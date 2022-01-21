@@ -42,28 +42,39 @@ public class Server {
 
 
     //Closes the server down
-    public void stop() throws IOException {
+    public void stopConnections() throws IOException {
         inBuff.close();
         outBuff.close();
         clientSocket.close();
         serverSocket.close();
-
     }
 
 
     //Contentiously listens to the buffer
     public void bufferListen() throws IOException {
 
+
+
         String inputLine;
+/*
+    Reads the buffer once then connection reset???? Problem on client end?? or server end??
+    who knows...
+
+ */
+
+
 
         while ((inputLine = inBuff.readLine()) != null) {
+            System.out.println("Listening...");
             if ("Close Connection".equals(inputLine)) {
                 outBuff.println("Connection Closed");
-                stop();
+                stopConnections();
                 break;
             } else {
+                System.out.println("Heard!");
+
                 //For now just echos the recieved message, will be passed through another function when it is written
-                outBuff.println("inputLine");
+                outBuff.println(inputLine);
 
             }
 

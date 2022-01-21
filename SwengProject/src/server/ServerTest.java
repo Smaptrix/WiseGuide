@@ -12,7 +12,7 @@ public class ServerTest {
 
     //Tests that the server initialises its ports
     @Test
-    private void TestServerStartup() throws IOException {
+    public void TestServerStartup() throws IOException {
 
         Server server = new Server();
 

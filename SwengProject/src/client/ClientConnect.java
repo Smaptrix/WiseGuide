@@ -15,4 +15,25 @@ public class ClientConnect {
         inBuff = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
+
+    public void stopConnection() throws IOException {
+        inBuff.close();
+        outBuff.close();
+        clientSocket.close();
+        System.out.println("Connection Closed");
+    }
+
+    public void sendTestMessage(){
+        outBuff.println("test");
+    }
+
+
+    public String sendMessage(String msg) throws IOException {
+        outBuff.println(msg);
+        return inBuff.readLine();
+    }
+
+
+
+
 }

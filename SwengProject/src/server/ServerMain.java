@@ -17,6 +17,8 @@ public class ServerMain {
 
         server.startup(5555);
 
+        server.bufferListen();
+
     }
 
 }
