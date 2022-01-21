@@ -7,6 +7,12 @@ public class ClientMain {
         new ClientMain();
     }
 
+    public ClientMain(){
+
+        ClientConnect clientConnect = new ClientConnect();
+        clientConnect.startConnection("127.0.0.1", 5555);
+
+    }
 
 
 
