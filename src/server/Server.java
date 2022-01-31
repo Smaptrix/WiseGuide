@@ -11,6 +11,12 @@ public class Server {
     private BufferedReader inBuff;
     private int port;
 
+
+    //Hardcoded routes in array
+    private String[] romanRaidMarsRoute = {"Courtyard", "Lowther", "Stone Roses", "Yates", "Salvation"};
+    private String[] romanRaidVenusRoute = {"The Vanbrugh Arms", "Revolution", "Yates", "Flares", "Salvation"};
+
+
     //Starts the server
     public String startup(int port) throws IOException {
 
@@ -68,10 +74,12 @@ public class Server {
                     stopConnections();
                     break;
                 } else {
-                    System.out.println("Request Recived: " + inputLine);
+                    System.out.println("Request Received: " + inputLine);
 
-                    //For now just echos the recieved message, will be passed through another function when it is written
-                    outBuff.println(inputLine);
+                    requestParser(inputLine);
+
+                    //For now just echos the received message, will be passed through another function when it is written
+                    //outBuff.println(inputLine);
 
             }
 
@@ -81,4 +89,34 @@ public class Server {
             System.out.println("Socket Closed (Client may have closed!)");
         }
     }
+
+    //Requests in form "Request Code Type" + " " + "Request Information"
+    public void requestParser(String requestIn) {
+        String[] requestSplit = requestIn.split(" ");
+        switch(requestSplit[0]) {
+            case "Text":
+                textRequest(requestSplit[1]);
+                break;
+            default:
+                outBuff.println("Error 404: Text Request Code Not Found");
+                break;
+        }
+    }
+
+    //Gathers and sends the requested information to the client
+    public void textRequest(String requestInfo) {
+        switch(requestInfo) {
+            case "romanRaidMarsRoute":
+                for (int i = 0; i < romanRaidMarsRoute.length; i++){
+                    outBuff.println(romanRaidMarsRoute[i]);
+                }
+                break;
+            case "romanRaidVenusRoute":
+                    outBuff.println(toString());
+                break;
+            default:
+                outBuff.println("Error 404: Text Request Information Not Found");
+        }
+    }
+
 }
