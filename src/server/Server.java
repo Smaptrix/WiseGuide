@@ -13,6 +13,7 @@ public class Server {
     private PrintWriter outText;
     private BufferedReader inText;
     private int port;
+    private String CurrDir;
 
     //Starts the server
     public String startup(int port) throws IOException {
@@ -39,6 +40,9 @@ public class Server {
 
         //Reads text from the buffer
         inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+        //Stores the current directory that the application was launched from
+        CurrDir = System.getProperty("user.dir");
 
         //Used for Unit Testing
         return "Server now accepting connections";
@@ -68,10 +72,9 @@ public class Server {
                     stopConnections();
                     break;
                 } else {
-                    System.out.println("Request Recived: " + inputLine);
+                    System.out.println("Request Received: " + inputLine);
 
-                    //For now just echos the recieved message, will be passed through another function when it is written
-                    outText.println(inputLine);
+                    requestParser(inputLine);
 
             }
 
@@ -79,6 +82,29 @@ public class Server {
 
         }catch (SocketException e){
             System.out.println("Socket Closed (Client may have closed!)");
+        }
+    }
+
+
+
+
+
+
+
+
+
+    //Requests in form "Request Code Type" + " " + "Request Information"
+    public void requestParser(String requestIn) throws IOException {
+        String[] requestSplit = requestIn.split(" ");
+        switch(requestSplit[0]) {
+            case "GET":
+                //Should send file stored at the location of the current directory with the filename provided
+                sendFile(Path.of((CurrDir + "\\" + requestSplit[1])));
+
+                break;
+            default:
+                outText.println("Error 404: Text Request Code Not Found");
+                break;
         }
     }
 
@@ -92,7 +118,6 @@ public class Server {
         Files.copy(filepath, outFile);
         //Clears the outputStream of any excess data
         outFile.flush();
-
 
     }
 

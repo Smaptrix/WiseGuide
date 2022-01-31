@@ -10,7 +10,7 @@ public class ClientMain {
 
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        System.out.println("Client Starting\n");
+        System.out.println("Client Starting");
         new ClientMain();
     }
 
@@ -21,6 +21,8 @@ public class ClientMain {
         clientConnect.sendTestMessage();
         clientConnect.sendMessage("Heyyyyy x");
         //clientConnect.sendMessage("Close Connection");
+
+        clientConnect.receiveFile("test");
 
 
     }
