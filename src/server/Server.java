@@ -107,12 +107,10 @@ public class Server {
     public void textRequest(String requestInfo) {
         switch(requestInfo) {
             case "romanRaidMarsRoute":
-                for (int i = 0; i < romanRaidMarsRoute.length; i++){
-                    outBuff.println(romanRaidMarsRoute[i]);
-                }
+                outBuff.println(romanRaidMarsRoute.toString());
                 break;
             case "romanRaidVenusRoute":
-                    outBuff.println(toString());
+                outBuff.println(romanRaidVenusRoute.toString());
                 break;
             default:
                 outBuff.println("Error 404: Text Request Information Not Found");
