@@ -8,6 +8,10 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class Client {
+
+   //TODO - TURN ALL INPUTS INTO INPUT STREAM
+
+
     private Socket clientSocket;
     //Only need a printWriter as we won't be sending files back to the server, just text requests
     private PrintWriter outText;
@@ -47,15 +51,15 @@ public class Client {
 
     public String sendTestMessage() throws IOException {
 
-            outText.println("test");
+            outText.println("ECHO " + "test");
 
             return inText.readLine();
 
     }
 
 
-    public String sendMessage(String msg) throws IOException {
-        outText.println(msg);
+    public String echoMessage(String msg) throws IOException {
+        outText.println("ECHO " + msg);
 
         String Response = inText.readLine();
 
@@ -68,7 +72,7 @@ public class Client {
     //The filenames should be stored in the XML
     public void receiveFile(String fileName) throws IOException {
 
-        outText.println("GET: " + fileName);
+        outText.println("GET " + fileName);
 
         inFile = new DataInputStream(clientSocket.getInputStream());
 
@@ -98,6 +102,8 @@ public class Client {
 
 
          os.close();
+
+         System.out.println("File saved at: " + currFile);
 
          return currFile;
 

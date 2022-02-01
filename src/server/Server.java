@@ -3,9 +3,14 @@ package server;
 import java.net.*;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 public class Server {
+
+    //TODO - TURN ALL OUTPUTS INTO OUTPUT STREAM!
+
+
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
@@ -90,18 +95,21 @@ public class Server {
 
 
 
-
-
-
     //Requests in form "Request Code Type" + " " + "Request Information"
     public void requestParser(String requestIn) throws IOException {
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
             case "GET":
+
+                System.out.println(CurrDir + "\\" + requestSplit[1]);
+
                 //Should send file stored at the location of the current directory with the filename provided
                 sendFile(Path.of((CurrDir + "\\" + requestSplit[1])));
 
                 break;
+            case "ECHO":
+                //Echos the request back (mainly for testing)
+                outText.println(requestSplit[1]);
             default:
                 outText.println("Error 404: Text Request Code Not Found");
                 break;
@@ -114,11 +122,15 @@ public class Server {
     //Sends a file across the socket (after it has been broken down into its bytes)
     public void sendFile(Path filepath) throws IOException {
 
-        //Copies the file into the outputStream
-        Files.copy(filepath, outFile);
-        //Clears the outputStream of any excess data
-        outFile.flush();
 
+        try {
+            //Copies the file into the outputStream
+            Files.copy(filepath, outFile);
+            //Clears the outputStream of any excess data
+            outFile.flush();
+        }catch(NoSuchFileException e){
+            System.out.println("File not found");
+        }
     }
 
 

@@ -1,6 +1,7 @@
 package client;
 
 import java.io.IOException;
+import java.net.SocketException;
 
 
 public class ClientMain {
@@ -16,13 +17,18 @@ public class ClientMain {
 
     public ClientMain() throws IOException, InterruptedException {
 
-        Client clientConnect = new Client();
-        clientConnect.startConnection(host, 5555);
-        clientConnect.sendTestMessage();
-        clientConnect.sendMessage("Heyyyyy x");
-        //clientConnect.sendMessage("Close Connection");
+      try {
+          Client clientConnect = new Client();
+          clientConnect.startConnection(host, 5555);
+          clientConnect.sendTestMessage();
+          clientConnect.echoMessage("Heyyyyy");
+          clientConnect.echoMessage("again");
+          //clientConnect.sendMessage("Close Connection");
 
-        clientConnect.receiveFile("test");
+          clientConnect.receiveFile("test.txt");
+      }catch(SocketException e){
+          System.out.println("Connection lost/Closed");
+      }
 
 
     }
