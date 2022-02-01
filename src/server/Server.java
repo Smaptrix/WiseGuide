@@ -8,7 +8,6 @@ import java.nio.file.Path;
 
 public class Server {
 
-    //TODO - TURN ALL OUTPUTS INTO OUTPUT STREAM!
 
 
 
@@ -130,6 +129,19 @@ public class Server {
             System.out.println("File stored at: " + filepath);
             //Only open this when need to send a file
             outFile = clientSocket.getOutputStream();
+
+
+
+            //Sends a data packet telling the client to expect a file of a certain size
+            long bytes = Files.size(filepath);
+            outFile.write((int) bytes);
+            outFile.flush();
+
+            //Tells the client what type of file to expect
+            String fileType = filepath.toString();
+            String[] fileTypeSplit = fileType.split("\\.");
+            outText.println(fileTypeSplit[1]);
+
             //Copies the file into the outputStream
             Files.copy(filepath, outFile);
 

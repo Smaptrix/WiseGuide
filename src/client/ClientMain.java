@@ -26,8 +26,6 @@ public class ClientMain {
           client.echoMessage("again");
           //client.sendMessage("Close Connection");
           client.receiveFile("test.txt");
-          System.out.println(client.fileLocs);
-          System.out.println(client.fileLocs.get("test.txt"));
 
           client.openFile((File) client.fileLocs.get("test.txt"));
 

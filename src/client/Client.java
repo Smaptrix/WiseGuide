@@ -10,7 +10,7 @@ import java.util.Hashtable;
 
 public class Client {
 
-   //TODO - TURN ALL INPUTS INTO INPUT STREAM
+
 
 
     private Socket clientSocket;
@@ -71,7 +71,7 @@ public class Client {
     }
 
 
-    //TODO CREATE PROTOCOL THAT EXPLICITLY STATES SIZE OF DATA (GOOD FOR ERROR DETECTION AND READING LOL)
+
 
 
     //The client should request specific files from the server so we should know the name of the files
@@ -83,35 +83,61 @@ public class Client {
         inFile = new DataInputStream(clientSocket.getInputStream());
 
 
-        //Reads the inputstream and stores it as an array of bytes
-        byte[] data = inFile.readAllBytes();
+        int bytesToRead = inFile.read();
+        System.out.println("We have " + bytesToRead + " bytes to read");
 
+        String dataType = inText.readLine();
+        System.out.println("The file we are recieiving is a: " + dataType + " file");
+
+        boolean end = false;
+        int bytesRead = 0;
+
+        //Initialises a new byte array of size predetermined by our network protocol
+        byte[] data = new byte[bytesToRead];
+
+        //Reads bytes up until the count has been reached
+        while(!end) {
+            data[bytesRead] = (byte) inFile.read();
+            //Increment Byte count
+            bytesRead += 1;
+            if(bytesRead == bytesToRead){
+                System.out.println("We have read: " + bytesRead);
+                end = true;
+            }
+        }
 
         inFile.close();
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
-        BytesToFile(data, fileName);
+        BytesToFile(data, fileName, dataType);
+
 
     }
 
 
     //
-    public File BytesToFile(byte[] data, String fileName) throws IOException {
+    public File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
 
         //Creates a new temp file - Identifiable by custom prefix
-        File currFile = new File(String.valueOf(Files.createTempFile("WG_", null)));
+        File currFile = new File(String.valueOf(Files.createTempFile("WG_", "." + fileType)));
 
          //Creates a temp file out of the data recieved, so that when the program closes the data isnt saved
          FileOutputStream os = new FileOutputStream(currFile);
 
+         os.write(data);
 
          fileLocs.put(fileName, currFile);
 
 
          os.close();
 
+         //Saves file in temp positition
          System.out.println("File saved at: " + currFile);
 
+         /*TODO Determine why we are getting ÿ in our text file
+                Where is the issue? (Client side or Server Side)
+                Are we just reading the bytes in the text file rather than the actual text?
+          */
          return currFile;
 
     }
