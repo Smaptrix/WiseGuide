@@ -1,5 +1,6 @@
 package client;
 
+import java.awt.*;
 import java.net.*;
 import java.io.*;
 import java.nio.file.Files;
@@ -20,8 +21,8 @@ public class Client {
     //InputStream to read files
     private InputStream inFile;
 
-    //TODO CREATE DICITONARY HOLDING FILENAMES AND LOCATIONS
-    Dictionary fileLocs = new Hashtable();
+
+    public Dictionary fileLocs = new Hashtable();
 
 
     //Connects to the port
@@ -63,9 +64,14 @@ public class Client {
 
         String Response = inText.readLine();
 
+        outText.flush();
+
         System.out.println(Response);
         return Response;
     }
+
+
+    //TODO CREATE PROTOCOL THAT EXPLICITLY STATES SIZE OF DATA (GOOD FOR ERROR DETECTION AND READING LOL)
 
 
     //The client should request specific files from the server so we should know the name of the files
@@ -79,6 +85,7 @@ public class Client {
 
         //Reads the inputstream and stores it as an array of bytes
         byte[] data = inFile.readAllBytes();
+
 
         inFile.close();
 
@@ -106,6 +113,15 @@ public class Client {
          System.out.println("File saved at: " + currFile);
 
          return currFile;
+
+    }
+
+
+
+    public void openFile(File file) throws IOException {
+
+
+        Desktop.getDesktop().open(file);
 
     }
 

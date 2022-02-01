@@ -1,7 +1,9 @@
 package client;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
+import java.nio.file.Path;
 
 
 public class ClientMain {
@@ -18,14 +20,19 @@ public class ClientMain {
     public ClientMain() throws IOException, InterruptedException {
 
       try {
-          Client clientConnect = new Client();
-          clientConnect.startConnection(host, 5555);
-          clientConnect.sendTestMessage();
-          clientConnect.echoMessage("Heyyyyy");
-          clientConnect.echoMessage("again");
-          //clientConnect.sendMessage("Close Connection");
+          Client client = new Client();
+          client.startConnection(host, 5555);
+          client.echoMessage("Heyyyyy");
+          client.echoMessage("again");
+          //client.sendMessage("Close Connection");
+          client.receiveFile("test.txt");
+          System.out.println(client.fileLocs);
+          System.out.println(client.fileLocs.get("test.txt"));
 
-          clientConnect.receiveFile("test.txt");
+          client.openFile((File) client.fileLocs.get("test.txt"));
+
+
+
       }catch(SocketException e){
           System.out.println("Connection lost/Closed");
       }

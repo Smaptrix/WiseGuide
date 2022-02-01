@@ -37,7 +37,7 @@ public class Server {
         System.out.println("After accept\n");
 
 
-        outFile = clientSocket.getOutputStream();
+
 
         //Writes text to the buffer
         outText = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -101,7 +101,7 @@ public class Server {
         switch(requestSplit[0]) {
             case "GET":
 
-                System.out.println(CurrDir + "\\" + requestSplit[1]);
+
 
                 //Should send file stored at the location of the current directory with the filename provided
                 sendFile(Path.of((CurrDir + "\\" + requestSplit[1])));
@@ -110,7 +110,10 @@ public class Server {
             case "ECHO":
                 //Echos the request back (mainly for testing)
                 outText.println(requestSplit[1]);
+                System.out.println("Response sent: " + requestSplit[1]);
+                break;
             default:
+                System.out.println(requestIn + " : Invalid command");
                 outText.println("Error 404: Text Request Code Not Found");
                 break;
         }
@@ -124,10 +127,15 @@ public class Server {
 
 
         try {
+            System.out.println("File stored at: " + filepath);
+            //Only open this when need to send a file
+            outFile = clientSocket.getOutputStream();
             //Copies the file into the outputStream
             Files.copy(filepath, outFile);
+
             //Clears the outputStream of any excess data
             outFile.flush();
+            outFile.close();
         }catch(NoSuchFileException e){
             System.out.println("File not found");
         }
