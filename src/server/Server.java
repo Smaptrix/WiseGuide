@@ -2,6 +2,7 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -100,8 +101,6 @@ public class Server {
         switch(requestSplit[0]) {
             case "GET":
 
-
-
                 //Should send file stored at the location of the current directory with the filename provided
                 sendFile(Path.of((CurrDir + "\\" + requestSplit[1])));
 
@@ -133,17 +132,36 @@ public class Server {
 
 
             //Sends a data packet telling the client to expect a file of a certain size
-            long bytes = Files.size(filepath);
-            outFile.write((int) bytes);
+            long byteSize = Files.size(filepath);
+            outFile.write((int) byteSize);
             outFile.flush();
 
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
             String[] fileTypeSplit = fileType.split("\\.");
             outText.println(fileTypeSplit[1]);
+            outFile.flush();
 
-            //Copies the file into the outputStream
-            Files.copy(filepath, outFile);
+
+            //Construct a byte array and send that across network
+            FileInputStream fileStream = new FileInputStream(String.valueOf(filepath));
+            byte[] buffer = new byte[(int) byteSize];
+            buffer = fileStream.readAllBytes();
+
+            boolean end = false;
+            int bytesSent = 0;
+
+
+            while(!end){
+                outFile.write(buffer[bytesSent]);
+                System.out.println(buffer[bytesSent]);
+                bytesSent += 1;
+
+                if(bytesSent == byteSize){
+                    System.out.println("We have written: " + bytesSent);
+                    end = true;
+                }
+            }
 
             //Clears the outputStream of any excess data
             outFile.flush();

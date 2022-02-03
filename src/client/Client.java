@@ -3,6 +3,7 @@ package client;
 import java.awt.*;
 import java.net.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Dictionary;
@@ -76,7 +77,7 @@ public class Client {
 
     //The client should request specific files from the server so we should know the name of the files
     //The filenames should be stored in the XML
-    public void receiveFile(String fileName) throws IOException {
+    public void requestFile(String fileName) throws IOException {
 
         outText.println("GET " + fileName);
 
@@ -95,9 +96,17 @@ public class Client {
         //Initialises a new byte array of size predetermined by our network protocol
         byte[] data = new byte[bytesToRead];
 
+        /*TODO Determine why we are getting ÿ in our text file
+                Where is the issue? (Client side or Server Side)
+                Are we just reading the bytes in the text file rather than the actual text?
+                IT WORKS SOMETIMES?? CONFUSING
+          */
+
+
         //Reads bytes up until the count has been reached
         while(!end) {
             data[bytesRead] = (byte) inFile.read();
+            System.out.println(data[bytesRead]);
             //Increment Byte count
             bytesRead += 1;
             if(bytesRead == bytesToRead){
@@ -121,7 +130,8 @@ public class Client {
         //Creates a new temp file - Identifiable by custom prefix
         File currFile = new File(String.valueOf(Files.createTempFile("WG_", "." + fileType)));
 
-         //Creates a temp file out of the data recieved, so that when the program closes the data isnt saved
+
+         //Creates a temp file out of the data received, so that when the program closes the data isnt saved
          FileOutputStream os = new FileOutputStream(currFile);
 
          os.write(data);
@@ -134,10 +144,7 @@ public class Client {
          //Saves file in temp positition
          System.out.println("File saved at: " + currFile);
 
-         /*TODO Determine why we are getting ÿ in our text file
-                Where is the issue? (Client side or Server Side)
-                Are we just reading the bytes in the text file rather than the actual text?
-          */
+
          return currFile;
 
     }

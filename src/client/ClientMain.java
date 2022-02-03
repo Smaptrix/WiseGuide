@@ -3,7 +3,6 @@ package client;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
-import java.nio.file.Path;
 
 
 public class ClientMain {
@@ -25,7 +24,7 @@ public class ClientMain {
           client.echoMessage("Heyyyyy");
           client.echoMessage("again");
           //client.sendMessage("Close Connection");
-          client.receiveFile("test.txt");
+          client.requestFile("test.txt");
 
           client.openFile((File) client.fileLocs.get("test.txt"));
 
