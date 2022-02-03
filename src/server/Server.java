@@ -14,7 +14,7 @@ public class Server {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private OutputStream outFile;
+    private DataOutputStream outFile;
     private PrintWriter outText;
     private BufferedReader inText;
     private int port;
@@ -127,7 +127,7 @@ public class Server {
         try {
             System.out.println("File stored at: " + filepath);
             //Only open this when need to send a file
-            outFile = clientSocket.getOutputStream();
+            outFile = new DataOutputStream(clientSocket.getOutputStream());
 
 
 
