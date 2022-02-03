@@ -81,14 +81,14 @@ public class Client {
 
         outText.println("GET " + fileName);
 
-        inFile = new DataInputStream(clientSocket.getInputStream());
+        inFile = clientSocket.getInputStream();
 
 
         int bytesToRead = inFile.read();
         System.out.println("We have " + bytesToRead + " bytes to read");
 
         String dataType = inText.readLine();
-        System.out.println("The file we are recieiving is a: " + dataType + " file");
+        System.out.println("The file we are receiving is a: " + dataType + " file");
 
         boolean end = false;
         int bytesRead = 0;
@@ -105,6 +105,7 @@ public class Client {
 
         //Reads bytes up until the count has been reached
         while(!end) {
+
             data[bytesRead] = (byte) inFile.read();
             System.out.println(data[bytesRead]);
             //Increment Byte count
@@ -115,6 +116,7 @@ public class Client {
             }
         }
 
+        //Closes the inputStream
         inFile.close();
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.

@@ -46,6 +46,9 @@ public class Server {
         //Reads text from the buffer
         inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
+        //Writes pure file bytes to output socket
+        outFile = new DataOutputStream(clientSocket.getOutputStream());
+
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
 
@@ -60,6 +63,7 @@ public class Server {
         outText.close();
         clientSocket.close();
         serverSocket.close();
+        outFile.close();
     }
 
 
@@ -127,7 +131,7 @@ public class Server {
         try {
             System.out.println("File stored at: " + filepath);
             //Only open this when need to send a file
-            outFile = new DataOutputStream(clientSocket.getOutputStream());
+
 
 
 
@@ -145,12 +149,11 @@ public class Server {
 
             //Construct a byte array and send that across network
             FileInputStream fileStream = new FileInputStream(String.valueOf(filepath));
-            byte[] buffer = new byte[(int) byteSize];
-            buffer = fileStream.readAllBytes();
+            byte[] buffer = fileStream.readAllBytes();
+            fileStream.close();
 
             boolean end = false;
             int bytesSent = 0;
-
 
             while(!end){
                 outFile.write(buffer[bytesSent]);
@@ -158,14 +161,17 @@ public class Server {
                 bytesSent += 1;
 
                 if(bytesSent == byteSize){
-                    System.out.println("We have written: " + bytesSent);
+                    System.out.println("We have written: " + bytesSent + " bytes");
+
                     end = true;
                 }
             }
 
+
             //Clears the outputStream of any excess data
             outFile.flush();
-            outFile.close();
+
+
         }catch(NoSuchFileException e){
             System.out.println("File not found");
         }
