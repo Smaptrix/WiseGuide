@@ -18,7 +18,7 @@ public class ServerClientTest {
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
         assertEquals(client.sendTestMessage(), "test");
-        assertEquals(client.echoMessage("echo"), "echo");
+        assertEquals(client.echoMessage("echos"), "echos");
     }
 
 }
