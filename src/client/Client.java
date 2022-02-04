@@ -3,6 +3,7 @@ package client;
 import java.awt.*;
 import java.net.*;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -92,7 +93,19 @@ public class Client {
 
         outText.println("GET " + fileName);
 
-        int bytesToRead = inputStream.read();
+        //Tells us how many bytes are telling us how big the file is
+        int numOfFileSizeBytes = inputStream.read();
+
+        System.out.println("We have " + numOfFileSizeBytes + " file size bytes to read");
+
+        //Reads the next set amount of bytes to decode the file size
+        byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
+
+        for(int i = 0; i<numOfFileSizeBytes; i++){
+            bytesToReadBytes[i] = (byte) inputStream.read();
+        }
+
+        int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
 
 
         //Magic number 3 - because we know that the file extension is only going to be three letters
@@ -118,6 +131,31 @@ public class Client {
 
     }
 
+
+    public byte[] readBytes(int bytesToRead) throws IOException {
+
+        //Initialises a new byte array of size predetermined by our network protocol
+        byte[] data = new byte[bytesToRead];
+
+        boolean end = false;
+        int bytesRead = 0;
+
+
+        //Reads bytes up until the count has been reached
+        while (!end) {
+
+            data[bytesRead] = (byte) inputStream.read();
+            System.out.println(data[bytesRead]);
+            //Increment Byte count
+            bytesRead += 1;
+            if (bytesRead == bytesToRead) {
+                System.out.println("We have read: " + bytesRead);
+                end = true;
+            }
+
+        }
+        return data;
+    }
 
     //
     public File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
@@ -147,33 +185,6 @@ public class Client {
 
 
 
-
-    public byte[] readBytes(int bytesToRead) throws IOException {
-
-        //Initialises a new byte array of size predetermined by our network protocol
-        byte[] data = new byte[bytesToRead];
-
-        boolean end = false;
-        int bytesRead = 0;
-
-
-        //Reads bytes up until the count has been reached
-        while (!end) {
-
-            data[bytesRead] = (byte) inputStream.read();
-            System.out.println(data[bytesRead]);
-            //Increment Byte count
-            bytesRead += 1;
-            if (bytesRead == bytesToRead) {
-                System.out.println("We have read: " + bytesRead);
-                end = true;
-            }
-
-
-        }
-
-        return data;
-    }
 
     public void openFile(File file) throws IOException {
 

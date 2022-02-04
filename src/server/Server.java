@@ -1,7 +1,9 @@
 package server;
 
+import java.math.BigInteger;
 import java.net.*;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -113,10 +115,12 @@ public class Server {
     }
 
 
-    // ToDo -  SEND LARGE FILE I.E IMAGE (DOESN'T CURRENTLY WORK)
+    /* ToDo -  SEND LARGE FILE I.E IMAGE (DOESN'T CURRENTLY WORK)
+            -   NEED TO FILESIZE DATA LARGER MORE ROBUST
 
+     */
     //Sends a file across the socket (after it has been broken down into its bytes)
-    public void sendFile(Path filepath) throws IOException {
+    private void sendFile(Path filepath) throws IOException {
 
 
         try {
@@ -125,11 +129,23 @@ public class Server {
 
 
             //Sends a data packet telling the client to expect a file of a certain size
-            long byteSize = Files.size(filepath);
+            long fileSize = Files.size(filepath);
 
-            System.out.print("File Size: " + byteSize);
-            outputStream.write((int) byteSize);
-            outputStream.flush();
+            System.out.print("File Size: " + fileSize);
+
+            byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) fileSize).array();
+
+            int fileSizeInBytesLen = fileSizeInBytes.length;
+
+            //Tells the client how many bytes are determining the size of the file
+            outputStream.write(fileSizeInBytesLen);
+
+            //Writes the fileSize in bytes to the client
+            for(int i = 0; i<fileSizeInBytesLen; i++){
+                outputStream.write(fileSizeInBytes[i]);
+            }
+
+
 
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
@@ -151,7 +167,7 @@ public class Server {
                 System.out.println(buffer[bytesSent]);
                 bytesSent += 1;
 
-                if(bytesSent == byteSize){
+                if(bytesSent == fileSize){
                     System.out.println("We have written: " + bytesSent + " bytes");
 
                     end = true;
@@ -179,7 +195,6 @@ public class Server {
             int sizeOfResponse = responseInBytes.length;
             outputStream.write(sizeOfResponse);
         }
-
 
 
 
