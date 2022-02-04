@@ -1,6 +1,6 @@
 package serverclientstuff;
 
-import client.ClientConnect;
+import client.Client;
 import org.junit.Test;
 
 
@@ -15,7 +15,7 @@ public class ServerClientTest {
     //Launch Server first, then test
     public void clientConnectToServer_RxTxTest() throws IOException {
 
-        ClientConnect client = new ClientConnect();
+        Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
         assertEquals(client.sendTestMessage(), "Error 404: Text Request Code Not Found");
         assertEquals(client.sendMessage("Text romanRaidMarsRoute"), "Courtyard,Lowther,Stone Roses,Yates,Salvation");

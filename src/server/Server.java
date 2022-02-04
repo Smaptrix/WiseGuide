@@ -1,29 +1,29 @@
 package server;
 
+
 import java.net.*;
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 
 public class Server {
 
+
+
+
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private PrintWriter outBuff;
-    private BufferedReader inBuff;
-    private int port;
-
-
-    //Hardcoded routes in array
-    private String[] romanRaidMarsRoute = {"Courtyard", "Lowther", "Stone Roses", "Yates", "Salvation"};
-    private String[] romanRaidVenusRoute = {"The Vanbrugh Arms", "Revolution", "Yates", "Flares", "Salvation"};
-
+    private DataOutputStream outputStream;
+    private BufferedReader inText;
+    private String CurrDir;
 
     //Starts the server
-    public String startup(int port) throws IOException {
-
-        this.port = port;
+    public void startup(int port) throws IOException {
 
         System.out.println("Creating new Server Socket at " + port);
-
 
         //Server formed
         serverSocket = new ServerSocket(port);
@@ -34,52 +34,46 @@ public class Server {
 
         System.out.println("After accept\n");
 
-        //Writes to the buffer
-        outBuff = new PrintWriter(clientSocket.getOutputStream(), true);
+         //Reads text from the buffer
+        inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        //Reads from the buffer
-        inBuff = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        //Writes pure file bytes to output socket
+        outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
-        String acceptanceMsg = "Server now accepting connections";
+        //Stores the current directory that the application was launched from
+        CurrDir = System.getProperty("user.dir");
 
-        //Used for Unit Testing
-        return acceptanceMsg;
     }
 
 
     //Closes the server down
     public void stopConnections() throws IOException {
-        inBuff.close();
-        outBuff.close();
+        System.out.println("Closing Down");
+        inText.close();
         clientSocket.close();
         serverSocket.close();
+        outputStream.close();
     }
 
 
-    //Contentiously listens to the buffer
+    //Contentiously listens to the input buffer
+    //Used to wait for requests from the client
     public void bufferListen() throws IOException {
 
         String inputLine;
-/*
-    As soon as the connection from the client terminates, error!!!
-    TODO - HANDLE IOEXCEPTION
- */
 
         try{
 
-            while ((inputLine = inBuff.readLine()) != null) {
+            while ((inputLine = inText.readLine()) != null) {
                 System.out.println("Listening...");
                 if ("Close Connection".equals(inputLine)) {
-                    outBuff.println("Connection Closed");
+                    sendResponse("Connection Closed", true);
                     stopConnections();
                     break;
                 } else {
                     System.out.println("Request Received: " + inputLine);
 
                     requestParser(inputLine);
-
-                    //For now just echos the received message, will be passed through another function when it is written
-                    //outBuff.println(inputLine);
 
             }
 
@@ -90,31 +84,121 @@ public class Server {
         }
     }
 
+
+
+
+
+
     //Requests in form "Request Code Type" + " " + "Request Information"
-    public void requestParser(String requestIn) {
+    public void requestParser(String requestIn) throws IOException {
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
-            case "Text":
-                textRequest(requestSplit[1]);
+            case "GET":
+
+                //Should send file stored at the location of the current directory with the filename provided
+                sendFile(Path.of((CurrDir + "\\" + requestSplit[1])));
+
+                break;
+            case "ECHO":
+                //Echos the request back (mainly for testing)
+                sendResponse(requestSplit[1], true);
+                System.out.println("Response sent: " + requestSplit[1]);
                 break;
             default:
-                outBuff.println("Error 404: Text Request Code Not Found");
+                System.out.println(requestIn + " : Invalid command");
+                sendResponse("Error 404: Text Request Code Not Found", false);
                 break;
         }
     }
 
-    //Gathers and sends the requested information to the client
-    public void textRequest(String requestInfo) {
-        switch(requestInfo) {
-            case "romanRaidMarsRoute":
-                outBuff.println(romanRaidMarsRoute.toString());
-                break;
-            case "romanRaidVenusRoute":
-                outBuff.println(romanRaidVenusRoute.toString());
-                break;
-            default:
-                outBuff.println("Error 404: Text Request Information Not Found");
+
+
+    //Sends a file across the socket (after it has been broken down into its bytes)
+    private void sendFile(Path filepath) throws IOException {
+
+
+        try {
+            System.out.println("File stored at: " + filepath);
+            //Only open this when need to send a file
+
+
+            //Sends a data packet telling the client to expect a file of a certain size
+            long fileSize = Files.size(filepath);
+
+            System.out.print("File Size: " + fileSize);
+
+            byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) fileSize).array();
+
+            int fileSizeInBytesLen = fileSizeInBytes.length;
+
+            //Tells the client how many bytes are determining the size of the file
+            outputStream.write(fileSizeInBytesLen);
+
+            //Writes the fileSize in bytes to the client
+            for (byte fileSizeInByte : fileSizeInBytes) {
+                outputStream.write(fileSizeInByte);
+            }
+
+            //Tells the client what type of file to expect
+            String fileType = filepath.toString();
+            String[] fileTypeSplit = fileType.split("\\.");
+            sendResponse(fileTypeSplit[1], false);
+            outputStream.flush();
+
+
+            //Construct a byte array from the file we want to send and send that across network
+            FileInputStream fileStream = new FileInputStream(String.valueOf(filepath));
+            byte[] buffer = fileStream.readAllBytes();
+            fileStream.close();
+
+            boolean end = false;
+            int bytesSent = 0;
+
+            while(!end){
+                outputStream.write(buffer[bytesSent]);
+
+                bytesSent += 1;
+
+                if(bytesSent == fileSize){
+                    System.out.println("We have written: " + bytesSent + " bytes");
+
+                    end = true;
+                }
+            }
+            //Clears the outputStream of any excess data
+
+            outputStream.flush();
+
+
+        }catch(NoSuchFileException e){
+            System.out.println("File not found");
         }
     }
+
+
+    //No need to tell the client to expect a string it should already be expecting it
+    //Sends a response to the client - Used by ECHO requests
+    private void sendResponse(String response, Boolean sendSize) throws IOException {
+
+        //Turns the string into its byte array
+        byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
+
+        if (sendSize){
+            //Sends the size of the response first
+            int sizeOfResponse = responseInBytes.length;
+            outputStream.write(sizeOfResponse);
+        }
+
+
+
+        outputStream.write(responseInBytes);
+
+        outputStream.flush();
+
+
+    }
+
+
+
 
 }
