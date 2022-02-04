@@ -17,8 +17,8 @@ public class ServerClientTest {
 
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
-        assertEquals(client.sendTestMessage(), "Error 404: Text Request Code Not Found");
-        assertEquals(client.sendMessage("Text romanRaidMarsRoute"), "Courtyard,Lowther,Stone Roses,Yates,Salvation");
+        assertEquals(client.sendTestMessage(), "test");
+        assertEquals(client.echoMessage("echo"), "echo");
     }
 
 }

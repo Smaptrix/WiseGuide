@@ -64,7 +64,7 @@ public class Client {
     }
 
     //Sends an ECHO request to the server and waits for its response
-    public void echoMessage(String msg) throws IOException {
+    public String echoMessage(String msg) throws IOException {
 
         System.out.println("ECHO REQUEST: " + msg);
 
@@ -79,6 +79,8 @@ public class Client {
         String result = new String(data, StandardCharsets.UTF_8);
 
         System.out.println(result);
+
+        return result;
 
     }
 
