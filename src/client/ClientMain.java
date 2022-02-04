@@ -28,6 +28,10 @@ public class ClientMain {
 
           client.openFile((File) client.fileLocs.get("test.txt"));
 
+          client.requestFile("partypopper.jpg");
+
+          client.openFile((File) client.fileLocs.get("partypopper.jpg"));
+
 
 
       }catch(SocketException e){

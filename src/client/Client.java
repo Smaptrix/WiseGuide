@@ -8,19 +8,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public class Client {
-
-
 
 
     private Socket clientSocket;
     //Only need a printWriter as we won't be sending files back to the server, just text requests
     private PrintWriter outText;
-    //BufferedReader to read text
-    private BufferedReader inText;
     //InputStream to read files
-    private InputStream inFile;
+    private InputStream inputStream;
 
 
     public Dictionary fileLocs = new Hashtable();
@@ -29,13 +26,13 @@ public class Client {
     //Connects to the port
     public void startConnection(String ip, int port) throws IOException {
 
-       try {
-           clientSocket = new Socket(ip, port);
-           outText = new PrintWriter(clientSocket.getOutputStream(), true);
-           inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-       }catch(ConnectException e){
-           System.out.println("Failed to connect/Server Offline");
-       }
+        try {
+            clientSocket = new Socket(ip, port);
+            outText = new PrintWriter(clientSocket.getOutputStream(), true);
+            inputStream = clientSocket.getInputStream();
+        } catch (ConnectException e) {
+            System.out.println("Failed to connect/Server Offline");
+        }
 
         //Finds the temp directory on the system - No prefix because we will save
         Path tmpFolderDir = Files.createTempDirectory(null);
@@ -45,7 +42,7 @@ public class Client {
 
 
     public void stopConnection() throws IOException {
-        inText.close();
+        inputStream.close();
         outText.close();
         clientSocket.close();
         System.out.println("Connection Closed");
@@ -53,71 +50,67 @@ public class Client {
 
     public String sendTestMessage() throws IOException {
 
-            outText.println("ECHO " + "test");
+        outText.println("ECHO " + "test");
 
-            return inText.readLine();
+        int stringSize = inputStream.read();
+
+        byte[] data = readBytes(stringSize);
+
+
+        String result = new String(data, StandardCharsets.UTF_8);
+
+        System.out.println(result);
+        return result;
 
     }
 
 
     public String echoMessage(String msg) throws IOException {
+
+        System.out.println("ECHO REQUEST: " + msg);
+
         outText.println("ECHO " + msg);
 
-        String Response = inText.readLine();
+        int fileSize = inputStream.read();
 
-        outText.flush();
+        System.out.println("We are receiving: " + fileSize + " bytes");
+        byte[] data = readBytes(fileSize);
 
-        System.out.println(Response);
-        return Response;
+
+        String result = new String(data, StandardCharsets.UTF_8);
+
+        System.out.println(result);
+        return result;
     }
-
-
-
 
 
     //The client should request specific files from the server so we should know the name of the files
     //The filenames should be stored in the XML
     public void requestFile(String fileName) throws IOException {
 
+        System.out.println("GET REQUEST: " + fileName);
+
         outText.println("GET " + fileName);
 
-        inFile = clientSocket.getInputStream();
+        int bytesToRead = inputStream.read();
 
 
-        int bytesToRead = inFile.read();
-        System.out.println("We have " + bytesToRead + " bytes to read");
+        //Magic number 3 - because we know that the file extension is only going to be three letters
+        byte[] DataTypeBytes = new byte[3];
 
-        String dataType = inText.readLine();
-        System.out.println("The file we are receiving is a: " + dataType + " file");
-
-        boolean end = false;
-        int bytesRead = 0;
-
-        //Initialises a new byte array of size predetermined by our network protocol
-        byte[] data = new byte[bytesToRead];
-
-        /*TODO Determine why we are getting ÿ in our text file
-                Where is the issue? (Client side or Server Side)
-                Are we just reading the bytes in the text file rather than the actual text?
-                IT WORKS SOMETIMES?? CONFUSING
-          */
-
-
-        //Reads bytes up until the count has been reached
-        while(!end) {
-
-            data[bytesRead] = (byte) inFile.read();
-            System.out.println(data[bytesRead]);
-            //Increment Byte count
-            bytesRead += 1;
-            if(bytesRead == bytesToRead){
-                System.out.println("We have read: " + bytesRead);
-                end = true;
-            }
+        for(int i = 0; i < 3; i++){
+            DataTypeBytes[i] = (byte) inputStream.read();
         }
 
-        //Closes the inputStream
-        inFile.close();
+        String dataType = new String(DataTypeBytes, StandardCharsets.UTF_8);
+
+        System.out.println(dataType);
+
+
+        byte[] data = readBytes(bytesToRead);
+
+
+        System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
         BytesToFile(data, fileName, dataType);
@@ -133,25 +126,54 @@ public class Client {
         File currFile = new File(String.valueOf(Files.createTempFile("WG_", "." + fileType)));
 
 
-         //Creates a temp file out of the data received, so that when the program closes the data isnt saved
-         FileOutputStream os = new FileOutputStream(currFile);
+        //Creates a temp file out of the data received, so that when the program closes the data isnt saved
+        FileOutputStream os = new FileOutputStream(currFile);
 
-         os.write(data);
+        os.write(data);
 
-         fileLocs.put(fileName, currFile);
-
-
-         os.close();
-
-         //Saves file in temp positition
-         System.out.println("File saved at: " + currFile);
+        fileLocs.put(fileName, currFile);
 
 
-         return currFile;
+        os.close();
+
+        //Saves file in temp positition
+        System.out.println("File saved at: " + currFile);
+
+
+        return currFile;
 
     }
 
 
+
+
+
+    public byte[] readBytes(int bytesToRead) throws IOException {
+
+        //Initialises a new byte array of size predetermined by our network protocol
+        byte[] data = new byte[bytesToRead];
+
+        boolean end = false;
+        int bytesRead = 0;
+
+
+        //Reads bytes up until the count has been reached
+        while (!end) {
+
+            data[bytesRead] = (byte) inputStream.read();
+            System.out.println(data[bytesRead]);
+            //Increment Byte count
+            bytesRead += 1;
+            if (bytesRead == bytesToRead) {
+                System.out.println("We have read: " + bytesRead);
+                end = true;
+            }
+
+
+        }
+
+        return data;
+    }
 
     public void openFile(File file) throws IOException {
 
@@ -159,6 +181,4 @@ public class Client {
         Desktop.getDesktop().open(file);
 
     }
-
-
 }

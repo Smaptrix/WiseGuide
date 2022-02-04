@@ -14,8 +14,7 @@ public class Server {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private DataOutputStream outFile;
-    private PrintWriter outText;
+    private DataOutputStream outputStream;
     private BufferedReader inText;
     private int port;
     private String CurrDir;
@@ -36,18 +35,11 @@ public class Server {
 
         System.out.println("After accept\n");
 
-
-
-
-        //Writes text to the buffer
-        outText = new PrintWriter(clientSocket.getOutputStream(), true);
-
-
-        //Reads text from the buffer
+         //Reads text from the buffer
         inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
         //Writes pure file bytes to output socket
-        outFile = new DataOutputStream(clientSocket.getOutputStream());
+        outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
@@ -60,10 +52,9 @@ public class Server {
     //Closes the server down
     public void stopConnections() throws IOException {
         inText.close();
-        outText.close();
         clientSocket.close();
         serverSocket.close();
-        outFile.close();
+        outputStream.close();
     }
 
 
@@ -77,7 +68,7 @@ public class Server {
             while ((inputLine = inText.readLine()) != null) {
                 System.out.println("Listening...");
                 if ("Close Connection".equals(inputLine)) {
-                    outText.println("Connection Closed");
+                    sendResponse("Connection Closed", true);
                     stopConnections();
                     break;
                 } else {
@@ -111,18 +102,18 @@ public class Server {
                 break;
             case "ECHO":
                 //Echos the request back (mainly for testing)
-                outText.println(requestSplit[1]);
+                sendResponse(requestSplit[1], true);
                 System.out.println("Response sent: " + requestSplit[1]);
                 break;
             default:
                 System.out.println(requestIn + " : Invalid command");
-                outText.println("Error 404: Text Request Code Not Found");
+                sendResponse("Error 404: Text Request Code Not Found", false);
                 break;
         }
     }
 
 
-    // ToDo - Test this actually works!!!! Need to make an example file then reconstruct client side
+    // ToDo -  SEND LARGE FILE I.E IMAGE (DOESN'T CURRENTLY WORK)
 
     //Sends a file across the socket (after it has been broken down into its bytes)
     public void sendFile(Path filepath) throws IOException {
@@ -133,21 +124,21 @@ public class Server {
             //Only open this when need to send a file
 
 
-
-
             //Sends a data packet telling the client to expect a file of a certain size
             long byteSize = Files.size(filepath);
-            outFile.write((int) byteSize);
-            outFile.flush();
+
+            System.out.print("File Size: " + byteSize);
+            outputStream.write((int) byteSize);
+            outputStream.flush();
 
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
             String[] fileTypeSplit = fileType.split("\\.");
-            outText.println(fileTypeSplit[1]);
-            outFile.flush();
+            sendResponse(fileTypeSplit[1], false);
+            outputStream.flush();
 
 
-            //Construct a byte array and send that across network
+            //Construct a byte array from the file we want to send and send that across network
             FileInputStream fileStream = new FileInputStream(String.valueOf(filepath));
             byte[] buffer = fileStream.readAllBytes();
             fileStream.close();
@@ -156,7 +147,7 @@ public class Server {
             int bytesSent = 0;
 
             while(!end){
-                outFile.write(buffer[bytesSent]);
+                outputStream.write(buffer[bytesSent]);
                 System.out.println(buffer[bytesSent]);
                 bytesSent += 1;
 
@@ -166,10 +157,9 @@ public class Server {
                     end = true;
                 }
             }
-
-
             //Clears the outputStream of any excess data
-            outFile.flush();
+
+            outputStream.flush();
 
 
         }catch(NoSuchFileException e){
@@ -178,7 +168,27 @@ public class Server {
     }
 
 
+//No need to tell the client to expect a string it should already be expecting it
+    private void sendResponse(String response, Boolean sendSize) throws IOException {
 
+        //Turns the string into its byte array
+        byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
+
+        if (sendSize == true){
+            //Sends the size of the response first
+            int sizeOfResponse = responseInBytes.length;
+            outputStream.write(sizeOfResponse);
+        }
+
+
+
+
+        outputStream.write(responseInBytes);
+
+        outputStream.flush();
+
+
+    }
 
 
 
