@@ -1,6 +1,6 @@
 package server;
 
-import java.math.BigInteger;
+
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -18,13 +18,10 @@ public class Server {
     private Socket clientSocket;
     private DataOutputStream outputStream;
     private BufferedReader inText;
-    private int port;
     private String CurrDir;
 
     //Starts the server
-    public String startup(int port) throws IOException {
-
-        this.port = port;
+    public void startup(int port) throws IOException {
 
         System.out.println("Creating new Server Socket at " + port);
 
@@ -46,13 +43,12 @@ public class Server {
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
 
-        //Used for Unit Testing
-        return "Server now accepting connections";
     }
 
 
     //Closes the server down
     public void stopConnections() throws IOException {
+        System.out.println("Closing Down");
         inText.close();
         clientSocket.close();
         serverSocket.close();
@@ -60,7 +56,8 @@ public class Server {
     }
 
 
-    //Contentiously listens to the buffer
+    //Contentiously listens to the input buffer
+    //Used to wait for requests from the client
     public void bufferListen() throws IOException {
 
         String inputLine;
@@ -115,10 +112,7 @@ public class Server {
     }
 
 
-    /* ToDo -  SEND LARGE FILE I.E IMAGE (DOESN'T CURRENTLY WORK)
-            -   NEED TO FILESIZE DATA LARGER MORE ROBUST
 
-     */
     //Sends a file across the socket (after it has been broken down into its bytes)
     private void sendFile(Path filepath) throws IOException {
 
@@ -141,11 +135,9 @@ public class Server {
             outputStream.write(fileSizeInBytesLen);
 
             //Writes the fileSize in bytes to the client
-            for(int i = 0; i<fileSizeInBytesLen; i++){
-                outputStream.write(fileSizeInBytes[i]);
+            for (byte fileSizeInByte : fileSizeInBytes) {
+                outputStream.write(fileSizeInByte);
             }
-
-
 
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
@@ -164,7 +156,7 @@ public class Server {
 
             while(!end){
                 outputStream.write(buffer[bytesSent]);
-                System.out.println(buffer[bytesSent]);
+
                 bytesSent += 1;
 
                 if(bytesSent == fileSize){
@@ -184,13 +176,14 @@ public class Server {
     }
 
 
-//No need to tell the client to expect a string it should already be expecting it
+    //No need to tell the client to expect a string it should already be expecting it
+    //Sends a response to the client - Used by ECHO requests
     private void sendResponse(String response, Boolean sendSize) throws IOException {
 
         //Turns the string into its byte array
         byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
 
-        if (sendSize == true){
+        if (sendSize){
             //Sends the size of the response first
             int sizeOfResponse = responseInBytes.length;
             outputStream.write(sizeOfResponse);

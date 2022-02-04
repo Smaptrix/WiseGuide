@@ -6,10 +6,9 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Scanner;
+
 
 public class Client {
 
@@ -21,7 +20,8 @@ public class Client {
     private InputStream inputStream;
 
 
-    public Dictionary fileLocs = new Hashtable();
+    //Each client will keep a dictionary containing where all there files are located
+    public Dictionary<String, File> fileLocations = new Hashtable<>();
 
 
     //Connects to the port
@@ -35,20 +35,18 @@ public class Client {
             System.out.println("Failed to connect/Server Offline");
         }
 
-        //Finds the temp directory on the system - No prefix because we will save
-        Path tmpFolderDir = Files.createTempDirectory(null);
-
-
     }
 
-
-    public void stopConnection() throws IOException {
+    //Closes the clients connections
+    public void closeConnection() throws IOException {
+        outText.println("Close Connection");
         inputStream.close();
         outText.close();
         clientSocket.close();
         System.out.println("Connection Closed");
     }
 
+    //Sends a test message to the server
     public String sendTestMessage() throws IOException {
 
         outText.println("ECHO " + "test");
@@ -65,8 +63,8 @@ public class Client {
 
     }
 
-
-    public String echoMessage(String msg) throws IOException {
+    //Sends an ECHO request to the server and waits for its response
+    public void echoMessage(String msg) throws IOException {
 
         System.out.println("ECHO REQUEST: " + msg);
 
@@ -81,11 +79,11 @@ public class Client {
         String result = new String(data, StandardCharsets.UTF_8);
 
         System.out.println(result);
-        return result;
+
     }
 
-
-    //The client should request specific files from the server so we should know the name of the files
+    //Requests a file from the server
+    //The client should request specific files from the server, so we should know the name of the files
     //The filenames should be stored in the XML
     public void requestFile(String fileName) throws IOException {
 
@@ -128,10 +126,9 @@ public class Client {
         //Once we have the array of bytes, we then reconstruct that into the actual file.
         BytesToFile(data, fileName, dataType);
 
-
     }
 
-
+    //Reads the bytes for the file from the inputStream
     public byte[] readBytes(int bytesToRead) throws IOException {
 
         //Initialises a new byte array of size predetermined by our network protocol
@@ -145,7 +142,7 @@ public class Client {
         while (!end) {
 
             data[bytesRead] = (byte) inputStream.read();
-            System.out.println(data[bytesRead]);
+
             //Increment Byte count
             bytesRead += 1;
             if (bytesRead == bytesToRead) {
@@ -157,39 +154,38 @@ public class Client {
         return data;
     }
 
-    //
-    public File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
+    //Turns the raw bytes into a file and saves it in the default temp folder on the system
+    public void BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
 
         //Creates a new temp file - Identifiable by custom prefix
         File currFile = new File(String.valueOf(Files.createTempFile("WG_", "." + fileType)));
 
 
-        //Creates a temp file out of the data received, so that when the program closes the data isnt saved
+        //Creates a temp file out of the data received, so that when the program closes the data isn't saved
         FileOutputStream os = new FileOutputStream(currFile);
 
         os.write(data);
 
-        fileLocs.put(fileName, currFile);
+        fileLocations.put(fileName, currFile);
 
 
         os.close();
 
-        //Saves file in temp positition
+        //Saves file in temp position
         System.out.println("File saved at: " + currFile);
-
-
-        return currFile;
 
     }
 
 
 
-
-
+    //Opens a file in the system - MIGHT BE REDUNDANT SOON
     public void openFile(File file) throws IOException {
-
 
         Desktop.getDesktop().open(file);
 
     }
+
+
+
+
 }
