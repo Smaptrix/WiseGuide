@@ -92,7 +92,7 @@ public class Client {
     //Requests a file from the server
     //The client should request specific files from the server, so we should know the name of the files
     //The filenames should be stored in the XML
-    public void requestFile(String fileName) throws IOException {
+    public File requestFile(String fileName) throws IOException {
 
         System.out.println("GET REQUEST: " + fileName);
 
@@ -131,8 +131,9 @@ public class Client {
         System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
-        BytesToFile(data, fileName, dataType);
+       File currFile = BytesToFile(data, fileName, dataType);
 
+       return currFile;
     }
 
     //Reads the bytes for the file from the inputStream
@@ -162,7 +163,7 @@ public class Client {
     }
 
     //Turns the raw bytes into a file and saves it in the default temp folder on the system
-    public void BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
+    public File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
 
         //Creates a new temp file - Identifiable by custom prefix
         File currFile = new File(String.valueOf(Files.createTempFile("WG_", "." + fileType)));
@@ -182,6 +183,8 @@ public class Client {
 
         //Saves file in temp position
         System.out.println("File saved at: " + currFile);
+
+        return currFile;
 
     }
 

@@ -4,7 +4,7 @@ import client.Client;
 import org.junit.Test;
 
 
-
+import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
@@ -30,6 +30,17 @@ public class ServerClientTest {
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
         assertEquals(client.echoMessage("echos"), "echos");
+
+    }
+
+    @Test
+    //Test to detect whether a file has been downloaded
+    public void clientServerTransferFileTest() throws IOException {
+
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        File testFile = client.requestFile("test.txt");
+        assertEquals(testFile.exists(), true);
 
     }
 
