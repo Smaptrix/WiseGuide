@@ -170,6 +170,8 @@ public class Client {
 
         fileLocations.put(fileName, currFile);
 
+        //Schedules the file to be deleted when the application closes
+        currFile.deleteOnExit();
 
         os.close();
 

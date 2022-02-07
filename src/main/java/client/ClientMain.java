@@ -29,19 +29,19 @@ public class ClientMain {
 
           client.requestFile("test.txt");
 
-          client.openFile(client.fileLocations.get("test.txt"));
+          //client.openFile(client.fileLocations.get("test.txt"));
 
           client.requestFile("partypopper.jpg");
 
-          client.openFile(client.fileLocations.get("partypopper.jpg"));
+          //client.openFile(client.fileLocations.get("partypopper.jpg"));
 
           client.requestFile("Applause.mp3");
 
-          client.openFile(client.fileLocations.get("Applause.mp3"));
+         //client.openFile(client.fileLocations.get("Applause.mp3"));
 
           client.requestFile("clapping.mp4");
 
-          client.openFile(client.fileLocations.get("clapping.mp4"));
+          //client.openFile(client.fileLocations.get("clapping.mp4"));
 
           client.closeConnection();
 

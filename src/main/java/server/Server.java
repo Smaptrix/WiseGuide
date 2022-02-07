@@ -19,6 +19,7 @@ public class Server {
     private DataOutputStream outputStream;
     private BufferedReader inText;
     private String CurrDir;
+    private String slashType;
 
     //Starts the server
     public void startup(int port) throws IOException {
@@ -40,8 +41,28 @@ public class Server {
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
+        osDetect();
+
+
+
+
+    }
+
+    private void osDetect(){
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
+        String operatingSys = System.getProperty("os.name");
+
+        //Determines the slash type (back or forward) for file systems on unix/non-unix systems.
+        if (operatingSys.startsWith("Windows")){
+            slashType = "\\";
+            System.out.println("Expecting Windows machine, actual machine: " + operatingSys);
+        }
+        else{
+            slashType = "/";
+        }
+
+
 
     }
 
@@ -96,7 +117,7 @@ public class Server {
             case "GET":
 
                 //Should send file stored at the location of the current directory with the filename provided
-                sendFile(Path.of((CurrDir + "/" + requestSplit[1])));
+                sendFile(Path.of((CurrDir + slashType + requestSplit[1])));
 
                 break;
             case "ECHO":
@@ -125,7 +146,7 @@ public class Server {
             //Sends a data packet telling the client to expect a file of a certain size
             long fileSize = Files.size(filepath);
 
-            System.out.print("File Size: " + fileSize);
+            System.out.println("File Size: " + fileSize);
 
             byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) fileSize).array();
 
