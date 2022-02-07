@@ -39,29 +39,34 @@ public class Client {
 
     //Closes the clients connections
     public void closeConnection() throws IOException {
-        outText.println("Close Connection");
-        inputStream.close();
-        outText.close();
-        clientSocket.close();
-        System.out.println("Connection Closed");
+
+            outText.println("Close Connection");
+            inputStream.close();
+            outText.close();
+            clientSocket.close();
+            System.out.println("Connection Closed");
+
     }
 
     //Sends a test message to the server
     public String sendTestMessage() throws IOException {
 
-        outText.println("ECHO " + "test");
 
-        int stringSize = inputStream.read();
+            outText.println("ECHO " + "test");
 
-        byte[] data = readBytes(stringSize);
+            int stringSize = inputStream.read();
+
+            byte[] data = readBytes(stringSize);
 
 
-        String result = new String(data, StandardCharsets.UTF_8);
+            String result = new String(data, StandardCharsets.UTF_8);
 
-        System.out.println(result);
-        return result;
+            System.out.println(result);
+            return result;
+        }
 
-    }
+
+
 
     //Sends an ECHO request to the server and waits for its response
     public String echoMessage(String msg) throws IOException {

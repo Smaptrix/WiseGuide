@@ -11,9 +11,12 @@ public class ClientMain {
 
     //Entry point of client-side application
     public static void main(String[] args) throws IOException {
-        System.out.println("Client Starting");
-        //Generates an instance of Client Main
-        new ClientMain();
+
+
+            System.out.println("Client Starting");
+            //Generates an instance of Client Main
+            new ClientMain();
+
     }
 
     //Connects the client to the server and requests a few test files
