@@ -7,8 +7,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ServerClientTest {
 
@@ -42,6 +41,7 @@ public class ServerClientTest {
         client.startConnection("127.0.0.1", 5555);
         File testFile = client.requestFile("test.txt");
         assertTrue(testFile.exists());
+
 
     }
 

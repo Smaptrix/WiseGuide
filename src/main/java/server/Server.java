@@ -125,6 +125,10 @@ public class Server {
                 sendResponse(requestSplit[1], true);
                 System.out.println("Response sent: " + requestSplit[1]);
                 break;
+
+            //Creates a new user and adds it to the database
+            case "NEWUSER":
+
             default:
                 System.out.println(requestIn + " : Invalid command");
                 sendResponse("Error 404: Text Request Code Not Found", false);
