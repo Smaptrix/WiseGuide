@@ -1,6 +1,8 @@
 package server;
 
 
+import serverclientstuff.User;
+
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -222,6 +224,9 @@ public class Server {
 
 
     }
+
+
+
 
 
 
