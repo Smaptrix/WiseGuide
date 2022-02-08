@@ -1,7 +1,10 @@
 package client;
 
+import serverclientstuff.User;
+
 import java.io.IOException;
 import java.net.SocketException;
+import java.security.NoSuchAlgorithmException;
 
 
 public class ClientMain {
@@ -10,7 +13,7 @@ public class ClientMain {
     String host = "127.0.0.1";
 
     //Entry point of client-side application
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
 
             System.out.println("Client Starting");
@@ -20,11 +23,17 @@ public class ClientMain {
     }
 
     //Connects the client to the server and requests a few test files
-    public ClientMain() throws IOException {
+    public ClientMain() throws IOException, NoSuchAlgorithmException {
 
+        User test = new User("jingham", "12345");
+
+        /*
       try {
           Client client = new Client();
           client.startConnection(host, 5555);
+
+
+
           client.echoMessage("Hey");
           client.echoMessage("again");
 
@@ -32,19 +41,19 @@ public class ClientMain {
 
           client.requestFile("test.txt");
 
-          //client.openFile(client.fileLocations.get("test.txt"));
+          //Utils.openFile(client.fileLocations.get("test.txt"));
 
           client.requestFile("partypopper.jpg");
 
-          //client.openFile(client.fileLocations.get("partypopper.jpg"));
+          //Utils.openFile(client.fileLocations.get("partypopper.jpg"));
 
           client.requestFile("Applause.mp3");
 
-         //client.openFile(client.fileLocations.get("Applause.mp3"));
+         //Utils.openFile(client.fileLocations.get("Applause.mp3"));
 
           client.requestFile("clapping.mp4");
 
-          //client.openFile(client.fileLocations.get("clapping.mp4"));
+          //Utils.openFile(client.fileLocations.get("clapping.mp4"));
 
           client.closeConnection();
 
@@ -52,6 +61,8 @@ public class ClientMain {
       }catch(SocketException e){
           System.out.println("Connection lost/Closed");
       }
+
+         */
 
     }
 

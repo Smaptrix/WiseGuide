@@ -190,12 +190,7 @@ public class Client {
 
 
 
-    //Opens a file in the system - MIGHT BE REDUNDANT SOON
-    public void openFile(File file) throws IOException {
 
-        Desktop.getDesktop().open(file);
-
-    }
 
 
 
