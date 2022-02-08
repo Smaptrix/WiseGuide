@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import static org.junit.Assert.*;
 
@@ -42,6 +43,23 @@ public class ServerClientTest {
         File testFile = client.requestFile("test.txt");
         assertTrue(testFile.exists());
 
+    }
+
+
+
+    @Test
+    public void userUsernameSetupTest() throws NoSuchAlgorithmException {
+        User test = new User("test", "12345");
+        assertEquals(test.getUsername(), "test");
+    }
+
+    @Test
+    //Test to make sure hashing works correctly
+    public void userPasswordHashingTest() throws NoSuchAlgorithmException {
+        User test = new User("test", "12345");
+
+        //Password is '12345' pre-hash
+        assertEquals(test.getEncodedPass(), "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
 
     }
 

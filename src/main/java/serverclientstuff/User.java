@@ -24,9 +24,19 @@ public class User {
         System.out.println(encodedPass);
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public String getEncodedPass() {
+        return encodedPass;
+    }
 
-
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", encodedPass='" + encodedPass + '\'' +
+                '}';
+    }
 }
