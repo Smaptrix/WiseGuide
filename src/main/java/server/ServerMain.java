@@ -1,13 +1,16 @@
 package server;
 
 
+import serverclientstuff.User;
+
 import java.io.IOException;
 import java.net.SocketException;
+import java.security.NoSuchAlgorithmException;
 
 public class ServerMain {
 
     //Entry point for server application
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
 
             System.out.println("Server Start\n");
@@ -16,8 +19,14 @@ public class ServerMain {
     }
 
     //Sets up the initial server
-    public ServerMain() throws IOException {
+    public ServerMain() throws IOException, NoSuchAlgorithmException {
 
+
+        ServerUser testUser = new ServerUser(new User("test", "12345"));
+        ServerUser meUser = new ServerUser(new User("jingham", "12345"));
+
+
+        /*
         try {
             Server server = new Server();
 
@@ -27,6 +36,8 @@ public class ServerMain {
         }catch(SocketException e){
             System.out.println("Socket exception - Lost connection with client");
         }
+        */
+
 
 
     }
