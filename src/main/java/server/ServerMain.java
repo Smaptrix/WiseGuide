@@ -18,12 +18,27 @@ public class ServerMain {
 
     }
 
+    //TODO - ASk the client to login to the server
+
+
     //Sets up the initial server
     public ServerMain() throws IOException, NoSuchAlgorithmException {
 
 
         ServerUser testUser = new ServerUser(new User("test", "12345"));
         ServerUser meUser = new ServerUser(new User("jingham", "12345"));
+
+        System.out.println(meUser.toString());
+
+
+        meUser.createUser();
+
+
+        ServerUser nonExistantUser = new ServerUser(new User("testagain", "test"));
+        nonExistantUser.createUser();
+        System.out.println("Does this user exist: " + nonExistantUser.userExistState);
+
+
 
 
         /*

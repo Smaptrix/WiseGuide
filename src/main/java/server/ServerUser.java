@@ -2,13 +2,8 @@ package server;
 
 import serverclientstuff.User;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.*;
+
 
 public class ServerUser {
 
@@ -18,15 +13,18 @@ public class ServerUser {
     public boolean passVerified;
 
 
+    //Creates the user serverside
     public ServerUser(User currUser) throws IOException {
         this.currUser = currUser;
         userExistState = findUser();
-        passVerified = verifyPass();
+        //If the user doesn't exist there is no need to  verify the password
+        if(userExistState) {
+            passVerified = verifyPass();
+        }
+        else{
+            passVerified = false;
+        }
     }
-
-
-    //TODO - PARSE userDATA file and find/verify users
-    //TODO - Add new users to userData
 
     //Checks to see if a user exists
     private boolean findUser() throws IOException {
@@ -42,21 +40,48 @@ public class ServerUser {
 
         }
 
-
-
-
+        System.out.println("User: " + currUser.getUsername() + " does not exist!");
         return false;
     }
 
     //Checks to see if the users password is correct
     public boolean verifyPass(){
 
-
-        return false;
+        return currUser.getEncodedPass().equals(userInfo[1]);
     }
+
+    public void createUser() throws IOException {
+        if(userExistState){
+            System.out.println("This user already exists");
+        }
+        else{
+            System.out.println("Creating a new user...");
+            Writer output = new BufferedWriter(new FileWriter("userDatabase.txt", true));
+            //This may need to be adapted depending on the kind of user info we want to hold
+            output.write(currUser.getUsername() + "," + currUser.getEncodedPass() + "\n");
+            output.close();
+            userExistState = findUser();
+            passVerified = verifyPass();
+        }
+
+
+    }
+
+
+
+
 
 
     public void setCurrUser(User currUser) {
         this.currUser = currUser;
+    }
+
+    @Override
+    public String toString() {
+        return "ServerUser{" +
+                "currUser=" + currUser +
+                ", userExistState=" + userExistState +
+                ", passVerified=" + passVerified +
+                '}';
     }
 }
