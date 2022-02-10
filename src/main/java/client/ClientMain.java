@@ -10,7 +10,7 @@ public class ClientMain {
     String host = "127.0.0.1";
 
     //Entry point of client-side application
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
 
 
             System.out.println("Client Starting");
