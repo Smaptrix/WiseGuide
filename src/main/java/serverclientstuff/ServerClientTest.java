@@ -1,7 +1,7 @@
 /*
     Company Name:   Maptrix
     Project Name:   WiseGuide
-    Authors:        Joe Ingham
+    Authors:        Joe Ingham, Ben Alexander
     Date Created:   27/01/2022
     Last Updated:   10/02/2022
  */
