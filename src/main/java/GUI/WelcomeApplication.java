@@ -1,4 +1,12 @@
-package maptrix.wiseguide;
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Will Pitchfork
+    Date Created:   04/02/2022
+    Last Updated:   04/02/2022
+ */
+
+package GUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +15,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class WelcomeApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WelcomeApplication.class.getResource("welcomeScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 320);
         stage.setTitle("Hello!");
         stage.setScene(scene);
