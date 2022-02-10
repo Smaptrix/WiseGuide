@@ -17,6 +17,6 @@ public class WelcomeController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+        welcomeText.setText("Welcome to WiseGuide by Maptrix!");
     }
 }

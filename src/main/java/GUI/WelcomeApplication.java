@@ -19,8 +19,8 @@ public class WelcomeApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WelcomeApplication.class.getResource("welcomeScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 320);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        stage.setTitle("WiseGuide by Maptrix - V1.0.0");
         stage.setScene(scene);
         stage.show();
     }
