@@ -12,6 +12,6 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick() throws IOException {
         welcomeText.setText("Welcome to JavaFX Application!");
-        client.ClientMain.main();
+        client.ClientMain.main(); // Pressing "Hello" button starts the client
     }
 }
