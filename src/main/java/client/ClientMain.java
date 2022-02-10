@@ -25,18 +25,18 @@ public class ClientMain {
     //Connects the client to the server and requests a few test files
     public ClientMain() throws IOException, NoSuchAlgorithmException {
 
-        User test = new User("jingham", "12345");
+        User testUser = new User("jingham", "12345");
 
-        /*
+
       try {
           Client client = new Client();
           client.startConnection(host, 5555);
 
+          client.requestLogin(testUser);
 
-
+          /*
           client.echoMessage("Hey");
           client.echoMessage("again");
-
 
 
           client.requestFile("test.txt");
@@ -55,14 +55,14 @@ public class ClientMain {
 
           //Utils.openFile(client.fileLocations.get("clapping.mp4"));
 
+          */
+
           client.closeConnection();
 
 
       }catch(SocketException e){
           System.out.println("Connection lost/Closed");
       }
-
-         */
 
     }
 

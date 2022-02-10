@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 
 public class Server {
 
@@ -22,6 +23,7 @@ public class Server {
     private BufferedReader inText;
     private String CurrDir;
     private String slashType;
+    private ServerUser currUser;
 
     //Starts the server
     public void startup(int port) throws IOException {
@@ -97,13 +99,13 @@ public class Server {
                     System.out.println("Request Received: " + inputLine);
 
                     requestParser(inputLine);
-
             }
-
         }
 
         }catch (SocketException e){
-            System.out.println("Socket Closed (Client may have closed!)");
+            System.out.println("Lost connnection to client");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -113,7 +115,7 @@ public class Server {
 
 
     //Requests in form "Request Code Type" + " " + "Request Information"
-    public void requestParser(String requestIn) throws IOException {
+    public void requestParser(String requestIn) throws IOException, NoSuchAlgorithmException {
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
             case "GET":
@@ -129,11 +131,13 @@ public class Server {
                 break;
 
             //Creates a new user and adds it to the database
-            case "NEWUSER":
+            case "LOGIN":
+                receiveLogin();
+                break;
 
             default:
                 System.out.println(requestIn + " : Invalid command");
-                sendResponse("Error 404: Text Request Code Not Found", false);
+                sendResponse("Error 404: Request Code Not Found", false);
                 break;
         }
     }
@@ -146,7 +150,6 @@ public class Server {
 
         try {
             System.out.println("File stored at: " + filepath);
-            //Only open this when need to send a file
 
 
             //Sends a data packet telling the client to expect a file of a certain size
@@ -226,7 +229,17 @@ public class Server {
     }
 
 
+    //Handles the clients attempt to login
+    public void receiveLogin() throws IOException, NoSuchAlgorithmException {
+        String loginName = inText.readLine();
 
+        String loginPass = inText.readLine();
+
+        currUser = new ServerUser(new User(loginName, loginPass));
+
+        System.out.println(currUser);
+        sendResponse("Acknowledged", true);
+    }
 
 
 

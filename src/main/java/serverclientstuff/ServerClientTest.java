@@ -46,7 +46,6 @@ public class ServerClientTest {
     }
 
 
-
     @Test
     public void userUsernameSetupTest() throws NoSuchAlgorithmException {
         User test = new User("test", "12345");
