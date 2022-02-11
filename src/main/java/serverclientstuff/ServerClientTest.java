@@ -2,6 +2,7 @@ package serverclientstuff;
 
 import client.Client;
 import org.junit.Test;
+import server.ServerUser;
 
 
 import java.io.File;
@@ -62,5 +63,38 @@ public class ServerClientTest {
         assertEquals(test.getEncodedPass(), "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
 
     }
+
+
+    @Test
+    //Test to see if users exists in the user database
+    public void userExistsTest() throws NoSuchAlgorithmException, IOException {
+        ServerUser testUser = new ServerUser(new User("test", "12345"));
+        assertTrue(testUser.userExistState);
+    }
+
+    @Test
+    //Test to make sure a user doesnt exist
+    public void userDoesntExistTest() throws NoSuchAlgorithmException, IOException {
+        ServerUser nonExistantTestUser = new ServerUser(new User("ImNotReal", "089-2341980-324"));
+        assertFalse(nonExistantTestUser.userExistState);
+
+    }
+
+    @Test
+    //Test to create a new user and add them to the text file (only works once unless you delete this user again)
+    public void userCreationTest() throws NoSuchAlgorithmException, IOException {
+        ServerUser toBeCreatedUser = new ServerUser(new User("makeme!", "password"));
+        //First check they dont exist
+        assertFalse(toBeCreatedUser.userExistState);
+        //Make user
+        toBeCreatedUser.createUser();
+        //Check the user now exists
+        assertTrue(toBeCreatedUser.userExistState);
+
+
+    }
+
+
+
 
 }

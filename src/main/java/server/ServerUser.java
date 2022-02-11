@@ -13,6 +13,9 @@ public class ServerUser {
     public boolean passVerified;
 
 
+    //TODO - Delete User?
+
+
     //Creates the user serverside
     public ServerUser(User currUser) throws IOException {
         this.currUser = currUser;
