@@ -1,6 +1,7 @@
 package client;
 
-import java.awt.*;
+import serverclientstuff.User;
+
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -77,7 +78,6 @@ public class Client {
 
         int fileSize = inputStream.read();
 
-        System.out.println("We are receiving: " + fileSize + " bytes");
         byte[] data = readBytes(fileSize);
 
 
@@ -185,12 +185,35 @@ public class Client {
         System.out.println("File saved at: " + currFile);
 
         return currFile;
+    }
+
+
+    //Attempts to log in with the given user data
+    public void requestLogin(User currUser) throws IOException {
+        outText.println("LOGIN");
+
+        outText.println(currUser.getUsername());
+
+        outText.println(currUser.getEncodedPass());
+
+        receiveAcknowledgement();
 
     }
 
 
+    //Receive an acknowledgement from the server
+    public void receiveAcknowledgement() throws IOException {
+
+        int fileSize = inputStream.read();
+
+        byte[] data = readBytes(fileSize);
 
 
+        String result = new String(data, StandardCharsets.UTF_8);
+
+        System.out.println(result);
+
+    }
 
 
 

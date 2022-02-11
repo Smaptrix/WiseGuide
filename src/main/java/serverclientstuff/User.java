@@ -20,8 +20,6 @@ public class User {
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
         this.encodedPass = Utils.bytesToHex(hash);
-
-        System.out.println(encodedPass);
     }
 
     public String getUsername() {
