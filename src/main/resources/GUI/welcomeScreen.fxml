@@ -13,6 +13,6 @@
     </padding>
 
     <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <Button text="Welcome!" onAction="#onHelloButtonClick"/>
     <Text text="Version 1 of WiseGuide GUI. Soon to be updated with something much better than a single button and some text..."/>
 </VBox>
