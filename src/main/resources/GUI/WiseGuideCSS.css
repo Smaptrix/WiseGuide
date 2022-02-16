@@ -7,26 +7,27 @@
     -fx-font-size: 14px;
     -fx-font-family: Oswald, sans-serif;
     -fx-font-style: normal;
-    -fx-background-color: white;
+    -fx-background-color: #E9EFF1;
     -fx-padding: 10px;
-}/*
-    --pale-blue:#E9EFF1;
-    --pastel-blue: #AFD4E5;
-    --middle-blue: #3C86A6;
-    --dark-blue: #245164;
-    --light-grey: #768085;
-    --middle-grey: #6E7076;
-    --dark-grey: #4A4A4A;
-}*/
+    -pale-blue:#E9EFF1;
+    -pastel-blue: #AFD4E5;
+    -middle-blue: #3C86A6;
+    -dark-blue: #245164;
+    -light-grey: #768085;
+    -middle-grey: #6E7076;
+    -dark-grey: #4A4A4A;
+}
 
 .heading1 {
     -fx-font-family: Oswald;
     -fx-font-style: normal;
     -fx-font-size: 28px;
-    -fx-dark-text-color: #245164;
-    -fx-mid-text-color: #3C86A6;
-    -fx-light-text-color: #AFD4E5;
+    -fx-dark-text-color: -dark-blue;
+    -fx-mid-text-color: -middle-blue;
+    -fx-light-text-color: -pastel-blue;
     -fx-padding: 10px;
+    -fx-max-width: 800px;
+    -fx-text-alignment: center;
 }
 
 .heading2 {
@@ -53,4 +54,6 @@
 
 }
 
-
+.button {
+    -fx-background-color: -pastel-blue;
+}
