@@ -1,0 +1,47 @@
+.root {
+    -fx-font-size: 14px;
+    -fx-font-family: Oswald, sans-serif;
+    -fx-font-style: normal;
+    -fx-background-color: white;
+    --pale-blue:#E9EFF1;
+    --pastel-blue: #AFD4E5;
+    --middle-blue: #3C86A6;
+    --dark-blue: #245164;
+    --light-grey: #768085;
+    --middle-grey: #6E7076;
+    --dark-grey: #4A4A4A;
+}
+
+.heading1 {
+    -fx-font-family: Oswald;
+    -fx-font-style: normal;
+    -fx-font-size: 28px;
+    -fx-dark-text-color: var(--dark-blue);
+    -fx-mid-text-color: var(--middle-blue);
+    -fx-light-text-color: var(--pastel-blue);
+    -fx-padding: 10px;
+}
+
+.heading2 {
+
+}
+
+.heading3 {
+
+}
+
+.heading4 {
+
+}
+
+.heading5 {
+
+}
+
+.heading6 {
+
+}
+
+.text {
+
+}
