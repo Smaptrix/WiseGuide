@@ -5,6 +5,9 @@ import serverclientstuff.User;
 import java.io.*;
 
 
+//TODO - HASH ALL OF THE USERS DATA NOT JUST THE PASSWORD!!!
+
+
 public class ServerUser {
 
     private User currUser;
