@@ -6,6 +6,7 @@ import java.io.*;
 
 
 //TODO - HASH ALL OF THE USERS DATA NOT JUST THE PASSWORD!!!
+//TODO - STORE EACH USERS DATA IN A SEPERATE FILE????
 
 
 public class ServerUser {
