@@ -15,7 +15,7 @@
 
     <Label fx:id="welcomeText"/>
     <Button text="Welcome!" onAction="#onHelloButtonClick"/>
-    <Text styleClass=".heading1" text="Version 1 of WiseGuide GUI. Soon to be updated with something much better than a single button and some text..."/>
+    <Text styleClass="heading1" text="Version 1 of WiseGuide GUI. Soon to be updated with something much better than a single button and some text..."/>
 
     <stylesheets>
         <URL value="@WiseGuideCSS.css" />
