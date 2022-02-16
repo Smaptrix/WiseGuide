@@ -9,14 +9,27 @@
 package GUI;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
 
 public class WelcomeController {
-    @FXML
-    private Label welcomeText;
+    public AnchorPane mainPane;
+    public MenuBar menuBar;
+    public SplitPane horizontalSplitPane;
+    public AnchorPane leftPane;
+    public SplitPane leftSplitPane;
+    public TitledPane venuesPane;
+    public ScrollPane venueScrollPane;
+    public TitledPane routesPane;
+    public ScrollPane routesScrollPane;
+    public AnchorPane mapPane;
+
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to WiseGuide by Maptrix!");
+        
     }
 }
