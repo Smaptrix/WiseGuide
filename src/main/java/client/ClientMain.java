@@ -5,9 +5,9 @@ import java.net.SocketException;
 
 
 public class ClientMain {
-
     //For now the server is hosted locally
     String host = "127.0.0.1";
+    static Client client;
 
     //Entry point of client-side application
     public static void main() throws IOException {
@@ -23,7 +23,7 @@ public class ClientMain {
     public ClientMain() throws IOException {
 
       try {
-          Client client = new Client();
+          client = new Client();
           client.startConnection(host, 5555);
           client.echoMessage("Hey");
           client.echoMessage("again");
@@ -46,7 +46,7 @@ public class ClientMain {
 
           //client.openFile(client.fileLocations.get("clapping.mp4"));
 
-          client.closeConnection();
+          //client.closeConnection();
 
 
       }catch(SocketException e){
@@ -55,6 +55,13 @@ public class ClientMain {
 
     }
 
-
+    //Connects the client to the server and requests a few test files
+    public static void closeClient() throws IOException {
+        try {
+            client.closeConnection();
+        } catch (SocketException e) {
+            System.out.println("Connect failed to close.");
+        }
+    }
 
 }
