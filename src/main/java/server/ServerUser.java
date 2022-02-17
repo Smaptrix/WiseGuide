@@ -5,8 +5,8 @@ import serverclientstuff.User;
 import java.io.*;
 
 
-//TODO - HASH ALL OF THE USERS DATA NOT JUST THE PASSWORD!!!
-//TODO - STORE EACH USERS DATA IN A SEPERATE FILE????
+//TODO - HASH ALL OF THE USERS DATA WHEN ADDED TO THE FILE (sort curr users)
+
 
 
 public class ServerUser {
@@ -40,7 +40,7 @@ public class ServerUser {
         String line;
         while((line = br.readLine()) != null) {
             String[] values = line.split(",");
-                if((values[0]).equals(currUser.getUsername())){
+                if((values[0]).equals(currUser.getEncodedUsername())){
                     userInfo = values;
                     System.out.println("User: "+ userInfo[0] +" exists!");
                     return true;
@@ -48,7 +48,7 @@ public class ServerUser {
 
         }
 
-        System.out.println("User: " + currUser.getUsername() + " does not exist!");
+        System.out.println("User: " + currUser.getEncodedUsername() + " does not exist!");
         return false;
     }
 
@@ -66,7 +66,7 @@ public class ServerUser {
             System.out.println("Creating a new user...");
             Writer output = new BufferedWriter(new FileWriter("userDatabase.txt", true));
             //This may need to be adapted depending on the kind of user info we want to hold
-            output.write(currUser.getUsername() + "," + currUser.getEncodedPass() + "\n");
+            output.write(currUser.getEncodedUsername() + "," + currUser.getEncodedPass() + "\n");
             output.close();
             userExistState = findUser();
             passVerified = verifyPass();

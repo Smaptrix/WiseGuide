@@ -9,21 +9,24 @@ import java.security.NoSuchAlgorithmException;
 
 public class User {
 
-    private String username;
+    private String encodedUsername;
     private String encodedPass;
 
 
+    //Creates the user object - stores all information as a hash
     public User(String username, String password) throws NoSuchAlgorithmException {
-        this.username = username;
+
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        byte[] hashUsername = digest.digest(username.getBytes(StandardCharsets.UTF_8));
+        byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-        this.encodedPass = Utils.bytesToHex(hash);
+        this.encodedUsername = Utils.bytesToHex(hashUsername);
+        this.encodedPass = Utils.bytesToHex(hashPass);
     }
 
-    public String getUsername() {
-        return username;
+    public String getEncodedUsername() {
+        return encodedUsername;
     }
 
     public String getEncodedPass() {
@@ -33,7 +36,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "username='" + encodedUsername + '\'' +
                 ", encodedPass='" + encodedPass + '\'' +
                 '}';
     }

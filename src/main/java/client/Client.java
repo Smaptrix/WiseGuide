@@ -192,7 +192,7 @@ public class Client {
     public void requestLogin(User currUser) throws IOException {
         outText.println("LOGIN");
 
-        outText.println(currUser.getUsername());
+        outText.println(currUser.getEncodedUsername());
 
         outText.println(currUser.getEncodedPass());
 

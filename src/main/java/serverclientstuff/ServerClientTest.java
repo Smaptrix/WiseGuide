@@ -50,7 +50,7 @@ public class ServerClientTest {
     @Test
     public void userUsernameSetupTest() throws NoSuchAlgorithmException {
         User test = new User("test", "12345");
-        assertEquals(test.getUsername(), "test");
+        assertEquals(test.getEncodedUsername(), "test");
     }
 
     @Test
