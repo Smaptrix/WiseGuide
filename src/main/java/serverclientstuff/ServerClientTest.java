@@ -98,6 +98,21 @@ public class ServerClientTest {
     }
 
 
+    @Test
+    //Test to check whether a password cna be detected as correct or not
+    public void passwordCheckTest() throws NoSuchAlgorithmException, IOException {
+        //Create user with incorrect passowrd
+        ServerUser passCheckUser = new ServerUser(new User("test", "54321"));
+
+        //Check password has been detected as incorrect
+        assertFalse(passCheckUser.passVerified);
+
+        //Change password to the correct one
+        passCheckUser = new ServerUser(new User("test", "12345"));
+
+        //Check password has been detected as correct
+        assertTrue(passCheckUser.passVerified);
+    }
 
 
 }
