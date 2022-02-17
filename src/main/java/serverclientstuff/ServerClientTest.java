@@ -13,6 +13,10 @@ import static org.junit.Assert.*;
 
 public class ServerClientTest {
 
+
+    //TODO - change tests and current saved user info
+
+
     @Test
     //Launch Server first, then test
     //Tests to see if the server and client can connect to one another
