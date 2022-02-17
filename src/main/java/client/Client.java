@@ -31,6 +31,7 @@ public class Client {
             clientSocket = new Socket(ip, port);
             outText = new PrintWriter(clientSocket.getOutputStream(), true);
             inputStream = clientSocket.getInputStream();
+            System.out.println("Connection Opened");
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
         }

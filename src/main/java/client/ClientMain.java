@@ -1,3 +1,6 @@
+//
+// CURRENTLY NOT IN USE!!!
+//
 package client;
 
 import java.io.IOException;
