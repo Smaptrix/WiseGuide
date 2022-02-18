@@ -192,9 +192,9 @@ public class Client {
     public void requestLogin(User currUser) throws IOException {
         outText.println("LOGIN");
 
-        outText.println(currUser.getEncodedUsername());
+        outText.println(currUser.getUsername());
 
-        outText.println(currUser.getEncodedPass());
+        outText.println(currUser.getPassword());
 
         receiveAcknowledgement();
 
@@ -221,9 +221,9 @@ public class Client {
     public String verifyUser(User currUser) throws IOException {
         outText.println("VERIFYUSER");
 
-        outText.println(currUser.getEncodedUsername());
+        outText.println(currUser.getUsername());
 
-        outText.println(currUser.getEncodedPass());
+        outText.println(currUser.getPassword());
 
         return receiveAcknowledgement();
 

@@ -5,7 +5,7 @@ import serverclientstuff.User;
 import java.io.*;
 
 
-//TODO - HASH ALL OF THE USERS DATA WHEN ADDED TO THE FILE (sort curr users)
+
 
 
 
@@ -39,7 +39,10 @@ public class ServerUserHandler {
         String line;
         while ((line = br.readLine()) != null) {
             String[] values = line.split(",");
-            if ((values[0]).equals(currUser.getEncodedUsername())) {
+
+            System.out.println(values[0]);
+
+            if ((values[0]).equals(currUser.getUsername())) {
                 userInfo = values;
                 return true;
             }
@@ -52,7 +55,7 @@ public class ServerUserHandler {
     //Checks to see if the users password is correct
     public boolean verifyPass() {
 
-        return (currUser.getEncodedPass()).equals(userInfo[1]);
+        return (currUser.getPassword()).equals(userInfo[1]);
     }
 
     public void createUser() throws IOException {
@@ -62,7 +65,7 @@ public class ServerUserHandler {
             System.out.println("Creating a new user...");
             Writer output = new BufferedWriter(new FileWriter("userDatabase.txt", true));
             //This may need to be adapted depending on the kind of user info we want to hold
-            output.write(currUser.getEncodedUsername() + "," + currUser.getEncodedPass() + "\n");
+            output.write(currUser.getUsername() + "," + currUser.getPassword() + "\n");
             output.close();
             userExistState = findUser();
             passVerified = verifyPass();

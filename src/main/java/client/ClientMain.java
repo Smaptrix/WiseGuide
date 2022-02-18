@@ -22,10 +22,20 @@ public class ClientMain {
 
     }
 
+
+    //NOTE - REMEMBER TO HASH DATA AFTER CREATING NEW USER
+    //     - DO NOT HASH ON THE SERVER :)  - JOE
+
+
+
     //Connects the client to the server and requests a few test files
     public ClientMain() throws IOException, NoSuchAlgorithmException {
 
-        User testUser = new User("jingham", "12345");
+
+
+        //Creates User then hashes there data
+        User testUser = new User("test", "12345");
+        testUser.hashUserInfo();
 
 
       try {

@@ -54,7 +54,7 @@ public class ServerClientTest {
     @Test
     public void userUsernameSetupTest() throws NoSuchAlgorithmException {
         User test = new User("test", "12345");
-        assertEquals(test.getEncodedUsername(), "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
+        assertEquals(test.getUsername(), "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ServerClientTest {
         User test = new User("test", "12345");
 
         //Password is '12345' pre-hash
-        assertEquals(test.getEncodedPass(), "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
+        assertEquals(test.getPassword(), "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
 
     }
 

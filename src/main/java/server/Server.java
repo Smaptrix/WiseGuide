@@ -258,6 +258,7 @@ public class Server {
             }
             //If password is correct
             else if (!currUserHandler.passVerified){
+                System.out.println(currUserHandler);
                 sendResponse("BADPASS", true);
             }
 
@@ -273,7 +274,7 @@ public class Server {
 
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
-                //If the users data is incorrect
+                //If the users data is incorrect - let the client know
                 currUserHandler = null;
                 sendResponse("BADLOGIN", true);
             }

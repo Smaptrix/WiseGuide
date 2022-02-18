@@ -5,39 +5,50 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
+//TODO - Only Hash once - Stop Hashing every time new user is made
+
 //Object regarding User functions and User creation
 
 public class User {
 
-    private String encodedUsername;
-    private String encodedPass;
+    private String username;
+    private String password;
 
 
-    //Creates the user object - stores all information as a hash
+    //Creates the user object
     public User(String username, String password) throws NoSuchAlgorithmException {
 
+        this.username = username;
+        this.password = password;
+
+
+    }
+
+    //Hashes user data
+    public void hashUserInfo() throws NoSuchAlgorithmException {
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hashUsername = digest.digest(username.getBytes(StandardCharsets.UTF_8));
         byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-        this.encodedUsername = Utils.bytesToHex(hashUsername);
-        this.encodedPass = Utils.bytesToHex(hashPass);
+        this.username = Utils.bytesToHex(hashUsername);
+        this.password = Utils.bytesToHex(hashPass);
+
     }
 
-    public String getEncodedUsername() {
-        return encodedUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public String getEncodedPass() {
-        return encodedPass;
+    public String getPassword() {
+        return password;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + encodedUsername + '\'' +
-                ", encodedPass='" + encodedPass + '\'' +
+                "username='" + username + '\'' +
+                ", encodedPass='" + password + '\'' +
                 '}';
     }
 }
