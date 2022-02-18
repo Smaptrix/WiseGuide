@@ -26,11 +26,11 @@ public class LoginController {
     @FXML
     Label errorLabel;
 
-
+    @FXML
     //Always called by the FXML Loader
     public void initialize(){
 
-        errorLabel.setText("Hello :)");
+
     }
 
 
@@ -38,7 +38,7 @@ public class LoginController {
 
     @FXML
     //Closes the application
-    protected void exitButtonAction(){
+    private void exitButtonAction(){
         System.out.println("closing down!");
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();

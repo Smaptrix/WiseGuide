@@ -4,10 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-//TODO - GET BUTTON WORKING (Controller Issues?)
+
 
 
 
@@ -18,6 +19,7 @@ public class LoginApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
         stage.setTitle("Login");
         stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
