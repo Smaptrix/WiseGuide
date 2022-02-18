@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maptrix.wiseguide.AccountCreationController">
+   <children>
+      <AnchorPane prefHeight="416.0" prefWidth="321.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="22.0" prefHeight="26.0" prefWidth="144.0" text="Account Creation">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="62.0" layoutY="106.0" text="Username" />
+            <TextField id="usernameField" fx:id="userField" layoutX="131.0" layoutY="102.0" />
+            <Label layoutX="64.0" layoutY="157.0" text="Password" />
+            <PasswordField id="passField" fx:id="passField" layoutX="131.0" layoutY="153.0" />
+            <PasswordField id="passConfirmField" fx:id="passConfirmField" layoutX="131.0" layoutY="205.0" />
+            <Label layoutX="3.0" layoutY="209.0" text="Password Confirmation" />
+            <Button id="createAccountButton" fx:id="createAccountButton" layoutX="109.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Create Account" />
+            <Label id="errField" fx:id="errLabel" alignment="CENTER" layoutX="131.0" layoutY="266.0" textFill="#f80000" />
+         </children>
+      </AnchorPane>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</VBox>
