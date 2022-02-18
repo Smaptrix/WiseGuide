@@ -1,6 +1,9 @@
 package maptrix.wiseguide;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -44,7 +47,6 @@ public class LoginController {
     @FXML
     //Closes the application
     private void exitButtonAction(){
-        System.out.println("closing down!");
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
 
@@ -65,9 +67,34 @@ public class LoginController {
 
         System.out.println("User Exist State: " + currUser.userExistState);
 
-
-
+        if(!currUser.userExistState){
+            errorLabel.setText("User does not exist!");
+        }
+        else{
+            errorLabel.setText("");
+        }
 
     }
+
+
+    @FXML
+    //Opens the Account Creation Page
+    private void createAccButtonAction() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-create-page.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader.load(), 300, 350);
+            stage.setScene(scene);
+            stage.setTitle("Account Creation");
+            stage.show();
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
 }
