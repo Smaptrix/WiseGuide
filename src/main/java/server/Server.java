@@ -23,7 +23,8 @@ public class Server {
     private BufferedReader inText;
     private String CurrDir;
     private String slashType;
-    private ServerUser currUser;
+    private ServerUserHandler currUserHandler;
+    private User currUser;
 
     //Starts the server
     public void startup(int port) throws IOException {
@@ -132,7 +133,12 @@ public class Server {
 
             //Creates a new user and adds it to the database
             case "LOGIN":
-                receiveLogin();
+                receiveLogin(1);
+                break;
+
+
+            case "VERIFYUSER":
+                receiveLogin(0);
                 break;
 
             default:
@@ -229,17 +235,62 @@ public class Server {
     }
 
 
-    //Handles the clients attempt to login
-    public void receiveLogin() throws IOException, NoSuchAlgorithmException {
+    /*TODO - Refactor login - verify the users info first
+        Might be fine as is - If client recieves bad login then figure out what is wrong?
+     */
+
+    //Mode decides whether it verifies user data or logs in
+    public void receiveLogin(Integer mode) throws IOException, NoSuchAlgorithmException {
+
+
         String loginName = inText.readLine();
 
         String loginPass = inText.readLine();
 
-        currUser = new ServerUser(new User(loginName, loginPass));
+        currUserHandler = new ServerUserHandler(new User(loginName, loginPass));
 
-        System.out.println(currUser);
-        sendResponse("Acknowledged", true);
+        //Verification Mode - Mainly for user creation
+        if(mode == 0){
+
+            //If user exists (Good for login, bad for user creation)
+            if(currUserHandler.userExistState){
+                sendResponse("USEREXISTS", true);
+            }
+            //If password is correct
+            else if (!currUserHandler.passVerified){
+                sendResponse("BADPASS", true);
+            }
+
+            else{
+                sendResponse("USERNOTFOUND", true);
+            }
+
+        }
+
+
+        //Login Mode
+        else if(mode == 1) {
+
+            //Verifies the user data
+            if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
+                //If the users data is incorrect
+                currUserHandler = null;
+                sendResponse("BADLOGIN", true);
+            }
+            else{
+                //If the users data is verified - sets the server user to the user provided
+                currUser = new User(loginName, loginPass);
+                sendResponse("GOODLOGIN", true);
+            }
+
+        }
+        else{
+            System.out.println("Unrecognised login mode!");
+        }
     }
+
+
+
 
 
 

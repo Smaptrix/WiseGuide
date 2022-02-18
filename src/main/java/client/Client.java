@@ -201,8 +201,8 @@ public class Client {
     }
 
 
-    //Receive an acknowledgement from the server
-    public void receiveAcknowledgement() throws IOException {
+    //Receive a verification message from the server
+    public String receiveAcknowledgement() throws IOException {
 
         int fileSize = inputStream.read();
 
@@ -212,6 +212,20 @@ public class Client {
         String result = new String(data, StandardCharsets.UTF_8);
 
         System.out.println(result);
+
+        return result;
+    }
+
+
+    //Asks the server to verify if a user exists and if their password is correct
+    public String verifyUser(User currUser) throws IOException {
+        outText.println("VERIFYUSER");
+
+        outText.println(currUser.getEncodedUsername());
+
+        outText.println(currUser.getEncodedPass());
+
+        return receiveAcknowledgement();
 
     }
 

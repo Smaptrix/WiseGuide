@@ -2,14 +2,13 @@ package maptrix.wiseguide;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import server.ServerUser;
+import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -65,7 +64,7 @@ public class LoginController {
         System.out.println("Username: " + userTextField.getText());
         System.out.println("Password: " + userPassField.getText());
 
-        ServerUser currUser = new ServerUser(new User(userTextField.getText(), userPassField.getText()));
+        ServerUserHandler currUser = new ServerUserHandler(new User(userTextField.getText(), userPassField.getText()));
 
         System.out.println("User Exist State: " + currUser.userExistState);
 

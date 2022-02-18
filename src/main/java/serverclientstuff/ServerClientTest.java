@@ -2,7 +2,7 @@ package serverclientstuff;
 
 import client.Client;
 import org.junit.Test;
-import server.ServerUser;
+import server.ServerUserHandler;
 
 
 import java.io.File;
@@ -71,14 +71,14 @@ public class ServerClientTest {
     @Test
     //Test to see if users exists in the user database
     public void userExistsTest() throws NoSuchAlgorithmException, IOException {
-        ServerUser testUser = new ServerUser(new User("test", "12345"));
+        ServerUserHandler testUser = new ServerUserHandler(new User("test", "12345"));
         assertTrue(testUser.userExistState);
     }
 
     @Test
     //Test to make sure a user doesnt exist
     public void userDoesntExistTest() throws NoSuchAlgorithmException, IOException {
-        ServerUser nonExistantTestUser = new ServerUser(new User("ImNotReal", "089-2341980-324"));
+        ServerUserHandler nonExistantTestUser = new ServerUserHandler(new User("ImNotReal", "089-2341980-324"));
         assertFalse(nonExistantTestUser.userExistState);
 
     }
@@ -86,7 +86,7 @@ public class ServerClientTest {
     @Test
     //Test to create a new user and add them to the text file (only works once unless you delete this user again)
     public void userCreationTest() throws NoSuchAlgorithmException, IOException {
-        ServerUser toBeCreatedUser = new ServerUser(new User("makeme!", "password"));
+        ServerUserHandler toBeCreatedUser = new ServerUserHandler(new User("makeme!", "password"));
         //First check they dont exist
         assertFalse(toBeCreatedUser.userExistState);
         //Make user
@@ -102,17 +102,20 @@ public class ServerClientTest {
     //Test to check whether a password cna be detected as correct or not
     public void passwordCheckTest() throws NoSuchAlgorithmException, IOException {
         //Create user with incorrect passowrd
-        ServerUser passCheckUser = new ServerUser(new User("test", "54321"));
+        ServerUserHandler passCheckUser = new ServerUserHandler(new User("test", "54321"));
 
         //Check password has been detected as incorrect
         assertFalse(passCheckUser.passVerified);
 
         //Change password to the correct one
-        passCheckUser = new ServerUser(new User("test", "12345"));
+        passCheckUser = new ServerUserHandler(new User("test", "12345"));
 
         //Check password has been detected as correct
         assertTrue(passCheckUser.passVerified);
     }
+
+    //TODO - User checks using the client/server pair
+
 
 
 }

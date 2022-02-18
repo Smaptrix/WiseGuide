@@ -9,7 +9,7 @@ import java.io.*;
 
 
 
-public class ServerUser {
+public class ServerUserHandler {
 
     private User currUser;
     public boolean userExistState;
@@ -21,15 +21,14 @@ public class ServerUser {
 
 
     //Creates the user serverside
-    public ServerUser(User currUser) throws IOException {
+    public ServerUserHandler(User currUser) throws IOException {
         this.currUser = currUser;
         userExistState = findUser();
         //If the user doesn't exist there is no need to  verify the password
-        if(userExistState) {
+        if (userExistState) {
             passVerified = verifyPass();
 
-        }
-        else{
+        } else {
             passVerified = false;
         }
     }
@@ -38,12 +37,12 @@ public class ServerUser {
     private boolean findUser() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("userDatabase.txt"));
         String line;
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             String[] values = line.split(",");
-                if((values[0]).equals(currUser.getEncodedUsername())){
-                    userInfo = values;
-                    return true;
-                }
+            if ((values[0]).equals(currUser.getEncodedUsername())) {
+                userInfo = values;
+                return true;
+            }
 
         }
 
@@ -51,16 +50,15 @@ public class ServerUser {
     }
 
     //Checks to see if the users password is correct
-    public boolean verifyPass(){
+    public boolean verifyPass() {
 
         return (currUser.getEncodedPass()).equals(userInfo[1]);
     }
 
     public void createUser() throws IOException {
-        if(userExistState){
+        if (userExistState) {
             System.out.println("This user already exists");
-        }
-        else{
+        } else {
             System.out.println("Creating a new user...");
             Writer output = new BufferedWriter(new FileWriter("userDatabase.txt", true));
             //This may need to be adapted depending on the kind of user info we want to hold
@@ -80,4 +78,6 @@ public class ServerUser {
                 ", passVerified=" + passVerified +
                 '}';
     }
+
+
 }

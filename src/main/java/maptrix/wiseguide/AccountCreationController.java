@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import server.ServerUser;
+import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class AccountCreationController {
 
         else{
             errLabel.setText("");
-            ServerUser desiredUser = new ServerUser(new User(userField.getText(), passField.getText()));
+            ServerUserHandler desiredUser = new ServerUserHandler(new User(userField.getText(), passField.getText()));
             if(desiredUser.userExistState){
                 errLabel.setText("This username is taken");
             }
