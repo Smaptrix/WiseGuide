@@ -27,7 +27,7 @@ public class ServerUser {
         //If the user doesn't exist there is no need to  verify the password
         if(userExistState) {
             passVerified = verifyPass();
-            System.out.println("Password correct: " + passVerified);
+
         }
         else{
             passVerified = false;
@@ -42,13 +42,11 @@ public class ServerUser {
             String[] values = line.split(",");
                 if((values[0]).equals(currUser.getEncodedUsername())){
                     userInfo = values;
-                    System.out.println("User: "+ userInfo[0] +" exists!");
                     return true;
                 }
 
         }
 
-        System.out.println("User: " + currUser.getEncodedUsername() + " does not exist!");
         return false;
     }
 
