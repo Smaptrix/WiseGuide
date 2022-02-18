@@ -52,6 +52,8 @@ public class LoginController {
 
     }
 
+    //TODO - Post Integration let the client handle the user stuff not the GUI
+
     @FXML
     //Tries to login using the data provided
     //For now creates a user but that should all be handled on the client not the GUI :)
@@ -70,12 +72,14 @@ public class LoginController {
         if(!currUser.userExistState){
             errorLabel.setText("User does not exist!");
         }
+        if(!currUser.passVerified){
+            errorLabel.setText("Incorrect Password!");
+        }
         else{
             errorLabel.setText("");
         }
 
     }
-
 
     @FXML
     //Opens the Account Creation Page

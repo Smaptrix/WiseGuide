@@ -24,9 +24,9 @@
             <Label layoutX="64.0" layoutY="157.0" text="Password" />
             <PasswordField id="passField" fx:id="passField" layoutX="131.0" layoutY="153.0" />
             <PasswordField id="passConfirmField" fx:id="passConfirmField" layoutX="131.0" layoutY="205.0" />
-            <Label layoutX="3.0" layoutY="209.0" text="Password Confirmation" />
-            <Button id="createAccountButton" fx:id="createAccountButton" layoutX="109.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Create Account" />
-            <Label id="errField" fx:id="errLabel" alignment="CENTER" layoutX="131.0" layoutY="266.0" textFill="#f80000" />
+            <Label layoutX="20.0" layoutY="209.0" text="Confirm Password" />
+            <Button id="createAccountButton" fx:id="createAccountButton" layoutX="109.0" layoutY="313.0" mnemonicParsing="false" onAction="#createAccountButtonAction" prefHeight="25.0" prefWidth="103.0" text="Create Account" />
+            <Label id="errField" fx:id="errLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="268.0" prefHeight="17.0" prefWidth="300.0" textFill="#f80000" />
          </children>
       </AnchorPane>
    </children>
