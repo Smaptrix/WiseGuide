@@ -40,30 +40,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="173.0" layoutY="214.0" prefHeight="27.0" prefWidth="120.0" style="&#10;" text="Password" textAlignment="CENTER" textFill="#245164" wrapText="false">
+        <Label alignment="CENTER" layoutX="173.0" layoutY="196.0" prefHeight="27.0" prefWidth="120.0" style="&#10;" text="Password" textAlignment="CENTER" textFill="#245164" wrapText="false">
           <font>
             <Font size="25.0" />
           </font>
         </Label>
-            <Button layoutX="349.0" layoutY="291.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="114.0" text="Login" />
-            <PasswordField layoutX="332.0" layoutY="219.0" />
-            <TextField layoutX="332.0" layoutY="163.0" />
-            <Label layoutX="177.0" layoutY="158.0" text="Username" textFill="#245164">
+            <Button id="loginButton" layoutX="349.0" layoutY="291.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="114.0" text="Login" />
+            <PasswordField id="userPassField" layoutX="332.0" layoutY="202.0" />
+            <TextField id="usernameTextField" layoutX="332.0" layoutY="146.0" />
+            <Label layoutX="177.0" layoutY="140.0" text="Username" textFill="#245164">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Button layoutX="176.0" layoutY="291.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="114.0" text="Create Account" />
-            <Button layoutX="591.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
-            <Label layoutX="195.0" layoutY="62.0" prefHeight="42.0" prefWidth="275.0" text="MAPTRIX LOGO HERE">
+            <Button id="createAccButton" layoutX="176.0" layoutY="291.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="114.0" text="Create Account" />
+            <Button id="exitButton" layoutX="591.0" layoutY="14.0" mnemonicParsing="false" text="Exit" />
+            <Label layoutX="195.0" layoutY="63.0" prefHeight="42.0" prefWidth="275.0" text="MAPTRIX LOGO HERE">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
+            <Label id="errorLabel" layoutX="220.0" layoutY="249.0" prefHeight="17.0" prefWidth="198.0" textFill="#ee0000" />
       </children>
     </AnchorPane>
   </children>
