@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+        Company Name:   Maptrix
+        Project Name:   WiseGuide
+        Authors:        Will Pitchfork
+        Date Created:   04/02/2022
+        Last Updated:   20/02/2022
+-->
+
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
