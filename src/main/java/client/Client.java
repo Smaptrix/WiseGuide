@@ -189,14 +189,14 @@ public class Client {
 
 
     //Attempts to log in with the given user data
-    public void requestLogin(User currUser) throws IOException {
+    public String requestLogin(User currUser) throws IOException {
         outText.println("LOGIN");
 
         outText.println(currUser.getUsername());
 
         outText.println(currUser.getPassword());
 
-        receiveAcknowledgement();
+       return receiveAcknowledgement();
 
     }
 

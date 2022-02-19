@@ -150,6 +150,47 @@ public class ServerClientTest {
 
     }
 
+    @Test
+    //Remote verification test to prove a user doesn't exist- Requires server launch
+    public void failRemoteUserVerificationTest() throws NoSuchAlgorithmException, IOException {
+
+        User test = new User("IdOntExist", "12345");
+        test.hashUserInfo();
+
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        assertEquals("USERNOTFOUND", client.verifyUser(test));
+
+    }
+
+
+
+    @Test
+    //Remote login test- Requires server launch
+    public void remoteLoginTest() throws NoSuchAlgorithmException, IOException {
+
+        User test = new User("test", "12345");
+        test.hashUserInfo();
+
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        assertEquals("GOODLOGIN", client.requestLogin(test));
+
+    }
+
+    @Test
+    //Remote failed login test- Requires server launch
+    public void remoteFailedLoginTest() throws NoSuchAlgorithmException, IOException {
+
+        User test = new User("ICANTLOGIN", "12345");
+        test.hashUserInfo();
+
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        assertEquals("BADLOGIN", client.requestLogin(test));
+
+    }
+
 
 
 }
