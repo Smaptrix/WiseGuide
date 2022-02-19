@@ -51,9 +51,45 @@
 }
 
 .text {
-
+    -fx-font-family: Oswald, sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-style: normal;
+    -fx-dark-text-color: -dark-grey;
+    -fx-mid-text-color: -dark-grey;
+    -fx-light-text-color: -dark-grey;
 }
 
 .button {
     -fx-background-color: -pastel-blue;
+    -fx-border-color: -middle-blue;
+    -fx-wrap-text: true;
+}
+
+.menu-bar {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.menu-item{
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.scroll-pane {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.split-pane {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.list-view {
+    -fx-background-color: -pale-blue;
+}
+
+.scroll-bar {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
 }
