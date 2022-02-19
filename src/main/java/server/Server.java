@@ -252,17 +252,17 @@ public class Server {
         //Verification Mode - Mainly for user creation
         if(mode == 0){
 
-            //If user exists (Good for login, bad for user creation)
-            if(currUserHandler.userExistState){
-                sendResponse("USEREXISTS", true);
+            //If user exists and pass is correct(Good for login, bad for user creation)
+            if(currUserHandler.userExistState & currUserHandler.passVerified){
+                sendResponse("GOODPASS", true);
+
             }
             //If password is correct
-            else if (!currUserHandler.passVerified){
-                System.out.println(currUserHandler);
+            else if (currUserHandler.userExistState & !currUserHandler.passVerified){
                 sendResponse("BADPASS", true);
             }
 
-            else{
+            else {
                 sendResponse("USERNOTFOUND", true);
             }
 

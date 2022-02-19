@@ -54,6 +54,7 @@ public class ServerClientTest {
     @Test
     public void userUsernameSetupTest() throws NoSuchAlgorithmException {
         User test = new User("test", "12345");
+        test.hashUserInfo();
         assertEquals(test.getUsername(), "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
     }
 
@@ -61,6 +62,7 @@ public class ServerClientTest {
     //Test to make sure hashing works correctly
     public void userPasswordHashingTest() throws NoSuchAlgorithmException {
         User test = new User("test", "12345");
+        test.hashUserInfo();
 
         //Password is '12345' pre-hash
         assertEquals(test.getPassword(), "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
@@ -71,14 +73,20 @@ public class ServerClientTest {
     @Test
     //Test to see if users exists in the user database
     public void userExistsTest() throws NoSuchAlgorithmException, IOException {
-        ServerUserHandler testUser = new ServerUserHandler(new User("test", "12345"));
+        User test = new User("test", "12345");
+        test.hashUserInfo();
+
+        ServerUserHandler testUser = new ServerUserHandler(test);
         assertTrue(testUser.userExistState);
     }
 
     @Test
     //Test to make sure a user doesnt exist
     public void userDoesntExistTest() throws NoSuchAlgorithmException, IOException {
-        ServerUserHandler nonExistantTestUser = new ServerUserHandler(new User("ImNotReal", "089-2341980-324"));
+        User test = new User("ImNotReal", "089-2341980-324");
+        test.hashUserInfo();
+
+        ServerUserHandler nonExistantTestUser = new ServerUserHandler(test);
         assertFalse(nonExistantTestUser.userExistState);
 
     }
@@ -86,7 +94,11 @@ public class ServerClientTest {
     @Test
     //Test to create a new user and add them to the text file (only works once unless you delete this user again)
     public void userCreationTest() throws NoSuchAlgorithmException, IOException {
-        ServerUserHandler toBeCreatedUser = new ServerUserHandler(new User("makeme!", "password"));
+
+        User test = new User("makeme!", "password");
+        test.hashUserInfo();
+
+        ServerUserHandler toBeCreatedUser = new ServerUserHandler(test);
         //First check they dont exist
         assertFalse(toBeCreatedUser.userExistState);
         //Make user
@@ -101,20 +113,42 @@ public class ServerClientTest {
     @Test
     //Test to check whether a password cna be detected as correct or not
     public void passwordCheckTest() throws NoSuchAlgorithmException, IOException {
+
+        User test = new User("test", "54321");
+        test.hashUserInfo();
+
         //Create user with incorrect passowrd
-        ServerUserHandler passCheckUser = new ServerUserHandler(new User("test", "54321"));
+        ServerUserHandler passCheckUser = new ServerUserHandler(test);
 
         //Check password has been detected as incorrect
         assertFalse(passCheckUser.passVerified);
 
+
+        test = new User("test", "12345");
+        test.hashUserInfo();
+
         //Change password to the correct one
-        passCheckUser = new ServerUserHandler(new User("test", "12345"));
+        passCheckUser = new ServerUserHandler(test);
 
         //Check password has been detected as correct
         assertTrue(passCheckUser.passVerified);
     }
 
     //TODO - User checks using the client/server pair
+
+    @Test
+    //Remote verification test - Requires server launch
+    public void remoteUserVerificationTest() throws NoSuchAlgorithmException, IOException {
+
+        User test = new User("test", "12345");
+        test.hashUserInfo();
+
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        assertEquals("GOODPASS", client.verifyUser(test));
+
+
+    }
 
 
 
