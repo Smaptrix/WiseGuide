@@ -3,10 +3,7 @@ package maptrix.wiseguide;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import server.ServerUserHandler;
 import serverclientstuff.User;
@@ -33,6 +30,9 @@ public class AccountCreationController {
 
     @FXML
     Button closePopUpButton;
+
+    @FXML
+    CheckBox ageCheckBox;
 
 
 
@@ -67,9 +67,17 @@ public class AccountCreationController {
             errLabel.setText("You have not entered a password!");
         }
 
+        else if(!ageCheckBox.isSelected()){
+            errLabel.setText("You are not over the age of 13!");
+        }
+
         else{
             errLabel.setText("");
-            ServerUserHandler desiredUser = new ServerUserHandler(new User(userField.getText(), passField.getText()));
+
+            User newUser = new User(userField.getText(), passField.getText());
+            newUser.hashUserInfo();
+            ServerUserHandler desiredUser = new ServerUserHandler(newUser);
+
             if(desiredUser.userExistState){
                 errLabel.setText("This username is taken");
             }
