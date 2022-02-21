@@ -1,5 +1,8 @@
 package client;
 
+import VenueXMLThings.Page;
+import VenueXMLThings.VenueXML;
+
 import java.io.IOException;
 import java.net.SocketException;
 import java.nio.file.Path;

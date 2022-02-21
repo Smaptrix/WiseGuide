@@ -1,4 +1,4 @@
-package client;
+package VenueXMLThings;
 
 import org.w3c.dom.Node;
 
