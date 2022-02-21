@@ -2,22 +2,20 @@ package client;
 
 import org.w3c.dom.Node;
 
-import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.List;
 
 public class Page {
 
     public Node node;
-    public Dictionary attributes;
+    public Dictionary<String, String> attributes;
 
 
     public Page(Node item) {
 
         node = item;
 
-        attributes = new Hashtable<String, String>();
+        attributes = new Hashtable<>();
 
         int i = 0;
         while(node.getAttributes().item(i) != null) {
