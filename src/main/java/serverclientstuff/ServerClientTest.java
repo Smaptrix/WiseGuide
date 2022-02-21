@@ -2,6 +2,7 @@ package serverclientstuff;
 
 import client.Client;
 import org.junit.Test;
+import server.Server;
 import server.ServerUser;
 
 
@@ -112,6 +113,17 @@ public class ServerClientTest {
 
         //Check password has been detected as correct
         assertTrue(passCheckUser.passVerified);
+    }
+
+
+    @Test
+    //Test to determine that the server has checked the system OS correctly
+    public void sysDetectTest() throws IOException {
+        //Create new server
+        Server test = new Server();
+        //Change slash depending on your OS!!
+        assertEquals("\\", test.osDetect());
+
     }
 
 

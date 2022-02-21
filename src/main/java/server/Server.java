@@ -28,6 +28,7 @@ public class Server {
     //Starts the server
     public void startup(int port) throws IOException {
 
+
         System.out.println("Creating new Server Socket at " + port);
 
         //Server formed
@@ -45,30 +46,33 @@ public class Server {
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
-        osDetect();
 
+        slashType = osDetect();
 
 
 
     }
 
-    private void osDetect(){
+    //Public for testing reasons
+    public String osDetect(){
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
         String operatingSys = System.getProperty("os.name");
 
         //Determines the slash type (back or forward) for file systems on unix/non-unix systems.
         if (operatingSys.startsWith("Windows")){
-            slashType = "\\";
             System.out.println("Expecting Windows machine, actual machine: " + operatingSys);
+            return "\\";
+
         }
         else{
-            slashType = "/";
+            return "/";
         }
 
 
 
     }
+
 
 
     //Closes the server down
@@ -240,8 +244,6 @@ public class Server {
         System.out.println(currUser);
         sendResponse("Acknowledged", true);
     }
-
-
 
 
 }
