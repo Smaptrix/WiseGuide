@@ -1,24 +1,16 @@
-<document title=”A Title” author=”me” version=”v1234.xyz” comment=”a comment”>
-    <page title=”Page 1” ID=”page_1” x_orig=”0” y_orig=”0” x_size_px=”1000” y_size_px=”1000”>
-        <image name=”page_1_image_0” source=”imageA.jpg” x_orig=”0” y_orig=”0” z_ind=”0” x_size_px=”320” y_size_px=”320” rot_angle=”45”>
-        </image>
-        <image name=”page_1_image_1” source=”imageB.jpg” x_orig=”0” y_orig=”0” z_ind=”1” x_size_px=”32” y_size_px=”32” rot_angle=”45”>
-        </image>
-        <playable include_source=”sound.wav” x_orig=”0” y_orig=”0” x_size_px=”100” y_size_px=”32” display_player=”true”>
-        </playable>
-    </page>
-    <page title=”Page 2” name=”page_2” x_orig=”0” y_orig=”0” x_size_px=”1000” y_size_px=”1000”>
-        <fill>
-            <colour alpha=”10”>”#ffffff”</colour>
-        </fill>
-        <shape type=”circle” x_orig=”100” y_orig=”100” x_size_px=”32” y_size_px=”32” >
-            <fill>
-                <colour alpha=”90”>”#ffffff”</colour>
-            </fill>
-            <shading enable=”true”>
-            <basic_shading>
-                <colour alpha=”50”>”#ffffff”</colour>
-            </basic_shading>
-        </shape>
-    </page>
-</document>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<base:document xmlns:base="PWS_Base"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="PWS_Base https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/PWS.xsd PWS_Exts https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/my_exts.xsd"
+               xmlns:ext="PWS_Exts"
+>
+
+    <base:page title="first page" ID="page-0" x_orig="0" y_orig="0" x_size_px="400" y_size_px="400">
+        <ext:cool_element>This is a validating extension element</ext:cool_element>
+    </base:page>
+
+    <base:page title="second page" ID="page-1" x_orig="0" y_orig="0" x_size_px="400" y_size_px="400">
+
+    </base:page>
+</base:document>

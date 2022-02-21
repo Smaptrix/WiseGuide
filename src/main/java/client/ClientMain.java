@@ -1,7 +1,10 @@
 package client;
 
+import org.w3c.dom.Document;
+
 import java.io.IOException;
 import java.net.SocketException;
+import java.nio.file.Path;
 
 
 public class ClientMain {
@@ -28,7 +31,7 @@ public class ClientMain {
           client.echoMessage("Hey");
           client.echoMessage("again");
 
-
+            /*
 
           client.requestFile("test.txt");
 
@@ -45,6 +48,10 @@ public class ClientMain {
           client.requestFile("clapping.mp4");
 
           //client.openFile(client.fileLocations.get("clapping.mp4"));
+            */
+
+
+          Document document = new XMLParser().OpenXMLFile(Path.of(System.getProperty("user.dir") + "//" + "Example.xml"));
 
           client.closeConnection();
 

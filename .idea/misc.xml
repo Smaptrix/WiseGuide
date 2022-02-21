@@ -7,6 +7,10 @@
       </list>
     </option>
   </component>
+  <component name="ProjectResources">
+    <resource url="https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/PWS.xsd" location="$PROJECT_DIR$" />
+    <resource url="https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/my_exts.xsd" location="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

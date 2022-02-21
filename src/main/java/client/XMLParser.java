@@ -12,9 +12,9 @@ import org.w3c.dom.Element;
 public class XMLParser {
 
 
-    public NodeList OpenXMLFile (Path filePath) {
+    public Document OpenXMLFile (Path filePath) {
 
-        NodeList pageList = null;
+        Document document = null;
 
         try {
             File inputFile = new File(filePath.toString());
@@ -22,19 +22,15 @@ public class XMLParser {
             //Parsing XML File
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(inputFile);
+            document = documentBuilder.parse(inputFile);
             document.getDocumentElement().normalize();
 
-            System.out.println("XML of File path '" + filePath + "' normalised.");
-            System.out.println("Root Element: " + document.getDocumentElement().getNodeName());
-
-            pageList = document.getElementsByTagName("page");
 
         } catch (Exception e) {
             System.out.println("Unable to make tree of XML file at path: '" + filePath + "'.");
         }
 
-        return pageList;
+        return document;
 
     }
 
