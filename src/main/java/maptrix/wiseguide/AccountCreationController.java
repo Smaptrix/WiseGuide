@@ -4,11 +4,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import server.ServerUserHandler;
 import serverclientstuff.User;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
 public class AccountCreationController {
@@ -33,6 +40,14 @@ public class AccountCreationController {
 
     @FXML
     CheckBox ageCheckBox;
+
+
+    @FXML
+    Hyperlink privacyPolicyLink;
+
+    @FXML
+    Hyperlink termsLink;
+
 
 
 
@@ -112,5 +127,25 @@ public class AccountCreationController {
         Stage stage = (Stage) closePopUpButton.getScene().getWindow();
         stage.close();
     }
+
+
+    //Both methods below are used to link to company documents that the user is advised to read
+    @FXML
+    private void privacyPolicyLinkAction() throws IOException, URISyntaxException {
+
+        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1ALaRldIS1v9--ShyWjUDaXeeTgeiC5f-x4AlE0A3PxQ/edit?usp=sharing").toURI());
+
+    }
+
+    @FXML
+    private void termsLinkAction() throws IOException, URISyntaxException {
+
+        Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1mkBgUcoBHEGQWlDHR5cuLER7AewNDEgQsZZBejyExT0/edit?usp=sharing").toURI());
+
+    }
+
+
+
+
 
 }
