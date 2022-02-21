@@ -1,7 +1,5 @@
 package client;
 
-import org.w3c.dom.Document;
-
 import java.io.IOException;
 import java.net.SocketException;
 import java.nio.file.Path;
@@ -51,7 +49,11 @@ public class ClientMain {
             */
 
 
-          Document document = new XMLParser().OpenXMLFile(Path.of(System.getProperty("user.dir") + "//" + "Example.xml"));
+          VenueXML XML = new VenueXML((Path.of(System.getProperty("user.dir") + "//" + "Example.xml")));
+
+          System.out.println(XML.getPageNames());
+          Page secondPage = XML.getPage("ID", "page-1");
+          System.out.println(secondPage.attributes.get("x_orig"));
 
           client.closeConnection();
 
