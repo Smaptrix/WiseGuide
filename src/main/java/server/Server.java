@@ -1,11 +1,3 @@
-/*
-    Company Name:   Maptrix
-    Project Name:   WiseGuide
-    Authors:        Joe Ingham
-    Date Created:   27/01/2022
-    Last Updated:   10/02/2022
- */
-
 package server;
 
 
@@ -31,11 +23,11 @@ public class Server {
     private BufferedReader inText;
     private String CurrDir;
     private String slashType;
-    private ServerUser currUser;
+    private ServerUserHandler currUserHandler;
+    private User currUser;
 
     //Starts the server
     public void startup(int port) throws IOException {
-
 
         System.out.println("Creating new Server Socket at " + port);
 
@@ -54,33 +46,30 @@ public class Server {
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
+        osDetect();
 
-        slashType = osDetect();
 
 
 
     }
 
-    //Public for testing reasons
-    public String osDetect(){
+    private void osDetect(){
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
         String operatingSys = System.getProperty("os.name");
 
         //Determines the slash type (back or forward) for file systems on unix/non-unix systems.
         if (operatingSys.startsWith("Windows")){
+            slashType = "\\";
             System.out.println("Expecting Windows machine, actual machine: " + operatingSys);
-            return "\\";
-
         }
         else{
-            return "/";
+            slashType = "/";
         }
 
 
 
     }
-
 
 
     //Closes the server down
@@ -144,7 +133,12 @@ public class Server {
 
             //Creates a new user and adds it to the database
             case "LOGIN":
-                receiveLogin();
+                receiveLogin(1);
+                break;
+
+
+            case "VERIFYUSER":
+                receiveLogin(0);
                 break;
 
             default:
@@ -241,17 +235,65 @@ public class Server {
     }
 
 
-    //Handles the clients attempt to login
-    public void receiveLogin() throws IOException, NoSuchAlgorithmException {
+    /*TODO - Refactor login - verify the users info first
+        Might be fine as is - If client recieves bad login then figure out what is wrong?
+     */
+
+    //Mode decides whether it verifies user data or logs in
+    public void receiveLogin(Integer mode) throws IOException, NoSuchAlgorithmException {
+
+
         String loginName = inText.readLine();
 
         String loginPass = inText.readLine();
 
-        currUser = new ServerUser(new User(loginName, loginPass));
+        currUserHandler = new ServerUserHandler(new User(loginName, loginPass));
 
-        System.out.println(currUser);
-        sendResponse("Acknowledged", true);
+        //Verification Mode - Mainly for user creation
+        if(mode == 0){
+
+            //If user exists and pass is correct(Good for login, bad for user creation)
+            if(currUserHandler.userExistState & currUserHandler.passVerified){
+                sendResponse("GOODPASS", true);
+
+            }
+            //If password is correct
+            else if (currUserHandler.userExistState & !currUserHandler.passVerified){
+                sendResponse("BADPASS", true);
+            }
+
+            else {
+                sendResponse("USERNOTFOUND", true);
+            }
+
+        }
+
+
+        //Login Mode
+        else if(mode == 1) {
+
+            //Verifies the user data
+            if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
+                //If the users data is incorrect - let the client know
+                currUserHandler = null;
+                sendResponse("BADLOGIN", true);
+            }
+            else{
+                //If the users data is verified - sets the server user to the user provided
+                currUser = new User(loginName, loginPass);
+                sendResponse("GOODLOGIN", true);
+            }
+
+        }
+        else{
+            System.out.println("Unrecognised login mode!");
+        }
     }
+
+
+
+
+
 
 
 }
