@@ -9,6 +9,8 @@
 package server;
 
 
+import serverclientstuff.User;
+
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -16,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 
 public class Server {
 
@@ -28,9 +31,11 @@ public class Server {
     private BufferedReader inText;
     private String CurrDir;
     private String slashType;
+    private ServerUser currUser;
 
     //Starts the server
     public void startup(int port) throws IOException {
+
 
         System.out.println("Creating new Server Socket at " + port);
 
@@ -49,30 +54,33 @@ public class Server {
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
-        osDetect();
 
+        slashType = osDetect();
 
 
 
     }
 
-    private void osDetect(){
+    //Public for testing reasons
+    public String osDetect(){
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
         String operatingSys = System.getProperty("os.name");
 
         //Determines the slash type (back or forward) for file systems on unix/non-unix systems.
         if (operatingSys.startsWith("Windows")){
-            slashType = "\\";
             System.out.println("Expecting Windows machine, actual machine: " + operatingSys);
+            return "\\";
+
         }
         else{
-            slashType = "/";
+            return "/";
         }
 
 
 
     }
+
 
 
     //Closes the server down
@@ -103,13 +111,13 @@ public class Server {
                     System.out.println("Request Received: " + inputLine);
 
                     requestParser(inputLine);
-
             }
-
         }
 
         }catch (SocketException e){
-            System.out.println("Socket Closed (Client may have closed!)");
+            System.out.println("Lost connnection to client");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -119,7 +127,7 @@ public class Server {
 
 
     //Requests in form "Request Code Type" + " " + "Request Information"
-    public void requestParser(String requestIn) throws IOException {
+    public void requestParser(String requestIn) throws IOException, NoSuchAlgorithmException {
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
             case "GET":
@@ -133,9 +141,15 @@ public class Server {
                 sendResponse(requestSplit[1], true);
                 System.out.println("Response sent: " + requestSplit[1]);
                 break;
+
+            //Creates a new user and adds it to the database
+            case "LOGIN":
+                receiveLogin();
+                break;
+
             default:
                 System.out.println(requestIn + " : Invalid command");
-                sendResponse("Error 404: Text Request Code Not Found", false);
+                sendResponse("Error 404: Request Code Not Found", false);
                 break;
         }
     }
@@ -148,7 +162,6 @@ public class Server {
 
         try {
             System.out.println("File stored at: " + filepath);
-            //Only open this when need to send a file
 
 
             //Sends a data packet telling the client to expect a file of a certain size
@@ -228,6 +241,17 @@ public class Server {
     }
 
 
+    //Handles the clients attempt to login
+    public void receiveLogin() throws IOException, NoSuchAlgorithmException {
+        String loginName = inText.readLine();
+
+        String loginPass = inText.readLine();
+
+        currUser = new ServerUser(new User(loginName, loginPass));
+
+        System.out.println(currUser);
+        sendResponse("Acknowledged", true);
+    }
 
 
 }

@@ -1,4 +1,4 @@
-package GUI;
+package maptrix.wiseguide;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +16,8 @@ public class VenueDetailsPage extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+
 
     public static void main(String[] args) {
         launch();

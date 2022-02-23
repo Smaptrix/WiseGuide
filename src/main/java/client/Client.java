@@ -7,7 +7,8 @@
  */
 package client;
 
-import java.awt.*;
+import serverclientstuff.User;
+
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -38,6 +39,7 @@ public class Client {
             clientSocket = new Socket(ip, port);
             outText = new PrintWriter(clientSocket.getOutputStream(), true);
             inputStream = clientSocket.getInputStream();
+            System.out.println("Connection Opened");
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
         }
@@ -84,7 +86,6 @@ public class Client {
 
         int fileSize = inputStream.read();
 
-        System.out.println("We are receiving: " + fileSize + " bytes");
         byte[] data = readBytes(fileSize);
 
 
@@ -192,15 +193,33 @@ public class Client {
         System.out.println("File saved at: " + currFile);
 
         return currFile;
+    }
+
+
+    //Attempts to log in with the given user data
+    public void requestLogin(User currUser) throws IOException {
+        outText.println("LOGIN");
+
+        outText.println(currUser.getEncodedUsername());
+
+        outText.println(currUser.getEncodedPass());
+
+        receiveAcknowledgement();
 
     }
 
 
+    //Receive an acknowledgement from the server
+    public void receiveAcknowledgement() throws IOException {
 
-    //Opens a file in the system - MIGHT BE REDUNDANT SOON
-    public void openFile(File file) throws IOException {
+        int fileSize = inputStream.read();
 
-        Desktop.getDesktop().open(file);
+        byte[] data = readBytes(fileSize);
+
+
+        String result = new String(data, StandardCharsets.UTF_8);
+
+        System.out.println(result);
 
     }
 
