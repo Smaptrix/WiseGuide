@@ -10,13 +10,13 @@ import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class VenueXML {
+public class VenueXMLParser {
 
     public Element root = null;
     public int numberOfPages;
 
 
-    public VenueXML(Path filePath) {
+    public VenueXMLParser(Path filePath) {
 
         try {
 
@@ -52,7 +52,7 @@ public class VenueXML {
     }
 
 
-    public Page getPage(String index, String titleOrID) {
+    public VenuePage getPage(String index, String titleOrID) {
 
         if(!(index.equals("title") || index.equals("ID"))) {
             System.out.println("Error: no such index.");
@@ -63,19 +63,18 @@ public class VenueXML {
 
         for(int i = 0; i < numberOfPages; i++) {
 
-            String titleToCheck = this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(index).toString();
-
-            System.out.println(titleToCheck);
-
-            if(titleToCheck.equals(titleOrID)) {
-                return new Page(this.root.getElementsByTagName("base:page").item(i));
+            if(this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(index).toString().equals(titleOrID)) {
+                return new VenuePage(this.root.getElementsByTagName("base:page").item(i));
             }
+
         }
+
         if(index.equals("title")){
             System.out.println("Error: no such title.");
         } else {
-            System.out.println("Error: no such index.");
+            System.out.println("Error: no such ID.");
         }
+
         return null;
 
     }

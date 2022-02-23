@@ -1,7 +1,7 @@
 package client;
 
-import VenueXMLThings.Page;
-import VenueXMLThings.VenueXML;
+import VenueXMLThings.VenuePage;
+import VenueXMLThings.VenueXMLParser;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -32,7 +32,6 @@ public class ClientMain {
           client.echoMessage("Hey");
           client.echoMessage("again");
 
-            /*
 
           client.requestFile("test.txt");
 
@@ -49,14 +48,6 @@ public class ClientMain {
           client.requestFile("clapping.mp4");
 
           //client.openFile(client.fileLocations.get("clapping.mp4"));
-            */
-
-
-          VenueXML XML = new VenueXML((Path.of(System.getProperty("user.dir") + "//" + "Example.xml")));
-
-          System.out.println(XML.getPageNames());
-          Page secondPage = XML.getPage("ID", "page-1");
-          System.out.println(secondPage.attributes.get("x_orig"));
 
           client.closeConnection();
 
