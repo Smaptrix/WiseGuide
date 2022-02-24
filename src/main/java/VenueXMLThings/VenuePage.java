@@ -2,7 +2,6 @@ package VenueXMLThings;
 
 import org.w3c.dom.Node;
 
-import javax.print.attribute.standard.Media;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -21,7 +20,7 @@ public class VenuePage {
         this.node = item;
 
         this.attributes = new Hashtable<>();
-        this.children = new ArrayList<MediaElement>();
+        this.children = new ArrayList<>();
 
         if(this.node.getAttributes() != null) {
 
@@ -64,7 +63,7 @@ public class VenuePage {
 
     public List<Integer> getMediaByType(String mediaType) {
 
-        List<Integer> returnString = new ArrayList<Integer>();
+        List<Integer> returnString = new ArrayList<>();
 
         for(int i = 0; i < numberOfElements; i++) {
 
