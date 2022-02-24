@@ -54,7 +54,7 @@
             <Button id="loginButton" fx:id="loginButton" layoutX="349.0" layoutY="291.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="42.0" prefWidth="114.0" text="Login" />
             <PasswordField id="userPassField" fx:id="userPassField" layoutX="332.0" layoutY="202.0" />
             <TextField id="usernameTextField" fx:id="userTextField" layoutX="332.0" layoutY="146.0" />
-            <Label layoutX="177.0" layoutY="140.0" text="Username" textFill="#245164">
+            <Label layoutX="177.0" layoutY="141.0" text="Username" textFill="#245164">
                <font>
                   <Font size="25.0" />
                </font>

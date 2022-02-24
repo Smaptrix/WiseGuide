@@ -27,6 +27,8 @@ public class Client {
     //InputStream to read files
     private InputStream inputStream;
 
+    private boolean connected;
+
 
     //Each client will keep a dictionary containing where all there files are located
     public Dictionary<String, File> fileLocations = new Hashtable<>();
@@ -35,11 +37,14 @@ public class Client {
     //Connects to the port
     public void startConnection(String ip, int port) throws IOException {
 
+        connected = false;
+
         try {
             clientSocket = new Socket(ip, port);
             outText = new PrintWriter(clientSocket.getOutputStream(), true);
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
+            connected = true;
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
         }
@@ -54,6 +59,7 @@ public class Client {
             outText.close();
             clientSocket.close();
             System.out.println("Connection Closed");
+            connected = false;
 
     }
 
@@ -162,7 +168,7 @@ public class Client {
             //Increment Byte count
             bytesRead += 1;
             if (bytesRead == bytesToRead) {
-                System.out.println("We have read: " + bytesRead);
+               // System.out.println("We have read: " + bytesRead);
                 end = true;
             }
 
@@ -219,7 +225,7 @@ public class Client {
 
         String result = new String(data, StandardCharsets.UTF_8);
 
-        System.out.println(result);
+       // System.out.println(result);
 
         return result;
     }
@@ -237,7 +243,7 @@ public class Client {
 
     }
 
-
-
-
+    public boolean isConnected() {
+        return connected;
+    }
 }
