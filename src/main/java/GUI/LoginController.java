@@ -47,9 +47,7 @@ public class LoginController {
     @FXML
     //Closes the application
     private void exitButtonAction(){
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-
+        System.exit(0);
     }
 
     //TODO - Post Integration let the client handle the user stuff not the GUI
