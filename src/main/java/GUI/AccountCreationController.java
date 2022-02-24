@@ -1,5 +1,6 @@
 package GUI;
 
+import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,13 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
 public class AccountCreationController {
+
+
+    Client client;
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     @FXML
     TextField userField;

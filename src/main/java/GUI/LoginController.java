@@ -140,6 +140,8 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-create-page.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 300, 350);
+            AccountCreationController controller = fxmlLoader.getController();
+            controller.setClient(client);
             stage.setScene(scene);
             stage.setTitle("Account Creation");
             stage.show();
