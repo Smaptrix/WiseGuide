@@ -105,8 +105,8 @@ public class AccountCreationController {
                 errLabel.setText("This username is taken");
             }
             else{
-                desiredUser.createUser();
-                if(desiredUser.userExistState){
+
+                if(client.createUser(newUser).equals("USERCREATED")){
 
                     FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-created-window.fxml"));
                     Stage stage = new Stage();
@@ -121,6 +121,7 @@ public class AccountCreationController {
                     currStage.close();
 
                 }
+                //TODO - Account creation failed page
             }
         }
 

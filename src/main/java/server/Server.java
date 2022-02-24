@@ -132,14 +132,19 @@ public class Server {
                 break;
 
             //Creates a new user and adds it to the database
-            case "LOGIN":
-                receiveLogin(1);
-                break;
+
 
 
             case "VERIFYUSER":
                 receiveLogin(0);
                 break;
+
+            case "LOGIN":
+                receiveLogin(1);
+                break;
+
+            case "CREATEUSER":
+                receiveLogin(2);
 
             default:
                 System.out.println(requestIn + " : Invalid command");
@@ -247,6 +252,8 @@ public class Server {
 
         String loginPass = inText.readLine();
 
+
+        //Don't need to hash here because the client hashes the data
         currUserHandler = new ServerUserHandler(new User(loginName, loginPass));
 
         //Verification Mode - Mainly for user creation
@@ -283,6 +290,23 @@ public class Server {
                 currUser = new User(loginName, loginPass);
                 sendResponse("GOODLOGIN", true);
             }
+
+        }
+
+        //User Creation Mode
+        else if(mode == 2){
+
+            if(!(currUserHandler.userExistState)){
+                currUserHandler.createUser();
+                sendResponse("USERCREATED", true);
+            }
+
+            else{
+                sendResponse("USERALREADYEXISTS", true);
+
+            }
+
+
 
         }
         else{

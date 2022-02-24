@@ -231,6 +231,11 @@ public class Client {
     }
 
 
+    //TODO - possible refactor of user functions into single function?
+
+
+
+
     //Asks the server to verify if a user exists and if their password is correct
     public String verifyUser(User currUser) throws IOException {
         outText.println("VERIFYUSER");
@@ -242,6 +247,23 @@ public class Client {
         return receiveAcknowledgement();
 
     }
+
+
+    //Requests the server to create and add a user to the database
+    public String createUser(User currUser) throws IOException {
+
+        outText.println("CREATEUSER");
+
+        outText.println(currUser.getUsername());
+
+        outText.println(currUser.getPassword());
+
+
+        return receiveAcknowledgement();
+    }
+
+
+
 
     public boolean isConnected() {
         return connected;
