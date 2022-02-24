@@ -22,8 +22,8 @@ import java.security.NoSuchAlgorithmException;
 public class LoginController {
 
     //Stores the client object that lets the GUI communicate with the server
-    Client client; // Declare empty client
-    User currUser;
+    protected Client client; // Declare empty client
+    protected User currUser;
 
 
     //Imports all of the objects in the login 'scene'
@@ -68,9 +68,9 @@ public class LoginController {
 
     }
 
-    //TODO - Post Integration let the client handle the user stuff not the GUI
+
     //TODO - MAKE IT SO YOU CANT HAVE SPACES IN ANY OF THE FIELDS
-    //TODO - MAKE SURE EXISTS WHEN THEY TRY TO LOGIN
+
 
     @FXML
     //Tries to login using the data provided
@@ -118,6 +118,20 @@ public class LoginController {
                 errorLabel.setText("Incorrect Password!");
             } else {
                 errorLabel.setText("");
+
+               Stage currStage = (Stage) exitButton.getScene().getWindow();
+               currStage.close();
+
+
+                //Opens the main application once you have logged in
+                MainApplication app = new MainApplication();
+                Stage mainStage = new Stage();
+                app.transferInfo(mainStage, client, currUser);
+
+
+
+
+
             }
         }
 
