@@ -17,7 +17,7 @@ public class LoginAppTest extends ApplicationTest {
     @Test
     public void appTest() throws IOException {
         app = new LoginApplication();
-
+        app.start(stage);
 
     }
 
