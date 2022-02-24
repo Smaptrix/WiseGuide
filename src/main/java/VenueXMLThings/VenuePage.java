@@ -7,6 +7,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
+//Stores all relevant media data in a tree for one specific venue.
 public class VenuePage {
 
     private Node node;
@@ -14,7 +15,8 @@ public class VenuePage {
     public List<MediaElement> children;
     public int numberOfElements;
 
-
+    //Constructor takes in a node (venue) and creates a tree with all the child nodes of class
+    //MediaElements which extends VenuePage.
     public VenuePage(Node item) {
 
         this.node = item;
@@ -49,6 +51,7 @@ public class VenuePage {
 
     }
 
+    //Returns a list of children node media types (mainly for testing)
     public List<String> getChildrenType() {
 
         List<String> returnString = new ArrayList<>();
@@ -61,6 +64,7 @@ public class VenuePage {
 
     }
 
+    //Gather the child nodes of media type
     public List<Integer> getMediaByType(String mediaType) {
 
         List<Integer> returnString = new ArrayList<>();
