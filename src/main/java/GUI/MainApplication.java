@@ -25,15 +25,9 @@ public class MainApplication extends Application {
     //TODO - Get client and user info into the Main app
 
     private Client client;
-    private User user;
+    private User currUser;
 
-    public Client getClient() {
-        return client;
-    }
 
-    public User getUser() {
-        return user;
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -42,16 +36,23 @@ public class MainApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("welcomeScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+
+        MainController controller = fxmlLoader.getController();
+
+        controller.setClient(client);
+        controller.setUser(currUser);
+
         stage.setTitle("WiseGuide by Maptrix - V1.0.0");
         stage.setScene(scene);
         stage.show();
 
+
     }
 
-    public void transferInfo(Stage stage, Client client, User user) throws IOException {
+    public void transferInfoAndOpen(Stage stage, Client client, User currUser) throws IOException {
 
         this.client = client;
-        this.user = user;
+        this.currUser =  currUser;
 
         start(stage);
 

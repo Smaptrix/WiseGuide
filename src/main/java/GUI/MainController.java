@@ -10,35 +10,37 @@ package GUI;
 
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import serverclientstuff.User;
 
 public class MainController {
 
     private Client client;
 
-    private User user;
+    private User currUser;
 
     public void setClient(Client client) {
         this.client = client;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(User currUser) {
+        this.currUser = currUser;
     }
 
 
-    public void initialize(Client client, User user){
-       setUser(user);
-       setClient(client);
+    @FXML
+    Button helloButton;
 
-       System.out.println("Current User: " + user.getUsername());
-       System.out.println("Current Client: " + client);
+    @FXML
+    public void initialize(){
 
     }
 
 
     @FXML
     protected void onHelloButtonClick() {
-        
+        System.out.println(currUser);
+        System.out.println(client);
+
     }
 }

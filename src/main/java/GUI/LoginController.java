@@ -1,7 +1,6 @@
 package GUI;
 
 
-import GUI.LoginApplication;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -126,7 +122,7 @@ public class LoginController {
                 //Opens the main application once you have logged in
                 MainApplication app = new MainApplication();
                 Stage mainStage = new Stage();
-                app.transferInfo(mainStage, client, currUser);
+                app.transferInfoAndOpen(mainStage, client, currUser);
 
 
 
