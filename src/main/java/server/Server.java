@@ -1,6 +1,8 @@
 package server;
 
 
+import serverclientstuff.User;
+
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -8,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 
 public class Server {
 
@@ -20,6 +23,8 @@ public class Server {
     private BufferedReader inText;
     private String CurrDir;
     private String slashType;
+    private ServerUserHandler currUserHandler;
+    private User currUser;
 
     //Starts the server
     public void startup(int port) throws IOException {
@@ -95,13 +100,13 @@ public class Server {
                     System.out.println("Request Received: " + inputLine);
 
                     requestParser(inputLine);
-
             }
-
         }
 
         }catch (SocketException e){
-            System.out.println("Socket Closed (Client may have closed!)");
+            System.out.println("Lost connnection to client");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -111,7 +116,7 @@ public class Server {
 
 
     //Requests in form "Request Code Type" + " " + "Request Information"
-    public void requestParser(String requestIn) throws IOException {
+    public void requestParser(String requestIn) throws IOException, NoSuchAlgorithmException {
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
             case "GET":
@@ -125,9 +130,20 @@ public class Server {
                 sendResponse(requestSplit[1], true);
                 System.out.println("Response sent: " + requestSplit[1]);
                 break;
+
+            //Creates a new user and adds it to the database
+            case "LOGIN":
+                receiveLogin(1);
+                break;
+
+
+            case "VERIFYUSER":
+                receiveLogin(0);
+                break;
+
             default:
                 System.out.println(requestIn + " : Invalid command");
-                sendResponse("Error 404: Text Request Code Not Found", false);
+                sendResponse("Error 404: Request Code Not Found", false);
                 break;
         }
     }
@@ -140,7 +156,6 @@ public class Server {
 
         try {
             System.out.println("File stored at: " + filepath);
-            //Only open this when need to send a file
 
 
             //Sends a data packet telling the client to expect a file of a certain size
@@ -218,6 +233,65 @@ public class Server {
 
 
     }
+
+
+    /*TODO - Refactor login - verify the users info first
+        Might be fine as is - If client recieves bad login then figure out what is wrong?
+     */
+
+    //Mode decides whether it verifies user data or logs in
+    public void receiveLogin(Integer mode) throws IOException, NoSuchAlgorithmException {
+
+
+        String loginName = inText.readLine();
+
+        String loginPass = inText.readLine();
+
+        currUserHandler = new ServerUserHandler(new User(loginName, loginPass));
+
+        //Verification Mode - Mainly for user creation
+        if(mode == 0){
+
+            //If user exists and pass is correct(Good for login, bad for user creation)
+            if(currUserHandler.userExistState & currUserHandler.passVerified){
+                sendResponse("GOODPASS", true);
+
+            }
+            //If password is correct
+            else if (currUserHandler.userExistState & !currUserHandler.passVerified){
+                sendResponse("BADPASS", true);
+            }
+
+            else {
+                sendResponse("USERNOTFOUND", true);
+            }
+
+        }
+
+
+        //Login Mode
+        else if(mode == 1) {
+
+            //Verifies the user data
+            if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
+                //If the users data is incorrect - let the client know
+                currUserHandler = null;
+                sendResponse("BADLOGIN", true);
+            }
+            else{
+                //If the users data is verified - sets the server user to the user provided
+                currUser = new User(loginName, loginPass);
+                sendResponse("GOODLOGIN", true);
+            }
+
+        }
+        else{
+            System.out.println("Unrecognised login mode!");
+        }
+    }
+
+
+
 
 
 

@@ -1,0 +1,95 @@
+/****************************************************************************************************************
+    IMPORTANT: There are two CSS files. Do not change anything in either of them without consulting Will first!!!
+ ***************************************************************************************************************/
+
+
+.root {
+    -fx-font-size: 14px;
+    -fx-font-family: Oswald, sans-serif;
+    -fx-font-style: normal;
+    -fx-background-color: -pale-blue;
+    -fx-padding: 10px;
+    -pale-blue:#E9EFF1;
+    -pastel-blue: #AFD4E5;
+    -middle-blue: #3C86A6;
+    -dark-blue: #245164;
+    -light-grey: #768085;
+    -middle-grey: #6E7076;
+    -dark-grey: #4A4A4A;
+}
+
+.heading1 {
+    -fx-font-family: Oswald;
+    -fx-font-style: normal;
+    -fx-font-size: 28px;
+    -fx-dark-text-color: -dark-blue;
+    -fx-mid-text-color: -middle-blue;
+    -fx-light-text-color: -pastel-blue;
+    -fx-padding: 10px;
+    -fx-max-width: 800px;
+    -fx-text-alignment: center;
+}
+
+.heading2 {
+
+}
+
+.heading3 {
+
+}
+
+.heading4 {
+
+}
+
+.heading5 {
+
+}
+
+.heading6 {
+
+}
+
+.text {
+    -fx-font-family: Oswald, sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-style: normal;
+    -fx-dark-text-color: -dark-grey;
+    -fx-mid-text-color: -dark-grey;
+    -fx-light-text-color: -dark-grey;
+}
+
+.button {
+    -fx-background-color: -pastel-blue;
+    -fx-border-color: -middle-blue;
+    -fx-wrap-text: true;
+}
+
+.menu-bar {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.menu-item{
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.scroll-pane {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.split-pane {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
+
+.list-view {
+    -fx-background-color: -pale-blue;
+}
+
+.scroll-bar {
+    -fx-background-color: -pale-blue;
+    -fx-border-color: -pastel-blue;
+}
