@@ -9,6 +9,8 @@
 package GUI;
 
 import client.Client;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,13 +41,14 @@ public class MainController {
     @FXML
     public void initialize(){
 
+
+
     }
 
     @FXML
     //Closes the window
     protected void onCloseButtonClick(){
-        Stage currStage = (Stage) closeButton.getGraphic().getScene().getWindow();
-        currStage.close();
+          Platform.exit();
     }
 
 
