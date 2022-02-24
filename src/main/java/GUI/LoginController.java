@@ -18,6 +18,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
 
+        //TODO - Check to make sure login fields arent empty!
+
 
     //Imports all of the objects in the login 'scene'
     @FXML
