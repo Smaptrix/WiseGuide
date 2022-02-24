@@ -1,4 +1,4 @@
-package maptrix.wiseguide;
+package GUI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,6 +1,7 @@
-package maptrix.wiseguide;
+package GUI;
 
 
+import GUI.LoginApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
