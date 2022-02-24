@@ -1,25 +1,35 @@
 package GUI;
 
-import javafx.fxml.FXMLLoader;
+import TestFX.TestFXBase;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.junit.Test;
-import java.io.IOException;
-
+import org.testfx.api.FxRobot;
+import org.testfx.api.FxRobotException;
 import org.testfx.framework.junit.ApplicationTest;
 
-public class LoginAppTest extends ApplicationTest {
+public class LoginAppTest extends TestFXBase {
 
-    public LoginApplication app;
-    public Stage stage;
-
-    @Test
-    public void appTest() throws IOException {
-        app = new LoginApplication();
-        app.start(stage);
+    @Test(expected = FxRobotException.class)
+    public void clickOnCreateAcc() {
+        sleep(1000);
+        moveTo("#createAccButton");
+        sleep(1000);
+        clickOn("#createAccButton");
+        sleep(1000);
+        //moveTo();
 
     }
 
+    @Test(expected = FxRobotException.class)
+    public void clickOnLogin() {
+        sleep(1000);
+        clickOn("#loginButton");
+    }
+
+    @Test(expected = FxRobotException.class)
+    public void clickOnExit() {
+        sleep(1000);
+        clickOn("#exitButton");
+    }
 
 }

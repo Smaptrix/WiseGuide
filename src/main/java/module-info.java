@@ -12,9 +12,13 @@ module maptrix.wiseguide {
     requires javafx.fxml;
     requires javafx.controls;
     requires org.testfx.junit;
+    requires java.logging;
+    requires org.testfx;
+    requires javafx.web;
 
 
     opens GUI to javafx.fxml;
     exports GUI;
     exports serverclientstuff;
+    exports TestFX;
 }
