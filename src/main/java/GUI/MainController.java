@@ -10,7 +10,10 @@ package GUI;
 
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 import serverclientstuff.User;
 
 public class MainController {
@@ -28,19 +31,22 @@ public class MainController {
     }
 
 
+
+
     @FXML
-    Button helloButton;
+    MenuItem closeButton;
 
     @FXML
     public void initialize(){
 
     }
 
-
     @FXML
-    protected void onHelloButtonClick() {
-        System.out.println(currUser);
-        System.out.println(client);
-
+    //Closes the window
+    protected void onCloseButtonClick(){
+        Stage currStage = (Stage) closeButton.getGraphic().getScene().getWindow();
+        currStage.close();
     }
+
+
 }
