@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   27/01/2022
-    Last Updated:   10/02/2022
+    Last Updated:   24/02/2022
  */
 package client;
 
@@ -145,9 +145,7 @@ public class Client {
         System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
-       File currFile = BytesToFile(data, fileName, dataType);
-
-       return currFile;
+        return BytesToFile(data, fileName, dataType);
     }
 
     //Reads the bytes for the file from the inputStream
@@ -223,11 +221,7 @@ public class Client {
         byte[] data = readBytes(fileSize);
 
 
-        String result = new String(data, StandardCharsets.UTF_8);
-
-       // System.out.println(result);
-
-        return result;
+        return new String(data, StandardCharsets.UTF_8);
     }
 
 

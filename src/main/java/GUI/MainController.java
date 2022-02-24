@@ -1,9 +1,9 @@
 /*
     Company Name:   Maptrix
     Project Name:   WiseGuide
-    Authors:        Will Pitchfork
+    Authors:        Will Pitchfork, Joe Ingham
     Date Created:   04/02/2022
-    Last Updated:   20/02/2022
+    Last Updated:   24/02/2022
  */
 
 package GUI;

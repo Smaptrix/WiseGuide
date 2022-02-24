@@ -1,3 +1,11 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   08/02/2022
+    Last Updated:   18/02/2022
+ */
+
 package serverclientstuff;
 
 import java.nio.charset.StandardCharsets;
