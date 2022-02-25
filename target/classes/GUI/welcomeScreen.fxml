@@ -42,7 +42,7 @@
                 <MenuItem id="closeButton" fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close" /> <!-- onAction="#funcName" -->
             </Menu>
             <Menu mnemonicParsing="false" text="Account">
-                <MenuItem mnemonicParsing="false" text="Account Details" />
+                <MenuItem id="accDetailsButton" fx:id="accDetailsButton" mnemonicParsing="false" onAction="#onAccDetailsButtonClick" text="Account Details" />
                 <MenuItem mnemonicParsing="false" text="Sign Out" />
             </Menu>
             <Menu mnemonicParsing="false" text="Help">

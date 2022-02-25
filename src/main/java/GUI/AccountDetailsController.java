@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 public class AccountDetailsController {
 
     //TODO - Add all the functionality
+    //     - I.E Display User Details - Change User details
 
     Client client;
 

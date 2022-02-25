@@ -18,6 +18,9 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 
+//TODO - Log out function
+//     - Consider encryption rahter than hashing so that we cna decrypt all of the information (Research as well)
+
 public class Client {
 
 
