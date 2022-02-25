@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
 
-        //TODO - Check to make sure login fields arent empty!
+    //TODO - Check to make sure login fields arent empty!
 
 
     //Imports all of the objects in the login 'scene'
@@ -37,21 +37,14 @@ public class LoginController {
     Label errorLabel;
 
 
-
     @FXML
     //Always called by the FXML Loader
-    public void initialize(){
-
-
-
-    }
-
-
+    public void initialize() {}
 
 
     @FXML
     //Closes the application
-    private void exitButtonAction(){
+    private void exitButtonAction() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
 
@@ -74,13 +67,12 @@ public class LoginController {
 
         System.out.println("User Exist State: " + currUser.userExistState);
 
-        if(!currUser.userExistState){
+        if (!currUser.userExistState) {
             errorLabel.setText("User does not exist!");
         }
-        if(!currUser.passVerified){
+        if (!currUser.passVerified) {
             errorLabel.setText("Incorrect Password!");
-        }
-        else{
+        } else {
             errorLabel.setText("");
         }
 
@@ -97,15 +89,11 @@ public class LoginController {
             stage.setTitle("Account Creation");
             stage.show();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-
-
-
-
 
 
 }
