@@ -65,7 +65,7 @@ public class LoginController {
     private void exitButtonAction() throws IOException {
         //Doesn't try to close a connection that isn't there
         if(client.isConnected()) {
-            client.closeConnection(); // Pressing "Exit" button closes the client
+            client.closeConnection(); // Closes Client connection safely
         }
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();

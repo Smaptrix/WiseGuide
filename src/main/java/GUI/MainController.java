@@ -18,6 +18,8 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import java.io.IOException;
+
 public class MainController {
 
     private Client client;
@@ -47,7 +49,12 @@ public class MainController {
 
     @FXML
     //Closes the window
-    protected void onCloseButtonClick(){
+    protected void onCloseButtonClick() throws IOException {
+        //Doesn't try to close a connection that isn't there
+        if(client.isConnected()) {
+            client.closeConnection(); // Closes client connection safely.
+        }
+
           Platform.exit();
     }
 
