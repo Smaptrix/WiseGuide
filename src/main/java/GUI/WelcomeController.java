@@ -15,4 +15,10 @@ public class WelcomeController {
     protected void onHelloButtonClick() {
         
     }
+
+    @FXML
+    //Closes the application
+    private void exitButtonAction(){
+        System.exit(0);
+    }
 }
