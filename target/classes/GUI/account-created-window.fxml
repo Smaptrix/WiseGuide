@@ -11,7 +11,7 @@
       prefWidth="280.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="GUI.AccountCreationController">
    <AnchorPane prefHeight="152.0" prefWidth="279.0">
-      <Label layoutX="0.0" layoutY="40.0" prefHeight="38.0" prefWidth="279.0" text="Account Created!" alignment="CENTER"/>
+      <Label layoutY="40.0" prefHeight="38.0" prefWidth="279.0" text="Account Created!" alignment="CENTER"/>
       <Button id="closePopupButton" fx:id="closePopUpButton" layoutX="113.0" layoutY="97.0" mnemonicParsing="false"
               onAction="#closePopupButton" text="Okay!"/>
    </AnchorPane>
