@@ -45,6 +45,9 @@ public class MainController {
     MenuItem accDetailsButton;
 
     @FXML
+    MenuItem signOutButton;
+
+    @FXML
     public void initialize(){
 
 
@@ -76,6 +79,31 @@ public class MainController {
         stage.setTitle("Account Creation");
         stage.show();
     }
+
+
+    @FXML
+    //Logs the user out and reopens the login page
+    protected void onSignOutButtonClick() throws IOException {
+
+        if(client.isConnected()) {
+            client.requestLogout();
+        }
+
+        //Reopens the login page
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("login-page.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+        LoginController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        stage.setScene(scene);
+        stage.setTitle("Account Creation");
+        stage.show();
+
+
+
+
+    }
+
 
 
 }

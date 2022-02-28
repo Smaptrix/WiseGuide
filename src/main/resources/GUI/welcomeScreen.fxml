@@ -43,7 +43,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Account">
                 <MenuItem id="accDetailsButton" fx:id="accDetailsButton" mnemonicParsing="false" onAction="#onAccDetailsButtonClick" text="Account Details" />
-                <MenuItem mnemonicParsing="false" text="Sign Out" />
+                <MenuItem id="signOutButton" fx:id="signOutButton" mnemonicParsing="false" onAction="#onSignOutButtonClick" text="Sign Out" />
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <MenuItem mnemonicParsing="false" text="About" />
