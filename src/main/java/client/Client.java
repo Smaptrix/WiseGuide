@@ -266,8 +266,11 @@ public class Client {
 
 
     //Attempts to log out of the server
-    public void requestLogout(){
+    public String requestLogout() throws IOException {
 
+        outText.println("LOGOUT");
+
+        return receiveAcknowledgement();
     }
 
 
