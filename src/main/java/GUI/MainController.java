@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
@@ -46,6 +47,9 @@ public class MainController {
 
     @FXML
     MenuItem signOutButton;
+
+    @FXML
+    VBox mainWindow;
 
     @FXML
     public void initialize(){
@@ -100,7 +104,8 @@ public class MainController {
         stage.show();
 
 
-
+        Stage currStage = (Stage) mainWindow.getScene().getWindow();
+        currStage.close();
 
     }
 
