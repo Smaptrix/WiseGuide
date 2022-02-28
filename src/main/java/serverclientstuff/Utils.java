@@ -27,10 +27,10 @@ public class Utils {
     }
 
 
-    //Converts a hash (SHA-256) into hex for password storage
-    public static String bytesToHex(byte[] hash){
-        StringBuilder hexString = new StringBuilder( 2 * hash.length);
-        for (byte b : hash) {
+    //Converts a bytes into a hex string
+    public static String bytesToHex(byte[] byteArray){
+        StringBuilder hexString = new StringBuilder( 2 * byteArray.length);
+        for (byte b : byteArray) {
             String hex = Integer.toHexString(0xff & b);
             if (hex.length() == 1) {
                 hexString.append('0');
