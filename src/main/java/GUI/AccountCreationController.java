@@ -1,5 +1,13 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   18/02/2022
+    Last Updated:   24/02/2022
+ */
 package GUI;
 
+import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +27,13 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
 public class AccountCreationController {
+
+
+    Client client;
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     @FXML
     TextField userField;
@@ -97,8 +112,8 @@ public class AccountCreationController {
                 errLabel.setText("This username is taken");
             }
             else{
-                desiredUser.createUser();
-                if(desiredUser.userExistState){
+
+                if(client.createUser(newUser).equals("USERCREATED")){
 
                     FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-created-window.fxml"));
                     Stage stage = new Stage();
@@ -113,6 +128,7 @@ public class AccountCreationController {
                     currStage.close();
 
                 }
+                //TODO - Account creation failed page
             }
         }
 
