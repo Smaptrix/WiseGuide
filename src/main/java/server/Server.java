@@ -271,6 +271,8 @@ public class Server {
         //Don't need to hash here because the client hashes the data
         currUserHandler = new ServerUserHandler(new User(loginName, loginPass));
 
+
+
         //Verification Mode - Mainly for user creation
         if(mode == 0){
 
@@ -278,14 +280,17 @@ public class Server {
             if(currUserHandler.userExistState & currUserHandler.passVerified){
                 sendResponse("GOODPASS", true);
 
+
             }
             //If password is correct
             else if (currUserHandler.userExistState & !currUserHandler.passVerified){
                 sendResponse("BADPASS", true);
+
             }
 
             else {
                 sendResponse("USERNOTFOUND", true);
+
             }
 
         }
@@ -303,6 +308,7 @@ public class Server {
             else{
                 //If the users data is verified - sets the server user to the user provided
                 currUser = new User(loginName, loginPass);
+                System.out.println("Logged in!");
                 sendResponse("GOODLOGIN", true);
             }
 
@@ -335,8 +341,10 @@ public class Server {
 
         //deletes the current information regarding the user
         //Guarantees that the server wont accidently stick on
-        currUser = null;
-        currUserHandler = null;
+        //Have to be careful because this makes things null
+        currUser.clear();
+        currUserHandler.clear();
+
 
         try {
             sendResponse("LOGGEDOUT", true);

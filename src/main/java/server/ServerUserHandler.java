@@ -83,4 +83,11 @@ public class ServerUserHandler {
     }
 
 
+    public void clear(){
+         currUser = null;
+         userExistState = false;
+         userInfo = null;
+         passVerified = false;
+    }
+
 }

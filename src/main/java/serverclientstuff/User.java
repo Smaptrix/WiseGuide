@@ -65,4 +65,11 @@ public class User {
                 ", encodedPass='" + password + '\'' +
                 '}';
     }
+
+
+    public void clear(){
+        username = "";
+        password = "";
+
+    }
 }

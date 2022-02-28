@@ -25,6 +25,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
 
+    //TODO - CRASHES ON ATTEMPT ON RELOGIN
+
     //Stores the client object that lets the GUI communicate with the server
     protected Client client; // Declare empty client
     protected User currUser;

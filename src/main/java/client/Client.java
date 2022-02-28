@@ -269,6 +269,7 @@ public class Client {
     public String requestLogout() throws IOException {
 
         outText.println("LOGOUT");
+        outText.flush();
 
         return receiveAcknowledgement();
     }
