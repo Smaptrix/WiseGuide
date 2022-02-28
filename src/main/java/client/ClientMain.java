@@ -10,12 +10,8 @@ package client;
 
 import serverclientstuff.User;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.net.SocketException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 
@@ -25,7 +21,7 @@ public class ClientMain {
     String host = "127.0.0.1";
 
     //Entry point of client-side application
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
 
             System.out.println("Client Starting");
@@ -41,20 +37,23 @@ public class ClientMain {
 
 
     //Connects the client to the server and requests a few test files
-    public ClientMain() throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public ClientMain() throws IOException, NoSuchAlgorithmException {
 
 
 
         //Creates User then hashes there data
         User testUser = new User("test", "12345");
-
+        testUser.hashUserInfo();
 
 
       try {
           Client client = new Client();
           client.startConnection(host, 5555);
 
-          client.createUser(testUser);
+          System.out.println(client.verifyUser(testUser));
+
+
+          client.requestLogin(testUser);
 
           /*
           client.echoMessage("Hey");

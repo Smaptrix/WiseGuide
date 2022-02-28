@@ -108,6 +108,7 @@ public class LoginController {
             System.out.println("Password: " + userPassField.getText());
 
            currUser = new User(userTextField.getText(), userPassField.getText());
+           currUser.hashUserInfo();
 
 
            String verifyCode = client.verifyUser(currUser);

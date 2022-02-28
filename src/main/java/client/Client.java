@@ -19,7 +19,7 @@ import java.util.Hashtable;
 
 
 //TODO - Log out function
-//     - Consider encryption rather than hashing so that we can decrypt all of the information (Research as well)
+//     - Consider encryption rather than hashing so that we cna decrypt all of the information (Research as well)
 
 public class Client {
 

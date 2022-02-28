@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AccountDetailsController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -19,9 +20,10 @@
             <Label layoutX="84.0" layoutY="100.0" text="Username:" />
             <Label layoutX="86.0" layoutY="157.0" text="Password:" />
             <Label layoutX="198.0" layoutY="100.0" text="UsernameBlank" />
+            <Label layoutX="200.0" layoutY="157.0" text="PasswordBlank" />
             <CheckBox layoutX="198.0" layoutY="192.0" mnemonicParsing="false" text="Display Password" />
             <Button layoutX="322.0" layoutY="96.0" mnemonicParsing="false" text="Change" />
-            <Button layoutX="184.0" layoutY="153.0" mnemonicParsing="false" text="Change" />
+            <Button layoutX="325.0" layoutY="153.0" mnemonicParsing="false" text="Change" />
          </children>
       </AnchorPane>
    </children>

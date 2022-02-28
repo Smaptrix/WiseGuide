@@ -105,6 +105,7 @@ public class AccountCreationController {
             errLabel.setText("");
 
             User newUser = new User(userField.getText(), passField.getText());
+            newUser.hashUserInfo();
             ServerUserHandler desiredUser = new ServerUserHandler(newUser);
 
             if(desiredUser.userExistState){

@@ -23,8 +23,7 @@ public class ServerClientTest {
 
 
     //TODO - change tests and current saved user info
-    //TODO - Lots of test changes because of the new encryption thingy
-/*
+
 
     @Test
     //Launch Server first, then test
@@ -200,6 +199,6 @@ public class ServerClientTest {
 
     }
 
-*/
+
 
 }
