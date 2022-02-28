@@ -100,13 +100,7 @@ public class AccountCreationController {
                 desiredUser.createUser();
                 if(desiredUser.userExistState){
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-created-window.fxml"));
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(fxmlLoader.load(), 280, 155);
-                    stage.setScene(scene);
-                    stage.setTitle("Account Created");
-                    stage.show();
-
+                    accountCreatedPageOpen();
 
                     //Close the current page
                     Stage currStage = (Stage) createAccountButton.getScene().getWindow();
@@ -119,6 +113,21 @@ public class AccountCreationController {
 
 
     }
+
+    //Opens the account created notification - Designed with testing in mind :) - JI
+    public void accountCreatedPageOpen() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-created-window.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 280, 155);
+        stage.setScene(scene);
+        stage.setTitle("Account Created");
+        stage.show();
+
+
+    }
+
+
 
 
     @FXML
