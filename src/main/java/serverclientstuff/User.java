@@ -24,7 +24,7 @@ public class User {
 
 
     //Creates the user object
-    public User(String username, String password) throws NoSuchAlgorithmException {
+    public User(String username, String password)  {
 
         this.username = username;
         this.password = password;
@@ -33,9 +33,15 @@ public class User {
     }
 
     //Hashes user data
-    public void hashUserInfo() throws NoSuchAlgorithmException {
+    public void hashUserInfo()  {
 
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        assert digest != null;
         byte[] hashUsername = digest.digest(username.getBytes(StandardCharsets.UTF_8));
         byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 

@@ -158,12 +158,17 @@ public class Server {
             case "CREATEUSER":
                 receiveLogin(2);
 
+
+            case "LOGOUT":
+                logout();
+
             default:
                 System.out.println(requestIn + " : Invalid command");
                 sendResponse("Error 404: Request Code Not Found", false);
                 break;
         }
     }
+
 
 
 
@@ -252,12 +257,10 @@ public class Server {
     }
 
 
-    /*TODO - Refactor login - verify the users info first
-        Might be fine as is - If client recieves bad login then figure out what is wrong?
-     */
+
 
     //Mode decides whether it verifies user data or logs in
-    public void receiveLogin(Integer mode) throws IOException, NoSuchAlgorithmException {
+    public void receiveLogin(Integer mode) throws IOException {
 
 
         String loginName = inText.readLine();
@@ -327,8 +330,22 @@ public class Server {
     }
 
 
+    //Logs the user out of the server
+    private void logout() {
+
+        //deletes the current information regarding the user
+        //Guarantees that the server wont accidently stick on
+        currUser = null;
+        currUserHandler = null;
+
+        try {
+            sendResponse("LOGGEDOUT", true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
+    }
 
 
 

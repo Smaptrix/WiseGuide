@@ -152,7 +152,7 @@ public class Client {
     }
 
     //Reads the bytes for the file from the inputStream
-    public byte[] readBytes(int bytesToRead) throws IOException {
+    public byte[] readBytes(int bytesToRead)  {
 
         //Initialises a new byte array of size predetermined by our network protocol
         byte[] data = new byte[bytesToRead];
@@ -164,7 +164,11 @@ public class Client {
         //Reads bytes up until the count has been reached
         while (!end) {
 
-            data[bytesRead] = (byte) inputStream.read();
+            try {
+                data[bytesRead] = (byte) inputStream.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             //Increment Byte count
             bytesRead += 1;
@@ -259,6 +263,12 @@ public class Client {
         return receiveAcknowledgement();
     }
 
+
+
+    //Attempts to log out of the server
+    public void requestLogout(){
+
+    }
 
 
 
