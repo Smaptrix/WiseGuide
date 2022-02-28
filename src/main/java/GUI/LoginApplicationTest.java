@@ -79,7 +79,7 @@ public class LoginApplicationTest extends ApplicationTest {
         sleep(1000);
         clickOn("#loginButton");
 
-        //TODO: Clicking login when no data is entered produces - can't test until functionality is implemented.
+        //TODO: Login does not seem to do anything for me - can't test until functionality is implemented(?)
     }
 
     //Main Screen | Click Exit | Unit Test
