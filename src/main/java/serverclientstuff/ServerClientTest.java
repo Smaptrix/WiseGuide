@@ -84,7 +84,7 @@ public class ServerClientTest {
         User test = new User("test", "12345");
         test.hashUserInfo();
 
-        ServerUserHandler testUser = new ServerUserHandler(test);
+        ServerUserHandler testUser = new ServerUserHandler(test, true);
         assertTrue(testUser.userExistState);
     }
 
@@ -94,7 +94,7 @@ public class ServerClientTest {
         User test = new User("ImNotReal", "089-2341980-324");
         test.hashUserInfo();
 
-        ServerUserHandler nonExistantTestUser = new ServerUserHandler(test);
+        ServerUserHandler nonExistantTestUser = new ServerUserHandler(test, true);
         assertFalse(nonExistantTestUser.userExistState);
 
     }
@@ -106,7 +106,7 @@ public class ServerClientTest {
         User test = new User("makeme!", "password");
         test.hashUserInfo();
 
-        ServerUserHandler toBeCreatedUser = new ServerUserHandler(test);
+        ServerUserHandler toBeCreatedUser = new ServerUserHandler(test, true);
         //First check they dont exist
         assertFalse(toBeCreatedUser.userExistState);
         //Make user
@@ -126,7 +126,7 @@ public class ServerClientTest {
         test.hashUserInfo();
 
         //Create user with incorrect passowrd
-        ServerUserHandler passCheckUser = new ServerUserHandler(test);
+        ServerUserHandler passCheckUser = new ServerUserHandler(test, true);
 
         //Check password has been detected as incorrect
         assertFalse(passCheckUser.passVerified);
@@ -136,7 +136,7 @@ public class ServerClientTest {
         test.hashUserInfo();
 
         //Change password to the correct one
-        passCheckUser = new ServerUserHandler(test);
+        passCheckUser = new ServerUserHandler(test, true);
 
         //Check password has been detected as correct
         assertTrue(passCheckUser.passVerified);

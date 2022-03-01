@@ -48,6 +48,7 @@ public class Client {
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
             connected = true;
+
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
         }
@@ -79,7 +80,7 @@ public class Client {
 
             String result = new String(data, StandardCharsets.UTF_8);
 
-            System.out.println(result);
+
             return result;
         }
 
@@ -95,12 +96,14 @@ public class Client {
 
         int fileSize = inputStream.read();
 
+
+
+
         byte[] data = readBytes(fileSize);
 
 
         String result = new String(data, StandardCharsets.UTF_8);
 
-        System.out.println(result);
 
         return result;
 
@@ -166,6 +169,7 @@ public class Client {
 
             try {
                 data[bytesRead] = (byte) inputStream.read();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -211,24 +215,40 @@ public class Client {
     public String requestLogin(User currUser) throws IOException {
         outText.println("LOGIN");
 
+        System.out.println("LOGIN MESSAGE SENT");
+
         outText.println(currUser.getUsername());
 
         outText.println(currUser.getPassword());
 
-       return receiveAcknowledgement();
+       String ack =  receiveAcknowledgement();
+
+       System.out.println("Acknowledgement: " + ack);
+
+       return ack;
 
     }
 
 
     //Receive a verification message from the server
+    //TODO - FIX THE ERROR THAT LIES HERE - THE RELOGIN ACKNOWLEDGMENT EXPECTS SOMETHING LARGE FOR WHATEVER REASON
+    //     - POSSIBLE SOLUTIONS: FIGURE OUT WHY ITS READING A DIFFERENT NUMBER? Socket timeout?? issue as well
     public String receiveAcknowledgement() throws IOException {
 
         int fileSize = inputStream.read();
 
+
+        System.out.println("File size read: " + fileSize);
+
+
         byte[] data = readBytes(fileSize);
 
 
-        return new String(data, StandardCharsets.UTF_8);
+        String dataString = new String(data, StandardCharsets.UTF_8);
+
+        System.out.println("Data: " + dataString);
+
+        return dataString ;
     }
 
 

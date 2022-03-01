@@ -21,17 +21,30 @@ public class ServerUserHandler {
 
 
     //Creates the user serverside
-    public ServerUserHandler(User currUser) throws IOException {
+    public ServerUserHandler(User currUser, boolean autoVerify) throws IOException {
         this.currUser = currUser;
+
+        if(autoVerify){
+            verifyUser();
+        }
+    }
+
+
+    public void verifyUser() throws IOException {
         userExistState = findUser();
+
+
+
         //If the user doesn't exist there is no need to  verify the password
         if (userExistState) {
             passVerified = verifyPass();
+
 
         } else {
             passVerified = false;
         }
     }
+
 
     //Checks to see if a user exists
     private boolean findUser() throws IOException {
@@ -40,7 +53,6 @@ public class ServerUserHandler {
         while ((line = br.readLine()) != null) {
             String[] values = line.split(",");
 
-            System.out.println(values[0]);
 
             if ((values[0]).equals(currUser.getUsername())) {
                 userInfo = values;
@@ -90,4 +102,7 @@ public class ServerUserHandler {
          passVerified = false;
     }
 
+    public void setCurrUser(User currUser) {
+        this.currUser = currUser;
+    }
 }

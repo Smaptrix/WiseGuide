@@ -106,23 +106,31 @@ public class LoginController {
 
             errorLabel.setText("");
 
-            System.out.println("Username: " + userTextField.getText());
-            System.out.println("Password: " + userPassField.getText());
+           //System.out.println("Username: " + userTextField.getText());
+           //System.out.println("Password: " + userPassField.getText());
 
            currUser = new User(userTextField.getText(), userPassField.getText());
            currUser.hashUserInfo();
 
 
-           String verifyCode = client.verifyUser(currUser);
+           String loginCode = client.requestLogin(currUser);
 
 
+           if(loginCode.equals("BADLOGIN")){
 
-           if (verifyCode.equals("USERNOTFOUND")) {
-                errorLabel.setText("User does not exist!");
-            }
-            else if (verifyCode.equals("BADPASS")) {
-                errorLabel.setText("Incorrect Password!");
-            } else {
+               String verifyCode = client.verifyUser(currUser);
+
+               if (verifyCode.equals("USERNOTFOUND")) {
+                    errorLabel.setText("User does not exist!");
+                }
+                else if (verifyCode.equals("BADPASS")) {
+                    errorLabel.setText("Incorrect Password!");
+
+
+            } }
+
+           //If not BADLOGIN assume GOODLOGIN
+           else {
                 errorLabel.setText("");
 
                Stage currStage = (Stage) exitButton.getScene().getWindow();
@@ -133,10 +141,6 @@ public class LoginController {
                 MainApplication app = new MainApplication();
                 Stage mainStage = new Stage();
                 app.transferInfoAndOpen(mainStage, client, currUser);
-
-
-
-
 
             }
         }

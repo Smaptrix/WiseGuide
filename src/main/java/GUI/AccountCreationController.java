@@ -106,7 +106,8 @@ public class AccountCreationController {
 
             User newUser = new User(userField.getText(), passField.getText());
             newUser.hashUserInfo();
-            ServerUserHandler desiredUser = new ServerUserHandler(newUser);
+            ServerUserHandler desiredUser = new ServerUserHandler(newUser, true);
+            desiredUser.verifyUser();
 
             if(desiredUser.userExistState){
                 errLabel.setText("This username is taken");

@@ -60,6 +60,10 @@ public class Server {
 
         osDetect();
 
+        //Initialises the current user server user handler
+        currUser = new User("", "");
+        currUserHandler = new ServerUserHandler(currUser, false);
+
 
 
 
@@ -235,7 +239,8 @@ public class Server {
 
 
     //No need to tell the client to expect a string it should already be expecting it
-    //Sends a response to the client - Used by ECHO requests
+    //Sends a response to the client
+
     private void sendResponse(String response, Boolean sendSize) throws IOException {
 
         //Turns the string into its byte array
@@ -244,6 +249,9 @@ public class Server {
         if (sendSize){
             //Sends the size of the response first
             int sizeOfResponse = responseInBytes.length;
+
+            System.out.println("File Size: " + sizeOfResponse);
+
             outputStream.write(sizeOfResponse);
         }
 
@@ -269,8 +277,20 @@ public class Server {
 
 
         //Don't need to hash here because the client hashes the data
-        currUserHandler = new ServerUserHandler(new User(loginName, loginPass));
+        //Sets the current users information based on the login information provided
+        currUser.setUsername(loginName);
+        currUser.setPassword(loginPass);
 
+
+
+        currUserHandler.setCurrUser(currUser);
+
+        //Determine current users statuses
+        currUserHandler.verifyUser();
+
+
+        System.out.println("Users information has been checked!");
+        System.out.println("Mode: " + mode);
 
 
         //Verification Mode - Mainly for user creation
@@ -299,10 +319,13 @@ public class Server {
         //Login Mode
         else if(mode == 1) {
 
+            System.out.println("Login mode!");
+
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
                 //If the users data is incorrect - let the client know
-                currUserHandler = null;
+
+                System.out.println("Not logged in!");
                 sendResponse("BADLOGIN", true);
             }
             else{
@@ -310,6 +333,7 @@ public class Server {
                 currUser = new User(loginName, loginPass);
                 System.out.println("Logged in!");
                 sendResponse("GOODLOGIN", true);
+                System.out.println("Login message sent!");
             }
 
         }
