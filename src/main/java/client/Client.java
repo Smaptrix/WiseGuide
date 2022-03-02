@@ -171,7 +171,7 @@ public class Client {
             try {
 
                 data[bytesRead] = (byte) inputStream.read();
-                System.out.println(data[bytesRead]);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -226,7 +226,7 @@ public class Client {
 
        String ack =  receiveAcknowledgement();
 
-       System.out.println("Acknowledgement: " + ack);
+
 
        return ack;
 
@@ -239,7 +239,7 @@ public class Client {
         int fileSize = inputStream.read();
 
 
-        System.out.println("File size read: " + fileSize);
+
 
 
         byte[] data = readBytes(fileSize);
@@ -247,7 +247,7 @@ public class Client {
 
         String dataString = new String(data, StandardCharsets.UTF_8);
 
-        System.out.println("Data: " + dataString);
+
 
         return dataString ;
     }

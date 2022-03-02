@@ -142,7 +142,7 @@ public class ServerClientTest {
         assertTrue(passCheckUser.passVerified);
     }
 
-    //TODO - User checks using the client/server pair
+
 
     @Test
     //Remote verification test - Requires server launch
