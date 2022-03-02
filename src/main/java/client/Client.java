@@ -234,8 +234,6 @@ public class Client {
 
 
     //Receive a verification message from the server
-    //TODO - FIX THE ERROR THAT LIES HERE - THE RELOGIN ACKNOWLEDGMENT EXPECTS SOMETHING LARGE FOR WHATEVER REASON
-    //     - POSSIBLE SOLUTIONS: FIGURE OUT WHY ITS READING A DIFFERENT NUMBER? Socket timeout?? issue as well
     public String receiveAcknowledgement() throws IOException {
 
         int fileSize = inputStream.read();
