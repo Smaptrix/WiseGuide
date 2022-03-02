@@ -48,6 +48,7 @@ public class Client {
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
             connected = true;
+            clientSocket.setSoTimeout(500);
 
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
@@ -168,7 +169,9 @@ public class Client {
         while (!end) {
 
             try {
+
                 data[bytesRead] = (byte) inputStream.read();
+                System.out.println(data[bytesRead]);
 
             } catch (IOException e) {
                 e.printStackTrace();

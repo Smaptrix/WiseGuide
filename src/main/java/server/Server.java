@@ -161,14 +161,16 @@ public class Server {
 
             case "CREATEUSER":
                 receiveLogin(2);
+                break;
 
 
             case "LOGOUT":
                 logout();
+                break;
 
             default:
                 System.out.println(requestIn + " : Invalid command");
-                sendResponse("Error 404: Request Code Not Found", false);
+                sendResponse("Error 404: Request Code '" + requestIn + "' Not Found", false);
                 break;
         }
     }
@@ -243,6 +245,8 @@ public class Server {
 
     private void sendResponse(String response, Boolean sendSize) throws IOException {
 
+
+        //outputStream.flush();
         //Turns the string into its byte array
         byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
 
@@ -250,16 +254,19 @@ public class Server {
             //Sends the size of the response first
             int sizeOfResponse = responseInBytes.length;
 
-            System.out.println("File Size: " + sizeOfResponse);
+            System.out.println("File Size in bytes: " + sizeOfResponse);
 
-            outputStream.write(sizeOfResponse);
+            outputStream.writeByte(sizeOfResponse);
+
         }
 
 
 
         outputStream.write(responseInBytes);
 
-        outputStream.flush();
+
+
+        //outputStream.flush();
 
 
     }
@@ -316,6 +323,7 @@ public class Server {
         }
 
 
+
         //Login Mode
         else if(mode == 1) {
 
@@ -357,6 +365,8 @@ public class Server {
         else{
             System.out.println("Unrecognised login mode!");
         }
+
+
     }
 
 
