@@ -21,7 +21,8 @@ import javafx.stage.Stage;
 import serverclientstuff.User;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+
+
 
 public class LoginController {
 
@@ -84,7 +85,7 @@ public class LoginController {
     //Bypasses all the networking stuff while I wait for integration - JI
     //Shouldn't have to throw the exception because we only want to make the user and transfer that to the server
 
-    private void loginButtonAction() throws NoSuchAlgorithmException, IOException {
+    private void loginButtonAction() throws IOException {
 
         if(userTextField.getText().trim().isEmpty()) {
 
@@ -106,8 +107,7 @@ public class LoginController {
 
             errorLabel.setText("");
 
-           //System.out.println("Username: " + userTextField.getText());
-           //System.out.println("Password: " + userPassField.getText());
+
 
            currUser = new User(userTextField.getText(), userPassField.getText());
            currUser.hashUserInfo();

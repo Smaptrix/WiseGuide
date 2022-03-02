@@ -15,7 +15,7 @@ import server.ServerUserHandler;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+
 
 import static org.junit.Assert.*;
 
@@ -28,7 +28,7 @@ public class ServerClientTest {
     @Test
     //Launch Server first, then test
     //Tests to see if the server and client can connect to one another
-    //Then tests to see if the test message is snet and recieved
+    //Then tests to see if the test message is sent and recieved
     public void clientConnectToServer_RxTxTest() throws IOException {
 
         Client client = new Client();
@@ -60,7 +60,7 @@ public class ServerClientTest {
 
 
     @Test
-    public void userUsernameSetupTest() throws NoSuchAlgorithmException {
+    public void userUsernameSetupTest() {
         User test = new User("test", "12345");
         test.hashUserInfo();
         assertEquals(test.getUsername(), "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
@@ -68,7 +68,7 @@ public class ServerClientTest {
 
     @Test
     //Test to make sure hashing works correctly
-    public void userPasswordHashingTest() throws NoSuchAlgorithmException {
+    public void userPasswordHashingTest() {
         User test = new User("test", "12345");
         test.hashUserInfo();
 
@@ -80,7 +80,7 @@ public class ServerClientTest {
 
     @Test
     //Test to see if users exists in the user database
-    public void userExistsTest() throws NoSuchAlgorithmException, IOException {
+    public void userExistsTest() throws IOException {
         User test = new User("test", "12345");
         test.hashUserInfo();
 
@@ -90,7 +90,7 @@ public class ServerClientTest {
 
     @Test
     //Test to make sure a user doesnt exist
-    public void userDoesntExistTest() throws NoSuchAlgorithmException, IOException {
+    public void userDoesntExistTest() throws IOException {
         User test = new User("ImNotReal", "089-2341980-324");
         test.hashUserInfo();
 
@@ -101,7 +101,7 @@ public class ServerClientTest {
 
     @Test
     //Test to create a new user and add them to the text file (only works once unless you delete this user again)
-    public void userCreationTest() throws NoSuchAlgorithmException, IOException {
+    public void userCreationTest() throws IOException {
 
         User test = new User("makeme!", "password");
         test.hashUserInfo();
@@ -120,7 +120,7 @@ public class ServerClientTest {
 
     @Test
     //Test to check whether a password cna be detected as correct or not
-    public void passwordCheckTest() throws NoSuchAlgorithmException, IOException {
+    public void passwordCheckTest() throws IOException {
 
         User test = new User("test", "54321");
         test.hashUserInfo();
@@ -146,7 +146,7 @@ public class ServerClientTest {
 
     @Test
     //Remote verification test - Requires server launch
-    public void remoteUserVerificationTest() throws NoSuchAlgorithmException, IOException {
+    public void remoteUserVerificationTest() throws IOException {
 
         User test = new User("test", "12345");
         test.hashUserInfo();
@@ -160,7 +160,7 @@ public class ServerClientTest {
 
     @Test
     //Remote verification test to prove a user doesn't exist- Requires server launch
-    public void failRemoteUserVerificationTest() throws NoSuchAlgorithmException, IOException {
+    public void failRemoteUserVerificationTest() throws IOException {
 
         User test = new User("IdOntExist", "12345");
         test.hashUserInfo();
@@ -175,7 +175,7 @@ public class ServerClientTest {
 
     @Test
     //Remote login test- Requires server launch
-    public void remoteLoginTest() throws NoSuchAlgorithmException, IOException {
+    public void remoteLoginTest() throws IOException {
 
         User test = new User("test", "12345");
         test.hashUserInfo();
@@ -188,7 +188,7 @@ public class ServerClientTest {
 
     @Test
     //Remote failed login test- Requires server launch
-    public void remoteFailedLoginTest() throws NoSuchAlgorithmException, IOException {
+    public void remoteFailedLoginTest() throws IOException {
 
         User test = new User("ICANTLOGIN", "12345");
         test.hashUserInfo();

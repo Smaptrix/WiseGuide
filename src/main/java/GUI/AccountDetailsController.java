@@ -7,6 +7,7 @@ public class AccountDetailsController {
 
     //TODO - Add all the functionality
     //     - I.E Display User Details - Change User details
+    //     - BEFORE THIS NEED TO DO USER INFO ENCRYPTION RATHER THAN HASHING
 
     Client client;
 

@@ -25,7 +25,7 @@ public class Server {
 
         //TODO - Store prehashed user as well for account details
         //     - Do the hashing serverside? (would be a big refactor (incl tests)
-        //     - Log out function
+
 
 
 
