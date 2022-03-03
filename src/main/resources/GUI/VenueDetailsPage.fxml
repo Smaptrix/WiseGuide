@@ -5,7 +5,7 @@
         Project Name:   WiseGuide
         Authors:        Will Pitchfork
         Date Created:   20/02/2022
-        Last Updated:   20/02/2022
+        Last Updated:   27/02/2022
 -->
 
 <?import javafx.scene.control.*?>
@@ -22,7 +22,7 @@
           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <MenuBar>
             <Menu mnemonicParsing="false" text="File">
-                <MenuItem mnemonicParsing="false" text="Close"/> <!-- onAction="#funcName" -->
+                <MenuItem mnemonicParsing="false" text="Close" onAction="#exitButtonAction"/> <!-- onAction="#funcName" -->
             </Menu>
             <Menu mnemonicParsing="false" text="Account">
                 <MenuItem mnemonicParsing="false" text="Account Details"/>

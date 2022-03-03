@@ -14,9 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
@@ -43,8 +40,7 @@ public class LoginController {
     @FXML
     Button loginButton;
     @FXML
-    Button exitButton;
-
+    MenuItem menuClose;
     @FXML
     Label errorLabel;
 
@@ -70,9 +66,7 @@ public class LoginController {
         if(client.isConnected()) {
             client.closeConnection(); // Closes Client connection safely
         }
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-
+        System.exit(0);
     }
 
 
@@ -133,7 +127,7 @@ public class LoginController {
            else {
                 errorLabel.setText("");
 
-               Stage currStage = (Stage) exitButton.getScene().getWindow();
+               Stage currStage = (Stage) loginButton.getScene().getWindow();
                currStage.close();
 
 
