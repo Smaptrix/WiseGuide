@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
 public class ServerMain {
 
     //Entry point for server application
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+    public static void main(String[] args) throws IOException {
 
 
             System.out.println("Server Start\n");
@@ -28,7 +28,7 @@ public class ServerMain {
 
 
     //Sets up the initial server
-    public ServerMain() throws IOException, NoSuchAlgorithmException {
+    public ServerMain() throws IOException {
 
 
         try {

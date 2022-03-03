@@ -55,6 +55,9 @@ public class ClientMain {
 
           client.requestLogin(testUser);
 
+
+          client.requestLogout();
+
           /*
           client.echoMessage("Hey");
           client.echoMessage("again");

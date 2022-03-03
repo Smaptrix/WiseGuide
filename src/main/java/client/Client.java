@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   27/01/2022
-    Last Updated:   10/02/2022
+    Last Updated:   24/02/2022
  */
 package client;
 
@@ -18,6 +18,9 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 
+//TODO - Log out function
+//     - Consider encryption rather than hashing so that we cna decrypt all of the information (Research as well)
+
 public class Client {
 
 
@@ -27,6 +30,8 @@ public class Client {
     //InputStream to read files
     private InputStream inputStream;
 
+    private boolean connected;
+
 
     //Each client will keep a dictionary containing where all there files are located
     public Dictionary<String, File> fileLocations = new Hashtable<>();
@@ -35,11 +40,16 @@ public class Client {
     //Connects to the port
     public void startConnection(String ip, int port) throws IOException {
 
+        connected = false;
+
         try {
             clientSocket = new Socket(ip, port);
             outText = new PrintWriter(clientSocket.getOutputStream(), true);
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
+            connected = true;
+            clientSocket.setSoTimeout(500);
+
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
         }
@@ -54,6 +64,7 @@ public class Client {
             outText.close();
             clientSocket.close();
             System.out.println("Connection Closed");
+            connected = false;
 
     }
 
@@ -70,7 +81,7 @@ public class Client {
 
             String result = new String(data, StandardCharsets.UTF_8);
 
-            System.out.println(result);
+
             return result;
         }
 
@@ -86,12 +97,14 @@ public class Client {
 
         int fileSize = inputStream.read();
 
+
+
+
         byte[] data = readBytes(fileSize);
 
 
         String result = new String(data, StandardCharsets.UTF_8);
 
-        System.out.println(result);
 
         return result;
 
@@ -139,13 +152,11 @@ public class Client {
         System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
-       File currFile = BytesToFile(data, fileName, dataType);
-
-       return currFile;
+        return BytesToFile(data, fileName, dataType);
     }
 
     //Reads the bytes for the file from the inputStream
-    public byte[] readBytes(int bytesToRead) throws IOException {
+    public byte[] readBytes(int bytesToRead)  {
 
         //Initialises a new byte array of size predetermined by our network protocol
         byte[] data = new byte[bytesToRead];
@@ -157,12 +168,19 @@ public class Client {
         //Reads bytes up until the count has been reached
         while (!end) {
 
-            data[bytesRead] = (byte) inputStream.read();
+            try {
+
+                data[bytesRead] = (byte) inputStream.read();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             //Increment Byte count
             bytesRead += 1;
             if (bytesRead == bytesToRead) {
-                System.out.println("We have read: " + bytesRead);
+               // System.out.println("We have read: " + bytesRead);
                 end = true;
             }
 
@@ -200,11 +218,17 @@ public class Client {
     public String requestLogin(User currUser) throws IOException {
         outText.println("LOGIN");
 
+        System.out.println("LOGIN MESSAGE SENT");
+
         outText.println(currUser.getUsername());
 
         outText.println(currUser.getPassword());
 
-       return receiveAcknowledgement();
+       String ack =  receiveAcknowledgement();
+
+
+
+       return ack;
 
     }
 
@@ -214,15 +238,24 @@ public class Client {
 
         int fileSize = inputStream.read();
 
+
+
+
+
         byte[] data = readBytes(fileSize);
 
 
-        String result = new String(data, StandardCharsets.UTF_8);
+        String dataString = new String(data, StandardCharsets.UTF_8);
 
-        System.out.println(result);
 
-        return result;
+
+        return dataString ;
     }
+
+
+    //TODO - possible refactor of user functions into single function?
+
+
 
 
     //Asks the server to verify if a user exists and if their password is correct
@@ -238,6 +271,33 @@ public class Client {
     }
 
 
+    //Requests the server to create and add a user to the database
+    public String createUser(User currUser) throws IOException {
+
+        outText.println("CREATEUSER");
+
+        outText.println(currUser.getUsername());
+
+        outText.println(currUser.getPassword());
 
 
+        return receiveAcknowledgement();
+    }
+
+
+
+    //Attempts to log out of the server
+    public String requestLogout() throws IOException {
+
+        outText.println("LOGOUT");
+        outText.flush();
+
+        return receiveAcknowledgement();
+    }
+
+
+
+    public boolean isConnected() {
+        return connected;
+    }
 }
