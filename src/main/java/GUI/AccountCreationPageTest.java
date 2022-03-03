@@ -34,10 +34,14 @@ public class AccountCreationPageTest extends ApplicationTest {
 
     @Before
     public void setUpClass() throws Exception {
+        //TODO: CREATE TESTING ACCOUNT
     }
 
     @After
     public void afterEachTest() throws TimeoutException {
+
+        //TODO: DELETE ACCOUNTS THE TESTS CREATE
+
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();

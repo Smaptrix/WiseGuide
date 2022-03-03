@@ -41,11 +41,13 @@ public class LoginGUIIntegration extends ApplicationTest {
     }
 
     //TODO: Main Screen | Login real user real password | Integration Test with Login System
-    //Not sure if login is technically testable right now as login button does not work for me - AC
+    //Need hard-coded test account to log in to.
 
     //TODO: Main Screen | Login real user fake password | Integration Test with Login System
+    //Need hard-coded test account to log in to.
 
     //TODO: Main Screen | Login fake user fake password | Integration Test with Login System
+    //Need hard-coded test account to log in to.
 
     //TODO: Create New User
     //In theory this test should be enough to confirm a user exists, as if the closePopupButton
@@ -65,11 +67,11 @@ public class LoginGUIIntegration extends ApplicationTest {
         //clickOn("#ageCheckBox"); //This clicks on the centre of the text!
         clickOn("#createAccountButton");
         clickOn("#closePopupButton");
-        //TODO
+        //TODO: Verify user exists in database
     }
 
     //TODO: Account Creation | Create Existing User Attempt | Integration Test with Login System
-
+    //Need hard-coded test account to log in to.
 
 
     //Create User Attempt - Don't check 13 box

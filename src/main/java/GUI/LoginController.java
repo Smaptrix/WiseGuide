@@ -112,7 +112,6 @@ public class LoginController {
            currUser = new User(userTextField.getText(), userPassField.getText());
            currUser.hashUserInfo();
 
-        System.out.println("User Exist State: " + currUser.userExistState);
 
            String loginCode = client.requestLogin(currUser);
 

@@ -17,9 +17,12 @@ import org.testfx.assertions.api.TextAssert;
 import org.testfx.assertions.api.TextInputControlAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 import org.testfx.matcher.control.TextMatchers;
 import org.testfx.osgi.service.TestFx;
+import server.ServerUserHandler;
+import serverclientstuff.User;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -37,10 +40,25 @@ public class LoginApplicationTest extends ApplicationTest {
 
     @Before
     public void setUpClass() throws Exception {
+
+        //TODO: CREATE TESTING USER
+
+       /* User testingUser = new User("testUser","testPassword");
+        testingUser.hashUserInfo();
+        ServerUserHandler desiredUser = new ServerUserHandler(testingUser, true);
+        desiredUser.verifyUser();
+        if(desiredUser.userExistState){
+            System.out.println("WARNING: Testing User Already Exists!");
+        }*/
+
+
     }
 
     @After
     public void afterEachTest() throws TimeoutException {
+
+        //TODO: DELETE TESTING USER
+
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();
@@ -51,12 +69,12 @@ public class LoginApplicationTest extends ApplicationTest {
     //Unit tests that test all the basic stuff to make sure it all works.
     //Not everything works right now. I don't know how to do half the assertions because I can't find any TestFX documentation.
 
-    //TODO: Click Login Button
+    //Click Login Button
     @Test
     public void clickOnLoginTest() {
         sleep(1000);
         clickOn("#loginButton");
-        //TODO: Login empty field checks not yet implemeted - test cannot be written yet.
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
     //TODO: Click Exit Button

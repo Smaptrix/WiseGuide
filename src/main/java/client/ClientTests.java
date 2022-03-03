@@ -9,7 +9,5 @@
 package client;
 
 public class ClientTests {
-
-
-
+    //TODO: Unit Tests for client-related classes
 }
