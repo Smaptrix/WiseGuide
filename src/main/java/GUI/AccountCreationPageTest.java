@@ -78,6 +78,7 @@ public class AccountCreationPageTest extends ApplicationTest {
     public void clickCreateCheckboxTest(){
         sleep(1000);
         clickOn("#ageCheckBox"); //TODO: Make this press the box rather than the text.
+        sleep(1000);
         //TODO: Figure out how to confirm checkbox was pressed.
         //https://stackoverflow.com/questions/22882791/javafx-check-if-a-checkbox-is-ticked - JavaFX not TestFX but may be helpful
     }

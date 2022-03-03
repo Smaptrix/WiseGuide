@@ -76,7 +76,7 @@ public class LoginApplicationTest extends ApplicationTest {
     public void clickOnLoginTest() {
         sleep(1000);
         clickOn("#loginButton");
-        //TODO: Login does not seem to do anything for me (blank user/login => error and correct user/login doesn't work) - can't test until functionality is implemented(?)
+        //TODO: Login empty field checks not yet implemeted - test cannot be written yet.
     }
 
     //TODO: Click Exit Button
