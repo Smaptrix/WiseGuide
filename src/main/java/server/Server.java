@@ -1,3 +1,11 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   20/01/2022
+    Last Updated:   24/02/2022
+ */
+
 package server;
 
 
@@ -13,6 +21,10 @@ import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 
 public class Server {
+
+
+        //TODO - Store prehashed user as well for account details
+        //     - Do the hashing serverside? (would be a big refactor (incl tests)
 
 
 
@@ -47,6 +59,10 @@ public class Server {
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
         osDetect();
+
+        //Initialises the current user server user handler
+        currUser = new User("", "");
+        currUserHandler = new ServerUserHandler(currUser, false);
 
 
 
@@ -132,21 +148,33 @@ public class Server {
                 break;
 
             //Creates a new user and adds it to the database
-            case "LOGIN":
-                receiveLogin(1);
-                break;
+
 
 
             case "VERIFYUSER":
                 receiveLogin(0);
                 break;
 
+            case "LOGIN":
+                receiveLogin(1);
+                break;
+
+            case "CREATEUSER":
+                receiveLogin(2);
+                break;
+
+
+            case "LOGOUT":
+                logout();
+                break;
+
             default:
                 System.out.println(requestIn + " : Invalid command");
-                sendResponse("Error 404: Request Code Not Found", false);
+                sendResponse("Error 404: Request Code '" + requestIn + "' Not Found", false);
                 break;
         }
     }
+
 
 
 
@@ -213,41 +241,64 @@ public class Server {
 
 
     //No need to tell the client to expect a string it should already be expecting it
-    //Sends a response to the client - Used by ECHO requests
+    //Sends a response to the client
+
     private void sendResponse(String response, Boolean sendSize) throws IOException {
 
+
+        //outputStream.flush();
         //Turns the string into its byte array
         byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
 
         if (sendSize){
             //Sends the size of the response first
             int sizeOfResponse = responseInBytes.length;
-            outputStream.write(sizeOfResponse);
+
+            System.out.println("File Size in bytes: " + sizeOfResponse);
+
+            outputStream.writeByte(sizeOfResponse);
+
         }
 
 
 
         outputStream.write(responseInBytes);
 
-        outputStream.flush();
+
+
+        //outputStream.flush();
 
 
     }
 
 
-    /*TODO - Refactor login - verify the users info first
-        Might be fine as is - If client recieves bad login then figure out what is wrong?
-     */
+
 
     //Mode decides whether it verifies user data or logs in
-    public void receiveLogin(Integer mode) throws IOException, NoSuchAlgorithmException {
+    public void receiveLogin(Integer mode) throws IOException {
 
 
         String loginName = inText.readLine();
 
         String loginPass = inText.readLine();
 
-        currUserHandler = new ServerUserHandler(new User(loginName, loginPass));
+
+        //Don't need to hash here because the client hashes the data
+        //Sets the current users information based on the login information provided
+        currUser.setUsername(loginName);
+        currUser.setPassword(loginPass);
+
+
+
+        currUserHandler.setCurrUser(currUser);
+
+        //Determine current users statuses
+        currUserHandler.verifyUser();
+
+
+        System.out.println("Users information has been checked!");
+        System.out.println("Mode: " + mode);
+
 
         //Verification Mode - Mainly for user creation
         if(mode == 0){
@@ -256,43 +307,89 @@ public class Server {
             if(currUserHandler.userExistState & currUserHandler.passVerified){
                 sendResponse("GOODPASS", true);
 
+
             }
             //If password is correct
             else if (currUserHandler.userExistState & !currUserHandler.passVerified){
                 sendResponse("BADPASS", true);
+
             }
 
             else {
                 sendResponse("USERNOTFOUND", true);
+
             }
 
         }
+
 
 
         //Login Mode
         else if(mode == 1) {
 
+            System.out.println("Login mode!");
+
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
                 //If the users data is incorrect - let the client know
-                currUserHandler = null;
+
+                System.out.println("Not logged in!");
                 sendResponse("BADLOGIN", true);
             }
             else{
                 //If the users data is verified - sets the server user to the user provided
                 currUser = new User(loginName, loginPass);
+                System.out.println("Logged in!");
                 sendResponse("GOODLOGIN", true);
+                System.out.println("Login message sent!");
             }
+
+        }
+
+        //User Creation Mode
+        else if(mode == 2){
+
+            if(!(currUserHandler.userExistState)){
+                currUserHandler.createUser();
+                sendResponse("USERCREATED", true);
+            }
+
+            else{
+                sendResponse("USERALREADYEXISTS", true);
+
+            }
+
+
 
         }
         else{
             System.out.println("Unrecognised login mode!");
         }
+
+
     }
 
 
+    //Logs the user out of the server
+    private void logout() {
+
+        //deletes the current information regarding the user
+        //Guarantees that the server wont accidently stick on
+        //Have to be careful because this makes things null
+        currUser.clear();
+        currUserHandler.clear();
 
 
+        try {
+            sendResponse("LOGGEDOUT", true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Successfully logged out");
+
+
+    }
 
 
 

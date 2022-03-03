@@ -1,20 +1,33 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   18/02/2022
+    Last Updated:   24/02/2022
+ */
+
 package GUI;
 
 
+import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+
+
 
 public class LoginController {
 
-        //TODO - Check to make sure login fields arent empty!
+    //TODO - CRASHES ON ATTEMPT ON RELOGIN
+
+    //Stores the client object that lets the GUI communicate with the server
+    protected Client client; // Declare empty client
+    protected User currUser;
 
 
     //Imports all of the objects in the login 'scene'
@@ -35,7 +48,9 @@ public class LoginController {
 
     @FXML
     //Always called by the FXML Loader
-    public void initialize(){
+    public void initialize() throws IOException {
+        client = new Client(); // Creates new instance of client object
+        client.startConnection("127.0.0.1", 5555); // Pressing "Hello" button starts the client
 
 
 
@@ -46,11 +61,17 @@ public class LoginController {
 
     @FXML
     //Closes the application
-    private void exitButtonAction(){
+    private void exitButtonAction() throws IOException {
+        //Doesn't try to close a connection that isn't there
+        if(client.isConnected()) {
+            client.closeConnection(); // Closes Client connection safely
+        }
         System.exit(0);
     }
 
-    //TODO - Post Integration let the client handle the user stuff not the GUI
+
+    //TODO - MAKE IT SO YOU CANT HAVE SPACES IN ANY OF THE FIELDS
+
 
     @FXML
     //Tries to login using the data provided
@@ -58,23 +79,64 @@ public class LoginController {
     //Bypasses all the networking stuff while I wait for integration - JI
     //Shouldn't have to throw the exception because we only want to make the user and transfer that to the server
 
-    private void loginButtonAction() throws NoSuchAlgorithmException, IOException {
+    private void loginButtonAction() throws IOException {
 
-        System.out.println("Username: " + userTextField.getText());
-        System.out.println("Password: " + userPassField.getText());
+        if(userTextField.getText().trim().isEmpty()) {
 
-        ServerUserHandler currUser = new ServerUserHandler(new User(userTextField.getText(), userPassField.getText()));
+            errorLabel.setText("You have not entered a username!");
 
-        System.out.println("User Exist State: " + currUser.userExistState);
-
-        if(!currUser.userExistState){
-            errorLabel.setText("User does not exist!");
         }
-        if(!currUser.passVerified){
-            errorLabel.setText("Incorrect Password!");
+
+        else if(userPassField.getText().trim().isEmpty()){
+
+            errorLabel.setText("You have not entered a password!");
         }
-        else{
+
+        else if(!client.isConnected()){
+            errorLabel.setText("Cannot connect to server!");
+        }
+
+
+        else {
+
             errorLabel.setText("");
+
+
+
+           currUser = new User(userTextField.getText(), userPassField.getText());
+           currUser.hashUserInfo();
+
+
+           String loginCode = client.requestLogin(currUser);
+
+
+           if(loginCode.equals("BADLOGIN")){
+
+               String verifyCode = client.verifyUser(currUser);
+
+               if (verifyCode.equals("USERNOTFOUND")) {
+                    errorLabel.setText("User does not exist!");
+                }
+                else if (verifyCode.equals("BADPASS")) {
+                    errorLabel.setText("Incorrect Password!");
+
+
+            } }
+
+           //If not BADLOGIN assume GOODLOGIN
+           else {
+                errorLabel.setText("");
+
+               Stage currStage = (Stage) exitButton.getScene().getWindow();
+               currStage.close();
+
+
+                //Opens the main application once you have logged in
+                MainApplication app = new MainApplication();
+                Stage mainStage = new Stage();
+                app.transferInfoAndOpen(mainStage, client, currUser);
+
+            }
         }
 
     }
@@ -86,6 +148,8 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-create-page.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load(), 300, 350);
+            AccountCreationController controller = fxmlLoader.getController();
+            controller.setClient(client);
             stage.setScene(scene);
             stage.setTitle("Account Creation");
             stage.show();
@@ -96,9 +160,7 @@ public class LoginController {
 
     }
 
-
-
-
-
-
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

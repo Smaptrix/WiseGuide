@@ -1,3 +1,11 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   08/02/2022
+    Last Updated:   18/02/2022
+ */
+
 package serverclientstuff;
 
 import java.nio.charset.StandardCharsets;
@@ -16,7 +24,7 @@ public class User {
 
 
     //Creates the user object
-    public User(String username, String password) throws NoSuchAlgorithmException {
+    public User(String username, String password)  {
 
         this.username = username;
         this.password = password;
@@ -25,9 +33,15 @@ public class User {
     }
 
     //Hashes user data
-    public void hashUserInfo() throws NoSuchAlgorithmException {
+    public void hashUserInfo()  {
 
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        assert digest != null;
         byte[] hashUsername = digest.digest(username.getBytes(StandardCharsets.UTF_8));
         byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
@@ -44,11 +58,26 @@ public class User {
         return password;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
                 ", encodedPass='" + password + '\'' +
                 '}';
+    }
+
+
+    public void clear(){
+        username = "";
+        password = "";
+
     }
 }
