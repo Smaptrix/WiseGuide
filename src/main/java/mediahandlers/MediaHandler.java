@@ -10,7 +10,14 @@ package mediahandlers;
 
 public abstract class MediaHandler {
 
+
     String filePath;
+
+    public void getFilePath(String filePath){
+
+        this.filePath = filePath;
+
+    }
 
 
 }
