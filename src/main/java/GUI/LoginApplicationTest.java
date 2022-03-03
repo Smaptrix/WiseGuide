@@ -46,26 +46,6 @@ public class LoginApplicationTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
-    //WIP test that Lee was working on
-/*    @Test
-    public void clickOnCreateAcc() throws TimeoutException {
-        sleep(1000);
-        moveTo("#createAccButton");
-        sleep(1000);
-        clickOn("#createAccButton");
-        sleep(1000);
-        moveTo("#ageCheckBox");
-        sleep(1000);
-        clickOn("#ageCheckBox");
-        sleep(1000);
-        moveTo("#userField");
-        sleep(1000);
-        clickOn("#userField");
-        write("testUser");
-
-    }*/
-
-
     /* ===== UNIT TESTS for Main Login Screen ===== */
 
     //Unit tests that test all the basic stuff to make sure it all works.
