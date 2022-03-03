@@ -127,7 +127,7 @@ public class LoginController {
            else {
                 errorLabel.setText("");
 
-               Stage currStage = (Stage) exitButton.getScene().getWindow();
+               Stage currStage = (Stage) loginButton.getScene().getWindow();
                currStage.close();
 
 

@@ -39,8 +39,7 @@
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
         <MenuBar layoutX="7.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Menu mnemonicParsing="false" text="File">
-                <MenuItem id="closeButton" fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close" /> <!-- onAction="#funcName" -->
-                <MenuItem mnemonicParsing="false" text="Close" onAction="#exitButtonAction"/> <!-- onAction="#funcName" -->
+                <MenuItem id="closeButton" fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close" />
             </Menu>
             <Menu mnemonicParsing="false" text="Account">
                 <MenuItem id="accDetailsButton" fx:id="accDetailsButton" mnemonicParsing="false" onAction="#onAccDetailsButtonClick" text="Account Details" />
