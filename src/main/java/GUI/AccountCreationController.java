@@ -66,14 +66,11 @@ public class AccountCreationController {
 
 
 
-    //TODO - Post Integration let the client handle all the user stuff not the GUI
 
+    //TODO - Check that the client is connected to the server
 
     @FXML
     //Attempts to create account
-    //For now bypasses networking stuff while it waits for GUI and client/server integration - JI
-    //Should not have to deal with the user exceptions thrown here, just the creation of the user object
-    //Only here for now because we are bypassing network stuff
     private void createAccountButtonAction() throws NoSuchAlgorithmException, IOException {
         System.out.println("Wanted Username: " + userField.getText());
 
