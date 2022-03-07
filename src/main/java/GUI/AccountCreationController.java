@@ -34,6 +34,7 @@ public class AccountCreationController {
     public void setClient(Client client) {
         this.client = client;
     }
+    public Client getClient() { return this.client; }
 
     @FXML
     TextField userField;
@@ -68,6 +69,7 @@ public class AccountCreationController {
 
     //TODO - Post Integration let the client handle all the user stuff not the GUI
 
+    //TODO -  User should not be able to create accounts with same names as testing accounts (see LoginGUIIntegration TODOs)
 
     @FXML
     //Attempts to create account
@@ -131,6 +133,7 @@ public class AccountCreationController {
 
     }
 
+
     //Opens the account created notification - Designed with testing in mind :) - JI
     public void accountCreatedPageOpen() throws IOException {
 
@@ -140,11 +143,7 @@ public class AccountCreationController {
         stage.setScene(scene);
         stage.setTitle("Account Created");
         stage.show();
-
-
     }
-
-
 
 
     @FXML

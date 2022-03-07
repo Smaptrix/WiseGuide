@@ -30,27 +30,21 @@ import java.util.concurrent.TimeoutException;
 
 public class LoginApplicationTest extends ApplicationTest {
 
+    private Stage stage;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent mainNode = FXMLLoader.load(Objects.requireNonNull(LoginApplication.class.getResource("login-page.fxml")));
         stage.setScene(new Scene(mainNode));
         stage.show();
         stage.toFront();
+        this.stage = stage;
     }
 
     @Before
     public void setUpClass() throws Exception {
 
         //TODO: CREATE TESTING USER
-
-       /* User testingUser = new User("testUser","testPassword");
-        testingUser.hashUserInfo();
-        ServerUserHandler desiredUser = new ServerUserHandler(testingUser, true);
-        desiredUser.verifyUser();
-        if(desiredUser.userExistState){
-            System.out.println("WARNING: Testing User Already Exists!");
-        }*/
-
 
     }
 
@@ -66,9 +60,6 @@ public class LoginApplicationTest extends ApplicationTest {
 
     /* ===== UNIT TESTS for Main Login Screen ===== */
 
-    //Unit tests that test all the basic stuff to make sure it all works.
-    //Not everything works right now. I don't know how to do half the assertions because I can't find any TestFX documentation.
-
     //Click Login Button
     @Test
     public void clickOnLoginTest() {
@@ -77,12 +68,12 @@ public class LoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //TODO: Click Exit Button
+    //Click Exit Button
     @Test
     public void clickOnExit() {
         sleep(1000);
         clickOn("#exitButton");
-        //TODO: How to verify that stage was closed? WindowMatchers.isNotShowing() does not work as window does not have a title.
+        Assert.assertFalse(stage.isShowing());
     }
 
     //Click Create Account Button
@@ -114,7 +105,4 @@ public class LoginApplicationTest extends ApplicationTest {
         sleep(1000);
         FxAssert.verifyThat("#userPassField", TextInputControlMatchers.hasText("password"));
     }
-
-    //TODO: Account Creation | ANY LIMITS ON WHAT CHARACTERS ALLOWED IN USER/PASS??
-
 }

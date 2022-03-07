@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
@@ -22,12 +23,16 @@ public class AccountCreatedPageTest extends ApplicationTest {
 
     /* ===== UNIT Test for Account Created Page ===== */
 
+    private Stage stage; //Reference to JavaFX stage so that window showing status can be checked.
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent mainNode = FXMLLoader.load(Objects.requireNonNull(LoginApplication.class.getResource("account-created-window.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(LoginApplication.class.getResource("account-created-window.fxml")));
+        Parent mainNode = loader.load();
         stage.setScene(new Scene(mainNode));
         stage.show();
         stage.toFront();
+        this.stage = stage;
     }
 
     @Before
@@ -41,13 +46,13 @@ public class AccountCreatedPageTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
-    //TODO: "Okay" Button Test
+    //"Okay" Button Test
     @Test
     public void okayButtonTest(){
         sleep(1000);
         clickOn("#closePopupButton");
-
-        //TODO: How to test window was closed? WindowMatchers does not work as the window does not have a "title" it can search for.
+        //FxAssert.verifyThat(window("Account Created"), WindowMatchers.isNotShowing()); --This method does not work as it can't find a window w/o a title.
+        Assert.assertFalse(stage.isShowing());
     }
 
 }

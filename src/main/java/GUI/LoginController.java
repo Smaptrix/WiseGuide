@@ -56,8 +56,6 @@ public class LoginController {
         client = new Client(); // Creates new instance of client object
         client.startConnection("127.0.0.1", 5555); // Pressing "Hello" button starts the client
 
-
-
     }
 
 
@@ -166,7 +164,9 @@ public class LoginController {
 
     }
 
+    //Client field getter and setter, used by testing to create a new testing account manually.
     public void setClient(Client client) {
         this.client = client;
     }
+    public Client getClient() { return this.client; }
 }

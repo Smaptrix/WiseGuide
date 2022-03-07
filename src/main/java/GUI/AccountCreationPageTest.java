@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
@@ -17,6 +19,7 @@ import org.testfx.matcher.base.GeneralMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 
+import java.awt.*;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
@@ -24,24 +27,24 @@ public class AccountCreationPageTest extends ApplicationTest {
 
     /* ===== UNIT TESTS for Account Creation Page ===== */
 
+    private AccountCreationController controller; //Reference to controller so that CheckBox can be interacted with directly.
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent mainNode = FXMLLoader.load(Objects.requireNonNull(LoginApplication.class.getResource("account-create-page.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(LoginApplication.class.getResource("account-create-page.fxml")));
+        Parent mainNode = loader.load();
         stage.setScene(new Scene(mainNode));
         stage.show();
         stage.toFront();
+        this.controller = loader.getController();
     }
 
     @Before
     public void setUpClass() throws Exception {
-        //TODO: CREATE TESTING ACCOUNT
     }
 
     @After
     public void afterEachTest() throws TimeoutException {
-
-        //TODO: DELETE ACCOUNTS THE TESTS CREATE
-
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();
@@ -77,14 +80,18 @@ public class AccountCreationPageTest extends ApplicationTest {
         FxAssert.verifyThat("#passConfirmField", TextInputControlMatchers.hasText("password"));
     }
 
-    //TODO: Click Age 13 Box
+    //Click Age 13 Box
+    //This is an absolutely scuffed way of doing this. TestFX's clickOn(checkbox) does not work so I have
+    //instead attempted to click where the checkbox should be relative to the centre of the screen.
+    //TODO: Currently only works on AC's screen size/resolution...
+    //TODO: The relative checkbox position is not the same as when running integration tests. Investigate why.
     @Test
     public void clickCreateCheckboxTest(){
         sleep(1000);
-        clickOn("#ageCheckBox"); //TODO: Make this press the box rather than the text.
-        sleep(1000);
-        //TODO: Figure out how to confirm checkbox was pressed.
-        //https://stackoverflow.com/questions/22882791/javafx-check-if-a-checkbox-is-ticked - JavaFX not TestFX but may be helpful
+        //clickOn("#ageCheckBox");
+        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+        clickOn((screensize.getWidth()/2 - 92),(screensize.getHeight()/2-125));
+        Assert.assertTrue(controller.ageCheckBox.isSelected());
     }
 
     //Click Create Account Button
