@@ -96,6 +96,10 @@ public class LoginController {
             errorLabel.setText("Cannot connect to server!");
         }
 
+        else if(!client.isSameVersion()){
+            errorLabel.setText("Server and Client are different Versions!");
+        }
+
 
         else {
 

@@ -18,8 +18,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 
-//TODO - Log out function
-//     - Consider encryption rather than hashing so that we cna decrypt all of the information (Research as well)
+// TODO- Consider encryption rather than hashing so that we cna decrypt all of the information (Research as well)
 
 
 /**
@@ -28,7 +27,7 @@ import java.util.Hashtable;
 public class Client {
 
     //Should only be changed within the code!
-    private static final String version = "Ver 0.45";
+    private static final String CLIENTVERSION = "Ver 0.45";
 
     /**
      * clientSocket is the client side socket.
@@ -52,14 +51,19 @@ public class Client {
      */
     private boolean connected;
 
+    /**
+     * sameversion is a boolean that stores whterh the client and server are the same version
+     */
+
+    private boolean sameVersion;
+
 
     /**
      * Dictionary stores where all the files are located.
      */
     public Dictionary<String, File> fileLocations = new Hashtable<>();
-    //Each client will keep a dictionary containing where all there files are located
 
-    //Connects to the port
+
 
     /**
      * <p>
@@ -79,6 +83,7 @@ public class Client {
             outText = new PrintWriter(clientSocket.getOutputStream(), true);
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
+            sameVersion = versionCheck();
             connected = true;
             clientSocket.setSoTimeout(500);
 
@@ -322,11 +327,34 @@ public class Client {
         return receiveAcknowledgement();
     }
 
+    //Checks with the server that they are the same version
+    //This ensures that the client and server can communicate properly
+    private boolean versionCheck() throws IOException {
+
+        outText.println("VERSIONCHECK");
+
+        outText.println(CLIENTVERSION);
+
+        String ack = receiveAcknowledgement();
+
+       if(ack.equals("SAMEVER")){
+           return true;
+       }
+       else{
+           return false;
+        }
+
+    }
+
+
 
     public boolean isConnected() {
         return connected;
     }
 
-    public String getCurrVersion() {return version;}
+    public String getCurrVersion() {return CLIENTVERSION;}
 
+    public boolean isSameVersion() {
+        return sameVersion;
+    }
 }

@@ -22,8 +22,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class Server {
 
-
-    private static final String version = "Ver 0.45";
+    //Should only be changed in the code
+    private static final String SERVERVERSION = "Ver 0.45";
 
 
         //TODO - Store prehashed user as well for account details
@@ -169,6 +169,10 @@ public class Server {
 
             case "LOGOUT":
                 logout();
+                break;
+
+            case "VERSIONCHECK":
+                versionCheck();
                 break;
 
             default:
@@ -394,6 +398,19 @@ public class Server {
 
     }
 
+    //Checks that the client and server versions are the same
+    private void versionCheck() throws IOException {
 
+        String clientVersion = inText.readLine();
+
+        if(clientVersion.equals(SERVERVERSION)){
+            sendResponse("SAMEVER", true);
+        }
+        else{
+            sendResponse("DIFFVER", true);
+        }
+
+
+    }
 
 }
