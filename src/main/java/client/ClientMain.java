@@ -40,7 +40,6 @@ public class ClientMain {
     public ClientMain() throws IOException, NoSuchAlgorithmException {
 
 
-
         //Creates User then hashes there data
         User testUser = new User("test", "12345");
         testUser.hashUserInfo();
