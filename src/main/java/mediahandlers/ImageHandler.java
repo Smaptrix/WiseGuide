@@ -18,28 +18,17 @@ public class ImageHandler extends MediaHandler{
         setFilePath(filePath);
         this.desiredView = desiredView;
 
-
-
-
     }
-
-
 
 
     //Gets the image from the given filepath
     private void imageFromFile(){
       currImage = new Image(filePath.toURI().toString());
-
-
-
     }
 
     //Places the image into the desired image view
     private void intoImgView(){
-
         desiredView.setImage(currImage);
-
-
     }
 
     //Loads the desired image into the image view required
