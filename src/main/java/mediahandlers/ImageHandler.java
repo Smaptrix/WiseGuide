@@ -19,6 +19,8 @@ public class ImageHandler extends MediaHandler{
         this.desiredView = desiredView;
 
 
+
+
     }
 
 
@@ -41,11 +43,12 @@ public class ImageHandler extends MediaHandler{
     }
 
     //Loads the desired image into the image view required
-    public void load(){
+    public void load(int height, int width){
         imageFromFile();
         intoImgView();
 
-        desiredView.setVisible(true);
+        desiredView.setFitHeight(height);
+        desiredView.setFitWidth(width);
 
         System.out.println(currImage);
     }
