@@ -11,24 +11,51 @@ public class ImageHandler extends MediaHandler{
 
 
     Image currImage;
+    ImageView desiredView;
+
+
+    public ImageHandler(File filePath, ImageView desiredView){
+        setFilePath(filePath);
+        this.desiredView = desiredView;
+
+
+    }
+
+
+
 
     //Gets the image from the given filepath
-    public void imageFromFile(){
-
-      File imgFile = new File(filePath);
-
-      currImage = new Image(imgFile.toURI().toString());
+    private void imageFromFile(){
+      currImage = new Image(filePath.toURI().toString());
 
 
 
     }
 
     //Places the image into the desired image view
-    public void intoImgView(ImageView imageView){
+    private void intoImgView(){
 
-        imageView.setImage(currImage);
+        desiredView.setImage(currImage);
 
 
     }
 
+    //Loads the desired image into the image view required
+    public void load(){
+        imageFromFile();
+        intoImgView();
+
+        desiredView.setVisible(true);
+
+        System.out.println(currImage);
+    }
+
+
+    public Image getCurrImage() {
+        return currImage;
+    }
+
+    public ImageView getDesiredView() {
+        return desiredView;
+    }
 }

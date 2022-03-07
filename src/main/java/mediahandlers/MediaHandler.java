@@ -8,12 +8,14 @@
 
 package mediahandlers;
 
+import java.io.File;
+
 public abstract class MediaHandler {
 
 
-    String filePath;
+    File filePath;
 
-    public void getFilePath(String filePath){
+    public void setFilePath(File filePath){
 
         this.filePath = filePath;
 
