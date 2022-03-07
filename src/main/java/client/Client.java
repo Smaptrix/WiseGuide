@@ -26,7 +26,9 @@ import java.util.Hashtable;
  */
 public class Client {
 
-    //Should only be changed within the code!
+    /**
+     * CLIENTVERSION is the current version of the client
+     */
     private static final String CLIENTVERSION = "Ver 0.45";
 
     /**
@@ -137,7 +139,7 @@ public class Client {
      * </p>
      * @param msg The message to send to the server.
      * @return The message returned by the server.
-     * @throws IOException Throws an IOException if
+     * @throws IOException
      */
     public String echoMessage(String msg) throws IOException {
 
@@ -155,9 +157,14 @@ public class Client {
 
     }
 
-    //Requests a file from the server
-    //The client should request specific files from the server, so we should know the name of the files
-    //The filenames should be stored in the XML
+    /**
+     * <p>
+     *     Requests a file from the server for transfer and download
+     * </p>
+     * @param fileName the name of the file the client wants to download
+     * @return The bytes sent by the server
+     * @throws IOException if
+     */
     public File requestFile(String fileName) throws IOException {
 
         System.out.println("GET REQUEST: " + fileName);
@@ -200,7 +207,14 @@ public class Client {
         return BytesToFile(data, fileName, dataType);
     }
 
-    //Reads the bytes for the file from the inputStream
+
+    /**
+     * <p>
+     * Reads a specific amount of bytes from the inputStream
+     * </p>
+     * @param bytesToRead the number of bytes to read from the inputStream
+     * @return a byte array of data read from the input stream
+     */
     public byte[] readBytes(int bytesToRead) {
 
         //Initialises a new byte array of size predetermined by our network protocol
@@ -233,7 +247,17 @@ public class Client {
         return data;
     }
 
-    //Turns the raw bytes into a file and saves it in the default temp folder on the system
+
+    /**
+     * <p>
+     * Reconstructs a raw byte array to a file and saves it in the temp folder
+     * </p>
+     * @param data the raw byte array
+     * @param fileName the name of the requested file to construct
+     * @param fileType the type of the requested file
+     * @return the filepath of the downlaoded file
+     * @throws IOException if
+     */
     public File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
 
         //Creates a new temp file - Identifiable by custom prefix
@@ -259,7 +283,14 @@ public class Client {
     }
 
 
-    //Attempts to log in with the given user data
+    /**
+     * <p>
+     * Makes an attempt to login to the server with the provided user data
+     * </p>
+     * @param currUser The user attempting to login
+     * @return the acknowledgement to the request from the server
+     * @throws IOException if
+     */
     public String requestLogin(User currUser) throws IOException {
         outText.println("LOGIN");
 
@@ -275,7 +306,13 @@ public class Client {
     }
 
 
-    //Receive a verification message from the server
+    /**
+     * <p>
+     * Recieves a one line acknowledgement from the server
+     * </p>
+     * @return the acknowledgement in string form
+     * @throws IOException if
+     */
     public String receiveAcknowledgement() throws IOException {
 
         int fileSize = inputStream.read();
@@ -288,10 +325,18 @@ public class Client {
     }
 
 
-    //TODO - possible refactor of user functions into single function?
+    //TODO - possible refactor of user functions into single function? ~ eh maybe
 
 
-    //Asks the server to verify if a user exists and if their password is correct
+    /**
+     * <p>
+     * Asks the user to verify if the users information is correct
+     * Differs to a login
+     * </p>
+     * @param currUser the current user that you want the server to verify
+     * @return the verification status from the server
+     * @throws IOException if
+     */
     public String verifyUser(User currUser) throws IOException {
         outText.println("VERIFYUSER");
 
@@ -304,7 +349,14 @@ public class Client {
     }
 
 
-    //Requests the server to create and add a user to the database
+    /**
+     * <p>
+     * Requests the user to create a user with the provided information
+     * </p>
+     * @param currUser the user that the client wants the server to create
+     * @return the status of the user creation
+     * @throws IOException if
+     */
     public String createUser(User currUser) throws IOException {
 
         outText.println("CREATEUSER");
@@ -318,7 +370,13 @@ public class Client {
     }
 
 
-    //Attempts to log out of the server
+    /**
+     * <p>
+     * Requests that the server logs the current user out
+     * </p>
+     * @return the logout state of the server
+     * @throws IOException if
+     */
     public String requestLogout() throws IOException {
 
         outText.println("LOGOUT");
@@ -327,8 +385,13 @@ public class Client {
         return receiveAcknowledgement();
     }
 
-    //Checks with the server that they are the same version
-    //This ensures that the client and server can communicate properly
+    /**
+     * <p>
+     * Requests the server to check the versions of the client/server pair against eachother
+     * </p>
+     * @return the versionCheck response from the server
+     * @throws IOException if
+     */
     private boolean versionCheck() throws IOException {
 
         outText.println("VERSIONCHECK");
@@ -347,13 +410,24 @@ public class Client {
     }
 
 
-
+    /**
+     *
+     * @return The connection status to the server
+     */
     public boolean isConnected() {
         return connected;
     }
 
+    /**
+     *
+     * @return The current version of the client
+     */
     public String getCurrVersion() {return CLIENTVERSION;}
 
+    /**
+     *
+     * @return the boolean of whether the server/client pair are the same version
+     */
     public boolean isSameVersion() {
         return sameVersion;
     }
