@@ -52,6 +52,9 @@ public class MainController {
     VBox mainWindow;
 
     @FXML
+    MenuItem aboutButton;
+
+    @FXML
     public void initialize(){
 
 
@@ -108,6 +111,27 @@ public class MainController {
         Stage currStage = (Stage) mainWindow.getScene().getWindow();
         currStage.close();
 
+    }
+
+    @FXML
+    protected void onAboutButtonPress() throws IOException {
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("about-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 300);
+        Stage stage = new Stage();
+
+        AboutController controller = fxmlLoader.getController();
+
+
+        controller.setVerNum(client.getCurrVersion());
+
+
+        System.out.println("Opening about page");
+
+        stage.setTitle("WiseGuide by Maptrix - V1.0.0");
+        stage.setScene(scene);
+        stage.show();
     }
 
 

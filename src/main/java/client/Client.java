@@ -27,6 +27,9 @@ import java.util.Hashtable;
  */
 public class Client {
 
+    //Should only be changed within the code!
+    private static final String version = "Ver 0.45";
+
     /**
      * clientSocket is the client side socket.
      */
@@ -119,10 +122,7 @@ public class Client {
         byte[] data = readBytes(stringSize);
 
 
-        String result = new String(data, StandardCharsets.UTF_8);
-
-
-        return result;
+        return new String(data, StandardCharsets.UTF_8);
     }
 
 
@@ -146,10 +146,7 @@ public class Client {
         byte[] data = readBytes(fileSize);
 
 
-        String result = new String(data, StandardCharsets.UTF_8);
-
-
-        return result;
+        return new String(data, StandardCharsets.UTF_8);
 
     }
 
@@ -267,10 +264,8 @@ public class Client {
 
         outText.println(currUser.getPassword());
 
-        String ack = receiveAcknowledgement();
 
-
-        return ack;
+        return receiveAcknowledgement();
 
     }
 
@@ -284,10 +279,7 @@ public class Client {
         byte[] data = readBytes(fileSize);
 
 
-        String dataString = new String(data, StandardCharsets.UTF_8);
-
-
-        return dataString;
+        return new String(data, StandardCharsets.UTF_8);
     }
 
 
@@ -334,4 +326,7 @@ public class Client {
     public boolean isConnected() {
         return connected;
     }
+
+    public String getCurrVersion() {return version;}
+
 }

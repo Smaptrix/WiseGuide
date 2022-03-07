@@ -46,7 +46,7 @@
                 <MenuItem id="signOutButton" fx:id="signOutButton" mnemonicParsing="false" onAction="#onSignOutButtonClick" text="Sign Out" />
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
-                <MenuItem mnemonicParsing="false" text="About" />
+                <MenuItem id="aboutButton" fx:id="aboutButton" mnemonicParsing="false" onAction="#onAboutButtonPress" text="About" />
             </Menu>
         </MenuBar>
 

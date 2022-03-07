@@ -23,6 +23,9 @@ import java.security.NoSuchAlgorithmException;
 public class Server {
 
 
+    private static final String version = "Ver 0.45";
+
+
         //TODO - Store prehashed user as well for account details
         //     - Do the hashing serverside? (would be a big refactor (incl tests)
 
