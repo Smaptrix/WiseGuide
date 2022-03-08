@@ -26,52 +26,90 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Controls the account creator within the application
+ */
 public class AccountCreationController {
 
-
+    /**
+     * The current client
+     */
     Client client;
 
+    /**
+     * Lets previous controllers set the client so that the client is shared between pages
+     * @param client
+     */
+    /**
+     * Sets the client to be used by the controller
+     * @param client the client you want the controller to use
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /**
+     * The field that the user can type their desired username into
+     */
     @FXML
     TextField userField;
 
+    /**
+     * The field where the user can type their desired password into
+     */
     @FXML
     PasswordField passField;
 
+    /**
+     * The confirmation field for the users desired password
+     */
     @FXML
     PasswordField passConfirmField;
 
+    /**
+     * The label that displays any errors that occur
+     */
     @FXML
     Label errLabel;
 
+    /**
+     * The button the users press when they want to create the account with the desired attributes
+     */
     @FXML
     Button createAccountButton;
 
+    /**
+     * The button the users use to close the account creation confirmation popup
+     */
     @FXML
     Button closePopUpButton;
 
+    /**
+     * The checkbox the users tick to confirm they are over the required age limit
+     */
     @FXML
     CheckBox ageCheckBox;
 
-
+    /**
+     * The link to the companies privacy policy
+     */
     @FXML
     Hyperlink privacyPolicyLink;
 
+    /**
+     * The link to the companies terms and conditions link
+     */
     @FXML
     Hyperlink termsLink;
 
 
-
-
-
-    //TODO - Check that the client is connected to the server
-
+    /**
+     * When the user presses the create account button, this action occurs and requests the server to make the desired account
+     * @throws IOException
+     */
     @FXML
     //Attempts to create account
-    private void createAccountButtonAction() throws NoSuchAlgorithmException, IOException {
+    private void createAccountButtonAction() throws IOException {
         System.out.println("Wanted Username: " + userField.getText());
 
         System.out.println("Password: " + passField.getText());
@@ -136,14 +174,20 @@ public class AccountCreationController {
 
 
     @FXML
-    //Closes popup window
+    /**
+     * When the close popup button is pressed, this action occurs and closes the popup
+     */
     private void closePopupButton(){
         Stage stage = (Stage) closePopUpButton.getScene().getWindow();
         stage.close();
     }
 
 
-    //Both methods below are used to link to company documents that the user is advised to read
+    /**
+     * When the privacy policy link is pressed, this action occurs and opens the default webbrowser and displays the privacy policy
+     * @throws IOException if the default browser cannot be opened
+     * @throws URISyntaxException if the provided uri is invalid
+     */
     @FXML
     private void privacyPolicyLinkAction() throws IOException, URISyntaxException {
 
@@ -151,6 +195,11 @@ public class AccountCreationController {
 
     }
 
+    /**
+     * When the privacy policy link is pressed, this action occurs and opens the default webbrowser and displays the terms and conditions
+     * @throws IOException if the default browser cannot be opened
+     * @throws URISyntaxException if the provided uri is invalid
+     */
     @FXML
     private void termsLinkAction() throws IOException, URISyntaxException {
 
