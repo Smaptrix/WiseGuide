@@ -48,11 +48,15 @@ public class LoginController {
 
     @FXML
     //Always called by the FXML Loader
-    public void initialize() throws IOException {
+    public void initialize() {
+
+    }
+
+
+    public void initialConnection() throws IOException {
+
         client = new Client(); // Creates new instance of client object
-        client.startConnection("127.0.0.1", 5555); // Pressing "Hello" button starts the client
-
-
+        client.startConnection("127.0.0.1", 5555);
 
     }
 

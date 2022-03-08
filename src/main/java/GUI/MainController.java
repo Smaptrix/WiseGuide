@@ -99,12 +99,16 @@ public class MainController {
 
         //Reopens the login page
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("login-page.fxml"));
+
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+
+        System.out.println("Loaded login page again");
+
         LoginController controller = fxmlLoader.getController();
         controller.setClient(client);
         stage.setScene(scene);
-        stage.setTitle("Account Creation");
+        stage.setTitle("Welcome to WiseGuide");
         stage.show();
 
 

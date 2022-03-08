@@ -320,8 +320,11 @@ public class Client {
 
         byte[] data = readBytes(fileSize);
 
+        String ack = new String(data, StandardCharsets.UTF_8);
 
-        return new String(data, StandardCharsets.UTF_8);
+        System.out.println(ack);
+
+        return ack;
     }
 
 

@@ -20,6 +20,12 @@ import java.io.IOException;
                 Scene scene = new Scene(fxmlLoader.load(), 640, 400);
                 stage.setTitle("Login");
                 stage.setScene(scene);
+
+                LoginController controller = fxmlLoader.getController();
+
+                //Does the first initial connection to the server
+                controller.initialConnection();
+
                 stage.show();
             }
 
