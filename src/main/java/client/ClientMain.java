@@ -15,6 +15,9 @@ import java.net.SocketException;
 import java.security.NoSuchAlgorithmException;
 
 
+/**
+ * Legacy Class used for testing pre-GUI
+ */
 public class ClientMain {
 
     //For now the server is hosted locally

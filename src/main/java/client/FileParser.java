@@ -16,6 +16,9 @@ import java.util.Scanner;
 
 //After a received file is reconstructed by the client, it will be parsed by this
 
+/**
+ * Defunct class - not entirely sure why we made it now lol
+ */
 public class FileParser {
 
     private Path filePath;
