@@ -14,10 +14,7 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 
 // TODO- Consider encryption rather than hashing so that we cna decrypt all of the information (Research as well)
@@ -65,7 +62,7 @@ public class Client {
     /**
      * Dictionary stores where all the files are located.
      */
-    public Dictionary<String, File> fileLocations = new Hashtable<>();
+    public Map<String, File> fileLocations = new HashMap<>();
 
 
 
@@ -158,6 +155,10 @@ public class Client {
         return new String(data, StandardCharsets.UTF_8);
 
     }
+
+
+    //TODO - Check to see if a file has already been downloaded
+
 
     /**
      * <p>
@@ -462,4 +463,8 @@ public class Client {
     public boolean isSameVersion() {
         return sameVersion;
     }
+
+
+
+
 }

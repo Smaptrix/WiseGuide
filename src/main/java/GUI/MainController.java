@@ -35,6 +35,8 @@ public class MainController {
 
     private User currUser;
 
+
+
     public void setClient(Client client) {
         this.client = client;
     }
@@ -42,6 +44,8 @@ public class MainController {
     public void setUser(User currUser) {
         this.currUser = currUser;
     }
+
+
 
 
 
