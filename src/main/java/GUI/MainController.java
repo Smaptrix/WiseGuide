@@ -111,9 +111,9 @@ public class MainController {
     protected void onCloseButtonClick() throws IOException {
         // TODO: @Joe we need to look at this, give me a massive error for some reason but is happy to just close the program
         //Doesn't try to close a connection that isn't there
-        //if(client.isConnected()) {
-        //    client.closeConnection(); // Closes client connection safely.
-        //}
+        if(client.isConnected()) {
+           client.closeConnection(); // Closes client connection safely.
+        }
             System.exit(0);
           //Platform.exit();
     }
