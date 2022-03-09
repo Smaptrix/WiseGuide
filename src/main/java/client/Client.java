@@ -174,40 +174,48 @@ public class Client {
 
         outText.println("GET " + fileName);
 
-        //Tells us how many bytes are telling us how big the file is
-        int numOfFileSizeBytes = inputStream.read();
-
-        System.out.println("We have " + numOfFileSizeBytes + " file size bytes to read");
-
-        //Reads the next set amount of bytes to decode the file size
-        byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
-
-        for (int i = 0; i < numOfFileSizeBytes; i++) {
-            bytesToReadBytes[i] = (byte) inputStream.read();
+        //Checks to see if a file has already been downloaded
+        //This is so that the same file is not downloaded twice
+        if(fileLocations.containsKey(fileName)){
+            System.out.println("File is already downloaded");
+            return null;
         }
+        else {
+            //Tells us how many bytes are telling us how big the file is
+            int numOfFileSizeBytes = inputStream.read();
 
-        int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
+            System.out.println("We have " + numOfFileSizeBytes + " file size bytes to read");
+
+            //Reads the next set amount of bytes to decode the file size
+            byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
+
+            for (int i = 0; i < numOfFileSizeBytes; i++) {
+                bytesToReadBytes[i] = (byte) inputStream.read();
+            }
+
+            int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
 
 
-        //Magic number 3 - because we know that the file extension is only going to be three letters
-        byte[] DataTypeBytes = new byte[3];
+            //Magic number 3 - because we know that the file extension is only going to be three letters
+            byte[] DataTypeBytes = new byte[3];
 
-        for (int i = 0; i < 3; i++) {
-            DataTypeBytes[i] = (byte) inputStream.read();
+            for (int i = 0; i < 3; i++) {
+                DataTypeBytes[i] = (byte) inputStream.read();
+            }
+
+            String dataType = new String(DataTypeBytes, StandardCharsets.UTF_8);
+
+            System.out.println(dataType);
+
+
+            byte[] data = readBytes(bytesToRead);
+
+
+            System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
+
+            //Once we have the array of bytes, we then reconstruct that into the actual file.
+            return BytesToFile(data, fileName, dataType);
         }
-
-        String dataType = new String(DataTypeBytes, StandardCharsets.UTF_8);
-
-        System.out.println(dataType);
-
-
-        byte[] data = readBytes(bytesToRead);
-
-
-        System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
-
-        //Once we have the array of bytes, we then reconstruct that into the actual file.
-        return BytesToFile(data, fileName, dataType);
     }
 
 
@@ -406,12 +414,7 @@ public class Client {
 
         String ack = receiveAcknowledgement();
 
-       if(ack.equals("SAMEVER")){
-           return true;
-       }
-       else{
-           return false;
-        }
+        return ack.equals("SAMEVER");
 
     }
 
@@ -424,8 +427,8 @@ public class Client {
         List<String> VenueTypes = Arrays.asList("Bars.txt", "Cafes.txt", "Clubs.txt", "FastFood.txt", "Pubs.txt", "Restaurants.txt");
 
         //Requests a file containing the list of every venue contained within the venue types
-        for (int i=0; i < VenueTypes.size(); i++){
-            requestFile("VenueLists/" + VenueTypes.get(i));
+        for (String venueType : VenueTypes) {
+            requestFile("VenueLists/" + venueType);
         }
 
     }
