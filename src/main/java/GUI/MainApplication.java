@@ -42,7 +42,7 @@ public class MainApplication extends Application {
         controller.setClient(client);
         controller.setUser(currUser);
 
-        stage.setTitle("WiseGuide by Maptrix - V1.0.0");
+        stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
         stage.show();
 

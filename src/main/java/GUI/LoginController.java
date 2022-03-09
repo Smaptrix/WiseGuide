@@ -119,17 +119,9 @@ public class LoginController {
 
 
            if(loginCode.equals("BADLOGIN")){
+               errorLabel.setText("Unrecognised user details");
 
-               String verifyCode = client.verifyUser(currUser);
-
-               if (verifyCode.equals("USERNOTFOUND")) {
-                    errorLabel.setText("User does not exist!");
-                }
-                else if (verifyCode.equals("BADPASS")) {
-                    errorLabel.setText("Incorrect Password!");
-
-
-            } }
+            }
 
            //If not BADLOGIN assume GOODLOGIN
            else {

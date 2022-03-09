@@ -133,7 +133,7 @@ public class MainController {
 
         System.out.println("Opening about page");
 
-        stage.setTitle("WiseGuide by Maptrix - V1.0.0");
+        stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
         stage.show();
     }
