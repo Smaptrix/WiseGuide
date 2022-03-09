@@ -15,12 +15,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class MainController {
 
@@ -55,7 +61,11 @@ public class MainController {
     MenuItem aboutButton;
 
     @FXML
-    public void initialize(){
+    ListView venueList;
+
+
+    @FXML
+    public void initialize() {
 
 
 
@@ -137,6 +147,31 @@ public class MainController {
         stage.setScene(scene);
         stage.show();
     }
+
+
+    /**
+     * Loads the list of venues into the listview on the main application
+     */
+    protected void loadListOfVenues() {
+
+
+
+    try{
+        client.requestVenueList();
+    }catch(IOException e){
+        System.out.print("Failed to download venue lists");
+    }
+
+
+
+
+
+
+
+    }
+
+
+
 
 
 

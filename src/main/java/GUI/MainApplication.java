@@ -35,12 +35,15 @@ public class MainApplication extends Application {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("welcomeScreen.fxml"));
+
+
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
 
         MainController controller = fxmlLoader.getController();
-
         controller.setClient(client);
         controller.setUser(currUser);
+
+        controller.loadListOfVenues();
 
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);

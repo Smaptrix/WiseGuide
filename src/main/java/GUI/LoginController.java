@@ -127,14 +127,19 @@ public class LoginController {
            else {
                 errorLabel.setText("");
 
+
+
                Stage currStage = (Stage) loginButton.getScene().getWindow();
                currStage.close();
 
 
-                //Opens the main application once you have logged in
-                MainApplication app = new MainApplication();
-                Stage mainStage = new Stage();
-                app.transferInfoAndOpen(mainStage, client, currUser);
+               //Opens the main application once you have logged in
+               MainApplication app = new MainApplication();
+               Stage mainStage = new Stage();
+               app.transferInfoAndOpen(mainStage, client, currUser);
+
+
+
 
             }
         }

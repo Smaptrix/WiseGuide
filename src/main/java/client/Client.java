@@ -14,8 +14,10 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.List;
 
 
 // TODO- Consider encryption rather than hashing so that we cna decrypt all of the information (Research as well)
@@ -411,6 +413,22 @@ public class Client {
         }
 
     }
+
+    /**
+     * Requests the files from the server containing the list of the venues
+     */
+    public void requestVenueList() throws IOException {
+
+        //Provides the client  with the types of venues it will have to request to download
+        List<String> VenueTypes = Arrays.asList("Bars.txt", "Cafes.txt", "Clubs.txt", "FastFood.txt", "Pubs.txt", "Restaurants.txt");
+
+        //Requests a file containing the list of every venue contained within the venue types
+        for (int i=0; i < VenueTypes.size(); i++){
+            requestFile("VenueLists/" + VenueTypes.get(i));
+        }
+
+    }
+
 
 
     /**
