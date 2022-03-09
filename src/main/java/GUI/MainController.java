@@ -21,8 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -154,14 +153,34 @@ public class MainController {
      */
     protected void loadListOfVenues() {
 
-
-
+    //Tries to download the venue lists from the server
     try{
-        client.requestVenueList();
+        client.requestVenueLists();
     }catch(IOException e){
         System.out.print("Failed to download venue lists");
     }
 
+    //Provides the controller with the list of venue types it should expect
+    List<String> VenueTypes = Arrays.asList("Bars.txt", "Cafes.txt", "Clubs.txt", "FastFood.txt", "Pubs.txt", "Restaurants.txt");
+
+    //Iterates through every venue type and acquires the relevant text file containing the venues
+    for(int i = 0; i < VenueTypes.size(); i++){
+
+            File currFile = client.getFile("VenueLists/" + VenueTypes.get(i));
+
+            //Iterates through every line in the file and adds it to the listview
+            try(BufferedReader br = new BufferedReader(new FileReader(currFile))){
+                String line;
+                while((line = br.readLine()) != null) {
+                    venueList.getItems().add(line);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
 
 
 

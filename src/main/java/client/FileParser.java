@@ -7,6 +7,7 @@
  */
 
 package client;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -21,14 +22,14 @@ import java.util.Scanner;
  */
 public class FileParser {
 
-    private Path filePath;
+    private File currFile;
     private static Charset ENCODING = StandardCharsets.UTF_8;
 
 
     //Uses a scanner to read the file line by line
     public void processFile(String FileType) throws IOException {
 
-        try(Scanner scanner = new Scanner(filePath, ENCODING.name())){
+        try(Scanner scanner = new Scanner(currFile, ENCODING.name())){
 
             //If the file is a text file we want to print its contents
             if(FileType.equals("Txt")) {

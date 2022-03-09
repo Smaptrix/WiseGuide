@@ -417,7 +417,7 @@ public class Client {
     /**
      * Requests the files from the server containing the list of the venues
      */
-    public void requestVenueList() throws IOException {
+    public void requestVenueLists() throws IOException {
 
         //Provides the client  with the types of venues it will have to request to download
         List<String> VenueTypes = Arrays.asList("Bars.txt", "Cafes.txt", "Clubs.txt", "FastFood.txt", "Pubs.txt", "Restaurants.txt");
@@ -426,6 +426,16 @@ public class Client {
         for (int i=0; i < VenueTypes.size(); i++){
             requestFile("VenueLists/" + VenueTypes.get(i));
         }
+
+    }
+
+
+    public File getFile(String fileName){
+
+
+        //System.out.println("File requested: " + fileName);
+
+        return fileLocations.get(fileName);
 
     }
 
