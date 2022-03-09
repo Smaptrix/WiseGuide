@@ -22,4 +22,6 @@ public class AccountDetailsController {
     public void setClient(Client client) {
         this.client = client;
     }
+
+
 }

@@ -11,12 +11,14 @@ package GUI;
 import client.Client;
 import javafx.application.Platform;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
@@ -65,6 +67,36 @@ public class MainController {
 
     @FXML
     public void initialize() {
+
+        //Defines what happens when you double click a venue in the venue list
+        venueList.setOnMouseClicked(click -> {
+
+            if (click.getClickCount() == 2) {
+                //Use ListView's getSelected Item
+                Object currentItemSelected = venueList.getSelectionModel()
+                        .getSelectedItem();
+
+
+                //Opens the generic venue page with the current venue selected which is used to populate the venue information
+                FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
+                Stage stage = new Stage();
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load(), 420, 240);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                VenueDetailsController controller = fxmlLoader.getController();
+                controller.setClient(client);
+                controller.setCurrVenue((String) currentItemSelected);
+                stage.setScene(scene);
+                stage.setTitle((String) currentItemSelected);
+                stage.show();
+
+            }
+        });
+
+
 
 
 
