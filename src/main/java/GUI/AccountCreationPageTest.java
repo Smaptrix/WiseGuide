@@ -25,7 +25,7 @@ import java.util.concurrent.TimeoutException;
 
 public class AccountCreationPageTest extends ApplicationTest {
 
-    /* ===== UNIT TESTS for Account Creation Page ===== */
+    /* ===== Tests for Account Creation Page ===== */
 
     private AccountCreationController controller; //Reference to controller so that CheckBox can be interacted with directly.
 
@@ -51,7 +51,7 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
 
-    //Enter text in username field
+    //Unit Test | Confirm text can be entered in username field.
     @Test
     public void enterCreateUsernameTest(){
         sleep(1000);
@@ -61,9 +61,9 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
 
-    //Enter text in password field
+    //Unit Test | Confirm text can be entered in password field.
     @Test
-    public void enterCreatePasswordTest(){
+    public void enterPasswordTest(){
         sleep(1000);
         clickOn("#passField");
         write("password");
@@ -71,22 +71,27 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
 
-    //Enter text in confirm password field
+    //Unit Test | Confirm text can be entered in confirm password field.
     @Test
-    public void enterCreateConfirmPasswordTest(){
+    public void enterConfirmPasswordTest(){
         sleep(1000);
         clickOn("#passConfirmField");
         write("password");
         FxAssert.verifyThat("#passConfirmField", TextInputControlMatchers.hasText("password"));
     }
 
-    //Click Age 13 Box
-    //This is an absolutely scuffed way of doing this. TestFX's clickOn(checkbox) does not work so I have
-    //instead attempted to click where the checkbox should be relative to the centre of the screen.
+    //Unit Test | Confirm checkbox can be clicked.
+
+    //There is an issue with JavaFX(?) where only the upper half of the checkbox can be clicked. This means
+    //that TestFX's robot, which clicks the dead centre, does not cause the box to be registered as clicked.
+    //This was an attempt at clicking, on screen, where the box should be but it only works for AC's specific
+    //screen size/resolution.
+    //A better workaround could possibly be investigated but it is not a priority right now. Otherwise, simply
+    //manually test with a user that the box can be clicked.
     //TODO: Currently only works on AC's screen size/resolution...
-    //TODO: The relative checkbox position is not the same as when running integration tests. Investigate why.
+    //TODO: The relative checkbox position is not the same as when running the full integration tests with the main screen. Investigate why.
     @Test
-    public void clickCreateCheckboxTest(){
+    public void clickCheckboxTest(){
         sleep(1000);
         //clickOn("#ageCheckBox");
         Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -94,7 +99,7 @@ public class AccountCreationPageTest extends ApplicationTest {
         Assert.assertTrue(controller.ageCheckBox.isSelected());
     }
 
-    //Click Create Account Button
+    //Unit Test | Confirm "Create Account" Button can be pressed.
     @Test
     public void createAccountButtonTest(){
         sleep(1000);
@@ -102,7 +107,7 @@ public class AccountCreationPageTest extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //Account Creation | Open Privacy Policy/T&C | Unit Test
+    //Unit Test | Confirm Privacy Policy/T&C links work.
     //StackOverflow says this isn't possible to test.
     //https://stackoverflow.com/questions/13085791/possible-to-check-if-a-website-is-open-in-browser-from-java?rq=1
 

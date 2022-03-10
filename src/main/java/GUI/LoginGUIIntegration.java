@@ -46,6 +46,7 @@ public class LoginGUIIntegration extends ApplicationTest {
 
         //Creates a testing user if one does not already exist.
         //TODO: Ideally this should be hard-coded into the user database and not created here.
+        //TODO: Remove this when a test user is hard-coded into database.
         User testingUser = new User("testUser","testPassword");
         testingUser.hashUserInfo();
         ServerUserHandler desiredUser = new ServerUserHandler(testingUser, true);
@@ -70,7 +71,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         //TODO: IntTestUser should be deleted from database after the test, otherwise test will only work once!
     }
 
-    //Login real user, real password
+    //Integration Test | Confirm user can login with real username and password by clicking "Login" after entering them.
     @Test
     public void realLoginTest(){
         sleep(1000);
@@ -83,7 +84,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat(window("WiseGuide by Maptrix - V1.0.0"), WindowMatchers.isShowing());
     }
 
-    //Login real user, incorrect password
+    //Integration Test | Confirm user cannot login if they have entered a real username but incorrect password.
     @Test
     public void realUserWrongPassTest(){
         sleep(1000);
@@ -95,7 +96,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Incorrect Password!"));
     }
 
-    //Login user that does not exist
+    //Integration Test | Confirm user cannot login if they have entered an incorrect username and password.
     //TODO: Account creation should forbid the creation of an account with this username so that this test never breaks.
     @Test
     public void fakeUserWrongPassTest(){
@@ -108,9 +109,11 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("User does not exist!"));
     }
 
-    //Create New User Test
+    //Integration Test | Confirm that a new user can be created by entering unique username, acceptable password,
+    //and by checking the checkbox.
+
     //TODO: Account creation should forbid the username IntTestUser to prevent this test from breaking.
-    //TODO: Currently only works for AC's screen size/resolution...
+    //TODO: Currently only works for AC's screen size/resolution due to checkbox issue (see clickCheckboxTest)
     //In theory this test should be enough to confirm a user exists, as if the closePopupButton
     //exists then that implies the account creation process was successful.
     @Test
@@ -131,7 +134,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         //TODO: Verify user exists in database...? Maybe not necessary?
     }
 
-    //Create Existing User Attempt
+    //Integration Test | Confirm a user cannot be created if the username is taken.
     @Test
     public void createExistingUser(){
         sleep(1000);
@@ -150,7 +153,7 @@ public class LoginGUIIntegration extends ApplicationTest {
     }
 
 
-    //Create User Attempt - Don't check 13 box
+    //Integration Test | Confirm a user cannot be created if the checkbox is left unchecked.
     @Test
     public void createUserWithoutCheckboxTest(){
         sleep(1000);
@@ -165,7 +168,12 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You are not over the age of 13!"));
     }
 
-    //Create Blank User Attempt
+    //Integration Test | Confirm a user cannot be created if all fields are left blank.
+    /*
+    USER: N
+    PASS: N
+    CONF: N
+     */
     @Test
     public void createBlankUserTest(){
         sleep(1000);
@@ -174,7 +182,12 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //Create User Attempt - Username Only
+    //Integration Test | Confirm a user cannot be created if a username is entered without a password or password confirmation.
+    /*
+    USER: Y
+    PASS: N
+    CONF: N
+     */
     @Test
     public void createUserUsernameOnlyTest(){
         sleep(1000);
@@ -185,7 +198,12 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a password!"));
     }
 
-    //Create User Attempt - Password Only
+    //Integration Test | Confirm a user cannot be created if a password is entered without a username or password confirmation.
+    /*
+    USER: N
+    PASS: Y
+    CONF: N
+     */
     @Test
     public void createUserPasswordOnlyTest(){
         sleep(1000);
@@ -196,7 +214,12 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
-    //Create User Attempt - Confirm Password Only
+    //Integration Test | Confirm a user cannot be created if the password confirmation is entered without a username or password.
+    /*
+    USER: N
+    PASS: N
+    CONF: Y
+     */
     @Test
     public void createUserConfirmPasswordOnlyTest(){
         sleep(1000);
@@ -207,7 +230,12 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
-    //Create User Attempt - Username & Pass Only
+    //Integration Test | Confirm a user cannot be created if a username and password are entered but the password is not confirmed.
+    /*
+    USER: Y
+    PASS: Y
+    CONF: N
+     */
     @Test
     public void createUserUsernameAndPasswordOnlyTest(){
         sleep(1000);
@@ -220,7 +248,12 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
-    //Create User Attempt - Username & Confirm Only
+    //Integration Test | Confirm a user cannot be created if a username and password confirmation are entered without a password.
+    /*
+    USER: Y
+    PASS: N
+    CONF: Y
+     */
     @Test
     public void createUserUsernameAndConfirmOnlyTest(){
         sleep(1000);
@@ -233,7 +266,12 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
-    //Create User Attempt - Pass & Confirm Only
+    //Integration Test | Confirm a user cannot be created if a password and confirmation are entered without a username.
+    /*
+    USER: N
+    PASS: Y
+    CONF: Y
+     */
     @Test
     public void createUserPasswordAndConfirmOnlyTest(){
         sleep(1000);
@@ -246,7 +284,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //Create User Attempt - Mismatched Passwords
+    //Integration Test | Confirm a user cannot be created if a username is entered but the passwords do not match.
     @Test
     public void createUserMismatchedPasswordsTest(){
         sleep(1000);

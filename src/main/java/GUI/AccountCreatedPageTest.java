@@ -21,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 
 public class AccountCreatedPageTest extends ApplicationTest {
 
-    /* ===== UNIT Test for Account Created Page ===== */
+    /* ===== Tests for Account Created Page ===== */
 
     private Stage stage; //Reference to JavaFX stage so that window showing status can be checked.
 
@@ -46,7 +46,7 @@ public class AccountCreatedPageTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
-    //"Okay" Button Test
+    //Unit Test | Confirm "Okay" Button can be pressed.
     @Test
     public void okayButtonTest(){
         sleep(1000);

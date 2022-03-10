@@ -30,6 +30,8 @@ import java.util.concurrent.TimeoutException;
 
 public class LoginApplicationTest extends ApplicationTest {
 
+    /* ===== Tests for Main Login Screen ===== */
+
     private Stage stage;
 
     @Override
@@ -43,24 +45,18 @@ public class LoginApplicationTest extends ApplicationTest {
 
     @Before
     public void setUpClass() throws Exception {
-
-        //TODO: CREATE TESTING USER
-
     }
 
     @After
     public void afterEachTest() throws TimeoutException {
-
-        //TODO: DELETE TESTING USER
-
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();
     }
 
-    /* ===== UNIT TESTS for Main Login Screen ===== */
 
-    //Click Login Button
+
+    //Unit Test | Confirm "Login" button can be pressed.
     @Test
     public void clickOnLoginTest() {
         sleep(1000);
@@ -68,7 +64,7 @@ public class LoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //Click Exit Button
+    //Unit Test | Confirm "Exit" button can be pressed.
     @Test
     public void clickOnExit() {
         sleep(1000);
@@ -76,7 +72,7 @@ public class LoginApplicationTest extends ApplicationTest {
         Assert.assertFalse(stage.isShowing());
     }
 
-    //Click Create Account Button
+    //Unit Test | Confirm "Create Account" Button can be pressed.
     @Test
     public void clickOnCreateAccountTest(){
         sleep(1000);
@@ -84,7 +80,7 @@ public class LoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat(window("Account Creation"), WindowMatchers.isShowing());
     }
 
-    //Enter text in username field
+    //Unit Test | Confirm text can be entered in username field.
     @Test
     public void enterMainScreenUsernameTest(){
         sleep(1000);
@@ -95,7 +91,7 @@ public class LoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#usernameTextField", TextInputControlMatchers.hasText("Test"));
     }
 
-    //Enter text in password field
+    //Unit Test | Confirm text can be entered in password field.
     @Test
     public void enterMainScreenPasswordTest(){
         sleep(1000);
@@ -104,5 +100,12 @@ public class LoginApplicationTest extends ApplicationTest {
         write("password");
         sleep(1000);
         FxAssert.verifyThat("#userPassField", TextInputControlMatchers.hasText("password"));
+    }
+
+    //Unit Test | Confirm that error label is not visible by default.
+    @Test
+    public void errorLabelInvisibleTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(""));
     }
 }
