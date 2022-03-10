@@ -1,7 +1,6 @@
 package VenueXMLThings;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,12 +16,11 @@ public class VenueXMLParser {
     public Element root = null;
     public int numberOfPages;
 
-    //constructor, takes filepath of xml file and returns VenueXMLParser class
-    public VenueXMLParser(Path filePath) {
+    //constructor, takes xml file and returns VenueXMLParser class
+    public VenueXMLParser(File inputFile) {
 
         try {
 
-            File inputFile = new File(filePath.toString());
 
             //Parsing XML File
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -35,7 +33,7 @@ public class VenueXMLParser {
 
         } catch (Exception e) {
 
-            System.out.println("Unable to make tree of XML file at path: '" + filePath + "'.");
+            System.out.println("Unable to make tree of XML file at path: '" + inputFile + "'.");
 
         }
     }
