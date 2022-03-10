@@ -421,15 +421,10 @@ public class Client {
     /**
      * Requests the files from the server containing the list of the venues
      */
-    public void requestVenueLists() throws IOException {
+    public void requestVenueXMLFile() throws IOException {
 
-        //Provides the client  with the types of venues it will have to request to download
-        List<String> VenueTypes = Arrays.asList("Bars.txt", "Cafes.txt", "Clubs.txt", "FastFood.txt", "Pubs.txt", "Restaurants.txt");
-
-        //Requests a file containing the list of every venue contained within the venue types
-        for (String venueType : VenueTypes) {
-            requestFile("VenueLists/" + venueType);
-        }
+       //Requests a file containing the list of every venue contained within the venue types
+        requestFile("venuesLocation.xml");
 
     }
 
