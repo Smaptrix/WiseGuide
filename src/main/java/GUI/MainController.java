@@ -91,6 +91,12 @@ public class MainController {
                 VenueDetailsController controller = fxmlLoader.getController();
                 controller.setClient(client);
                 controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected));
+                try {
+                    controller.loadVenueData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Failed to get venue data");
+                }
                 stage.setScene(scene);
                 stage.setTitle((String) currentItemSelected);
                 stage.show();

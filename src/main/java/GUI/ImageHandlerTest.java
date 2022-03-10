@@ -24,12 +24,11 @@ public class ImageHandlerTest extends Application {
 
      File testFile = new File("C:\\Users\\jsphi\\eclipse-workspace\\WiseGuide\\partypopper.jpg");
 
-    ImageHandler test = new ImageHandler( testFile, testView);
+    ImageHandler test = new ImageHandler(testFile, testView);
 
     test.load(height, width);
 
     Group root = new Group(testView);
-
 
     Scene testScene = new Scene(root, height, width);
 

@@ -52,7 +52,7 @@
 <!--Bars-->
 <base:page title="The Stone Roses Bar" ID="006" lat="53.9573196" lon="-1.0843035" category="bar">
     <base:shape x_end="0" y_end="0" type="textbox">
-        <base:text include_source="Venues/Bars/The Stone Roses Bar/The Stone Roses Bar text.txt"></base:text>
+        <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/The_Stone_Roses_Bar_text.txt"></base:text>
     </base:shape>
 </base:page>
 <base:page title="Dusk" ID="008" lat="53.959545" lon="-1.0837168" category="bar">
