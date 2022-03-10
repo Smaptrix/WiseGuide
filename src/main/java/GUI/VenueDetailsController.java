@@ -49,7 +49,10 @@ public class VenueDetailsController {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
 
-            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replace("/", "\\");
+            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replaceAll("/", "\\");
+
+
+
             client.requestFile(file);
 
         }
