@@ -45,12 +45,12 @@ public class VenueDetailsController {
     public void loadVenueData() throws IOException {
 
         //Downloads every media element required by the venue xml
-        for(int i = 0; i < currVenuePage.numberOfElements; i++){
+        for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
 
-            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replaceAll("/", "\\");
-
+            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replace("/", "\\");
+            System.out.println("File: " + file);
 
 
             client.requestFile(file);
