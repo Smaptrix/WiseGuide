@@ -31,6 +31,8 @@ public class MainController {
 
     private User currUser;
 
+    private VenueXMLParser xml;
+
 
 
     public void setClient(Client client) {
@@ -88,7 +90,7 @@ public class MainController {
                 }
                 VenueDetailsController controller = fxmlLoader.getController();
                 controller.setClient(client);
-                controller.setCurrVenue((String) currentItemSelected);
+                controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected));
                 stage.setScene(scene);
                 stage.setTitle((String) currentItemSelected);
                 stage.show();
@@ -195,7 +197,7 @@ public class MainController {
     //TODO - Change line parser to handle the xml tree instead
 
     //Provides the controller with the list of venue types it should expect
-    VenueXMLParser xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
+    xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
 
     List<String> venueNameList = xml.getPageNames();
 

@@ -52,24 +52,24 @@ public class VenueXMLParser {
     }
 
     //Returns a new page based on the title or ID, where there is no page with title or ID, returns null
-    public VenuePage getPage(String index, String titleOrID) {
+    public VenuePage getPage(String indexType, String index) {
 
-        if(!(index.equals("title") || index.equals("ID"))) {
+        if(!(indexType.equals("title") || indexType.equals("ID"))) {
             System.out.println("Error: no such index.");
             return null;
         }
 
-        titleOrID = index + "=\"" + titleOrID + "\"";
+        index = indexType + "=\"" + index + "\"";
 
         for(int i = 0; i < numberOfPages; i++) {
 
-            if(this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(index).toString().equals(titleOrID)) {
+            if(this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(indexType).toString().equals(index)) {
                 return new VenuePage(this.root.getElementsByTagName("base:page").item(i));
             }
 
         }
 
-        if(index.equals("title")){
+        if(indexType.equals("title")){
             System.out.println("Error: no such title.");
         } else {
             System.out.println("Error: no such ID.");

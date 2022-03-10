@@ -8,6 +8,7 @@
 
 package GUI;
 
+import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
 
@@ -17,9 +18,17 @@ public class VenueDetailsController {
 
     String currVenue;
 
+    VenuePage currVenuePage;
+
     public void setClient(Client client){this.client = client;}
 
-    public void setCurrVenue(String currVenue){this.currVenue = currVenue;}
+    public void setCurrVenue(String currVenue, VenuePage currVenuePage){
+        this.currVenue = currVenue;
+        this.currVenuePage = currVenuePage;
+
+        System.out.println(currVenuePage);
+    }
+
 
 
     @FXML
