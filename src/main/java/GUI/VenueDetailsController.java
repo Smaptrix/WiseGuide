@@ -27,6 +27,7 @@ public class VenueDetailsController {
         this.currVenuePage = currVenuePage;
 
         System.out.println(currVenuePage);
+        System.out.println(currVenuePage.attributes);
     }
 
 
