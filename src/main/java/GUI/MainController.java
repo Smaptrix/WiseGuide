@@ -197,14 +197,20 @@ public class MainController {
     //Provides the controller with the list of venue types it should expect
     VenueXMLParser xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
 
+    List<String> venueNameList = xml.getPageNames();
 
 
-    //Iterates through every venue type and acquires the relevant text file containing the venues
-    for(int i = 0; i < xml.numberOfPages; i++){
-        System.out.println(i);
+
+    //Iterates through every venue name and adds it to the menu item
+        for (String s : venueNameList) {
+
+            //Strips the header and final quotation mark from each title
+            String stripped_title = s.substring(7, s.length() -1);
+
+            venueList.getItems().add(stripped_title);
 
 
-    }
+        }
 
 
 
