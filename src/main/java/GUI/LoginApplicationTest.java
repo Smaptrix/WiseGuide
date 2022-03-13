@@ -54,7 +54,12 @@ public class LoginApplicationTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
-
+    //Unit Test | Confirm "Login" button text is correct.
+    @Test
+    public void loginTextTest() {
+        sleep(1000);
+        FxAssert.verifyThat("#loginButton", LabeledMatchers.hasText("Login"));
+    }
 
     //Unit Test | Confirm "Login" button can be pressed.
     @Test
