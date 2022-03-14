@@ -84,7 +84,7 @@ public class MainController {
                 Stage stage = new Stage();
                 Scene scene = null;
                 try {
-                    scene = new Scene(fxmlLoader.load(), 420, 240);
+                    scene = new Scene(fxmlLoader.load(), 900, 600);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
