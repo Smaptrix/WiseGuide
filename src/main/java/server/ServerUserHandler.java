@@ -77,7 +77,7 @@ public class ServerUserHandler {
             System.out.println("Creating a new user...");
             Writer output = new BufferedWriter(new FileWriter("userDatabase.txt", true));
             //This may need to be adapted depending on the kind of user info we want to hold
-            output.write(currUser.getUsername() + "," + currUser.getPassword() + "\n");
+            output.write(currUser.getUsername() + "," + currUser.getPassword() + "," +  currUser.getSalt() + "\n");
             output.close();
             userExistState = findUser();
             passVerified = verifyPass();
@@ -102,7 +102,15 @@ public class ServerUserHandler {
          passVerified = false;
     }
 
-    public void setCurrUser(User currUser) {
+    public void setCurrUser(User currUser) throws IOException {
         this.currUser = currUser;
+
+
+    }
+
+    public String getcurrUserSalt() {
+
+        return userInfo[2];
+
     }
 }

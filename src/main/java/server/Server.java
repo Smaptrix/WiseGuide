@@ -290,14 +290,18 @@ public class Server {
         String loginPass = inText.readLine();
 
 
-        //Don't need to hash here because the client hashes the data
-        //Sets the current users information based on the login information provided
+
+
+        //Hashing server side as we can access the users salt
         currUser.setUsername(loginName);
         currUser.setPassword(loginPass);
 
-
-
         currUserHandler.setCurrUser(currUser);
+
+
+
+        currUser.encryptUserInfo();
+
 
         //Determine current users statuses
         currUserHandler.verifyUser();
@@ -336,6 +340,10 @@ public class Server {
 
             System.out.println("Login mode!");
 
+            currUser.setSalt(currUserHandler.getcurrUserSalt());
+
+            System.out.println(currUser.getSalt());
+
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
                 //If the users data is incorrect - let the client know
@@ -357,6 +365,7 @@ public class Server {
         else if(mode == 2){
 
             if(!(currUserHandler.userExistState)){
+                currUser.setSalt(inText.readLine());
                 currUserHandler.createUser();
                 sendResponse("USERCREATED", true);
             }

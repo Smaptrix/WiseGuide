@@ -112,7 +112,7 @@ public class LoginController {
 
 
            currUser = new User(userTextField.getText(), userPassField.getText());
-           currUser.encryptUserInfo();
+
 
 
            String loginCode = client.requestLogin(currUser);

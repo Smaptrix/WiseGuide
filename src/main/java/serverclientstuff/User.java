@@ -21,9 +21,8 @@ public class User {
 
     private String username;
     private String password;
-    //This is safe because we can assume that only the user has access to the client at any one time
-    //If the user is logged into the client, that means they know there password.
-    private String unencryptedPass;
+    //The users salt that is added to there password
+    private String salt;
 
 
     //Creates the user object
@@ -31,7 +30,7 @@ public class User {
 
         this.username = username;
         this.password = password;
-        unencryptedPass = password;
+
 
 
     }
@@ -46,33 +45,23 @@ public class User {
     //Hashes user data
     public void encryptUserInfo()  {
 
+
+        UserSecurity userSecurity =  new UserSecurity(this);
+
 /*
         //Encrypt username
         try {
-
-            UserSecurity userSecurity =  new UserSecurity(this);
-
             this.username = userSecurity.encryptUsername();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to encrypt username");
         }
-
- */
-
+        */
 
 
-        //Hash the password because we never want to undo it
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        assert digest != null;
 
-        byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-        this.password = Utils.bytesToHex(hashPass);
+
+        this.password = userSecurity.hashPassword();
 
 
 
@@ -97,6 +86,15 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getSalt(){
+        return salt;
+    }
+
 
     @Override
     public String toString() {

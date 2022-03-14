@@ -13,7 +13,7 @@ import java.util.Random;
 
 
 //TODO - Password based key derivation ?
-//TODO - Salt to slow down dictionary attacks
+
 //TODO - Store keys on the server?? Need to encrypt before sending to the server but cant download key?
 //TODO - Actually encrypt the username - for now maybe not worth the overhead
 
@@ -32,7 +32,7 @@ public class UserSecurity {
 
 
 
-    public UserSecurity(User currUser) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public UserSecurity(User currUser)  {
 
         this.currUser = currUser;
 
@@ -136,5 +136,43 @@ public class UserSecurity {
 
 
 */
+
+    //TODO - Salt to slow down dictionary attacks
+
+    public String hashPassword(){
+
+
+
+        //Hash the password because we never want to undo it
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        assert digest != null;
+
+        String saltedPass = currUser.getPassword() + currUser.getSalt();
+
+
+        byte[] hashPass = digest.digest(saltedPass.getBytes(StandardCharsets.UTF_8));
+
+
+        return Utils.bytesToHex(hashPass);
+    }
+
+
+    //Creates a random salt value
+    //Used to create new users
+    public static String generateSalt(){
+
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+
+        return Utils.bytesToHex(salt);
+
+    }
+
 
 }

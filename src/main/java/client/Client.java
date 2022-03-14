@@ -8,6 +8,7 @@
 package client;
 
 import serverclientstuff.User;
+import serverclientstuff.UserSecurity;
 
 import java.net.*;
 import java.io.*;
@@ -378,6 +379,12 @@ public class Client {
         outText.println(currUser.getUsername());
 
         outText.println(currUser.getPassword());
+
+        currUser.setSalt(UserSecurity.generateSalt());
+
+        System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
+
+        outText.println(currUser.getSalt());
 
 
         return receiveAcknowledgement();
