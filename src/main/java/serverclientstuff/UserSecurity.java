@@ -33,7 +33,7 @@ public class UserSecurity {
       * @param string The string you want to encrypt
      * @return the hex value of the encrypted string
      */
-    public String encrypt(String  string) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, IllegalBlockSizeException, BadPaddingException {
+    public void  encrypt() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, IllegalBlockSizeException, BadPaddingException {
 
         /*
         //Turns the string into bytes for the encryption

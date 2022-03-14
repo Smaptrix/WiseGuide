@@ -42,6 +42,12 @@ public class User {
     //Hashes user data
     public void encryptUserInfo()  {
 
+
+
+
+
+
+
         //Encrypt username
         try {
             this.username = UserSecurity.encrypt(username);
