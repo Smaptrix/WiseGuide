@@ -334,11 +334,12 @@ public class Server {
             if(currUserHandler.userExistState){
                 currUser.setSalt(currUserHandler.getcurrUserSalt());
                 currUser.encryptUserInfo();
+                currUserHandler.verifyUser();
             }
 
 
 
-            System.out.println(currUser.getSalt());
+
 
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
