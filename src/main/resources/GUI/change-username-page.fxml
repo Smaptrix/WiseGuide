@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ChangeUsernameController">
    <children>
       <AnchorPane prefHeight="454.0" prefWidth="600.0">
          <children>
@@ -20,7 +20,7 @@
             <Label layoutX="152.0" layoutY="128.0" prefHeight="17.0" prefWidth="103.0" text="Current Username" />
             <Label layoutX="155.0" layoutY="233.0" text="Desired Username" />
             <TextField layoutX="312.0" layoutY="229.0" />
-            <Label layoutX="341.0" layoutY="128.0" text="currentUsername" />
+            <Label id="usernameLabel" fx:id="usernameLabel" layoutX="341.0" layoutY="128.0" text="currentUsername" />
             <Button layoutX="271.0" layoutY="326.0" mnemonicParsing="false" text="Confirm" />
             <Label id="errLabel" alignment="CENTER" layoutX="160.0" layoutY="284.0" prefHeight="17.0" prefWidth="281.0" text="errorLabel" />
          </children>
