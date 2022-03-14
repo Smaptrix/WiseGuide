@@ -57,7 +57,7 @@ public class ChangeUsernameController {
         }
         else{
             try {
-                client.requestUserNameChange(currUser.getUsername(), desiredName);
+                client.requestUserNameChange(desiredName);
             } catch (IOException e) {
                 e.printStackTrace();
             }

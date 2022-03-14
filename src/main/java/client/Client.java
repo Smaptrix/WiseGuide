@@ -453,15 +453,16 @@ public class Client {
     }
 
 
+    //TODO - Could be made more rigourous, but assumes server and client have same user
 
-    public String requestUserNameChange(String currentUsername,String desiredUsername) throws IOException {
+    public String requestUserNameChange(String desiredUsername) throws IOException {
 
 
         outText.println("CHANGENAME");
 
-        outText.println(currentUsername);
 
         outText.println(desiredUsername);
+
 
 
 

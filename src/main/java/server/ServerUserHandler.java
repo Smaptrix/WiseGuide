@@ -56,6 +56,7 @@ public class ServerUserHandler {
 
             if ((values[0]).equals(currUser.getUsername())) {
                 userInfo = values;
+
                 return true;
             }
 
@@ -65,7 +66,7 @@ public class ServerUserHandler {
     }
 
 
-
+    //Note - no refactor to use this because this is a serverside package only
     //Determines if a provided username is already taken
     public static boolean findUserName(String username) throws IOException {
 
@@ -75,6 +76,7 @@ public class ServerUserHandler {
             String[] values = line.split(",");
 
             if ((values[0]).equals(username)) {
+
                 return true;
             }
 
@@ -83,6 +85,53 @@ public class ServerUserHandler {
         return false;
     }
 
+
+    //Changes the current username
+    public void changeUserName(String desiredName) throws IOException {
+
+        //Finds the line that we need to update
+        BufferedReader br = new BufferedReader(new FileReader("userDatabase.txt"));
+        String line;
+        String input = "";
+
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+
+
+            //If the current username matches the line, the line is replaced with the new data
+            if ((values[0]).equals(currUser.getUsername())) {
+                values[0] = desiredName;
+
+                input += desiredName + "," + currUser.getPassword() + "," + currUser.getSalt() + '\n';
+
+            }
+
+            //If the lines dont match, the line is ignored
+            else{
+
+                input += line + '\n' ;
+                System.out.println("Different user");
+            }
+
+
+            System.out.println("userDatabase: " + input);
+
+
+            FileOutputStream out = new FileOutputStream("userDatabase.txt");
+            out.write(input.getBytes());
+            out.close();
+
+
+
+
+        }
+
+
+
+
+
+
+    }
 
 
 

@@ -420,7 +420,7 @@ public class Server {
 
     private void changeUsername() throws IOException {
 
-        String currentUsername = inText.readLine();
+
 
         String desiredUsername = inText.readLine();
 
@@ -431,10 +431,12 @@ public class Server {
 
 
 
+
             sendResponse("USERNAMETAKEN", true);
         }
 
         else {
+            currUserHandler.changeUserName(desiredUsername);
             sendResponse("NAMECHANGED", true);
         }
 
