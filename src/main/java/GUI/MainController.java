@@ -132,6 +132,7 @@ public class MainController {
         Scene scene = new Scene(fxmlLoader.load(), 420, 240);
         AccountDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
+        controller.setUser(currUser);
         stage.setScene(scene);
         stage.setTitle("Account Creation");
         stage.show();
@@ -207,6 +208,8 @@ public class MainController {
 
     List<String> venueNameList = xml.getPageNames();
 
+
+    
 
 
     //Iterates through every venue name and adds it to the menu item

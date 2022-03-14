@@ -2,6 +2,8 @@ package GUI;
 
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import serverclientstuff.User;
 
 public class AccountDetailsController {
 
@@ -11,9 +13,16 @@ public class AccountDetailsController {
 
     Client client;
 
+    User currUser;
+
+    @FXML
+    Label usernameField;
+
+
 
     @FXML
     public void initialize(){
+
 
 
 
@@ -21,6 +30,11 @@ public class AccountDetailsController {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void setUser(User currUser) {
+        this.currUser = currUser;
+        usernameField.setText(currUser.getUsername());
     }
 
 
