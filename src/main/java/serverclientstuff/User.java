@@ -8,19 +8,21 @@
 
 package serverclientstuff;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 
 //TODO - Only Hash once - Stop Hashing every time new user is made
 
 //Object regarding User functions and User creation
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class User {
 
     private String username;
     private String password;
+    //The users salt that is added to there password
+    private String salt;
 
 
     //Creates the user object
@@ -30,23 +32,42 @@ public class User {
         this.password = password;
 
 
+
     }
 
+
+
+
+
+
+
+
     //Hashes user data
-    public void hashUserInfo()  {
+    public void encryptUserInfo()  {
 
-        MessageDigest digest = null;
+
+        UserSecurity userSecurity =  new UserSecurity(this);
+
+/*
+        //Encrypt username
         try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
+            this.username = userSecurity.encryptUsername();
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Failed to encrypt username");
         }
-        assert digest != null;
-        byte[] hashUsername = digest.digest(username.getBytes(StandardCharsets.UTF_8));
-        byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        */
 
-        this.username = Utils.bytesToHex(hashUsername);
-        this.password = Utils.bytesToHex(hashPass);
+
+
+
+        this.password = userSecurity.hashPassword();
+
+
+
+
+
+
 
     }
 
@@ -65,6 +86,15 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getSalt(){
+        return salt;
+    }
+
 
     @Override
     public String toString() {

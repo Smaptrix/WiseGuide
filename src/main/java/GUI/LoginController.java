@@ -112,7 +112,7 @@ public class LoginController {
 
 
            currUser = new User(userTextField.getText(), userPassField.getText());
-           currUser.hashUserInfo();
+
 
 
            String loginCode = client.requestLogin(currUser);
@@ -120,7 +120,6 @@ public class LoginController {
 
            if(loginCode.equals("BADLOGIN")){
                errorLabel.setText("Unrecognised user details");
-
             }
 
            //If not BADLOGIN assume GOODLOGIN
