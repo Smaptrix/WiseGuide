@@ -143,7 +143,7 @@ public class ServerClientTest {
     }
 
 
-
+/* - Kind of defunct test
     @Test
     //Remote verification test - Requires server launch
     public void remoteUserVerificationTest() throws IOException {
@@ -158,6 +158,8 @@ public class ServerClientTest {
 
     }
 
+
+
     @Test
     //Remote verification test to prove a user doesn't exist- Requires server launch
     public void failRemoteUserVerificationTest() throws IOException {
@@ -170,7 +172,7 @@ public class ServerClientTest {
         assertEquals("USERNOTFOUND", client.verifyUser(test));
 
     }
-
+ */
 
 
     @Test

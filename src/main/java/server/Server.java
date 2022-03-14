@@ -299,11 +299,7 @@ public class Server {
         currUserHandler.setCurrUser(currUser);
 
 
-
-        currUser.encryptUserInfo();
-
-
-        //Determine current users statuses
+        //Determine current users statuses - will always fail at the password level
         currUserHandler.verifyUser();
 
 
@@ -311,20 +307,14 @@ public class Server {
         System.out.println("Mode: " + mode);
 
 
-        //Verification Mode - Mainly for user creation
+        //Verification Mode - Mainly for testing
         if(mode == 0){
 
             //If user exists and pass is correct(Good for login, bad for user creation)
-            if(currUserHandler.userExistState & currUserHandler.passVerified){
-                sendResponse("GOODPASS", true);
-
-
+            if(currUserHandler.userExistState & currUserHandler.passVerified) {
+                sendResponse("USERFOUND", true);
             }
-            //If password is correct
-            else if (currUserHandler.userExistState & !currUserHandler.passVerified){
-                sendResponse("BADPASS", true);
 
-            }
 
             else {
                 sendResponse("USERNOTFOUND", true);
@@ -336,11 +326,17 @@ public class Server {
 
 
         //Login Mode
-        else if(mode == 1) {
+        if(mode == 1) {
 
             System.out.println("Login mode!");
 
-            currUser.setSalt(currUserHandler.getcurrUserSalt());
+            //If the user exists grab there salt then encrypt there data
+            if(currUserHandler.userExistState){
+                currUser.setSalt(currUserHandler.getcurrUserSalt());
+                currUser.encryptUserInfo();
+            }
+
+
 
             System.out.println(currUser.getSalt());
 
@@ -365,13 +361,17 @@ public class Server {
         else if(mode == 2){
 
             if(!(currUserHandler.userExistState)){
+
+                sendResponse("SENDSALT", true);
                 currUser.setSalt(inText.readLine());
+                currUser.encryptUserInfo();
                 currUserHandler.createUser();
                 sendResponse("USERCREATED", true);
             }
 
             else{
                 sendResponse("USERALREADYEXISTS", true);
+                System.out.println("User already exists");
 
             }
 

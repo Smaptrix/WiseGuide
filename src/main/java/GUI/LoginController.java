@@ -120,7 +120,6 @@ public class LoginController {
 
            if(loginCode.equals("BADLOGIN")){
                errorLabel.setText("Unrecognised user details");
-
             }
 
            //If not BADLOGIN assume GOODLOGIN

@@ -154,6 +154,10 @@ public class UserSecurity {
 
         String saltedPass = currUser.getPassword() + currUser.getSalt();
 
+        System.out.println("UnSalted Password: " + currUser.getPassword());
+
+        System.out.println("Salted Password: " + saltedPass);
+
 
         byte[] hashPass = digest.digest(saltedPass.getBytes(StandardCharsets.UTF_8));
 

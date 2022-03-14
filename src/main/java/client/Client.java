@@ -343,6 +343,7 @@ public class Client {
     //TODO - possible refactor of user functions into single function? ~ eh maybe
 
 
+
     /**
      * <p>
      * Asks the user to verify if the users information is correct
@@ -380,12 +381,13 @@ public class Client {
 
         outText.println(currUser.getPassword());
 
-        currUser.setSalt(UserSecurity.generateSalt());
+        //Should timeout if nothing respond
+        if(receiveAcknowledgement().equals("SENDSALT")) {
+            currUser.setSalt(UserSecurity.generateSalt());
+            System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
 
-        System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
-
-        outText.println(currUser.getSalt());
-
+            outText.println(currUser.getSalt());
+        }
 
         return receiveAcknowledgement();
     }

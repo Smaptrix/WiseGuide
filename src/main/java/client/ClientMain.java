@@ -52,7 +52,7 @@ public class ClientMain {
           Client client = new Client();
           client.startConnection(host, 5555);
 
-          System.out.println(client.verifyUser(testUser));
+         // System.out.println(client.verifyUser(testUser));
 
 
           client.requestLogin(testUser);
