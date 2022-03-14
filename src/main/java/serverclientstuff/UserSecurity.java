@@ -6,16 +6,17 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.Random;
 
 
 //TODO - Password based key derivation ?
 //TODO - Salt to slow down dictionary attacks
+//TODO - Store keys on the server?? Need to encrypt before sending to the server but cant download key?
+//TODO - Actually encrypt the username - for now maybe not worth the overhead
+
 
 
 //A class that provides the encryption/decryption tools required by the client to make sure that the users data
@@ -24,37 +25,50 @@ public class UserSecurity {
 
     User currUser;
 
-    //Store the password based keyspec
-    PBEKeySpec keySpec;
+
+    SecretKey key;
 
 
 
-    public UserSecurity(User currUser){
+
+
+    public UserSecurity(User currUser) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
         this.currUser = currUser;
 
         //Turns the password into a character array
+        //deriveEncryptionKey();
 
-        int passLength = currUser.getPassword().length();
-
-        char[] passinch = new char[passLength];
-
-        for (int i = 0; i < passLength; i++){
-            passinch[i] = currUser.getPassword().charAt(i);
-        }
-
-
-        keySpec = new PBEKeySpec(passinch);
-
-        System.out.println("Keyspec: " + keySpec.getPassword());
 
     }
+
+    /*
+    public void deriveEncryptionKey() throws InvalidKeySpecException, NoSuchAlgorithmException {
+
+        //Determining the method required for the encryption
+        String method = "PBKDF2WithHmacSHA1";
+
+
+
+        //Create a keyfactory with the method
+        SecretKeyFactory kf = SecretKeyFactory.getInstance(method);
+
+        KeySpec keySpec = new KeySpec(method);
+        key = kf.generateSecret(keySpec);
+
+        System.out.println(key.getEncoded());
+
+
+    }
+
+*/
 
 
     /**
      * Encrypts the users username
      * @return the hex value of the encrypted string
      */
+   /*
     public String encryptUsername() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException {
 
         /*
@@ -91,20 +105,15 @@ public class UserSecurity {
 
         */
 
+            /*
         //Creating a salt
         Random r = new SecureRandom();
         byte[] salt = new byte[20];
         r.nextBytes(salt);
 
 
+        String method = "AES";
 
-
-        //Determining the method required for the encryption
-        String method = "PBEWithMD5AndTripleDES";
-        //Create a keyfactory with the method
-        SecretKeyFactory kf = SecretKeyFactory.getInstance(method);
-
-        SecretKey key = kf.generateSecret(keySpec);
 
         Cipher cipher = Cipher.getInstance(method);
 
@@ -126,8 +135,6 @@ public class UserSecurity {
     }
 
 
-
-
-
+*/
 
 }

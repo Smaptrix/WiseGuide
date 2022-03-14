@@ -46,7 +46,7 @@ public class User {
     //Hashes user data
     public void encryptUserInfo()  {
 
-
+/*
         //Encrypt username
         try {
 
@@ -58,6 +58,8 @@ public class User {
             System.out.println("Failed to encrypt username");
         }
 
+ */
+
 
 
         //Hash the password because we never want to undo it
@@ -68,10 +70,8 @@ public class User {
             e.printStackTrace();
         }
         assert digest != null;
-        byte[] hashUsername = digest.digest(username.getBytes(StandardCharsets.UTF_8));
-        byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-        this.username = Utils.bytesToHex(hashUsername);
+        byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
         this.password = Utils.bytesToHex(hashPass);
 
 
