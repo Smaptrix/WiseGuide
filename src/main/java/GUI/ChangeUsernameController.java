@@ -3,6 +3,7 @@ package GUI;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import serverclientstuff.User;
 
 public class ChangeUsernameController {
@@ -14,11 +15,17 @@ public class ChangeUsernameController {
     @FXML
     Label usernameLabel;
 
+    @FXML
+    TextField desiredNameField;
+
+
+    @FXML
+    Label errLabel;
 
 
     @FXML
     public void initialize(){
-
+        errLabel.setText("");
     }
 
 
