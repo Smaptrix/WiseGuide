@@ -13,6 +13,10 @@ package serverclientstuff;
 
 //Object regarding User functions and User creation
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class User {
 
     private String username;
@@ -43,26 +47,38 @@ public class User {
     public void encryptUserInfo()  {
 
 
-
-
-
-
-
         //Encrypt username
         try {
-            this.username = UserSecurity.encrypt(username);
+
+            UserSecurity userSecurity =  new UserSecurity(this);
+
+            this.username = userSecurity.encryptUsername();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to encrypt username");
         }
 
-        //Encrypt password
+
+
+        //Hash the password because we never want to undo it
+        MessageDigest digest = null;
         try {
-            this.password = UserSecurity.encrypt(password);
-        } catch (Exception e) {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            System.out.println("Failed to encrypt username");
         }
+        assert digest != null;
+        byte[] hashUsername = digest.digest(username.getBytes(StandardCharsets.UTF_8));
+        byte[] hashPass = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+        this.username = Utils.bytesToHex(hashUsername);
+        this.password = Utils.bytesToHex(hashPass);
+
+
+
+
+
+
 
     }
 

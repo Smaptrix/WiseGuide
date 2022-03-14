@@ -3,10 +3,15 @@ package serverclientstuff;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Random;
 
 
 //TODO - Password based key derivation ?
@@ -19,21 +24,38 @@ public class UserSecurity {
 
     User currUser;
 
+    //Store the password based keyspec
+    PBEKeySpec keySpec;
+
 
 
     public UserSecurity(User currUser){
 
         this.currUser = currUser;
 
+        //Turns the password into a character array
+
+        int passLength = currUser.getPassword().length();
+
+        char[] passinch = new char[passLength];
+
+        for (int i = 0; i < passLength; i++){
+            passinch[i] = currUser.getPassword().charAt(i);
+        }
+
+
+        keySpec = new PBEKeySpec(passinch);
+
+        System.out.println("Keyspec: " + keySpec.getPassword());
+
     }
 
 
     /**
-     * Encrypts a string
-      * @param string The string you want to encrypt
+     * Encrypts the users username
      * @return the hex value of the encrypted string
      */
-    public void  encrypt() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, IllegalBlockSizeException, BadPaddingException {
+    public String encryptUsername() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException {
 
         /*
         //Turns the string into bytes for the encryption
@@ -69,10 +91,30 @@ public class UserSecurity {
 
         */
 
+        //Creating a salt
+        Random r = new SecureRandom();
+        byte[] salt = new byte[20];
+        r.nextBytes(salt);
 
 
 
 
+        //Determining the method required for the encryption
+        String method = "PBEWithMD5AndTripleDES";
+        //Create a keyfactory with the method
+        SecretKeyFactory kf = SecretKeyFactory.getInstance(method);
+
+        SecretKey key = kf.generateSecret(keySpec);
+
+        Cipher cipher = Cipher.getInstance(method);
+
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+
+
+
+
+
+        byte[] encrypted = cipher.doFinal(currUser.getUsername().getBytes(StandardCharsets.UTF_8));
 
 
         String encryptedString = Utils.bytesToHex(encrypted);
