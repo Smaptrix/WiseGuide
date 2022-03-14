@@ -32,6 +32,10 @@ public class AccountDetailsController {
         this.client = client;
     }
 
+
+
+
+
     public void setUser(User currUser) {
         this.currUser = currUser;
         usernameField.setText(currUser.getUsername());
