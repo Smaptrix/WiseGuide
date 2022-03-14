@@ -32,6 +32,13 @@ public class User {
 
     }
 
+
+
+
+
+
+
+
     //Hashes user data
     public void hashUserInfo()  {
 
