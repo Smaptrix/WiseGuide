@@ -64,6 +64,29 @@ public class ServerUserHandler {
         return false;
     }
 
+
+
+    //Determines if a provided username is already taken
+    public static boolean findUserName(String username) throws IOException {
+
+        BufferedReader br = new BufferedReader(new FileReader("userDatabase.txt"));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+
+            if ((values[0]).equals(username)) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+
+
+
+
     //Checks to see if the users password is correct
     public boolean verifyPass() {
 

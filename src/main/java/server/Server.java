@@ -26,8 +26,6 @@ public class Server {
     private static final String SERVERVERSION = "Ver 0.45";
 
 
-        //TODO - Store prehashed user as well for account details
-        //     - Do the hashing serverside? (would be a big refactor (incl tests)
 
 
 
@@ -66,12 +64,9 @@ public class Server {
         //Initialises the current user server user handler
         currUser = new User("", "");
         currUserHandler = new ServerUserHandler(currUser, false);
-
-
-
-
     }
 
+    //Possibly not needed now that windows accepts unix slashes...
     private void osDetect(){
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
@@ -85,9 +80,6 @@ public class Server {
         else{
             slashType = "/";
         }
-
-
-
     }
 
 
@@ -167,6 +159,10 @@ public class Server {
                 break;
 
 
+            case "CHANGENAME":
+                changeUsername();
+                break;
+
             case "LOGOUT":
                 logout();
                 break;
@@ -174,6 +170,7 @@ public class Server {
             case "VERSIONCHECK":
                 versionCheck();
                 break;
+
 
             default:
                 System.out.println(requestIn + " : Invalid command");
@@ -417,6 +414,32 @@ public class Server {
         }
 
 
+
     }
+
+
+    private void changeUsername() throws IOException {
+
+        String currentUsername = inText.readLine();
+
+        String desiredUsername = inText.readLine();
+
+
+        //If the username is taken
+        if (ServerUserHandler.findUserName(desiredUsername)){
+
+
+
+
+            sendResponse("USERNAMETAKEN", true);
+        }
+
+        else {
+            sendResponse("NAMECHANGED", true);
+        }
+
+
+    }
+
 
 }

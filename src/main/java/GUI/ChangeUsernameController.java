@@ -2,9 +2,12 @@ package GUI;
 
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import serverclientstuff.User;
+
+import java.io.IOException;
 
 public class ChangeUsernameController {
 
@@ -22,6 +25,9 @@ public class ChangeUsernameController {
     @FXML
     Label errLabel;
 
+    @FXML
+    Button confirmButton;
+
 
     @FXML
     public void initialize(){
@@ -36,6 +42,28 @@ public class ChangeUsernameController {
     public void setUser(User currUser){
         this.currUser = currUser;
         usernameLabel.setText(currUser.getUsername());
+    }
+
+
+    @FXML
+    protected void onConfirmButtonPress(){
+
+
+        String desiredName = desiredNameField.getText();
+
+
+        if(desiredName.equals(currUser.getUsername())){
+            errLabel.setText("This is your current name!");
+        }
+        else{
+            try {
+                client.requestUserNameChange(currUser.getUsername(), desiredName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
 

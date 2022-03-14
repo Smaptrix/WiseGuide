@@ -438,6 +438,11 @@ public class Client {
     }
 
 
+    /**
+     * Gives the directory path for the required file
+     * @param fileName name of the file you desire to fine
+     * @return the directory path of specified file
+     */
     public File getFile(String fileName){
 
 
@@ -446,6 +451,24 @@ public class Client {
         return fileLocations.get(fileName);
 
     }
+
+
+
+    public String requestUserNameChange(String currentUsername,String desiredUsername) throws IOException {
+
+
+        outText.println("CHANGENAME");
+
+        outText.println(currentUsername);
+
+        outText.println(desiredUsername);
+
+
+
+        return receiveAcknowledgement();
+
+    }
+
 
 
 

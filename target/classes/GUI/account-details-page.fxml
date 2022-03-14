@@ -18,7 +18,7 @@
             <Label layoutX="84.0" layoutY="100.0" text="Username:" />
             <Label layoutX="86.0" layoutY="157.0" text="Password:" />
             <Label id="usernameLabel" fx:id="usernameLabel" layoutX="198.0" layoutY="100.0" text="UsernameBlank" />
-            <Button id="changeNameButton" fx:id="changeNameButton" layoutX="322.0" layoutY="96.0" mnemonicParsing="false" onAction="#onchangeNamePress" text="Change" />
+            <Button id="changeNameButton" fx:id="changeNameButton" layoutX="322.0" layoutY="96.0" mnemonicParsing="false" onAction="#onchangeNameButtonPress" text="Change" />
             <Button layoutX="198.0" layoutY="153.0" mnemonicParsing="false" text="Change" />
          </children>
       </AnchorPane>

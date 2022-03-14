@@ -13,9 +13,8 @@ import java.io.IOException;
 
 public class AccountDetailsController {
 
-    //TODO - Add all the functionality
-    //     - I.E Display User Details - Change User details
-    //     - BEFORE THIS NEED TO DO USER INFO ENCRYPTION RATHER THAN HASHING
+    //TODO - Add password change functionality
+
 
     Client client;
 
@@ -48,7 +47,7 @@ public class AccountDetailsController {
 
 
     @FXML
-    protected void onchangeNamePress() throws IOException {
+    protected void onchangeNameButtonPress() throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("change-username-page.fxml"));
