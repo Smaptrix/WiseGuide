@@ -337,10 +337,6 @@ public class Server {
                 currUserHandler.verifyUser();
             }
 
-
-
-
-
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
                 //If the users data is incorrect - let the client know
