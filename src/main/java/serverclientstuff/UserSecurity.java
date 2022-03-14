@@ -3,25 +3,27 @@ package serverclientstuff;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
+
+//TODO - Password based key derivation ?
+//TODO - Salt to slow down dictionary attacks
+
+
 //A class that provides the encryption/decryption tools required by the client to make sure that the users data
 //is secure before it is sent to the server
-public class UserSecturity {
+public class UserSecurity {
 
     User currUser;
 
 
 
-    public UserSecturity(User currUser){
+    public UserSecurity(User currUser){
 
         this.currUser = currUser;
-
-
 
     }
 
@@ -33,20 +35,29 @@ public class UserSecturity {
      */
     public String encrypt(String  string) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, IllegalBlockSizeException, BadPaddingException {
 
+        /*
         //Turns the string into bytes for the encryption
         byte[] input = string.getBytes(StandardCharsets.UTF_8);
 
-        //Bytes to store the key and the IV
-        byte[] keyBytes = new byte[0];
-        byte[] ivBytes = new byte[0];
 
         //Create the cipher
         Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
 
+        //Bytes to store the key and the IV
+        byte[] keyBytes = new byte[256];
+        byte[] ivBytes= new byte[cipher.getBlockSize()];
+
+
+        //Create a key generator
+        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+        keyGen.init(256);
+
+
         //Generate the key and initialisation vector
-        SecretKeySpec key = new SecretKeySpec(keyBytes, "CTR");
+        SecretKey key = keyGen.generateKey();
         IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
 
+        //Pass the key and iv to the cipher
         cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
 
         byte[] encrypted = new byte[cipher.getOutputSize(input.length)];
@@ -56,11 +67,17 @@ public class UserSecturity {
         enc_len += cipher.doFinal(encrypted, enc_len);
 
 
+        */
+
+
+
 
 
 
 
         String encryptedString = Utils.bytesToHex(encrypted);
+
+        System.out.println(encryptedString);
 
         return encryptedString;
 

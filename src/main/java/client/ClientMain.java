@@ -45,7 +45,7 @@ public class ClientMain {
 
         //Creates User then hashes there data
         User testUser = new User("test", "12345");
-        testUser.hashUserInfo();
+        testUser.encryptUserInfo();
 
 
       try {

@@ -21,10 +21,8 @@ import serverclientstuff.User;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Controls the account creator within the application
@@ -140,7 +138,7 @@ public class AccountCreationController {
             errLabel.setText("");
 
             User newUser = new User(userField.getText(), passField.getText());
-            newUser.hashUserInfo();
+            newUser.encryptUserInfo();
             ServerUserHandler desiredUser = new ServerUserHandler(newUser, true);
             desiredUser.verifyUser();
 

@@ -62,7 +62,7 @@ public class ServerClientTest {
     @Test
     public void userUsernameSetupTest() {
         User test = new User("test", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
         assertEquals(test.getUsername(), "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
     }
 
@@ -70,7 +70,7 @@ public class ServerClientTest {
     //Test to make sure hashing works correctly
     public void userPasswordHashingTest() {
         User test = new User("test", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         //Password is '12345' pre-hash
         assertEquals(test.getPassword(), "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
@@ -82,7 +82,7 @@ public class ServerClientTest {
     //Test to see if users exists in the user database
     public void userExistsTest() throws IOException {
         User test = new User("test", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         ServerUserHandler testUser = new ServerUserHandler(test, true);
         assertTrue(testUser.userExistState);
@@ -92,7 +92,7 @@ public class ServerClientTest {
     //Test to make sure a user doesnt exist
     public void userDoesntExistTest() throws IOException {
         User test = new User("ImNotReal", "089-2341980-324");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         ServerUserHandler nonExistantTestUser = new ServerUserHandler(test, true);
         assertFalse(nonExistantTestUser.userExistState);
@@ -104,7 +104,7 @@ public class ServerClientTest {
     public void userCreationTest() throws IOException {
 
         User test = new User("makeme!", "password");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         ServerUserHandler toBeCreatedUser = new ServerUserHandler(test, true);
         //First check they dont exist
@@ -123,7 +123,7 @@ public class ServerClientTest {
     public void passwordCheckTest() throws IOException {
 
         User test = new User("test", "54321");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         //Create user with incorrect passowrd
         ServerUserHandler passCheckUser = new ServerUserHandler(test, true);
@@ -133,7 +133,7 @@ public class ServerClientTest {
 
 
         test = new User("test", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         //Change password to the correct one
         passCheckUser = new ServerUserHandler(test, true);
@@ -149,7 +149,7 @@ public class ServerClientTest {
     public void remoteUserVerificationTest() throws IOException {
 
         User test = new User("test", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
@@ -163,7 +163,7 @@ public class ServerClientTest {
     public void failRemoteUserVerificationTest() throws IOException {
 
         User test = new User("IdOntExist", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
@@ -178,7 +178,7 @@ public class ServerClientTest {
     public void remoteLoginTest() throws IOException {
 
         User test = new User("test", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
@@ -191,7 +191,7 @@ public class ServerClientTest {
     public void remoteFailedLoginTest() throws IOException {
 
         User test = new User("ICANTLOGIN", "12345");
-        test.hashUserInfo();
+        test.encryptUserInfo();
 
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
