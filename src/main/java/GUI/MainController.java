@@ -113,7 +113,7 @@ public class MainController {
     @FXML
     //Closes the window
     protected void onCloseButtonClick() throws IOException {
-        // TODO: @Joe we need to look at this, give me a massive error for some reason but is happy to just close the program
+
         //Doesn't try to close a connection that isn't there
         if(client.isConnected()) {
            client.closeConnection(); // Closes client connection safely.
@@ -194,22 +194,24 @@ public class MainController {
      */
     protected void loadListOfVenues() {
 
-    //Tries to download the venue lists from the server
-    try{
-        client.requestVenueXMLFile();
-    }catch(IOException e){
-        System.out.print("Failed to download venue lists");
-    }
+        //Checks to see if a file has already been downloaded
+        //This is so that the same file is not downloaded twice
+        //TODO - doesn't always work - FIX THIS!
+        if(!client.isFileDownloaded("venuesLocation.xml")){
+            //Tries to download the venue lists from the server
+            try {
+                client.requestVenueXMLFile();
+            } catch (IOException e) {
+                System.out.print("Failed to download venue lists");
+            }
+        }
 
-    //TODO - Change line parser to handle the xml tree instead
+
 
     //Provides the controller with the list of venue types it should expect
     xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
 
     List<String> venueNameList = xml.getPageNames();
-
-
-    
 
 
     //Iterates through every venue name and adds it to the menu item
@@ -222,17 +224,6 @@ public class MainController {
 
 
         }
-
-
-
-
-
-
     }
-
-
-
-
-
 
 }

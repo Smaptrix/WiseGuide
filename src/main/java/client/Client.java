@@ -175,15 +175,8 @@ public class Client {
 
         outText.println("GET " + fileName);
 
-        //Checks to see if a file has already been downloaded
-        //This is so that the same file is not downloaded twice
-        //TODO - doesn't always work - FIX THIS!
-        if(fileLocations.containsKey(fileName)){
-            System.out.println("File is already downloaded");
-            return null;
 
-        }
-        else {
+
             //Tells us how many bytes are telling us how big the file is
             int numOfFileSizeBytes = inputStream.read();
 
@@ -218,7 +211,7 @@ public class Client {
 
             //Once we have the array of bytes, we then reconstruct that into the actual file.
             return BytesToFile(data, fileName, dataType);
-        }
+
     }
 
 
@@ -431,12 +424,12 @@ public class Client {
 
     /**
      * Requests the files from the server containing the list of the venues
+     * @return
      */
     public void requestVenueXMLFile() throws IOException {
 
-       //Requests a file containing the list of every venue contained within the venue types
+        //Requests a file containing the list of every venue contained within the venue types
         requestFile("venuesLocation.xml");
-
     }
 
 
@@ -514,5 +507,16 @@ public class Client {
 
 
 
+    public boolean isFileDownloaded(String fileName){
+
+        if(fileLocations.containsKey(fileName)){
+            System.out.println("File is already downloaded");
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
 
 }
