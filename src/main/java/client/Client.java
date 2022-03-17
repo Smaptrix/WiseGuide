@@ -171,18 +171,19 @@ public class Client {
      */
     public File requestFile(String fileName) throws IOException {
 
+        //Checks to see if a file has already been downloaded
+        //This is so that the same file is not downloaded twice
+        if(isFileDownloaded(fileName)){
+            return null;
+        }
+
+
         System.out.println("GET REQUEST: " + fileName);
 
         outText.println("GET " + fileName);
 
-        //Checks to see if a file has already been downloaded
-        //This is so that the same file is not downloaded twice
-        //TODO - doesn't always work - FIX THIS!
-        if(isFileDownloaded(fileName)){
-           return null;
-        }
 
-        else {
+
 
             //Tells us how many bytes are telling us how big the file is
             int numOfFileSizeBytes = inputStream.read();
@@ -218,7 +219,7 @@ public class Client {
 
             //Once we have the array of bytes, we then reconstruct that into the actual file.
             return BytesToFile(data, fileName, dataType);
-        }
+
     }
 
 
