@@ -194,17 +194,15 @@ public class MainController {
      */
     protected void loadListOfVenues() {
 
-        //Checks to see if a file has already been downloaded
-        //This is so that the same file is not downloaded twice
-        //TODO - doesn't always work - FIX THIS!
-        if(!client.isFileDownloaded("venuesLocation.xml")){
+
             //Tries to download the venue lists from the server
             try {
                 client.requestVenueXMLFile();
+                System.out.println("OUT");
             } catch (IOException e) {
                 System.out.print("Failed to download venue lists");
             }
-        }
+        
 
 
 
