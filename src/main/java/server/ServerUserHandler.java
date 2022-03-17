@@ -106,7 +106,7 @@ public class ServerUserHandler {
 
                 input += desiredName + "," + currUser.getPassword() + "," + currUser.getSalt() + '\n';
 
-                System.out.println("CHANGED LINE: " + input);
+
 
             }
 
@@ -151,6 +151,7 @@ public class ServerUserHandler {
                 values[0] = desiredPass;
 
                 input += currUser.getUsername() + "," + desiredPass + "," + currUser.getSalt() + '\n';
+
             }
 
             //If the lines dont match, the line is ignored
@@ -209,7 +210,7 @@ public class ServerUserHandler {
          passVerified = false;
     }
 
-    public void setCurrUser(User currUser) throws IOException {
+    public void setCurrUser(User currUser) {
         this.currUser = currUser;
 
 

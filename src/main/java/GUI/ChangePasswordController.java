@@ -86,16 +86,10 @@ public class ChangePasswordController {
                    Stage currScene = (Stage) changePassButton.getScene().getWindow();
                    currScene.close();
                 }
-
                 else{
-
                     errLabel.setText("Unknown error");
 
                 }
-
-
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -455,7 +455,7 @@ public class Server {
 
             currUserHandler.changeUserPass(hashedDesiredPass);
 
-            currUserHandler.getcurrUser().setPassword(newPass);
+            currUserHandler.getcurrUser().setPassword(hashedDesiredPass);
 
             currUser.setPassword(newPass);
 
