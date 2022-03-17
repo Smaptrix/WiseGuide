@@ -220,4 +220,9 @@ public class ServerUserHandler {
         return userInfo[2];
 
     }
+
+    public User getcurrUser() {
+
+        return currUser;
+    }
 }

@@ -263,7 +263,7 @@ public class Server {
             //Sends the size of the response first
             int sizeOfResponse = responseInBytes.length;
 
-            System.out.println("File Size in bytes: " + sizeOfResponse);
+
 
             outputStream.writeByte(sizeOfResponse);
 
@@ -305,8 +305,6 @@ public class Server {
         currUserHandler.verifyUser();
 
 
-        System.out.println("Users information has been checked!");
-        System.out.println("Mode: " + mode);
 
 
         //Verification Mode - Mainly for testing
@@ -456,6 +454,8 @@ public class Server {
             String hashedDesiredPass = UserSecurity.hashThis(newPass, currUserHandler.getcurrUserSalt());
 
             currUserHandler.changeUserPass(hashedDesiredPass);
+
+            currUserHandler.getcurrUser().setPassword(newPass);
 
             currUser.setPassword(newPass);
 
