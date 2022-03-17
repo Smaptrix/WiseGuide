@@ -79,8 +79,9 @@ public class ChangePasswordController {
                     errLabel.setText("Your current password is incorrect!");
                 }
                 else if(changePassResult.equals("PASSCHANGED")){
+                    currUser.setPassword(desiredPass);
 
-                    currUser.setPassword("desiredPass");
+                    System.out.println("New password: " + desiredPass);
 
                    Stage currScene = (Stage) changePassButton.getScene().getWindow();
                    currScene.close();

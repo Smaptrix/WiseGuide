@@ -118,6 +118,9 @@ public class ServerUserHandler {
             }
         }
 
+
+            currUser.setUsername(desiredName);
+
             FileOutputStream out = new FileOutputStream("userDatabase.txt");
             out.write(input.getBytes());
             out.close();
