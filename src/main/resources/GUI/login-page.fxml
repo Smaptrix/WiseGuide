@@ -44,7 +44,7 @@
 
     <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <ImageView accessibleText="WiseGuide by Maptrix Logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="maptrixLogo" fx:id="maptrixLogo" accessibleText="WiseGuide by Maptrix Logo" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#venueLoginPageOpen" pickOnBounds="true" preserveRatio="true">
                 <Image url="@WiseGuideLogo.png" />
             </ImageView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

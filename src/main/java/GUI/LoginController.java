@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
@@ -22,7 +23,6 @@ import java.io.IOException;
 
 
 public class LoginController {
-
 
 
     //Stores the client object that lets the GUI communicate with the server
@@ -46,6 +46,7 @@ public class LoginController {
 
 
 
+
     @FXML
     //Always called by the FXML Loader
     public void initialize() {
@@ -61,13 +62,11 @@ public class LoginController {
     }
 
 
-
-
     @FXML
     //Closes the application
     private void exitButtonAction() throws IOException {
         //Doesn't try to close a connection that isn't there
-        if(client.isConnected()) {
+        if (client.isConnected()) {
             client.closeConnection(); // Closes Client connection safely
         }
         System.exit(0);
@@ -85,61 +84,45 @@ public class LoginController {
 
     private void loginButtonAction() throws IOException {
 
-        if(userTextField.getText().trim().isEmpty()) {
+        if (userTextField.getText().trim().isEmpty()) {
 
             errorLabel.setText("You have not entered a username!");
 
-        }
-
-        else if(userPassField.getText().trim().isEmpty()){
+        } else if (userPassField.getText().trim().isEmpty()) {
 
             errorLabel.setText("You have not entered a password!");
-        }
-
-        else if(!client.isConnected()){
+        } else if (!client.isConnected()) {
             errorLabel.setText("Cannot connect to server!");
-        }
-
-        else if(!client.isSameVersion()){
+        } else if (!client.isSameVersion()) {
             errorLabel.setText("Server and Client are different Versions!");
-        }
-
-
-        else {
+        } else {
 
             errorLabel.setText("");
 
 
-
-           currUser = new User(userTextField.getText(), userPassField.getText());
-
+            currUser = new User(userTextField.getText(), userPassField.getText());
 
 
-           String loginCode = client.requestLogin(currUser);
+            String loginCode = client.requestLogin(currUser);
 
 
-           if(loginCode.equals("BADLOGIN")){
-               errorLabel.setText("Unrecognised user details");
+            if (loginCode.equals("BADLOGIN")) {
+                errorLabel.setText("Unrecognised user details");
             }
 
-           //If not BADLOGIN assume GOODLOGIN
-           else {
+            //If not BADLOGIN assume GOODLOGIN
+            else {
                 errorLabel.setText("");
 
 
-
-               Stage currStage = (Stage) loginButton.getScene().getWindow();
-               currStage.close();
-
-
-               //Opens the main application once you have logged in
-               MainApplication app = new MainApplication();
-               Stage mainStage = new Stage();
-               app.transferInfoAndOpen(mainStage, client, currUser);
+                Stage currStage = (Stage) loginButton.getScene().getWindow();
+                currStage.close();
 
 
-
-
+                //Opens the main application once you have logged in
+                MainApplication app = new MainApplication();
+                Stage mainStage = new Stage();
+                app.transferInfoAndOpen(mainStage, client, currUser);
 
 
             }
@@ -160,7 +143,7 @@ public class LoginController {
             stage.setTitle("Account Creation");
             stage.show();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -169,4 +152,23 @@ public class LoginController {
     public void setClient(Client client) {
         this.client = client;
     }
+
+
+    @FXML
+    private void venueLoginPageOpen() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-login-page.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 300, 350);
+        VenueLoginController controller= fxmlLoader.getController();
+        controller.setClient(client);
+        stage.setScene(scene);
+        stage.setTitle("Venue Login Page");
+        stage.show();
+
+
+
+    }
+
+
 }
