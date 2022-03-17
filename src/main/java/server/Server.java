@@ -447,15 +447,17 @@ public class Server {
 
 
         //If the password entered doesnt match the current password
-        if(!(UserSecurity.hashThis(currPass, currUser.getSalt()).equals(UserSecurity.hashThis(currUser.getPassword(), currUser.getSalt())))){
+        if(!(UserSecurity.hashThis(currPass, currUserHandler.getcurrUserSalt()).equals(UserSecurity.hashThis(currUser.getPassword(), currUserHandler.getcurrUserSalt())))){
 
             sendResponse("INCORRECTPASS", true);
         }
         else{
 
-            String hashedDesiredPass = UserSecurity.hashThis(newPass, currUser.getSalt());
+            String hashedDesiredPass = UserSecurity.hashThis(newPass, currUserHandler.getcurrUserSalt());
 
             currUserHandler.changeUserPass(hashedDesiredPass);
+
+            currUser.setPassword(newPass);
 
             sendResponse("PASSCHANGED", true);
 

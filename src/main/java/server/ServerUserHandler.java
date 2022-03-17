@@ -24,6 +24,8 @@ public class ServerUserHandler {
     public ServerUserHandler(User currUser, boolean autoVerify) throws IOException {
         this.currUser = currUser;
 
+
+
         if(autoVerify){
             verifyUser();
         }
@@ -145,7 +147,7 @@ public class ServerUserHandler {
             if ((values[0]).equals(currUser.getUsername())) {
                 values[0] = desiredPass;
 
-                input += currUser.getUsername() + "," + currUser.getPassword() + "," + currUser.getSalt() + '\n';
+                input += currUser.getUsername() + "," + desiredPass + "," + currUser.getSalt() + '\n';
             }
 
             //If the lines dont match, the line is ignored

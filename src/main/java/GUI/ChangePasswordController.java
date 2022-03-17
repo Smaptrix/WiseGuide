@@ -34,8 +34,6 @@ public class ChangePasswordController {
         this.currUser = currUser;
     }
 
-
-
     @FXML
     PasswordField currPasswordField;
 
@@ -45,6 +43,8 @@ public class ChangePasswordController {
     @FXML
     PasswordField newPasswordConfirmField;
 
+
+    //TODO - Changing password lets you login with any old password???
 
     @FXML
     public void onChangePassButtonPress(){
@@ -75,6 +75,8 @@ public class ChangePasswordController {
                     errLabel.setText("Your current password is incorrect!");
                 }
                 else{
+
+                    currUser.setPassword("desiredPass");
 
                    Stage currScene = (Stage) changePassButton.getScene().getWindow();
                    currScene.close();
