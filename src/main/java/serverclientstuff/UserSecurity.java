@@ -154,10 +154,6 @@ public class UserSecurity {
 
         String saltedPass = currUser.getPassword() + currUser.getSalt();
 
-        System.out.println("UnSalted Password: " + currUser.getPassword());
-
-        System.out.println("Salted Password: " + saltedPass);
-
 
         byte[] hashPass = digest.digest(saltedPass.getBytes(StandardCharsets.UTF_8));
 
@@ -178,5 +174,28 @@ public class UserSecurity {
 
     }
 
+
+
+    //Hashes a provided string with a provided salt
+    public static String hashThis(String pass, String salt) {
+
+        //Hash the password because we never want to undo it
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        assert digest != null;
+
+        String saltedPass = pass + salt;
+
+
+
+        byte[] hashPass = digest.digest(saltedPass.getBytes(StandardCharsets.UTF_8));
+
+
+        return Utils.bytesToHex(hashPass);
+    }
 
 }

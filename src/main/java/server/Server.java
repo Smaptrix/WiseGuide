@@ -10,6 +10,7 @@ package server;
 
 
 import serverclientstuff.User;
+import serverclientstuff.UserSecurity;
 
 import java.net.*;
 import java.io.*;
@@ -161,6 +162,10 @@ public class Server {
 
             case "CHANGENAME":
                 changeUsername();
+                break;
+
+            case "CHANGEPASS":
+                changePassword();
                 break;
 
             case "LOGOUT":
@@ -424,21 +429,43 @@ public class Server {
 
         String desiredUsername = inText.readLine();
 
-
         //If the username is taken
         if (ServerUserHandler.findUserName(desiredUsername)){
-
-
-
-
-
             sendResponse("USERNAMETAKEN", true);
         }
-
         else {
             currUserHandler.changeUserName(desiredUsername);
             sendResponse("NAMECHANGED", true);
         }
+    }
+
+    private void changePassword() throws IOException {
+
+        String currPass = inText.readLine();
+
+        String newPass = inText.readLine();
+
+
+        //If the password entered doesnt match the current password
+        if(!(UserSecurity.hashThis(currPass, currUser.getSalt()).equals(UserSecurity.hashThis(currUser.getPassword(), currUser.getSalt())))){
+
+            sendResponse("INCORRECTPASS", true);
+        }
+        else{
+
+            String hashedDesiredPass = UserSecurity.hashThis(newPass, currUser.getSalt());
+
+            currUserHandler.changeUserPass(hashedDesiredPass);
+
+            sendResponse("PASSCHANGED", true);
+
+
+
+        }
+
+
+
+
 
 
     }

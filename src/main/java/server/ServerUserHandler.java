@@ -122,13 +122,42 @@ public class ServerUserHandler {
 
             System.out.println("File closed");
 
-
-
-
         }
 
 
 
+
+
+
+    //Changes the current username
+    public void changeUserPass (String desiredPass) throws IOException {
+
+        //Finds the line that we need to update
+        BufferedReader br = new BufferedReader(new FileReader("userDatabase.txt"));
+        String line;
+        String input = "";
+
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+
+
+            //If the current username matches the line, the line is replaced with the new data
+            if ((values[0]).equals(currUser.getUsername())) {
+                values[0] = desiredPass;
+
+                input += currUser.getUsername() + "," + currUser.getPassword() + "," + currUser.getSalt() + '\n';
+            }
+
+            //If the lines dont match, the line is ignored
+            else {
+                input += line + '\n';
+            }
+        }
+        FileOutputStream out = new FileOutputStream("userDatabase.txt");
+        out.write(input.getBytes());
+        out.close();
+
+   }
 
 
 

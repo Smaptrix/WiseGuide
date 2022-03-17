@@ -471,6 +471,21 @@ public class Client {
     }
 
 
+    public String requestPasswordChange(String enteredPassword, String newPassword) throws IOException {
+
+        outText.println("CHANGEPASS");
+
+        outText.println(enteredPassword);
+
+        outText.println(newPassword);
+
+        return receiveAcknowledgement();
+
+
+    }
+
+
+
 
 
     /**
