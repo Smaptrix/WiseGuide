@@ -85,7 +85,7 @@ public class AccountDetailsController {
 
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 600, 375);
-        ChangeUsernameController controller = fxmlLoader.getController();
+        ChangePasswordController controller = fxmlLoader.getController();
         controller.setClient(client);
         controller.setUser(currUser);
         stage.setScene(scene);
