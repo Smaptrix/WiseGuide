@@ -26,6 +26,9 @@ public class AccountDetailsController {
     @FXML
     Button changeNameButton;
 
+    @FXML
+    Button changePassButton;
+
 
 
 
@@ -43,6 +46,7 @@ public class AccountDetailsController {
     public void setUser(User currUser) {
         this.currUser = currUser;
         usernameLabel.setText(currUser.getUsername());
+        System.out.println(currUser.getUsername());
     }
 
 
@@ -71,6 +75,34 @@ public class AccountDetailsController {
 
 
     }
+
+
+    @FXML
+    protected void onchangePassButtonPress() throws IOException {
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("change-password-page.fxml"));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 600, 375);
+        ChangeUsernameController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        controller.setUser(currUser);
+        stage.setScene(scene);
+        stage.setTitle("Change Password");
+        stage.show();
+
+
+        //Close the current page
+        Stage currStage = (Stage) changeNameButton.getScene().getWindow();
+        currStage.close();
+
+
+
+
+
+    }
+
 
 
 }

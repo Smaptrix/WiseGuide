@@ -60,6 +60,8 @@ public class ChangeUsernameController {
             try {
                 if (client.requestUserNameChange(desiredName).equals("NAMECHANGED")){
 
+                    currUser.setUsername(desiredName);
+
                     Stage currStage = (Stage) confirmButton.getScene().getWindow();
                     currStage.close();
 

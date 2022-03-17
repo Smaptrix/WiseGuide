@@ -19,7 +19,7 @@
             <Label layoutX="86.0" layoutY="157.0" text="Password:" />
             <Label id="usernameLabel" fx:id="usernameLabel" layoutX="198.0" layoutY="100.0" text="UsernameBlank" />
             <Button id="changeNameButton" fx:id="changeNameButton" layoutX="322.0" layoutY="96.0" mnemonicParsing="false" onAction="#onchangeNameButtonPress" text="Change" />
-            <Button layoutX="198.0" layoutY="153.0" mnemonicParsing="false" text="Change" />
+            <Button id="changePassButton" fx:id="changePassButton" layoutX="198.0" layoutY="153.0" mnemonicParsing="false" onAction="#onchangePassButtonPress" text="Change" />
          </children>
       </AnchorPane>
    </children>
