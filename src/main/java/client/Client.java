@@ -177,9 +177,11 @@ public class Client {
 
         //Checks to see if a file has already been downloaded
         //This is so that the same file is not downloaded twice
+        //TODO - doesn't always work - FIX THIS!
         if(fileLocations.containsKey(fileName)){
             System.out.println("File is already downloaded");
             return null;
+
         }
         else {
             //Tells us how many bytes are telling us how big the file is
@@ -227,7 +229,7 @@ public class Client {
      * @param bytesToRead the number of bytes to read from the inputStream
      * @return a byte array of data read from the input stream
      */
-    public byte[] readBytes(int bytesToRead) {
+    private byte[] readBytes(int bytesToRead) {
 
         //Initialises a new byte array of size predetermined by our network protocol
         byte[] data = new byte[bytesToRead];
@@ -270,7 +272,7 @@ public class Client {
      * @return the filepath of the downlaoded file
      * @throws IOException if
      */
-    public File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
+    private File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
 
         //Creates a new temp file - Identifiable by custom prefix
         File currFile = new File(String.valueOf(Files.createTempFile("WG_", "." + fileType)));

@@ -70,16 +70,25 @@ public class ChangePasswordController {
             try {
 
 
-                if(client.requestPasswordChange(currPass, desiredPass).equals("INCORRECTPASS")){
+
+                String changePassResult = client.requestPasswordChange(currPass, desiredPass);
+
+
+                if(changePassResult.equals("INCORRECTPASS")){
 
                     errLabel.setText("Your current password is incorrect!");
                 }
-                else{
+                else if(changePassResult.equals("PASSCHANGED")){
 
                     currUser.setPassword("desiredPass");
 
                    Stage currScene = (Stage) changePassButton.getScene().getWindow();
                    currScene.close();
+                }
+
+                else{
+
+                    errLabel.setText("Unknown error");
 
                 }
 
