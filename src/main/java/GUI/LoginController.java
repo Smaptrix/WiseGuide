@@ -159,7 +159,7 @@ public class LoginController {
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-login-page.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load(), 300, 350);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         VenueLoginController controller= fxmlLoader.getController();
         controller.setClient(client);
         stage.setScene(scene);
