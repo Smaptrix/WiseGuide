@@ -104,22 +104,23 @@ public class ServerUserHandler {
 
                 input += desiredName + "," + currUser.getPassword() + "," + currUser.getSalt() + '\n';
 
+                System.out.println("CHANGED LINE: " + input);
+
             }
 
             //If the lines dont match, the line is ignored
-            else{
+            else {
 
-                input += line + '\n' ;
-                System.out.println("Different user");
+                input += line + '\n';
+
             }
-
-
-            System.out.println("userDatabase: " + input);
-
+        }
 
             FileOutputStream out = new FileOutputStream("userDatabase.txt");
             out.write(input.getBytes());
             out.close();
+
+            System.out.println("File closed");
 
 
 
@@ -131,7 +132,7 @@ public class ServerUserHandler {
 
 
 
-    }
+
 
 
 

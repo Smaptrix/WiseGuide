@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -57,8 +58,19 @@ public class ChangeUsernameController {
         }
         else{
             try {
-                client.requestUserNameChange(desiredName);
-            } catch (IOException e) {
+                if (client.requestUserNameChange(desiredName).equals("NAMECHANGED")){
+
+                    Stage currStage = (Stage) confirmButton.getScene().getWindow();
+                    currStage.close();
+
+                }
+                else{
+
+                    errLabel.setText("That name is already taken!");
+
+                }
+
+                } catch (IOException e) {
                 e.printStackTrace();
             }
         }
