@@ -81,7 +81,7 @@ public class ChangePasswordController {
                 else if(changePassResult.equals("PASSCHANGED")){
                     currUser.setPassword(desiredPass);
 
-                    System.out.println("New password: " + desiredPass);
+
 
                    Stage currScene = (Stage) changePassButton.getScene().getWindow();
                    currScene.close();
