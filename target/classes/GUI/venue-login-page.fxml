@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,6 +18,11 @@
                   <Font size="31.0" />
                </font>
             </Label>
+            <Label layoutX="144.0" layoutY="123.0" prefHeight="17.0" prefWidth="128.0" text="Venue Name: " />
+            <Label layoutX="154.0" layoutY="192.0" text="Password " />
+            <Button id="loginButton" fx:id="loginButton" layoutX="272.0" layoutY="272.0" mnemonicParsing="false" text="Login" />
+            <PasswordField fx:id="venuePass" layoutX="272.0" layoutY="188.0" />
+            <TextField fx:id="venueName" layoutX="272.0" layoutY="119.0" />
          </children>
       </AnchorPane>
    </children>
