@@ -29,6 +29,14 @@ public class VenueLoginController {
 
 
 
+    @FXML
+    public void onLoginButtonPress(){
+
+        System.out.println("Test");
+
+    }
+
+
 
 
 }

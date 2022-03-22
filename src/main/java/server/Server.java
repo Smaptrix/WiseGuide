@@ -11,6 +11,7 @@ package server;
 
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
+import serverclientstuff.VenueUser;
 
 import java.net.*;
 import java.io.*;
@@ -176,6 +177,10 @@ public class Server {
                 versionCheck();
                 break;
 
+            case "VENUELOGIN":
+                venueLoginRequest();
+                break;
+
 
             default:
                 System.out.println(requestIn + " : Invalid command");
@@ -184,7 +189,14 @@ public class Server {
         }
     }
 
+    private void venueLoginRequest() throws IOException {
 
+        String venueName = inText.readLine();
+        String venuePass = inText.readLine();
+
+
+        currUser = new VenueUser(venueName, venuePass);
+    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -295,8 +307,7 @@ public class Server {
 
 
         //Hashing server side as we can access the users salt
-        currUser.setUsername(loginName);
-        currUser.setPassword(loginPass);
+        currUser = new User(loginName, loginPass);
 
         currUserHandler.setCurrUser(currUser);
 
