@@ -489,6 +489,18 @@ public class Client {
 
 
 
+    public String requestVenueLogin(String venueName, String venuePass) throws IOException {
+        outText.println("VENUELOGIN");
+
+        outText.println(venueName);
+        outText.println(venuePass);
+
+        return receiveAcknowledgement();
+
+    }
+
+
+
 
 
     /**

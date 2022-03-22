@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class VenueLoginController {
 
     Client client;
@@ -30,9 +32,9 @@ public class VenueLoginController {
 
 
     @FXML
-    public void onLoginButtonPress(){
+    public void onLoginButtonPress() throws IOException {
 
-        System.out.println("Test");
+        client.requestVenueLogin(venueName.getText(), venuePass.getText());
 
     }
 
