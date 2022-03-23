@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import serverclientstuff.User;
 
 import java.io.IOException;
 
@@ -16,6 +17,7 @@ public class VenueLoginController {
 
     Client client;
 
+    User currUser;
 
     @FXML
     TextField venueName;
@@ -48,14 +50,37 @@ public class VenueLoginController {
             errLabel.setText("Please enter something in both fields!");
         }
         else{
+
+            currUser = new User(venueName.getText(), venuePass.getText());
+
+
             //Checks to see if the login data was correct
-            if(client.requestVenueLogin(venueName.getText(), venuePass.getText()).equals("BADLOGIN")){
+            if(client.requestVenueLogin(currUser.getUsername(), currUser.getPassword()).equals("BADLOGIN")){
                 errLabel.setText("Unrecognised Venue Details");
             }
             else{
                 //If the login data is correct
                 errLabel.setText("");
                 System.out.println("Good login!");
+
+                //Opens the main venue owner page
+                FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-owner-main-page.fxml"));
+
+                Stage stage = new Stage();
+                Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+
+                System.out.println("Loaded login page again");
+
+                VenueOwnerMainPageController controller = fxmlLoader.getController();
+                controller.setClient(client);
+                controller.setCurrUser(currUser);
+                stage.setScene(scene);
+                stage.setTitle("Welcome to WiseGuide");
+                stage.show();
+
+
+                Stage currStage = (Stage) backButton.getScene().getWindow();
+                currStage.close();
             }
 
         }

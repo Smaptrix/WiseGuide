@@ -339,15 +339,16 @@ public class Server {
         if(mode == 1) {
 
             System.out.println("Login mode!");
-            System.out.println("VENUE EXIST: " + currUserHandler.userExistState);
+
 
             //If the user exists grab there salt then encrypt there data
+           //Breaks if user has no salt
             if(currUserHandler.userExistState){
                 currUser.setSalt(currUserHandler.getcurrUserSalt());
                 currUser.encryptUserInfo();
                 currUserHandler.verifyUser();
-
             }
+
 
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
@@ -363,6 +364,9 @@ public class Server {
                 sendResponse("GOODLOGIN", true);
                 System.out.println("Login message sent!");
             }
+
+
+
 
         }
 
