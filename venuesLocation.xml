@@ -24,17 +24,17 @@
     -->
 
 
-<base:page title="Flares York" ID="001" price="2" lat="53.9587775" lon="-1.0867884" category="nightclub">
+<base:page title="Flares_York" ID="001" price="2" lat="53.9587775" lon="-1.0867884" category="nightclub">
     <base:shape x_end="0" y_end="0" type="textbox">
         <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text.txt"></base:text>
     </base:shape>
 </base:page>
-<base:page title="Revolution York" ID="002" price="2" lat="53.9592577" lon="-1.0872826" category="nightclub">
+<base:page title="Revolution_York" ID="002" price="2" lat="53.9592577" lon="-1.0872826" category="nightclub">
     <base:shape x_end="0" y_end="0" type="textbox">
         <base:text include_source="Venues/Clubs/Revolution_York/Revolution_York_text.txt"></base:text>
     </base:shape>
 </base:page>
-<base:page title="Club Salvation" ID="003" price="1" lat="53.958187" lon="-1.0895813" category="nightclub">
+<base:page title="Club_Salvation" ID="003" price="1" lat="53.958187" lon="-1.0895813" category="nightclub">
     <base:shape x_end="0" y_end="0" type="textbox">
         <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation_text.txt"></base:text>
     </base:shape>
