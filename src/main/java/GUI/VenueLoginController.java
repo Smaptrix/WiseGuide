@@ -67,15 +67,15 @@ public class VenueLoginController {
                 FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-owner-main-page.fxml"));
 
                 Stage stage = new Stage();
-                Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+                Scene scene = new Scene(fxmlLoader.load(), 450, 470);
 
-                System.out.println("Loaded login page again");
 
                 VenueOwnerMainPageController controller = fxmlLoader.getController();
                 controller.setClient(client);
                 controller.setCurrUser(currUser);
+                controller.populateFileList();
                 stage.setScene(scene);
-                stage.setTitle("Welcome to WiseGuide");
+                stage.setTitle(currUser.getUsername() + " Owner Page");
                 stage.show();
 
 
