@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -28,6 +29,9 @@ public class VenueLoginController {
     @FXML
     Button backButton;
 
+    @FXML
+    Label errLabel;
+
 
     public void setClient(Client client){
         this.client = client;
@@ -39,7 +43,24 @@ public class VenueLoginController {
     @FXML
     private void onLoginButtonPress() throws IOException {
 
-        client.requestVenueLogin(venueName.getText(), venuePass.getText());
+        //Make sure teh fields arent empty
+        if(venueName.getText().isEmpty() || venuePass.getText().isEmpty()){
+            errLabel.setText("Please enter something in both fields!");
+        }
+        else{
+            //Checks to see if the login data was correct
+            if(client.requestVenueLogin(venueName.getText(), venuePass.getText()).equals("BADLOGIN")){
+                errLabel.setText("Unrecognised Venue Details");
+            }
+            else{
+                //If the login data is correct
+                errLabel.setText("");
+                System.out.println("Good login!");
+            }
+
+        }
+
+
 
     }
     //TODO - IDEAS

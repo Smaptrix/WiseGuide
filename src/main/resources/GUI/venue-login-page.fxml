@@ -19,10 +19,11 @@
             </Label>
             <Label layoutX="144.0" layoutY="123.0" prefHeight="17.0" prefWidth="128.0" text="Venue Name: " />
             <Label layoutX="154.0" layoutY="192.0" text="Password " />
-            <Button id="loginButton" fx:id="loginButton" layoutX="272.0" layoutY="272.0" mnemonicParsing="false" onAction="#onLoginButtonPress" text="Login" />
+            <Button id="loginButton" fx:id="loginButton" layoutX="272.0" layoutY="301.0" mnemonicParsing="false" onAction="#onLoginButtonPress" text="Login" />
             <PasswordField fx:id="venuePass" layoutX="272.0" layoutY="188.0" />
             <TextField fx:id="venueName" layoutX="272.0" layoutY="119.0" />
             <Button fx:id="backButton" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#onBackButtonPress" text="Back" />
+            <Label id="errLabel" fx:id="errLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="244.0" prefHeight="17.0" prefWidth="534.0" />
          </children>
       </AnchorPane>
    </children>
