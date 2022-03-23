@@ -37,6 +37,9 @@ public class VenueLoginController {
         client.requestVenueLogin(venueName.getText(), venuePass.getText());
 
     }
+    //TODO - IDEAS
+    //     - FOR THE VENUE PRODUCE A LIST OF ALL FILES CURRENTLY STORED IN VENUES DIRECTORY
+    //     - LET THE VENUE ADD OR DELETE MORE FILES?!?!
 
 
 

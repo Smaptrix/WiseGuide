@@ -11,7 +11,6 @@ package server;
 
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
-import serverclientstuff.VenueUser;
 
 import java.net.*;
 import java.io.*;
@@ -149,27 +148,33 @@ public class Server {
 
 
             case "VERIFYUSER":
+                currUserHandler.setUserType("USER");
                 receiveLogin(0);
                 break;
 
             case "LOGIN":
+                currUserHandler.setUserType("USER");
                 receiveLogin(1);
                 break;
 
             case "CREATEUSER":
+                currUserHandler.setUserType("USER");
                 receiveLogin(2);
                 break;
 
 
             case "CHANGENAME":
+                currUserHandler.setUserType("USER");
                 changeUsername();
                 break;
 
             case "CHANGEPASS":
+                currUserHandler.setUserType("USER");
                 changePassword();
                 break;
 
             case "LOGOUT":
+                currUserHandler.setUserType("USER");
                 logout();
                 break;
 
@@ -178,7 +183,8 @@ public class Server {
                 break;
 
             case "VENUELOGIN":
-                venueLoginRequest();
+                currUserHandler.setUserType("VENUE");
+                receiveLogin(1);
                 break;
 
 
@@ -189,14 +195,6 @@ public class Server {
         }
     }
 
-    private void venueLoginRequest() throws IOException {
-
-        String venueName = inText.readLine();
-        String venuePass = inText.readLine();
-
-
-        currUser = new VenueUser(venueName, venuePass);
-    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -392,6 +390,7 @@ public class Server {
 
 
     }
+
 
 
     //Logs the user out of the server
