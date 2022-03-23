@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="446.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VenueOwnerMainPageController">
    <children>
       <AnchorPane prefHeight="425.0" prefWidth="600.0">
          <children>
@@ -20,7 +21,10 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Label layoutX="72.0" layoutY="14.0" prefHeight="17.0" prefWidth="327.0" text="VENUE ADMIN PAGE: " />
+            <Label fx:id="titleLabel" layoutX="72.0" layoutY="14.0" prefHeight="17.0" prefWidth="327.0" text="VENUE ADMIN PAGE: " />
+            <Button layoutX="281.0" layoutY="327.0" mnemonicParsing="false" text="Add New File" />
+            <Button layoutX="289.0" layoutY="143.0" mnemonicParsing="false" text="Delete File" />
+            <Button layoutX="291.0" layoutY="86.0" mnemonicParsing="false" text="Open File" />
          </children>
       </AnchorPane>
    </children>
