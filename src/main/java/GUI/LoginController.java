@@ -167,6 +167,10 @@ public class LoginController {
         stage.show();
 
 
+        Stage currStage = (Stage) errorLabel.getScene().getWindow();
+        currStage.close();
+
+
 
     }
 

@@ -316,6 +316,7 @@ public class Server {
 
 
 
+
         //Verification Mode - Mainly for testing
         if(mode == 0){
 
@@ -338,12 +339,14 @@ public class Server {
         if(mode == 1) {
 
             System.out.println("Login mode!");
+            System.out.println("VENUE EXIST: " + currUserHandler.userExistState);
 
             //If the user exists grab there salt then encrypt there data
             if(currUserHandler.userExistState){
                 currUser.setSalt(currUserHandler.getcurrUserSalt());
                 currUser.encryptUserInfo();
                 currUserHandler.verifyUser();
+
             }
 
             //Verifies the user data
