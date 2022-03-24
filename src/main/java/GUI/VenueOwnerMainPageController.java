@@ -4,12 +4,14 @@ import VenueXMLThings.VenuePage;
 import VenueXMLThings.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import serverclientstuff.User;
+import serverclientstuff.Utils;
 
 import java.io.IOException;
-import java.util.List;
+
 
 
 //TODO - Do we want to display the files that are needed by the XML? OR that we have in our directory?
@@ -18,7 +20,6 @@ public class VenueOwnerMainPageController {
 
     private Client client;
     private User currUser;
-    private VenueXMLParser xml;
     private String filePathStart;
 
     @FXML
@@ -26,6 +27,9 @@ public class VenueOwnerMainPageController {
 
     @FXML
     ListView fileList;
+
+    @FXML
+    Button openFileButton;
 
     public void setClient(Client client) {
         this.client = client;
@@ -51,7 +55,7 @@ public class VenueOwnerMainPageController {
             e.printStackTrace();
         }
 
-        xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
+        VenueXMLParser xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
 
         VenuePage currVenuePage = xml.getPage("title", currUser.getUsername());
@@ -70,8 +74,30 @@ public class VenueOwnerMainPageController {
 
     }
 
-    //TODO - DELETE FILES, ADD NEW FILES (REMEMBER WE HAVE TO CHANGE THE FILE ON THE SERVER AS WELL)
 
+
+    @FXML
+    //Downloads and opens the requested file by the venue owner
+    private void onOpenFileButtonPress(){
+
+        System.out.println("Open File Button Pressed");
+
+        //Make sure that something is selected to it doesnt request a file that doesnt exist
+       if(fileList.getSelectionModel().getSelectedItem() != null){
+           //Requests the selected file from the server
+           try {
+               String filePath = filePathStart + fileList.getSelectionModel().getSelectedItem();
+               client.requestFile(filePath);
+               Utils.openFile(client.getFile(filePath));
+           } catch (IOException e) {
+               System.out.println("Unable to download file!");
+           }
+       }
+
+    }
+
+
+    //TODO - DELETE FILES, ADD NEW FILES (REMEMBER WE HAVE TO CHANGE THE FILE ON THE SERVER AS WELL)
 
 
 }
