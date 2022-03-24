@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import serverclientstuff.User;
 import serverclientstuff.Utils;
 
@@ -93,6 +94,37 @@ public class VenueOwnerMainPageController {
                System.out.println("Unable to download file!");
            }
        }
+
+    }
+
+
+    @FXML
+    //Deletes a file from the servers directory, and in the XML file --- WIP
+    private void onDeleteFileButtonPress(){
+
+        System.out.println("Delete File Button Pressed");
+
+        if (fileList.getSelectionModel().getSelectedItem() != null) {
+
+            //Do thing
+
+        }
+
+
+    }
+
+
+    @FXML
+    //Adds a new file to the servers directory, and into the XML file
+    private void onAddFileButtonPress(){
+
+        System.out.println("Add File Button Pressed!");
+
+        if (fileList.getSelectionModel().getSelectedItem() != null){
+
+            //Do thing
+
+        }
 
     }
 
