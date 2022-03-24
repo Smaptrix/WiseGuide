@@ -67,7 +67,6 @@ public class LoginGUIIntegration extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();
-
         //TODO: IntTestUser should be deleted from database after the test, otherwise test will only work once!
     }
 

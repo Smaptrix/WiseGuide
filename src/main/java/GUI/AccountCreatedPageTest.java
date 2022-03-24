@@ -11,10 +11,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
-import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.WindowMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
@@ -53,6 +52,13 @@ public class AccountCreatedPageTest extends ApplicationTest {
         clickOn("#closePopupButton");
         //FxAssert.verifyThat(window("Account Created"), WindowMatchers.isNotShowing()); --This method does not work as it can't find a window w/o a title.
         Assert.assertFalse(stage.isShowing());
+    }
+
+    //Unit Test | Confirm "Okay" button text displays "Okay"
+    @Test
+    public void okayTextTest() {
+        sleep(1000);
+        FxAssert.verifyThat("#closePopupButton", LabeledMatchers.hasText("Okay!"));
     }
 
 }

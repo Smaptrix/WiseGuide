@@ -12,19 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
-import org.testfx.assertions.api.Assertions;
-import org.testfx.assertions.api.TextAssert;
-import org.testfx.assertions.api.TextInputControlAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
-import org.testfx.matcher.control.TextMatchers;
-import org.testfx.osgi.service.TestFx;
-import server.ServerUserHandler;
-import serverclientstuff.User;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
@@ -54,11 +46,27 @@ public class LoginApplicationTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    //TODO: Username and Password Labels require IDs to test.
+
     //Unit Test | Confirm "Login" button text is correct.
     @Test
     public void loginTextTest() {
         sleep(1000);
         FxAssert.verifyThat("#loginButton", LabeledMatchers.hasText("Login"));
+    }
+
+    //Unit Test | Confirm "Create Account" button text is correct.
+    @Test
+    public void createAccountTextTest() {
+        sleep(1000);
+        FxAssert.verifyThat("#createAccButton", LabeledMatchers.hasText("Create Account"));
+    }
+
+    //Unit Test | Confirm "Exit" button text is correct.
+    @Test
+    public void exitTextTest() {
+        sleep(1000);
+        FxAssert.verifyThat("#exitButton", LabeledMatchers.hasText("Exit"));
     }
 
     //Unit Test | Confirm "Login" button can be pressed.

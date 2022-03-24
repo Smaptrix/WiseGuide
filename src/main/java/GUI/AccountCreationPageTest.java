@@ -1,10 +1,8 @@
 package GUI;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
@@ -15,7 +13,6 @@ import org.junit.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.GeneralMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 
@@ -50,6 +47,45 @@ public class AccountCreationPageTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    //Unit Test | Confirm Username label is displayed
+    //TODO: Username label requries ID to test
+
+    //Unit Test | Confirm Password label is displayed
+    //TODO: Password label requries ID to test
+
+    //Unit Test | Confirm Password Confirmation label is displayed
+    //TODO: Password Confirmation label requries ID to test
+
+    //Unit Test | Confirm Error Field is not displayed
+    //TODO
+
+    //Unit Test | Confirm Age Checkbox label is displayed
+    @Test
+    public void ageCheckboxTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#ageCheckBox",LabeledMatchers.hasText("I confirm I am over the age of 13"));
+    }
+
+    //Unit Test | Confirm Privacy Policy Link is visible
+    @Test
+    public void privacyTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#privacyPolicyLink",LabeledMatchers.hasText("Privacy Policy"));
+    }
+
+    //Unit Test | Confirm T&C Link is visible
+    @Test
+    public void TCTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#termsLink",LabeledMatchers.hasText("Terms and Conditions"));
+    }
+
+    //Unit Test | Confirm "Create Account" button displays correct text
+    @Test
+    public void CreateAccountTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#createAccountButton",LabeledMatchers.hasText("Create Account"));
+    }
 
     //Unit Test | Confirm text can be entered in username field.
     @Test
@@ -60,7 +96,6 @@ public class AccountCreationPageTest extends ApplicationTest {
         FxAssert.verifyThat("#usernameField", TextInputControlMatchers.hasText("username"));
     }
 
-
     //Unit Test | Confirm text can be entered in password field.
     @Test
     public void enterPasswordTest(){
@@ -69,7 +104,6 @@ public class AccountCreationPageTest extends ApplicationTest {
         write("password");
         FxAssert.verifyThat("#passField", TextInputControlMatchers.hasText("password"));
     }
-
 
     //Unit Test | Confirm text can be entered in confirm password field.
     @Test
