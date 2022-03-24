@@ -21,8 +21,8 @@
               </content>
             </ScrollPane>
             <Label fx:id="titleLabel" alignment="CENTER" layoutX="72.0" layoutY="14.0" prefHeight="17.0" prefWidth="327.0" text="VENUE ADMIN PAGE: " />
-            <Button layoutX="281.0" layoutY="327.0" mnemonicParsing="false" text="Add New File" />
-            <Button layoutX="289.0" layoutY="143.0" mnemonicParsing="false" text="Delete File" />
+            <Button fx:id="addFileButton" layoutX="281.0" layoutY="327.0" mnemonicParsing="false" onAction="#onAddFileButtonPress" text="Add New File" />
+            <Button id="deleteFileButton" fx:id="deleteFileButton" layoutX="289.0" layoutY="143.0" mnemonicParsing="false" onAction="#onDeleteFileButtonPress" text="Delete File" />
             <Button id="openFileButton" fx:id="openFileButton" layoutX="291.0" layoutY="86.0" mnemonicParsing="false" onAction="#onOpenFileButtonPress" text="Open File" />
          </children>
       </AnchorPane>
