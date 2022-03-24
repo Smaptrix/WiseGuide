@@ -10,16 +10,20 @@ package GUI;
 
 
 import client.Client;
+import GUI.LoginApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
-
-
+import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
 
@@ -40,7 +44,10 @@ public class LoginController {
     @FXML
     Button loginButton;
     @FXML
+    Button exitButton;
+    @FXML
     MenuItem menuClose;
+
     @FXML
     Label errorLabel;
 
@@ -137,11 +144,6 @@ public class LoginController {
                Stage mainStage = new Stage();
                app.transferInfoAndOpen(mainStage, client, currUser);
 
-
-
-
-
-
             }
         }
 
@@ -166,7 +168,9 @@ public class LoginController {
 
     }
 
+    //Client field getter and setter, used by testing to create a new testing account manually.
     public void setClient(Client client) {
         this.client = client;
     }
+    public Client getClient() { return this.client; }
 }
