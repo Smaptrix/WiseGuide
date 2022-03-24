@@ -115,7 +115,7 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
     //Unit Test | Confirm checkbox can be clicked.
-
+    //TODO: GUI looks different now. Check if this is still an issue (AC)
     //There is an issue with JavaFX(?) where only the upper half of the checkbox can be clicked. This means
     //that TestFX's robot, which clicks the dead centre, does not cause the box to be registered as clicked.
     //This was an attempt at clicking, on screen, where the box should be but it only works for AC's specific
