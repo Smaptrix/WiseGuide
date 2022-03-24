@@ -11,6 +11,9 @@ import serverclientstuff.User;
 import java.io.IOException;
 import java.util.List;
 
+
+//TODO - Do we want to display the files that are needed by the XML? OR that we have in our directory?
+
 public class VenueOwnerMainPageController {
 
     private Client client;
