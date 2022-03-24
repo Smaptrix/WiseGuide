@@ -64,6 +64,7 @@ public class LoginApplicationTest extends ApplicationTest {
 
     //Unit Test | Confirm "Exit" button text is correct.
     @Test
+    //TODO: Exit button no longer exists - Investigate. (AC)
     public void exitTextTest() {
         sleep(1000);
         FxAssert.verifyThat("#exitButton", LabeledMatchers.hasText("Exit"));
@@ -79,6 +80,7 @@ public class LoginApplicationTest extends ApplicationTest {
 
     //Unit Test | Confirm "Exit" button can be pressed.
     @Test
+    //TODO: Exit button no longer exists - Investigate. (AC)
     public void clickOnExit() {
         sleep(1000);
         clickOn("#exitButton");

@@ -112,7 +112,7 @@ public class AccountCreationController {
 
     //TODO - Post Integration let the client handle all the user stuff not the GUI
 
-    //TODO -  User should not be able to create accounts with same names as testing accounts (see LoginGUIIntegration TODOs)
+    //TODO -  User should not be able to create accounts with same names as testing accounts (see LoginGUIIntegration TODOs) (AC)
 
     @FXML
     //Attempts to create account
@@ -159,9 +159,6 @@ public class AccountCreationController {
             }
         }
 
-
-
-    }
 
 
     //Opens the account created notification - Designed with testing in mind :) - JI

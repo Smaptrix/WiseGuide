@@ -29,7 +29,9 @@ public class LoginGUIIntegration extends ApplicationTest {
 
     private LoginController loginController; //Reference to controller so testing user can be created manually.
 
-    //TODO: Account Creation | ANY LIMITS ON WHAT CHARACTERS ALLOWED IN USER/PASS??
+    //TODO: Account Creation | Any limits on what characters allowed in username/password? These will need testing.
+
+    //TODO: Like none of these work anymore after the merge and just throw a nonspecific error every time the robot presses a button. Investigate (AC).
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -46,9 +48,11 @@ public class LoginGUIIntegration extends ApplicationTest {
 
         //Creates a testing user if one does not already exist.
         //TODO: Ideally this should be hard-coded into the user database and not created here.
-        //TODO: Remove this when a test user is hard-coded into database.
+
+        //TODO: Not confident this works after merging - check later (AC)
+
+        /*
         User testingUser = new User("testUser","testPassword");
-        testingUser.hashUserInfo();
         ServerUserHandler desiredUser = new ServerUserHandler(testingUser, true);
         desiredUser.verifyUser();
         if(desiredUser.userExistState){
@@ -59,6 +63,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         } else {
             System.out.println("ERROR: Testing User could not be created!");
         }
+         */
 
     }
 
@@ -67,7 +72,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();
-        //TODO: IntTestUser should be deleted from database after the test, otherwise test will only work once!
+        //TODO: IntTestUser should be deleted from database after the test, otherwise test will only work once! (AC)
     }
 
     //Integration Test | Confirm user can login with real username and password by clicking "Login" after entering them.
@@ -130,7 +135,6 @@ public class LoginGUIIntegration extends ApplicationTest {
         clickOn((screensize.getWidth()/2 - 93),(screensize.getHeight()/2-103));
         clickOn("#createAccountButton");
         clickOn("#closePopupButton");
-        //TODO: Verify user exists in database...? Maybe not necessary?
     }
 
     //Integration Test | Confirm a user cannot be created if the username is taken.

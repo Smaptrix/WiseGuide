@@ -48,13 +48,13 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
     //Unit Test | Confirm Username label is displayed
-    //TODO: Username label requries ID to test
+    //TODO: Username label requires ID to test
 
     //Unit Test | Confirm Password label is displayed
-    //TODO: Password label requries ID to test
+    //TODO: Password label requires ID to test
 
     //Unit Test | Confirm Password Confirmation label is displayed
-    //TODO: Password Confirmation label requries ID to test
+    //TODO: Password Confirmation label requires ID to test
 
     //Unit Test | Confirm Error Field is not displayed
     //TODO
@@ -123,7 +123,7 @@ public class AccountCreationPageTest extends ApplicationTest {
     //A better workaround could possibly be investigated but it is not a priority right now. Otherwise, simply
     //manually test with a user that the box can be clicked.
     //TODO: Currently only works on AC's screen size/resolution...
-    //TODO: The relative checkbox position is not the same as when running the full integration tests with the main screen. Investigate why.
+    //TODO: The relative checkbox position is not the same as when running the full integration tests with the main screen - Investigate (AC).
     @Test
     public void clickCheckboxTest(){
         sleep(1000);

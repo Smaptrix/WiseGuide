@@ -28,7 +28,7 @@ public class ServerClientTest {
     @Test
     //Launch Server first, then test
     //Tests to see if the server and client can connect to one another
-    //Then tests to see if the test message is sent and recieved
+    //Then tests to see if the test message is sent and received
     public void clientConnectToServer_RxTxTest() throws IOException {
 
         Client client = new Client();
