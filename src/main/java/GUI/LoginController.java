@@ -43,6 +43,8 @@ public class LoginController {
     MenuItem menuClose;
     @FXML
     Label errorLabel;
+    @FXML
+    ImageView maptrixLogo;
 
 
 
@@ -163,7 +165,7 @@ public class LoginController {
         VenueLoginController controller= fxmlLoader.getController();
         controller.setClient(client);
         stage.setScene(scene);
-        stage.setTitle("Venue Login Page");
+        stage.setTitle("Venue Login");
         stage.show();
 
 
