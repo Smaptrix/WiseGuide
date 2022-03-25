@@ -7,12 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 
@@ -47,8 +49,7 @@ public class VenueLoginApplicationTest extends ApplicationTest {
     }
 
     //TODO - Tests Required
-    //     - Make sure you can type in the fields
-    //     - Make sure that you can press the buttons
+    //     - Make sure that you can press the buttons (and they have functionality)
 
 
     //Unit test | Confirm title label is visible and has the correct text
@@ -107,6 +108,13 @@ public class VenueLoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#venuePassField", Node::isVisible);
     }
 
+    //Unit test | Confirm that the error labe lis blank on startup
+    public void errLabelVisibilityandTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText(""));
+        FxAssert.verifyThat("#errLabel", Node::isVisible);
+
+    }
 
     //Unit test | Confirm that you can type in the venue name text field
     @Test
@@ -131,6 +139,15 @@ public class VenueLoginApplicationTest extends ApplicationTest {
     }
 
 
+
+    //Unit Test | Confirm that pressing the back button takes you back to the login page
+
+    @Test
+    public void backButtonFuncitonalityTest(){
+        sleep(1000);
+        clickOn("#backButton");
+        FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
+    }
 
 
 

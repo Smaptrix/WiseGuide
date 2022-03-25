@@ -108,7 +108,7 @@ public class VenueLoginController {
         LoginController controller = fxmlLoader.getController();
         controller.setClient(client);
         stage.setScene(scene);
-        stage.setTitle("Welcome to WiseGuide");
+        stage.setTitle("Login");
         stage.show();
 
 
