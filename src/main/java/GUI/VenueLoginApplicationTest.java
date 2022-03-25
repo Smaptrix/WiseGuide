@@ -47,7 +47,6 @@ public class VenueLoginApplicationTest extends ApplicationTest {
     }
 
     //TODO - Tests Required
-    //     - Make sure labels are visible
     //     - Make sure you can type in the fields
     //     - Make sure that you can press the buttons
 
@@ -107,5 +106,32 @@ public class VenueLoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#venuePassField", TextInputControlMatchers.hasText(""));
         FxAssert.verifyThat("#venuePassField", Node::isVisible);
     }
+
+
+    //Unit test | Confirm that you can type in the venue name text field
+    @Test
+    public void venueNameTextEntryTest(){
+        sleep(1000);
+        clickOn("#venueNameField");
+        sleep(1000);
+        write("Test");
+        sleep(1000);
+        FxAssert.verifyThat("#venueNameField", TextInputControlMatchers.hasText("Test"));
+    }
+
+    //Unit test | Confirm that you can type in the venue password text field
+    @Test
+    public void venuePassTextEntryTest(){
+        sleep(1000);
+        clickOn("#venuePassField");
+        sleep(1000);
+        write("Test");
+        sleep(1000);
+        FxAssert.verifyThat("#venuePassField", TextInputControlMatchers.hasText("Test"));
+    }
+
+
+
+
 
 }

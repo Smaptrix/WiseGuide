@@ -41,6 +41,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         stage.show();
         stage.toFront();
         this.loginController = loader.getController();
+
     }
 
     @Before
