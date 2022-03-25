@@ -20,10 +20,10 @@ public class VenueLoginController {
     User currUser;
 
     @FXML
-    TextField venueName;
+    TextField venueNameField;
 
     @FXML
-    PasswordField venuePass;
+    PasswordField venuePassField;
 
     @FXML
     Button loginButton;
@@ -46,12 +46,12 @@ public class VenueLoginController {
     private void onLoginButtonPress() throws IOException {
 
         //Make sure teh fields arent empty
-        if(venueName.getText().isEmpty() || venuePass.getText().isEmpty()){
+        if(venueNameField.getText().isEmpty() || venuePassField.getText().isEmpty()){
             errLabel.setText("Please enter something in both fields!");
         }
         else{
 
-            currUser = new User(venueName.getText(), venuePass.getText());
+            currUser = new User(venueNameField.getText(), venuePassField.getText());
 
 
             //Checks to see if the login data was correct
