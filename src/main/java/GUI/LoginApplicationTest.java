@@ -132,6 +132,5 @@ public class LoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat(window("Venue Login"), WindowMatchers.isShowing());
     }
 
-    //Unit Test
 
 }

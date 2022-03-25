@@ -108,12 +108,12 @@ public class LoginController {
             String loginCode = client.requestLogin(currUser);
 
 
-            if (loginCode.equals("BADLOGIN")) {
+            if (!(loginCode.equals("GOODLOGIN"))) {
                 errorLabel.setText("Unrecognised user details");
             }
 
-            //If not BADLOGIN assume GOODLOGIN
-            else {
+            //If not BADLOGIN assume GOODLOGIN - shouldn't this be the other way around?? (JI)
+            else{
                 errorLabel.setText("");
 
 

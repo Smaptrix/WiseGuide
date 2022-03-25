@@ -31,17 +31,19 @@ public class ServerMain {
     public ServerMain() {
 
        //Restarts the server after a bit of time - REMEMBER TO RECOMMENT BACK IN
-       /// while(true) {
+
             try {
+                while(true) {
                 Server server = new Server();
 
                 server.startup(5555);
 
 
                 server.bufferListen();
+                }
             } catch (Exception e) {
                 System.out.println("Socket exception - Lost connection with client");
-         //   }
+
     }
 
 

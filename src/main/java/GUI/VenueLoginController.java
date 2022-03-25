@@ -55,9 +55,10 @@ public class VenueLoginController {
 
 
             //Checks to see if the login data was correct
-            if(client.requestVenueLogin(currUser.getUsername(), currUser.getPassword()).equals("BADLOGIN")){
+            if(!(client.requestVenueLogin(currUser.getUsername(), currUser.getPassword()).equals("GOODLOGIN"))){
                 errLabel.setText("Unrecognised Venue Details");
             }
+            //If not a bad login, it has to be a good login
             else{
                 //If the login data is correct
                 errLabel.setText("");
