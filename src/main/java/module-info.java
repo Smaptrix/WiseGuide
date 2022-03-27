@@ -11,6 +11,7 @@ module maptrix.wiseguide {
     requires java.desktop;
     requires javafx.fxml;
     requires javafx.controls;
+    requires javafx.media;
 
 
     opens GUI to javafx.fxml;
