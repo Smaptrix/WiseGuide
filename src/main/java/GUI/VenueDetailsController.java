@@ -30,7 +30,9 @@ public class VenueDetailsController {
 
         System.out.println(currVenuePage);
         System.out.println(currVenuePage.attributes);
-        System.out.println(currVenuePage.children.get(0).children.get(0).attributes.get("include_source"));
+        if(currVenuePage.children != null) {
+            System.out.println(currVenuePage.children.get(0).children.get(0).attributes.get("include_source"));
+        }
     }
 
 
