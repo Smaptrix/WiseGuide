@@ -4,10 +4,13 @@ import VenueXMLThings.VenuePage;
 import VenueXMLThings.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 import serverclientstuff.User;
 import serverclientstuff.Utils;
 
@@ -31,6 +34,9 @@ public class VenueOwnerMainPageController {
 
     @FXML
     Button openFileButton;
+
+    @FXML
+    Button logOutButton;
 
     public void setClient(Client client) {
         this.client = client;
@@ -125,6 +131,30 @@ public class VenueOwnerMainPageController {
             //Do thing
 
         }
+
+    }
+
+    @FXML
+    private void onLogOutButtonPress() throws IOException {
+        System.out.println("Log out button pressed");
+
+        //Reopens the login page
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-login-page.fxml"));
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+
+        System.out.println("Loaded venue login page again");
+
+        VenueLoginController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        stage.setScene(scene);
+        stage.setTitle("Venue Login");
+        stage.show();
+
+
+        Stage currStage = (Stage) logOutButton.getScene().getWindow();
+        currStage.close();
 
     }
 

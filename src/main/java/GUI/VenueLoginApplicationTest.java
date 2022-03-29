@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,11 +18,11 @@ import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
-import server.ServerMain;
+
 
 
 import java.io.IOException;
-import java.util.Objects;
+
 import java.util.concurrent.TimeoutException;
 
 public class VenueLoginApplicationTest extends ApplicationTest {
@@ -30,7 +30,6 @@ public class VenueLoginApplicationTest extends ApplicationTest {
     /* === Tests for Venue Login Page === */
     //MAKE SURE YOU RUN THE SERVER BEFORE DOING THIS!
 
-    private Stage stage;
     private VenueLoginController controller;
 
 
@@ -43,7 +42,6 @@ public class VenueLoginApplicationTest extends ApplicationTest {
 
         stage.show();
         stage.toFront();
-        this.stage = stage;
     }
 
 
@@ -59,8 +57,6 @@ public class VenueLoginApplicationTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
-    //TODO - Tests Required
-    //     - Make sure that you can press the buttons (and they have functionality)
 
 
     //Unit test | Confirm title label is visible and has the correct text
