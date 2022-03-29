@@ -106,13 +106,20 @@ public class VenueOwnerMainPageController {
 
     @FXML
     //Deletes a file from the servers directory, and in the XML file --- WIP
+    //WARNING - Will actually delete the file on the server and not change the xml for now
     private void onDeleteFileButtonPress(){
 
         System.out.println("Delete File Button Pressed");
 
         if (fileList.getSelectionModel().getSelectedItem() != null) {
 
-            //Do thing
+            //Do thing - contact server and change xml thats currently downloaded
+            try {
+                client.requestDeleteFile(filePathStart + fileList.getSelectionModel().getSelectedItem());
+                fileList.getItems().remove(fileList.getSelectionModel().getSelectedItem());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -128,7 +135,7 @@ public class VenueOwnerMainPageController {
 
         if (fileList.getSelectionModel().getSelectedItem() != null){
 
-            //Do thing
+            //Do thing - contact server and change xml thats currently downloaded
 
         }
 

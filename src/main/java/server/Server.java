@@ -186,6 +186,11 @@ public class Server {
                 currUserHandler.setUserType("VENUE");
                 receiveLogin(1);
                 break;
+                
+            case "DELETEVENUEFILE":
+                currUserHandler.setUserType("VENUE");
+                deleteVenueFile();
+                break;
 
 
             default:
@@ -482,9 +487,23 @@ public class Server {
 
         }
 
+    }
+
+    //Deletes the requested venue file
+    private void deleteVenueFile() throws IOException {
+
+        //Gets the filepath from the client
+        File fileToDelete = new File(inText.readLine());
+
+        System.out.println(fileToDelete);
 
 
+        fileToDelete.delete();
 
+        //TODO - Also change the XML file
+
+
+        sendResponse("File Deleted", true);
 
 
     }

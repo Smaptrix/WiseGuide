@@ -458,6 +458,7 @@ public class Client {
 
     //TODO - Could be made more rigourous, but assumes server and client have same user
 
+    //Requests that the server requests a users name
     public String requestUserNameChange(String desiredUsername) throws IOException {
 
 
@@ -474,6 +475,7 @@ public class Client {
     }
 
 
+    //Requests that the server changes the users password
     public String requestPasswordChange(String enteredPassword, String newPassword) throws IOException {
 
         outText.println("CHANGEPASS");
@@ -489,6 +491,7 @@ public class Client {
 
 
 
+    //Requests that the server log a venue in
     public String requestVenueLogin(String venueName, String venuePass) throws IOException {
         outText.println("VENUELOGIN");
 
@@ -496,9 +499,19 @@ public class Client {
         outText.println(venuePass);
 
         return receiveAcknowledgement();
-
     }
 
+
+    //Requests that the server delete a file from a venues directory
+    public String requestDeleteFile(String filePath) throws IOException {
+        outText.println("DELETEVENUEFILE");
+
+        outText.println(filePath);
+
+        return receiveAcknowledgement();
+
+
+    }
 
 
 
