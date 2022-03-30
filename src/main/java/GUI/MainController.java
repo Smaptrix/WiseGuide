@@ -90,7 +90,7 @@ public class MainController {
                 }
                 VenueDetailsController controller = fxmlLoader.getController();
                 controller.setClient(client);
-                controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected));
+                controller.setCurrVenue(((String) currentItemSelected).replaceAll(" ", "_"), xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")));
                 try {
                     controller.loadVenueData();
                 } catch (IOException e) {
@@ -216,7 +216,7 @@ public class MainController {
         for (String s : venueNameList) {
 
             //Strips the header and final quotation mark from each title
-            String stripped_title = s.substring(7, s.length() -1);
+            String stripped_title = s.substring(7, s.length() -1).replaceAll("_", " ");
 
             venueList.getItems().add(stripped_title);
 
