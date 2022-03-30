@@ -10,6 +10,51 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
+/*
+
+//this is an example of how to use the updating of the XML File,
+//it also creates a backup of the xml at the time in milliseconds
+//(higher number after the file is newer :) ) this probably won't
+//be used much in the final product as it would take up a lot of
+//space. *also note I use venue and page interchangeably
+
+public class mainXMLtester {
+
+    public static void main(String[] args) throws IOException, TransformerException {
+        File file = new File("venuesLocation.xml");
+        VenueXMLParser xml = new VenueXMLParser(file);
+        System.out.println(xml.numberOfPages);
+
+        //adds a venue with the attributes 1,2,3...
+        xml.addPage("1","2","3","4","5","6");
+        System.out.println(xml.numberOfPages);
+        System.out.println(xml.getPage("title", "1").attributes);
+
+        //changes the category attribute of the venue of title "1"
+        System.out.println(xml.changeAttribute("title", "1", "category", "nightclub"));
+
+        //adding media requires a hashtable where you can add all the attributes for the media
+
+        //adding some of the attributes for a text media object
+        Dictionary<String, String> newText = new Hashtable<>();
+        newText.put("include_source", "text.txt");
+        newText.put("x_end", "0");
+
+        //adding some of the attributes for a video media object
+        Dictionary<String, String> newMedia = new Hashtable<>();
+        newMedia.put("include_source", "video.mp4");
+        newMedia.put("autoplay", "true");
+        newMedia.put("type", "video");
+
+        System.out.println(xml.addChildText("title", "1", newText));
+        System.out.println(xml.addChildMedia("title", "1", "playable", newMedia));
+
+        //just for now, remove the page when testing as you can still see the changes in the backups
+        System.out.println(xml.removePage("title", "1"));
+
+    }
+}
+ */
 
 //XML parsing for venue data, constructs a tree with the ability to get pages through id or title.
 public class VenueXMLParser {
