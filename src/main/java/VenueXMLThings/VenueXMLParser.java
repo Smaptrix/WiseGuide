@@ -262,6 +262,8 @@ public class VenueXMLParser {
         int childIndex = -1;
 
         for(int i = 0; i < root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().getLength(); i++) {
+
+
             if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().equals("base:shape")) {
                 if(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(0).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
                     sourceFound = true;
@@ -310,8 +312,6 @@ public class VenueXMLParser {
 
         for(int i = 0; i < numberOfPages; i++) {
 
-            System.out.println(this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(indexType).toString());
-            System.out.println(index);
 
             if(this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(indexType).toString().equals(index)) {
                 return i;
