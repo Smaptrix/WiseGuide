@@ -18,42 +18,61 @@ import org.w3c.dom.*;
 //be used much in the final product as it would take up a lot of
 //space. *also note I use venue and page interchangeably
 
+
+
+package VenueXMLThings;
+
+
+import javax.xml.transform.TransformerException;
+import java.io.File;
+import java.io.IOException;
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 public class mainXMLtester {
 
     public static void main(String[] args) throws IOException, TransformerException {
-        File file = new File("venuesLocation.xml");
-        VenueXMLParser xml = new VenueXMLParser(file);
-        System.out.println(xml.numberOfPages);
+            File file = new File("venuesLocation.xml");
+            VenueXMLParser xml = new VenueXMLParser(file);
+            System.out.println(xml.numberOfPages);
 
-        //adds a venue with the attributes 1,2,3...
-        xml.addPage("1","2","3","4","5","6");
-        System.out.println(xml.numberOfPages);
-        System.out.println(xml.getPage("title", "1").attributes);
+            //adds a venue with the attributes 1,2,3...
+            xml.addPage("1","2","3","4","5","6");
+            System.out.println(xml.numberOfPages);
+            System.out.println(xml.getPage("title", "1").attributes);
 
-        //changes the category attribute of the venue of title "1"
-        System.out.println(xml.changeAttribute("title", "1", "category", "nightclub"));
+            //changes the category attribute of the venue of title "1"
+            System.out.println(xml.changeAttribute("title", "1", "category", "nightclub"));
 
-        //adding media requires a hashtable where you can add all the attributes for the media
+            //adding media requires a hashtable where you can add all the attributes for the media
 
-        //adding some of the attributes for a text media object
-        Dictionary<String, String> newText = new Hashtable<>();
-        newText.put("include_source", "text.txt");
-        newText.put("x_end", "0");
+            //adding some of the attributes for a text media object
+            Dictionary<String, String> newText = new Hashtable<>();
+            newText.put("include_source", "text.txt");
+            newText.put("x_end", "0");
 
-        //adding some of the attributes for a video media object
-        Dictionary<String, String> newMedia = new Hashtable<>();
-        newMedia.put("include_source", "video.mp4");
-        newMedia.put("autoplay", "true");
-        newMedia.put("type", "video");
+            System.out.println(xml.addChildText("title", "1", newText));
 
-        System.out.println(xml.addChildText("title", "1", newText));
-        System.out.println(xml.addChildMedia("title", "1", "playable", newMedia));
+            //adding some of the attributes for a video media object
+            Dictionary<String, String> newMedia = new Hashtable<>();
+            newMedia.put("include_source", "video.mp4");
+            newMedia.put("autoplay", "true");
+            newMedia.put("type", "video");
 
-        //just for now, remove the page when testing as you can still see the changes in the backups
-        System.out.println(xml.removePage("title", "1"));
+            System.out.println(xml.addChildMedia("title", "1", "playable", newMedia));
+
+            //Removing the child media files
+            System.out.println(xml.removeChildMedia("title", "1", "text.txt"));
+            System.out.println(xml.removeChildMedia("title", "1", "video.mp4"));
+
+            //just for now, remove the page when testing as you can still see the changes in the backups
+            System.out.println(xml.removePage("title", "1"));
 
     }
 }
+
+
+
  */
 
 //XML parsing for venue data, constructs a tree with the ability to get pages through id or title.
@@ -160,7 +179,7 @@ public class VenueXMLParser {
         createXMLFile(true);
 
         for(int i = 0; i<root.getElementsByTagName("base:page").item(searchedIndex).getAttributes().getLength(); i++) {
-            if(root.getElementsByTagName("base:page").item(searchedIndex).getAttributes().item(i).getNodeName() == attributeType) {
+            if(root.getElementsByTagName("base:page").item(searchedIndex).getAttributes().item(i).getNodeName().equals(attributeType)) {
                 root.getElementsByTagName("base:page").item(searchedIndex).getAttributes().item(i).setNodeValue(attribute);
             }
         }
@@ -186,7 +205,7 @@ public class VenueXMLParser {
         while (keys.hasMoreElements()) {
 
             String key = keys.nextElement();
-            if(key != "include_source") {
+            if(!key.equals("include_source")) {
                 newMedia.setAttribute(key, attributesDict.get(key));
             }
         }
@@ -230,12 +249,48 @@ public class VenueXMLParser {
         return 1;
     }
 
+    public int removeChildMedia(String indexType, String index, String source) throws TransformerException {
+        int searchedIndex = searchForPage(indexType, index);
+
+        if(searchedIndex == -1) {
+            return -1;
+        }
+
+        createXMLFile(true);
+
+        boolean sourceFound = false;
+        int childIndex = -1;
+
+        for(int i = 0; i < root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().getLength(); i++) {
+            if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().equals("base:shape")) {
+                if(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(0).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
+                    sourceFound = true;
+                    childIndex = i;
+                    break;
+                }
+            } else if(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
+                sourceFound = true;
+                childIndex = i;
+                break;
+            }
+        }
+
+        if(sourceFound) {
+            root.getElementsByTagName("base:page").item(searchedIndex).removeChild(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(childIndex));
+            createXMLFile(false);
+            return 1;
+        } else {
+            System.out.println("ERROR: NO SUCH SOURCE IN XML");
+            return -1;
+        }
+
+    }
+
     private void createXMLFile(boolean isBackup) throws TransformerException {
-        document.getDocumentElement().equals(root);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource domSource = new DOMSource(document);
-        StreamResult streamResult = null;
+        StreamResult streamResult;
         if(isBackup) {
             streamResult = new StreamResult(new File(String.valueOf(file.toPath()).replace("venuesLocation", "venuesLocation" + System.currentTimeMillis())));
         } else {
@@ -250,7 +305,7 @@ public class VenueXMLParser {
             return -1;
         }
 
-        index.replaceAll(" ", "_");
+        index = index.replaceAll(" ", "_");
         index = indexType + "=\"" + index + "\"";
 
         for(int i = 0; i < numberOfPages; i++) {
