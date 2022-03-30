@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import serverclientstuff.User;
 import serverclientstuff.Utils;
 
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 
@@ -25,6 +26,7 @@ public class VenueOwnerMainPageController {
     private Client client;
     private User currUser;
     private String filePathStart;
+    private VenueXMLParser xml;
 
     @FXML
     Label titleLabel;
@@ -62,7 +64,7 @@ public class VenueOwnerMainPageController {
             e.printStackTrace();
         }
 
-        VenueXMLParser xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
+        xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
 
         VenuePage currVenuePage = xml.getPage("title", currUser.getUsername());
@@ -70,7 +72,7 @@ public class VenueOwnerMainPageController {
         int numOfFiles = currVenuePage.numberOfElements;
 
         for(int i = 0; i < numOfFiles; i++){
-            String fileName = currVenuePage.children.get(0).children.get(i).attributes.get("include_source");
+            String fileName = currVenuePage.children.get(i).children.get(0).attributes.get("include_source");
 
             int filePathLength = filePathStart.length();
 
@@ -113,13 +115,24 @@ public class VenueOwnerMainPageController {
 
         if (fileList.getSelectionModel().getSelectedItem() != null) {
 
-            //Do thing - contact server and change xml thats currently downloaded
+            /*
+            //Request Server delete a file
+            //TODO - Handle deletion error
             try {
                 client.requestDeleteFile(filePathStart + fileList.getSelectionModel().getSelectedItem());
                 fileList.getItems().remove(fileList.getSelectionModel().getSelectedItem());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            */
+
+            //Remove the tag from the current XML file on the PC
+            try {
+                xml.removeChildMedia("title", currUser.getUsername(), filePathStart + fileList.getSelectionModel().getSelectedItem());
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
+
 
         }
 

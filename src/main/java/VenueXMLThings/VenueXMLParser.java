@@ -310,6 +310,9 @@ public class VenueXMLParser {
 
         for(int i = 0; i < numberOfPages; i++) {
 
+            System.out.println(this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(indexType).toString());
+            System.out.println(index);
+
             if(this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem(indexType).toString().equals(index)) {
                 return i;
             }

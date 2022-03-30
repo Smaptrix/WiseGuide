@@ -498,12 +498,17 @@ public class Server {
         System.out.println(fileToDelete);
 
 
-        fileToDelete.delete();
+        if(fileToDelete.delete()){
+            sendResponse("File Deleted", true);
+        }
+        else{
+            sendResponse("File Deletion Error", true);
+        }
 
         //TODO - Also change the XML file
 
 
-        sendResponse("File Deleted", true);
+
 
 
     }

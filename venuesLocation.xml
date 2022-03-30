@@ -18,17 +18,20 @@
     -->
 
 
-    <base:page ID="001" category="nightclub" lat="53.9587775" lon="-1.0867884" price="2" title="Flares York">
+    <base:page ID="001" category="nightclub" lat="53.9587775" lon="-1.0867884" price="2" title="Flares_York">
         <base:shape type="textbox" x_end="0" y_end="0">
             <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text.txt"/>
         </base:shape>
+        <base:shape type="textbox" x_end="0" y_end="0">
+            <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text_Copy.txt"/>
+        </base:shape>
     </base:page>
-    <base:page ID="002" category="nightclub" lat="53.9592577" lon="-1.0872826" price="2" title="Revolution York">
+    <base:page ID="002" category="nightclub" lat="53.9592577" lon="-1.0872826" price="2" title="Revolution_York">
         <base:shape type="textbox" x_end="0" y_end="0">
             <base:text include_source="Venues/Clubs/Revolution_York/Revolution_York_text.txt"/>
         </base:shape>
     </base:page>
-    <base:page ID="003" category="nightclub" lat="53.958187" lon="-1.0895813" price="1" title="Club Salvation">
+    <base:page ID="003" category="nightclub" lat="53.958187" lon="-1.0895813" price="1" title="Club_Salvation">
         <base:shape type="textbox" x_end="0" y_end="0">
             <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation_text.txt"/>
         </base:shape>
