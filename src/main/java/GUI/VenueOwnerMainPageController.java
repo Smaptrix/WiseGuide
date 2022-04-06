@@ -128,7 +128,7 @@ public class VenueOwnerMainPageController {
 
             //Remove the tag from the current XML file on the PC
             try {
-                xml.removeChildMedia("title", currUser.getUsername(), filePathStart + fileList.getSelectionModel().getSelectedItem());
+                xml.removeChildMedia("title", currUser.getUsername(), (String) fileList.getSelectionModel().getSelectedItem());
             } catch (TransformerException e) {
                 e.printStackTrace();
             }
