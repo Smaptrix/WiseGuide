@@ -142,7 +142,7 @@ public class VenueXMLParser {
         newPage.setAttribute("lat", lat);
         newPage.setAttribute("lon", lon);
         newPage.setAttribute("category", category);
-        newPage.setAttribute("price", category);
+        newPage.setAttribute("price", price);
 
         root.appendChild(newPage);
         numberOfPages++;
