@@ -26,11 +26,6 @@ public class Server {
     //Should only be changed in the code
     private static final String SERVERVERSION = "Ver 0.45";
 
-
-
-
-
-
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private DataOutputStream outputStream;
@@ -47,11 +42,9 @@ public class Server {
 
         //Server formed
         serverSocket = new ServerSocket(port);
-
         System.out.println("Port Created\n");
 
         clientSocket = serverSocket.accept();
-
         System.out.println("After accept\n");
 
          //Reads text from the buffer
@@ -159,6 +152,9 @@ public class Server {
                 receiveLogin(2);
                 break;
 
+            case "DELETEUSER":
+                receiveLogin(3);
+                break;
 
             case "CHANGENAME":
                 changeUsername();
@@ -372,9 +368,14 @@ public class Server {
 
             }
 
+        }
 
+        //User Deletion Mode
+        else if(mode == 3){
+            currUserHandler.deleteUser();
 
         }
+
         else{
             System.out.println("Unrecognised login mode!");
         }

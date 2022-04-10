@@ -395,6 +395,11 @@ public class Client {
         return receiveAcknowledgement();
     }
 
+    public void deleteUser(User currUser) throws IOException {
+        outText.println("DELETEUSER");
+        outText.println(currUser.getUsername());
+        outText.println(currUser.getPassword());
+    }
 
     /**
      * <p>

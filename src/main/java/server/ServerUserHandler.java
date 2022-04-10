@@ -24,8 +24,6 @@ public class ServerUserHandler {
     public ServerUserHandler(User currUser, boolean autoVerify) throws IOException {
         this.currUser = currUser;
 
-
-
         if(autoVerify){
             verifyUser();
         }
@@ -34,8 +32,6 @@ public class ServerUserHandler {
 
     public void verifyUser() throws IOException {
         userExistState = findUser();
-
-
 
         //If the user doesn't exist there is no need to  verify the password
         if (userExistState) {
@@ -67,6 +63,32 @@ public class ServerUserHandler {
         return false;
     }
 
+    public boolean deleteUser() throws IOException {
+        File database = new File("userDatabase.txt");
+        File tempFile = new File("tempDatabase.txt");
+        BufferedReader br = new BufferedReader(new FileReader(database));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
+        String userToRemove = currUser.getUsername();
+        String line;
+
+        while((line = br.readLine()) != null){
+            String[] values = line.split(",");
+            if(!(values[0].equals(userToRemove))){
+                bw.write(line + System.getProperty("line.separator"));
+            }
+        }
+        bw.close();
+        br.close();
+        bw = null;
+        br = null;
+        System.gc();
+        boolean pa1 = database.canExecute();
+        boolean pa2 = database.canRead();
+        boolean pa3 = database.canWrite();
+        boolean delsuccess = database.delete();
+        boolean success = tempFile.renameTo(database);
+        return (success);
+    }
 
     //Note - no refactor to use this because this is a serverside package only
     //Determines if a provided username is already taken
