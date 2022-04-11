@@ -115,20 +115,19 @@ public class VenueOwnerMainPageController {
 
         if (fileList.getSelectionModel().getSelectedItem() != null) {
 
-            /*
+
             //Request Server delete a file
-            //TODO - Handle deletion error
             try {
                 client.requestDeleteFile(filePathStart + fileList.getSelectionModel().getSelectedItem());
                 fileList.getItems().remove(fileList.getSelectionModel().getSelectedItem());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            */
+
 
             //Remove the tag from the current XML file on the PC
             try {
-                xml.removeChildMedia("title", currUser.getUsername(), (String) fileList.getSelectionModel().getSelectedItem());
+                xml.removeChildMedia("title", currUser.getUsername(), filePathStart + fileList.getSelectionModel().getSelectedItem());
             } catch (TransformerException e) {
                 e.printStackTrace();
             }

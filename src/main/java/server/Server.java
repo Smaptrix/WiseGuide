@@ -9,9 +9,11 @@
 package server;
 
 
+import VenueXMLThings.VenueXMLParser;
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
 
+import javax.xml.transform.TransformerException;
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -495,10 +497,20 @@ public class Server {
         //Gets the filepath from the client
         File fileToDelete = new File(inText.readLine());
 
-        System.out.println(fileToDelete);
 
 
+        System.out.println("File to delete: " + fileToDelete);
+
+        //Delete the file from the PC
         if(fileToDelete.delete()){
+            //Delete the file from the XML
+            VenueXMLParser xml = new VenueXMLParser(new File("venuesLocation.xml"));
+            try {
+                //MAke sure the slashes are consistent with the direction in the venue XML file
+                xml.removeChildMedia("title", currUser.getUsername(), (String.valueOf(fileToDelete)).replace("\\", "/"));
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
             sendResponse("File Deleted", true);
         }
         else{
