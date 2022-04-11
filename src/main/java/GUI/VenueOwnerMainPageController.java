@@ -10,11 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 import serverclientstuff.Utils;
 
 import javax.xml.transform.TransformerException;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -141,15 +143,22 @@ public class VenueOwnerMainPageController {
 
     @FXML
     //Adds a new file to the servers directory, and into the XML file
+    //Uploading files to a server could be very dangerous
     private void onAddFileButtonPress(){
 
         System.out.println("Add File Button Pressed!");
 
-        if (fileList.getSelectionModel().getSelectedItem() != null){
+        FileChooser fileChooser = new FileChooser();
 
-            //Do thing - contact server and change xml thats currently downloaded
+        //Make sure that the user can only select certain types of files
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+                ,new FileChooser.ExtensionFilter("Image Files", "*.png")
+        );
 
-        }
+        //Opens the file explorer so the venue user can select a file
+        Stage stage = new Stage();
+        File selectedFile = fileChooser.showOpenDialog(stage);
 
     }
 
