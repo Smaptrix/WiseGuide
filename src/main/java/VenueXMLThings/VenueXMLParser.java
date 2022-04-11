@@ -142,7 +142,7 @@ public class VenueXMLParser {
         newPage.setAttribute("lat", lat);
         newPage.setAttribute("lon", lon);
         newPage.setAttribute("category", category);
-        newPage.setAttribute("price", category);
+        newPage.setAttribute("price", price);
 
         root.appendChild(newPage);
         numberOfPages++;
@@ -261,24 +261,38 @@ public class VenueXMLParser {
         boolean sourceFound = false;
         int childIndex = -1;
 
-        for(int i = 0; i < root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().getLength(); i++) {
+        int i = 0;
 
-
+        while (i < root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().getLength() && !sourceFound) {
             if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().equals("base:shape")) {
-                if(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(0).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
-                    sourceFound = true;
-                    childIndex = i;
-                    break;
+                for (int j = 0; j<root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().getLength(); j++) {
+                    if(!root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(j).getNodeName().contains("#text")) {
+                        System.out.println(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(j).getAttributes().getNamedItem("include_source").getNodeValue());
+                        if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(j).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
+                            System.out.println("FOUND IT");
+                            sourceFound = true;
+                            childIndex = i;
+                            break;
+                        }
+                    }
                 }
-            } else if(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
-                sourceFound = true;
-                childIndex = i;
-                break;
+            } else {
+                System.out.println(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().contains("#text"));
+                if (!root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().contains("#text")) {
+                    if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
+                        sourceFound = true;
+                        childIndex = i;
+                        break;
+                    }
+                }
             }
+            i++;
         }
 
         if(sourceFound) {
-            root.getElementsByTagName("base:page").item(searchedIndex).removeChild(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(childIndex));
+            Node tempNode = root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(childIndex);
+            root.getElementsByTagName("base:page").item(searchedIndex).removeChild(tempNode);
+
             createXMLFile(false);
             return 1;
         } else {

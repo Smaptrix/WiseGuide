@@ -22,6 +22,7 @@
         <base:shape type="textbox" x_end="0" y_end="0">
             <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text.txt"/>
         </base:shape>
+        <base:image ID="im0" disp_duration_s="40" include_source="pic.png" rot_angle="45" show_after_s="0" x_orig="40" x_size_px="50" y_orig="40" y_size_px="50" z_ind="0"/>
         <base:shape type="textbox" x_end="0" y_end="0">
             <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text_Copy.txt"/>
         </base:shape>
