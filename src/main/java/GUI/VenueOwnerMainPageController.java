@@ -120,6 +120,7 @@ public class VenueOwnerMainPageController {
 
             //Request Server delete a file
             try {
+                //Could cause memory leak ish thingy here, not deleting a file but removing its reference from the XML
                 client.requestDeleteFile(filePathStart + fileList.getSelectionModel().getSelectedItem());
                 fileList.getItems().remove(fileList.getSelectionModel().getSelectedItem());
             } catch (IOException e) {
@@ -159,6 +160,13 @@ public class VenueOwnerMainPageController {
         //Opens the file explorer so the venue user can select a file
         Stage stage = new Stage();
         File selectedFile = fileChooser.showOpenDialog(stage);
+
+        try {
+            client.requestUploadFile(selectedFile);
+        } catch (IOException e) {
+            //TODO - Add error message?
+            e.printStackTrace();
+        }
 
     }
 

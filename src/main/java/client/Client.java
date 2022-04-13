@@ -15,6 +15,7 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 
@@ -514,6 +515,34 @@ public class Client {
     }
 
 
+    //Requests that the client can send a file to the server
+    public String requestUploadFile(File filetoUpload) throws IOException {
+        outText.println("UPLOADFILE");
+
+        if (receiveAcknowledgement().equals("SIZE?")){
+            long fileSize = Files.size(Path.of(filetoUpload.getPath()));
+
+            byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) fileSize).array();
+
+            int fileSizeInBytesLen = fileSizeInBytes.length;
+
+            //TODO - Rejig the clients I/O so that it can send bytes not just text
+
+            /*
+            //Tells the server how many bytes are determining the size of the file
+            outputStream.write(fileSizeInBytesLen);
+
+            //Writes the fileSize in bytes to the client
+            for (byte fileSizeInByte : fileSizeInBytes) {
+                outputStream.write(fileSizeInByte);
+            }
+            */
+        }
+
+
+        return receiveAcknowledgement();
+
+    }
 
 
     /**

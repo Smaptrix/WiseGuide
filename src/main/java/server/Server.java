@@ -194,6 +194,11 @@ public class Server {
                 deleteVenueFile();
                 break;
 
+            case "UPLOADFILE":
+                currUserHandler.setUserType("VENUE");
+                recieveVenueFile();
+                break;
+
 
             default:
                 System.out.println(requestIn + " : Invalid command");
@@ -202,6 +207,12 @@ public class Server {
         }
     }
 
+    private void recieveVenueFile() throws IOException {
+        sendResponse("SIZE?", true);
+
+        inText.readLine();
+
+    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -256,7 +267,6 @@ public class Server {
                 }
             }
             //Clears the outputStream of any excess data
-
             outputStream.flush();
 
 
