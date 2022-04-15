@@ -2,10 +2,13 @@ package GUI;
 
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -36,8 +39,13 @@ public class AccountDeletionController {
     @FXML
     Button closePopUpButton;
 
+
     @FXML
-    //Deletes Account
+    /*
+    * Deletes Account upon button press.
+    * First checks to make sure passwords match and that username and password fields are not blank.
+    * Should then verify that the user exists and the password is correct, but this function does not currently work?
+    */
     private void deleteAccountButtonAction() throws IOException {
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
@@ -58,8 +66,10 @@ public class AccountDeletionController {
             if (verified == "USERFOUND") {
                 String success = client.deleteUser(currUser);
                 if (success.equals("DELETESUCCESS")){
-                    //TODO: OK POPUP
-                    errLabel.setText( userField.getText().trim() + " was deleted.");
+                    //errLabel.setText( userField.getText().trim() + " was deleted.");
+                    accountDeletedPageOpen();
+                    Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
+                    currStage.close();
                 } else {
                     errLabel.setText("Something went wrong. The user could not be deleted.");
                 }
@@ -67,6 +77,21 @@ public class AccountDeletionController {
                 errLabel.setText("User details are incorrect.");
             }
         }
+    }
+
+    public void accountDeletedPageOpen() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-deleted-window.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 280, 155);
+        stage.setScene(scene);
+        stage.setTitle("Account Deleted");
+        stage.show();
+    }
+
+    @FXML
+    private void closePopupButton(){
+        Stage stage = (Stage) closePopUpButton.getScene().getWindow();
+        stage.close();
     }
 
     //FOR TESTING PURPOSES: CREATE AN ACCOUNT TO DELETE

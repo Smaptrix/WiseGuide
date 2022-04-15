@@ -27,12 +27,14 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
 
-
-
     //Stores the client object that lets the GUI communicate with the server
-    protected Client client; // Declare empty client
+    public Client client; // Declare empty client
     protected User currUser;
 
+    private boolean testingMode = false;
+    public void setTestingMode(boolean testingMode) {
+        this.testingMode = testingMode;
+    }
 
     //Imports all of the objects in the login 'scene'
     @FXML
@@ -47,11 +49,8 @@ public class LoginController {
     Button exitButton;
     @FXML
     MenuItem menuClose;
-
     @FXML
     Label errorLabel;
-
-
 
     @FXML
     //Always called by the FXML Loader
@@ -59,16 +58,12 @@ public class LoginController {
 
     }
 
-
     public void initialConnection() throws IOException {
 
         client = new Client(); // Creates new instance of client object
         client.startConnection("127.0.0.1", 5555);
 
     }
-
-
-
 
     @FXML
     //Closes the application
@@ -80,9 +75,7 @@ public class LoginController {
         System.exit(0);
     }
 
-
     //TODO - MAKE IT SO YOU CANT HAVE SPACES IN ANY OF THE FIELDS
-
 
     @FXML
     //Tries to login using the data provided
@@ -111,33 +104,23 @@ public class LoginController {
             errorLabel.setText("Server and Client are different Versions!");
         }
 
-
         else {
 
             errorLabel.setText("");
+            currUser = new User(userTextField.getText(), userPassField.getText());
 
+            String loginCode = client.requestLogin(currUser);
 
-
-           currUser = new User(userTextField.getText(), userPassField.getText());
-
-
-
-           String loginCode = client.requestLogin(currUser);
-
-
-           if(loginCode.equals("BADLOGIN")){
+            if(loginCode.equals("BADLOGIN")){
                errorLabel.setText("Unrecognised user details");
             }
 
-           //If not BADLOGIN assume GOODLOGIN
-           else {
+            //If not BADLOGIN assume GOODLOGIN
+            else {
                 errorLabel.setText("");
-
-
 
                Stage currStage = (Stage) loginButton.getScene().getWindow();
                currStage.close();
-
 
                //Opens the main application once you have logged in
                MainApplication app = new MainApplication();
@@ -158,14 +141,25 @@ public class LoginController {
             Scene scene = new Scene(fxmlLoader.load(), 300, 350);
             AccountCreationController controller = fxmlLoader.getController();
             controller.setClient(client);
+            controller.setTestingMode(testingMode);
             stage.setScene(scene);
             stage.setTitle("Account Creation");
             stage.show();
 
-        }catch(IOException e){
+        } catch(IOException e){
             e.printStackTrace();
         }
 
+    }
+
+    //FOR TESTING PURPOSES: CREATE AN ACCOUNT TO DELETE
+    public void createTestAccount() throws IOException {
+        User testingUser = new User("accountTestUser","accountTest");
+        if(client.createUser(testingUser).equals("USERCREATED")) {
+            System.out.println("ACCOUNT TEST USER was created.");
+        } else {
+            System.out.println("ACCOUNT TEST USER could not be created.");
+        }
     }
 
     //Client field getter and setter, used by testing to create a new testing account manually.

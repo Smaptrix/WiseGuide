@@ -21,6 +21,7 @@ import serverclientstuff.User;
 
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -89,7 +90,7 @@ public class AccountCreationController {
      * The checkbox the users tick to confirm they are over the required age limit
      */
     @FXML
-    CheckBox ageCheckBox;
+    public CheckBox ageCheckBox;
 
     /**
      * The link to the companies privacy policy
@@ -112,12 +113,31 @@ public class AccountCreationController {
 
     //TODO - Post Integration let the client handle all the user stuff not the GUI
 
-    //TODO -  User should not be able to create accounts with same names as testing accounts (see LoginGUIIntegration TODOs) (AC)
+    //User should not be able to create accounts with same names as testing accounts
+    public String[] forbiddenNames = {"userDoesNotExist", "accountTestUser", "IntTestUser", "accountDeletionTestUser"};
+
+    private boolean testingMode = false;
+
+    public void setTestingMode(boolean testingMode) {
+        this.testingMode = testingMode;
+    }
 
     @FXML
     //Attempts to create account
     private void createAccountButtonAction() throws IOException {
 
+        //Checks to see if the name is forbidden
+        boolean nameForbidden = false;
+        for(String s:forbiddenNames){
+            if(userField.getText().trim().equals(s)){
+                nameForbidden = true;
+            }
+        }
+
+        //If testingMode is true, accounts with forbidden names should be allowed
+        if(testingMode){
+            nameForbidden = false;
+        }
 
         //Big check to make sure username and password stuff is correct
 
@@ -139,6 +159,10 @@ public class AccountCreationController {
             errLabel.setText("You are not over the age of 13!");
         }
 
+        else if(nameForbidden){
+            errLabel.setText("The selected username is unavailable.");
+        }
+
         else{
             errLabel.setText("");
 
@@ -154,7 +178,7 @@ public class AccountCreationController {
                     currStage.close();
 
                 }
-                errLabel.setText("User already exists");
+                errLabel.setText("This username is taken");
                 //TODO - Account creation failed page
             }
         }

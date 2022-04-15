@@ -1,10 +1,13 @@
-package GUI;
+package tests;
 
+import GUI.LoginApplication;
+import GUI.LoginController;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
@@ -17,10 +20,12 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.matcher.control.TextInputControlMatchers;
 import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
@@ -47,17 +52,16 @@ public class LoginGUIIntegration extends ApplicationTest {
     public void setUpClass() throws Exception {
 
         loginController.initialConnection();
-
-        //TODO: Hardcode testing user into database.
-
+        loginController.createTestAccount();
     }
 
     @After
-    public void afterEachTest() throws TimeoutException {
+    public void afterEachTest() throws TimeoutException, IOException {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();
-        //TODO: IntTestUser should be deleted from database after the test, otherwise test will only work once! (AC)
+        loginController.client.deleteUser(new User("IntTestUser","password")); //Deletes IntTestUser from database, otherwise test would only work once.
+        loginController.setTestingMode(false);
     }
 
     //Integration Test | Confirm user can login with real username and password by clicking "Login" after entering them.
@@ -65,9 +69,9 @@ public class LoginGUIIntegration extends ApplicationTest {
     public void realLoginTest(){
         sleep(1000);
         clickOn("#usernameTextField");
-        write("testUser");
+        write("accountTestUser");
         clickOn("#userPassField");
-        write("testPassword");
+        write("accountTest");
         clickOn("#loginButton");
         sleep(2000);
         FxAssert.verifyThat(window("WiseGuide by Maptrix - Ver 0.45"), WindowMatchers.isShowing());
@@ -78,7 +82,7 @@ public class LoginGUIIntegration extends ApplicationTest {
     public void realUserWrongPassTest(){
         sleep(1000);
         clickOn("#usernameTextField");
-        write("testUser");
+        write("accountTestUser");
         clickOn("#userPassField");
         write("incorrectPassword");
         clickOn("#loginButton");
@@ -86,7 +90,6 @@ public class LoginGUIIntegration extends ApplicationTest {
     }
 
     //Integration Test | Confirm user cannot login if they have entered an incorrect username and password.
-    //TODO: Account creation should forbid the creation of an account with this username so that this test never breaks.
     @Test
     public void fakeUserWrongPassTest(){
         sleep(1000);
@@ -100,11 +103,10 @@ public class LoginGUIIntegration extends ApplicationTest {
 
     //Integration Test | Confirm that a new user can be created by entering unique username, acceptable password,
     //and by checking the checkbox.
-
-    //TODO: Account creation should forbid the username IntTestUser to prevent this test from breaking.
     @Test
     public void createNewUserTest(){
         sleep(1000);
+        loginController.setTestingMode(true);
         clickOn("#createAccButton");
         clickOn("#usernameField");
         write("IntTestUser");
@@ -112,7 +114,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         write("password");
         clickOn("#passConfirmField");
         write("password");
-        clickOn("#ageCheckBox"); //This clicks on the centre of the text!
+        clickOn("#ageCheckBox");
         clickOn("#createAccountButton");
         clickOn("#closePopupButton");
     }
@@ -121,9 +123,10 @@ public class LoginGUIIntegration extends ApplicationTest {
     @Test
     public void createExistingUser(){
         sleep(1000);
+        loginController.setTestingMode(true);
         clickOn("#createAccButton");
         clickOn("#usernameField");
-        write("testUser");
+        write("accountTestUser");
         clickOn("#passField");
         write("password");
         clickOn("#passConfirmField");
@@ -280,6 +283,24 @@ public class LoginGUIIntegration extends ApplicationTest {
         write("mismatch");
         clickOn("#createAccountButton");
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
+    }
+
+    //Integration Test | Confirm that a user cannot create an account with a forbidden name.
+    @Test
+    public void forbiddenNamesTest(){
+        //TextInputControls.clearTextIn
+        sleep(1000);
+        loginController.setTestingMode(false);
+        clickOn("#createAccButton");
+        clickOn("#usernameField");
+        write("userDoesNotExist");
+        clickOn("#passField");
+        write("password");
+        clickOn("#passConfirmField");
+        write("password");
+        clickOn("#ageCheckBox");
+        clickOn("#createAccountButton");
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("The selected username is unavailable."));
     }
 
 }

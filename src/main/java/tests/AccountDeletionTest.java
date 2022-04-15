@@ -17,6 +17,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.matcher.control.TextInputControlMatchers;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -51,16 +52,19 @@ public class AccountDeletionTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    //For Debug Purposes Only: Open the GUI and do nothing (allows programmer to interact with GUI)
     @Test
     public void doesItWorkTest(){
-        sleep(100000);
+        sleep(1000000);
     }
 
+    //Unit Test | Confirm an internal testing user can be created.
     @Test
     public void testDeletionUserCreation() throws IOException {
         controller.createDeletionTestAccount();
     }
 
+    //Integration Test | Confirm User Can Be Deleted
     @Test
     public void userDeletionTest() throws IOException {
         sleep (1000);
@@ -72,7 +76,76 @@ public class AccountDeletionTest extends ApplicationTest {
         clickOn("#passConfirmField");
         write("accountDeletionTest");
         clickOn("#deleteAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("accountDeletionTestUser was deleted."));
+        clickOn("#closePopupButton");
     }
 
+    //Unit Test | Confirm Error Field is not displayed
+    @Test
+    public void errorFieldInvisibleTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText(""));
+    }
+
+    //Unit Test | Confirm "Delete Account" button displays correct text
+    @Test
+    public void DeleteAccountTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#deleteAccountButton",LabeledMatchers.hasText("Delete Account"));
+    }
+
+    //Unit Test | Confirm text can be entered in username field.
+    @Test
+    public void enterDeleteUsernameTest(){
+        sleep(1000);
+        clickOn("#usernameField");
+        write("username");
+        FxAssert.verifyThat("#usernameField", TextInputControlMatchers.hasText("username"));
+    }
+
+    //Unit Test | Confirm text can be entered in password field.
+    @Test
+    public void enterPasswordTest(){
+        sleep(1000);
+        clickOn("#passField");
+        write("password");
+        FxAssert.verifyThat("#passField", TextInputControlMatchers.hasText("password"));
+    }
+
+    //Unit Test | Confirm text can be entered in confirm password field.
+    @Test
+    public void enterConfirmPasswordTest(){
+        sleep(1000);
+        clickOn("#passConfirmField");
+        write("password");
+        FxAssert.verifyThat("#passConfirmField", TextInputControlMatchers.hasText("password"));
+    }
+
+    //Unit Test | Confirm "Create Account" Button can be pressed.
+    @Test
+    public void deleteAccountButtonTest(){
+        sleep(1000);
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
+    }
+
+    //TODO: Integration Test | Confirm that blank account can not be deleted.
+    //Test is functionally identical to deleteAccountButtonTest()
+
+    //TODO: Integration Test | Confirm that account with mismatched passwords cannot be deleted.
+    @Test
+    public void mismatchPasswordsTest(){
+        sleep(1000);
+        clickOn("#usernameField");
+        write("username");
+        clickOn("#passField");
+        write("passwordA");
+        clickOn("#passConfirmField");
+        write("passwordB");
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("The passwords do not match!"));
+    }
+
+    //TODO: Integration Test | Confirm that non-existent account cannot be deleted. (REQUIRES VERIFICATION)
+    //TODO: Integration Test | Confirm that account cannot be deleted if password is not correct (REQUIRES VERIFICATION)
+    //TODO: Integration Test | Confirm that reserved accounts cannot be deleted. (REQUIRES RESERVED ACCOUNTS LIST)
 }
