@@ -52,8 +52,30 @@ public class AccountDeletionController {
         }
         else {
             User currUser = new User(userField.getText(), passField.getText());
-            //client.verifyUser(currUser); //TODO: Verification always fails??
-            client.deleteUser(currUser);
+            //TODO: Verification always fails? Account should not be deleted if it does not exist or if the password is not correct.
+            //String verified = client.verifyUser(currUser);
+            String verified = "USERFOUND"; //DISCARD ONCE VERIFICATION WORKS!
+            if (verified == "USERFOUND") {
+                String success = client.deleteUser(currUser);
+                if (success.equals("DELETESUCCESS")){
+                    //TODO: OK POPUP
+                    errLabel.setText( userField.getText().trim() + " was deleted.");
+                } else {
+                    errLabel.setText("Something went wrong. The user could not be deleted.");
+                }
+            } else {
+                errLabel.setText("User details are incorrect.");
+            }
+        }
+    }
+
+    //FOR TESTING PURPOSES: CREATE AN ACCOUNT TO DELETE
+    public void createDeletionTestAccount() throws IOException {
+        User testingUser = new User("accountDeletionTestUser","accountDeletionTest");
+        if(client.createUser(testingUser).equals("USERCREATED")) {
+            System.out.println("ACCOUNT DELETION TEST USER was created.");
+        } else {
+            System.out.println("ACCOUNT DELETION TEST USER could not be created.");
         }
     }
 

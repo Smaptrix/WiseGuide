@@ -57,7 +57,11 @@ public class AccountCreationPageTest extends ApplicationTest {
     //TODO: Password Confirmation label requires ID to test
 
     //Unit Test | Confirm Error Field is not displayed
-    //TODO
+    @Test
+    public void errorFieldInvisibleTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText(""));
+    }
 
     //Unit Test | Confirm Age Checkbox label is displayed
     @Test

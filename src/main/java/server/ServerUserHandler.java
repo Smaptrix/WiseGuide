@@ -79,12 +79,7 @@ public class ServerUserHandler {
         }
         bw.close();
         br.close();
-        bw = null;
-        br = null;
         System.gc();
-        boolean pa1 = database.canExecute();
-        boolean pa2 = database.canRead();
-        boolean pa3 = database.canWrite();
         boolean delsuccess = database.delete();
         boolean success = tempFile.renameTo(database);
         return (success);

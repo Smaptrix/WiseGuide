@@ -372,8 +372,14 @@ public class Server {
 
         //User Deletion Mode
         else if(mode == 3){
-            currUserHandler.deleteUser();
-
+            boolean deleteSuccess = currUserHandler.deleteUser();
+            if (deleteSuccess){
+                sendResponse("DELETESUCCESS",true);
+                System.out.println("User was deleted.");
+            } else {
+                sendResponse("DELETEFAILURE",true);
+                System.out.println("User could not be deleted.");
+            }
         }
 
         else{

@@ -378,6 +378,8 @@ public class Client {
      */
     public String createUser(User currUser) throws IOException {
 
+        boolean success = false;
+
         outText.println("CREATEUSER");
 
         outText.println(currUser.getUsername());
@@ -388,17 +390,22 @@ public class Client {
         if(receiveAcknowledgement().equals("SENDSALT")) {
             currUser.setSalt(UserSecurity.generateSalt());
             System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
-
             outText.println(currUser.getSalt());
+            success = true;
         }
 
-        return receiveAcknowledgement();
+        if (success){
+            return receiveAcknowledgement();
+        } else {
+            return "";
+        }
     }
 
-    public void deleteUser(User currUser) throws IOException {
+    public String deleteUser(User currUser) throws IOException {
         outText.println("DELETEUSER");
         outText.println(currUser.getUsername());
         outText.println(currUser.getPassword());
+        return receiveAcknowledgement();
     }
 
     /**
