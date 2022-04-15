@@ -47,8 +47,10 @@ public class VideoHandler extends MediaHandler {
      * </p>
      *
      * @param filePath Is the file path of the desired media.
+     * @param heightIn Desired initial media height.
+     * @param widthIn Desired initial media width.
      */
-    public VideoHandler(File filePath) {
+    public VideoHandler(File filePath, int heightIn, int widthIn) {
 
         toString(filePath);
 
@@ -69,6 +71,10 @@ public class VideoHandler extends MediaHandler {
                             }
                         });
                         this.mediaView = new MediaView(mediaPlayer);
+                        this.mediaView.setPreserveRatio(true);
+                        this.mediaView.setSmooth(true);
+                        this.mediaView.setFitHeight(heightIn);
+                        this.mediaView.setFitWidth(widthIn);
                         this.mediaView.setOnError(new EventHandler<MediaErrorEvent>() {
                             public void handle(MediaErrorEvent t) {
                                 // Handle asynchronous error in MediaView.
@@ -137,18 +143,13 @@ public class VideoHandler extends MediaHandler {
         this.mediaPlayer.stop();
     }
 
-    public  void getHeight(){
-        this.media.getHeight();
-    }
-
     /**
      * <p>
      * Method to set the mediaView window height.
      * </p>
      * @param height Desired height of the window.
      */
-    public void setFitHeight(int height){
-        this.mediaView.setFitHeight(height);
+    public void setFitHeight(int height){this.mediaView.setFitHeight(height);
     }
 
     /**
@@ -157,7 +158,6 @@ public class VideoHandler extends MediaHandler {
      * </p>
      * @param width Desired width of the window.
      */
-    public void setFitWidth(int width){
-        this.mediaView.setFitHeight(width);
+    public void setFitWidth(int width){this.mediaView.setFitWidth(width);
     }
 }
