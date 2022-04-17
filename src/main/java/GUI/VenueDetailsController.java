@@ -11,6 +11,7 @@ package GUI;
 import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
@@ -33,7 +34,8 @@ public class VenueDetailsController {
         System.out.println(currVenuePage.children.get(0).children.get(0).attributes.get("include_source"));
     }
 
-
+    @FXML
+    public Label venueName;
 
     @FXML
     //Always called by the FXML Loader
@@ -44,12 +46,14 @@ public class VenueDetailsController {
     //Will use the client to download relevant data and place it into the page.
     public void loadVenueData() throws IOException {
 
+        venueName.setText(currVenue);
+
         //Downloads every media element required by the venue xml
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
 
-            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replace("/", "\\");
+            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replace("/", "/");
             System.out.println("File: " + file);
 
 

@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class VenueDetailsPage extends Application {
         stage.show();
     }
 
+
     @FXML
     //Closes the application
     private void exitButtonAction(){
@@ -29,5 +31,6 @@ public class VenueDetailsPage extends Application {
 
     public static void main(String[] args) {
         launch();
+
     }
 }

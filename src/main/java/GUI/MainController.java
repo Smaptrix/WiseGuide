@@ -33,7 +33,7 @@ public class MainController {
 
     private VenueXMLParser xml;
 
-
+    public Object currentItemSelected;
 
     public void setClient(Client client) {
         this.client = client;
@@ -75,7 +75,7 @@ public class MainController {
 
             if (click.getClickCount() == 2) {
                 //Use ListView's getSelected Item
-                Object currentItemSelected = venueList.getSelectionModel()
+                currentItemSelected = venueList.getSelectionModel()
                         .getSelectedItem();
 
 
