@@ -27,6 +27,18 @@ import java.util.*;
  */
 public class Client {
 
+    //TODO - Step 1: Server generate public/private key pair
+    //     - Step 2: Server sends public key to the client
+    //     - Step 3: Client generates own public/private key pair
+    //     - Step 4: Client encrypts public key using servers public key
+    //     -Step 5: Server receives encrypted public key, decrypts it
+    //     -Step 6: Server then generates symmetric key for use in the session
+    //     -Step 7: Server encrypts symmetric key using clients public key and sends to client
+    //     -Step 8: Client decrypts symmetric key and uses that for the rest of the session
+    //     -Step 9: Every packet is encrypted/decrypted using randomly generated symmetric key
+
+
+
     /**
      * CLIENTVERSION is the current version of the client
      */
@@ -65,6 +77,8 @@ public class Client {
      * Dictionary stores where all the files are located.
      */
     public Map<String, File> fileLocations = new HashMap<>();
+
+
 
 
 
