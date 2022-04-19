@@ -31,7 +31,9 @@ import java.security.spec.X509EncodedKeySpec;
 public class Server {
 
     //Should only be changed in the code
-    private static final String SERVERVERSION = "Ver 0.45";
+    private static final String SERVERVERSION = "Ver 0.50";
+
+
 
 
 
@@ -72,18 +74,46 @@ public class Server {
 
 
     //Generates the keypair for the start of the encryption of the socket connection
-    private void startupEncryption() throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private void startupEncryption() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
 
         //Generate initial key pair
         KeyPair initKeyPair = generateKeyPair();
 
-
+        //Seperates the keys out
         publicKey = (RSAPublicKey) initKeyPair.getPublic();
         privateKey = (RSAPrivateKey) initKeyPair.getPrivate();
 
         System.out.println("Public: " + publicKey.getEncoded());
         System.out.println("Private: " + privateKey.getEncoded());
 
+        //Gets the current server key directory
+        String keyDirectory = CurrDir + "\\serverkeys";
+
+        //Writes the public key to a file
+        File serverPublicKey = new File(keyDirectory + "\\serverpubkey");
+
+        FileOutputStream publicOut = new FileOutputStream(serverPublicKey);
+
+        publicOut.write(publicKey.getEncoded());
+
+        serverPublicKey.deleteOnExit();
+
+        publicOut.close();
+
+        System.out.println("Public key file created");
+
+        //Writes the private key to a file
+        File serverPrivateKey = new File(keyDirectory + "\\serverprivkey");
+
+        FileOutputStream privateOut = new FileOutputStream(serverPrivateKey);
+
+        privateOut.write(privateKey.getEncoded());
+
+        serverPrivateKey.deleteOnExit();
+
+        privateOut.close();
+
+        System.out.println("Private key file created");
 
 
     }
@@ -105,12 +135,15 @@ public class Server {
     //Starts the server
     public void startup(int port) throws IOException{
 
+        osDetect();
         System.out.println("Creating new Server Socket at " + port);
 
         //Server formed
         serverSocket = new ServerSocket(port);
 
         System.out.println("Port Created\n");
+
+
 
         //Generate the first parts of the encryption
         try {
@@ -132,7 +165,7 @@ public class Server {
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
-        osDetect();
+
 
         getClientEncryption();
 

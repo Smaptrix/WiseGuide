@@ -29,7 +29,7 @@ import java.util.*;
 public class Client {
 
     //TODO - Step 1: Server generate public/private key pair ✓
-    //     - EXTRA STEP: Server turns these into text files
+    //     - EXTRA STEP: Server turns these into files ✓
     //     - Step 2: Server sends public key file to the client
     //     - Step 3: Client generates own public/private key pair
     //     - Step 4: Client encrypts public key using servers public key
@@ -45,7 +45,7 @@ public class Client {
     /**
      * CLIENTVERSION is the current version of the client
      */
-    private static final String CLIENTVERSION = "Ver 0.45";
+    private static final String CLIENTVERSION = "Ver 0.50";
 
     /**
      * clientSocket is the client side socket.
