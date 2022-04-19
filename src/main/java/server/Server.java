@@ -21,7 +21,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 public class Server {
 
@@ -42,8 +47,63 @@ public class Server {
     private ServerUserHandler currUserHandler;
     private User currUser;
 
+
+
+    private RSAPublicKey publicKey;
+    private RSAPrivateKey privateKey;
+
+
+
+    //Generates a random public/private keypair
+    private KeyPair generateKeyPair() throws NoSuchAlgorithmException {
+
+        SecureRandom random = new SecureRandom();
+
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+
+        //Initialises the key pair generator with a key size of 2048
+        keyPairGenerator.initialize(2048, random);
+
+
+        //Generates the key pair and then returns it
+        return keyPairGenerator.generateKeyPair();
+
+    }
+
+
+    //Generates the keypair for the start of the encryption of the socket connection
+    private void startupEncryption() throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        //Generate initial key pair
+        KeyPair initKeyPair = generateKeyPair();
+
+
+        publicKey = (RSAPublicKey) initKeyPair.getPublic();
+        privateKey = (RSAPrivateKey) initKeyPair.getPrivate();
+
+        System.out.println("Public: " + publicKey.getEncoded());
+        System.out.println("Private: " + privateKey.getEncoded());
+
+
+
+    }
+
+    //Communicates with the client to get there public key
+    private void getClientEncryption() throws IOException {
+
+        outputStream.write(publicKey.getEncoded());
+
+    }
+
+    //Generates the symmetric key for the use of the session and sends it to the client
+    private void generateAndSendSymmetric(){
+
+    }
+
+
+
     //Starts the server
-    public void startup(int port) throws IOException {
+    public void startup(int port) throws IOException{
 
         System.out.println("Creating new Server Socket at " + port);
 
@@ -51,6 +111,16 @@ public class Server {
         serverSocket = new ServerSocket(port);
 
         System.out.println("Port Created\n");
+
+        //Generate the first parts of the encryption
+        try {
+            startupEncryption();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Encryption failed, aborting server launch");
+            System.exit(-1);
+        }
+
 
         clientSocket = serverSocket.accept();
 
@@ -63,6 +133,8 @@ public class Server {
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
         osDetect();
+
+        getClientEncryption();
 
         //Initialises the current user server user handler
         currUser = new User("", "");

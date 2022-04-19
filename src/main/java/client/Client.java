@@ -16,6 +16,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.interfaces.RSAPublicKey;
 import java.util.*;
 
 
@@ -27,14 +28,16 @@ import java.util.*;
  */
 public class Client {
 
-    //TODO - Step 1: Server generate public/private key pair
-    //     - Step 2: Server sends public key to the client
+    //TODO - Step 1: Server generate public/private key pair ✓
+    //     - EXTRA STEP: Server turns these into text files
+    //     - Step 2: Server sends public key file to the client
     //     - Step 3: Client generates own public/private key pair
     //     - Step 4: Client encrypts public key using servers public key
-    //     -Step 5: Server receives encrypted public key, decrypts it
+    //     -Step 5: Server receives encrypted public key file, decrypts it
     //     -Step 6: Server then generates symmetric key for use in the session
     //     -Step 7: Server encrypts symmetric key using clients public key and sends to client
     //     -Step 8: Client decrypts symmetric key and uses that for the rest of the session
+    //     -EXTRA STEP: Client verifies the key is correct by echoing a message from the server
     //     -Step 9: Every packet is encrypted/decrypted using randomly generated symmetric key
 
 
@@ -79,6 +82,8 @@ public class Client {
     public Map<String, File> fileLocations = new HashMap<>();
 
 
+    RSAPublicKey serverPublicKey;
+
 
 
 
@@ -101,6 +106,15 @@ public class Client {
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
             sameVersion = versionCheck();
+
+            getServerEncryption();
+
+            generateKeyPair();
+
+            sendPublicKey();
+
+            recieveSymmetricKey();
+
             connected = true;
             clientSocket.setSoTimeout(500);
 
@@ -109,6 +123,31 @@ public class Client {
         }
 
     }
+
+    //Generates clients public/private key pair
+    private void generateKeyPair(){
+
+    }
+
+
+
+    //Recieves the privates public key for the encryption
+    private void getServerEncryption(){
+
+
+    }
+
+    //Encrypts clients public key and send it to server
+    private void sendPublicKey(){
+
+    }
+
+
+    //Recieves the symmetric key to use for the rest of the session
+    private void recieveSymmetricKey(){
+
+    }
+
 
     /**
      * <p>
