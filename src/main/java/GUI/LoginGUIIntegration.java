@@ -1,5 +1,6 @@
 package GUI;
 
+import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,10 +29,9 @@ public class LoginGUIIntegration extends ApplicationTest {
     /* ===== INTEGRATION TESTS for Login and GUI ===== */
 
     private LoginController loginController; //Reference to controller so testing user can be created manually.
+    private Client client;
 
     //TODO: Account Creation | Any limits on what characters allowed in username/password? These will need testing.
-
-    //TODO: Like none of these work anymore after the merge and just throw a nonspecific error every time the robot presses a button. Investigate (AC).
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,24 +47,9 @@ public class LoginGUIIntegration extends ApplicationTest {
     @Before
     public void setUpClass() throws Exception {
 
-        //Creates a testing user if one does not already exist.
-        //TODO: Ideally this should be hard-coded into the user database and not created here.
+        loginController.initialConnection();
 
-        //TODO: Not confident this works after merging - check later (AC)
-
-        /*
-        User testingUser = new User("testUser","testPassword");
-        ServerUserHandler desiredUser = new ServerUserHandler(testingUser, true);
-        desiredUser.verifyUser();
-        if(desiredUser.userExistState){
-            System.out.println("WARNING: Testing User Already Exists!");
-        }
-        if(loginController.getClient().createUser(testingUser).equals("USERCREATED")){
-            System.out.println("SUCCESS: Testing User Created");
-        } else {
-            System.out.println("ERROR: Testing User could not be created!");
-        }
-         */
+        //TODO: Hardcode testing user into database.
 
     }
 
@@ -85,8 +70,8 @@ public class LoginGUIIntegration extends ApplicationTest {
         clickOn("#userPassField");
         write("testPassword");
         clickOn("#loginButton");
-        sleep(1000);
-        FxAssert.verifyThat(window("WiseGuide by Maptrix - V1.0.0"), WindowMatchers.isShowing());
+        sleep(2000);
+        FxAssert.verifyThat(window("WiseGuide by Maptrix - Ver 0.45"), WindowMatchers.isShowing());
     }
 
     //Integration Test | Confirm user cannot login if they have entered a real username but incorrect password.
@@ -98,7 +83,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         clickOn("#userPassField");
         write("incorrectPassword");
         clickOn("#loginButton");
-        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Incorrect Password!"));
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Unrecognised user details"));
     }
 
     //Integration Test | Confirm user cannot login if they have entered an incorrect username and password.
@@ -111,16 +96,13 @@ public class LoginGUIIntegration extends ApplicationTest {
         clickOn("#userPassField");
         write("password");
         clickOn("#loginButton");
-        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("User does not exist!"));
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Unrecognised user details"));
     }
 
     //Integration Test | Confirm that a new user can be created by entering unique username, acceptable password,
     //and by checking the checkbox.
 
     //TODO: Account creation should forbid the username IntTestUser to prevent this test from breaking.
-    //TODO: Currently only works for AC's screen size/resolution due to checkbox issue (see clickCheckboxTest)
-    //In theory this test should be enough to confirm a user exists, as if the closePopupButton
-    //exists then that implies the account creation process was successful.
     @Test
     public void createNewUserTest(){
         sleep(1000);
@@ -131,9 +113,7 @@ public class LoginGUIIntegration extends ApplicationTest {
         write("password");
         clickOn("#passConfirmField");
         write("password");
-        //clickOn("#ageCheckBox"); //This clicks on the centre of the text!
-        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-        clickOn((screensize.getWidth()/2 - 93),(screensize.getHeight()/2-103));
+        clickOn("#ageCheckBox"); //This clicks on the centre of the text!
         clickOn("#createAccountButton");
         clickOn("#closePopupButton");
     }
@@ -149,9 +129,9 @@ public class LoginGUIIntegration extends ApplicationTest {
         write("password");
         clickOn("#passConfirmField");
         write("password");
-        //clickOn("#ageCheckBox");
-        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-        clickOn((screensize.getWidth()/2 - 93),(screensize.getHeight()/2-103));
+        clickOn("#ageCheckBox");
+        //Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+        //clickOn((screensize.getWidth()/2 - 93),(screensize.getHeight()/2-103));
         clickOn("#createAccountButton");
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("This username is taken"));
     }

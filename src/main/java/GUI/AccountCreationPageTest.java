@@ -115,21 +115,10 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
     //Unit Test | Confirm checkbox can be clicked.
-    //TODO: GUI looks different now. Check if this is still an issue (AC)
-    //There is an issue with JavaFX(?) where only the upper half of the checkbox can be clicked. This means
-    //that TestFX's robot, which clicks the dead centre, does not cause the box to be registered as clicked.
-    //This was an attempt at clicking, on screen, where the box should be but it only works for AC's specific
-    //screen size/resolution.
-    //A better workaround could possibly be investigated but it is not a priority right now. Otherwise, simply
-    //manually test with a user that the box can be clicked.
-    //TODO: Currently only works on AC's screen size/resolution...
-    //TODO: The relative checkbox position is not the same as when running the full integration tests with the main screen - Investigate (AC).
     @Test
     public void clickCheckboxTest(){
         sleep(1000);
-        //clickOn("#ageCheckBox");
-        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-        clickOn((screensize.getWidth()/2 - 92),(screensize.getHeight()/2-125));
+        clickOn("#ageCheckBox");
         Assert.assertTrue(controller.ageCheckBox.isSelected());
     }
 
