@@ -9,6 +9,7 @@ package client;
 
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
+import serverclientstuff.Utils;
 
 import java.net.*;
 import java.io.*;
@@ -83,6 +84,7 @@ public class Client {
 
 
     RSAPublicKey serverPublicKey;
+    File serverPublicKeyFile;
 
 
 
@@ -116,7 +118,7 @@ public class Client {
             recieveSymmetricKey();
 
             connected = true;
-            clientSocket.setSoTimeout(500);
+            clientSocket.setSoTimeout(1000);
 
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
@@ -136,12 +138,45 @@ public class Client {
 
         outText.println("SENDPUBLIC");
 
-       int keyFileSize = inputStream.read();
+
+        //SAME CODE AS FILE REQUEST EXCEPT WE DONT CHOOSE THE FILE
+
+        //Tells us how many bytes are telling us how big the file is
+        int numOfFileSizeBytes = inputStream.read();
+
+        System.out.println("We have " + numOfFileSizeBytes + " file size bytes to read");
+
+        //Reads the next set amount of bytes to decode the file size
+        byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
+
+        for (int i = 0; i < numOfFileSizeBytes; i++) {
+            bytesToReadBytes[i] = (byte) inputStream.read();
+        }
+
+        int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
 
 
-       byte[] serverPublicKey = readBytes(keyFileSize);
+        //Magic number 3 - because we know that the file extension is only going to be three letters
+        byte[] DataTypeBytes = new byte[3];
 
-       System.out.println("Key Bytes: " + serverPublicKey);
+        for (int i = 0; i < 3; i++) {
+            DataTypeBytes[i] = (byte) inputStream.read();
+        }
+
+        String dataType = new String(DataTypeBytes, StandardCharsets.UTF_8);
+
+        System.out.println(dataType);
+
+
+        byte[] data = readBytes(bytesToRead);
+
+
+        System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
+
+        //Once we have the array of bytes, we then reconstruct that into the actual file.
+        serverPublicKeyFile = BytesToFile(data, "severPubKey", dataType);
+
+        System.out.println("All done!");
 
     }
 
@@ -307,6 +342,8 @@ public class Client {
             try {
 
                 data[bytesRead] = (byte) inputStream.read();
+
+                //System.out.println(data[bytesRead]);
 
 
             } catch (IOException e) {

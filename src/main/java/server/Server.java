@@ -51,8 +51,11 @@ public class Server {
 
 
 
-    private RSAPublicKey publicKey;
-    private RSAPrivateKey privateKey;
+    private PublicKey publicKey;
+    private PrivateKey privateKey;
+
+    private File serverPublicKey;
+    private File serverPrivateKey;
 
 
 
@@ -80,8 +83,8 @@ public class Server {
         KeyPair initKeyPair = generateKeyPair();
 
         //Seperates the keys out
-        publicKey = (RSAPublicKey) initKeyPair.getPublic();
-        privateKey = (RSAPrivateKey) initKeyPair.getPrivate();
+        publicKey =  initKeyPair.getPublic();
+        privateKey =  initKeyPair.getPrivate();
 
         System.out.println("Public: " + publicKey.getEncoded());
         System.out.println("Private: " + privateKey.getEncoded());
@@ -90,7 +93,7 @@ public class Server {
         String keyDirectory = CurrDir + "\\serverkeys";
 
         //Writes the public key to a file
-        File serverPublicKey = new File(keyDirectory + "\\serverpubkey");
+        serverPublicKey = new File(keyDirectory + "\\serverpubkey.pub");
 
         FileOutputStream publicOut = new FileOutputStream(serverPublicKey);
 
@@ -103,7 +106,7 @@ public class Server {
         System.out.println("Public key file created");
 
         //Writes the private key to a file
-        File serverPrivateKey = new File(keyDirectory + "\\serverprivkey");
+        serverPrivateKey = new File(keyDirectory + "\\serverprivkey.key");
 
         FileOutputStream privateOut = new FileOutputStream(serverPrivateKey);
 
@@ -121,6 +124,8 @@ public class Server {
     //Communicates with the client to get there public key
     private void getClientEncryption() throws IOException {
 
+        //Sends the servers public key file to the client
+        sendFile(Path.of(serverPublicKey.getPath()));
 
 
 
@@ -166,10 +171,6 @@ public class Server {
 
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
-
-
-
-
 
         //Initialises the current user server user handler
         currUser = new User("", "");
@@ -253,9 +254,6 @@ public class Server {
                 break;
 
             //Creates a new user and adds it to the database
-
-
-
             case "VERIFYUSER":
                 currUserHandler.setUserType("USER");
                 receiveLogin(0);
@@ -343,13 +341,18 @@ public class Server {
 
             int fileSizeInBytesLen = fileSizeInBytes.length;
 
+
             //Tells the client how many bytes are determining the size of the file
             outputStream.write(fileSizeInBytesLen);
+
+            //System.out.println("Sent file size length");
 
             //Writes the fileSize in bytes to the client
             for (byte fileSizeInByte : fileSizeInBytes) {
                 outputStream.write(fileSizeInByte);
             }
+
+           // System.out.println("sent file size");
 
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
@@ -371,6 +374,9 @@ public class Server {
 
                 bytesSent += 1;
 
+                //Testing purposes only
+                //System.out.println(buffer[bytesSent]);
+
                 if(bytesSent == fileSize){
                     System.out.println("We have written: " + bytesSent + " bytes");
 
@@ -380,6 +386,7 @@ public class Server {
             //Clears the outputStream of any excess data
             outputStream.flush();
 
+            System.out.println("All done!");
 
         }catch(NoSuchFileException e){
             System.out.println("File not found");
