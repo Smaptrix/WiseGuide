@@ -132,8 +132,15 @@ public class Client {
 
 
     //Recieves the privates public key for the encryption
-    private void getServerEncryption(){
+    private void getServerEncryption() throws IOException {
 
+        outText.println("SENDPUBLIC");
+
+       int keyFileSize = inputStream.read();
+
+       byte[] serverPublicKey = readBytes(keyFileSize);
+
+       System.out.println("Key Bytes: " + serverPublicKey);
 
     }
 

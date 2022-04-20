@@ -121,7 +121,9 @@ public class Server {
     //Communicates with the client to get there public key
     private void getClientEncryption() throws IOException {
 
-        outputStream.write(publicKey.getEncoded());
+
+
+
 
     }
 
@@ -167,7 +169,7 @@ public class Server {
 
 
 
-        getClientEncryption();
+
 
         //Initialises the current user server user handler
         currUser = new User("", "");
@@ -302,6 +304,10 @@ public class Server {
             case "UPLOADFILE":
                 currUserHandler.setUserType("VENUE");
                 recieveVenueFile();
+                break;
+
+            case "SENDPUBLIC":
+                getClientEncryption();
                 break;
 
 
