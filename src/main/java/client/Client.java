@@ -36,7 +36,7 @@ public class Client {
 
     //TODO - Step 1: Server generate public/private key pair ✓
     //     - EXTRA STEP: Server turns these into files ✓
-    //     - Step 2: Server sends public key file to the client
+    //     - Step 2: Server sends public key file to the client ✓
     //     - Step 3: Client generates own public/private key pair
     //     - Step 4: Client encrypts public key using servers public key
     //     -Step 5: Server receives encrypted public key file, decrypts it
