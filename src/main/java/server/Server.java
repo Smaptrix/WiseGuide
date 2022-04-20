@@ -86,8 +86,8 @@ public class Server {
         publicKey =  initKeyPair.getPublic();
         privateKey =  initKeyPair.getPrivate();
 
-        System.out.println("Public: " + publicKey.getEncoded());
-        System.out.println("Private: " + privateKey.getEncoded());
+        System.out.println("Public: " + publicKey);
+        System.out.println("Private: " + privateKey);
 
         //Gets the current server key directory
         String keyDirectory = CurrDir + "\\serverkeys";

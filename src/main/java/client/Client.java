@@ -17,7 +17,12 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
 
 
@@ -83,7 +88,7 @@ public class Client {
     public Map<String, File> fileLocations = new HashMap<>();
 
 
-    RSAPublicKey serverPublicKey;
+    PublicKey serverPublicKey;
     File serverPublicKeyFile;
 
 
@@ -168,15 +173,26 @@ public class Client {
         System.out.println(dataType);
 
 
-        byte[] data = readBytes(bytesToRead);
+        byte[] encPublicKey = readBytes(bytesToRead);
 
 
         System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
-        serverPublicKeyFile = BytesToFile(data, "severPubKey", dataType);
+        serverPublicKeyFile = BytesToFile(encPublicKey, "severPubKey", dataType);
 
-        System.out.println("All done!");
+
+        X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encPublicKey);
+
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            serverPublicKey = keyFactory.generatePublic(pubKeySpec);
+            System.out.println(serverPublicKey);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
