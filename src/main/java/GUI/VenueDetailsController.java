@@ -14,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import mediahandlers.TextManager;
+import serverclientstuff.Utils;
 
+import java.io.File;
 import java.io.IOException;
 
 public class VenueDetailsController {
@@ -66,6 +68,7 @@ public class VenueDetailsController {
 
             TextManager textManager = new TextManager(file, 470, 100);
             venueText.setText(textManager.loadTextFromFile());
+
         }
 
 
