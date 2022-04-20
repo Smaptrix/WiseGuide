@@ -12,6 +12,8 @@ import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import mediahandlers.TextManager;
 
 import java.io.IOException;
 
@@ -36,7 +38,8 @@ public class VenueDetailsController {
 
     @FXML
     public Label venueName;
-
+    @FXML
+    public TextArea venueText;
     @FXML
     //Always called by the FXML Loader
     public void initialize() {
@@ -47,6 +50,8 @@ public class VenueDetailsController {
     public void loadVenueData() throws IOException {
 
         venueName.setText(currVenue);
+
+
 
         //Downloads every media element required by the venue xml
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
@@ -59,7 +64,11 @@ public class VenueDetailsController {
 
             client.requestFile(file);
 
+            TextManager textManager = new TextManager(file, 470, 100);
+            venueText.setText(textManager.loadTextFromFile());
         }
+
+
 
 
     }

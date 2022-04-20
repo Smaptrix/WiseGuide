@@ -2,28 +2,16 @@ package mediahandlers;
 
 //CREATED BY ENTROPY DESIGNS FOR MAPTRIX
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.SubScene;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
 
 public class TextManager{
 
     protected int mediaID;
-    protected String mediaName;
     protected int positionX;
     protected int positionY;
     protected int width = 200;
@@ -45,12 +33,12 @@ public class TextManager{
 
     }
 
-    public void loadTextFromFile(){
+    public String loadTextFromFile(){
         //Read the data from the text file and store in the content attribute.
         try{
             File textFile = new File(filePath);
             Scanner fileReader = new Scanner(textFile);
-            while(fileReader.hasNextLine()){
+            while(fileReader.hasNextLine()) {
                 content = content + fileReader.nextLine() + "\n";
             }
         }
@@ -69,8 +57,8 @@ public class TextManager{
         textArea.setUnderline(underline);
         textArea.setTextAlignment(TextAlignment.CENTER);
         textArea.setWrappingWidth(width);
-
-    }
+    return content;
+}
 
     public Text getTextArea(){
         return this.textArea;
