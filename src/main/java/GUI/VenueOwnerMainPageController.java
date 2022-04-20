@@ -159,7 +159,7 @@ public class VenueOwnerMainPageController {
     @FXML
     //Adds a new file to the servers directory, and into the XML file
     //Uploading files to a server could be very dangerous
-    //WIP!!!
+    //WIP!!! - BUTTON IS INVISIBLE
     private void onAddFileButtonPress(){
 
         System.out.println("Add File Button Pressed!");
