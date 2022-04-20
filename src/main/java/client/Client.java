@@ -138,6 +138,7 @@ public class Client {
 
        int keyFileSize = inputStream.read();
 
+
        byte[] serverPublicKey = readBytes(keyFileSize);
 
        System.out.println("Key Bytes: " + serverPublicKey);
