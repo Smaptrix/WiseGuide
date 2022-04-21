@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
-import java.io.IOException;
+import java.io.*;
 
 public class AccountDeletionController {
 
@@ -25,6 +25,7 @@ public class AccountDeletionController {
 
     private String userExists;
     private boolean userPassCorrect;
+    private boolean testingMode = false; //testingMode should only be true if specifically set.
 
     @FXML
     TextField userField;
@@ -39,30 +40,31 @@ public class AccountDeletionController {
     @FXML
     Button closePopUpButton;
 
-
     @FXML
     /*
     * Deletes Account upon button press.
     * First checks to make sure passwords match and that username and password fields are not blank.
-    * Should then verify that the user exists and the password is correct, but this function does not currently work?
+    * Will not delete an account with a reserved username unless testingMode is on.
+    * Should then verify that the user exists and the password is correct, but this function does not currently work.
     */
     private void deleteAccountButtonAction() throws IOException {
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
-
         }
         else if(userField.getText().trim().isEmpty()){
             errLabel.setText("You have not entered a username!");
         }
-
         else if(passField.getText().trim().isEmpty()){
             errLabel.setText("You have not entered a password!");
+        }
+        else if(forbiddenNamesCheck(userField.getText().trim()) && (!testingMode)){
+            errLabel.setText("The selected user cannot be deleted.");
         }
         else {
             User currUser = new User(userField.getText(), passField.getText());
             //TODO: Verification always fails? Account should not be deleted if it does not exist or if the password is not correct.
             //String verified = client.verifyUser(currUser);
-            String verified = "USERFOUND"; //DISCARD ONCE VERIFICATION WORKS!
+            String verified = "USERFOUND"; //TODO: DISCARD ONCE VERIFICATION WORKS!
             if (verified == "USERFOUND") {
                 String success = client.deleteUser(currUser);
                 if (success.equals("DELETESUCCESS")){
@@ -102,6 +104,24 @@ public class AccountDeletionController {
         } else {
             System.out.println("ACCOUNT DELETION TEST USER could not be created.");
         }
+    }
+
+    private boolean forbiddenNamesCheck(String name) throws IOException {
+        boolean forbidden = false;
+        File forbiddenNamesList = new File("reservedUsernames.txt");
+        BufferedReader br = new BufferedReader(new FileReader(forbiddenNamesList));
+        String line;
+        while(((line = br.readLine()) != null) && forbidden == false){
+            if(name.equals(line)){
+                forbidden = true;
+            }
+        }
+        br.close();
+        return forbidden;
+    }
+
+    public void setTestingMode(boolean mode){
+        this.testingMode = mode;
     }
 
 }

@@ -20,7 +20,7 @@ import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -113,9 +113,6 @@ public class AccountCreationController {
 
     //TODO - Post Integration let the client handle all the user stuff not the GUI
 
-    //User should not be able to create accounts with same names as testing accounts
-    public String[] forbiddenNames = {"userDoesNotExist", "accountTestUser", "IntTestUser", "accountDeletionTestUser"};
-
     private boolean testingMode = false;
 
     public void setTestingMode(boolean testingMode) {
@@ -126,13 +123,7 @@ public class AccountCreationController {
     //Attempts to create account
     private void createAccountButtonAction() throws IOException {
 
-        //Checks to see if the name is forbidden
-        boolean nameForbidden = false;
-        for(String s:forbiddenNames){
-            if(userField.getText().trim().equals(s)){
-                nameForbidden = true;
-            }
-        }
+        boolean nameForbidden = forbiddenNameCheck(userField.getText().trim());
 
         //If testingMode is true, accounts with forbidden names should be allowed
         if(testingMode){
@@ -231,8 +222,18 @@ public class AccountCreationController {
 
     }
 
-
-
-
+    private boolean forbiddenNameCheck(String name) throws IOException {
+        boolean forbidden = false;
+        File forbiddenNamesList = new File("reservedUsernames.txt");
+        BufferedReader br = new BufferedReader(new FileReader(forbiddenNamesList));
+        String line;
+        while(((line = br.readLine()) != null) && forbidden == false){
+            if(name.equals(line)){
+                forbidden = true;
+            }
+        }
+        br.close();
+        return forbidden;
+    }
 
 }

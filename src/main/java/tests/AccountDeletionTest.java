@@ -50,6 +50,7 @@ public class AccountDeletionTest extends ApplicationTest {
         release(new KeyCode[]{});
         release(new MouseButton[]{});
         FxToolkit.hideStage();
+        controller.setTestingMode(false);
     }
 
     //For Debug Purposes Only: Open the GUI and do nothing (allows programmer to interact with GUI)
@@ -68,6 +69,7 @@ public class AccountDeletionTest extends ApplicationTest {
     @Test
     public void userDeletionTest() throws IOException {
         sleep (1000);
+        controller.setTestingMode(true);
         controller.createDeletionTestAccount();
         clickOn("#usernameField");
         write("accountDeletionTestUser");
@@ -128,10 +130,10 @@ public class AccountDeletionTest extends ApplicationTest {
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //TODO: Integration Test | Confirm that blank account can not be deleted.
+    //Integration Test | Confirm that blank account can not be deleted.
     //Test is functionally identical to deleteAccountButtonTest()
 
-    //TODO: Integration Test | Confirm that account with mismatched passwords cannot be deleted.
+    //Integration Test | Confirm that account with mismatched passwords cannot be deleted.
     @Test
     public void mismatchPasswordsTest(){
         sleep(1000);
@@ -147,5 +149,20 @@ public class AccountDeletionTest extends ApplicationTest {
 
     //TODO: Integration Test | Confirm that non-existent account cannot be deleted. (REQUIRES VERIFICATION)
     //TODO: Integration Test | Confirm that account cannot be deleted if password is not correct (REQUIRES VERIFICATION)
-    //TODO: Integration Test | Confirm that reserved accounts cannot be deleted. (REQUIRES RESERVED ACCOUNTS LIST)
+
+    //Integration Test | Confirm that reserved accounts cannot be deleted. (REQUIRES RESERVED ACCOUNTS LIST)
+    @Test
+    public void reservedNoDeleteTest() throws IOException {
+        sleep(1000);
+        controller.setTestingMode(false);
+        controller.createDeletionTestAccount();
+        clickOn("#usernameField");
+        write("accountDeletionTestUser");
+        clickOn("#passField");
+        write("accountDeletionTest");
+        clickOn("#passConfirmField");
+        write("accountDeletionTest");
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("The selected user cannot be deleted."));
+    }
 }

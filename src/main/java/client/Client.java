@@ -401,6 +401,13 @@ public class Client {
         }
     }
 
+    /**
+     * <p>
+     * Deletes the selected user account
+     * </p>
+     * @return whether the deletion was successful or not.
+     * @throws IOException if
+     */
     public String deleteUser(User currUser) throws IOException {
         outText.println("DELETEUSER");
         outText.println(currUser.getUsername());
