@@ -17,6 +17,7 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.security.*;
 import java.security.interfaces.RSAPublicKey;
@@ -41,6 +42,7 @@ public class Client {
     //     -Step 5: Server receives encrypted  key file, decrypts it
     //     -EXTRA STEP: Client verifies the key is correct by echoing a message from the server
     //     -Step 9: Every packet is encrypted/decrypted using randomly generated symmetric key
+    //     - DO THIS BY REPLACING EVERY OUTTEXT.PRINT WITH A FUNCTION ETC...
 
 
 
@@ -87,11 +89,9 @@ public class Client {
 
 
     private PublicKey serverPublicKey;
-     private  File serverPublicKeyFile;
 
 
-
-     //The clients symmetric key
+    //The clients symmetric key
 
     private SecretKey symKey;
     private File symmetricKeyFile;
@@ -201,7 +201,8 @@ public class Client {
         System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
-        serverPublicKeyFile = BytesToFile(encPublicKey, "severPubKey", dataType);
+        //Don't need to save the file actually...
+        //File serverPublicKeyFile = BytesToFile(encPublicKey, "severPubKey", dataType);
 
 
         X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encPublicKey);
@@ -219,7 +220,7 @@ public class Client {
     }
 
     //Encrypts clients public key and send it to server
-    private void sendSymmetricKey() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    private void sendSymmetricKey() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
         //First encrypt the clients public key with the servers public key
         Cipher rsaCipher = Cipher.getInstance("RSA");
 
@@ -241,6 +242,54 @@ public class Client {
 
         //TODO - SEND KEY
 
+        //Opens a one time output data stream to send the file
+        DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+
+        //Get the length of the keyfile
+        long symKeyFileSize = symmetricKeyFile.length();
+
+        byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) symKeyFileSize).array();
+
+        int fileSizeInBytesLen = fileSizeInBytes.length;
+
+        //Tell the server how many bytes to expect regarding the length
+        out.write(fileSizeInBytesLen);
+
+        //Writes the fileSize in bytes to the client
+        for (byte fileSizeInByte : fileSizeInBytes) {
+            out.write(fileSizeInByte);
+        }
+
+
+        //Construct a byte array from the file we want to send and send that across network
+        FileInputStream fileStream = new FileInputStream(symmetricKeyFile);
+        byte[] buffer = fileStream.readAllBytes();
+        fileStream.close();
+
+        boolean end = false;
+        int bytesSent = 0;
+
+        //Sends the file byte by byte
+        while(!end){
+            out.write(buffer[bytesSent]);
+
+            bytesSent += 1;
+
+            //Testing purposes only
+            //System.out.println(buffer[bytesSent]);
+
+            if(bytesSent == symKeyFileSize){
+                System.out.println("We have written: " + bytesSent + " bytes");
+
+                end = true;
+            }
+        }
+        //Clears the outputStream of any excess data
+        out.flush();
+
+        System.out.println("Key written");
+
+        out.close();
 
 
     }

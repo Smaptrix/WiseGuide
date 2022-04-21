@@ -13,6 +13,8 @@ import VenueXMLThings.VenueXMLParser;
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
 
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
 import javax.xml.transform.TransformerException;
 import java.net.*;
 import java.io.*;
@@ -121,19 +123,89 @@ public class Server {
 
     }
 
-    //Communicates with the client to get there public key
-    private void getClientEncryption() throws IOException {
+    //Communicates with the client to get the symmetric key
+    private void getClientEncryption() throws IOException, NoSuchPaddingException, NoSuchAlgorithmException {
 
         //Sends the servers public key file to the client
         sendFile(Path.of(serverPublicKey.getPath()));
 
+        DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+
+        //Recieve the length of the size data
+
+        int numOfFileSizeBytes = in.read();
+
+        //Recieve the size data
+
+        byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
+
+        for (int i = 0; i < numOfFileSizeBytes; i++) {
+            bytesToReadBytes[i] = (byte) in.read();
+        }
+
+        int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
+
+        //Recieve the actual data
+
+
+        //Similar code to the clients read bytes but we only need it the once for the server - JI
+
+        //Initialises a new byte array of size predetermined by our network protocol
+        byte[] keyData = new byte[bytesToRead];
+
+        boolean end = false;
+        int bytesRead = 0;
+
+
+        //Reads bytes up until the count has been reached
+        while (!end) {
+
+            try {
+                keyData[bytesRead] = (byte) in.read();
+                //System.out.println(data[bytesRead]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Increment Byte count
+            bytesRead += 1;
+            if (bytesRead == bytesToRead) {
+                // System.out.println("We have read: " + bytesRead);
+                end = true;
+            }
+
+        }
+
+
+        System.out.println("Key read");
+
+        in.close();
+
+        //Decrypt the key
+        decryptSymmetricKey(keyData);
+
+
+    }
+
+
+    //Decrypts the symmetric key from the client then "remembers" it
+    private void decryptSymmetricKey(byte[] encryptedKeyData) throws NoSuchPaddingException, NoSuchAlgorithmException {
+
+        //Decrypt key data
+        Cipher decryptCipher = Cipher.getInstance("RSA");
+
+
+
+
+        //Save the key
 
 
 
     }
 
+
     //Generates the symmetric key for the use of the session and sends it to the client
-    private void generateAndSendSymmetric(){
+    private void validateSymmetricKey(){
 
     }
 
