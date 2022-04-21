@@ -11,15 +11,14 @@ import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
 import serverclientstuff.Utils;
 
+import javax.crypto.*;
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
+import java.security.*;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
@@ -37,14 +36,13 @@ public class Client {
     //TODO - Step 1: Server generate public/private key pair ✓
     //     - EXTRA STEP: Server turns these into files ✓
     //     - Step 2: Server sends public key file to the client ✓
-    //     - Step 3: Client generates own public/private key pair
-    //     - Step 4: Client encrypts public key using servers public key
-    //     -Step 5: Server receives encrypted public key file, decrypts it
-    //     -Step 6: Server then generates symmetric key for use in the session
-    //     -Step 7: Server encrypts symmetric key using clients public key and sends to client
-    //     -Step 8: Client decrypts symmetric key and uses that for the rest of the session
+    //     - Step 3: Client generates symmetric key!
+    //     - Step 4: Client encrypts symmetric key using servers public key
+    //     -Step 5: Server receives encrypted  key file, decrypts it
     //     -EXTRA STEP: Client verifies the key is correct by echoing a message from the server
     //     -Step 9: Every packet is encrypted/decrypted using randomly generated symmetric key
+
+
 
 
 
@@ -88,9 +86,15 @@ public class Client {
     public Map<String, File> fileLocations = new HashMap<>();
 
 
-    PublicKey serverPublicKey;
-    File serverPublicKeyFile;
+    private PublicKey serverPublicKey;
+     private  File serverPublicKeyFile;
 
+
+
+     //The clients symmetric key
+
+    private SecretKey symKey;
+    private File symmetricKeyFile;
 
 
 
@@ -114,27 +118,45 @@ public class Client {
             System.out.println("Connection Opened");
             sameVersion = versionCheck();
 
+            //Get the servers public key
             getServerEncryption();
 
-            generateKeyPair();
+            //Generate a symmetric key for use for the session
+            generateSymmetricKey();
 
-            sendPublicKey();
+            //Sends the encrypted symmetric key to the server
+            sendSymmetricKey();
 
-            recieveSymmetricKey();
+            //Makes sure that the server and client are able to encrypt/decrypt messages
+            if(!keyValidation()){
+                System.out.println("Key validation failed... Shutting down");
+                System.exit(-1);
+
+            }
+
+
 
             connected = true;
             clientSocket.setSoTimeout(1000);
 
         } catch (ConnectException e) {
             System.out.println("Failed to connect/Server Offline");
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
+            e.printStackTrace();
+            System.out.println("Encryption Failed... Shutting down");
+            System.exit(-1);
         }
 
     }
 
-    //Generates clients public/private key pair
-    private void generateKeyPair(){
-
+    //Generates the symmetric key for the use in the session
+    private void generateSymmetricKey() throws NoSuchAlgorithmException {
+        KeyGenerator generator = KeyGenerator.getInstance("AES");
+        generator.init(256);
+        symKey = generator.generateKey();
     }
+
+
 
 
 
@@ -197,14 +219,39 @@ public class Client {
     }
 
     //Encrypts clients public key and send it to server
-    private void sendPublicKey(){
+    private void sendSymmetricKey() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+        //First encrypt the clients public key with the servers public key
+        Cipher rsaCipher = Cipher.getInstance("RSA");
+
+        //Initialise the cipher with the servers public key
+        rsaCipher.init(Cipher.ENCRYPT_MODE, serverPublicKey);
+
+        //Encode the public key with the servers public key
+        byte[] encodedSymKey = rsaCipher.doFinal(symKey.getEncoded());
+
+
+        //Writes the encoded public key to a file
+        try {
+            symmetricKeyFile = BytesToFile(encodedSymKey, "symKey", "sec");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Encoded symmetric key file!");
+
+        //TODO - SEND KEY
+
+
 
     }
 
 
     //Recieves the symmetric key to use for the rest of the session
-    private void recieveSymmetricKey(){
+    private boolean keyValidation(){
 
+
+
+        return false;
     }
 
 
