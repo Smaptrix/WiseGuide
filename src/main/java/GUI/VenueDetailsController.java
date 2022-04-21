@@ -13,8 +13,12 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import mediahandlers.TextManager;
+import mediahandlers.ImageHandler;
+import serverclientstuff.Utils;
 
+import java.io.File;
 import java.io.IOException;
 
 public class VenueDetailsController {
@@ -41,6 +45,8 @@ public class VenueDetailsController {
     @FXML
     public TextArea venueText;
     @FXML
+    public ImageView venueImage;
+    @FXML
     //Always called by the FXML Loader
     public void initialize() {
 
@@ -66,6 +72,14 @@ public class VenueDetailsController {
 
             TextManager textManager = new TextManager(file, 470, 100);
             venueText.setText(textManager.loadTextFromFile());
+            /*
+            File imageFilepath = new File(file);
+
+            ImageView imageView = new ImageView();
+            ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+            venueImage.setImage(imageHandler.getCurrImage());
+            */
+
         }
 
 

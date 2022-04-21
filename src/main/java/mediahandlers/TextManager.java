@@ -29,17 +29,20 @@ public class TextManager{
         this.width = width;
         this.height = height;
         this.filePath = fileLocation;
-        this.loadTextFromFile();
 
     }
 
     public String loadTextFromFile(){
         //Read the data from the text file and store in the content attribute.
         try{
+            //Tex file we want to read from
             File textFile = new File(filePath);
+            //The scanner that reads the file
             Scanner fileReader = new Scanner(textFile);
+            //while the file has a next line
             while(fileReader.hasNextLine()) {
-                content = content + fileReader.nextLine() + "\n";
+                String nextLine = fileReader.nextLine();
+                content = content + nextLine + "\n";
             }
         }
         catch (FileNotFoundException e){
