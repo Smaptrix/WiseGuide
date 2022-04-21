@@ -13,8 +13,8 @@ import VenueXMLThings.VenueXMLParser;
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
 
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import javax.xml.transform.TransformerException;
 import java.net.*;
 import java.io.*;
@@ -52,13 +52,11 @@ public class Server {
     private User currUser;
 
 
-
-    private PublicKey publicKey;
     private PrivateKey privateKey;
 
     private File serverPublicKey;
-    private File serverPrivateKey;
 
+    private SecretKey symKey;
 
 
     //Generates a random public/private keypair
@@ -85,7 +83,7 @@ public class Server {
         KeyPair initKeyPair = generateKeyPair();
 
         //Seperates the keys out
-        publicKey =  initKeyPair.getPublic();
+        PublicKey publicKey = initKeyPair.getPublic();
         privateKey =  initKeyPair.getPrivate();
 
         //System.out.println("Public: " + publicKey);
@@ -108,7 +106,7 @@ public class Server {
         System.out.println("Public key file created");
 
         //Writes the private key to a file
-        serverPrivateKey = new File(keyDirectory + "\\serverprivkey.key");
+        File serverPrivateKey = new File(keyDirectory + "\\serverprivkey.key");
 
         FileOutputStream privateOut = new FileOutputStream(serverPrivateKey);
 
@@ -124,7 +122,7 @@ public class Server {
     }
 
     //Communicates with the client to get the symmetric key
-    private void getClientEncryption() throws IOException, NoSuchPaddingException, NoSuchAlgorithmException {
+    private void getClientEncryption() throws IOException {
 
         //Sends the servers public key file to the client
         sendFile(Path.of(serverPublicKey.getPath()));
@@ -182,24 +180,34 @@ public class Server {
         in.close();
 
         //Decrypt the key
-        decryptSymmetricKey(keyData);
+        try {
+            decryptSymmetricKey(keyData);
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
 
     //Decrypts the symmetric key from the client then "remembers" it
-    private void decryptSymmetricKey(byte[] encryptedKeyData) throws NoSuchPaddingException, NoSuchAlgorithmException {
+    private void decryptSymmetricKey(byte[] encryptedKeyData) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
 
         //Decrypt key data
-        Cipher decryptCipher = Cipher.getInstance("RSA");
+        Cipher decryptionCipher = Cipher.getInstance("RSA");
+        try {
+            decryptionCipher.init(Cipher.DECRYPT_MODE, privateKey);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
+
+        byte[] decryptedSymmetricKey = decryptionCipher.doFinal(encryptedKeyData);
 
 
+        //Rebuild the key using the encoded key bytes
+        symKey = new SecretKeySpec(decryptedSymmetricKey, 0, decryptedSymmetricKey.length, "AES");
 
-
-        //Save the key
-
-
+        System.out.println(symKey);
 
     }
 

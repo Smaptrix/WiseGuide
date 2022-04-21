@@ -37,9 +37,9 @@ public class Client {
     //TODO - Step 1: Server generate public/private key pair ✓
     //     - EXTRA STEP: Server turns these into files ✓
     //     - Step 2: Server sends public key file to the client ✓
-    //     - Step 3: Client generates symmetric key!
-    //     - Step 4: Client encrypts symmetric key using servers public key
-    //     -Step 5: Server receives encrypted  key file, decrypts it
+    //     - Step 3: Client generates symmetric key!✓
+    //     - Step 4: Client encrypts symmetric key using servers public key✓
+    //     -Step 5: Server receives encrypted  key file, decrypts it✓
     //     -EXTRA STEP: Client verifies the key is correct by echoing a message from the server
     //     -Step 9: Every packet is encrypted/decrypted using randomly generated symmetric key
     //     - DO THIS BY REPLACING EVERY OUTTEXT.PRINT WITH A FUNCTION ETC...
@@ -95,6 +95,8 @@ public class Client {
 
     private SecretKey symKey;
     private File symmetricKeyFile;
+
+    private Cipher symmetricCipher;
 
 
 
@@ -240,7 +242,6 @@ public class Client {
 
         System.out.println("Encoded symmetric key file!");
 
-        //TODO - SEND KEY
 
         //Opens a one time output data stream to send the file
         DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
@@ -297,6 +298,27 @@ public class Client {
 
     //Recieves the symmetric key to use for the rest of the session
     private boolean keyValidation(){
+
+        System.out.println(symKey);
+
+        //Plan - Encrypt Command and send it
+        //     - Encrypt test message and send it
+        //     - Have server decrypt the command, then decrypt the message then echo it back
+        //     -Check on client to make sure that the messages are the same
+
+        String unencryptedCommand = "ECHO";
+
+        String unencryptedMessage = "thisisatestmessage";
+
+        symmetricCipher  = Cipher.getInstance("AES");
+
+        symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+
+
+
+
+
+
 
 
 
