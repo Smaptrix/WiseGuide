@@ -1,11 +1,9 @@
 package GUI;
 
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.media.MediaView;
-import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import mediahandlers.VideoHandler;
 
 import java.io.File;
@@ -22,10 +20,7 @@ public class VideoHandlerTest extends Application {
 
         VideoHandler test = new VideoHandler(testFile, height, width);
 
-        Group root = new Group();
-        root.getChildren().add(test.getMediaView());
-
-        Scene testScene = new Scene(root, width, height, Color.BLACK);
+        Scene testScene = new Scene(test, width, height, Color.BLACK);
 
         stage.setTitle("Video Handler Test");
 
@@ -33,7 +28,6 @@ public class VideoHandlerTest extends Application {
 
         stage.show();
 
-        test.play();
     }
 
     public static void main(String[] args) {

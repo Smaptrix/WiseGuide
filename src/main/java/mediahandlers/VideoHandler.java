@@ -3,12 +3,14 @@
     Project Name:   WiseGuide
     Authors:        Lee Foster
     Date Created:   10/03/2022
-    Last Updated:   10/03/2022
+    Last Updated:   22/04/2022
  */
 
 package mediahandlers;
 
 import javafx.event.EventHandler;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaErrorEvent;
 import javafx.scene.media.MediaPlayer;
@@ -19,7 +21,7 @@ import java.io.File;
 /**
  * VideoHandler class handles the creation, destruction and playback of video files.
  */
-public class VideoHandler extends MediaHandler {
+public class VideoHandler extends BorderPane {
 
     /**
      * media stores a media resource.
@@ -42,13 +44,23 @@ public class VideoHandler extends MediaHandler {
     String source;
 
     /**
+     * mpane is the pane layout of the player.
+     */
+    Pane mpane;
+
+    /**
+     * bar is the media controls at the bottom of the window.
+     */
+    MediaBar bar;
+
+    /**
      * <p>
      * Video handler constructor.
      * </p>
      *
      * @param filePath Is the file path of the desired media.
      * @param heightIn Desired initial media height.
-     * @param widthIn Desired initial media width.
+     * @param widthIn  Desired initial media width.
      */
     public VideoHandler(File filePath, int heightIn, int widthIn) {
 
@@ -80,6 +92,13 @@ public class VideoHandler extends MediaHandler {
                                 // Handle asynchronous error in MediaView.
                             }
                         });
+                        mpane = new Pane();
+                        mpane.getChildren().add(mediaView);
+                        setCenter(mpane);
+                        bar = new MediaBar(mediaPlayer);
+                        setBottom(bar);
+                        setStyle("-fx-background-color:#474746");
+                        mediaPlayer.play();
                     } else {
                         // Handle synchronous error creating MediaPlayer.
                     }
@@ -121,7 +140,7 @@ public class VideoHandler extends MediaHandler {
      * Method plays the video.
      * </p>
      */
-    public void play(){
+    public void play() {
         this.mediaPlayer.play();
     }
 
@@ -130,7 +149,7 @@ public class VideoHandler extends MediaHandler {
      * Method pauses the video.
      * </p>
      */
-    public void pause(){
+    public void pause() {
         this.mediaPlayer.pause();
     }
 
@@ -139,7 +158,7 @@ public class VideoHandler extends MediaHandler {
      * Method stops the video.
      * </p>
      */
-    public void stop(){
+    public void stop() {
         this.mediaPlayer.stop();
     }
 
@@ -147,17 +166,21 @@ public class VideoHandler extends MediaHandler {
      * <p>
      * Method to set the mediaView window height.
      * </p>
+     *
      * @param height Desired height of the window.
      */
-    public void setFitHeight(int height){this.mediaView.setFitHeight(height);
+    public void setFitHeight(int height) {
+        this.mediaView.setFitHeight(height);
     }
 
     /**
      * <p>
      * Method to set the mediaView window width.
      * </p>
+     *
      * @param width Desired width of the window.
      */
-    public void setFitWidth(int width){this.mediaView.setFitWidth(width);
+    public void setFitWidth(int width) {
+        this.mediaView.setFitWidth(width);
     }
 }
