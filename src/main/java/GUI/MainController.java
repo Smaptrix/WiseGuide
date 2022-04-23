@@ -125,6 +125,8 @@ public class MainController {
 
             System.out.println("X Position = " + mouseX);
             System.out.println("Y Position = " + mouseY);
+
+            // Doesn't quite work, detects whole screen, not the window.
         });
 
 

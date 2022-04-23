@@ -67,7 +67,7 @@
                 </SplitPane>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="0.0">
-                <ImageView accessibleText="WiseGuide by Maptrix Logo" fitHeight="558.0" fitWidth="658.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView id="mapView" fx:id="mapView" accessibleText="Base Map showing all venues in York" fitHeight="558.0" fitWidth="658.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../Maps/baseMap.png" />
                 </ImageView>
             </AnchorPane>
