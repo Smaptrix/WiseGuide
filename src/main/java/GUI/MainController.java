@@ -11,6 +11,8 @@ package GUI;
 import VenueXMLThings.VenueXMLParser;
 import client.Client;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,10 +20,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
@@ -38,10 +42,6 @@ public class MainController {
     public int mouseX;
     public int mouseY;
 
-
-
-
-
     public void setClient(Client client) {
         this.client = client;
     }
@@ -49,10 +49,6 @@ public class MainController {
     public void setUser(User currUser) {
         this.currUser = currUser;
     }
-
-
-
-
 
 
     @FXML
@@ -114,26 +110,37 @@ public class MainController {
             }
         });
 
+
         // If mouse is double clicked on the map, get x and y coordinates
         mapView.setOnMouseClicked(click -> {
             Point p = MouseInfo.getPointerInfo().getLocation();
 
-            if (click.getClickCount() == 2) {
-                mouseX = p.x;
-                mouseY = p.y;
-            }
 
-            System.out.println("X Position = " + mouseX);
-            System.out.println("Y Position = " + mouseY);
+            if (click.getClickCount() == 2) {
+                mouseX = (int) p.getX();
+                mouseY = (int) p.getY();
+
+                System.out.println("X Position = " + mouseX);
+                System.out.println("Y Position = " + mouseY);
+            }
 
             // Doesn't quite work, detects whole screen, not the window.
         });
-
-
-
-
-
     }
+
+    // TODO: could someone help me look at this as this is how I get the scene mouse position not the screen. cant get it to work though
+    /*
+    EventHandler<MouseEvent> mouseEvent = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+            String eType = mouseEvent.getEventType().toString();
+            if(eType.equals("MOUSE_PRESSED")) {
+                mouseX = (int) mouseEvent.getSceneX();
+                mouseY = (int) mouseEvent.getSceneY();
+                System.out.println(mouseX + " ... " + mouseY);
+            }
+        }
+    }; */
 
     @FXML
     //Closes the window
