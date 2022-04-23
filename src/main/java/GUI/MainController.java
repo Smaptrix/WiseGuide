@@ -17,10 +17,12 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,11 @@ public class MainController {
     private User currUser;
 
     private VenueXMLParser xml;
+
+    public int mouseX;
+    public int mouseY;
+
+
 
 
 
@@ -65,6 +72,9 @@ public class MainController {
 
     @FXML
     ListView venueList;
+
+    @FXML
+    ImageView mapView;
 
 
     @FXML
@@ -102,6 +112,19 @@ public class MainController {
                 stage.show();
 
             }
+        });
+
+        // If mouse is double clicked on the map, get x and y coordinates
+        mapView.setOnMouseClicked(click -> {
+            Point p = MouseInfo.getPointerInfo().getLocation();
+
+            if (click.getClickCount() == 2) {
+                mouseX = p.x;
+                mouseY = p.y;
+            }
+
+            System.out.println("X Position = " + mouseX);
+            System.out.println("Y Position = " + mouseY);
         });
 
 
