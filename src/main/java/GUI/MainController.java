@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Will Pitchfork, Joe Ingham
     Date Created:   04/02/2022
-    Last Updated:   24/02/2022
+    Last Updated:   24/04/2022
  */
 
 package GUI;
@@ -11,7 +11,6 @@ package GUI;
 import VenueXMLThings.VenueXMLParser;
 import client.Client;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,10 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import java.awt.*;
 import java.io.*;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainController {
@@ -82,35 +78,37 @@ public class MainController {
         venueList.setOnMouseClicked(click -> {
 
             if (click.getClickCount() == 2) {
-                //Use ListView's getSelected Item
-                Object currentItemSelected = venueList.getSelectionModel()
-                        .getSelectedItem();
-
-
-                //Opens the generic venue page with the current venue selected which is used to populate the venue information
-                FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
-                Stage stage = new Stage();
-                Scene scene = null;
-                try {
-                    scene = new Scene(fxmlLoader.load(), 900, 600);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                VenueDetailsController controller = fxmlLoader.getController();
-                controller.setClient(client);
-                controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected));
-                try {
-                    controller.loadVenueData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Failed to get venue data");
-                }
-                stage.setScene(scene);
-                stage.setTitle((String) currentItemSelected);
-                stage.show();
-
+                openSelectedVenue();
             }
         });
+    }
+
+    protected void openSelectedVenue() {
+        //Use ListView's getSelected Item
+        Object currentItemSelected = venueList.getSelectionModel()
+                .getSelectedItem();
+
+        //Opens the generic venue page with the current venue selected which is used to populate the venue information
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
+        Stage stage = new Stage();
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 900, 600);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        VenueDetailsController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected));
+        try {
+            controller.loadVenueData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to get venue data");
+        }
+        stage.setScene(scene);
+        stage.setTitle((String) currentItemSelected);
+        stage.show();
     }
 
     EventHandler<MouseEvent> mouseEvent = new EventHandler<>() {
