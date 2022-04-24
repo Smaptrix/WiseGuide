@@ -28,9 +28,9 @@ public class VenueDetailsController {
         this.currVenue = currVenue;
         this.currVenuePage = currVenuePage;
 
-        System.out.println(currVenuePage);
-        System.out.println(currVenuePage.attributes);
-        System.out.println(currVenuePage.children.get(0).children.get(0).attributes.get("include_source"));
+        //System.out.println(currVenuePage);
+        //System.out.println(currVenuePage.attributes);
+        //System.out.println(currVenuePage.children.get(0).children.get(0).attributes.get("include_source"));
     }
 
 
