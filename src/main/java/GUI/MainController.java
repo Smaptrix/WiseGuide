@@ -83,6 +83,9 @@ public class MainController {
         });
     }
 
+    /**
+     * Opens the Venue Details Page when a venue is selected.
+     */
     protected void openSelectedVenue() {
         //Use ListView's getSelected Item
         Object currentItemSelected = venueList.getSelectionModel()
