@@ -76,6 +76,8 @@ public class MainController {
     @FXML
     public void initialize() {
 
+        mapView.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent);
+
         //Defines what happens when you double click a venue in the venue list
         venueList.setOnMouseClicked(click -> {
 
@@ -109,38 +111,16 @@ public class MainController {
 
             }
         });
-
-
-        // If mouse is double clicked on the map, get x and y coordinates
-        mapView.setOnMouseClicked(click -> {
-            Point p = MouseInfo.getPointerInfo().getLocation();
-
-
-            if (click.getClickCount() == 2) {
-                mouseX = (int) p.getX();
-                mouseY = (int) p.getY();
-
-                System.out.println("X Position = " + mouseX);
-                System.out.println("Y Position = " + mouseY);
-            }
-
-            // Doesn't quite work, detects whole screen, not the window.
-        });
     }
 
-    // TODO: could someone help me look at this as this is how I get the scene mouse position not the screen. cant get it to work though
-    /*
-    EventHandler<MouseEvent> mouseEvent = new EventHandler<MouseEvent>() {
+    EventHandler<MouseEvent> mouseEvent = new EventHandler<>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            String eType = mouseEvent.getEventType().toString();
-            if(eType.equals("MOUSE_PRESSED")) {
-                mouseX = (int) mouseEvent.getSceneX();
-                mouseY = (int) mouseEvent.getSceneY();
-                System.out.println(mouseX + " ... " + mouseY);
-            }
+            mouseX = (int) mouseEvent.getSceneX();
+            mouseY = (int) mouseEvent.getSceneY();
+            System.out.println(mouseX + " ... " + mouseY);
         }
-    }; */
+    };
 
     @FXML
     //Closes the window
