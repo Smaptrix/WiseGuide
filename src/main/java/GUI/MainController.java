@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -26,6 +27,8 @@ import javafx.stage.Stage;
 import serverclientstuff.User;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 public class MainController {
@@ -42,6 +45,14 @@ public class MainController {
 
     public int mouseX;
     public int mouseY;
+
+    Image baseMapImage;
+    Image centralCentralYorkImage;
+    Image centralYorkImage;
+    Image hesEastImage;
+    Image SEYorkImage;
+    Image southCentralYorkImage;
+    Image westCentralYorkImage;
 
     Object currentItemSelected = new Object();
 
@@ -139,18 +150,22 @@ public class MainController {
 
     public void selectVenueOnMap() {
         Point2D mousePosition = new Point2D(mouseX, mouseY);
+        createImageObjects();
 
         if ((mousePosition.getX() > getBase_NRM_min().getX()) && (mousePosition.getX() < getBase_NRM_max().getX()) && (mousePosition.getY() > getBase_NRM_min().getY()) && (mousePosition.getY() < getBase_NRM_max().getY())) {
             selectedItem = "National Railway Museum York";
         } else if ((mousePosition.getX() > getBase_25_min().getX()) && (mousePosition.getX() < getBase_25_max().getX()) && (mousePosition.getY() > getBase_25_min().getY()) && (mousePosition.getY() < getBase_25_max().getY())) {
             selectedItem = "Central York 25";
             desiredMap = "CentralYorkMap";
+            mapView.setImage(centralYorkImage);
         } else if ((mousePosition.getX() > getBase_SW3_min().getX()) && (mousePosition.getX() < getBase_SW3_max().getX()) && (mousePosition.getY() > getBase_SW3_min().getY()) && (mousePosition.getY() < getBase_SW3_max().getY())) {
             selectedItem = "South West York 3";
             desiredMap = "SEYorkMap";
+            mapView.setImage(SEYorkImage);
         } else if ((mousePosition.getX() > getBase_UoY_min().getX()) && (mousePosition.getX() < getBase_UoY_max().getX()) && (mousePosition.getY() > getBase_UoY_min().getY()) && (mousePosition.getY() < getBase_UoY_max().getY())) {
             selectedItem = "Uni of York 3";
             desiredMap = "hesEastMap";
+            mapView.setImage(hesEastImage);
         } else if ((mousePosition.getX() > getBase_Charles_min().getX()) && (mousePosition.getX() < getBase_Charles_max().getX()) && (mousePosition.getY() > getBase_Charles_min().getY()) && (mousePosition.getY() < getBase_Charles_max().getY())) {
             selectedItem = "Charles XII";
         } else if ((mousePosition.getX() > getBase_RKC_min().getX()) && (mousePosition.getX() < getBase_RKC_max().getX()) && (mousePosition.getY() > getBase_RKC_min().getY()) && (mousePosition.getY() < getBase_RKC_max().getY())) {
@@ -164,6 +179,24 @@ public class MainController {
         } else {
             selectedItem = "BaseMap";
             desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+    }
+
+    private void createImageObjects() {
+        try {
+            //baseMapImage = new Image(new FileInputStream("@../resources/Maps/baseMap.png"));
+            baseMapImage = new Image(new FileInputStream("src/main/resources/Maps/baseMap.png"));
+            centralCentralYorkImage = new Image(new FileInputStream("src/main/resources/Maps/centralCentralYorkMap.png"));
+            centralYorkImage = new Image(new FileInputStream("src/main/resources/Maps/centralYorkMap.png"));
+            hesEastImage = new Image(new FileInputStream("src/main/resources/Maps/hesEastMap.png"));
+            SEYorkImage = new Image(new FileInputStream("src/main/resources/Maps/SEYorkMap.png"));
+            southCentralYorkImage = new Image(new FileInputStream("src/main/resources/Maps/southCentralYorkMap.png"));
+            westCentralYorkImage = new Image(new FileInputStream( "src/main/resources/Maps/westCentralYorkMap.png"));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("uh oh...");
         }
     }
 
