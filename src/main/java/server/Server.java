@@ -211,12 +211,18 @@ public class Server {
 
     }
 
+/*
+    //Waits to recieve the validation checks from the client
+    private void validateSymmetricKey() throws IOException {
 
-    //Generates the symmetric key for the use of the session and sends it to the client
-    private void validateSymmetricKey(){
+       String encryptedCommand = inText.readLine();
+
+        while ((encryptedCommand = inText.readLine()) != null) {
+       System.out.println(encryptedCommand);
+
 
     }
-
+*/
 
 
     //Starts the server

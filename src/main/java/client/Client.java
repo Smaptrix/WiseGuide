@@ -297,7 +297,7 @@ public class Client {
 
 
     //Recieves the symmetric key to use for the rest of the session
-    private boolean keyValidation(){
+    private boolean keyValidation() {
 
         System.out.println(symKey);
 
@@ -310,19 +310,34 @@ public class Client {
 
         String unencryptedMessage = "thisisatestmessage";
 
-        symmetricCipher  = Cipher.getInstance("AES");
+        //Creates the cipher to use for the rest of the  and determines the algorithm to use
+        //SHOULD BE AES
+        try {
+            symmetricCipher = Cipher.getInstance("AES");
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+        }
 
-        symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+        //Initialises the cipher in encryption mode and gives it the symmetric key
+        try {
+            symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
+
+        byte[] encryptedCommand = new byte[0];
+        try {
+            encryptedCommand = symmetricCipher.doFinal(unencryptedCommand.getBytes(StandardCharsets.UTF_8));
+        } catch (IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
+
+        //Sends the encrypted command
+        outText.println(encryptedCommand);
+        System.out.println(encryptedCommand);
 
 
-
-
-
-
-
-
-
-        return false;
+        return true;
     }
 
 
