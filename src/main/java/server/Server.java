@@ -25,6 +25,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 
 public class Server {
 
@@ -333,9 +334,18 @@ public class Server {
                         //ITS ALREADY IN THE BYTE FORM
                         System.out.println("Input line: " + inputLine);
 
-                        byte[] encryptedInpLineBytes = inputLine;
+                        //THIS IS TEMPORARY - FIRST ENCRYPTED MESSAGE IS 11 BYTES
+                        //TODO - Input length must be multiple of 16???? maybe swap the encryption lol
+                        byte[] encryptedInpLineBytes = new byte[11];
 
-                        System.out.println("Input line in bytes: " + encryptedInpLineBytes);
+                        //Places each character from the string into the byte (really lsoppy workaround)
+                        for(int i = 0; i < inputLine.length() ; i++){
+                            encryptedInpLineBytes[i] = (byte) inputLine.charAt(i);
+                        }
+
+
+
+                        System.out.println("Input line in bytes: " + Arrays.toString(encryptedInpLineBytes));
 
 
                         byte[] decryptedInpLineBytes = symmetricCipher.doFinal(encryptedInpLineBytes);

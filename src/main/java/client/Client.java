@@ -309,6 +309,7 @@ public class Client {
 
         String unencryptedCommand = "ECHO";
 
+
         String unencryptedMessage = "thisisatestmessage";
 
         //Creates the cipher to use for the rest of the  and determines the algorithm to use
@@ -336,10 +337,10 @@ public class Client {
 
 
         //Sends the encrypted command
-        outText.println(Arrays.toString(encryptedCommand));
+        outText.println(encryptedCommand);
 
 
-        System.out.println(Arrays.toString(encryptedCommand));
+        System.out.println(encryptedCommand);
 
         System.out.println("Sent encrypted command");
 
