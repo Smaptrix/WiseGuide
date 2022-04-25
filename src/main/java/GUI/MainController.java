@@ -38,7 +38,7 @@ public class MainController {
 
     private String selectedItem;
 
-    protected String currentMap = "baseMap";
+    protected String desiredMap = "baseMap";
 
     public int mouseX;
     public int mouseY;
@@ -144,13 +144,13 @@ public class MainController {
             selectedItem = "National Railway Museum York";
         } else if ((mousePosition.getX() > getBase_25_min().getX()) && (mousePosition.getX() < getBase_25_max().getX()) && (mousePosition.getY() > getBase_25_min().getY()) && (mousePosition.getY() < getBase_25_max().getY())) {
             selectedItem = "Central York 25";
-            currentMap = "CentralYorkMap";
+            desiredMap = "CentralYorkMap";
         } else if ((mousePosition.getX() > getBase_SW3_min().getX()) && (mousePosition.getX() < getBase_SW3_max().getX()) && (mousePosition.getY() > getBase_SW3_min().getY()) && (mousePosition.getY() < getBase_SW3_max().getY())) {
             selectedItem = "South West York 3";
-            currentMap = "SEYorkMap";
+            desiredMap = "SEYorkMap";
         } else if ((mousePosition.getX() > getBase_UoY_min().getX()) && (mousePosition.getX() < getBase_UoY_max().getX()) && (mousePosition.getY() > getBase_UoY_min().getY()) && (mousePosition.getY() < getBase_UoY_max().getY())) {
             selectedItem = "Uni of York 3";
-            currentMap = "hesEastMap";
+            desiredMap = "hesEastMap";
         } else if ((mousePosition.getX() > getBase_Charles_min().getX()) && (mousePosition.getX() < getBase_Charles_max().getX()) && (mousePosition.getY() > getBase_Charles_min().getY()) && (mousePosition.getY() < getBase_Charles_max().getY())) {
             selectedItem = "Charles XII";
         } else if ((mousePosition.getX() > getBase_RKC_min().getX()) && (mousePosition.getX() < getBase_RKC_max().getX()) && (mousePosition.getY() > getBase_RKC_min().getY()) && (mousePosition.getY() < getBase_RKC_max().getY())) {
@@ -163,7 +163,7 @@ public class MainController {
             selectedItem = "Millennium Fields";
         } else {
             selectedItem = "BaseMap";
-            currentMap = "baseMap";
+            desiredMap = "baseMap";
         }
     }
 
