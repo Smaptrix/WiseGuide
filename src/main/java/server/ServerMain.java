@@ -44,6 +44,7 @@ public class ServerMain {
                 }
             } catch (Exception e) {
                 System.out.println("Socket exception - Lost connection with client");
+                e.printStackTrace();
 
     }
 

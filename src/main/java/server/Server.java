@@ -212,13 +212,13 @@ public class Server {
 
         System.out.println(symKey);
 
-/*
+
         //Creates the symmetric Cipher with which to decrypt messages from the client
         symmetricCipher = Cipher.getInstance("AES");
 
-        symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+        //symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
 
-        */
+
         encryptionReady = true;
 
     }
@@ -318,14 +318,32 @@ public class Server {
                     break;
                 } else {
 
+                    System.out.println("Encryption done: " + encryptionReady);
                     if(encryptionReady) {
                         symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
 
-                        byte[] encryptedInpLineBytes = inputLine.getBytes(StandardCharsets.UTF_8);
+
+                        //TODO - BIG CHANGE MAYBE HAVE CLIENT SEND BYTES ONLY RATHER THAN STRINGS???!?!?!?!
+                        //     -BASICALLY ~NEED TO FIGURE OUT HOW TO TURN THIS STRING INTO BYTES BUT LIKE THE STRING IS ALREADY IN BYTE FORM
+
+
+
+
+
+                        //ITS ALREADY IN THE BYTE FORM
+                        System.out.println("Input line: " + inputLine);
+
+                        byte[] encryptedInpLineBytes = inputLine;
+
+                        System.out.println("Input line in bytes: " + encryptedInpLineBytes);
+
 
                         byte[] decryptedInpLineBytes = symmetricCipher.doFinal(encryptedInpLineBytes);
 
+                        System.out.println("Decrypted input line in bytes: " + encryptedInpLineBytes);
+
                         String decryptedInputLine = new String(decryptedInpLineBytes, StandardCharsets.UTF_8);
+
 
                         System.out.println("Request Received: " + decryptedInputLine);
 
@@ -339,6 +357,7 @@ public class Server {
 
         }catch (SocketException e){
             System.out.println("Lost connnection to client");
+            e.printStackTrace();
         } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }

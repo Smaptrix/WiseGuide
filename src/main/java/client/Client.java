@@ -336,8 +336,10 @@ public class Client {
 
 
         //Sends the encrypted command
-        outText.println(encryptedCommand);
-        System.out.println(encryptedCommand);
+        outText.println(Arrays.toString(encryptedCommand));
+
+
+        System.out.println(Arrays.toString(encryptedCommand));
 
         System.out.println("Sent encrypted command");
 
