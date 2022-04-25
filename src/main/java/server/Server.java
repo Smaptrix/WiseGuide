@@ -24,11 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.security.*;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 
 public class Server {
 
@@ -58,6 +54,10 @@ public class Server {
 
     private SecretKey symKey;
 
+    private Cipher symmetricCipher;
+
+    private boolean encryptionReady;
+
 
     //Generates a random public/private keypair
     private KeyPair generateKeyPair() throws NoSuchAlgorithmException {
@@ -78,6 +78,8 @@ public class Server {
 
     //Generates the keypair for the start of the encryption of the socket connection
     private void startupEncryption() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+
+        encryptionReady = false;
 
         //Generate initial key pair
         KeyPair initKeyPair = generateKeyPair();
@@ -177,7 +179,8 @@ public class Server {
 
         System.out.println("Key read");
 
-        in.close();
+        //Sets the input socket back to the text reader
+        inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
         //Decrypt the key
         try {
@@ -208,6 +211,15 @@ public class Server {
         symKey = new SecretKeySpec(decryptedSymmetricKey, 0, decryptedSymmetricKey.length, "AES");
 
         System.out.println(symKey);
+
+/*
+        //Creates the symmetric Cipher with which to decrypt messages from the client
+        symmetricCipher = Cipher.getInstance("AES");
+
+        symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+
+        */
+        encryptionReady = true;
 
     }
 
@@ -305,15 +317,29 @@ public class Server {
                     stopConnections();
                     break;
                 } else {
-                    System.out.println("Request Received: " + inputLine);
 
-                    requestParser(inputLine);
+                    if(encryptionReady) {
+                        symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+
+                        byte[] encryptedInpLineBytes = inputLine.getBytes(StandardCharsets.UTF_8);
+
+                        byte[] decryptedInpLineBytes = symmetricCipher.doFinal(encryptedInpLineBytes);
+
+                        String decryptedInputLine = new String(decryptedInpLineBytes, StandardCharsets.UTF_8);
+
+                        System.out.println("Request Received: " + decryptedInputLine);
+
+                        requestParser(decryptedInputLine);
+                    }
+                    else{
+                        requestParser(inputLine);
+                    }
             }
         }
 
         }catch (SocketException e){
             System.out.println("Lost connnection to client");
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
     }
@@ -325,6 +351,9 @@ public class Server {
 
     //Requests in form "Request Code Type" + " " + "Request Information"
     public void requestParser(String requestIn) throws IOException, NoSuchAlgorithmException {
+
+
+
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
             case "GET":

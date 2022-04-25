@@ -290,7 +290,8 @@ public class Client {
 
         System.out.println("Key written");
 
-        out.close();
+        //Set the socket back to the text write
+        outText = new PrintWriter(clientSocket.getOutputStream(), true);
 
 
     }
@@ -332,9 +333,13 @@ public class Client {
             e.printStackTrace();
         }
 
+
+
         //Sends the encrypted command
         outText.println(encryptedCommand);
         System.out.println(encryptedCommand);
+
+        System.out.println("Sent encrypted command");
 
 
         return true;

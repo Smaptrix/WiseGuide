@@ -38,6 +38,7 @@ public class ServerMain {
 
                 server.startup(5555);
 
+                System.out.println("Start buffer listen");
 
                 server.bufferListen();
                 }
