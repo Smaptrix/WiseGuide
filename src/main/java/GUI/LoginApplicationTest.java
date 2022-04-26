@@ -124,4 +124,14 @@ public class LoginApplicationTest extends ApplicationTest {
         sleep(1000);
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(""));
     }
+
+    //Unit Test | Confirm that clicking the maptrix logo opens the venue login page
+    @Test
+    public void openVenueLoginPageTest(){
+        sleep(1000);
+        clickOn("#maptrixLogo");
+        FxAssert.verifyThat(window("Venue Login"), WindowMatchers.isShowing());
+    }
+
+
 }

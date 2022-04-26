@@ -9,9 +9,11 @@
 package server;
 
 
+import VenueXMLThings.VenueXMLParser;
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
 
+import javax.xml.transform.TransformerException;
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -148,32 +150,53 @@ public class Server {
 
 
             case "VERIFYUSER":
+                currUserHandler.setUserType("USER");
                 receiveLogin(0);
                 break;
 
             case "LOGIN":
+                currUserHandler.setUserType("USER");
                 receiveLogin(1);
                 break;
 
             case "CREATEUSER":
+                currUserHandler.setUserType("USER");
                 receiveLogin(2);
                 break;
 
 
             case "CHANGENAME":
+                currUserHandler.setUserType("USER");
                 changeUsername();
                 break;
 
             case "CHANGEPASS":
+                currUserHandler.setUserType("USER");
                 changePassword();
                 break;
 
             case "LOGOUT":
+                currUserHandler.setUserType("USER");
                 logout();
                 break;
 
             case "VERSIONCHECK":
                 versionCheck();
+                break;
+
+            case "VENUELOGIN":
+                currUserHandler.setUserType("VENUE");
+                receiveLogin(1);
+                break;
+                
+            case "DELETEVENUEFILE":
+                currUserHandler.setUserType("VENUE");
+                deleteVenueFile();
+                break;
+
+            case "UPLOADFILE":
+                currUserHandler.setUserType("VENUE");
+                recieveVenueFile();
                 break;
 
 
@@ -184,7 +207,12 @@ public class Server {
         }
     }
 
+    private void recieveVenueFile() throws IOException {
+        sendResponse("SIZE?", true);
 
+        inText.readLine();
+
+    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -239,7 +267,6 @@ public class Server {
                 }
             }
             //Clears the outputStream of any excess data
-
             outputStream.flush();
 
 
@@ -295,14 +322,14 @@ public class Server {
 
 
         //Hashing server side as we can access the users salt
-        currUser.setUsername(loginName);
-        currUser.setPassword(loginPass);
+        currUser = new User(loginName, loginPass);
 
         currUserHandler.setCurrUser(currUser);
 
 
         //Determine current users statuses - will always fail at the password level
         currUserHandler.verifyUser();
+
 
 
 
@@ -330,12 +357,15 @@ public class Server {
 
             System.out.println("Login mode!");
 
+
             //If the user exists grab there salt then encrypt there data
+           //Breaks if user has no salt
             if(currUserHandler.userExistState){
                 currUser.setSalt(currUserHandler.getcurrUserSalt());
                 currUser.encryptUserInfo();
                 currUserHandler.verifyUser();
             }
+
 
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
@@ -351,6 +381,9 @@ public class Server {
                 sendResponse("GOODLOGIN", true);
                 System.out.println("Login message sent!");
             }
+
+
+
 
         }
 
@@ -381,6 +414,7 @@ public class Server {
 
 
     }
+
 
 
     //Logs the user out of the server
@@ -465,6 +499,35 @@ public class Server {
 
         }
 
+    }
+
+    //Deletes the requested venue file
+    private void deleteVenueFile() throws IOException {
+
+        //Gets the filepath from the client
+        File fileToDelete = new File(inText.readLine());
+
+
+
+        System.out.println("File to delete: " + fileToDelete);
+
+        //Delete the file from the PC
+        if(fileToDelete.delete()){
+            //Delete the file from the XML
+            VenueXMLParser xml = new VenueXMLParser(new File("venuesLocation.xml"));
+            try {
+                //MAke sure the slashes are consistent with the direction in the venue XML file
+                xml.removeChildMedia("title", currUser.getUsername(), (String.valueOf(fileToDelete)).replace("\\", "/"));
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
+            sendResponse("File Deleted", true);
+        }
+        else{
+            sendResponse("File Deletion Error", true);
+        }
+
+        //TODO - Also change the XML file
 
 
 

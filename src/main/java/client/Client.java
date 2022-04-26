@@ -15,6 +15,7 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 
@@ -458,6 +459,7 @@ public class Client {
 
     //TODO - Could be made more rigourous, but assumes server and client have same user
 
+    //Requests that the server requests a users name
     public String requestUserNameChange(String desiredUsername) throws IOException {
 
 
@@ -474,6 +476,7 @@ public class Client {
     }
 
 
+    //Requests that the server changes the users password
     public String requestPasswordChange(String enteredPassword, String newPassword) throws IOException {
 
         outText.println("CHANGEPASS");
@@ -489,6 +492,40 @@ public class Client {
 
 
 
+    //Requests that the server log a venue in
+    public String requestVenueLogin(String venueName, String venuePass) throws IOException {
+        outText.println("VENUELOGIN");
+
+        outText.println(venueName);
+        outText.println(venuePass);
+
+        return receiveAcknowledgement();
+    }
+
+
+    //Requests that the server delete a file from a venues directory
+    public String requestDeleteFile(String filePath) throws IOException {
+        outText.println("DELETEVENUEFILE");
+
+        outText.println(filePath);
+
+        return receiveAcknowledgement();
+
+
+    }
+
+
+    //Requests that the client can send a file to the server
+    //Maybe change so that it sends an email and then we discuss it
+    //Rather than having any user be able to upload any file they want
+    public String requestUploadFile(File filetoUpload) throws IOException {
+        outText.println("UPLOADFILE");
+
+
+
+        return receiveAcknowledgement();
+
+    }
 
 
     /**
