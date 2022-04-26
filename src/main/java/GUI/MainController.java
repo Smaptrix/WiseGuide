@@ -26,10 +26,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import java.awt.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 public class MainController {
 
@@ -110,7 +112,7 @@ public class MainController {
             currentItemSelected = venueList.getSelectionModel()
                     .getSelectedItem();
         } else {
-            currentItemSelected = selectedItem;
+                currentItemSelected = selectedItem;
         }
 
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
@@ -144,7 +146,9 @@ public class MainController {
 
             System.out.println(mouseX + " ... " + mouseY);
             selectVenueOnMap();
-            openSelectedVenue();
+            if (!Objects.equals(selectedItem, "ignore")) {
+                openSelectedVenue();
+            }
         }
     };
 
@@ -152,18 +156,26 @@ public class MainController {
         Point2D mousePosition = new Point2D(mouseX, mouseY);
         createImageObjects();
 
+        if (Objects.equals(desiredMap, "baseMap")) {
+            baseMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "hesEastMap")) {
+            UoYMapSelecting(mousePosition);
+        }
+    }
+
+    private void baseMapSelecting(Point2D mousePosition) {
         if ((mousePosition.getX() > getBase_NRM_min().getX()) && (mousePosition.getX() < getBase_NRM_max().getX()) && (mousePosition.getY() > getBase_NRM_min().getY()) && (mousePosition.getY() < getBase_NRM_max().getY())) {
             selectedItem = "National Railway Museum York";
         } else if ((mousePosition.getX() > getBase_25_min().getX()) && (mousePosition.getX() < getBase_25_max().getX()) && (mousePosition.getY() > getBase_25_min().getY()) && (mousePosition.getY() < getBase_25_max().getY())) {
-            selectedItem = "Central York 25";
+            selectedItem = "ignore";
             desiredMap = "CentralYorkMap";
             mapView.setImage(centralYorkImage);
         } else if ((mousePosition.getX() > getBase_SW3_min().getX()) && (mousePosition.getX() < getBase_SW3_max().getX()) && (mousePosition.getY() > getBase_SW3_min().getY()) && (mousePosition.getY() < getBase_SW3_max().getY())) {
-            selectedItem = "South West York 3";
+            selectedItem = "ignore";
             desiredMap = "SEYorkMap";
             mapView.setImage(SEYorkImage);
         } else if ((mousePosition.getX() > getBase_UoY_min().getX()) && (mousePosition.getX() < getBase_UoY_max().getX()) && (mousePosition.getY() > getBase_UoY_min().getY()) && (mousePosition.getY() < getBase_UoY_max().getY())) {
-            selectedItem = "Uni of York 3";
+            selectedItem = "ignore";
             desiredMap = "hesEastMap";
             mapView.setImage(hesEastImage);
         } else if ((mousePosition.getX() > getBase_Charles_min().getX()) && (mousePosition.getX() < getBase_Charles_max().getX()) && (mousePosition.getY() > getBase_Charles_min().getY()) && (mousePosition.getY() < getBase_Charles_max().getY())) {
@@ -177,10 +189,33 @@ public class MainController {
         } else if ((mousePosition.getX() > getBase_millennium_min().getX()) && (mousePosition.getX() < getBase_millennium_max().getX()) && (mousePosition.getY() > getBase_millennium_min().getY()) && (mousePosition.getY() < getBase_millennium_max().getY())) {
             selectedItem = "Millennium Fields";
         } else {
-            selectedItem = "BaseMap";
+            selectedItem = "ignore";
             desiredMap = "baseMap";
             mapView.setImage(baseMapImage);
         }
+    }
+
+    private void UoYMapSelecting(Point2D mousePosition) {
+        if ((mousePosition.getX() > getUoY3_JBM_min().getX()) && (mousePosition.getX() < getUoY3_JBM_max().getX()) && (mousePosition.getY() > getUoY3_JBM_min().getY()) && (mousePosition.getY() < getUoY3_JBM_max().getY())) {
+            selectedItem = "University of York JB Morrell Library";
+        } else if ((mousePosition.getX() > getUoY3_RKC_min().getX()) && (mousePosition.getX() < getUoY3_RKC_max().getX()) && (mousePosition.getY() > getUoY3_RKC_min().getY()) && (mousePosition.getY() < getUoY3_RKC_max().getY())) {
+            selectedItem = "Roger Kirk Centre";
+        } else if ((mousePosition.getX() > getUoY3_Charles_min().getX()) && (mousePosition.getX() < getUoY3_Charles_max().getX()) && (mousePosition.getY() > getUoY3_Charles_min().getY()) && (mousePosition.getY() < getUoY3_Charles_max().getY())) {
+            selectedItem = "Charles XII";
+        } else if ((mousePosition.getX() > getUoY3_BlackBull_min().getX()) && (mousePosition.getX() < getUoY3_BlackBull_max().getX()) && (mousePosition.getY() > getUoY3_BlackBull_min().getY()) && (mousePosition.getY() < getUoY3_BlackBull_max().getY())) {
+            selectedItem = "The Black Bull";
+        } else if ((mousePosition.getX() > getUoY3_Cecils_min().getX()) && (mousePosition.getX() < getUoY3_Cecils_max().getX()) && (mousePosition.getY() > getUoY3_Cecils_min().getY()) && (mousePosition.getY() < getUoY3_Cecils_max().getY())) {
+            selectedItem = "Cecil's Pizza - Grill";
+        } else if ((mousePosition.getX() > getUoY3_RCH_min().getX()) && (mousePosition.getX() < getUoY3_RCH_max().getX()) && (mousePosition.getY() > getUoY3_RCH_min().getY()) && (mousePosition.getY() < getUoY3_RCH_max().getY())) {
+            selectedItem = "The Ron Cooke Hub";
+        } else if ((mousePosition.getX() > getUoY3_Piazza_min().getX()) && (mousePosition.getX() < getUoY3_Piazza_max().getX()) && (mousePosition.getY() > getUoY3_Piazza_min().getY()) && (mousePosition.getY() < getUoY3_Piazza_max().getY())) {
+            selectedItem = "Piazza Building";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+
     }
 
     private void createImageObjects() {
@@ -342,6 +377,27 @@ public class MainController {
     private final Point2D base_millennium_min = new Point2D(445, 384);
     private final Point2D base_millennium_max = new Point2D(474, 420);
 
+    private final Point2D UoY3_JBM_min = new Point2D(308, 283);
+    private final Point2D UoY3_JBM_max = new Point2D(336, 321);
+
+    private final Point2D UoY3_RKC_min = new Point2D(243, 391);
+    private final Point2D UoY3_RKC_max = new Point2D(270, 428);
+
+    private final Point2D UoY3_Charles_min = new Point2D(444, 418);
+    private final Point2D UoY3_Charles_max = new Point2D(471, 456);
+
+    private final Point2D UoY3_BlackBull_min = new Point2D(467, 138);
+    private final Point2D UoY3_BlackBull_max = new Point2D(495, 175);
+
+    private final Point2D UoY3_Cecils_min = new Point2D(728, 242);
+    private final Point2D UoY3_Cecils_max = new Point2D(756, 276);
+
+    private final Point2D UoY3_RCH_min = new Point2D(710, 362);
+    private final Point2D UoY3_RCH_max = new Point2D(739, 399);
+
+    private final Point2D UoY3_Piazza_min = new Point2D(763, 332);
+    private final Point2D UoY3_Piazza_max = new Point2D(791, 360);
+
 
     // Getters for all points
     public Point2D getBase_NRM_min() {
@@ -405,5 +461,54 @@ public class MainController {
     }
     public Point2D getBase_millennium_max() {
         return base_millennium_max;
+    }
+
+    public Point2D getUoY3_JBM_min() {
+        return UoY3_JBM_min;
+    }
+    public Point2D getUoY3_JBM_max() {
+        return UoY3_JBM_max;
+    }
+
+    public Point2D getUoY3_RKC_min() {
+        return UoY3_RKC_min;
+    }
+    public Point2D getUoY3_RKC_max() {
+        return UoY3_RKC_max;
+    }
+
+    public Point2D getUoY3_Charles_min() {
+        return UoY3_Charles_min;
+    }
+    public Point2D getUoY3_Charles_max() {
+        return UoY3_Charles_max;
+    }
+
+    public Point2D getUoY3_BlackBull_min() {
+        return UoY3_BlackBull_min;
+    }
+    public Point2D getUoY3_BlackBull_max() {
+        return UoY3_BlackBull_max;
+    }
+
+    public Point2D getUoY3_Cecils_min() {
+        return UoY3_Cecils_min;
+    }
+    public Point2D getUoY3_Cecils_max() {
+        return UoY3_Cecils_max;
+    }
+
+    public Point2D getUoY3_RCH_min() {
+        return UoY3_RCH_min;
+    }
+    public Point2D getUoY3_RCH_max() {
+        return UoY3_RCH_max;
+    }
+
+    public Point2D getUoY3_Piazza_min() {
+        return UoY3_Piazza_min;
+    }
+    public Point2D getUoY3_Piazza_max() {
+        return UoY3_Piazza_max;
     }
 }
