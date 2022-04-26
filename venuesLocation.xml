@@ -1,198 +1,246 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><xml xmlns:base="PWS_Base" xmlns:ext="PWS_Exts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="PWS_Base https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/PWS.xsd PWS_Exts https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/my_exts.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<xml xmlns:base="PWS_Base"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="PWS_Base https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/PWS.xsd PWS_Exts https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/my_exts.xsd"
+     xmlns:ext="PWS_Exts"
+>
     <!--Price range from 0 (free) to 3 (expensive)-->
     <!--Nightclubs-->
-    <!--
-    there's also some weird shape and text attributes that we can use if need see this example xml from david's schema (https://github.com/super-cow-powers/sweng_21_PWS/blob/master/example_doc.xml)
 
-    also i didnt realise that the "source" attribute was actually "include_source" so i just made a quick switch
-    and there was some other silly mistakes i made formatting wise... so ive just cleaned them up now, sorry!
+    <base:page title="Flares_York" ID="001" price="2" lat="53.9587775" lon="-1.0867884" category="nightclub">
+        <!--
+        there's also some weird shape and text attributes that we can use if need see this example xml from david's schema (https://github.com/super-cow-powers/sweng_21_PWS/blob/master/example_doc.xml)
 
-    hopefully this should be everything we need from the schema for now? i guess we also need the alt text option, but will have to change the extra schema and im unsure of how to do that atm aha
-    -->
-    <!--
+        also i didnt realise that the "source" attribute was actually "include_source" so i just made a quick switch
+        and there was some other silly mistakes i made formatting wise... so ive just cleaned them up now, sorry!
 
-    here are the baselines for the other things, playable for some weird reason handles both audio and video:
-
-    <base:image include_source="pic.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="45" ID="im0" disp_duration_s="40" show_after_s="0" />
-    <base:playable indlude_source="vid.mp4 or sound.mp3" display_player="true" seek_offset="10" autoplay="false" loop="false" type="video or audio"</base:playable>
-    -->
-
-
-    <base:page ID="001" category="nightclub" lat="53.9587775" lon="-1.0867884" price="2" title="Flares_York">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text.txt"/>
+        hopefully this should be everything we need from the schema for now? i guess we also need the alt text option, but will have to change the extra schema and im unsure of how to do that atm aha
+        -->
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text.txt" ID="text0"></base:text>
         </base:shape>
-        <base:image ID="im0" disp_duration_s="40" include_source="pic.png" rot_angle="45" show_after_s="0" x_orig="40" x_size_px="50" y_orig="40" y_size_px="50" z_ind="0"/>
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text_Copy.txt"/>
+        <base:image include_source="Venues/Clubs/Flares_York/Flares1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="40" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Flares_York/Flares2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Flares_York/Flares3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Flares_York/Flares4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image3" disp_duration_s="-1" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Flares_York/Flares5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image4" disp_duration_s="-1" show_after_s="0" />
+        <base:playable indlude_source="Venues/Clubs/Flares_York/FlaresVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
+        <!--
+
+        here are the baselines for the other things, playable for some weird reason handles both audio and video:
+
+        <base:image include_source="pic.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="im0" disp_duration_s="-1" show_after_s="0" />
+        <base:playable indlude_source="vid.mp4 or sound.mp3" display_player="true" seek_offset="10" autoplay="false" loop="false" type="video or audio"</base:playable>
+        -->
+    </base:page>
+    <base:page title="Revolution_York" ID="002" price="2" lat="53.9592577" lon="-1.0872826" category="nightclub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Revolution_York/Revolution_York.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="002" category="nightclub" lat="53.9592577" lon="-1.0872826" price="2" title="Revolution_York">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Clubs/Revolution_York/Revolution_York_text.txt"/>
+    <base:page title="Club_Salvation" ID="003" price="1" lat="53.958187" lon="-1.0895813" category="nightclub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Clubs/Club_Salvation/Club_Salvation1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Club_Salvation/Club_Salvation2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Club_Salvation/Club_Salvation3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
     </base:page>
-    <base:page ID="003" category="nightclub" lat="53.958187" lon="-1.0895813" price="1" title="Club_Salvation">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation_text.txt"/>
+    <base:page title="Kuda" ID="004" price="2" lat="53.9568311" lon="-1.0840847" category="nightclub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Kuda/Kuda.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Clubs/Kuda/Kuda1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Kuda/Kuda2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
+        <base:image include_source="Venues/Clubs/Kuda/Kuda3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
     </base:page>
-    <base:page ID="004" category="nightclub" lat="53.9568311" lon="-1.0840847" price="2" title="Kuda">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Clubs/Kuda/Kuda_text.txt"/>
+    <base:page title="Popworld_York" ID="005" price="2" lat="53.957479" lon="-1.0890425" category="nightclub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Popworld/Popworld.txt" ID="text0"></base:text>
         </base:shape>
-    </base:page>
-    <base:page ID="005" category="nightclub" lat="53.957479" lon="-1.0890425" price="2" title="Popworld York">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Clubs/Popworld/Popworld_text.txt"/>
-        </base:shape>
+        <base:image include_source="Venues/Clubs/Popworld/Popworld1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
     </base:page>
 
     <!--Bars-->
-    <base:page ID="006" category="bar" lat="53.9573196" lon="-1.0843035" title="The Stone Roses Bar">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/The_Stones_Roses_Bar_text.txt"/>
+    <base:page title="The_Stone_Roses_Bar" ID="006" lat="53.9573196" lon="-1.0843035" category="bar">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/The_Stone_Roses_Bar.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="008" category="bar" lat="53.959545" lon="-1.0837168" title="Dusk">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Bars/Dusk/Dusk_text.txt"/>
+    <base:page title="Dusk" ID="008" lat="53.959545" lon="-1.0837168" category="bar">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Dusk/Dusk.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="009" category="bar" lat="53.9611081" lon="-1.0852717" title="Evil Eye">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Bars/Evil_Eye/Evil_Eye_text.txt"/>
+    <base:page title="Evil_Eye" ID="009" lat="53.9611081" lon="-1.0852717" category="bar">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Evil_Eye/Evil_Eye.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="012" category="bar" lat="53.9593409" lon="-1.0859765" title="All Bar One York">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Bars/All_Bar_One_York/All_Bar_One_York_text.txt"/>
+    <base:page title="All_Bar_One_York" ID="012" lat="53.9593409" lon="-1.0859765" category="bar">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/All_Bar_One/All_Bar_One_York.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
 
     <!--Cafes-->
-    <base:page ID="019" category="cafe" lat="53.9593409" lon="-1.0859765" title="The Cat's Whiskers">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Cafes/The_Cat's_Whiskers/The_Cat's_Whiskers_text.txt"/>
+    <base:page title="The_Cat's_Whiskers" ID="019" lat="53.9593409" lon="-1.0859765" category="cafe">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/The_Cat's_Whiskers/The_Cat's_Whiskers.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="020" category="cafe" lat="53.9577585" lon="-1.0842764" title="Drift-In York">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Cafes/Drift-In_York/Drift-In_York_text.txt"/>
+    <base:page title="Drift-In_York" ID="020" lat="53.9577585" lon="-1.0842764" category="cafe">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Drift-In_York/Drift-In_York.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="021" category="cafe" lat="53.9610243" lon="-1.0878127" title="Brew &amp; Brownie">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Cafes/Brew_&amp;_Brownie/Brew_&amp;_Brownie_text.txt"/>
+    <base:page title="Brew_&amp;_Brownie" ID="021" lat="53.9610243" lon="-1.0878127" category="cafe">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Brew_&amp;_Brownie/Brew_&amp;_Brownie.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="022" category="cafe" lat="53.9608023" lon="-1.0834307" title="Lucky Days">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days_text.txt"/>
+    <base:page title="Lucky_Days" ID="022" lat="53.9608023" lon="-1.0834307" category="cafe">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
 
     <!--Restaurants-->
-    <base:page ID="042" category="restaurant" lat="53.9571145" lon="-1.078579" title="Il Paradiso Del Cibo">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo_text.txt"/>
+    <base:page title="Il_Paradiso_Del_Cibo" ID="042" lat="53.9571145" lon="-1.078579" category="restaurant">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="044" category="restaurant" lat="53.956867" lon="-1.0796585" title="Spark York C.I.C">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC_text.txt"/>
+    <base:page title="Spark_York_C.I.C" ID="044" lat="53.956867" lon="-1.0796585" category="restaurant">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="045" category="restaurant" lat="53.9584837" lon="-1.0806656" title="Cosy Club">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club_text.txt"/>
+    <base:page title="Cosy_Club" ID="045" lat="53.9584837" lon="-1.0806656" category="restaurant">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="046" category="restaurant" lat="53.9579621" lon="-1.081914" title="Cresci Pizzeria">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria_text.txt"/>
+    <base:page title="Cresci_Pizzeria" ID="046" lat="53.9579621" lon="-1.081914" category="restaurant">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
 
     <!--Fast Food Places-->
-    <base:page ID="076" category="fast food" lat="53.9586409" lon="-1.0825015" title="Deniz Best Kebab">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab_text.txt"/>
+    <base:page title="Deniz_Best_Kebab" ID="076" lat="53.9586409" lon="-1.0825015" category="fast_food">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="077" category="fast food" lat="53.9591728" lon="-1.0827803" title="NaNa Noodle Bar">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar_text.txt"/>
+    <base:page title="NaNa_Noodle_Bar" ID="077" lat="53.9591728" lon="-1.0827803" category="fast_food">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="079" category="fast food" lat="53.9500767" lon="-1.0322042" title="Cecil's Pizza - Grill">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Fast_Food/Cecil's_Pizza_&amp;_Grill/Cecil's_Pizza_&amp;_Grill_text.txt"/>
+    <base:page title="Cecil's_Pizza_-_Grill" ID="079" lat="53.9500767" lon="-1.0322042" category="fast_food">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Cecil's_Pizza_-_Grill/Cecil's_Pizza_-_Grill.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
-    <base:page ID="083" category="fast food" lat="53.9524207" lon="-1.0733016" title="Efes Pizza">
-        <base:shape type="textbox" x_end="0" y_end="0">
-            <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza_text.txt"/>
+    <base:page title="Efes_Pizza" ID="083" lat="53.9524207" lon="-1.0733016" category="fast_food">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
 
     <!--Pubs-->
-    <base:page ID="090" category="pub" lat="53.9452911" lon="-1.0471227" title="Charles XII">
-
+    <base:page title="Charles_XII" ID="090" lat="53.9452911" lon="-1.0471227" category="pub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="092" category="pub" lat="53.9549563" lon="-1.0713238" title="The Waggon &amp; Horses">
-
+    <base:page title="The_Waggon_&amp;_Horses" ID="092" lat="53.9549563" lon="-1.0713238" category="pub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Waggon_&amp;_Horses/The_Waggon_&amp;_Horses.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="093" category="pub" lat="53.953665" lon="-1.045859" title="The Black Bull">
-
+    <base:page title="The_Black_Bull" ID="093" lat="53.953665" lon="-1.045859" category="pub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="095" category="pub" lat="53.9549124" lon="-1.0723326" title="The Rook &amp; Gaskill">
-
+    <base:page title="The_Rook_&amp;_Gaskill" ID="095" lat="53.9549124" lon="-1.0723326" category="pub">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Rook_&amp;_Gaskill/The_Rook_&amp;_Gaskill.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
 
     <!--Green Spaces-->
-    <base:page ID="109" category="green space" lat="53.9615475" lon="-1.0903137" title="Museum Gardens">
-
+    <base:page title="Museum_Gardens" ID="109" lat="53.9615475" lon="-1.0903137" category="green_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Museum_Gardens/Museum_Gardens.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="110" category="green space" lat="53.9487966" lon="-1.083312" title="Rowntree Park">
-
+    <base:page title="Rowntree_Park" ID="110" lat="53.9487966" lon="-1.083312" category="green_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Rowntree_Park/Rowntree_Park.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="111" category="green space" lat="53.9630229" lon="-1.0846681" title="Dean's Park">
-
+    <base:page title="Dean's_Park" ID="111" lat="53.9630229" lon="-1.0846681" category="green_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Dean's_Park/Dean's_Park.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="112" category="green space" lat="53.9438" lon="-1.0839827" title="Millennium Fields">
-
+    <base:page title="Millennium_Fields" ID="112" lat="53.9438" lon="-1.0839827" category="green_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Millennium_Fields/Millennium_Fields.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
 
     <!--Study Spaces-->
-    <base:page ID="124" category="study space" lat="53.9490728" lon="-1.0527472" title="University of York JB Morrell Library">
-
+    <base:page title="University_of_York_JB_Morrell_Library" ID="124" lat="53.9490728" lon="-1.0527472" category="study_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Study_Spaces/University_of_York_JB_Morrell_Library/University_of_York_JB_Morrell_Library.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="127" category="study space" lat="53.9478336" lon="-1.0304155" title="Piazza Building">
-
+    <base:page title="Piazza_Building" ID="127" lat="53.9478336" lon="-1.0304155" category="study_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Study_Spaces/Piazza_Building/Piazza_Building.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="128" category="study space" lat="53.9472683" lon="-1.0320877" title="The Ron Cooke Hub">
-
+    <base:page title="The_Ron_Cooke_Hub" ID="128" lat="53.9472683" lon="-1.0320877" category="study_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Study_Spaces/The_Ron_Cooke_Hub/The_Ron_Cooke_Hub.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="132" category="study space" lat="53.9457663" lon="-1.0577333" title="Roger Kirk Centre">
-
+    <base:page title="Roger_Kirk_Centre" ID="132" lat="53.9457663" lon="-1.0577333" category="study_space">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Study_Spaces/Roger_Kirk_Centre/Roger_Kirk_Centre.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
 
     <!--Sightseeing-->
-    <base:page ID="137" category="sightseeing" lat="53.9621584" lon="-1.0795979" title="York City Walls">
-
+    <base:page title="York_City_Walls" ID="137" lat="53.9621584" lon="-1.0795979" category="sightseeing">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="138" category="sightseeing" lat="53.9623323" lon="-1.0841092" title="York Minster">
-
+    <base:page title="York_Minster" ID="138" lat="53.9623323" lon="-1.0841092" category="sightseeing">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="140" category="sightseeing" lat="53.9605498" lon="-1.0985547" title="National Railway Museum York">
-
+    <base:page title="National_Railway_Museum_York" ID="140" lat="53.9605498" lon="-1.0985547" category="sightseeing">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="147" category="sightseeing" lat="53.9575578" lon="-1.0822688" title="The Hole In Wand">
-
+    <base:page title="The_Hole_In_Wand" ID="147" lat="53.9575578" lon="-1.0822688" category="sightseeing">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/The_Hole_In_Wand.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
-    <base:page ID="150" category="sightseeing" lat="53.9599946" lon="-1.0825968" title="York's Chocolate Story">
-
+    <base:page title="York's_Chocolate_Story" ID="150" lat="53.9599946" lon="-1.0825968" category="sightseeing">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York's_Chocolate_Story/York's_Chocolate_Story.txt" ID="text0"></base:text>
+        </base:shape>
     </base:page>
 
 </xml>

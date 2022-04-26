@@ -89,4 +89,35 @@ public class VenuePage {
         }
     }
 
+    public String getMediaSourceByID(String IDSearch) {
+
+        System.out.println(this.attributes);
+            for(int i = 0; i < this.children.size(); i++) {
+                MediaElement element = null;
+                try {
+                    if (IDSearch.contains("text") && this.children.get(i).attributes.get("type").equals("textbox")) {
+                        for(int j = 0; j <= this.children.get(i).children.size() - 1; ++j) {
+                            if (children.get(i).children.get(j).ID.contains("text")) {
+                                element = this.children.get(i).children.get(j);
+                                j = this.children.get(i).children.size();
+                            }
+                        }
+                    } else {
+                        element = this.children.get(i);
+                    }
+                } catch (Exception e) {}
+
+                try {
+                    if (element != null) {
+                        if (element.ID != null) {
+                            if (element.ID.equals(IDSearch)) {
+                                return element.include_source;
+                            }
+                        }
+                    }
+                } catch (Exception e) {}
+            }
+
+        return null;
+    }
 }

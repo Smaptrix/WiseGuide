@@ -341,25 +341,6 @@ public class VenueXMLParser {
 
         return -1;
     }
-
-    public String getMediaSourceByID(String IDsearch) {
-        System.out.println(this.attributes);
-
-        try {
-            for (int i = 0; i < this.children.size() - 1; ++i) {
-                MediaElement element = (MediaElement) this.children.get(i);
-                System.out.println(i + ":, ID: " + element.ID + ", " + element.include_source);
-                if (element.ID.equals(IDsearch)) {
-                    System.out.println("MATCH! for " + element.include_source);
-                    return element.include_source;
-                }
-            }
-        } catch (Exception var4) {
-            System.out.println("Error: Unable to get source by ID: " + IDsearch + " for venue " + (String) this.attributes.get("title"));
-        }
-
-        return null;
-    }
 }
 
 

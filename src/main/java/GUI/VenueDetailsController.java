@@ -37,7 +37,7 @@ public class VenueDetailsController {
 
         System.out.println(currVenuePage);
         System.out.println(currVenuePage.attributes);
-        System.out.println(currVenuePage.children.get(0).children.get(0).attributes.get("include_source"));
+        System.out.println(currVenuePage.children.get(0).attributes.get("include_source"));
     }
 
     @FXML
@@ -64,21 +64,25 @@ public class VenueDetailsController {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
 
-            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replace("/", "/");
-            System.out.println("File: " + file);
+            String textFile = (currVenuePage.getMediaSourceByID("text0"));
+            System.out.println("File: " + textFile);
 
 
-            client.requestFile(file);
+            client.requestFile(textFile);
 
-            TextManager textManager = new TextManager(file, 470, 100);
+            TextManager textManager = new TextManager(textFile, 470, 100);
             venueText.setText(textManager.loadTextFromFile());
-            /*
-            File imageFilepath = new File(file);
+
+            String imageFile = (currVenuePage.getMediaSourceByID("image0"));
+
+            client.requestFile(imageFile);
+
+            File imageFilepath = new File(imageFile);
 
             ImageView imageView = new ImageView();
             ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
-            venueImage.setImage(imageHandler.getCurrImage());
-            */
+            //venueImage.setImage(imageHandler.getCurrImage());
+
 
         }
 
