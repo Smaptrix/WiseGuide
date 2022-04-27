@@ -2,13 +2,34 @@ package VenueXMLThings;
 
 import org.w3c.dom.Node;
 
-//Node of media which extends the page class.
+/**
+ * <p>
+ *     Node of media which extends the page class.
+ * </p>
+ */
 public class MediaElement extends VenuePage {
 
+    /**
+     * mediaType is "playable"/"text"/"shape"/"image"
+     */
     public String mediaType;
+
+    /**
+     * ID is the unique identifier for the media within the venuePage
+     */
     public String ID;
+
+    /**
+     * include_source is the file where the media data is stored
+     */
     public String include_source;
 
+    /**
+     * <p>
+     *     Constructor for MediaElement
+     * </p>
+     * @param item is the media element
+     */
     public MediaElement(Node item) {
         super(item);
 

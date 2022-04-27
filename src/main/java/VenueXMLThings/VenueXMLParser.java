@@ -1,6 +1,7 @@
 package VenueXMLThings;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -10,86 +11,45 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
-/*
 
-//this is an example of how to use the updating of the XML File,
-//it also creates a backup of the xml at the time in milliseconds
-//(higher number after the file is newer :) ) this probably won't
-//be used much in the final product as it would take up a lot of
-//space. *also note I use venue and page interchangeably
-
-
-
-package VenueXMLThings;
-
-
-import javax.xml.transform.TransformerException;
-import java.io.File;
-import java.io.IOException;
-import java.util.Dictionary;
-import java.util.Hashtable;
-
-public class mainXMLtester {
-
-    public static void main(String[] args) throws IOException, TransformerException {
-            File file = new File("venuesLocation.xml");
-            VenueXMLParser xml = new VenueXMLParser(file);
-            System.out.println(xml.numberOfPages);
-
-            //adds a venue with the attributes 1,2,3...
-            xml.addPage("1","2","3","4","5","6");
-            System.out.println(xml.numberOfPages);
-            System.out.println(xml.getPage("title", "1").attributes);
-
-            //changes the category attribute of the venue of title "1"
-            System.out.println(xml.changeAttribute("title", "1", "category", "nightclub"));
-
-            //adding media requires a hashtable where you can add all the attributes for the media
-
-            //adding some of the attributes for a text media object
-            Dictionary<String, String> newText = new Hashtable<>();
-            newText.put("include_source", "text.txt");
-            newText.put("x_end", "0");
-
-            System.out.println(xml.addChildText("title", "1", newText));
-
-            //adding some of the attributes for a video media object
-            Dictionary<String, String> newMedia = new Hashtable<>();
-            newMedia.put("include_source", "video.mp4");
-            newMedia.put("autoplay", "true");
-            newMedia.put("type", "video");
-
-            System.out.println(xml.addChildMedia("title", "1", "playable", newMedia));
-
-            //Removing the child media files
-            System.out.println(xml.removeChildMedia("title", "1", "text.txt"));
-            System.out.println(xml.removeChildMedia("title", "1", "video.mp4"));
-
-            //just for now, remove the page when testing as you can still see the changes in the backups
-            System.out.println(xml.removePage("title", "1"));
-
-    }
-}
-
-
-
+/**
+ * XML parsing for venue data, constructs a tree with the ability to get pages through id or title.
  */
-
-//XML parsing for venue data, constructs a tree with the ability to get pages through id or title.
 public class VenueXMLParser {
 
+    /**
+     * file is the xml file
+     */
     private File file;
+
+    /**
+     * document is created by the document builder
+     */
     private Document document;
+
+    /**
+     * root contains the top node of the xml tree
+     */
     public Element root = null;
+
+    /**
+     * number of pages is the number of venue elements (excludes #comment and #text)
+     */
     public int numberOfPages;
 
-    //constructor, takes xml file and returns VenueXMLParser class
+
+    /**
+     * <p>
+     *     Constructor, takes xml file and returns VenueXMLParser class
+     * </p>
+     * @param inputFile the name of the xml file
+     * @return VenueXMLParser
+     */
     public VenueXMLParser(File inputFile) {
 
         try {
             this.file = inputFile;
 
-            //Parsing XML File
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             this.document = documentBuilder.parse(this.file);
@@ -105,7 +65,12 @@ public class VenueXMLParser {
         }
     }
 
-    //Returns a list of the page names under the root (mainly used for testing)
+    /**
+     * <p>
+     *     Returns a list of the page names under the root (mainly used for testing)
+     * </p>
+     * @return List of strings with the page names
+     */
     public List<String> getPageNames() {
 
         List<String> returnString = new ArrayList<>();
@@ -115,10 +80,16 @@ public class VenueXMLParser {
         }
 
         return returnString;
-
     }
 
-    //Returns a new page based on the title or ID, where there is no page with title or ID, returns null
+    /**
+     * <p>
+     *     Searches for a requested page based on title/ID
+     * </p>
+     * @param indexType can be "title" or "id"
+     * @param index the title/id value
+     * @return Returns a new page based on the title or ID, where there is no page with title or ID, returns null
+     */
     public VenuePage getPage(String indexType, String index) {
 
         int searchedIndex = searchForPage(indexType, index);
@@ -131,6 +102,18 @@ public class VenueXMLParser {
 
     }
 
+    /**
+     * <p>
+     *     Adds a page to the xml and creates a backup before altering the xml file.
+     * </p>
+     * @param title of new venue
+     * @param ID of new venue
+     * @param lat of new venue
+     * @param lon of new venue
+     * @param category of new venue
+     * @param price of new venue
+     * @throws TransformerException
+     */
     public void addPage(String title, String ID, String lat, String lon, String category, String price) throws TransformerException {
 
         Element newPage = document.createElement("base:page");
@@ -147,10 +130,18 @@ public class VenueXMLParser {
         root.appendChild(newPage);
         numberOfPages++;
 
-
         createXMLFile(false);
     }
 
+    /**
+     * <p>
+     *     Removes page based on searched title/ID
+     * </p>
+     * @param indexType can be "title" or "id"
+     * @param index the title/id value
+     * @return int 1 if successful, -1 if unsuccessful
+     * @throws TransformerException
+     */
     public int removePage(String indexType, String index) throws TransformerException {
 
         int searchedIndex = searchForPage(indexType, index);
@@ -169,6 +160,17 @@ public class VenueXMLParser {
         return 1;
     }
 
+    /**
+     * <p>
+     *     Changes the attribute of a searched venue
+     * </p>
+     * @param indexType can be "title" or "id"
+     * @param index the title/id value
+     * @param attributeType type of attribute
+     * @param attribute value of attribute
+     * @return int -1 if unsuccessful and 1 if successful
+     * @throws TransformerException
+     */
     public int changeAttribute(String indexType, String index, String attributeType, String attribute) throws TransformerException {
         int searchedIndex = searchForPage(indexType, index);
 
@@ -178,17 +180,34 @@ public class VenueXMLParser {
 
         createXMLFile(true);
 
+        boolean changedAttribute = false;
+
         for (int i = 0; i < root.getElementsByTagName("base:page").item(searchedIndex).getAttributes().getLength(); i++) {
             if (root.getElementsByTagName("base:page").item(searchedIndex).getAttributes().item(i).getNodeName().equals(attributeType)) {
                 root.getElementsByTagName("base:page").item(searchedIndex).getAttributes().item(i).setNodeValue(attribute);
+                changedAttribute = true;
             }
         }
 
-        createXMLFile(false);
+        if(changedAttribute) {
+            createXMLFile(false);
+            return 1;
 
-        return 1;
+        } else {
+            return -1;
+        }
     }
 
+    /**
+     * <p>
+     *     Adds a textbox and text-type media with attributes specified by the user
+     * </p>
+     * @param indexType can be "title" or "id"
+     * @param index the title/id value
+     * @param attributesDict a dictionary with the specified attributes for the text media
+     * @return
+     * @throws TransformerException
+     */
     public int addChildText(String indexType, String index, Dictionary<String, String> attributesDict) throws TransformerException {
         int searchedIndex = searchForPage(indexType, index);
 
@@ -222,6 +241,17 @@ public class VenueXMLParser {
         return 1;
     }
 
+    /**
+     * <p>
+     *     Adds media element with attributes specified by the user
+     * </p>
+     * @param indexType can be "title" or "id"
+     * @param index the title/id value
+     * @param mediaType the "image"/"playable"
+     * @param attributesDict a dictionary with the specified attributes for the media
+     * @return int -1 if unsuccessful, 1 if successful
+     * @throws TransformerException
+     */
     public int addChildMedia(String indexType, String index, String mediaType, Dictionary<String, String> attributesDict) throws TransformerException {
         int searchedIndex = searchForPage(indexType, index);
 
@@ -249,6 +279,16 @@ public class VenueXMLParser {
         return 1;
     }
 
+    /**
+     * <p>
+     *     Removes a media element of a specific venue from the input of the include_source of the media
+     * </p>
+     * @param indexType can be "title" or "id"
+     * @param index the title/id value
+     * @param source is the source for the include_source value
+     * @return int -1 if unsuccessful, 1 if successful
+     * @throws TransformerException
+     */
     public int removeChildMedia(String indexType, String index, String source) throws TransformerException {
         int searchedIndex = searchForPage(indexType, index);
 
@@ -302,6 +342,13 @@ public class VenueXMLParser {
 
     }
 
+    /**
+     * <p>
+     *     Creates a backup XML file and stores with the current date
+     * </p>
+     * @param isBackup true if it is a backup (will make a file with date), if false it will overwrite the XML file
+     * @throws TransformerException
+     */
     private void createXMLFile(boolean isBackup) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
@@ -315,6 +362,14 @@ public class VenueXMLParser {
         transformer.transform(domSource, streamResult);
     }
 
+    /**
+     * <p>
+     *     Searches for page given an title/index
+     * </p>
+     * @param indexType can be "title" or "id"
+     * @param index the title/id value
+     * @return int -1 if unsuccessful, 1 if successful
+     */
     private int searchForPage(String indexType, String index) {
         if (!(indexType.equals("title") || indexType.equals("ID"))) {
             System.out.println("Error: no such index.");
