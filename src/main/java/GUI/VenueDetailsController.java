@@ -13,6 +13,7 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
@@ -20,6 +21,7 @@ import serverclientstuff.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class VenueDetailsController {
 
@@ -63,15 +65,22 @@ public class VenueDetailsController {
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
-            //Text
-            String textFile = (currVenuePage.getMediaSourceByID("text0"));
 
-            System.out.println("File: " + textFile);
+            int j = 0;
+            while (j == 0) {
+                //Text
 
-            client.requestFile(textFile);
+                String textFile = (currVenuePage.getMediaSourceByID("text0"));
+                System.out.println("File: " + textFile);
 
-            TextManager textManager = new TextManager(textFile, 470, 100);
-            venueText.setText(textManager.loadTextFromFile());
+                client.requestFile(textFile);
+
+                TextManager textManager = new TextManager(textFile, 470, 100);
+                venueText.setText(textManager.loadTextFromFile());
+                j = 1;
+            }
+
+
             //Images
             String imageFile = (currVenuePage.getMediaSourceByID("image0"));
 
@@ -82,16 +91,7 @@ public class VenueDetailsController {
             ImageView imageView = new ImageView();
             ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
 
-            //venueImage.setImage(imageHandler.getCurrImage());
-
-
+            venueImage.setImage(imageHandler.getCurrImage());
         }
-
-
-
-
     }
-
-
-
 }

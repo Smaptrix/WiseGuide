@@ -47,22 +47,43 @@
             <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation.txt" ID="text0"></base:text>
         </base:shape>
         <base:image include_source="Venues/Clubs/Club_Salvation/Club_Salvation1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation1.txt" ID="altText0"></base:text>
+        </base:shape>
         <base:image include_source="Venues/Clubs/Club_Salvation/Club_Salvation2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation2.txt" ID="altText1"></base:text>
+        </base:shape>
         <base:image include_source="Venues/Clubs/Club_Salvation/Club_Salvation3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation3.txt" ID="altText2"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Kuda" ID="004" price="2" lat="53.9568311" lon="-1.0840847" category="nightclub">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Clubs/Kuda/Kuda.txt" ID="text0"></base:text>
         </base:shape>
         <base:image include_source="Venues/Clubs/Kuda/Kuda1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Kuda/Kuda1.txt" ID="altText0"></base:text>
+        </base:shape>
         <base:image include_source="Venues/Clubs/Kuda/Kuda2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Kuda/Kuda2.txt" ID="altText1"></base:text>
+        </base:shape>
         <base:image include_source="Venues/Clubs/Kuda/Kuda3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Kuda/Kuda3.txt" ID="altText2"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Popworld_York" ID="005" price="2" lat="53.957479" lon="-1.0890425" category="nightclub">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Clubs/Popworld/Popworld.txt" ID="text0"></base:text>
         </base:shape>
         <base:image include_source="Venues/Clubs/Popworld/Popworld1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Clubs/Popworld/Popworld1.txt" ID="altText0"></base:text>
+        </base:shape>
     </base:page>
 
     <!--Bars-->
@@ -70,20 +91,97 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/The_Stone_Roses_Bar.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses5.txt" ID="altText4"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses6.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses6.txt" ID="altText5"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Dusk" ID="008" lat="53.959545" lon="-1.0837168" category="bar">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/Dusk/Dusk.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Dusk/Dusk1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Dusk/Dusk1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Dusk/Dusk2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Dusk/Dusk2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Dusk/Dusk3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Dusk/Dusk3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Dusk/Dusk4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Dusk/Dusk4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Dusk/Dusk5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Dusk/Dusk5.txt" ID="altText4"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Dusk/Dusk6.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Dusk/Dusk6.txt" ID="altText5"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Evil_Eye" ID="009" lat="53.9611081" lon="-1.0852717" category="bar">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/Evil_Eye/Evil_Eye.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Bars/Evil_Eye/EvilEye1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Evil_Eye/EvilEye2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Evil_Eye/EvilEye3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Evil_Eye/EvilEye4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Evil_Eye/EvilEye5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye5.txt" ID="altText4"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/Evil_Eye/EvilEye6.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye6.txt" ID="altText5"></base:text>
+        </base:shape>
+
     </base:page>
     <base:page title="All_Bar_One_York" ID="012" lat="53.9593409" lon="-1.0859765" category="bar">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/All_Bar_One_York/All_Bar_One_York.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Bars/All_Bar_One_York/AllBarOne1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/All_Bar_One_York/AllBarOne1.txt" ID="altText0"></base:text>
         </base:shape>
     </base:page>
 
@@ -92,20 +190,100 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/The_Cat_s_Whiskers/The_Cat_s_Whiskers.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Cafes/The_Cat_s_Whiskers/CatsWhiskers1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Cat_s_Whiskers/CatsWhiskers1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/The_Cat_s_Whiskers/CatsWhiskers2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Cat_s_Whiskers/CatsWhiskers2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/The_Cat_s_Whiskers/CatsWhiskers3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Cat_s_Whiskers/CatsWhiskers3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/The_Cat_s_Whiskers/CatsWhiskers4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Cat_s_Whiskers/CatsWhiskers4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/The_Cat_s_Whiskers/CatsWhiskers5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/The_Cat_s_Whiskers/CatsWhiskers5.txt" ID="altText4"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Drift-In_York" ID="020" lat="53.9577585" lon="-1.0842764" category="cafe">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/Drift-In_York/Drift-In_York.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Drift-In_York/Drift-In1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Drift-In_York/Drift-In1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Drift-In_York/Drift-In2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Drift-In_York/Drift-In2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Drift-In_York/Drift-In3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Drift-In_York/Drift-In3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Drift-In_York/Drift-In4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Drift-In_York/Drift-In4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Drift-In_York/Drift-In5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Drift-In_York/Drift-In5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Brew_&amp;_Brownie" ID="021" lat="53.9610243" lon="-1.0878127" category="cafe">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/Brew_and_Brownie/Brew_and_Brownie.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Cafes/Brew_and_Brownie/BrewandBrownie1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Brew_and_Brownie/BrewandBrownie1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Brew_and_Brownie/BrewandBrownie2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Brew_and_Brownie/BrewandBrownie2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Brew_and_Brownie/BrewandBrownie3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Brew_and_Brownie/BrewandBrownie3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Brew_and_Brownie/BrewandBrownie4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Brew_and_Brownie/BrewandBrownie4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Brew_and_Brownie/BrewandBrownie5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Bars/Brew_and_Brownie/BrewandBrownie5.txt" ID="altText4"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Lucky_Days" ID="022" lat="53.9608023" lon="-1.0834307" category="cafe">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Lucky_Days/LuckyDays1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Lucky_Days/LuckyDays2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Lucky_Days/LuckyDays3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Lucky_Days/LuckyDays4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Cafes/Lucky_Days/LuckyDays5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
 
@@ -114,20 +292,84 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo4.txt" ID="altText3"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Spark_York_C.I.C" ID="044" lat="53.956867" lon="-1.0796585" category="restaurant">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Cosy_Club" ID="045" lat="53.9584837" lon="-1.0806656" category="restaurant">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Restaurants/Cosy_Club/Cosy_Club1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Cosy_Club/Cosy_Club2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Cosy_Club/Cosy_Club3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Cosy_Club/Cosy_Club4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club4.txt" ID="altText3"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Cresci_Pizzeria" ID="046" lat="53.9579621" lon="-1.081914" category="restaurant">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
 
@@ -136,20 +378,84 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab2.txt" ID="altText1"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="NaNa_Noodle_Bar" ID="077" lat="53.9591728" lon="-1.0827803" category="fast_food">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Cecil's_Pizza_-_Grill" ID="079" lat="53.9500767" lon="-1.0322042" category="fast_food">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecil_s_Pizza_-_Grill.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill5.txt" ID="altText4"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="Efes_Pizza" ID="083" lat="53.9524207" lon="-1.0733016" category="fast_food">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
 
@@ -158,20 +464,68 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Pubs/Charles_XII/Charles_XII1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/Charles_XII/Charles_XII2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/Charles_XII/Charles_XII3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/Charles_XII/Charles_XII4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII4.txt" ID="altText3"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="The_Waggon_&amp;_Horses" ID="092" lat="53.9549563" lon="-1.0713238" category="pub">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
     <base:page title="The_Black_Bull" ID="093" lat="53.953665" lon="-1.045859" category="pub">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull2.txt" ID="altText1"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="The_Rook_&amp;_Gaskill" ID="095" lat="53.9549124" lon="-1.0723326" category="pub">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/The_Rook_and_Gaskill/The_Rook_and_Gaskill.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/The_Rook_and_Gaskill/The_Rook_and_Gaskill1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Rook_and_Gaskill/The_Rook_and_Gaskill1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Pubs/The_Rook_and_Gaskill/The_Rook_and_Gaskill2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Pubs/The_Rook_and_Gaskill/The_Rook_and_Gaskill2.txt" ID="altText1"></base:text>
         </base:shape>
     </base:page>
 
@@ -179,6 +533,26 @@
     <base:page title="Museum_Gardens" ID="109" lat="53.9615475" lon="-1.0903137" category="green_space">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Green_Spaces/Museum_Gardens/Museum_Gardens.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Rowntree_Park" ID="110" lat="53.9487966" lon="-1.083312" category="green_space">
@@ -189,6 +563,18 @@
     <base:page title="Dean's_Park" ID="111" lat="53.9630229" lon="-1.0846681" category="green_space">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park3.txt" ID="altText2"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Millennium_Fields" ID="112" lat="53.9438" lon="-1.0839827" category="green_space">
@@ -224,25 +610,113 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls4.txt" ID="altText3"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="York_Minster" ID="138" lat="53.9623323" lon="-1.0841092" category="sightseeing">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_Minster/York_Minster1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_Minster/York_Minster2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_Minster/York_Minster3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_Minster/York_Minster4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_Minster/York_Minster5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
     <base:page title="National_Railway_Museum_York" ID="140" lat="53.9605498" lon="-1.0985547" category="sightseeing">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York4.txt" ID="altText3"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="The_Hole_In_Wand" ID="147" lat="53.9575578" lon="-1.0822688" category="sightseeing">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/The_Hole_In_Wand.txt" ID="text0"></base:text>
         </base:shape>
+        <base:image include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand4.txt" ID="altText3"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand5.txt" ID="altText4"></base:text>
+        </base:shape>
     </base:page>
     <base:page title="York's_Chocolate_Story" ID="150" lat="53.9599946" lon="-1.0825968" category="sightseeing">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/York_s_Chocolate_Story/York_s_Chocolate_Story.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory1.txt" ID="altText0"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory2.txt" ID="altText1"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory3.txt" ID="altText2"></base:text>
+        </base:shape>
+        <base:image include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Venues/Sightseeing/York_s_Chocolate_Story/YorkChocolateStory4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
 
