@@ -30,18 +30,21 @@ public class ServerMain {
     //Sets up the initial server
     public ServerMain() {
 
-       //Restarts the server after a bit of time
-        while(true) {
+       //Restarts the server after a bit of time - REMEMBER TO RE-COMMENT BACK IN
+
             try {
+                while(true) {
                 Server server = new Server();
 
                 server.startup(5555);
 
 
                 server.bufferListen();
+                }
             } catch (Exception e) {
                 System.out.println("Socket exception - Lost connection with client");
-            }
+                e.printStackTrace();
+
     }
 
 

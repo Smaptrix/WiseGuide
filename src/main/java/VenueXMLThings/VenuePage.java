@@ -46,6 +46,8 @@ public class VenuePage {
         this.attributes = new Hashtable<>();
         this.children = new ArrayList<>();
 
+
+
         if(this.node.getAttributes() != null) {
 
             int i = 0;
