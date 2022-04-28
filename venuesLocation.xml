@@ -18,7 +18,7 @@
         hopefully this should be everything we need from the schema for now? i guess we also need the alt text option, but will have to change the extra schema and im unsure of how to do that atm aha
         -->
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/Flares_York/Flares_York_text.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares_York.txt" ID="text0"></base:text>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="40" show_after_s="0" />
         <base:image include_source="Venues/Clubs/Flares_York/Flares2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
@@ -80,14 +80,14 @@
     </base:page>
     <base:page title="All_Bar_One_York" ID="012" lat="53.9593409" lon="-1.0859765" category="bar">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Bars/All_Bar_One/All_Bar_One_York.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Bars/All_Bar_One_York/All_Bar_One_York.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
 
     <!--Cafes-->
     <base:page title="The_Cat's_Whiskers" ID="019" lat="53.9593409" lon="-1.0859765" category="cafe">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Cafes/The_Cat's_Whiskers/The_Cat's_Whiskers.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Cafes/The_Cat_s_Whiskers/The_Cat_s_Whiskers.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Drift-In_York" ID="020" lat="53.9577585" lon="-1.0842764" category="cafe">
@@ -97,7 +97,7 @@
     </base:page>
     <base:page title="Brew_&amp;_Brownie" ID="021" lat="53.9610243" lon="-1.0878127" category="cafe">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Cafes/Brew_&amp;_Brownie/Brew_&amp;_Brownie.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Cafes/Brew_and_Brownie/Brew_and_Brownie.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Lucky_Days" ID="022" lat="53.9608023" lon="-1.0834307" category="cafe">
@@ -141,7 +141,7 @@
     </base:page>
     <base:page title="Cecil's_Pizza_-_Grill" ID="079" lat="53.9500767" lon="-1.0322042" category="fast_food">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Fast_Food/Cecil's_Pizza_-_Grill/Cecil's_Pizza_-_Grill.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecil_s_Pizza_-_Grill.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Efes_Pizza" ID="083" lat="53.9524207" lon="-1.0733016" category="fast_food">
@@ -158,7 +158,7 @@
     </base:page>
     <base:page title="The_Waggon_&amp;_Horses" ID="092" lat="53.9549563" lon="-1.0713238" category="pub">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Pubs/The_Waggon_&amp;_Horses/The_Waggon_&amp;_Horses.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
     <base:page title="The_Black_Bull" ID="093" lat="53.953665" lon="-1.045859" category="pub">
@@ -168,7 +168,7 @@
     </base:page>
     <base:page title="The_Rook_&amp;_Gaskill" ID="095" lat="53.9549124" lon="-1.0723326" category="pub">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Pubs/The_Rook_&amp;_Gaskill/The_Rook_&amp;_Gaskill.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Pubs/The_Rook_and_Gaskill/The_Rook_and_Gaskill.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
 
@@ -185,7 +185,7 @@
     </base:page>
     <base:page title="Dean's_Park" ID="111" lat="53.9630229" lon="-1.0846681" category="green_space">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Green_Spaces/Dean's_Park/Dean's_Park.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
     <base:page title="Millennium_Fields" ID="112" lat="53.9438" lon="-1.0839827" category="green_space">
@@ -239,7 +239,7 @@
     </base:page>
     <base:page title="York's_Chocolate_Story" ID="150" lat="53.9599946" lon="-1.0825968" category="sightseeing">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Sightseeing/York's_Chocolate_Story/York's_Chocolate_Story.txt" ID="text0"></base:text>
+            <base:text include_source="Venues/Sightseeing/York_s_Chocolate_Story/York_s_Chocolate_Story.txt" ID="text0"></base:text>
         </base:shape>
     </base:page>
 
