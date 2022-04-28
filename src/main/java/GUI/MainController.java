@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
 import java.awt.*;
@@ -140,6 +141,7 @@ public class MainController {
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();
+        stage.setResizable(false);
     }
 
     EventHandler<MouseEvent> mouseEvent = new EventHandler<>() {
@@ -265,6 +267,7 @@ public class MainController {
         stage.setScene(scene);
         stage.setTitle("Account Creation");
         stage.show();
+        stage.setResizable(false);
     }
 
 
@@ -289,6 +292,7 @@ public class MainController {
         stage.setScene(scene);
         stage.setTitle("Welcome to WiseGuide");
         stage.show();
+        stage.setResizable(false);
 
 
         Stage currStage = (Stage) mainWindow.getScene().getWindow();
@@ -315,6 +319,7 @@ public class MainController {
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
     }
 
 

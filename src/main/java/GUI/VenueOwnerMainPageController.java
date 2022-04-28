@@ -174,6 +174,7 @@ public class VenueOwnerMainPageController {
 
         //Opens the file explorer so the venue user can select a file
         Stage stage = new Stage();
+        stage.setResizable(false);
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         try {
@@ -202,6 +203,7 @@ public class VenueOwnerMainPageController {
         stage.setScene(scene);
         stage.setTitle("Venue Login");
         stage.show();
+        stage.setResizable(false);
 
 
         Stage currStage = (Stage) logOutButton.getScene().getWindow();
