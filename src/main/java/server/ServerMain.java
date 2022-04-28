@@ -30,7 +30,7 @@ public class ServerMain {
     //Sets up the initial server
     public ServerMain() {
 
-       //Restarts the server after a bit of time - REMEMBER TO RECOMMENT BACK IN
+       //Restarts the server after a bit of time - REMEMBER TO RE-COMMENT BACK IN
 
             try {
                 while(true) {
@@ -43,6 +43,7 @@ public class ServerMain {
                 }
             } catch (Exception e) {
                 System.out.println("Socket exception - Lost connection with client");
+                e.printStackTrace();
 
     }
 

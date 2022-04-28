@@ -15,22 +15,18 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
-
 // TODO- Consider encryption rather than hashing so that we cna decrypt all of the information (Research as well)
-
-
 /**
  * Client class handles the client side server operation methods.
  */
 public class Client {
 
     /**
-     * CLIENTVERSION is the current version of the client
+     * CLIENT_VERSION is the current version of the client
      */
-    private static final String CLIENTVERSION = "Ver 0.45";
+    private static final String CLIENT_VERSION = "Ver 0.45";
 
     /**
      * clientSocket is the client side socket.
@@ -55,7 +51,7 @@ public class Client {
     private boolean connected;
 
     /**
-     * sameversion is a boolean that stores whterh the client and server are the same version
+     * sameVersion is a boolean that stores whether the client and server are the same version
      */
 
     private boolean sameVersion;
@@ -121,18 +117,14 @@ public class Client {
      * @throws IOException Throws an IOException if the client fails to send a message.
      */
     public String sendTestMessage() throws IOException {
-
-
         outText.println("ECHO " + "test");
 
         int stringSize = inputStream.read();
 
         byte[] data = readBytes(stringSize);
 
-
         return new String(data, StandardCharsets.UTF_8);
     }
-
 
     /**
      * <p>
@@ -150,17 +142,10 @@ public class Client {
 
         int fileSize = inputStream.read();
 
-
         byte[] data = readBytes(fileSize);
 
-
         return new String(data, StandardCharsets.UTF_8);
-
     }
-
-
-    //TODO - Check to see if a file has already been downloaded
-
 
     /**
      * <p>
@@ -178,14 +163,9 @@ public class Client {
             return null;
         }
 
-
         System.out.println("GET REQUEST: " + fileName);
 
         outText.println("GET " + fileName);
-
-
-
-
             //Tells us how many bytes are telling us how big the file is
             int numOfFileSizeBytes = inputStream.read();
 
@@ -200,7 +180,6 @@ public class Client {
 
             int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
 
-
             //Magic number 3 - because we know that the file extension is only going to be three letters
             byte[] DataTypeBytes = new byte[3];
 
@@ -212,15 +191,12 @@ public class Client {
 
             System.out.println(dataType);
 
-
             byte[] data = readBytes(bytesToRead);
-
 
             System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
             //Once we have the array of bytes, we then reconstruct that into the actual file.
             return BytesToFile(data, fileName, dataType);
-
     }
 
 
@@ -244,10 +220,7 @@ public class Client {
         while (!end) {
 
             try {
-
                 data[bytesRead] = (byte) inputStream.read();
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -258,7 +231,6 @@ public class Client {
                 // System.out.println("We have read: " + bytesRead);
                 end = true;
             }
-
         }
         return data;
     }
@@ -271,7 +243,7 @@ public class Client {
      * @param data the raw byte array
      * @param fileName the name of the requested file to construct
      * @param fileType the type of the requested file
-     * @return the filepath of the downlaoded file
+     * @return the filepath of the downloaded file
      * @throws IOException if
      */
     private File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
@@ -298,12 +270,11 @@ public class Client {
         return currFile;
     }
 
-
     /**
      * <p>
      * Makes an attempt to login to the server with the provided user data
      * </p>
-     * @param currUser The user attempting to login
+     * @param currUser The user attempting to log in
      * @return the acknowledgement to the request from the server
      * @throws IOException if
      */
@@ -316,15 +287,13 @@ public class Client {
 
         outText.println(currUser.getPassword());
 
-
         return receiveAcknowledgement();
-
     }
 
 
     /**
      * <p>
-     * Recieves a one line acknowledgement from the server
+     * Receives a one line acknowledgement from the server
      * </p>
      * @return the acknowledgement in string form
      * @throws IOException if
@@ -343,11 +312,6 @@ public class Client {
         return ack;
     }
 
-
-    //TODO - possible refactor of user functions into single function? ~ eh maybe
-
-
-
     /**
      * <p>
      * Asks the user to verify if the users information is correct
@@ -365,7 +329,6 @@ public class Client {
         outText.println(currUser.getPassword());
 
         return receiveAcknowledgement();
-
     }
 
 
@@ -385,7 +348,7 @@ public class Client {
 
         outText.println(currUser.getPassword());
 
-        //Should timeout if nothing respond
+        //Should time out if nothing respond
         if(receiveAcknowledgement().equals("SENDSALT")) {
             currUser.setSalt(UserSecurity.generateSalt());
             System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
@@ -414,7 +377,7 @@ public class Client {
 
     /**
      * <p>
-     * Requests the server to check the versions of the client/server pair against eachother
+     * Requests the server to check the versions of the client/server pair against each other
      * </p>
      * @return the versionCheck response from the server
      * @throws IOException if
@@ -423,12 +386,11 @@ public class Client {
 
         outText.println("VERSIONCHECK");
 
-        outText.println(CLIENTVERSION);
+        outText.println(CLIENT_VERSION);
 
         String ack = receiveAcknowledgement();
 
         return ack.equals("SAMEVER");
-
     }
 
     /**
@@ -441,38 +403,26 @@ public class Client {
         requestFile("venuesLocation.xml");
     }
 
-
     /**
      * Gives the directory path for the required file
      * @param fileName name of the file you desire to fine
      * @return the directory path of specified file
      */
     public File getFile(String fileName){
-
-
         //System.out.println("File requested: " + fileName);
-
         return fileLocations.get(fileName);
-
     }
 
 
-    //TODO - Could be made more rigourous, but assumes server and client have same user
+    //TODO - Could be made more rigorous, but assumes server and client have same user
 
     //Requests that the server requests a users name
     public String requestUserNameChange(String desiredUsername) throws IOException {
-
-
         outText.println("CHANGENAME");
-
 
         outText.println(desiredUsername);
 
-
-
-
         return receiveAcknowledgement();
-
     }
 
 
@@ -486,8 +436,6 @@ public class Client {
         outText.println(newPassword);
 
         return receiveAcknowledgement();
-
-
     }
 
 
@@ -516,12 +464,10 @@ public class Client {
 
 
     //Requests that the client can send a file to the server
-    //Maybe change so that it sends an email and then we discuss it
+    //Maybe change so that it sends an email, and then we discuss it
     //Rather than having any user be able to upload any file they want
-    public String requestUploadFile(File filetoUpload) throws IOException {
+    public String requestUploadFile(File fileToUpload) throws IOException {
         outText.println("UPLOADFILE");
-
-
 
         return receiveAcknowledgement();
 
@@ -540,7 +486,7 @@ public class Client {
      *
      * @return The current version of the client
      */
-    public String getCurrVersion() {return CLIENTVERSION;}
+    public String getCurrVersion() {return CLIENT_VERSION;}
 
     /**
      *
@@ -561,7 +507,5 @@ public class Client {
         else{
             return false;
         }
-
     }
-
 }
