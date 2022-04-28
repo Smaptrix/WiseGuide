@@ -49,7 +49,7 @@ public class VenueDetailsController {
     @FXML
     //Always called by the FXML Loader
     public void initialize() {
-
+        venueText.setEditable(false);
     }
 
     //Will use the client to download relevant data and place it into the page.
