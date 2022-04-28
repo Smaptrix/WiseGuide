@@ -45,14 +45,14 @@ public class ClientMain {
 
         //Creates User then hashes there data
         User testUser = new User("test", "12345");
-        testUser.hashUserInfo();
+        testUser.encryptUserInfo();
 
 
       try {
           Client client = new Client();
           client.startConnection(host, 5555);
 
-          System.out.println(client.verifyUser(testUser));
+         // System.out.println(client.verifyUser(testUser));
 
 
           client.requestLogin(testUser);

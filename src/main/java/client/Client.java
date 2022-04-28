@@ -8,12 +8,14 @@
 package client;
 
 import serverclientstuff.User;
+import serverclientstuff.UserSecurity;
 
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 
@@ -170,17 +172,20 @@ public class Client {
      */
     public File requestFile(String fileName) throws IOException {
 
+        //Checks to see if a file has already been downloaded
+        //This is so that the same file is not downloaded twice
+        if(isFileDownloaded(fileName)){
+            return null;
+        }
+
+
         System.out.println("GET REQUEST: " + fileName);
 
         outText.println("GET " + fileName);
 
-        //Checks to see if a file has already been downloaded
-        //This is so that the same file is not downloaded twice
-        if(fileLocations.containsKey(fileName)){
-            System.out.println("File is already downloaded");
-            return null;
-        }
-        else {
+
+
+
             //Tells us how many bytes are telling us how big the file is
             int numOfFileSizeBytes = inputStream.read();
 
@@ -215,7 +220,7 @@ public class Client {
 
             //Once we have the array of bytes, we then reconstruct that into the actual file.
             return BytesToFile(data, fileName, dataType);
-        }
+
     }
 
 
@@ -226,7 +231,7 @@ public class Client {
      * @param bytesToRead the number of bytes to read from the inputStream
      * @return a byte array of data read from the input stream
      */
-    public byte[] readBytes(int bytesToRead) {
+    private byte[] readBytes(int bytesToRead) {
 
         //Initialises a new byte array of size predetermined by our network protocol
         byte[] data = new byte[bytesToRead];
@@ -269,7 +274,7 @@ public class Client {
      * @return the filepath of the downlaoded file
      * @throws IOException if
      */
-    public File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
+    private File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
 
         //Creates a new temp file - Identifiable by custom prefix
         File currFile = new File(String.valueOf(Files.createTempFile("WG_", "." + fileType)));
@@ -342,6 +347,7 @@ public class Client {
     //TODO - possible refactor of user functions into single function? ~ eh maybe
 
 
+
     /**
      * <p>
      * Asks the user to verify if the users information is correct
@@ -379,6 +385,13 @@ public class Client {
 
         outText.println(currUser.getPassword());
 
+        //Should timeout if nothing respond
+        if(receiveAcknowledgement().equals("SENDSALT")) {
+            currUser.setSalt(UserSecurity.generateSalt());
+            System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
+
+            outText.println(currUser.getSalt());
+        }
 
         return receiveAcknowledgement();
     }
@@ -420,20 +433,20 @@ public class Client {
 
     /**
      * Requests the files from the server containing the list of the venues
+     * @return
      */
-    public void requestVenueLists() throws IOException {
-
-        //Provides the client  with the types of venues it will have to request to download
-        List<String> VenueTypes = Arrays.asList("Bars.txt", "Cafes.txt", "Clubs.txt", "FastFood.txt", "Pubs.txt", "Restaurants.txt");
+    public void requestVenueXMLFile() throws IOException {
 
         //Requests a file containing the list of every venue contained within the venue types
-        for (String venueType : VenueTypes) {
-            requestFile("VenueLists/" + venueType);
-        }
-
+        requestFile("venuesLocation.xml");
     }
 
 
+    /**
+     * Gives the directory path for the required file
+     * @param fileName name of the file you desire to fine
+     * @return the directory path of specified file
+     */
     public File getFile(String fileName){
 
 
@@ -443,6 +456,76 @@ public class Client {
 
     }
 
+
+    //TODO - Could be made more rigourous, but assumes server and client have same user
+
+    //Requests that the server requests a users name
+    public String requestUserNameChange(String desiredUsername) throws IOException {
+
+
+        outText.println("CHANGENAME");
+
+
+        outText.println(desiredUsername);
+
+
+
+
+        return receiveAcknowledgement();
+
+    }
+
+
+    //Requests that the server changes the users password
+    public String requestPasswordChange(String enteredPassword, String newPassword) throws IOException {
+
+        outText.println("CHANGEPASS");
+
+        outText.println(enteredPassword);
+
+        outText.println(newPassword);
+
+        return receiveAcknowledgement();
+
+
+    }
+
+
+
+    //Requests that the server log a venue in
+    public String requestVenueLogin(String venueName, String venuePass) throws IOException {
+        outText.println("VENUELOGIN");
+
+        outText.println(venueName);
+        outText.println(venuePass);
+
+        return receiveAcknowledgement();
+    }
+
+
+    //Requests that the server delete a file from a venues directory
+    public String requestDeleteFile(String filePath) throws IOException {
+        outText.println("DELETEVENUEFILE");
+
+        outText.println(filePath);
+
+        return receiveAcknowledgement();
+
+
+    }
+
+
+    //Requests that the client can send a file to the server
+    //Maybe change so that it sends an email and then we discuss it
+    //Rather than having any user be able to upload any file they want
+    public String requestUploadFile(File filetoUpload) throws IOException {
+        outText.println("UPLOADFILE");
+
+
+
+        return receiveAcknowledgement();
+
+    }
 
 
     /**
@@ -469,5 +552,16 @@ public class Client {
 
 
 
+    public boolean isFileDownloaded(String fileName){
+
+        if(fileLocations.containsKey(fileName)){
+            System.out.println("File is already downloaded");
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
 
 }

@@ -9,8 +9,11 @@
 package server;
 
 
+import VenueXMLThings.VenueXMLParser;
 import serverclientstuff.User;
+import serverclientstuff.UserSecurity;
 
+import javax.xml.transform.TransformerException;
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -26,8 +29,6 @@ public class Server {
     private static final String SERVERVERSION = "Ver 0.45";
 
 
-        //TODO - Store prehashed user as well for account details
-        //     - Do the hashing serverside? (would be a big refactor (incl tests)
 
 
 
@@ -66,12 +67,9 @@ public class Server {
         //Initialises the current user server user handler
         currUser = new User("", "");
         currUserHandler = new ServerUserHandler(currUser, false);
-
-
-
-
     }
 
+    //Possibly not needed now that windows accepts unix slashes...
     private void osDetect(){
         //Stores the current directory that the application was launched from
         CurrDir = System.getProperty("user.dir");
@@ -85,9 +83,6 @@ public class Server {
         else{
             slashType = "/";
         }
-
-
-
     }
 
 
@@ -155,25 +150,55 @@ public class Server {
 
 
             case "VERIFYUSER":
+                currUserHandler.setUserType("USER");
                 receiveLogin(0);
                 break;
 
             case "LOGIN":
+                currUserHandler.setUserType("USER");
                 receiveLogin(1);
                 break;
 
             case "CREATEUSER":
+                currUserHandler.setUserType("USER");
                 receiveLogin(2);
                 break;
 
 
+            case "CHANGENAME":
+                currUserHandler.setUserType("USER");
+                changeUsername();
+                break;
+
+            case "CHANGEPASS":
+                currUserHandler.setUserType("USER");
+                changePassword();
+                break;
+
             case "LOGOUT":
+                currUserHandler.setUserType("USER");
                 logout();
                 break;
 
             case "VERSIONCHECK":
                 versionCheck();
                 break;
+
+            case "VENUELOGIN":
+                currUserHandler.setUserType("VENUE");
+                receiveLogin(1);
+                break;
+                
+            case "DELETEVENUEFILE":
+                currUserHandler.setUserType("VENUE");
+                deleteVenueFile();
+                break;
+
+            case "UPLOADFILE":
+                currUserHandler.setUserType("VENUE");
+                recieveVenueFile();
+                break;
+
 
             default:
                 System.out.println(requestIn + " : Invalid command");
@@ -182,7 +207,12 @@ public class Server {
         }
     }
 
+    private void recieveVenueFile() throws IOException {
+        sendResponse("SIZE?", true);
 
+        inText.readLine();
+
+    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -237,7 +267,6 @@ public class Server {
                 }
             }
             //Clears the outputStream of any excess data
-
             outputStream.flush();
 
 
@@ -261,7 +290,7 @@ public class Server {
             //Sends the size of the response first
             int sizeOfResponse = responseInBytes.length;
 
-            System.out.println("File Size in bytes: " + sizeOfResponse);
+
 
             outputStream.writeByte(sizeOfResponse);
 
@@ -290,37 +319,29 @@ public class Server {
         String loginPass = inText.readLine();
 
 
-        //Don't need to hash here because the client hashes the data
-        //Sets the current users information based on the login information provided
-        currUser.setUsername(loginName);
-        currUser.setPassword(loginPass);
 
 
+        //Hashing server side as we can access the users salt
+        currUser = new User(loginName, loginPass);
 
         currUserHandler.setCurrUser(currUser);
 
-        //Determine current users statuses
+
+        //Determine current users statuses - will always fail at the password level
         currUserHandler.verifyUser();
 
 
-        System.out.println("Users information has been checked!");
-        System.out.println("Mode: " + mode);
 
 
-        //Verification Mode - Mainly for user creation
+
+        //Verification Mode - Mainly for testing
         if(mode == 0){
 
             //If user exists and pass is correct(Good for login, bad for user creation)
-            if(currUserHandler.userExistState & currUserHandler.passVerified){
-                sendResponse("GOODPASS", true);
-
-
+            if(currUserHandler.userExistState & currUserHandler.passVerified) {
+                sendResponse("USERFOUND", true);
             }
-            //If password is correct
-            else if (currUserHandler.userExistState & !currUserHandler.passVerified){
-                sendResponse("BADPASS", true);
 
-            }
 
             else {
                 sendResponse("USERNOTFOUND", true);
@@ -332,9 +353,19 @@ public class Server {
 
 
         //Login Mode
-        else if(mode == 1) {
+        if(mode == 1) {
 
             System.out.println("Login mode!");
+
+
+            //If the user exists grab there salt then encrypt there data
+           //Breaks if user has no salt
+            if(currUserHandler.userExistState){
+                currUser.setSalt(currUserHandler.getcurrUserSalt());
+                currUser.encryptUserInfo();
+                currUserHandler.verifyUser();
+            }
+
 
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
@@ -351,18 +382,26 @@ public class Server {
                 System.out.println("Login message sent!");
             }
 
+
+
+
         }
 
         //User Creation Mode
         else if(mode == 2){
 
             if(!(currUserHandler.userExistState)){
+
+                sendResponse("SENDSALT", true);
+                currUser.setSalt(inText.readLine());
+                currUser.encryptUserInfo();
                 currUserHandler.createUser();
                 sendResponse("USERCREATED", true);
             }
 
             else{
                 sendResponse("USERALREADYEXISTS", true);
+                System.out.println("User already exists");
 
             }
 
@@ -375,6 +414,7 @@ public class Server {
 
 
     }
+
 
 
     //Logs the user out of the server
@@ -411,6 +451,89 @@ public class Server {
         }
 
 
+
     }
+
+
+    private void changeUsername() throws IOException {
+
+
+
+        String desiredUsername = inText.readLine();
+
+        //If the username is taken
+        if (ServerUserHandler.findUserName(desiredUsername)){
+            sendResponse("USERNAMETAKEN", true);
+        }
+        else {
+            currUserHandler.changeUserName(desiredUsername);
+            sendResponse("NAMECHANGED", true);
+        }
+    }
+
+    private void changePassword() throws IOException {
+
+        String currPass = inText.readLine();
+
+        String newPass = inText.readLine();
+
+
+        //If the password entered doesnt match the current password
+        if(!(UserSecurity.hashThis(currPass, currUserHandler.getcurrUserSalt()).equals(UserSecurity.hashThis(currUser.getPassword(), currUserHandler.getcurrUserSalt())))){
+
+            sendResponse("INCORRECTPASS", true);
+        }
+        else{
+
+            String hashedDesiredPass = UserSecurity.hashThis(newPass, currUserHandler.getcurrUserSalt());
+
+            currUserHandler.changeUserPass(hashedDesiredPass);
+
+            currUserHandler.getcurrUser().setPassword(hashedDesiredPass);
+
+            currUser.setPassword(newPass);
+
+            sendResponse("PASSCHANGED", true);
+
+
+
+        }
+
+    }
+
+    //Deletes the requested venue file
+    private void deleteVenueFile() throws IOException {
+
+        //Gets the filepath from the client
+        File fileToDelete = new File(inText.readLine());
+
+
+
+        System.out.println("File to delete: " + fileToDelete);
+
+        //Delete the file from the PC
+        if(fileToDelete.delete()){
+            //Delete the file from the XML
+            VenueXMLParser xml = new VenueXMLParser(new File("venuesLocation.xml"));
+            try {
+                //MAke sure the slashes are consistent with the direction in the venue XML file
+                xml.removeChildMedia("title", currUser.getUsername(), (String.valueOf(fileToDelete)).replace("\\", "/"));
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
+            sendResponse("File Deleted", true);
+        }
+        else{
+            sendResponse("File Deletion Error", true);
+        }
+
+        //TODO - Also change the XML file
+
+
+
+
+
+    }
+
 
 }

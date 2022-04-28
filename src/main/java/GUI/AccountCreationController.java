@@ -47,6 +47,7 @@ public class AccountCreationController {
     public void setClient(Client client) {
         this.client = client;
     }
+    public Client getClient() { return this.client; }
 
     /**
      * The field that the user can type their desired username into
@@ -107,14 +108,16 @@ public class AccountCreationController {
      * When the user presses the create account button, this action occurs and requests the server to make the desired account
      * @throws IOException
      */
+
+
+    //TODO - Post Integration let the client handle all the user stuff not the GUI
+
+    //TODO -  User should not be able to create accounts with same names as testing accounts (see LoginGUIIntegration TODOs) (AC)
+
     @FXML
     //Attempts to create account
     private void createAccountButtonAction() throws IOException {
-        System.out.println("Wanted Username: " + userField.getText());
 
-        System.out.println("Password: " + passField.getText());
-
-        System.out.println("Confirm Password: " + passConfirmField.getText());
 
         //Big check to make sure username and password stuff is correct
 
@@ -139,37 +142,34 @@ public class AccountCreationController {
         else{
             errLabel.setText("");
 
-            User newUser = new User(userField.getText(), passField.getText());
-            newUser.hashUserInfo();
-            ServerUserHandler desiredUser = new ServerUserHandler(newUser, true);
-            desiredUser.verifyUser();
 
-            if(desiredUser.userExistState){
-                errLabel.setText("This username is taken");
-            }
-            else{
+            User currUser = new User(userField.getText(), passField.getText());
 
-                if(client.createUser(newUser).equals("USERCREATED")){
+            if(client.createUser(currUser).equals("USERCREATED")){
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-created-window.fxml"));
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(fxmlLoader.load(), 280, 155);
-                    stage.setScene(scene);
-                    stage.setTitle("Account Created");
-                    stage.show();
-
+                    accountCreatedPageOpen();
 
                     //Close the current page
                     Stage currStage = (Stage) createAccountButton.getScene().getWindow();
                     currStage.close();
 
                 }
+                errLabel.setText("User already exists");
                 //TODO - Account creation failed page
             }
         }
 
 
 
+    //Opens the account created notification - Designed with testing in mind :) - JI
+    public void accountCreatedPageOpen() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-created-window.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 280, 155);
+        stage.setScene(scene);
+        stage.setTitle("Account Created");
+        stage.show();
     }
 
 

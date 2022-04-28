@@ -28,19 +28,23 @@ public class ServerMain {
 
 
     //Sets up the initial server
-    public ServerMain() throws IOException {
+    public ServerMain() {
+
+       //Restarts the server after a bit of time - REMEMBER TO RECOMMENT BACK IN
+
+            try {
+                while(true) {
+                Server server = new Server();
+
+                server.startup(5555);
 
 
-        try {
-            Server server = new Server();
+                server.bufferListen();
+                }
+            } catch (Exception e) {
+                System.out.println("Socket exception - Lost connection with client");
 
-            server.startup(5555);
-
-
-            server.bufferListen();
-        }catch(SocketException e){
-            System.out.println("Socket exception - Lost connection with client");
-        }
+    }
 
 
 

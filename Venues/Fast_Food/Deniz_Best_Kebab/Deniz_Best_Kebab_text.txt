@@ -1,0 +1,18 @@
+UID: 076
+Deniz Best Kebab
+
+Address: 47 Parliament Street, York YO1 8RU
+Phone: 07715 380423
+Email: 
+
+Description:
+A food truck serving Turkish cuisine. Tasty kebabs are what this place offers you. Most visitors find the staff creative.
+
+Opening Times: 
+Monday: 12:00 - 17:30 
+Tuesday: 12:00 - 20:30 
+Wednesday: 12:00 - 20:30 
+Thursday: 12:00 - 20:30 
+Friday: 12:00 - 20:30 
+Saturday: 12:00 - 20:30 
+Sunday: 12:00 - 19:00 
