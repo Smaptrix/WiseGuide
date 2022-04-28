@@ -63,16 +63,16 @@ public class VenueDetailsController {
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
-
+            //Text
             String textFile = (currVenuePage.getMediaSourceByID("text0"));
-            System.out.println("File: " + textFile);
 
+            System.out.println("File: " + textFile);
 
             client.requestFile(textFile);
 
             TextManager textManager = new TextManager(textFile, 470, 100);
             venueText.setText(textManager.loadTextFromFile());
-
+            //Images
             String imageFile = (currVenuePage.getMediaSourceByID("image0"));
 
             client.requestFile(imageFile);
@@ -81,6 +81,7 @@ public class VenueDetailsController {
 
             ImageView imageView = new ImageView();
             ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+
             //venueImage.setImage(imageHandler.getCurrImage());
 
 
