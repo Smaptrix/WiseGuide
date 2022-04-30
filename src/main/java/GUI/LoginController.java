@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import server.ServerUserHandler;
 import serverclientstuff.User;
 
@@ -47,10 +48,7 @@ public class LoginController {
     @FXML
     Button loginButton;
     @FXML
-    Button exitButton;
-    @FXML
     MenuItem menuClose;
-
     @FXML
     Label errorLabel;
     @FXML
@@ -143,6 +141,7 @@ public class LoginController {
             stage.setScene(scene);
             stage.setTitle("Account Creation");
             stage.show();
+            stage.setResizable(false);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -178,6 +177,7 @@ public class LoginController {
         stage.setScene(scene);
         stage.setTitle("Venue Login");
         stage.show();
+        stage.setResizable(false);
 
 
         Stage currStage = (Stage) errorLabel.getScene().getWindow();

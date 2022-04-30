@@ -37,9 +37,9 @@ public class AccountCreationController {
      */
     Client client;
 
-    /**
-     * Lets previous controllers set the client so that the client is shared between pages
-     * @param client
+    /*
+      Lets previous controllers set the client so that the client is shared between pages
+      @param client
      */
     /**
      * Sets the client to be used by the controller
@@ -93,7 +93,7 @@ public class AccountCreationController {
     public CheckBox ageCheckBox;
 
     /**
-     * The link to the companies privacy policy
+     * The link to the company's privacy policy
      */
     @FXML
     Hyperlink privacyPolicyLink;
@@ -132,7 +132,7 @@ public class AccountCreationController {
 
         //Big check to make sure username and password stuff is correct
 
-        //If the password and the confrimed password dont match
+        //If the password and the confirmed password don't match
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
 
@@ -169,7 +169,7 @@ public class AccountCreationController {
                     currStage.close();
 
                 }
-                errLabel.setText("This username is taken");
+                errLabel.setText("This username is taken.");
                 //TODO - Account creation failed page
             }
         }
@@ -189,8 +189,8 @@ public class AccountCreationController {
 
 
     @FXML
-    /**
-     * When the close popup button is pressed, this action occurs and closes the popup
+    /*
+      When the close popup button is pressed, this action occurs and closes the popup
      */
     private void closePopupButton(){
         Stage stage = (Stage) closePopUpButton.getScene().getWindow();
@@ -199,7 +199,7 @@ public class AccountCreationController {
 
 
     /**
-     * When the privacy policy link is pressed, this action occurs and opens the default webbrowser and displays the privacy policy
+     * When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the privacy policy
      * @throws IOException if the default browser cannot be opened
      * @throws URISyntaxException if the provided uri is invalid
      */
@@ -211,7 +211,7 @@ public class AccountCreationController {
     }
 
     /**
-     * When the privacy policy link is pressed, this action occurs and opens the default webbrowser and displays the terms and conditions
+     * When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the terms and conditions
      * @throws IOException if the default browser cannot be opened
      * @throws URISyntaxException if the provided uri is invalid
      */

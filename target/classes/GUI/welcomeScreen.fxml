@@ -17,21 +17,12 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<!-- Working code -->
-<!--
-<ImageView>
-        <image>@WiseGuideLogo.jpg</image>
-        </ImageView>
-<Label fx:id="welcomeText"/>
-<Button text="Welcome!" onAction="#onHelloButtonClick"/>
-<Label styleClass="heading1" text="Version 1 of WiseGuide GUI. Soon to be updated with something much better than a single button and some text..." wrapText="true"/>
-
--->
-
-<VBox id="mainWindow" fx:id="mainWindow" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
+<VBox id="mainWindow" fx:id="mainWindow" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -76,7 +67,9 @@
                 </SplitPane>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="0.0">
-
+                <ImageView id="mapView" fx:id="mapView" accessibleText="Base Map showing all venues in York" fitHeight="558.0" fitWidth="658.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../Maps/baseMap.png" />
+                </ImageView>
             </AnchorPane>
         </SplitPane>
     </AnchorPane>
