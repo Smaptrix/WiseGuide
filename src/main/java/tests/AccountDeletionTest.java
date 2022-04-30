@@ -10,7 +10,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
@@ -147,10 +146,37 @@ public class AccountDeletionTest extends ApplicationTest {
         FxAssert.verifyThat("#errField",LabeledMatchers.hasText("The passwords do not match!"));
     }
 
-    //TODO: Integration Test | Confirm that non-existent account cannot be deleted. (REQUIRES VERIFICATION)
-    //TODO: Integration Test | Confirm that account cannot be deleted if password is not correct (REQUIRES VERIFICATION)
+    //Integration Test | Confirm that non-existent account cannot be deleted.
+    @Test
+    public void nonExistentDeleteTest(){
+        sleep(1000);
+        controller.setTestingMode(true);
+        clickOn("#usernameField");
+        write("userDoesNotExist");
+        clickOn("#passField");
+        write("password");
+        clickOn("#passConfirmField");
+        write("password");
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("User details are incorrect."));
+    }
 
-    //Integration Test | Confirm that reserved accounts cannot be deleted. (REQUIRES RESERVED ACCOUNTS LIST)
+    //Integration Test | Confirm that account cannot be deleted if password is not correct
+    @Test
+    public void deleteWrongPasswordTest(){
+        sleep (1000);
+        controller.setTestingMode(true);
+        clickOn("#usernameField");
+        write("accountDeletionTestUser");
+        clickOn("#passField");
+        write("accountDeletionTest1");
+        clickOn("#passConfirmField");
+        write("accountDeletionTest1");
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("User details are incorrect."));
+    }
+
+    //Integration Test | Confirm that reserved accounts cannot be deleted.
     @Test
     public void reservedNoDeleteTest() throws IOException {
         sleep(1000);
