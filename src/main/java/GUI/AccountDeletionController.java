@@ -48,6 +48,7 @@ public class AccountDeletionController {
     * Should then verify that the user exists and the password is correct, but this function does not currently work.
     */
     private void deleteAccountButtonAction() throws IOException {
+        //Verifies that the user input data is OK.
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
         }
@@ -61,21 +62,19 @@ public class AccountDeletionController {
             errLabel.setText("The selected user cannot be deleted.");
         }
         else {
-            User currUser = new User(userField.getText(), passField.getText());
-            //TODO: Verification always fails? Account should not be deleted if it does not exist or if the password is not correct.
 
+            //Uses the login code to determine whether the user details are valid.
+            User currUser = new User(userField.getText(), passField.getText());
             String verificationCode = client.requestLogin(currUser);
 
-            //String verified = client.verifyUser(currUser);
-            //String verified = "USERFOUND"; //TODO: DISCARD ONCE VERIFICATION WORKS!
             if (verificationCode.equals("GOODLOGIN")) {
                 String success = client.deleteUser(currUser);
                 if (success.equals("DELETESUCCESS")){
-                    //errLabel.setText( userField.getText().trim() + " was deleted.");
                     accountDeletedPageOpen();
                     Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
                     currStage.close();
                 } else {
+                    //This should never appear. If it does, something has gone wrong in the code.
                     errLabel.setText("Something went wrong. The user could not be deleted.");
                 }
             } else {
@@ -109,6 +108,7 @@ public class AccountDeletionController {
         }
     }
 
+    //Reads the list of reserved usernames to check if the user input name is allowed.
     private boolean forbiddenNamesCheck(String name) throws IOException {
         boolean forbidden = false;
         File forbiddenNamesList = new File("reservedUsernames.txt");

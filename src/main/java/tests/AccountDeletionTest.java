@@ -56,7 +56,7 @@ public class AccountDeletionTest extends ApplicationTest {
     //For Debug Purposes Only: Open the GUI and do nothing (allows programmer to interact with GUI)
     @Test
     public void doesItWorkTest(){
-        sleep(1000);
+        sleep(10000000);
     }
 
     //Unit Test | Confirm an internal testing user can be created.

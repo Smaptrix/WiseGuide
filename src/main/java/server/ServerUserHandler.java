@@ -88,11 +88,8 @@ public class ServerUserHandler {
         br.close();
         System.gc();
         boolean delsuccess = database.delete();
-        boolean success = tempFile.renameTo(database);
-        //TODO: This is not returning a boolean based on whether the account was delete or not.
-        // The bool returned is whether the rename was successful or not - not the same thing!
-        // Fine for now since verification doesn't work so non-existent accounts can be deleted,
-        // but once it does this will need changing to reflect what it's supposed to.
+        tempFile.renameTo(database);
+        boolean success = !(findUser());
         return (success);
     }
 
