@@ -63,9 +63,12 @@ public class AccountDeletionController {
         else {
             User currUser = new User(userField.getText(), passField.getText());
             //TODO: Verification always fails? Account should not be deleted if it does not exist or if the password is not correct.
+
+            String verificationCode = client.requestLogin(currUser);
+
             //String verified = client.verifyUser(currUser);
-            String verified = "USERFOUND"; //TODO: DISCARD ONCE VERIFICATION WORKS!
-            if (verified == "USERFOUND") {
+            //String verified = "USERFOUND"; //TODO: DISCARD ONCE VERIFICATION WORKS!
+            if (verificationCode.equals("GOODLOGIN")) {
                 String success = client.deleteUser(currUser);
                 if (success.equals("DELETESUCCESS")){
                     //errLabel.setText( userField.getText().trim() + " was deleted.");

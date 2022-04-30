@@ -203,7 +203,6 @@ public class ServerUserHandler {
 
     //Checks to see if the users password is correct
     public boolean verifyPass() {
-
         return (currUser.getPassword()).equals(userInfo[1]);
     }
 
