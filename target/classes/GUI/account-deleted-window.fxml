@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        Company Name:   Maptrix
+        Project Name:   WiseGuide
+        Authors:        Joe Ingham
+        Date Created:   18/02/2022
+        Last Updated:   24/02/2022
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<?import java.net.URL?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0"
+      prefWidth="280.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="GUI.AccountDeletionController">
+   <AnchorPane prefHeight="152.0" prefWidth="279.0">
+      <Label layoutY="40.0" prefHeight="38.0" prefWidth="279.0" text="Account Deleted!" alignment="CENTER"/>
+      <Button id="closePopupButton" fx:id="closePopUpButton" layoutX="113.0" layoutY="97.0" mnemonicParsing="false"
+              onAction="#closePopupButton" text="Okay!"/>
+   </AnchorPane>
+
+   <stylesheets>
+      <URL value="@WiseGuideCSS.css" />
+   </stylesheets>
+</VBox>
