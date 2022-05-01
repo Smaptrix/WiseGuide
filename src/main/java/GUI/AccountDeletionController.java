@@ -77,8 +77,13 @@ public class AccountDeletionController {
                 //Close all windows and attempt to delete the user.
                 Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
                 currStage.close();
-                parentStage.close();
-                mapStage.close();
+                //Null comparisons are made because the parentStage and mapStage will not exist during testing.
+                if(parentStage != null){
+                    parentStage.close();
+                }
+                if (mapStage != null) {
+                    mapStage.close();
+                }
                 System.gc(); //Runs gc, allows deleteUser to update the database.
                 String success = client.deleteUser(currUser);
 

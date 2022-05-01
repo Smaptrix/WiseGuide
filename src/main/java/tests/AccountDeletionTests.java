@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
@@ -17,12 +18,13 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
+import serverclientstuff.User;
 
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class AccountDeletionTest extends ApplicationTest {
+public class AccountDeletionTests extends ApplicationTest {
 
     private AccountDeletionController controller;
     public Client client;
@@ -62,6 +64,7 @@ public class AccountDeletionTest extends ApplicationTest {
     @Test
     public void testDeletionUserCreation() throws IOException {
         controller.createDeletionTestAccount();
+        //No assertion needed.
     }
 
     //Integration Test | Confirm User Can Be Deleted
@@ -70,12 +73,12 @@ public class AccountDeletionTest extends ApplicationTest {
         sleep (1000);
         controller.setTestingMode(true);
         controller.createDeletionTestAccount();
-        clickOn("#usernameField");
-        write("accountDeletionTestUser");
+        controller.setCurrUser(new User("accountDeletionTestUser","accountDeletionTest"));
         clickOn("#passField");
         write("accountDeletionTest");
         clickOn("#passConfirmField");
         write("accountDeletionTest");
+        clickOn("#delCheckBox");
         clickOn("#deleteAccountButton");
         clickOn("#closePopupButton");
     }
@@ -87,6 +90,13 @@ public class AccountDeletionTest extends ApplicationTest {
         FxAssert.verifyThat("#errField",LabeledMatchers.hasText(""));
     }
 
+    //Unit Test | Confirm delete account explanation is displayed
+    @Test
+    public void deleteExplanationTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#infoLabel",LabeledMatchers.hasText("Enter your password to confirm that you would like to delete your WiseGuide account."));
+    }
+
     //Unit Test | Confirm "Delete Account" button displays correct text
     @Test
     public void DeleteAccountTextTest(){
@@ -94,13 +104,19 @@ public class AccountDeletionTest extends ApplicationTest {
         FxAssert.verifyThat("#deleteAccountButton",LabeledMatchers.hasText("Delete Account"));
     }
 
-    //Unit Test | Confirm text can be entered in username field.
+    //Unit Test | Confirm that checkbox text is correct.
     @Test
-    public void enterDeleteUsernameTest(){
+    public void checkboxTextTest(){
         sleep(1000);
-        clickOn("#usernameField");
-        write("username");
-        FxAssert.verifyThat("#usernameField", TextInputControlMatchers.hasText("username"));
+        FxAssert.verifyThat("#delCheckBox",LabeledMatchers.hasText("I understand that deletion is permanent."));
+    }
+
+    //Unit Test | Confirm that checkbox can be clicked.
+    @Test
+    public void clickCheckboxTest(){
+        sleep(1000);
+        clickOn("#delCheckBox");
+        Assert.assertTrue(controller.delCheckBox.isSelected());
     }
 
     //Unit Test | Confirm text can be entered in password field.
@@ -126,18 +142,25 @@ public class AccountDeletionTest extends ApplicationTest {
     public void deleteAccountButtonTest(){
         sleep(1000);
         clickOn("#deleteAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
+        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a password!"));
     }
 
-    //Integration Test | Confirm that blank account can not be deleted.
-    //Test is functionally identical to deleteAccountButtonTest()
+    //Integration Test | Confirm account can't be deleted if checkbox is not clicked.
+    @Test
+    public void noCheckboxDeleteTest() {
+        sleep(1000);
+        clickOn("#passField");
+        write("accountDeletionTest");
+        clickOn("#passConfirmField");
+        write("accountDeletionTest");
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("You must click the checkbox to continue."));
+    }
 
     //Integration Test | Confirm that account with mismatched passwords cannot be deleted.
     @Test
     public void mismatchPasswordsTest(){
         sleep(1000);
-        clickOn("#usernameField");
-        write("username");
         clickOn("#passField");
         write("passwordA");
         clickOn("#passConfirmField");
@@ -146,38 +169,25 @@ public class AccountDeletionTest extends ApplicationTest {
         FxAssert.verifyThat("#errField",LabeledMatchers.hasText("The passwords do not match!"));
     }
 
-    //Integration Test | Confirm that non-existent account cannot be deleted.
-    @Test
-    public void nonExistentDeleteTest(){
-        sleep(1000);
-        controller.setTestingMode(true);
-        clickOn("#usernameField");
-        write("userDoesNotExist");
-        clickOn("#passField");
-        write("password");
-        clickOn("#passConfirmField");
-        write("password");
-        clickOn("#deleteAccountButton");
-        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("User details are incorrect."));
-    }
-
     //Integration Test | Confirm that account cannot be deleted if password is not correct
     @Test
-    public void deleteWrongPasswordTest(){
+    public void deleteWrongPasswordTest() throws IOException {
         sleep (1000);
         controller.setTestingMode(true);
-        clickOn("#usernameField");
-        write("accountDeletionTestUser");
+        controller.createDeletionTestAccount();
+        controller.setCurrUser(new User("accountDeletionTestUser","accountDeletionTest"));
         clickOn("#passField");
         write("accountDeletionTest1");
         clickOn("#passConfirmField");
         write("accountDeletionTest1");
+        clickOn("#delCheckBox");
         clickOn("#deleteAccountButton");
         FxAssert.verifyThat("#errField",LabeledMatchers.hasText("User details are incorrect."));
     }
 
     //Integration Test | Confirm that reserved accounts cannot be deleted.
-    @Test
+    //Currently not needed as username field was removed and only a logged-in account can be deleted.
+    /*@Test
     public void reservedNoDeleteTest() throws IOException {
         sleep(1000);
         controller.setTestingMode(false);
@@ -191,4 +201,6 @@ public class AccountDeletionTest extends ApplicationTest {
         clickOn("#deleteAccountButton");
         FxAssert.verifyThat("#errField",LabeledMatchers.hasText("The selected user cannot be deleted."));
     }
+
+     */
 }

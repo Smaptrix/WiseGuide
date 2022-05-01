@@ -22,7 +22,7 @@ import java.awt.*;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class AccountCreationPageTest extends ApplicationTest {
+public class AccountCreationPageTests extends ApplicationTest {
 
     /* ===== Tests for Account Creation Page ===== */
 
@@ -39,7 +39,7 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
     @Before
-    public void setUpClass() throws Exception {
+    public void setUpClass() {
     }
 
     @After

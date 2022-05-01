@@ -28,7 +28,7 @@
          <font>
             <Font size="30.0" />
          </font></Label>
-      <Label layoutX="16.0" layoutY="40.0" prefHeight="70.0" prefWidth="243.0" text="Enter your password to confirm that you would like to delete your WiseGuide account." textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+      <Label id="infoLabel" fx:id="infoLabel" layoutX="16.0" layoutY="40.0" prefHeight="70.0" prefWidth="243.0" text="Enter your password to confirm that you would like to delete your WiseGuide account." textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
       <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="125.0" prefHeight="22.0" prefWidth="103.0" text="Password" />
       <PasswordField id="passField" fx:id="passField" layoutX="131.0" layoutY="121.0" />
       <PasswordField id="passConfirmField" fx:id="passConfirmField" layoutX="131.0" layoutY="160.0" />

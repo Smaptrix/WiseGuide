@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class LoginApplicationTest extends ApplicationTest {
+public class LoginApplicationTests extends ApplicationTest {
 
     /* ===== Tests for Main Login Screen ===== */
 

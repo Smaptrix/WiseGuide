@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class LoginGUIIntegration extends ApplicationTest {
+public class LoginGUIIntegrationTests extends ApplicationTest {
 
     /* ===== INTEGRATION TESTS for Login and GUI ===== */
 

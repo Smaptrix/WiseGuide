@@ -19,7 +19,7 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class AccountCreatedPageTest extends ApplicationTest {
+public class AccountCreatedPageTests extends ApplicationTest {
 
     /* ===== Tests for Account Created Page ===== */
 
