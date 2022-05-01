@@ -88,8 +88,19 @@ public class ServerUserHandler {
         br.close();
         System.gc();
         boolean delsuccess = database.delete();
-        tempFile.renameTo(database);
+        boolean renameSuccess = tempFile.renameTo(database);
+        if(delsuccess){
+            System.out.println("The database deletion was successful.");
+        } else {
+            System.out.println("The database deletion was not successful.");
+        }
+        if(renameSuccess){
+            System.out.println("The database rename was successful.");
+        } else {
+            System.out.println("The database rename was not successful.");
+        }
         boolean success = !(findUser());
+        if(success) { System.out.println("The user was not found in the database."); } else { System.out.println("The user was found in the database."); };
         return (success);
     }
 

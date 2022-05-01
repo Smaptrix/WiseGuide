@@ -27,6 +27,10 @@ public class AccountDeletionController {
     private boolean userPassCorrect;
     private boolean testingMode = false; //testingMode should only be true if specifically set.
 
+    Stage parentStage;
+    Stage mapStage;
+    User currUser;
+
     @FXML
     TextField userField;
     @FXML
@@ -39,6 +43,10 @@ public class AccountDeletionController {
     Button deleteAccountButton;
     @FXML
     Button closePopUpButton;
+    @FXML
+    Label infoLabel;
+    @FXML
+    Label deletedLabel;
 
     @FXML
     /*
@@ -49,33 +57,43 @@ public class AccountDeletionController {
     */
     private void deleteAccountButtonAction() throws IOException {
         //Verifies that the user input data is OK.
+
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
         }
-        else if(userField.getText().trim().isEmpty()){
-            errLabel.setText("You have not entered a username!");
-        }
+        //else if(username.trim().isEmpty()){
+            //errLabel.setText("You have not entered a username!");
+        //}
         else if(passField.getText().trim().isEmpty()){
             errLabel.setText("You have not entered a password!");
         }
-        else if(forbiddenNamesCheck(userField.getText().trim()) && (!testingMode)){
-            errLabel.setText("The selected user cannot be deleted.");
-        }
+        //else if(forbiddenNamesCheck(username.trim()) && (!testingMode)){
+            //errLabel.setText("The selected user cannot be deleted.");
+        //}
         else {
 
             //Uses the login code to determine whether the user details are valid.
-            User currUser = new User(userField.getText(), passField.getText());
             String verificationCode = client.requestLogin(currUser);
 
             if (verificationCode.equals("GOODLOGIN")) {
+                Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
+                currStage.close();
+                parentStage.close();
+                mapStage.close();
+
+                //Open Login Page Here
+
                 String success = client.deleteUser(currUser);
+
                 if (success.equals("DELETESUCCESS")){
                     accountDeletedPageOpen();
-                    Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
-                    currStage.close();
+                    //Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
+                    //currStage.close();
                 } else {
                     //This should never appear. If it does, something has gone wrong in the code.
-                    errLabel.setText("Something went wrong. The user could not be deleted.");
+                    //errLabel.setText("Something went wrong. The user could not be deleted.");
+                    accountDeletedPageOpen();
+                    deletedLabel.setText("Something went wrong. ("+success+")");
                 }
             } else {
                 errLabel.setText("User details are incorrect.");
@@ -126,5 +144,14 @@ public class AccountDeletionController {
     public void setTestingMode(boolean mode){
         this.testingMode = mode;
     }
+
+    public void setCurrUser(User user) {
+        this.currUser = user;
+    }
+
+    public void setParentStage(Stage stage) { this.parentStage = stage;
+    };
+
+    public void setMapStage(Stage stage) {this.mapStage = stage;};
 
 }

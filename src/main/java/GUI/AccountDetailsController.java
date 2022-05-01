@@ -21,6 +21,8 @@ public class AccountDetailsController {
 
     User currUser;
 
+    private Stage mapStage;
+
     @FXML
     Label usernameLabel;
 
@@ -30,6 +32,8 @@ public class AccountDetailsController {
     @FXML
     Button changePassButton;
 
+    @FXML
+    Button deleteAccountButton;
 
 
 
@@ -105,16 +109,24 @@ public class AccountDetailsController {
     }
 
     //TODO: Button on the fxml may not be centred
+    @FXML
     public void onDeleteAccountButtonPress(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-delete-page.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 300, 350);
         AccountDeletionController controller = fxmlLoader.getController();
         controller.setClient(client);
+        controller.setCurrUser(currUser);
+        controller.setParentStage((Stage)deleteAccountButton.getScene().getWindow());
+        controller.setMapStage(mapStage);
         //controller.setTestingMode(testingMode); //Uncomment if a testingMode if a testingMode is added to main screen
         stage.setScene(scene);
         stage.setTitle("Account Deletion");
         stage.show();
         stage.setResizable(false);
+    }
+
+    public void setMapStage(Stage mapStage) {
+        this.mapStage = mapStage;
     }
 }

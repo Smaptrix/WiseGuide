@@ -264,6 +264,7 @@ public class MainController {
         AccountDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
         controller.setUser(currUser);
+        controller.setMapStage((Stage)mainWindow.getScene().getWindow());
         stage.setScene(scene);
         stage.setTitle("Account Creation");
         stage.show();

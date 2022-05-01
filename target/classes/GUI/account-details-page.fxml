@@ -22,5 +22,7 @@
               onAction="#onchangeNameButtonPress" text="Change"/>
       <Button id="changePassButton" fx:id="changePassButton" layoutX="198.0" layoutY="153.0" mnemonicParsing="false"
               onAction="#onchangePassButtonPress" text="Change"/>
+      <Button id="deleteAccountButton" fx:id="deleteAccountButton" layoutX="170.0" layoutY="210.0" mnemonicParsing="false"
+              onAction="#onDeleteAccountButtonPress" text="Delete Account"/>
    </AnchorPane>
 </VBox>
