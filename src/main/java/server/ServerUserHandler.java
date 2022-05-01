@@ -77,30 +77,32 @@ public class ServerUserHandler {
         BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
         String userToRemove = currUser.getUsername();
         String line;
-
+        //Copies all lines from database into new file EXCEPT for user we wish to delete.
         while((line = br.readLine()) != null){
             String[] values = line.split(",");
             if(!(values[0].equals(userToRemove))){
                 bw.write(line + System.getProperty("line.separator"));
             }
         }
+        //Close buffers and run garbage collection (doesn't work if you don't do the gc! Java bug)
         bw.close();
         br.close();
         System.gc();
-        boolean delsuccess = database.delete();
+        boolean delSuccess = database.delete();
         boolean renameSuccess = tempFile.renameTo(database);
-        if(delsuccess){
-            System.out.println("The database deletion was successful.");
-        } else {
+        boolean success = !(findUser());
+
+        //Identify if there's an issue (FOR DEBUG PURPOSES ONLY)
+        if(!delSuccess) {
             System.out.println("The database deletion was not successful.");
         }
-        if(renameSuccess){
-            System.out.println("The database rename was successful.");
-        } else {
+        if(!renameSuccess) {
             System.out.println("The database rename was not successful.");
         }
-        boolean success = !(findUser());
-        if(success) { System.out.println("The user was not found in the database."); } else { System.out.println("The user was found in the database."); };
+        if(!success) {
+            System.out.println("The user is still in the database.");
+        }
+
         return (success);
     }
 
