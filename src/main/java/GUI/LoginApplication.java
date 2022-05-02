@@ -11,8 +11,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
 
         public class LoginApplication extends Application {
@@ -22,7 +20,6 @@ import java.io.IOException;
                 Scene scene = new Scene(fxmlLoader.load(), 640, 400);
                 stage.setTitle("Login");
                 stage.setScene(scene);
-                stage.setResizable(false);
 
                 LoginController controller = fxmlLoader.getController();
 

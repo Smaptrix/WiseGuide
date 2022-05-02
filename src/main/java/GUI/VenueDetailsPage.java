@@ -6,9 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -21,9 +19,7 @@ public class VenueDetailsPage extends Application {
         stage.setTitle("WiseGuide by Maptrix - V1.0.0");
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(false);
     }
-
 
     @FXML
     //Closes the application
@@ -33,6 +29,5 @@ public class VenueDetailsPage extends Application {
 
     public static void main(String[] args) {
         launch();
-
     }
 }

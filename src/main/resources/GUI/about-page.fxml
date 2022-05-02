@@ -5,19 +5,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
-      prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.AboutController">
-   <AnchorPane prefHeight="349.0" prefWidth="513.0">
-      <Label layoutX="178.0" layoutY="59.0" prefHeight="27.0" prefWidth="158.0" text="About  WiseGuides">
-         <font>
-            <Font size="18.0"/>
-         </font>
-      </Label>
-      <Label layoutX="130.0" layoutY="123.0" text="Version:"/>
-      <Label id="verNumLabel" fx:id="verNumLabel" layoutX="243.0" layoutY="123.0" text="Version Num Here"/>
-      <Label alignment="TOP_LEFT" layoutX="120.0" layoutY="169.0" prefHeight="81.0" prefWidth="274.0"
-             text="WiseGuides is an application created by Maptrix.  This application is designed to help you find new and exciting places around York! It will help you explore the beautiful city!"
-             wrapText="true"/>
-   </AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AboutController">
+   <children>
+      <AnchorPane prefHeight="349.0" prefWidth="513.0">
+         <children>
+            <Label layoutX="178.0" layoutY="59.0" prefHeight="27.0" prefWidth="158.0" text="About  WiseGuides">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label layoutX="130.0" layoutY="123.0" text="Version:" />
+            <Label id="verNumLabel" fx:id="verNumLabel" layoutX="243.0" layoutY="123.0" text="Version Num Here" />
+            <Label alignment="TOP_LEFT" layoutX="120.0" layoutY="169.0" prefHeight="81.0" prefWidth="274.0" text="WiseGuides is an application created by Maptrix.  This application is designed to help you find new and exciting places around York! It will help you explore the beautiful city!" wrapText="true" />
+         </children>
+      </AnchorPane>
+   </children>
 </VBox>

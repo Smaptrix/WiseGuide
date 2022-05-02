@@ -1,0 +1,16 @@
+UID: 022
+Lucky Days
+
+Address: 77 Low Petergate, York YO1 7HY
+Phone: 01904733992
+
+Description:
+
+Opening Times: 
+Monday: 09:00 - 17:00
+Tuesday: 09:00 - 17:00
+Wednesday: 09:00 - 18:00
+Thursday: 09:00 - 17:00
+Friday: 09:00 - 17:00
+Saturday: 09:00 - 17:00
+Sunday: 09:00 - 17:00

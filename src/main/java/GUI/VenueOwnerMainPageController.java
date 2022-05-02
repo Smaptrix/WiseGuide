@@ -42,20 +42,6 @@ public class VenueOwnerMainPageController {
     @FXML
     Button logOutButton;
 
-    @FXML
-    Button addFileButton;
-
-
-    @FXML
-    public void initialize(){
-
-        //REMINDER - MADE THIS BUTTON INVISIBLE BECAUSE IT IS AN UNFINISHED FEATURE
-        addFileButton.setVisible(false);
-
-
-    }
-
-
     public void setClient(Client client) {
         this.client = client;
     }
@@ -159,7 +145,6 @@ public class VenueOwnerMainPageController {
     @FXML
     //Adds a new file to the servers directory, and into the XML file
     //Uploading files to a server could be very dangerous
-    //WIP!!! - BUTTON IS INVISIBLE
     private void onAddFileButtonPress(){
 
         System.out.println("Add File Button Pressed!");
@@ -174,7 +159,6 @@ public class VenueOwnerMainPageController {
 
         //Opens the file explorer so the venue user can select a file
         Stage stage = new Stage();
-        stage.setResizable(false);
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         try {
@@ -203,7 +187,6 @@ public class VenueOwnerMainPageController {
         stage.setScene(scene);
         stage.setTitle("Venue Login");
         stage.show();
-        stage.setResizable(false);
 
 
         Stage currStage = (Stage) logOutButton.getScene().getWindow();
@@ -212,7 +195,7 @@ public class VenueOwnerMainPageController {
     }
 
 
-    //TODO - ADD NEW FILES (REMEMBER WE HAVE TO CHANGE THE FILE ON THE SERVER AS WELL)
+    //TODO - DELETE FILES, ADD NEW FILES (REMEMBER WE HAVE TO CHANGE THE FILE ON THE SERVER AS WELL)
 
 
 }

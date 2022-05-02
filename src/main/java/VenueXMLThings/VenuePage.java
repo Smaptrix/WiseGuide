@@ -7,38 +7,16 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-/**
- * Stores all relevant media data in a tree for one specific venue.
- */
+//Stores all relevant media data in a tree for one specific venue.
 public class VenuePage {
 
-    /**
-     * node is the top node of the VenuePage
-     */
     private Node node;
-
-    /**
-     * attributes is a dictionary that contains all the attributes for the page
-     */
     public Dictionary<String, String> attributes;
-
-    /**
-     * children are a list of the MediaElements attached to the VenuePage
-     */
     public List<MediaElement> children;
-
-    /**
-     * numberOfElements is the number of MediaElements attached to the given page
-     */
     public int numberOfElements;
 
-
-    /**
-     * <p>
-     *     Constructor takes in a node (venue) and creates a tree with all the child nodes of class
-     * </p>
-     * @param item is the page node
-     */
+    //Constructor takes in a node (venue) and creates a tree with all the child nodes of class
+    //MediaElements which extends VenuePage.
     public VenuePage(Node item) {
 
         this.node = item;
@@ -75,12 +53,7 @@ public class VenuePage {
 
     }
 
-    /**
-     * <p>
-     *     Returns a list of children node media types (mainly for debugging/testing)
-     * </p>
-     * @return List/<String/> of the media children's mediaType
-     */
+    //Returns a list of children node media types (mainly for testing)
     public List<String> getChildrenType() {
 
         List<String> returnString = new ArrayList<>();
@@ -93,13 +66,7 @@ public class VenuePage {
 
     }
 
-    /**
-     * <p>
-     *     Gather the child nodes of media type (mainly for debugging/testing)
-     * </p>
-     * @param mediaType is the type of media "text"/"playable" ect.
-     * @return List/<Integer/> of the index of the media with a given mediaType, returns null if none found
-     */
+    //Gather the child nodes of media type
     public List<Integer> getMediaByType(String mediaType) {
 
         List<Integer> returnString = new ArrayList<>();
@@ -109,6 +76,7 @@ public class VenuePage {
             if(this.children.get(i).mediaType.equals(mediaType)) {
                 returnString.add(i);
             }
+
         }
 
         if(!returnString.isEmpty()) {
@@ -123,42 +91,4 @@ public class VenuePage {
         }
     }
 
-    /**
-     * <p>
-     *     Gets the media's source location from a given media ID
-     * </p>
-     * @param IDSearch the unique media ID
-     * @return String of source from the ID inputted
-     */
-    public String getMediaSourceByID(String IDSearch) {
-
-        System.out.println(this.attributes);
-            for(int i = 0; i < this.children.size(); i++) {
-                MediaElement element = null;
-                try {
-                    if (IDSearch.contains("text") && this.children.get(i).attributes.get("type").equals("textbox")) {
-                        for(int j = 0; j <= this.children.get(i).children.size() - 1; ++j) {
-                            if (children.get(i).children.get(j).ID.contains("text")) {
-                                element = this.children.get(i).children.get(j);
-                                j = this.children.get(i).children.size();
-                            }
-                        }
-                    } else {
-                        element = this.children.get(i);
-                    }
-                } catch (Exception e) {}
-
-                try {
-                    if (element != null) {
-                        if (element.ID != null) {
-                            if (element.ID.equals(IDSearch)) {
-                                return element.include_source;
-                            }
-                        }
-                    }
-                } catch (Exception e) {}
-            }
-
-        return null;
-    }
 }

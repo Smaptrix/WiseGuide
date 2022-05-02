@@ -1,0 +1,18 @@
+UID: 004
+Kuda
+
+Address: 12 Clifford St, York YO1 9RD
+Phone: 01904 647947
+Email: york@kudaclub.com
+
+Description:
+A stylish sizeable nightclub ideally located in the heart of York city centre. Split over three rooms, including a tiki-themed bar and a sophisticated lounge, the venue boasts LED technology, high-quality sound and light systems and exclusive VIP booths.
+
+Opening Times: 
+Monday: Closed
+Tuesday: Closed
+Wednesday: 22:30 - 04:00 
+Thursday: Closed
+Friday: 21:00 - 04:00 
+Saturday: 21:00 - 04:00 
+Sunday: Closed

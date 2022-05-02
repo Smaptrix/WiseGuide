@@ -35,7 +35,7 @@ public class AccountCreatedPageTest extends ApplicationTest {
     }
 
     @Before
-    public void setUpClass() {
+    public void setUpClass() throws Exception {
     }
 
     @After

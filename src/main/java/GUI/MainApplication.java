@@ -8,17 +8,13 @@
 
 package GUI;
 
-
 import client.Client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
-
-import java.awt.*;
 import java.io.IOException;
 
 public class MainApplication extends Application {
@@ -52,7 +48,6 @@ public class MainApplication extends Application {
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(false);
 
 
     }
@@ -70,6 +65,4 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-
 }

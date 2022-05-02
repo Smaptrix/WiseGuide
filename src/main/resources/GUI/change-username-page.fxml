@@ -8,22 +8,22 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.ChangeUsernameController">
-   <AnchorPane prefHeight="454.0" prefWidth="600.0">
-      <Label layoutX="214.0" layoutY="26.0" prefHeight="71.0" prefWidth="172.0" text="Change Username">
-         <font>
-            <Font size="21.0"/>
-         </font>
-      </Label>
-      <Label layoutX="152.0" layoutY="128.0" prefHeight="17.0" prefWidth="103.0" text="Current Username"/>
-      <Label layoutX="155.0" layoutY="233.0" text="Desired Username"/>
-      <TextField id="desiredNameField" fx:id="desiredNameField" layoutX="312.0" layoutY="229.0"/>
-      <Label id="usernameLabel" fx:id="usernameLabel" layoutX="341.0" layoutY="128.0" text="currentUsername"/>
-      <Button id="confirmButton" fx:id="confirmButton" layoutX="271.0" layoutY="326.0" mnemonicParsing="false"
-              onAction="#onConfirmButtonPress" text="Confirm"/>
-      <Label id="errLabel" fx:id="errLabel" alignment="CENTER" layoutX="160.0" layoutY="284.0" prefHeight="17.0"
-             prefWidth="281.0" text="errorLabel"/>
-   </AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ChangeUsernameController">
+   <children>
+      <AnchorPane prefHeight="454.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="214.0" layoutY="26.0" prefHeight="71.0" prefWidth="172.0" text="Change Username">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="128.0" prefHeight="17.0" prefWidth="103.0" text="Current Username" />
+            <Label layoutX="155.0" layoutY="233.0" text="Desired Username" />
+            <TextField id="desiredNameField" fx:id="desiredNameField" layoutX="312.0" layoutY="229.0" />
+            <Label id="usernameLabel" fx:id="usernameLabel" layoutX="341.0" layoutY="128.0" text="currentUsername" />
+            <Button id="confirmButton" fx:id="confirmButton" layoutX="271.0" layoutY="326.0" mnemonicParsing="false" onAction="#onConfirmButtonPress" text="Confirm" />
+            <Label id="errLabel" fx:id="errLabel" alignment="CENTER" layoutX="160.0" layoutY="284.0" prefHeight="17.0" prefWidth="281.0" text="errorLabel" />
+         </children>
+      </AnchorPane>
+   </children>
 </VBox>

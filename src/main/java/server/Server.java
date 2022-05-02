@@ -242,7 +242,6 @@ public class Server {
         osDetect();
         System.out.println("Creating new Server Socket at " + port);
 
-
         //Server formed
         serverSocket = new ServerSocket(port);
 

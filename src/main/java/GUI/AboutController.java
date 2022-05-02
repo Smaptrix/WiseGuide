@@ -31,4 +31,9 @@ public class AboutController {
     public void setVerNum(String verString){
         verNumLabel.setText(verString);
     }
+
+
+
+
+
 }
