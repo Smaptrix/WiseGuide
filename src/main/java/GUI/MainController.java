@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
 import java.awt.*;
@@ -88,9 +89,13 @@ public class MainController {
     @FXML
     ImageView mapView;
 
+    MapController mapController;
+
 
     @FXML
     public void initialize() {
+
+        mapController = new MapController();
 
         mapView.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent);
 
@@ -136,6 +141,7 @@ public class MainController {
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();
+        stage.setResizable(false);
     }
 
     EventHandler<MouseEvent> mouseEvent = new EventHandler<>() {
@@ -164,29 +170,29 @@ public class MainController {
     }
 
     private void baseMapSelecting(Point2D mousePosition) {
-        if ((mousePosition.getX() > getBase_NRM_min().getX()) && (mousePosition.getX() < getBase_NRM_max().getX()) && (mousePosition.getY() > getBase_NRM_min().getY()) && (mousePosition.getY() < getBase_NRM_max().getY())) {
+        if ((mousePosition.getX() > mapController.getBase_NRM_min().getX()) && (mousePosition.getX() < mapController.getBase_NRM_max().getX()) && (mousePosition.getY() > mapController.getBase_NRM_min().getY()) && (mousePosition.getY() < mapController.getBase_NRM_max().getY())) {
             selectedItem = "National Railway Museum York";
-        } else if ((mousePosition.getX() > getBase_25_min().getX()) && (mousePosition.getX() < getBase_25_max().getX()) && (mousePosition.getY() > getBase_25_min().getY()) && (mousePosition.getY() < getBase_25_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_25_min().getX()) && (mousePosition.getX() < mapController.getBase_25_max().getX()) && (mousePosition.getY() > mapController.getBase_25_min().getY()) && (mousePosition.getY() < mapController.getBase_25_max().getY())) {
             selectedItem = "ignore";
             desiredMap = "CentralYorkMap";
             mapView.setImage(centralYorkImage);
-        } else if ((mousePosition.getX() > getBase_SW3_min().getX()) && (mousePosition.getX() < getBase_SW3_max().getX()) && (mousePosition.getY() > getBase_SW3_min().getY()) && (mousePosition.getY() < getBase_SW3_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_SW3_min().getX()) && (mousePosition.getX() < mapController.getBase_SW3_max().getX()) && (mousePosition.getY() > mapController.getBase_SW3_min().getY()) && (mousePosition.getY() < mapController.getBase_SW3_max().getY())) {
             selectedItem = "ignore";
             desiredMap = "SEYorkMap";
             mapView.setImage(SEYorkImage);
-        } else if ((mousePosition.getX() > getBase_UoY_min().getX()) && (mousePosition.getX() < getBase_UoY_max().getX()) && (mousePosition.getY() > getBase_UoY_min().getY()) && (mousePosition.getY() < getBase_UoY_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_UoY_min().getX()) && (mousePosition.getX() < mapController.getBase_UoY_max().getX()) && (mousePosition.getY() > mapController.getBase_UoY_min().getY()) && (mousePosition.getY() < mapController.getBase_UoY_max().getY())) {
             selectedItem = "ignore";
             desiredMap = "hesEastMap";
             mapView.setImage(hesEastImage);
-        } else if ((mousePosition.getX() > getBase_Charles_min().getX()) && (mousePosition.getX() < getBase_Charles_max().getX()) && (mousePosition.getY() > getBase_Charles_min().getY()) && (mousePosition.getY() < getBase_Charles_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_Charles_min().getX()) && (mousePosition.getX() < mapController.getBase_Charles_max().getX()) && (mousePosition.getY() > mapController.getBase_Charles_min().getY()) && (mousePosition.getY() < mapController.getBase_Charles_max().getY())) {
             selectedItem = "Charles XII";
-        } else if ((mousePosition.getX() > getBase_RKC_min().getX()) && (mousePosition.getX() < getBase_RKC_max().getX()) && (mousePosition.getY() > getBase_RKC_min().getY()) && (mousePosition.getY() < getBase_RKC_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_RKC_min().getX()) && (mousePosition.getX() < mapController.getBase_RKC_max().getX()) && (mousePosition.getY() > mapController.getBase_RKC_min().getY()) && (mousePosition.getY() < mapController.getBase_RKC_max().getY())) {
             selectedItem = "Roger Kirk Centre";
-        } else if ((mousePosition.getX() > getBase_JBM_min().getX()) && (mousePosition.getX() < getBase_JBM_max().getX()) && (mousePosition.getY() > getBase_JBM_min().getY()) && (mousePosition.getY() < getBase_JBM_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_JBM_min().getX()) && (mousePosition.getX() < mapController.getBase_JBM_max().getX()) && (mousePosition.getY() > mapController.getBase_JBM_min().getY()) && (mousePosition.getY() < mapController.getBase_JBM_max().getY())) {
             selectedItem = "University of York JB Morrell Library";
-        } else if ((mousePosition.getX() > getBase_rowntree_min().getX()) && (mousePosition.getX() < getBase_rowntree_max().getX()) && (mousePosition.getY() > getBase_rowntree_min().getY()) && (mousePosition.getY() < getBase_rowntree_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_rowntree_min().getX()) && (mousePosition.getX() < mapController.getBase_rowntree_max().getX()) && (mousePosition.getY() > mapController.getBase_rowntree_min().getY()) && (mousePosition.getY() < mapController.getBase_rowntree_max().getY())) {
             selectedItem = "Rowntree Park";
-        } else if ((mousePosition.getX() > getBase_millennium_min().getX()) && (mousePosition.getX() < getBase_millennium_max().getX()) && (mousePosition.getY() > getBase_millennium_min().getY()) && (mousePosition.getY() < getBase_millennium_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getBase_millennium_min().getX()) && (mousePosition.getX() < mapController.getBase_millennium_max().getX()) && (mousePosition.getY() > mapController.getBase_millennium_min().getY()) && (mousePosition.getY() < mapController.getBase_millennium_max().getY())) {
             selectedItem = "Millennium Fields";
         } else {
             selectedItem = "ignore";
@@ -196,19 +202,19 @@ public class MainController {
     }
 
     private void UoYMapSelecting(Point2D mousePosition) {
-        if ((mousePosition.getX() > getUoY3_JBM_min().getX()) && (mousePosition.getX() < getUoY3_JBM_max().getX()) && (mousePosition.getY() > getUoY3_JBM_min().getY()) && (mousePosition.getY() < getUoY3_JBM_max().getY())) {
+        if ((mousePosition.getX() > mapController.getUoY3_JBM_min().getX()) && (mousePosition.getX() < mapController.getUoY3_JBM_max().getX()) && (mousePosition.getY() > mapController.getUoY3_JBM_min().getY()) && (mousePosition.getY() < mapController.getUoY3_JBM_max().getY())) {
             selectedItem = "University of York JB Morrell Library";
-        } else if ((mousePosition.getX() > getUoY3_RKC_min().getX()) && (mousePosition.getX() < getUoY3_RKC_max().getX()) && (mousePosition.getY() > getUoY3_RKC_min().getY()) && (mousePosition.getY() < getUoY3_RKC_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getUoY3_RKC_min().getX()) && (mousePosition.getX() < mapController.getUoY3_RKC_max().getX()) && (mousePosition.getY() > mapController.getUoY3_RKC_min().getY()) && (mousePosition.getY() < mapController.getUoY3_RKC_max().getY())) {
             selectedItem = "Roger Kirk Centre";
-        } else if ((mousePosition.getX() > getUoY3_Charles_min().getX()) && (mousePosition.getX() < getUoY3_Charles_max().getX()) && (mousePosition.getY() > getUoY3_Charles_min().getY()) && (mousePosition.getY() < getUoY3_Charles_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getUoY3_Charles_min().getX()) && (mousePosition.getX() < mapController.getUoY3_Charles_max().getX()) && (mousePosition.getY() > mapController.getUoY3_Charles_min().getY()) && (mousePosition.getY() < mapController.getUoY3_Charles_max().getY())) {
             selectedItem = "Charles XII";
-        } else if ((mousePosition.getX() > getUoY3_BlackBull_min().getX()) && (mousePosition.getX() < getUoY3_BlackBull_max().getX()) && (mousePosition.getY() > getUoY3_BlackBull_min().getY()) && (mousePosition.getY() < getUoY3_BlackBull_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getUoY3_BlackBull_min().getX()) && (mousePosition.getX() < mapController.getUoY3_BlackBull_max().getX()) && (mousePosition.getY() > mapController.getUoY3_BlackBull_min().getY()) && (mousePosition.getY() < mapController.getUoY3_BlackBull_max().getY())) {
             selectedItem = "The Black Bull";
-        } else if ((mousePosition.getX() > getUoY3_Cecils_min().getX()) && (mousePosition.getX() < getUoY3_Cecils_max().getX()) && (mousePosition.getY() > getUoY3_Cecils_min().getY()) && (mousePosition.getY() < getUoY3_Cecils_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getUoY3_Cecils_min().getX()) && (mousePosition.getX() < mapController.getUoY3_Cecils_max().getX()) && (mousePosition.getY() > mapController.getUoY3_Cecils_min().getY()) && (mousePosition.getY() < mapController.getUoY3_Cecils_max().getY())) {
             selectedItem = "Cecil's Pizza - Grill";
-        } else if ((mousePosition.getX() > getUoY3_RCH_min().getX()) && (mousePosition.getX() < getUoY3_RCH_max().getX()) && (mousePosition.getY() > getUoY3_RCH_min().getY()) && (mousePosition.getY() < getUoY3_RCH_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getUoY3_RCH_min().getX()) && (mousePosition.getX() < mapController.getUoY3_RCH_max().getX()) && (mousePosition.getY() > mapController.getUoY3_RCH_min().getY()) && (mousePosition.getY() < mapController.getUoY3_RCH_max().getY())) {
             selectedItem = "The Ron Cooke Hub";
-        } else if ((mousePosition.getX() > getUoY3_Piazza_min().getX()) && (mousePosition.getX() < getUoY3_Piazza_max().getX()) && (mousePosition.getY() > getUoY3_Piazza_min().getY()) && (mousePosition.getY() < getUoY3_Piazza_max().getY())) {
+        } else if ((mousePosition.getX() > mapController.getUoY3_Piazza_min().getX()) && (mousePosition.getX() < mapController.getUoY3_Piazza_max().getX()) && (mousePosition.getY() > mapController.getUoY3_Piazza_min().getY()) && (mousePosition.getY() < mapController.getUoY3_Piazza_max().getY())) {
             selectedItem = "Piazza Building";
         } else {
             selectedItem = "ignore";
@@ -261,6 +267,7 @@ public class MainController {
         stage.setScene(scene);
         stage.setTitle("Account Creation");
         stage.show();
+        stage.setResizable(false);
     }
 
 
@@ -285,6 +292,7 @@ public class MainController {
         stage.setScene(scene);
         stage.setTitle("Welcome to WiseGuide");
         stage.show();
+        stage.setResizable(false);
 
 
         Stage currStage = (Stage) mainWindow.getScene().getWindow();
@@ -311,6 +319,7 @@ public class MainController {
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
     }
 
 
@@ -349,7 +358,7 @@ public class MainController {
         }
     }
 
-
+/*
     private final Point2D base_NRM_min = new Point2D(344, 202);
     private final Point2D base_NRM_max = new Point2D(373, 240);
 
@@ -511,4 +520,6 @@ public class MainController {
     public Point2D getUoY3_Piazza_max() {
         return UoY3_Piazza_max;
     }
+
+ */
 }

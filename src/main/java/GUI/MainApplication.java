@@ -14,6 +14,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
 
@@ -51,6 +52,7 @@ public class MainApplication extends Application {
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
 
 
     }

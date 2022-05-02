@@ -46,7 +46,7 @@
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </HBox.margin>
             </Button>
-            <Label alignment="TOP_CENTER" prefWidth="900.0" styleClass="heading1" text="VENUE NAME" textAlignment="CENTER">
+            <Label id="venueName" fx:id="venueName" alignment="TOP_CENTER" prefWidth="900.0" styleClass="heading1" text="VENUE NAME" textAlignment="CENTER">
                 <padding>
                     <Insets bottom="15.0" top="15.0" />
                 </padding>
@@ -63,7 +63,7 @@
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </HBox.margin>
             </ImageView>
-            <TextArea prefHeight="200.0" prefWidth="470.0">
+            <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0">
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>

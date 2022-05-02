@@ -11,7 +11,14 @@ package GUI;
 import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import mediahandlers.TextManager;
+import mediahandlers.ImageHandler;
+import serverclientstuff.Utils;
 
+import java.io.File;
 import java.io.IOException;
 
 public class VenueDetailsController {
@@ -28,34 +35,59 @@ public class VenueDetailsController {
         this.currVenue = currVenue;
         this.currVenuePage = currVenuePage;
 
-        //System.out.println(currVenuePage);
-        //System.out.println(currVenuePage.attributes);
-        //System.out.println(currVenuePage.children.get(0).children.get(0).attributes.get("include_source"));
+        System.out.println(currVenuePage);
+        System.out.println(currVenuePage.attributes);
+        System.out.println(currVenuePage.children.get(0).attributes.get("include_source"));
     }
 
-
-
+    @FXML
+    public Label venueName;
+    @FXML
+    public TextArea venueText;
+    @FXML
+    public ImageView venueImage;
     @FXML
     //Always called by the FXML Loader
     public void initialize() {
-
+        venueText.setEditable(false);
     }
 
     //Will use the client to download relevant data and place it into the page.
     public void loadVenueData() throws IOException {
 
+        venueName.setText(currVenue);
+
+
+
         //Downloads every media element required by the venue xml
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
+            //Text
+            String textFile = (currVenuePage.getMediaSourceByID("text0"));
 
-            String file = (currVenuePage.children.get(0).children.get(0).attributes.get("include_source")).replace("/", "\\");
-            System.out.println("File: " + file);
+            System.out.println("File: " + textFile);
 
+            client.requestFile(textFile);
 
-            client.requestFile(file);
+            TextManager textManager = new TextManager(textFile, 470, 100);
+            venueText.setText(textManager.loadTextFromFile());
+            //Images
+            String imageFile = (currVenuePage.getMediaSourceByID("image0"));
+
+            client.requestFile(imageFile);
+
+            File imageFilepath = new File(imageFile);
+
+            ImageView imageView = new ImageView();
+            ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+
+            //venueImage.setImage(imageHandler.getCurrImage());
+
 
         }
+
+
 
 
     }
