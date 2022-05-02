@@ -34,13 +34,7 @@ public class Server {
 
 
     //Should only be changed in the code
-    private static final String SERVERVERSION = "Ver 0.50";
-
-
-
-
-
-
+    private static final String SERVERVERSION = "Ver 0.60";
 
 
     private ServerSocket serverSocket;
@@ -332,6 +326,8 @@ public class Server {
 
                         //TODO - BIG CHANGE MAYBE HAVE CLIENT SEND BYTES ONLY RATHER THAN STRINGS???!?!?!?!
                         //     -BASICALLY ~NEED TO FIGURE OUT HOW TO TURN THIS STRING INTO BYTES BUT LIKE THE STRING IS ALREADY IN BYTE FORM
+
+                        System.out.println("Input size: " + inputLine.length);
 
                          byte[] decryptedInpLineBytes = symmetricCipher.doFinal(inputLine);
 
@@ -683,6 +679,9 @@ public class Server {
 
         String clientVersion = recieveMessageAsString(inStream.read());;
 
+        System.out.println("Client ver: " + clientVersion);
+        System.out.println("Server ver: " + SERVERVERSION);
+
         if(clientVersion.equals(SERVERVERSION)){
             sendResponse("SAMEVER", true);
         }
@@ -767,13 +766,15 @@ public class Server {
             sendResponse("File Deletion Error", true);
         }
 
-        //TODO - Also change the XML file
+
 
 
 
 
 
     }
+
+    //Overloaded functions to let you decide if you want to recieve the pure bytes or the string
 
     //Reads n number of bytes from the socket
     private byte[] recieveMessage(int n) {
@@ -799,8 +800,15 @@ public class Server {
             e.printStackTrace();
         }
 
-        return new String(readBytes);
+        //Decrypt the message
+        String unencryptedMsg = null;
+        try {
+            unencryptedMsg = new String(symmetricCipher.doFinal(readBytes));
+        } catch (IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
 
+        return unencryptedMsg;
     }
 
 

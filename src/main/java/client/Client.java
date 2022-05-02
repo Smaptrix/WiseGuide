@@ -51,7 +51,7 @@ public class Client {
     /**
      * CLIENTVERSION is the current version of the client
      */
-    private static final String CLIENTVERSION = "Ver 0.50";
+    private static final String CLIENTVERSION = "Ver 0.60";
 
     /**
      * clientSocket is the client side socket.
@@ -76,7 +76,7 @@ public class Client {
     private boolean connected;
 
     /**
-     * sameversion is a boolean that stores whterh the client and server are the same version
+     * sameversion is a boolean that stores whether the client and server are the same version
      */
 
     private boolean sameVersion;
@@ -118,7 +118,8 @@ public class Client {
             outStream = clientSocket.getOutputStream();
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
-            sameVersion = versionCheck();
+
+
 
             //Get the servers public key
             getServerEncryption();
@@ -129,12 +130,16 @@ public class Client {
             //Sends the encrypted symmetric key to the server
             sendSymmetricKey();
 
+
             //Makes sure that the server and client are able to encrypt/decrypt messages
             if(!keyValidation()){
                 System.out.println("Key validation failed... Shutting down");
                 System.exit(-1);
 
             }
+
+            //Verify that the server and client are running on the same version
+            sameVersion = versionCheck();
 
 
 
@@ -165,7 +170,7 @@ public class Client {
     //Recieves the privates public key for the encryption
     private void getServerEncryption() throws IOException {
 
-        sendMessage("SENDPUBLIC");
+        sendMessage("SENDPUBLIC", false);
 
 
         //SAME CODE AS FILE REQUEST EXCEPT WE DONT CHOOSE THE FILE
@@ -298,7 +303,7 @@ public class Client {
 
 
     //Recieves the symmetric key to use for the rest of the session
-    private boolean keyValidation() {
+    private boolean keyValidation() throws IOException {
 
         System.out.println(symKey);
 
@@ -327,25 +332,27 @@ public class Client {
             e.printStackTrace();
         }
 
-        byte[] encryptedCommand = new byte[0];
-        try {
-            encryptedCommand = symmetricCipher.doFinal(unencryptedCommand.getBytes(StandardCharsets.UTF_8));
-        } catch (IllegalBlockSizeException | BadPaddingException e) {
-            e.printStackTrace();
-        }
+        //Combine the test command with the test message
+        String combinedString = unencryptedCommand + " " + unencryptedMessage;
 
 
 
         //Sends the encrypted command
-        sendMessage(encryptedCommand);
-
-
-        System.out.println(encryptedCommand);
+        sendMessage(combinedString, true);
 
         System.out.println("Sent encrypted command");
 
 
-        return true;
+        if(receiveAcknowledgement().equals(unencryptedMessage)){
+            return true;
+        }
+        else{
+            System.out.print("Unable to verify encryptyed connection");
+            return false;
+        }
+
+
+
     }
 
 
@@ -357,7 +364,7 @@ public class Client {
      */
     public void closeConnection() throws IOException {
 
-        sendMessage("Close Connection");
+        sendMessage("Close Connection", true);
         inputStream.close();
         outStream.close();
         clientSocket.close();
@@ -376,7 +383,7 @@ public class Client {
     public String sendTestMessage() throws IOException {
 
 
-        sendMessage("ECHO " + "test");
+        sendMessage("ECHO " + "test", true);
 
         int stringSize = inputStream.read();
 
@@ -399,7 +406,7 @@ public class Client {
 
         System.out.println("ECHO REQUEST: " + msg);
 
-        sendMessage("ECHO " + msg);
+        sendMessage("ECHO " + msg, true);
 
         int fileSize = inputStream.read();
 
@@ -434,7 +441,7 @@ public class Client {
 
         System.out.println("GET REQUEST: " + fileName);
 
-        sendMessage("GET " + fileName);
+        sendMessage("GET " + fileName, true);
 
 
 
@@ -563,13 +570,13 @@ public class Client {
      * @throws IOException if
      */
     public String requestLogin(User currUser) throws IOException {
-        sendMessage("LOGIN");
+        sendMessage("LOGIN", true);
 
         System.out.println("LOGIN MESSAGE SENT");
 
-        sendMessage(currUser.getUsername());
+        sendMessage(currUser.getUsername(), true);
 
-        sendMessage(currUser.getPassword());
+        sendMessage(currUser.getPassword(), true);
 
 
         return receiveAcknowledgement();
@@ -613,11 +620,11 @@ public class Client {
      * @throws IOException if
      */
     public String verifyUser(User currUser) throws IOException {
-        sendMessage("VERIFYUSER");
+        sendMessage("VERIFYUSER", true);
 
-        sendMessage(currUser.getUsername());
+        sendMessage(currUser.getUsername(), true);
 
-        sendMessage(currUser.getPassword());
+        sendMessage(currUser.getPassword(), true);
 
         return receiveAcknowledgement();
 
@@ -634,18 +641,18 @@ public class Client {
      */
     public String createUser(User currUser) throws IOException {
 
-        sendMessage("CREATEUSER");
+        sendMessage("CREATEUSER", true);
 
-        sendMessage(currUser.getUsername());
+        sendMessage(currUser.getUsername(), true);
 
-        sendMessage(currUser.getPassword());
+        sendMessage(currUser.getPassword(), true);
 
         //Should timeout if nothing respond
         if(receiveAcknowledgement().equals("SENDSALT")) {
             currUser.setSalt(UserSecurity.generateSalt());
             System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
 
-            sendMessage(currUser.getSalt());
+            sendMessage(currUser.getSalt(), true);
         }
 
         return receiveAcknowledgement();
@@ -661,7 +668,7 @@ public class Client {
      */
     public String requestLogout() throws IOException {
 
-        sendMessage("LOGOUT");
+        sendMessage("LOGOUT", true);
         outStream.flush();
 
         return receiveAcknowledgement();
@@ -676,13 +683,20 @@ public class Client {
      */
     private boolean versionCheck() throws IOException {
 
-        sendMessage("VERSIONCHECK");
+        sendMessage("VERSIONCHECK", true);
 
-        sendMessage(CLIENTVERSION);
+        sendMessage(CLIENTVERSION, true);
 
         String ack = receiveAcknowledgement();
 
-        return ack.equals("SAMEVER");
+        if(ack.equals("SAMEVER")){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+
 
     }
 
@@ -718,10 +732,10 @@ public class Client {
     public String requestUserNameChange(String desiredUsername) throws IOException {
 
 
-        sendMessage("CHANGENAME");
+        sendMessage("CHANGENAME", true);
 
 
-        sendMessage(desiredUsername);
+        sendMessage(desiredUsername, true);
 
 
 
@@ -734,11 +748,11 @@ public class Client {
     //Requests that the server changes the users password
     public String requestPasswordChange(String enteredPassword, String newPassword) throws IOException {
 
-        sendMessage("CHANGEPASS");
+        sendMessage("CHANGEPASS", true);
 
-        sendMessage(enteredPassword);
+        sendMessage(enteredPassword, true);
 
-        sendMessage(newPassword);
+        sendMessage(newPassword,true);
 
         return receiveAcknowledgement();
 
@@ -749,10 +763,10 @@ public class Client {
 
     //Requests that the server log a venue in
     public String requestVenueLogin(String venueName, String venuePass) throws IOException {
-        sendMessage("VENUELOGIN");
+        sendMessage("VENUELOGIN",true);
 
-        sendMessage(venueName);
-        sendMessage(venuePass);
+        sendMessage(venueName,true);
+        sendMessage(venuePass,true);
 
         return receiveAcknowledgement();
     }
@@ -760,9 +774,9 @@ public class Client {
 
     //Requests that the server delete a file from a venues directory
     public String requestDeleteFile(String filePath) throws IOException {
-        sendMessage("DELETEVENUEFILE");
+        sendMessage("DELETEVENUEFILE",true);
 
-        sendMessage(filePath);
+        sendMessage(filePath,true);
 
         return receiveAcknowledgement();
 
@@ -774,7 +788,7 @@ public class Client {
     //Maybe change so that it sends an email and then we discuss it
     //Rather than having any user be able to upload any file they want
     public String requestUploadFile(File filetoUpload) throws IOException {
-        sendMessage("UPLOADFILE");
+        sendMessage("UPLOADFILE",true);
 
 
 
@@ -823,35 +837,77 @@ public class Client {
     //Overloaded functions to let client send strings or bytes
 
     //Provides a wrapper for functions to send strings to the server and also bytes
-    private void sendMessage(byte[] toSend){
+    private void sendMessage(byte[] toSend, boolean doEncrypt){
 
-        int numOfBytes = toSend.length;
+        if(doEncrypt) {
 
-        try {
-            outStream.write(numOfBytes);
-            outStream.write(toSend);
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                toSend = symmetricCipher.doFinal(toSend);
+            } catch (IllegalBlockSizeException | BadPaddingException e) {
+                e.printStackTrace();
+            }
+
+            int numOfBytes = toSend.length;
+
+            try {
+                outStream.write(numOfBytes);
+                outStream.write(toSend);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+
+            int numOfBytes = toSend.length;
+
+            try {
+                outStream.write(numOfBytes);
+                outStream.write(toSend);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
 
+
     //Provides a wrapper for functions to send strings to the server and also bytes
-    private void sendMessage(String toSend){
+    private void sendMessage(String toSend, boolean doEncrypt)  {
 
         byte[] toSendBytes = toSend.getBytes();
 
-        int numOfBytes = toSendBytes.length;
+        if(doEncrypt) {
 
-        try {
-            outStream.write(numOfBytes);
-            outStream.write(toSendBytes);
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                toSendBytes = symmetricCipher.doFinal(toSendBytes);
+            } catch (IllegalBlockSizeException | BadPaddingException e) {
+                e.printStackTrace();
+            }
+
+            int numOfBytes = toSendBytes.length;
+
+            try {
+                outStream.write(numOfBytes);
+                outStream.write(toSendBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+
+            int numOfBytes = toSendBytes.length;
+
+            try {
+                outStream.write(numOfBytes);
+                outStream.write(toSendBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         }
 
 
     }
 
 
-}
