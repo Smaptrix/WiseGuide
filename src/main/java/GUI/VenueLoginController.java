@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -78,6 +79,8 @@ public class VenueLoginController {
                 stage.setScene(scene);
                 stage.setTitle(currUser.getUsername() + " Owner Page");
                 stage.show();
+                stage.setResizable(false);
+                stage.initStyle(StageStyle.UNDECORATED);
 
 
                 Stage currStage = (Stage) backButton.getScene().getWindow();
@@ -89,9 +92,6 @@ public class VenueLoginController {
 
 
     }
-    //TODO - IDEAS
-    //     - FOR THE VENUE PRODUCE A LIST OF ALL FILES CURRENTLY STORED IN VENUES DIRECTORY
-    //     - LET THE VENUE ADD OR DELETE MORE FILES?!?!
 
 
 
@@ -111,6 +111,7 @@ public class VenueLoginController {
         stage.setScene(scene);
         stage.setTitle("Login");
         stage.show();
+        stage.setResizable(false);
 
 
         Stage currStage = (Stage) backButton.getScene().getWindow();

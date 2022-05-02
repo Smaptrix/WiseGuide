@@ -11,20 +11,17 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Controls the account creator within the application
@@ -39,9 +36,9 @@ public class AccountCreationController {
      */
     Client client;
 
-    /**
-     * Lets previous controllers set the client so that the client is shared between pages
-     * @param client
+    /*
+      Lets previous controllers set the client so that the client is shared between pages
+      @param client
      */
     /**
      * Sets the client to be used by the controller
@@ -95,7 +92,7 @@ public class AccountCreationController {
     CheckBox ageCheckBox;
 
     /**
-     * The link to the companies privacy policy
+     * The link to the companies' privacy policy
      */
     @FXML
     Hyperlink privacyPolicyLink;
@@ -124,7 +121,7 @@ public class AccountCreationController {
 
         //Big check to make sure username and password stuff is correct
 
-        //If the password and the confrimed password dont match
+        //If the password and the confirmed password don't match
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
 
@@ -177,8 +174,8 @@ public class AccountCreationController {
 
 
     @FXML
-    /**
-     * When the close popup button is pressed, this action occurs and closes the popup
+    /*
+      When the close popup button is pressed, this action occurs and closes the popup
      */
     private void closePopupButton(){
         Stage stage = (Stage) closePopUpButton.getScene().getWindow();
@@ -187,7 +184,7 @@ public class AccountCreationController {
 
 
     /**
-     * When the privacy policy link is pressed, this action occurs and opens the default webbrowser and displays the privacy policy
+     * When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the privacy policy
      * @throws IOException if the default browser cannot be opened
      * @throws URISyntaxException if the provided uri is invalid
      */
@@ -199,7 +196,7 @@ public class AccountCreationController {
     }
 
     /**
-     * When the privacy policy link is pressed, this action occurs and opens the default webbrowser and displays the terms and conditions
+     * When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the terms and conditions
      * @throws IOException if the default browser cannot be opened
      * @throws URISyntaxException if the provided uri is invalid
      */

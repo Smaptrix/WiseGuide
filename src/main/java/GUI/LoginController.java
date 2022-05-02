@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -144,6 +145,7 @@ public class LoginController {
             stage.setScene(scene);
             stage.setTitle("Account Creation");
             stage.show();
+            stage.setResizable(false);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -167,6 +169,7 @@ public class LoginController {
         stage.setScene(scene);
         stage.setTitle("Venue Login");
         stage.show();
+        stage.setResizable(false);
 
 
         Stage currStage = (Stage) errorLabel.getScene().getWindow();

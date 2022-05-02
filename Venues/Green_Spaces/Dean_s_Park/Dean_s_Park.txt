@@ -1,0 +1,19 @@
+UID: 111
+Dean's Park
+
+Address: Minster Yard, York, England
+Phone: 01904621756
+Email: info@yorkminster.org
+
+Description:
+This quiet and serene park is located behind the Minster yard, a perfect place to relax and view the Minster and other magnificent architectural wonders.
+
+Opening Times: 
+Monday: 10:00 - 16:00 
+Tuesday: 10:00 - 16:00 
+Wednesday: 10:00 - 16:00 
+Thursday: 10:00 - 16:00 
+Friday: 10:00 - 16:00 
+Saturday: 10:00 - 16:00 
+Sunday: 10:00 - 16:00 
+
