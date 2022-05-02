@@ -59,9 +59,9 @@ public class Client {
     private Socket clientSocket;
 
     /**
-     * outText is a PrintWriter that allows sending text requests to the server.
+     * outStream is an output stream that allows the client to send bytes to the server
      */
-    private PrintWriter outText;
+    private OutputStream outStream;
     //Only need a printWriter as we won't be sending files back to the server, just text requests
 
     /**
@@ -115,7 +115,7 @@ public class Client {
 
         try {
             clientSocket = new Socket(ip, port);
-            outText = new PrintWriter(clientSocket.getOutputStream(), true);
+            outStream = clientSocket.getOutputStream();
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
             sameVersion = versionCheck();
@@ -165,7 +165,7 @@ public class Client {
     //Recieves the privates public key for the encryption
     private void getServerEncryption() throws IOException {
 
-        outText.println("SENDPUBLIC");
+        sendMessage("SENDPUBLIC");
 
 
         //SAME CODE AS FILE REQUEST EXCEPT WE DONT CHOOSE THE FILE
@@ -291,7 +291,7 @@ public class Client {
         System.out.println("Key written");
 
         //Set the socket back to the text write
-        outText = new PrintWriter(clientSocket.getOutputStream(), true);
+        outStream = clientSocket.getOutputStream();
 
 
     }
@@ -337,7 +337,7 @@ public class Client {
 
 
         //Sends the encrypted command
-        outText.println(encryptedCommand);
+        sendMessage(encryptedCommand);
 
 
         System.out.println(encryptedCommand);
@@ -357,9 +357,9 @@ public class Client {
      */
     public void closeConnection() throws IOException {
 
-        outText.println("Close Connection");
+        sendMessage("Close Connection");
         inputStream.close();
-        outText.close();
+        outStream.close();
         clientSocket.close();
         System.out.println("Connection Closed");
         connected = false;
@@ -376,7 +376,7 @@ public class Client {
     public String sendTestMessage() throws IOException {
 
 
-        outText.println("ECHO " + "test");
+        sendMessage("ECHO " + "test");
 
         int stringSize = inputStream.read();
 
@@ -399,7 +399,7 @@ public class Client {
 
         System.out.println("ECHO REQUEST: " + msg);
 
-        outText.println("ECHO " + msg);
+        sendMessage("ECHO " + msg);
 
         int fileSize = inputStream.read();
 
@@ -434,7 +434,7 @@ public class Client {
 
         System.out.println("GET REQUEST: " + fileName);
 
-        outText.println("GET " + fileName);
+        sendMessage("GET " + fileName);
 
 
 
@@ -563,13 +563,13 @@ public class Client {
      * @throws IOException if
      */
     public String requestLogin(User currUser) throws IOException {
-        outText.println("LOGIN");
+        sendMessage("LOGIN");
 
         System.out.println("LOGIN MESSAGE SENT");
 
-        outText.println(currUser.getUsername());
+        sendMessage(currUser.getUsername());
 
-        outText.println(currUser.getPassword());
+        sendMessage(currUser.getPassword());
 
 
         return receiveAcknowledgement();
@@ -613,11 +613,11 @@ public class Client {
      * @throws IOException if
      */
     public String verifyUser(User currUser) throws IOException {
-        outText.println("VERIFYUSER");
+        sendMessage("VERIFYUSER");
 
-        outText.println(currUser.getUsername());
+        sendMessage(currUser.getUsername());
 
-        outText.println(currUser.getPassword());
+        sendMessage(currUser.getPassword());
 
         return receiveAcknowledgement();
 
@@ -634,18 +634,18 @@ public class Client {
      */
     public String createUser(User currUser) throws IOException {
 
-        outText.println("CREATEUSER");
+        sendMessage("CREATEUSER");
 
-        outText.println(currUser.getUsername());
+        sendMessage(currUser.getUsername());
 
-        outText.println(currUser.getPassword());
+        sendMessage(currUser.getPassword());
 
         //Should timeout if nothing respond
         if(receiveAcknowledgement().equals("SENDSALT")) {
             currUser.setSalt(UserSecurity.generateSalt());
             System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
 
-            outText.println(currUser.getSalt());
+            sendMessage(currUser.getSalt());
         }
 
         return receiveAcknowledgement();
@@ -661,8 +661,8 @@ public class Client {
      */
     public String requestLogout() throws IOException {
 
-        outText.println("LOGOUT");
-        outText.flush();
+        sendMessage("LOGOUT");
+        outStream.flush();
 
         return receiveAcknowledgement();
     }
@@ -676,9 +676,9 @@ public class Client {
      */
     private boolean versionCheck() throws IOException {
 
-        outText.println("VERSIONCHECK");
+        sendMessage("VERSIONCHECK");
 
-        outText.println(CLIENTVERSION);
+        sendMessage(CLIENTVERSION);
 
         String ack = receiveAcknowledgement();
 
@@ -718,10 +718,10 @@ public class Client {
     public String requestUserNameChange(String desiredUsername) throws IOException {
 
 
-        outText.println("CHANGENAME");
+        sendMessage("CHANGENAME");
 
 
-        outText.println(desiredUsername);
+        sendMessage(desiredUsername);
 
 
 
@@ -734,11 +734,11 @@ public class Client {
     //Requests that the server changes the users password
     public String requestPasswordChange(String enteredPassword, String newPassword) throws IOException {
 
-        outText.println("CHANGEPASS");
+        sendMessage("CHANGEPASS");
 
-        outText.println(enteredPassword);
+        sendMessage(enteredPassword);
 
-        outText.println(newPassword);
+        sendMessage(newPassword);
 
         return receiveAcknowledgement();
 
@@ -749,10 +749,10 @@ public class Client {
 
     //Requests that the server log a venue in
     public String requestVenueLogin(String venueName, String venuePass) throws IOException {
-        outText.println("VENUELOGIN");
+        sendMessage("VENUELOGIN");
 
-        outText.println(venueName);
-        outText.println(venuePass);
+        sendMessage(venueName);
+        sendMessage(venuePass);
 
         return receiveAcknowledgement();
     }
@@ -760,9 +760,9 @@ public class Client {
 
     //Requests that the server delete a file from a venues directory
     public String requestDeleteFile(String filePath) throws IOException {
-        outText.println("DELETEVENUEFILE");
+        sendMessage("DELETEVENUEFILE");
 
-        outText.println(filePath);
+        sendMessage(filePath);
 
         return receiveAcknowledgement();
 
@@ -774,7 +774,7 @@ public class Client {
     //Maybe change so that it sends an email and then we discuss it
     //Rather than having any user be able to upload any file they want
     public String requestUploadFile(File filetoUpload) throws IOException {
-        outText.println("UPLOADFILE");
+        sendMessage("UPLOADFILE");
 
 
 
@@ -818,5 +818,40 @@ public class Client {
         }
 
     }
+
+
+    //Overloaded functions to let client send strings or bytes
+
+    //Provides a wrapper for functions to send strings to the server and also bytes
+    private void sendMessage(byte[] toSend){
+
+        int numOfBytes = toSend.length;
+
+        try {
+            outStream.write(numOfBytes);
+            outStream.write(toSend);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //Provides a wrapper for functions to send strings to the server and also bytes
+    private void sendMessage(String toSend){
+
+        byte[] toSendBytes = toSend.getBytes();
+
+        int numOfBytes = toSendBytes.length;
+
+        try {
+            outStream.write(numOfBytes);
+            outStream.write(toSendBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 }

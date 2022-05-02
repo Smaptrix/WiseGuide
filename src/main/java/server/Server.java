@@ -46,7 +46,7 @@ public class Server {
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private DataOutputStream outputStream;
-    private BufferedReader inText;
+    private InputStream inStream;
     private String CurrDir;
     private String slashType;
     private ServerUserHandler currUserHandler;
@@ -185,7 +185,7 @@ public class Server {
         System.out.println("Key read");
 
         //Sets the input socket back to the text reader
-        inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        inStream = clientSocket.getInputStream();
 
         //Decrypt the key
         try {
@@ -269,8 +269,8 @@ public class Server {
 
         System.out.println("After accept\n");
 
-         //Reads text from the buffer
-        inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+         //Reverts back to original socket type
+        inStream = clientSocket.getInputStream();
 
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
@@ -300,10 +300,11 @@ public class Server {
     //Closes the server down
     public void stopConnections() throws IOException {
         System.out.println("Closing Down");
-        inText.close();
+        inStream.close();
         clientSocket.close();
         serverSocket.close();
         outputStream.close();
+        System.exit(1);
     }
 
 
@@ -311,50 +312,30 @@ public class Server {
     //Used to wait for requests from the client
     public void bufferListen() throws IOException {
 
-        String inputLine;
+        int bytesToRead;
 
         try{
 
-            while ((inputLine = inText.readLine()) != null) {
-                System.out.println("Listening...");
-                if ("Close Connection".equals(inputLine)) {
-                    sendResponse("Connection Closed", true);
-                    stopConnections();
-                    break;
-                } else {
+            while (true) {
+                System.out.println("Waiting for byte size");
+                    if ((bytesToRead = inStream.read()) != 0) {
+
+
+                    System.out.println("Listening...");
+
+                    byte[] inputLine =  recieveMessage(bytesToRead);
+
 
                     System.out.println("Encryption done: " + encryptionReady);
-                    if(encryptionReady) {
+                    if (encryptionReady) {
                         symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
-
 
                         //TODO - BIG CHANGE MAYBE HAVE CLIENT SEND BYTES ONLY RATHER THAN STRINGS???!?!?!?!
                         //     -BASICALLY ~NEED TO FIGURE OUT HOW TO TURN THIS STRING INTO BYTES BUT LIKE THE STRING IS ALREADY IN BYTE FORM
 
+                         byte[] decryptedInpLineBytes = symmetricCipher.doFinal(inputLine);
 
-
-
-
-                        //ITS ALREADY IN THE BYTE FORM
-                        System.out.println("Input line: " + inputLine);
-
-                        //THIS IS TEMPORARY - FIRST ENCRYPTED MESSAGE IS 11 BYTES
-                        //TODO - Input length must be multiple of 16???? maybe swap the encryption lol
-                        byte[] encryptedInpLineBytes = new byte[11];
-
-                        //Places each character from the string into the byte (really lsoppy workaround)
-                        for(int i = 0; i < inputLine.length() ; i++){
-                            encryptedInpLineBytes[i] = (byte) inputLine.charAt(i);
-                        }
-
-
-
-                        System.out.println("Input line in bytes: " + Arrays.toString(encryptedInpLineBytes));
-
-
-                        byte[] decryptedInpLineBytes = symmetricCipher.doFinal(encryptedInpLineBytes);
-
-                        System.out.println("Decrypted input line in bytes: " + encryptedInpLineBytes);
+                        System.out.println("Decrypted input line in bytes: " + Arrays.toString(decryptedInpLineBytes));
 
                         String decryptedInputLine = new String(decryptedInpLineBytes, StandardCharsets.UTF_8);
 
@@ -362,17 +343,18 @@ public class Server {
                         System.out.println("Request Received: " + decryptedInputLine);
 
                         requestParser(decryptedInputLine);
+                    //Preencryption request parser
+                    } else {
+                            requestParser(new String(inputLine));
+                        }
                     }
-                    else{
-                        requestParser(inputLine);
-                    }
-            }
+                }
+            } catch (IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | InvalidKeyException ex) {
+            ex.printStackTrace();
         }
 
-        }catch (SocketException e){
+        catch (SocketException e){
             System.out.println("Lost connnection to client");
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
     }
@@ -385,6 +367,7 @@ public class Server {
     //Requests in form "Request Code Type" + " " + "Request Information"
     public void requestParser(String requestIn) throws IOException, NoSuchAlgorithmException {
 
+    //TODO - CLOSE CONNECTION REQUEST
 
 
         String[] requestSplit = requestIn.split(" ");
@@ -447,11 +430,6 @@ public class Server {
                 deleteVenueFile();
                 break;
 
-            case "UPLOADFILE":
-                currUserHandler.setUserType("VENUE");
-                recieveVenueFile();
-                break;
-
             case "SENDPUBLIC":
                 getClientEncryption();
                 break;
@@ -464,12 +442,7 @@ public class Server {
         }
     }
 
-    private void recieveVenueFile() throws IOException {
-        sendResponse("SIZE?", true);
 
-        inText.readLine();
-
-    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -580,9 +553,10 @@ public class Server {
     public void receiveLogin(Integer mode) throws IOException {
 
 
-        String loginName = inText.readLine();
+        //Reads the input stream for the size of the message
+        String loginName = recieveMessageAsString(inStream.read());
 
-        String loginPass = inText.readLine();
+        String loginPass = recieveMessageAsString(inStream.read());
 
 
 
@@ -659,7 +633,7 @@ public class Server {
             if(!(currUserHandler.userExistState)){
 
                 sendResponse("SENDSALT", true);
-                currUser.setSalt(inText.readLine());
+                currUser.setSalt(recieveMessageAsString(inStream.read()));
                 currUser.encryptUserInfo();
                 currUserHandler.createUser();
                 sendResponse("USERCREATED", true);
@@ -707,7 +681,7 @@ public class Server {
     //Checks that the client and server versions are the same
     private void versionCheck() throws IOException {
 
-        String clientVersion = inText.readLine();
+        String clientVersion = recieveMessageAsString(inStream.read());;
 
         if(clientVersion.equals(SERVERVERSION)){
             sendResponse("SAMEVER", true);
@@ -725,7 +699,7 @@ public class Server {
 
 
 
-        String desiredUsername = inText.readLine();
+        String desiredUsername = recieveMessageAsString(inStream.read());;
 
         //If the username is taken
         if (ServerUserHandler.findUserName(desiredUsername)){
@@ -739,9 +713,9 @@ public class Server {
 
     private void changePassword() throws IOException {
 
-        String currPass = inText.readLine();
+        String currPass = recieveMessageAsString(inStream.read());;
 
-        String newPass = inText.readLine();
+        String newPass = recieveMessageAsString(inStream.read());;
 
 
         //If the password entered doesnt match the current password
@@ -771,7 +745,7 @@ public class Server {
     private void deleteVenueFile() throws IOException {
 
         //Gets the filepath from the client
-        File fileToDelete = new File(inText.readLine());
+        File fileToDelete = new File(recieveMessageAsString(inStream.read()));
 
 
 
@@ -798,6 +772,34 @@ public class Server {
 
 
 
+
+    }
+
+    //Reads n number of bytes from the socket
+    private byte[] recieveMessage(int n) {
+
+        byte[] readBytes = new byte[0];
+        try {
+            readBytes = inStream.readNBytes(n);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return readBytes;
+
+    }
+
+    //Reads n number of bytes from the socket - turns them into a string
+    private String recieveMessageAsString(int n) {
+
+        byte[] readBytes = new byte[0];
+        try {
+            readBytes = inStream.readNBytes(n);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new String(readBytes);
 
     }
 

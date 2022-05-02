@@ -31,6 +31,9 @@ import java.security.NoSuchAlgorithmException;
  */
 public class AccountCreationController {
 
+    //TODO - Limit size of password and username to less than 100 characters
+
+
     /**
      * The current client
      */
