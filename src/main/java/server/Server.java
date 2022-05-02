@@ -29,6 +29,10 @@ import java.util.Arrays;
 
 public class Server {
 
+    //TODO - Refactor - Make I/O Functions for server/client that take strings and turn them into bytes and vice-versa
+
+
+
     //Should only be changed in the code
     private static final String SERVERVERSION = "Ver 0.50";
 
