@@ -1,6 +1,7 @@
 package server;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,10 +29,24 @@ public class FaveVenuesHandler {
 
     }
 
+    //Adds a new favourite venue to the users list
     public void addFaveVenue(String username, String venueName){
 
+        //Makes sure a user exists in the hashmap
+        if(!faveVenueMap.containsKey(username)){
+            addUser(username);
+        }
 
+        //Creates a new array with an extra space
+        String[] result = Arrays.copyOf(faveVenueMap.get(username), faveVenueMap.get(username).length + 1);
 
+        //Places the venuename into the extra space
+        result[result.length -1] = venueName;
+
+        //Replace the current venue list with the new one
+        faveVenueMap.replace(username, result);
+
+        //Saves the hashmap to the text file
         saveHashMap();
     }
 
@@ -44,16 +59,21 @@ public class FaveVenuesHandler {
 
     public void addUser(String username){
 
-        faveVenueMap.put(username, new String[0]);
-
-        saveHashMap();
+        //Makes sure that the user isn't already in there
+        if(!faveVenueMap.containsKey(username)) {
+            faveVenueMap.put(username, new String[0]);
+            saveHashMap();
+        }
     }
 
     public void removeUser(String username){
 
-        faveVenueMap.remove(username);
+        //Makes sure that the user is in the list before trying to delete them
+        if(faveVenueMap.containsKey(username)) {
+            faveVenueMap.remove(username);
 
-        saveHashMap();
+            saveHashMap();
+        }
     }
 
 
@@ -61,17 +81,15 @@ public class FaveVenuesHandler {
 
         try {
             FileWriter hashMapFileWriter = new FileWriter(faveVenueFile);
+
+
             for(Map.Entry<String, String[]> entry : faveVenueMap.entrySet()){
                 hashMapFileWriter.write(entry.getKey() + ",");
 
                 for(int i = 0; entry.getValue().length > i; i++){
-
-                    hashMapFileWriter.write(entry.getValue()[i] + ".");
-
+                    hashMapFileWriter.write( entry.getValue()[i] + ".");
                 }
                 hashMapFileWriter.write("\n");
-
-
             }
 
 
@@ -101,10 +119,17 @@ public class FaveVenuesHandler {
 
             String[] userVenuesPair = line.split(",");
 
-            String[] venueArray = userVenuesPair[1].split(".");
 
-            faveVenueMap.put(userVenuesPair[0], venueArray);
+            if(userVenuesPair.length > 1) {
+                String[] venueArray = userVenuesPair[1].split("\\.");
+
+                faveVenueMap.put(userVenuesPair[0], venueArray);
+            }
+
+
         }
+
+        System.out.println("Fave venues loaded!");
 
     }
 
