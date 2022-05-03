@@ -151,8 +151,10 @@ public class AccountCreationController {
                     currStage.close();
 
                 }
+            else {
                 errLabel.setText("User already exists");
-                //TODO - Account creation failed page
+            }
+
             }
         }
 

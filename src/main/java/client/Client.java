@@ -638,15 +638,24 @@ public class Client {
 
         sendMessage(currUser.getPassword(), true);
 
+
+        String ack = receiveAcknowledgement();
+
         //Should timeout if nothing respond
-        if(receiveAcknowledgement().equals("SENDSALT")) {
+        if(ack.equals("SENDSALT")) {
             currUser.setSalt(UserSecurity.generateSalt());
             System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
 
             sendMessage(currUser.getSalt(), true);
+            return receiveAcknowledgement();
+        }
+        else{
+
+            return ack;
+
         }
 
-        return receiveAcknowledgement();
+
     }
 
 
