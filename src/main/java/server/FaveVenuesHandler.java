@@ -1,0 +1,113 @@
+package server;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
+
+//Controls the hashmap textfile which contains every users favourite venues
+public class FaveVenuesHandler {
+
+    File faveVenueFile;
+    HashMap<String, String[]> faveVenueMap;
+
+    //TODO - Comment it up
+
+
+    public FaveVenuesHandler(File faveVenueFile){
+        this.faveVenueFile = faveVenueFile;
+        try {
+            loadHashMap();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(faveVenueMap);
+
+
+
+    }
+
+    public void addFaveVenue(String username, String venueName){
+
+
+
+        saveHashMap();
+    }
+
+    public void removeFaveVenue(String username, String venueName){
+
+
+        saveHashMap();
+
+    }
+
+    public void addUser(String username){
+
+        faveVenueMap.put(username, new String[0]);
+
+        saveHashMap();
+    }
+
+    public void removeUser(String username){
+
+        faveVenueMap.remove(username);
+
+        saveHashMap();
+    }
+
+
+    private void saveHashMap(){
+
+        try {
+            FileWriter hashMapFileWriter = new FileWriter(faveVenueFile);
+            for(Map.Entry<String, String[]> entry : faveVenueMap.entrySet()){
+                hashMapFileWriter.write(entry.getKey() + ",");
+
+                for(int i = 0; entry.getValue().length > i; i++){
+
+                    hashMapFileWriter.write(entry.getValue()[i] + ".");
+
+                }
+                hashMapFileWriter.write("\n");
+
+
+            }
+
+
+            hashMapFileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+    }
+
+    private void loadHashMap() throws IOException {
+
+        faveVenueMap = new HashMap<>();
+
+        BufferedReader br = new BufferedReader(new FileReader(faveVenueFile));
+        String line;
+
+        //Places every user and there favourite venues into the hashmap
+        while((line = br.readLine()) != null){
+
+            System.out.println(line);
+
+            String[] userVenuesPair = line.split(",");
+
+            String[] venueArray = userVenuesPair[1].split(".");
+
+            faveVenueMap.put(userVenuesPair[0], venueArray);
+        }
+
+    }
+
+
+
+}

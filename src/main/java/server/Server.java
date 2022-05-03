@@ -24,12 +24,12 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.security.*;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 
 public class Server {
 
 
+    //TODO - Could maybe compartmentalise some of these security functions to trim down this file
 
 
 
@@ -45,6 +45,7 @@ public class Server {
     private String slashType;
     private ServerUserHandler currUserHandler;
     private User currUser;
+    private FaveVenuesHandler faveVenuesHandler;
 
 
     private PrivateKey privateKey;
@@ -76,7 +77,7 @@ public class Server {
 
 
     //Generates the keypair for the start of the encryption of the socket connection
-    private void startupEncryption() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+    private void startupEncryption() throws NoSuchAlgorithmException, IOException {
 
         encryptionReady = false;
 
@@ -222,18 +223,7 @@ public class Server {
 
     }
 
-/*
-    //Waits to recieve the validation checks from the client
-    private void validateSymmetricKey() throws IOException {
 
-       String encryptedCommand = inText.readLine();
-
-        while ((encryptedCommand = inText.readLine()) != null) {
-       System.out.println(encryptedCommand);
-
-
-    }
-*/
 
 
     //Starts the server
@@ -272,7 +262,13 @@ public class Server {
         //Initialises the current user server user handler
         currUser = new User("", "");
         currUserHandler = new ServerUserHandler(currUser, false);
+        faveVenuesHandler = new FaveVenuesHandler(new File("faveVenues.txt"));
+        faveVenuesHandler.addUser("tester");
+
+
     }
+
+
 
     //Possibly not needed now that windows accepts unix slashes...
     private void osDetect(){
