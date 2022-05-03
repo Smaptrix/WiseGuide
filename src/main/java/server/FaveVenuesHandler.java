@@ -1,9 +1,7 @@
 package server;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 //Controls the hashmap textfile which contains every users favourite venues
@@ -51,7 +49,21 @@ public class FaveVenuesHandler {
     }
 
     public void removeFaveVenue(String username, String venueName){
+        //If a user doesn't exist dont do anything
+        if(!faveVenueMap.containsKey(username)){
+            return;
+        }
+        else{
 
+            List<String> list = new ArrayList<String>(Arrays.asList(faveVenueMap.get(username)));
+
+            list.remove(venueName);
+
+            String[] result = list.toArray(new String[0]);
+
+            faveVenueMap.replace(username, result);
+
+        }
 
         saveHashMap();
 

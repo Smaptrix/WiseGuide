@@ -264,9 +264,10 @@ public class Server {
         currUserHandler = new ServerUserHandler(currUser, false);
         faveVenuesHandler = new FaveVenuesHandler(new File("faveVenues.txt"));
         //TEST FEATURES
-        faveVenuesHandler.addUser("tester");
-        faveVenuesHandler.removeUser("deleteme");
-        faveVenuesHandler.addFaveVenue("joe", "ADDEDVENUE");
+        //faveVenuesHandler.addUser("tester");
+        //faveVenuesHandler.removeUser("deleteme");
+        //faveVenuesHandler.addFaveVenue("joe", "ADDEDVENUE");
+        //faveVenuesHandler.removeFaveVenue("joe", "DELETEME");
 
     }
 
