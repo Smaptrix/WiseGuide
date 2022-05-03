@@ -7,24 +7,22 @@ import java.util.*;
 //Controls the hashmap textfile which contains every users favourite venues
 public class FaveVenuesHandler {
 
+    //Filepath to the favourite venue file
     File faveVenueFile;
+    //The hashmap that contains the user as a key, and then the list of venues as the value
     HashMap<String, String[]> faveVenueMap;
 
-    //TODO - Comment it up
 
 
+    //Constructor for this class
     public FaveVenuesHandler(File faveVenueFile){
         this.faveVenueFile = faveVenueFile;
+        //Loads the hashmap from the textfile
         try {
             loadHashMap();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println(faveVenueMap);
-
-
-
     }
 
     //Adds a new favourite venue to the users list
@@ -48,27 +46,32 @@ public class FaveVenuesHandler {
         saveHashMap();
     }
 
+    //Removes a users favourite venue from there favourites list
     public void removeFaveVenue(String username, String venueName){
         //If a user doesn't exist dont do anything
         if(!faveVenueMap.containsKey(username)){
             return;
         }
         else{
-
+            //Turns the string array into a list so we can remove the venue
             List<String> list = new ArrayList<String>(Arrays.asList(faveVenueMap.get(username)));
-
+            //Remove the venue
             list.remove(venueName);
 
+            //Turn the list back into a string array
             String[] result = list.toArray(new String[0]);
 
+            //Replaces the old list with the new list
             faveVenueMap.replace(username, result);
 
         }
 
+        //Saves the map
         saveHashMap();
 
     }
 
+    //Adds a new user to the hashmap
     public void addUser(String username){
 
         //Makes sure that the user isn't already in there
@@ -78,6 +81,7 @@ public class FaveVenuesHandler {
         }
     }
 
+    //Removes a user from the hashmap
     public void removeUser(String username){
 
         //Makes sure that the user is in the list before trying to delete them
@@ -88,23 +92,26 @@ public class FaveVenuesHandler {
         }
     }
 
-
+    //Saves the hashmap into a text file
     private void saveHashMap(){
 
         try {
+            //Opens the file which we want to write on
             FileWriter hashMapFileWriter = new FileWriter(faveVenueFile);
 
-
+            //Runs through every entry in the hashmaps
             for(Map.Entry<String, String[]> entry : faveVenueMap.entrySet()){
+                //Places the username first
                 hashMapFileWriter.write(entry.getKey() + ",");
-
+                //Places the list of venues next
                 for(int i = 0; entry.getValue().length > i; i++){
                     hashMapFileWriter.write( entry.getValue()[i] + ".");
                 }
+                //Adds a new line to represent a new entry
                 hashMapFileWriter.write("\n");
             }
 
-
+            //Close the file to save it
             hashMapFileWriter.close();
 
         } catch (IOException e) {
@@ -117,30 +124,35 @@ public class FaveVenuesHandler {
 
     }
 
+    //Opens the file and interprets the hashmap
     private void loadHashMap() throws IOException {
 
+        //Initialises the hashmap
         faveVenueMap = new HashMap<>();
 
+        //Creates a reader for the file
         BufferedReader br = new BufferedReader(new FileReader(faveVenueFile));
         String line;
 
-        //Places every user and there favourite venues into the hashmap
+        //Goes through every line in the file
         while((line = br.readLine()) != null){
 
             System.out.println(line);
 
+            //splits the line into the key and value pair
             String[] userVenuesPair = line.split(",");
 
-
+            //If there are entries into the favourite venues list
             if(userVenuesPair.length > 1) {
+                //Splits the String of venues into an array
                 String[] venueArray = userVenuesPair[1].split("\\.");
-
+                //Places the username and the array of venues into the hashmap
                 faveVenueMap.put(userVenuesPair[0], venueArray);
             }
 
 
         }
-
+        //Message to let the system aware that the venues have been loaded
         System.out.println("Fave venues loaded!");
 
     }
