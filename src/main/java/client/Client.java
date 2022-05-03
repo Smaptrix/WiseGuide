@@ -589,9 +589,14 @@ public class Client {
 
         byte[] data = readBytes(fileSize);
 
+
+
+
         String ack = new String(data, StandardCharsets.UTF_8);
 
         System.out.println(ack);
+
+
 
         return ack;
     }
@@ -830,6 +835,31 @@ public class Client {
         else{
             return false;
         }
+
+    }
+
+
+
+    //Requests that the server favourites a venue for the user
+    public void addFavouriteVenue(String venueName) throws IOException {
+        sendMessage("FAVEVENUE", true);
+
+        sendMessage(venueName, true);
+
+
+        receiveAcknowledgement();
+
+
+    }
+
+
+    public void removeFavouriteVenue(String venueName) throws IOException {
+        sendMessage("UNFAVEVENUE", true);
+
+        sendMessage(venueName, true);
+
+        receiveAcknowledgement();
+
 
     }
 

@@ -32,6 +32,8 @@ public class Server {
     //TODO - Could maybe compartmentalise some of these security functions to trim down this file
 
 
+    //TODO - ONLY ONE WAY IS ACTUALLY ENCRYPTED - SERVER TO CLIENT IS NOT LOL?!
+
 
     //Should only be changed in the code
     private static final String SERVERVERSION = "Ver 0.60";
@@ -132,7 +134,6 @@ public class Server {
         DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 
         //Recieve the length of the size data
-
         int numOfFileSizeBytes = in.read();
 
         //Recieve the size data
@@ -430,6 +431,15 @@ public class Server {
                 break;
 
 
+            case "FAVEVENUE":
+                favouriteNewVenue();
+
+
+
+            case "UNFAVEVENUE":
+                    unfavouriteVenue();
+
+
             default:
                 System.out.println(requestIn + " : Invalid command");
                 sendResponse("Error 404: Request Code '" + requestIn + "' Not Found", false);
@@ -437,7 +447,23 @@ public class Server {
         }
     }
 
+    private void favouriteNewVenue() throws IOException {
 
+        String venueToFavourite = recieveMessageAsString(inStream.read());
+
+        faveVenuesHandler.addFaveVenue(currUser.getUsername(), venueToFavourite);
+
+        sendResponse("ADDED", true);
+    }
+
+
+    private void unfavouriteVenue() throws IOException {
+        String venueToUnFavourite = recieveMessageAsString(inStream.read());
+
+        faveVenuesHandler.removeFaveVenue(currUser.getUsername(), venueToUnFavourite);
+
+        sendResponse("REMOVED", true);
+    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -537,6 +563,8 @@ public class Server {
 
 
         //outputStream.flush();
+
+
 
 
     }
