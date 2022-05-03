@@ -13,6 +13,8 @@ import VenueXMLThings.VenueXMLParser;
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
 
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import javax.xml.transform.TransformerException;
 import java.net.*;
 import java.io.*;
@@ -21,49 +23,251 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 
 public class Server {
 
+
+
+
+
     //Should only be changed in the code
-    private static final String SERVERVERSION = "Ver 0.45";
-
-
-
-
+    private static final String SERVERVERSION = "Ver 0.60";
 
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private DataOutputStream outputStream;
-    private BufferedReader inText;
+    private InputStream inStream;
     private String CurrDir;
     private String slashType;
     private ServerUserHandler currUserHandler;
     private User currUser;
 
+
+    private PrivateKey privateKey;
+
+    private File serverPublicKey;
+
+    private SecretKey symKey;
+
+    private Cipher symmetricCipher;
+
+    private boolean encryptionReady;
+
+
+    //Generates a random public/private keypair
+    private KeyPair generateKeyPair() throws NoSuchAlgorithmException {
+
+        SecureRandom random = new SecureRandom();
+
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+
+        //Initialises the key pair generator with a key size of 2048
+        keyPairGenerator.initialize(2048, random);
+
+
+        //Generates the key pair and then returns it
+        return keyPairGenerator.generateKeyPair();
+
+    }
+
+
+    //Generates the keypair for the start of the encryption of the socket connection
+    private void startupEncryption() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+
+        encryptionReady = false;
+
+        //Generate initial key pair
+        KeyPair initKeyPair = generateKeyPair();
+
+        //Seperates the keys out
+        PublicKey publicKey = initKeyPair.getPublic();
+        privateKey =  initKeyPair.getPrivate();
+
+        //System.out.println("Public: " + publicKey);
+        //System.out.println("Private: " + privateKey);
+
+        //Gets the current server key directory
+        String keyDirectory = CurrDir + "\\serverkeys";
+
+        //Writes the public key to a file
+        serverPublicKey = new File(keyDirectory + "\\serverpubkey.pub");
+
+        FileOutputStream publicOut = new FileOutputStream(serverPublicKey);
+
+        publicOut.write(publicKey.getEncoded());
+
+        serverPublicKey.deleteOnExit();
+
+        publicOut.close();
+
+        System.out.println("Public key file created");
+
+        //Writes the private key to a file
+        File serverPrivateKey = new File(keyDirectory + "\\serverprivkey.key");
+
+        FileOutputStream privateOut = new FileOutputStream(serverPrivateKey);
+
+        privateOut.write(privateKey.getEncoded());
+
+        serverPrivateKey.deleteOnExit();
+
+        privateOut.close();
+
+        System.out.println("Private key file created");
+
+
+    }
+
+    //Communicates with the client to get the symmetric key
+    private void getClientEncryption() throws IOException {
+
+        //Sends the servers public key file to the client
+        sendFile(Path.of(serverPublicKey.getPath()));
+
+        DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+
+        //Recieve the length of the size data
+
+        int numOfFileSizeBytes = in.read();
+
+        //Recieve the size data
+
+        byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
+
+        for (int i = 0; i < numOfFileSizeBytes; i++) {
+            bytesToReadBytes[i] = (byte) in.read();
+        }
+
+        int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
+
+        //Recieve the actual data
+
+
+        //Similar code to the clients read bytes but we only need it the once for the server - JI
+
+        //Initialises a new byte array of size predetermined by our network protocol
+        byte[] keyData = new byte[bytesToRead];
+
+        boolean end = false;
+        int bytesRead = 0;
+
+
+        //Reads bytes up until the count has been reached
+        while (!end) {
+
+            try {
+                keyData[bytesRead] = (byte) in.read();
+                //System.out.println(data[bytesRead]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Increment Byte count
+            bytesRead += 1;
+            if (bytesRead == bytesToRead) {
+                // System.out.println("We have read: " + bytesRead);
+                end = true;
+            }
+
+        }
+
+
+        System.out.println("Key read");
+
+        //Sets the input socket back to the text reader
+        inStream = clientSocket.getInputStream();
+
+        //Decrypt the key
+        try {
+            decryptSymmetricKey(keyData);
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    //Decrypts the symmetric key from the client then "remembers" it
+    private void decryptSymmetricKey(byte[] encryptedKeyData) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
+
+        //Decrypt key data
+        Cipher decryptionCipher = Cipher.getInstance("RSA");
+        try {
+            decryptionCipher.init(Cipher.DECRYPT_MODE, privateKey);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
+
+        byte[] decryptedSymmetricKey = decryptionCipher.doFinal(encryptedKeyData);
+
+
+        //Rebuild the key using the encoded key bytes
+        symKey = new SecretKeySpec(decryptedSymmetricKey, 0, decryptedSymmetricKey.length, "AES");
+
+        System.out.println(symKey);
+
+
+        //Creates the symmetric Cipher with which to decrypt messages from the client
+        symmetricCipher = Cipher.getInstance("AES");
+
+        //symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+
+
+        encryptionReady = true;
+
+    }
+
+/*
+    //Waits to recieve the validation checks from the client
+    private void validateSymmetricKey() throws IOException {
+
+       String encryptedCommand = inText.readLine();
+
+        while ((encryptedCommand = inText.readLine()) != null) {
+       System.out.println(encryptedCommand);
+
+
+    }
+*/
+
+
     //Starts the server
-    public void startup(int port) throws IOException {
+    public void startup(int port) throws IOException{
 
+        osDetect();
         System.out.println("Creating new Server Socket at " + port);
-
 
         //Server formed
         serverSocket = new ServerSocket(port);
 
         System.out.println("Port Created\n");
 
+
+
+        //Generate the first parts of the encryption
+        try {
+            startupEncryption();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Encryption failed, aborting server launch");
+            System.exit(-1);
+        }
+
+
         clientSocket = serverSocket.accept();
 
         System.out.println("After accept\n");
 
-         //Reads text from the buffer
-        inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        //Reverts back to original socket type
+        inStream = clientSocket.getInputStream();
 
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
-
-        osDetect();
 
         //Initialises the current user server user handler
         currUser = new User("", "");
@@ -90,10 +294,11 @@ public class Server {
     //Closes the server down
     public void stopConnections() throws IOException {
         System.out.println("Closing Down");
-        inText.close();
+        inStream.close();
         clientSocket.close();
         serverSocket.close();
         outputStream.close();
+        System.exit(1);
     }
 
 
@@ -101,26 +306,50 @@ public class Server {
     //Used to wait for requests from the client
     public void bufferListen() throws IOException {
 
-        String inputLine;
+        int bytesToRead;
 
         try{
 
-            while ((inputLine = inText.readLine()) != null) {
-                System.out.println("Listening...");
-                if ("Close Connection".equals(inputLine)) {
-                    sendResponse("Connection Closed", true);
-                    stopConnections();
-                    break;
-                } else {
-                    System.out.println("Request Received: " + inputLine);
+            while (true) {
+                System.out.println("Waiting for byte size");
+                if ((bytesToRead = inStream.read()) != 0) {
 
-                    requestParser(inputLine);
+
+                    System.out.println("Listening...");
+
+                    byte[] inputLine =  recieveMessage(bytesToRead);
+
+
+                    System.out.println("Encryption done: " + encryptionReady);
+                    if (encryptionReady) {
+                        symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+
+
+
+                        System.out.println("Input size: " + inputLine.length);
+
+                        byte[] decryptedInpLineBytes = symmetricCipher.doFinal(inputLine);
+
+                        System.out.println("Decrypted input line in bytes: " + Arrays.toString(decryptedInpLineBytes));
+
+                        String decryptedInputLine = new String(decryptedInpLineBytes, StandardCharsets.UTF_8);
+
+
+                        System.out.println("Request Received: " + decryptedInputLine);
+
+                        requestParser(decryptedInputLine);
+                        //Preencryption request parser
+                    } else {
+                        requestParser(new String(inputLine));
+                    }
+                }
             }
+        } catch (IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | InvalidKeyException ex) {
+            ex.printStackTrace();
         }
 
-        }catch (SocketException e){
+        catch (SocketException e){
             System.out.println("Lost connnection to client");
-        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
     }
@@ -132,6 +361,10 @@ public class Server {
 
     //Requests in form "Request Code Type" + " " + "Request Information"
     public void requestParser(String requestIn) throws IOException, NoSuchAlgorithmException {
+
+        //TODO - CLOSE CONNECTION REQUEST
+
+
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
             case "GET":
@@ -147,9 +380,6 @@ public class Server {
                 break;
 
             //Creates a new user and adds it to the database
-
-
-
             case "VERIFYUSER":
                 currUserHandler.setUserType("USER");
                 receiveLogin(0);
@@ -189,15 +419,14 @@ public class Server {
                 currUserHandler.setUserType("VENUE");
                 receiveLogin(1);
                 break;
-                
+
             case "DELETEVENUEFILE":
                 currUserHandler.setUserType("VENUE");
                 deleteVenueFile();
                 break;
 
-            case "UPLOADFILE":
-                currUserHandler.setUserType("VENUE");
-                recieveVenueFile();
+            case "SENDPUBLIC":
+                getClientEncryption();
                 break;
 
 
@@ -208,12 +437,7 @@ public class Server {
         }
     }
 
-    private void recieveVenueFile() throws IOException {
-        sendResponse("SIZE?", true);
 
-        inText.readLine();
-
-    }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
@@ -233,13 +457,18 @@ public class Server {
 
             int fileSizeInBytesLen = fileSizeInBytes.length;
 
+
             //Tells the client how many bytes are determining the size of the file
             outputStream.write(fileSizeInBytesLen);
+
+            //System.out.println("Sent file size length");
 
             //Writes the fileSize in bytes to the client
             for (byte fileSizeInByte : fileSizeInBytes) {
                 outputStream.write(fileSizeInByte);
             }
+
+            // System.out.println("sent file size");
 
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
@@ -261,6 +490,9 @@ public class Server {
 
                 bytesSent += 1;
 
+                //Testing purposes only
+                //System.out.println(buffer[bytesSent]);
+
                 if(bytesSent == fileSize){
                     System.out.println("We have written: " + bytesSent + " bytes");
 
@@ -270,6 +502,7 @@ public class Server {
             //Clears the outputStream of any excess data
             outputStream.flush();
 
+            System.out.println("All done!");
 
         }catch(NoSuchFileException e){
             System.out.println("File not found");
@@ -315,9 +548,10 @@ public class Server {
     public void receiveLogin(Integer mode) throws IOException {
 
 
-        String loginName = inText.readLine();
+        //Reads the input stream for the size of the message
+        String loginName = recieveMessageAsString(inStream.read());
 
-        String loginPass = inText.readLine();
+        String loginPass = recieveMessageAsString(inStream.read());
 
 
 
@@ -360,7 +594,7 @@ public class Server {
 
 
             //If the user exists grab there salt then encrypt there data
-           //Breaks if user has no salt
+            //Breaks if user has no salt
             if(currUserHandler.userExistState){
                 currUser.setSalt(currUserHandler.getcurrUserSalt());
                 currUser.encryptUserInfo();
@@ -394,7 +628,7 @@ public class Server {
             if(!(currUserHandler.userExistState)){
 
                 sendResponse("SENDSALT", true);
-                currUser.setSalt(inText.readLine());
+                currUser.setSalt(recieveMessageAsString(inStream.read()));
                 currUser.encryptUserInfo();
                 currUserHandler.createUser();
                 sendResponse("USERCREATED", true);
@@ -442,7 +676,10 @@ public class Server {
     //Checks that the client and server versions are the same
     private void versionCheck() throws IOException {
 
-        String clientVersion = inText.readLine();
+        String clientVersion = recieveMessageAsString(inStream.read());;
+
+        System.out.println("Client ver: " + clientVersion);
+        System.out.println("Server ver: " + SERVERVERSION);
 
         if(clientVersion.equals(SERVERVERSION)){
             sendResponse("SAMEVER", true);
@@ -460,7 +697,7 @@ public class Server {
 
 
 
-        String desiredUsername = inText.readLine();
+        String desiredUsername = recieveMessageAsString(inStream.read());;
 
         //If the username is taken
         if (ServerUserHandler.findUserName(desiredUsername)){
@@ -474,9 +711,9 @@ public class Server {
 
     private void changePassword() throws IOException {
 
-        String currPass = inText.readLine();
+        String currPass = recieveMessageAsString(inStream.read());;
 
-        String newPass = inText.readLine();
+        String newPass = recieveMessageAsString(inStream.read());;
 
 
         //If the password entered doesnt match the current password
@@ -506,7 +743,7 @@ public class Server {
     private void deleteVenueFile() throws IOException {
 
         //Gets the filepath from the client
-        File fileToDelete = new File(inText.readLine());
+        File fileToDelete = new File(recieveMessageAsString(inStream.read()));
 
 
 
@@ -528,12 +765,49 @@ public class Server {
             sendResponse("File Deletion Error", true);
         }
 
-        //TODO - Also change the XML file
 
 
 
 
 
+
+    }
+
+    //Overloaded functions to let you decide if you want to recieve the pure bytes or the string
+
+    //Reads n number of bytes from the socket
+    private byte[] recieveMessage(int n) {
+
+        byte[] readBytes = new byte[0];
+        try {
+            readBytes = inStream.readNBytes(n);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return readBytes;
+
+    }
+
+    //Reads n number of bytes from the socket - turns them into a string
+    private String recieveMessageAsString(int n) {
+
+        byte[] readBytes = new byte[0];
+        try {
+            readBytes = inStream.readNBytes(n);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Decrypt the message
+        String unencryptedMsg = null;
+        try {
+            unencryptedMsg = new String(symmetricCipher.doFinal(readBytes));
+        } catch (IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
+
+        return unencryptedMsg;
     }
 
 
