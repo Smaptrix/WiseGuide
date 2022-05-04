@@ -270,6 +270,7 @@ public class Server {
         //faveVenuesHandler.removeUser("deleteme");
         //faveVenuesHandler.addFaveVenue("joe", "ADDEDVENUE");
         //faveVenuesHandler.removeFaveVenue("joe", "DELETEME");
+        faveVenuesHandler.faveVenueList("joe");
 
     }
 
@@ -433,11 +434,18 @@ public class Server {
 
             case "FAVEVENUE":
                 favouriteNewVenue();
+                break;
 
 
 
             case "UNFAVEVENUE":
                     unfavouriteVenue();
+                    break;
+
+            case "FAVELIST":
+                    sendFaveVenueList();
+                    break;
+
 
 
             default:
@@ -445,6 +453,21 @@ public class Server {
                 sendResponse("Error 404: Request Code '" + requestIn + "' Not Found", false);
                 break;
         }
+    }
+
+    //Sends the current users list of favourite venues
+    private void sendFaveVenueList() throws IOException {
+
+        String faveVenueListString = faveVenuesHandler.faveVenueList(currUser.getUsername());
+
+        //Tells the client if there are no favourite venues
+        if(faveVenueListString == null){
+            sendResponse("EMPTY", true);
+        }
+        else{
+            sendResponse(faveVenueListString, true);
+        }
+
     }
 
     private void favouriteNewVenue() throws IOException {

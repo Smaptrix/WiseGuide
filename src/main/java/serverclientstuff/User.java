@@ -24,6 +24,7 @@ public class User {
     //The users salt that is added to there password
     private String salt;
 
+    private String[] faveVenues;
 
     //Creates the user object
     public User(String username, String password)  {
@@ -95,6 +96,9 @@ public class User {
         return salt;
     }
 
+    public void setFaveVenues(String[] faveVenues) {
+        this.faveVenues = faveVenues;
+    }
 
     @Override
     public String toString() {

@@ -49,6 +49,10 @@ public class MainApplication extends Application {
 
         controller.loadListOfVenues();
 
+        //Sets the users favourite venues
+        currUser.setFaveVenues(client.requestFaveVenueList());
+
+
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
         stage.show();

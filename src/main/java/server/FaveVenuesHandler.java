@@ -158,5 +158,33 @@ public class FaveVenuesHandler {
     }
 
 
+    public String faveVenueList(String username){
+
+        //Checks to make sure the user is in there first
+        if(faveVenueMap.containsKey(username)) {
+
+            String[] faveVenueList = faveVenueMap.get(username);
+
+            String faveVenueListString = "";
+
+            //Turn the string array into one long string so its easier to send
+            for (int i = 0; faveVenueList.length > i; i++) {
+                faveVenueListString = faveVenueListString.concat(faveVenueList[i] + ".");
+            }
+
+
+            System.out.println(faveVenueListString);
+
+            return faveVenueListString;
+        }
+        else{
+            return null;
+        }
+
+    }
+
+
+
+
 
 }

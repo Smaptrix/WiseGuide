@@ -90,6 +90,10 @@ public class Client {
     private Cipher symmetricCipher;
 
 
+    //Stores the users favourite venues
+    private String[] faveVenues;
+
+
 
     /**
      * <p>
@@ -789,6 +793,7 @@ public class Client {
     }
 
 
+
     //Requests that the client can send a file to the server
     //Maybe change so that it sends an email and then we discuss it
     //Rather than having any user be able to upload any file they want
@@ -796,10 +801,11 @@ public class Client {
         sendMessage("UPLOADFILE",true);
 
 
-
         return receiveAcknowledgement();
 
     }
+
+
 
 
     /**
@@ -839,6 +845,21 @@ public class Client {
     }
 
 
+    public String[] requestFaveVenueList() throws IOException {
+        sendMessage("FAVELIST", true);
+
+        String venueListString =  receiveAcknowledgement();
+
+        if(venueListString.equals("EMPTY")) {
+            String[] venueList = venueListString.split("\\.");
+            return venueList;
+        }
+
+        else{
+            return null;
+        }
+    }
+
 
     //Requests that the server favourites a venue for the user
     public void addFavouriteVenue(String venueName) throws IOException {
@@ -859,7 +880,6 @@ public class Client {
         sendMessage(venueName, true);
 
         receiveAcknowledgement();
-
 
     }
 
