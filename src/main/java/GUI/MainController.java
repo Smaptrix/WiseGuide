@@ -24,13 +24,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
-import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -138,6 +134,7 @@ public class MainController {
             e.printStackTrace();
             System.out.println("Failed to get venue data");
         }
+        controller.checkIfFavourite();
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();

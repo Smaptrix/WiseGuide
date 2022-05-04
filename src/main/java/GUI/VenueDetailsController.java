@@ -18,7 +18,6 @@ import javafx.scene.image.ImageView;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
 import serverclientstuff.User;
-import serverclientstuff.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,9 +61,6 @@ public class VenueDetailsController {
     public void initialize() {
         venueText.setEditable(false);
 
-        if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
-            faveVenueButton.setText("UnFavourite");
-        }
 
 
     }
@@ -105,6 +101,28 @@ public class VenueDetailsController {
         }
 
 
+
+
+    }
+
+
+    public void checkIfFavourite() {
+        if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
+            faveVenueButton.setText("UnFavourite");
+        }
+    }
+
+
+    @FXML
+    public void favouriteButtonAction() throws IOException {
+        if(faveVenueButton.getText().equals("Favourite")){
+            client.addFavouriteVenue(currVenue);
+            faveVenueButton.setText("UnFavourite");
+        }
+        else if(faveVenueButton.getText().equals("UnFavourite")){
+            client.removeFavouriteVenue(currVenue);
+            faveVenueButton.setText("Favourite");
+        }
 
 
     }

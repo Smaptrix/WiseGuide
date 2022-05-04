@@ -51,7 +51,7 @@
                     <Insets bottom="15.0" top="15.0" />
                 </padding>
             </Label>
-            <Button id="faveVenueButton" fx:id="faveVenueButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="93.0" text="Favourite">
+            <Button id="faveVenueButton" fx:id="faveVenueButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#favouriteButtonAction" prefHeight="45.0" prefWidth="119.0" text="Favourite">
                 <HBox.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </HBox.margin>

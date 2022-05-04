@@ -456,7 +456,8 @@ public class Client {
         int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
 
 
-        //Magic number 3 - because we know that the file extension is only going to be three letters
+        //Magic number 3 - because we know that the file extension is only going to be max three letters
+        //TODO - Issue is the file is a jpeg...
         byte[] DataTypeBytes = new byte[3];
 
         for (int i = 0; i < 3; i++) {
