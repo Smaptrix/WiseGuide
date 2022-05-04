@@ -22,6 +22,7 @@ import serverclientstuff.User;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 public class VenueDetailsController {
 
@@ -122,10 +123,32 @@ public class VenueDetailsController {
         if(faveVenueButton.getText().equals("Favourite")){
             client.addFavouriteVenue(currVenue);
             faveVenueButton.setText("UnFavourite");
+
+            /* - May be required in the future
+            //Turns the string array into a list
+            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+
+            //Adds the current venue to the current users list of favourite venues clientside
+            faveVenues.add(currVenue);
+
+            currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+
+            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+            */
         }
+
         else if(faveVenueButton.getText().equals("UnFavourite")){
             client.removeFavouriteVenue(currVenue);
             faveVenueButton.setText("Favourite");
+
+            /* - May be required in the future
+            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+            faveVenues.remove(currVenue);
+            currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+
+            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+
+             */
         }
 
 
