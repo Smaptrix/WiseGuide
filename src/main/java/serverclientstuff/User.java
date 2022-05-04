@@ -100,6 +100,10 @@ public class User {
         this.faveVenues = faveVenues;
     }
 
+    public String[] getFaveVenues() {
+        return faveVenues;
+    }
+
     @Override
     public String toString() {
         return "User{" +
