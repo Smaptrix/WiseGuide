@@ -107,9 +107,13 @@ public class VenueDetailsController {
 
 
     public void checkIfFavourite() {
-        if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
-            faveVenueButton.setText("UnFavourite");
+
+        if(currUser.getFaveVenues() != null){
+            if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
+                faveVenueButton.setText("UnFavourite");
+            }
         }
+
     }
 
 
