@@ -747,7 +747,6 @@ public class Server {
     private void changeUsername() throws IOException {
 
 
-
         String desiredUsername = recieveMessageAsString(inStream.read());;
 
         //If the username is taken
