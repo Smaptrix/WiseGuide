@@ -850,7 +850,7 @@ public class Client {
 
         String venueListString =  receiveAcknowledgement();
 
-        if(venueListString.equals("EMPTY")) {
+        if(!(venueListString.equals("EMPTY"))) {
             String[] venueList = venueListString.split("\\.");
             return venueList;
         }

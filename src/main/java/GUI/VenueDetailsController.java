@@ -11,15 +11,18 @@ package GUI;
 import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
+import serverclientstuff.User;
 import serverclientstuff.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class VenueDetailsController {
 
@@ -29,11 +32,14 @@ public class VenueDetailsController {
 
     VenuePage currVenuePage;
 
+    User currUser;
+
     public void setClient(Client client){this.client = client;}
 
-    public void setCurrVenue(String currVenue, VenuePage currVenuePage){
+    public void setCurrVenue(String currVenue, VenuePage currVenuePage, User currUser){
         this.currVenue = currVenue;
         this.currVenuePage = currVenuePage;
+        this.currUser = currUser;
 
         System.out.println(currVenuePage);
         System.out.println(currVenuePage.attributes);
@@ -47,9 +53,20 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage;
     @FXML
+    public Button faveVenueButton;
+
+
+
+    @FXML
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
+
+        if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
+            faveVenueButton.setText("UnFavourite");
+        }
+
+
     }
 
     //Will use the client to download relevant data and place it into the page.

@@ -52,9 +52,12 @@ public class MainApplication extends Application {
 
         //Sets the users favourite venues -- as long there are some
         String[] userFaveVenueList = client.requestFaveVenueList();
+
+
+
         if(!(userFaveVenueList == null)){
             currUser.setFaveVenues(userFaveVenueList);
-            System.out.println(Arrays.toString(currUser.getFaveVenues()));
+            System.out.println("Set user faves: " + Arrays.toString(currUser.getFaveVenues()));
         }
 
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
