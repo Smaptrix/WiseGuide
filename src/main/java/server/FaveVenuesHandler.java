@@ -184,6 +184,19 @@ public class FaveVenuesHandler {
     }
 
 
+    public void nameChange(String oldUsername, String newUsername){
+
+        String[] faveVenueList = faveVenueMap.get(oldUsername);
+
+        faveVenueMap.put(newUsername, faveVenueList);
+
+        faveVenueMap.remove(oldUsername);
+
+        saveHashMap();
+
+    }
+
+
 
 
 

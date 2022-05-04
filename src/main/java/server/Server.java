@@ -755,6 +755,7 @@ public class Server {
             sendResponse("USERNAMETAKEN", true);
         }
         else {
+            faveVenuesHandler.nameChange(currUserHandler.getcurrUser().getUsername(), desiredUsername);
             currUserHandler.changeUserName(desiredUsername);
             sendResponse("NAMECHANGED", true);
         }
