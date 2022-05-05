@@ -13,15 +13,12 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
-import serverclientstuff.Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class VenueDetailsController {
 
@@ -49,6 +46,18 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage;
     @FXML
+    public ImageView venueImage0;
+    @FXML
+    public ImageView venueImage1;
+    @FXML
+    public ImageView venueImage2;
+    @FXML
+    public ImageView venueImage3;
+    @FXML
+    public ImageView venueImage4;
+    @FXML
+    public ImageView venueImage5;
+    @FXML
     //Always called by the FXML Loader
     public void initialize() {
 
@@ -60,16 +69,19 @@ public class VenueDetailsController {
         venueName.setText(currVenue);
 
 
-
+        int textIndex = 0;
+        int photoIndex = 0;
+        int maxPhotoIndex = 5;
+        String imageFile = null;
+        //ImageView[] imageViews = {venueImage0, venueImage1, venueImage2, venueImage3, venueImage4, venueImage5};
         //Downloads every media element required by the venue xml
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
 
-            int j = 0;
-            while (j == 0) {
-                //Text
 
+            while (textIndex == 0) {
+                //Text
                 String textFile = (currVenuePage.getMediaSourceByID("text0"));
                 System.out.println("File: " + textFile);
 
@@ -77,21 +89,51 @@ public class VenueDetailsController {
 
                 TextManager textManager = new TextManager(textFile, 470, 100);
                 venueText.setText(textManager.loadTextFromFile());
-                j = 1;
+
+                //Sets the text index to 1, as there's only one text file for each venue
+                textIndex = 1;
             }
 
+            imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
+            System.out.println(imageFile);
+            while (photoIndex <= maxPhotoIndex && imageFile != null) {
+                //Images
+                imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
 
-            //Images
-            String imageFile = (currVenuePage.getMediaSourceByID("image0"));
+                client.requestFile(imageFile);
 
-            client.requestFile(imageFile);
+                File imageFilepath = new File(imageFile);
+                System.out.println("This is the file path:" + imageFilepath);
 
-            File imageFilepath = new File(imageFile);
+                ImageView imageView = new ImageView();
 
-            ImageView imageView = new ImageView();
-            ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+                ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+                // TODO: Look into accessing this value instead of magic number
+                imageHandler.load(220, 400);
+                //venueImage0.setImage(imageHandler.getCurrImage());
+                switch (photoIndex) {
+                    case 0:
+                        venueImage0.setImage(imageHandler.getCurrImage());
+                        break;
+                    case 1:
+                        venueImage1.setImage(imageHandler.getCurrImage());
+                        break;
+                    case 2:
+                        venueImage2.setImage(imageHandler.getCurrImage());
+                        break;
+                    case 3:
+                        venueImage3.setImage(imageHandler.getCurrImage());
+                        break;
+                    case 4:
+                        venueImage4.setImage(imageHandler.getCurrImage());
+                        break;
+                    case 5:
+                        venueImage5.setImage(imageHandler.getCurrImage());
+                        break;
+                }
 
-            venueImage.setImage(imageHandler.getCurrImage());
+                photoIndex++;
+            }
         }
     }
 }

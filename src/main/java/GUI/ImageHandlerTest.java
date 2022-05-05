@@ -22,7 +22,7 @@ public class ImageHandlerTest extends Application {
 
      ImageView testView = new ImageView();
 
-     File testFile = new File("C:\\Users\\jsphi\\eclipse-workspace\\WiseGuide\\partypopper.jpg");
+     File testFile = new File("src/main/resources/Maps/baseMap.png");
 
     ImageHandler test = new ImageHandler(testFile, testView);
 
@@ -30,7 +30,7 @@ public class ImageHandlerTest extends Application {
 
     Group root = new Group(testView);
 
-    Scene testScene = new Scene(root, height, width);
+    Scene testScene = new Scene(root, width, height);
 
     stage.setTitle("Image Handler Test");
 

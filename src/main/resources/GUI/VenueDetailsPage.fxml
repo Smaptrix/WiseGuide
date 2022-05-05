@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VenueDetailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VenueDetailsController">
 
     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <MenuBar>
@@ -58,7 +58,7 @@
             </Button>
         </HBox>
         <HBox prefHeight="300.0" prefWidth="900.0">
-            <ImageView fitHeight="220.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="venueImage" fitHeight="220.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                 <HBox.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </HBox.margin>
@@ -83,6 +83,14 @@
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>
+            <children>
+               <ImageView fx:id="venueImage0" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="venueImage1" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+               <ImageView fx:id="venueImage2" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+               <ImageView fx:id="venueImage3" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+               <ImageView fx:id="venueImage4" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <ImageView fx:id="venueImage5" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            </children>
             </GridPane>
             <VBox prefHeight="200.0" prefWidth="470.0">
                 <Pane prefHeight="125.0" prefWidth="200.0">
