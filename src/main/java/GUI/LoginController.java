@@ -10,6 +10,7 @@ package GUI;
 
 
 import client.Client;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,7 +32,7 @@ public class LoginController {
     protected User currUser;
 
 
-    //Imports all of the objects in the login 'scene'
+    //Imports all the objects in the login 'scene'
     @FXML
     PasswordField userPassField;
     @FXML
@@ -46,6 +47,9 @@ public class LoginController {
     Label errorLabel;
     @FXML
     ImageView maptrixLogo;
+    @FXML
+    MenuItem accountDetailsButton;
+
 
 
 
@@ -160,7 +164,6 @@ public class LoginController {
 
     @FXML
     private void venueLoginPageOpen() throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-login-page.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
@@ -171,13 +174,10 @@ public class LoginController {
         stage.show();
         stage.setResizable(false);
 
-
         Stage currStage = (Stage) errorLabel.getScene().getWindow();
         currStage.close();
-
-
-
     }
 
-
+    public void onAboutButtonPress() {
+    }
 }

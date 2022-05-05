@@ -257,7 +257,7 @@ public class MainController {
 
     @FXML
     //Opens the account details page
-    protected void onAccDetailsButtonClick() throws IOException {
+    public void onAccDetailsButtonClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-details-page.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 420, 240);
@@ -301,18 +301,14 @@ public class MainController {
     }
 
     @FXML
-    protected void onAboutButtonPress() throws IOException {
-
-
+    public void onAboutButtonPress() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("about-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 300);
         Stage stage = new Stage();
 
         AboutController controller = fxmlLoader.getController();
 
-
         controller.setVerNum(client.getCurrVersion());
-
 
         System.out.println("Opening about page");
 
