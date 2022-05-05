@@ -905,11 +905,15 @@ public class Server {
             e.printStackTrace();
         }
 
+
+
         //Decrypt the message
         String unencryptedMsg = null;
         try {
+            symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
             unencryptedMsg = new String(symmetricCipher.doFinal(readBytes));
-        } catch (IllegalBlockSizeException | BadPaddingException e) {
+            symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+        } catch (IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
 
