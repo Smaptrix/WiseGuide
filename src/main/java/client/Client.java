@@ -35,10 +35,6 @@ import java.util.*;
 public class Client {
 
 
-
-
-
-
     /**
      * CLIENTVERSION is the current version of the client
      */
@@ -338,7 +334,7 @@ public class Client {
         System.out.println("Sent encrypted command");
 
 
-        if(receiveAcknowledgement().equals(unencryptedMessage)){
+        if(receiveAcknowledgement(true).equals(unencryptedMessage)){
             return true;
         }
         else{
@@ -575,7 +571,7 @@ public class Client {
         sendMessage(currUser.getPassword(), true);
 
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
 
     }
 
@@ -587,20 +583,45 @@ public class Client {
      * @return the acknowledgement in string form
      * @throws IOException if
      */
-    public String receiveAcknowledgement() throws IOException {
+    public String receiveAcknowledgement(boolean decrypt) throws IOException {
 
         int fileSize = inputStream.read();
 
 
         byte[] data = readBytes(fileSize);
 
+        String ack = null;
+        if (decrypt) {
+
+            try {
+                symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
+
+            byte[] decryptedData = new byte[0];
+            try {
+                decryptedData = symmetricCipher.doFinal(data);
+            } catch (IllegalBlockSizeException | BadPaddingException e) {
+                e.printStackTrace();
+            }
 
 
+            ack = new String(decryptedData, StandardCharsets.UTF_8);
 
-        String ack = new String(data, StandardCharsets.UTF_8);
+            System.out.println(ack);
 
-        System.out.println(ack);
+            try {
+                symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
+        } else {
 
+            ack = new String(data, StandardCharsets.UTF_8);
+
+            System.out.println(ack);
+        }
 
 
         return ack;
@@ -627,7 +648,7 @@ public class Client {
 
         sendMessage(currUser.getPassword(), true);
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
 
     }
 
@@ -649,7 +670,7 @@ public class Client {
         sendMessage(currUser.getPassword(), true);
 
 
-        String ack = receiveAcknowledgement();
+        String ack = receiveAcknowledgement(true);
 
         //Should timeout if nothing respond
         if(ack.equals("SENDSALT")) {
@@ -657,7 +678,7 @@ public class Client {
             System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
 
             sendMessage(currUser.getSalt(), true);
-            return receiveAcknowledgement();
+            return receiveAcknowledgement(true);
         }
         else{
 
@@ -681,7 +702,7 @@ public class Client {
         sendMessage("LOGOUT", true);
         outStream.flush();
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
     }
 
     /**
@@ -697,7 +718,7 @@ public class Client {
 
         sendMessage(CLIENTVERSION, true);
 
-        String ack = receiveAcknowledgement();
+        String ack = receiveAcknowledgement(true);
 
         if(ack.equals("SAMEVER")){
             return true;
@@ -750,7 +771,7 @@ public class Client {
 
 
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
 
     }
 
@@ -764,7 +785,7 @@ public class Client {
 
         sendMessage(newPassword,true);
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
 
 
     }
@@ -778,7 +799,7 @@ public class Client {
         sendMessage(venueName,true);
         sendMessage(venuePass,true);
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
     }
 
 
@@ -788,7 +809,7 @@ public class Client {
 
         sendMessage(filePath,true);
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
 
 
     }
@@ -802,7 +823,7 @@ public class Client {
         sendMessage("UPLOADFILE",true);
 
 
-        return receiveAcknowledgement();
+        return receiveAcknowledgement(true);
 
     }
 
@@ -849,7 +870,7 @@ public class Client {
     public String[] requestFaveVenueList() throws IOException {
         sendMessage("FAVELIST", true);
 
-        String venueListString =  receiveAcknowledgement();
+        String venueListString =  receiveAcknowledgement(true);
 
         if(!(venueListString.equals("EMPTY"))) {
             String[] venueList = venueListString.split("\\.");
@@ -869,7 +890,7 @@ public class Client {
         sendMessage(venueName, true);
 
 
-        receiveAcknowledgement();
+        receiveAcknowledgement(true);
 
 
     }
@@ -880,7 +901,7 @@ public class Client {
 
         sendMessage(venueName, true);
 
-        receiveAcknowledgement();
+        receiveAcknowledgement(true);
 
     }
 

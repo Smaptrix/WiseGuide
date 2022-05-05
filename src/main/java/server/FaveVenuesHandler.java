@@ -186,13 +186,15 @@ public class FaveVenuesHandler {
 
     public void nameChange(String oldUsername, String newUsername){
 
-        String[] faveVenueList = faveVenueMap.get(oldUsername);
+        if(faveVenueMap.containsKey(oldUsername)) {
+            String[] faveVenueList = faveVenueMap.get(oldUsername);
 
-        faveVenueMap.put(newUsername, faveVenueList);
+            faveVenueMap.put(newUsername, faveVenueList);
 
-        faveVenueMap.remove(oldUsername);
+            faveVenueMap.remove(oldUsername);
 
-        saveHashMap();
+            saveHashMap();
+        }
 
     }
 

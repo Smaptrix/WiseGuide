@@ -129,7 +129,7 @@ public class Server {
     private void getClientEncryption() throws IOException {
 
         //Sends the servers public key file to the client
-        sendFile(Path.of(serverPublicKey.getPath()));
+        sendFile(Path.of(serverPublicKey.getPath()), false);
 
         DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 
@@ -372,12 +372,12 @@ public class Server {
             case "GET":
 
                 //Should send file stored at the location of the current directory with the filename provided
-                sendFile(Path.of((CurrDir + slashType + requestSplit[1])));
+                sendFile(Path.of((CurrDir + slashType + requestSplit[1])), true);
 
                 break;
             case "ECHO":
                 //Echos the request back (mainly for testing)
-                sendResponse(requestSplit[1], true);
+                sendResponse(requestSplit[1], true, true);
                 System.out.println("Response sent: " + requestSplit[1]);
                 break;
 
@@ -450,7 +450,7 @@ public class Server {
 
             default:
                 System.out.println(requestIn + " : Invalid command");
-                sendResponse("Error 404: Request Code '" + requestIn + "' Not Found", false);
+                sendResponse("Error 404: Request Code '" + requestIn + "' Not Found", false, true);
                 break;
         }
     }
@@ -462,10 +462,10 @@ public class Server {
 
         //Tells the client if there are no favourite venues
         if(faveVenueListString == null){
-            sendResponse("EMPTY", true);
+            sendResponse("EMPTY", true, true);
         }
         else{
-            sendResponse(faveVenueListString, true);
+            sendResponse(faveVenueListString, true, true);
         }
 
     }
@@ -476,7 +476,7 @@ public class Server {
 
         faveVenuesHandler.addFaveVenue(currUser.getUsername(), venueToFavourite);
 
-        sendResponse("ADDED", true);
+        sendResponse("ADDED", true, true);
     }
 
 
@@ -485,12 +485,20 @@ public class Server {
 
         faveVenuesHandler.removeFaveVenue(currUser.getUsername(), venueToUnFavourite);
 
-        sendResponse("REMOVED", true);
+        sendResponse("REMOVED", true, true);
     }
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
-    private void sendFile(Path filepath) throws IOException {
+    private void sendFile(Path filepath, Boolean encrypt) throws IOException {
+
+        if(encrypt){
+            try {
+                symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         try {
@@ -503,6 +511,8 @@ public class Server {
             System.out.println("File Size: " + fileSize);
 
             byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) fileSize).array();
+
+
 
             int fileSizeInBytesLen = fileSizeInBytes.length;
 
@@ -553,7 +563,11 @@ public class Server {
 
             System.out.println("All done!");
 
-        }catch(NoSuchFileException e){
+            if(encrypt) {
+                symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+            }
+
+        }catch(NoSuchFileException | InvalidKeyException e){
             System.out.println("File not found");
         }
     }
@@ -562,6 +576,52 @@ public class Server {
     //No need to tell the client to expect a string it should already be expecting it
     //Sends a response to the client
 
+    private void sendResponse(String response, Boolean sendSize, Boolean encrypt) throws IOException {
+
+
+        //outputStream.flush();
+        //Turns the string into its byte array
+        byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
+        if (encrypt) {
+            try {
+                symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
+
+
+            byte[] encryptedResponse = new byte[0];
+
+            try {
+                encryptedResponse = symmetricCipher.doFinal(responseInBytes);
+            } catch (IllegalBlockSizeException | BadPaddingException e) {
+                e.printStackTrace();
+            }
+
+            if (sendSize) {
+                //Sends the size of the response first
+                int sizeOfResponse = encryptedResponse.length;
+
+                outputStream.writeByte(sizeOfResponse);
+            }
+            outputStream.write(encryptedResponse);
+        }
+        else{
+            if (sendSize){
+                int sizeOfResponse = responseInBytes.length;
+
+                outputStream.writeByte(sizeOfResponse);
+            }
+
+            outputStream.write(responseInBytes);
+
+        }
+
+
+    }
+
+
+
     private void sendResponse(String response, Boolean sendSize) throws IOException {
 
 
@@ -569,28 +629,23 @@ public class Server {
         //Turns the string into its byte array
         byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
 
-        if (sendSize){
-            //Sends the size of the response first
-            int sizeOfResponse = responseInBytes.length;
+            if (sendSize){
+                int sizeOfResponse = responseInBytes.length;
 
+                outputStream.writeByte(sizeOfResponse);
+            }
 
-
-            outputStream.writeByte(sizeOfResponse);
-
-        }
-
-
-
-        outputStream.write(responseInBytes);
-
-
-
-        //outputStream.flush();
+            outputStream.write(responseInBytes);
 
 
 
 
     }
+
+
+
+
+
 
 
 
@@ -625,12 +680,12 @@ public class Server {
 
             //If user exists and pass is correct(Good for login, bad for user creation)
             if(currUserHandler.userExistState & currUserHandler.passVerified) {
-                sendResponse("USERFOUND", true);
+                sendResponse("USERFOUND", true, true);
             }
 
 
             else {
-                sendResponse("USERNOTFOUND", true);
+                sendResponse("USERNOTFOUND", true, true);
 
             }
 
@@ -658,13 +713,13 @@ public class Server {
                 //If the users data is incorrect - let the client know
 
                 System.out.println("Not logged in!");
-                sendResponse("BADLOGIN", true);
+                sendResponse("BADLOGIN", true, true);
             }
             else{
                 //If the users data is verified - sets the server user to the user provided
                 currUser = new User(loginName, loginPass);
                 System.out.println("Logged in!");
-                sendResponse("GOODLOGIN", true);
+                sendResponse("GOODLOGIN", true, true);
                 System.out.println("Login message sent!");
             }
 
@@ -678,15 +733,15 @@ public class Server {
 
             if(!(currUserHandler.userExistState)){
 
-                sendResponse("SENDSALT", true);
+                sendResponse("SENDSALT", true, true);
                 currUser.setSalt(recieveMessageAsString(inStream.read()));
                 currUser.encryptUserInfo();
                 currUserHandler.createUser();
-                sendResponse("USERCREATED", true);
+                sendResponse("USERCREATED", true, true);
             }
 
             else{
-                sendResponse("USERALREADYEXISTS", true);
+                sendResponse("USERALREADYEXISTS", true, true);
                 System.out.println("User already exists");
 
             }
@@ -714,7 +769,7 @@ public class Server {
 
 
         try {
-            sendResponse("LOGGEDOUT", true);
+            sendResponse("LOGGEDOUT", true, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -733,10 +788,10 @@ public class Server {
         System.out.println("Server ver: " + SERVERVERSION);
 
         if(clientVersion.equals(SERVERVERSION)){
-            sendResponse("SAMEVER", true);
+            sendResponse("SAMEVER", true, true);
         }
         else{
-            sendResponse("DIFFVER", true);
+            sendResponse("DIFFVER", true, true);
         }
 
 
@@ -751,12 +806,12 @@ public class Server {
 
         //If the username is taken
         if (ServerUserHandler.findUserName(desiredUsername)){
-            sendResponse("USERNAMETAKEN", true);
+            sendResponse("USERNAMETAKEN", true, true);
         }
         else {
             faveVenuesHandler.nameChange(currUserHandler.getcurrUser().getUsername(), desiredUsername);
             currUserHandler.changeUserName(desiredUsername);
-            sendResponse("NAMECHANGED", true);
+            sendResponse("NAMECHANGED", true, true);
         }
     }
 
@@ -770,7 +825,7 @@ public class Server {
         //If the password entered doesnt match the current password
         if(!(UserSecurity.hashThis(currPass, currUserHandler.getcurrUserSalt()).equals(UserSecurity.hashThis(currUser.getPassword(), currUserHandler.getcurrUserSalt())))){
 
-            sendResponse("INCORRECTPASS", true);
+            sendResponse("INCORRECTPASS", true, true);
         }
         else{
 
@@ -782,7 +837,7 @@ public class Server {
 
             currUser.setPassword(newPass);
 
-            sendResponse("PASSCHANGED", true);
+            sendResponse("PASSCHANGED", true, true);
 
 
 
@@ -810,10 +865,10 @@ public class Server {
             } catch (TransformerException e) {
                 e.printStackTrace();
             }
-            sendResponse("File Deleted", true);
+            sendResponse("File Deleted", true, true);
         }
         else{
-            sendResponse("File Deletion Error", true);
+            sendResponse("File Deletion Error", true, true);
         }
 
 
@@ -850,11 +905,15 @@ public class Server {
             e.printStackTrace();
         }
 
+
+
         //Decrypt the message
         String unencryptedMsg = null;
         try {
+            symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
             unencryptedMsg = new String(symmetricCipher.doFinal(readBytes));
-        } catch (IllegalBlockSizeException | BadPaddingException e) {
+            symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+        } catch (IllegalBlockSizeException | BadPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
 
