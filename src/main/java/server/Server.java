@@ -129,7 +129,7 @@ public class Server {
     private void getClientEncryption() throws IOException {
 
         //Sends the servers public key file to the client
-        sendFile(Path.of(serverPublicKey.getPath()));
+        sendFile(Path.of(serverPublicKey.getPath()), false);
 
         DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 
@@ -372,7 +372,7 @@ public class Server {
             case "GET":
 
                 //Should send file stored at the location of the current directory with the filename provided
-                sendFile(Path.of((CurrDir + slashType + requestSplit[1])));
+                sendFile(Path.of((CurrDir + slashType + requestSplit[1])), true);
 
                 break;
             case "ECHO":
@@ -490,13 +490,16 @@ public class Server {
 
 
     //Sends a file across the socket (after it has been broken down into its bytes)
-    private void sendFile(Path filepath) throws IOException {
+    private void sendFile(Path filepath, Boolean encrypt) throws IOException {
 
-        try {
-            symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
+        if(encrypt){
+            try {
+                symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
         }
+
 
         try {
             System.out.println("File stored at: " + filepath);
@@ -529,7 +532,7 @@ public class Server {
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
             String[] fileTypeSplit = fileType.split("\\.");
-            sendResponse(fileTypeSplit[1], false, true);
+            sendResponse(fileTypeSplit[1], false);
             outputStream.flush();
 
 
@@ -560,7 +563,9 @@ public class Server {
 
             System.out.println("All done!");
 
-            symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+            if(encrypt) {
+                symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
+            }
 
         }catch(NoSuchFileException | InvalidKeyException e){
             System.out.println("File not found");
@@ -616,7 +621,26 @@ public class Server {
     }
 
 
+
+    private void sendResponse(String response, Boolean sendSize) throws IOException {
+
+
         //outputStream.flush();
+        //Turns the string into its byte array
+        byte[] responseInBytes = response.getBytes(StandardCharsets.UTF_8);
+
+            if (sendSize){
+                int sizeOfResponse = responseInBytes.length;
+
+                outputStream.writeByte(sizeOfResponse);
+            }
+
+            outputStream.write(responseInBytes);
+
+
+
+
+    }
 
 
 
