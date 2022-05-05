@@ -155,8 +155,6 @@ public class VenueDetailsController {
         currStage.close();
     }
 
-}
-
     public void checkIfFavourite() {
 
         if(currUser.getFaveVenues() != null){
