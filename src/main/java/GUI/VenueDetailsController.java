@@ -11,6 +11,7 @@ package GUI;
 import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -21,10 +22,12 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
-import serverclientstuff.Utils;
+import serverclientstuff.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class VenueDetailsController {
 
@@ -34,11 +37,14 @@ public class VenueDetailsController {
 
     VenuePage currVenuePage;
 
+    User currUser;
+
     public void setClient(Client client){this.client = client;}
 
-    public void setCurrVenue(String currVenue, VenuePage currVenuePage){
+    public void setCurrVenue(String currVenue, VenuePage currVenuePage, User currUser){
         this.currVenue = currVenue;
         this.currVenuePage = currVenuePage;
+        this.currUser = currUser;
 
         System.out.println(currVenuePage);
         System.out.println(currVenuePage.attributes);
@@ -52,6 +58,11 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage;
     @FXML
+    public Button faveVenueButton;
+
+
+
+    @FXML
     public MenuItem closeButton;
     @FXML
     VBox mainWindow;
@@ -64,6 +75,9 @@ public class VenueDetailsController {
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
+
+
+
     }
 
     //Will use the client to download relevant data and place it into the page.
@@ -127,7 +141,6 @@ public class VenueDetailsController {
         AboutController controller = fxmlLoader.getController();
 
         controller.setVerNum(client.getCurrVersion());
-
         System.out.println("Opening about page");
 
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
@@ -141,5 +154,56 @@ public class VenueDetailsController {
         Stage currStage = (Stage) mainWindow.getScene().getWindow();
         currStage.close();
     }
+
+}
+
+    public void checkIfFavourite() {
+
+        if(currUser.getFaveVenues() != null){
+            if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
+                faveVenueButton.setText("UnFavourite");
+            }
+        }
+
+    }
+
+
+    @FXML
+    public void favouriteButtonAction() throws IOException {
+        if(faveVenueButton.getText().equals("Favourite")){
+            client.addFavouriteVenue(currVenue);
+            faveVenueButton.setText("UnFavourite");
+
+            /* - May be required in the future
+            //Turns the string array into a list
+            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+
+            //Adds the current venue to the current users list of favourite venues clientside
+            faveVenues.add(currVenue);
+
+            currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+
+            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+            */
+        }
+
+        else if(faveVenueButton.getText().equals("UnFavourite")){
+            client.removeFavouriteVenue(currVenue);
+            faveVenueButton.setText("Favourite");
+
+            /* - May be required in the future
+            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+            faveVenues.remove(currVenue);
+            currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+
+            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+
+             */
+        }
+
+
+    }
+
+
 
 }

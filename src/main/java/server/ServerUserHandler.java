@@ -33,16 +33,17 @@ public class ServerUserHandler {
 
 
 
+
         if(autoVerify){
             verifyUser();
         }
     }
 
 
+
+
     public void verifyUser() throws IOException {
         userExistState = findUser();
-
-
 
         //If the user doesn't exist there is no need to  verify the password
         if (userExistState) {

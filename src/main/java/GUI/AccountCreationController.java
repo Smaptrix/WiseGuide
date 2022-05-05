@@ -116,7 +116,7 @@ public class AccountCreationController {
     private void createAccountButtonAction() throws IOException {
 
 
-        //Big check to make sure username and password stuff is correct
+        //Lots of if/elseifs to make sure that the user data stuff is correct
 
         //If the password and the confirmed password don't match
         if(!(passField.getText()).equals(passConfirmField.getText())){
@@ -136,6 +136,14 @@ public class AccountCreationController {
             errLabel.setText("You are not over the age of 13!");
         }
 
+        else if(userField.getLength() > 15){
+            errLabel.setText("username can't be more than 15 characters!");
+        }
+
+        else if(passField.getLength() > 15){
+            errLabel.setText("password can't be more than 15 characters!");
+        }
+
         else{
             errLabel.setText("");
 
@@ -151,8 +159,10 @@ public class AccountCreationController {
                     currStage.close();
 
                 }
+            else {
                 errLabel.setText("User already exists");
-                //TODO - Account creation failed page
+            }
+
             }
         }
 

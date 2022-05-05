@@ -20,6 +20,7 @@ import serverclientstuff.User;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class MainApplication extends Application {
 
@@ -48,6 +49,16 @@ public class MainApplication extends Application {
         controller.setUser(currUser);
 
         controller.loadListOfVenues();
+
+        //Sets the users favourite venues -- as long there are some
+        String[] userFaveVenueList = client.requestFaveVenueList();
+
+
+
+        if(!(userFaveVenueList == null)){
+            currUser.setFaveVenues(userFaveVenueList);
+            System.out.println("Set user faves: " + Arrays.toString(currUser.getFaveVenues()));
+        }
 
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
