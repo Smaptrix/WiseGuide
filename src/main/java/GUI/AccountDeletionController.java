@@ -88,14 +88,15 @@ public class AccountDeletionController {
                 String success = client.deleteUser(currUser);
 
                 if (success.equals("DELETESUCCESS")){
+                    //client.requestLogout();
                     accountDeletedPageOpen();
                 } else {
                     //This should never appear. If it does, something has gone wrong in the code. Could add error codes if needed.
+                    //client.requestLogout();
                     accountDeletedPageOpen();
                     deletedLabel.setText("Something went wrong. ("+success+")");
                 }
 
-                //Open Login Page Here
 
             } else {
                 errLabel.setText("User details are incorrect.");
@@ -115,9 +116,23 @@ public class AccountDeletionController {
 
     @FXML
     //Closes the "Account Deleted!" window.
-    private void closePopupButton(){
+    private void closePopupButton() throws IOException {
         Stage stage = (Stage) closePopUpButton.getScene().getWindow();
         stage.close();
+    }
+
+    //Reopen Login Page (Couldn't get this working)
+    private void reopenLogin() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("login-page.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+        System.out.println("Loaded login page again");
+        LoginController controller = fxmlLoader.getController();
+        controller.initialConnection();
+        stage.setScene(scene);
+        stage.setTitle("Welcome to WiseGuide");
+        stage.show();
+        stage.setResizable(false);
     }
 
     //FOR TESTING PURPOSES: CREATE AN ACCOUNT TO DELETE
