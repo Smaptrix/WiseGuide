@@ -87,14 +87,23 @@ public class VenueOwnerMainPageController {
 
         int numOfFiles = currVenuePage.numberOfElements;
 
+
+
+
         for(int i = 0; i < numOfFiles; i++){
-            String fileName = currVenuePage.children.get(i).children.get(0).attributes.get("include_source");
 
-            int filePathLength = filePathStart.length();
+            String fileName;
 
-            fileName = fileName.substring(filePathLength);
+            if(currVenuePage.children.get(i).include_source != null){
+                fileName = currVenuePage.children.get(i).include_source;
 
-            fileList.getItems().add(fileName);
+                int filePathLength = filePathStart.length();
+
+                fileName = fileName.substring(filePathLength);
+
+                fileList.getItems().add(fileName);
+            }
+
         }
 
     }
