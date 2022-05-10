@@ -94,6 +94,7 @@ public class VenueOwnerMainPageController {
 
             String fileName;
 
+            //TODO - ASK BEN ABOUT GETTING THE INCLUDE SOURCE FOR A TEXT FILE
             if(currVenuePage.children.get(i).include_source != null){
                 fileName = currVenuePage.children.get(i).include_source;
 

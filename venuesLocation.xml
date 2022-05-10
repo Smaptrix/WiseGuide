@@ -28,7 +28,7 @@
         <base:image include_source="Venues/Clubs/Flares_York/Flares3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
         <base:image include_source="Venues/Clubs/Flares_York/Flares4.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image3" disp_duration_s="-1" show_after_s="0" />
         <base:image include_source="Venues/Clubs/Flares_York/Flares5.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image4" disp_duration_s="-1" show_after_s="0" />
-        <base:playable indlude_source="Venues/Clubs/Flares_York/FlaresVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
+        <base:playable include_source="Venues/Clubs/Flares_York/FlaresVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
         <!--
 
         here are the baselines for the other things, playable for some weird reason handles both audio and video:
