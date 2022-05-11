@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   18/02/2022
+    Last Updated:   11/05/2022
+ */
 package GUI;
 
 import javafx.application.Application;
@@ -9,6 +16,9 @@ import mediahandlers.ImageHandler;
 
 import java.io.File;
 
+/**
+ * A test for the ImageHandler developed by Joe
+ */
 public class ImageHandlerTest extends Application {
 
 
