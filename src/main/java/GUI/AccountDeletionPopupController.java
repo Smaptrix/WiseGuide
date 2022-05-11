@@ -2,6 +2,8 @@ package GUI;
 
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -51,6 +53,17 @@ public class AccountDeletionPopupController {
         System.out.println("Attempting to log out the client.");
         client.requestLogout();
         System.out.println("Opening the login page...");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("login-page.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+        System.out.println("Loaded login page again");
+        LoginController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        stage.setScene(scene);
+        stage.setTitle("Welcome to WiseGuide");
+        stage.show();
+        stage.setResizable(false);
 
     }
 

@@ -134,42 +134,6 @@ public class AccountDeletionController {
         stage.show();
     }
 
-    /*Closes the "Account Deleted!" window. -- Moved to PopupController
-    @FXML
-    private void closePopUpButton() throws IOException {
-
-        System.out.println("The popup button was pressed.");
-        if(client == null){
-            System.out.println("CPB: The client is null! What happened?");
-        } else {
-            System.out.println("CPB: Client is not null.");
-        }
-        Stage stage = (Stage) closePopUpButton.getScene().getWindow();
-        stage.close();
-
-        reopenLogin(this.client);
-    }*/
-
-    //Reopen Login Page
-    private void reopenLogin(Client client) throws IOException {
-        //TODO: Client is not transferred because it randomly gets set to null at some point
-        // and I can't figure out where or why this happens.
-        System.out.println("Attempting to log out the client.");
-        client.requestLogout();
-        System.out.println("Opening the login page...");
-        //Reopens the login page
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("login-page.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load(), 640, 400);
-        System.out.println("Loaded login page again");
-        LoginController controller = fxmlLoader.getController();
-        controller.setClient(client);
-        stage.setScene(scene);
-        stage.setTitle("Welcome to WiseGuide");
-        stage.show();
-        stage.setResizable(false);
-    }
-
     //FOR TESTING PURPOSES: CREATE AN ACCOUNT TO DELETE
     public void createDeletionTestAccount() throws IOException {
         User testingUser = new User("accountDeletionTestUser","accountDeletionTest");
