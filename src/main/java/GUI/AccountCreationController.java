@@ -162,17 +162,17 @@ public class AccountCreationController {
 
             if(client.createUser(currUser).equals("USERCREATED")){
 
-                    accountCreatedPageOpen();
+                accountCreatedPageOpen();
 
-                    //Close the current page
-                    Stage currStage = (Stage) createAccountButton.getScene().getWindow();
-                    currStage.close();
+                //Close the current page
+                Stage currStage = (Stage) createAccountButton.getScene().getWindow();
+                currStage.close();
 
-                }
-                errLabel.setText("This username is taken.");
-                //TODO - Account creation failed page
             }
+            errLabel.setText("This username is taken.");
+            //TODO - Account creation failed page
         }
+    }
 
 
 

@@ -50,7 +50,7 @@ public class Server {
         clientSocket = serverSocket.accept();
         System.out.println("After accept\n");
 
-         //Reads text from the buffer
+        //Reads text from the buffer
         inText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
         //Writes pure file bytes to output socket
@@ -108,8 +108,8 @@ public class Server {
                     System.out.println("Request Received: " + inputLine);
 
                     requestParser(inputLine);
+                }
             }
-        }
 
         }catch (SocketException e){
             System.out.println("Lost connnection to client");
@@ -185,7 +185,7 @@ public class Server {
                 currUserHandler.setUserType("VENUE");
                 receiveLogin(1);
                 break;
-                
+
             case "DELETEVENUEFILE":
                 currUserHandler.setUserType("VENUE");
                 deleteVenueFile();
@@ -356,7 +356,7 @@ public class Server {
 
 
             //If the user exists grab there salt then encrypt there data
-           //Breaks if user has no salt
+            //Breaks if user has no salt
             if(currUserHandler.userExistState){
                 currUser.setSalt(currUserHandler.getcurrUserSalt());
                 currUser.encryptUserInfo();
@@ -406,6 +406,7 @@ public class Server {
 
         //User Deletion Mode
         else if(mode == 3){
+            System.out.println("The server is attempting to delete the user.");
             boolean deleteSuccess = currUserHandler.deleteUser();
             if (deleteSuccess){
                 sendResponse("DELETESUCCESS",true);

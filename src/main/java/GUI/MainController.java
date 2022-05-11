@@ -117,7 +117,7 @@ public class MainController {
             currentItemSelected = venueList.getSelectionModel()
                     .getSelectedItem();
         } else {
-                currentItemSelected = selectedItem;
+            currentItemSelected = selectedItem;
         }
 
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
@@ -247,10 +247,10 @@ public class MainController {
 
         //Doesn't try to close a connection that isn't there
         if(client.isConnected()) {
-           client.closeConnection(); // Closes client connection safely.
+            client.closeConnection(); // Closes client connection safely.
         }
-            System.exit(0);
-          //Platform.exit();
+        System.exit(0);
+        //Platform.exit();
     }
 
 
@@ -330,24 +330,24 @@ public class MainController {
     protected void loadListOfVenues() {
 
 
-            //Tries to download the venue lists from the server
-            try {
-                client.requestVenueXMLFile();
-                System.out.println("OUT");
-            } catch (IOException e) {
-                System.out.print("Failed to download venue lists");
-            }
-        
+        //Tries to download the venue lists from the server
+        try {
+            client.requestVenueXMLFile();
+            System.out.println("OUT");
+        } catch (IOException e) {
+            System.out.print("Failed to download venue lists");
+        }
 
 
 
-    //Provides the controller with the list of venue types it should expect
-    xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
 
-    List<String> venueNameList = xml.getPageNames();
+        //Provides the controller with the list of venue types it should expect
+        xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
+
+        List<String> venueNameList = xml.getPageNames();
 
 
-    //Iterates through every venue name and adds it to the menu item
+        //Iterates through every venue name and adds it to the menu item
         for (String s : venueNameList) {
 
             //Strips the header and final quotation mark from each title

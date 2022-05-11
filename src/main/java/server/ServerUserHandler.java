@@ -71,6 +71,9 @@ public class ServerUserHandler {
     }
 
     public boolean deleteUser() throws IOException {
+
+        System.out.println("Opening the files...");
+
         File database = new File("userDatabase.txt");
         File tempFile = new File("tempDatabase.txt");
         BufferedReader br = new BufferedReader(new FileReader(database));
@@ -78,6 +81,9 @@ public class ServerUserHandler {
         String userToRemove = currUser.getUsername();
         String line;
         //Copies all lines from database into new file EXCEPT for user we wish to delete.
+
+        System.out.println("Removing the user from the database.");
+
         while((line = br.readLine()) != null){
             String[] values = line.split(",");
             if(!(values[0].equals(userToRemove))){
@@ -85,23 +91,33 @@ public class ServerUserHandler {
             }
         }
         //Close buffers and run garbage collection (doesn't work if you don't do the gc! Java bug)
+        System.out.println("Closing the reader...");
         bw.close();
         br.close();
         System.gc();
-        boolean delSuccess = database.delete();
-        boolean renameSuccess = tempFile.renameTo(database);
-        boolean success = !(findUser());
+        bw = null;
+        br = null;
 
         //Identify if there's an issue (FOR DEBUG PURPOSES ONLY)
+
+        //TODO: Deletion sometimes fails for literally no reason.
+
+        boolean delSuccess = database.delete();
         if(!delSuccess) {
             System.out.println("The database deletion was not successful.");
         }
+        boolean renameSuccess = tempFile.renameTo(database);
         if(!renameSuccess) {
             System.out.println("The database rename was not successful.");
         }
+        boolean success = !(findUser());
         if(!success) {
             System.out.println("The user is still in the database.");
         }
+
+
+
+
 
         return (success);
     }
@@ -158,15 +174,15 @@ public class ServerUserHandler {
         }
 
 
-            currUser.setUsername(desiredName);
+        currUser.setUsername(desiredName);
 
-            FileOutputStream out = new FileOutputStream(dataFile);
-            out.write(input.getBytes());
-            out.close();
+        FileOutputStream out = new FileOutputStream(dataFile);
+        out.write(input.getBytes());
+        out.close();
 
-            System.out.println("File closed");
+        System.out.println("File closed");
 
-        }
+    }
 
 
 
@@ -202,7 +218,7 @@ public class ServerUserHandler {
         out.write(input.getBytes());
         out.close();
 
-   }
+    }
 
 
 
@@ -242,10 +258,10 @@ public class ServerUserHandler {
 
 
     public void clear(){
-         currUser = null;
-         userExistState = false;
-         userInfo = null;
-         passVerified = false;
+        currUser = null;
+        userExistState = false;
+        userInfo = null;
+        passVerified = false;
     }
 
     public void setCurrUser(User currUser) {

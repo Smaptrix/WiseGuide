@@ -115,13 +115,13 @@ public class LoginController {
             else{
                 errorLabel.setText("");
 
-               Stage currStage = (Stage) loginButton.getScene().getWindow();
-               currStage.close();
+                Stage currStage = (Stage) loginButton.getScene().getWindow();
+                currStage.close();
 
-               //Opens the main application once you have logged in
-               MainApplication app = new MainApplication();
-               Stage mainStage = new Stage();
-               app.transferInfoAndOpen(mainStage, client, currUser);
+                //Opens the main application once you have logged in
+                MainApplication app = new MainApplication();
+                Stage mainStage = new Stage();
+                app.transferInfoAndOpen(mainStage, client, currUser);
 
             }
         }
@@ -169,6 +169,9 @@ public class LoginController {
     @FXML
     private void venueLoginPageOpen() throws IOException {
 
+        createTestAccount();
+
+        /*
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-login-page.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
@@ -182,7 +185,7 @@ public class LoginController {
 
         Stage currStage = (Stage) errorLabel.getScene().getWindow();
         currStage.close();
-
+*/
 
 
     }
