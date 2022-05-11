@@ -3,13 +3,13 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   27/01/2022
-    Last Updated:   24/02/2022
+    Last Updated:   11/05/2022
  */
 package client;
 
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
-import serverclientstuff.Utils;
+
 
 import javax.crypto.*;
 import java.net.*;
@@ -17,10 +17,10 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
+
+
 import java.security.*;
-import java.security.interfaces.RSAPublicKey;
+
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
@@ -410,7 +410,7 @@ public class Client {
      * </p>
      * @param msg The message to send to the server.
      * @return The message returned by the server.
-     * @throws IOException
+     * @throws IOException if client cannot connect to the server
      */
     public String echoMessage(String msg) throws IOException {
 
@@ -752,12 +752,7 @@ public class Client {
 
         String ack = receiveAcknowledgement(true);
 
-        if(ack.equals("SAMEVER")){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return ack.equals("SAMEVER");
 
 
 
@@ -925,8 +920,7 @@ public class Client {
         String venueListString =  receiveAcknowledgement(true);
 
         if(!(venueListString.equals("EMPTY"))) {
-            String[] venueList = venueListString.split("\\.");
-            return venueList;
+            return venueListString.split("\\.");
         }
 
         else{
@@ -969,7 +963,7 @@ public class Client {
     /**
      * Sends a message to the server (Overload of another function)
      * @param toSend The bytes to sned to the server
-     * @param doEncrypt Whether or not to encrypt the data
+     * @param doEncrypt Whether to encrypt the data
      */
     private void sendMessage(byte[] toSend, boolean doEncrypt){
 
