@@ -18,9 +18,11 @@
       prefWidth="280.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="GUI.AccountDeletionController">
    <AnchorPane prefHeight="152.0" prefWidth="279.0">
-      <Label id="deletedLabel" fx:id="deletedLabel" layoutY="40.0" prefHeight="38.0" prefWidth="279.0" text="Account Deleted" alignment="CENTER"/>
-      <Button id="closePopupButton" fx:id="closePopUpButton" layoutX="113.0" layoutY="97.0" mnemonicParsing="false"
-              onAction="#closePopupButton" text="Okay"/>
+      <Label id="infoLabel1" fx:id="infoLabel1" layoutY="0.0" prefHeight="38.0" prefWidth="279.0" text="An error occurred." alignment="CENTER"/>
+      <Label id="infoLabel2" fx:id="infoLabel2" layoutY="20.0" prefHeight="38.0" prefWidth="279.0" text="The account could not be deleted." alignment="CENTER"/>
+      <Label id="infoLabel3" fx:id="infoLabel3" layoutY="40.0" prefHeight="38.0" prefWidth="279.0" text="(DELETEFAILURE)" alignment="CENTER"/>
+      <Button id="closePopUpButton" fx:id="closePopUpButton" layoutX="113.0" layoutY="97.0" mnemonicParsing="false"
+              onAction="#closePopUpButton" text="Okay"/>
    </AnchorPane>
 
    <stylesheets>

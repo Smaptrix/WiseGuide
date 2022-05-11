@@ -76,6 +76,13 @@ public class ServerUserHandler {
 
         File database = new File("userDatabase.txt");
         File tempFile = new File("tempDatabase.txt");
+
+        if(tempFile.exists()){
+            System.out.println("INFO: The temp database exists.");
+        } else {
+            System.out.println("INFO: The temp database does NOT exist");
+        }
+
         BufferedReader br = new BufferedReader(new FileReader(database));
         BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
         String userToRemove = currUser.getUsername();

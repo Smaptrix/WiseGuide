@@ -43,8 +43,6 @@ public class AccountDeletionController {
     @FXML
     Label infoLabel;
     @FXML
-    Label deletedLabel;
-    @FXML
     public CheckBox delCheckBox;
 
     @FXML
@@ -114,27 +112,36 @@ public class AccountDeletionController {
 
     //Opens the "Account Deleted!" window.
     public void accountDeletedPageOpen(boolean error) throws IOException {
+
+        //Decides which popup to show.
+        //Ideally would have just changed an error message, but couldn't find a way
+        //to edit an element that isn't visible when the controller initializes.
+        String pageToOpen;
+        if(error){
+            pageToOpen = "account-deleted-window-error.fxml";
+        } else {
+            pageToOpen = "account-deleted-window-ok";
+        }
+
         System.out.println("Opening the Account Deleted Page...");
         if(client == null){
             System.out.println("ADPO: The client is null! What happened?");
         } else {
             System.out.println("ADPO: Client is not null.");
         }
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-deleted-window.fxml"));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(pageToOpen));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 280, 155);
         stage.setScene(scene);
         stage.setTitle("Account Deleted");
         stage.show();
-        if(error){
-            //TODO: This doesn't work.
-            deletedLabel.setText("Something went wrong.");
-        }
     }
 
-    @FXML
     //Closes the "Account Deleted!" window.
-    private void closePopupButton() throws IOException {
+    @FXML
+    private void closePopUpButton() throws IOException {
+
         System.out.println("The popup button was pressed.");
         if(client == null){
             System.out.println("CPB: The client is null! What happened?");
