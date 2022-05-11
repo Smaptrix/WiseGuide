@@ -16,9 +16,11 @@
 <?import java.net.URL?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0"
       prefWidth="280.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.AccountDeletionController">
+      fx:controller="GUI.AccountDeletionPopupController">
    <AnchorPane prefHeight="152.0" prefWidth="279.0">
-      <Label id="infoLabel" fx:id="infoLabel" layoutY="40.0" prefHeight="38.0" prefWidth="279.0" text="Account Deleted" alignment="CENTER"/>
+      <Label id="infoLabel0" fx:id="infoLabel0" layoutY="0.0" prefHeight="38.0" prefWidth="279.0" text="" alignment="CENTER"/>
+      <Label id="infoLabel1" fx:id="infoLabel1" layoutY="20.0" prefHeight="38.0" prefWidth="279.0" text="" alignment="CENTER"/>
+      <Label id="infoLabel2" fx:id="infoLabel2" layoutY="40.0" prefHeight="38.0" prefWidth="279.0" text="Account Deleted" alignment="CENTER"/>
       <Button id="closePopUpButton" fx:id="closePopUpButton" layoutX="113.0" layoutY="97.0" mnemonicParsing="false"
               onAction="#closePopUpButton" text="Okay"/>
    </AnchorPane>

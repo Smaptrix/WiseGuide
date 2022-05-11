@@ -113,32 +113,28 @@ public class AccountDeletionController {
     //Opens the "Account Deleted!" window.
     public void accountDeletedPageOpen(boolean error) throws IOException {
 
-        //Decides which popup to show.
-        //Ideally would have just changed an error message, but couldn't find a way
-        //to edit an element that isn't visible when the controller initializes.
-        String pageToOpen;
-        if(error){
-            pageToOpen = "account-deleted-window-error.fxml";
-        } else {
-            pageToOpen = "account-deleted-window-ok";
-        }
-
         System.out.println("Opening the Account Deleted Page...");
+
         if(client == null){
             System.out.println("ADPO: The client is null! What happened?");
         } else {
             System.out.println("ADPO: Client is not null.");
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(pageToOpen));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-deleted-window-ok.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 280, 155);
         stage.setScene(scene);
         stage.setTitle("Account Deleted");
+
+        AccountDeletionPopupController popupController = fxmlLoader.getController();
+        popupController.setClient(client);
+        popupController.setMessage(error);
+
         stage.show();
     }
 
-    //Closes the "Account Deleted!" window.
+    /*Closes the "Account Deleted!" window. -- Moved to PopupController
     @FXML
     private void closePopUpButton() throws IOException {
 
@@ -152,7 +148,7 @@ public class AccountDeletionController {
         stage.close();
 
         reopenLogin(this.client);
-    }
+    }*/
 
     //Reopen Login Page
     private void reopenLogin(Client client) throws IOException {
