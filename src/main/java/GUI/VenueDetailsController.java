@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   09/03/2022
-    Last Updated:   09/03/2022
+    Last Updated:   11/05/2022
  */
 
 package GUI;
@@ -29,19 +29,45 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Controls the venue details page
+ */
 public class VenueDetailsController {
 
+    /**
+     * The client that the GUI is using to connect to the server
+     */
     Client client;
 
+    /**
+     * The venue that the venue details page is displaying the details of
+     */
     String currVenue;
 
+    /**
+     * The current venue page xml which is being displayed
+     */
     VenuePage currVenuePage;
 
+    /**
+     * The user that is currently logged into the application
+     */
     User currUser;
 
+    /**
+     * Sets the client to be used by the controller to communicate with the server
+     * @param client
+     */
     public void setClient(Client client){this.client = client;}
 
+    /**
+     * Sets the current venue for the controller
+     * @param currVenue The current venue that the program is dispalying the details of
+     * @param currVenuePage The xml data for the current venue page
+     * @param currUser The current user logged into the application
+     */
     public void setCurrVenue(String currVenue, VenuePage currVenuePage, User currUser){
+        //Sets the relevant data
         this.currVenue = currVenue;
         this.currVenuePage = currVenuePage;
         this.currUser = currUser;
@@ -50,6 +76,7 @@ public class VenueDetailsController {
         System.out.println(currVenuePage.attributes);
         System.out.println(currVenuePage.children.get(0).attributes.get("include_source"));
     }
+
 
     @FXML
     public Label venueName;
