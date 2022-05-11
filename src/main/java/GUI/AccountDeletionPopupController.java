@@ -14,6 +14,10 @@ public class AccountDeletionPopupController {
 
     private Client client;
     public void setClient(Client client){ this.client = client; };
+    private boolean testingMode = false;
+    public void setTestingMode(boolean mode){ this.testingMode = mode; };
+    public boolean buttonPressed = false; //For testing purposes
+    private boolean nullClientDetected = false;
 
 
     @FXML
@@ -30,18 +34,29 @@ public class AccountDeletionPopupController {
 
     public void closePopUpButton() throws IOException {
 
-        if(client == null){
-            System.out.println("The client is null");
-        }
-
-        //Close popup window
+        buttonPressed = true;
         Stage stage = (Stage) closePopUpButton.getScene().getWindow();
-        stage.close();
-        reopenLoginPage();
 
+        if(testingMode){
+            setErrorMessage(true);
+        } else if(!nullClientDetected){
+            if(client != null){
+                //Close popup window
+                stage.close();
+                reopenLoginPage();
+            } else {
+                nullClientDetected = true;
+                infoLabel0.setText("An error occurred.");
+                infoLabel1.setText("The connection to the server was lost.");
+                infoLabel2.setText("WiseGuide will be closed.");
+                //App will close when user next presses button.
+            }
+        } else {
+            stage.close();
+        }
     }
 
-    public void setMessage(boolean error){
+    public void setErrorMessage(boolean error){
         if(error){
             infoLabel0.setText("An error occurred.");
             infoLabel1.setText("The account could not be deleted.");

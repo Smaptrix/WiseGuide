@@ -129,7 +129,7 @@ public class AccountDeletionController {
 
         AccountDeletionPopupController popupController = fxmlLoader.getController();
         popupController.setClient(client);
-        popupController.setMessage(error);
+        popupController.setErrorMessage(error);
 
         stage.show();
     }

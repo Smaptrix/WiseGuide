@@ -80,7 +80,7 @@ public class AccountDeletionTests extends ApplicationTest {
         write("accountDeletionTest");
         clickOn("#delCheckBox");
         clickOn("#deleteAccountButton");
-        clickOn("#closePopupButton");
+        clickOn("#closePopUpButton");
     }
 
     //Unit Test | Confirm Error Field is not displayed
