@@ -121,7 +121,7 @@ public class AccountDeletionController {
             System.out.println("ADPO: Client is not null.");
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-deleted-window-ok.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-deleted-window.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 280, 155);
         stage.setScene(scene);
