@@ -4,17 +4,34 @@ import java.io.*;
 import java.util.*;
 
 
-//Controls the hashmap textfile which contains every users favourite venues
+/**
+ * <p>
+ *     Controls the hashmap textfile which contains every users favourite venues
+ * </p>
+ */
+
 public class FaveVenuesHandler {
 
-    //Filepath to the favourite venue file
+    /**
+     *<p>
+     *      Contains the list of every users favourite venues
+     *</p>
+     */
     File faveVenueFile;
-    //The hashmap that contains the user as a key, and then the list of venues as the value
+    /**
+     * <p>
+     *     The users username is the key, the value is the list of venues
+     * </p>
+     */
     HashMap<String, String[]> faveVenueMap;
 
 
-
-    //Constructor for this class
+    /**
+     * <p>
+     *     The constructor
+     * </p>
+     * @param faveVenueFile
+     */
     public FaveVenuesHandler(File faveVenueFile){
         this.faveVenueFile = faveVenueFile;
         //Loads the hashmap from the textfile
@@ -25,7 +42,13 @@ public class FaveVenuesHandler {
         }
     }
 
-    //Adds a new favourite venue to the users list
+    /**
+     * <p>
+     *     Adds a new favourite venue to the users list
+     * </p>
+     * @param username the users username
+     * @param venueName the name of the venue to be favourited
+     */
     public void addFaveVenue(String username, String venueName){
 
         //Makes sure a user exists in the hashmap
@@ -46,7 +69,13 @@ public class FaveVenuesHandler {
         saveHashMap();
     }
 
-    //Removes a users favourite venue from there favourites list
+    /**
+     * <p>
+     *     Removes a users favourite venue from there favourites list
+     * </p>
+     * @param username the users username
+     * @param venueName the name of the venue
+     */
     public void removeFaveVenue(String username, String venueName){
         //If a user doesn't exist dont do anything
         if(!faveVenueMap.containsKey(username)){
@@ -71,7 +100,12 @@ public class FaveVenuesHandler {
 
     }
 
-    //Adds a new user to the hashmap
+    /**
+     * <p>
+     *     Adds a new user to the hashmap
+     * </p>
+     * @param username the users username
+     */
     public void addUser(String username){
 
         //Makes sure that the user isn't already in there
@@ -81,7 +115,12 @@ public class FaveVenuesHandler {
         }
     }
 
-    //Removes a user from the hashmap
+    /**
+     * <p>
+     *     Removes a user from the hashmap
+     * </p>
+     * @param username the users username
+     */
     public void removeUser(String username){
 
         //Makes sure that the user is in the list before trying to delete them
@@ -92,7 +131,11 @@ public class FaveVenuesHandler {
         }
     }
 
-    //Saves the hashmap into a text file
+    /**
+     * <p>
+     *     Saves the hashmap into a text file
+     * </p>
+     */
     private void saveHashMap(){
 
         try {
@@ -124,7 +167,12 @@ public class FaveVenuesHandler {
 
     }
 
-    //Opens the file and interprets the hashmap
+    /**
+     * <p>
+     *     Opens the text file and interprets the hashmap
+     * </p>
+     * @throws IOException
+     */
     private void loadHashMap() throws IOException {
 
         //Initialises the hashmap
@@ -157,7 +205,13 @@ public class FaveVenuesHandler {
 
     }
 
-
+    /**
+     * <p>
+     *     Returns the favourite venue list for a given user
+     * </p>
+     * @param username the users username
+     * @return The list of venues as a string with a fullstop between each venue name
+     */
     public String faveVenueList(String username){
 
         //Checks to make sure the user is in there first
@@ -184,6 +238,13 @@ public class FaveVenuesHandler {
     }
 
 
+    /**
+     * <p>
+     *     Changes the name of a user in the favourite venue list to represent there new name
+     * </p>
+     * @param oldUsername the old uesrname of the user
+     * @param newUsername the new username of the user
+     */
     public void nameChange(String oldUsername, String newUsername){
 
         if(faveVenueMap.containsKey(oldUsername)) {

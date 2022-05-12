@@ -14,21 +14,29 @@ import java.io.File;
 
 
 /**
- * This handles loading images and placing them onto the GUI
+ * <p>
+ *     This handles loading images and placing them onto the GUI
+ * </p>
  */
 public class ImageHandler extends MediaHandler{
 
     /**
-     * The current image
+     * <p>
+     *     The current image
+     * </p>
      */
     Image currImage;
     /**
-     * The place where we wish to display the image
+     * <p>
+     *     The place where we wish to display the image
+     * </p>
      */
     ImageView desiredView;
 
     /**
-     * The constructor for the ImageHandler
+     * <p>
+     *     The constructor for the ImageHandler
+     * </p>
      * @param filePath the filepath to the image
      * @param desiredView the view that we want to display the image in
      */
@@ -40,14 +48,18 @@ public class ImageHandler extends MediaHandler{
 
 
     /**
-     * This loads the image from the given filepath
+     * <p>
+     *     This loads the image from the given filepath
+     * </p>
      */
     private void imageFromFile(){
       currImage = new Image(filePath.toURI().toString());
     }
 
     /**
-     * This places the current image into the image view
+     * <p>
+     *     This places the current image into the image view
+     * </p>
      */
     private void intoImgView(){
         desiredView.setImage(currImage);
