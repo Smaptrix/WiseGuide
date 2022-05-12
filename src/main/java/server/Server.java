@@ -802,7 +802,9 @@ public class Server {
 
 
     /**
-     * Recieves the login information from the client
+     * <p>
+     *     Recieves the login information from the client
+     * </p>
      * @param mode decides whether it verifies user data or logs in
      * @throws IOException if the server loses connection with the client
      */
