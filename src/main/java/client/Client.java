@@ -30,73 +30,99 @@ import java.util.*;
 
 
 /**
- * Client class handles the client side application operation methods.
+ * <p>
+ *     Client class handles the client side application operation methods.
+ * </p>
  */
 public class Client {
 
 
     /**
-     * CLIENTVERSION is the current version of the client
+     * <p>
+     *     CLIENTVERSION is the current version of the client
+     * </p>
      */
     private static final String CLIENTVERSION = "Ver 0.60";
 
     /**
-     * clientSocket is the client side socket.
+     * <p>
+     *     clientSocket is the client side socket.
+     * </p>
      */
     private Socket clientSocket;
 
     /**
-     * outStream is an output stream that allows the client to send bytes to the server
+     * <p>
+     *     outStream is an output stream that allows the client to send bytes to the server
+     * </p>
      */
     private OutputStream outStream;
     //Only need a printWriter as we won't be sending files back to the server, just text requests
 
     /**
-     * inputStream allows reading of the files sent by the server.
+     * <p>
+     *     inputStream allows reading of the files sent by the server.
+     * </p>
      */
     private InputStream inputStream;
     //InputStream to read files
 
     /**
-     * connected is a boolean that stores whether the client is connected to the server.
+     * <p>
+     *     connected is a boolean that stores whether the client is connected to the server.
+     * </p>
      */
     private boolean connected;
 
     /**
-     * sameversion is a boolean that stores whether the client and server are the same version
+     * <p>
+     *     sameversion is a boolean that stores whether the client and server are the same version
+     * </p>
      */
 
     private boolean sameVersion;
 
 
     /**
-     * fileLocations stores where all the files are located.
+     * <p>
+     *     fileLocations stores where all the files are located.
+     * </p>
      */
     public Map<String, File> fileLocations = new HashMap<>();
 
     /**
-     * serverPublicKey stores the public key of the server
+     * <p>
+     *     serverPublicKey stores the public key of the server
+     * </p>
      */
     private PublicKey serverPublicKey;
 
 
     /**
-     * symKey is they symmetric key used for communciation between the server & client
+     * <p>
+     *     symKey is they symmetric key used for communciation between the server & client
+     * </p>
      */
     private SecretKey symKey;
     /**
-     * symmetricKeyFile is the file that contains the symmetric key
+     * <p>
+     *     symmetricKeyFile is the file that contains the symmetric key
+     * </p>
      */
     private File symmetricKeyFile;
 
     /**
-     * symmetricCIpher is the cipher that is used to encrypt/decrypt communications
+     * <p>
+     *     symmetricCipher is the cipher that is used to encrypt/decrypt communications
+     * </p>
      */
     private Cipher symmetricCipher;
 
 
     /**
-     * faveVenues is a list of the current users favorite venues
+     * <p>
+     *     faveVenues is a list of the current users favorite venues
+     * </p>
      */
     private String[] faveVenues;
 
@@ -162,7 +188,9 @@ public class Client {
     }
 
     /**
-     * Generates a random symmetric key for use in the session
+     * <p>
+     *     Generates a random symmetric key for use in the session
+     * </p>
      * @throws NoSuchAlgorithmException if the specified algorithm does not exist
      */
     private void generateSymmetricKey() throws NoSuchAlgorithmException {
@@ -174,7 +202,9 @@ public class Client {
 
 
     /**
-     * Gets the servser public key for use of encrypting the generated symmetric key
+     * <p>
+     *     Gets the servser public key for use of encrypting the generated symmetric key
+     * </p>
      * @throws IOException if the connection is not available
      */
     private void getServerEncryption() throws IOException {
@@ -233,7 +263,9 @@ public class Client {
     }
 
     /**
-     * Encodes the gneerated symmetric key and sends it to the server for the current session
+     * <p>
+     *     Encodes the generated symmetric key and sends it to the server for the current session
+     * </p>
      * @throws NoSuchPaddingException If the given padding type does not exist
      * @throws NoSuchAlgorithmException If the given alogirthm does not exist
      * @throws InvalidKeyException If the given key is incorrect/invalid
@@ -313,7 +345,9 @@ public class Client {
 
 
     /**
-     * This function is used to validate that the server has the same symmetric key
+     * <p>
+     *     This function is used to validate that the server has the same symmetric key
+     * </p>
      * @return True - The server key has been validated. False - The server key hasn't been validated
      * @throws IOException If the client cannot connect to the server
      */
@@ -766,7 +800,9 @@ public class Client {
     }
 
     /**
-     * Requests the files from the server containing the list of the venues
+     * <p>
+     *     Requests the files from the server containing the list of the venues
+     * </p>
      */
     public void requestVenueXMLFile() throws IOException {
 
@@ -776,7 +812,9 @@ public class Client {
 
 
     /**
-     * Gives the directory path for the required file
+     * <p>
+     *     Gives the directory path for the required file
+     * </p>
      * @param fileName name of the file you desire to fine
      * @return the directory path of specified file
      */
@@ -787,7 +825,9 @@ public class Client {
     }
 
     /**
-     * Requests that the server change a users username
+     * <p>
+     *     Requests that the server change a users username
+     * </p>
      * @param desiredUsername the new name that the user would like
      * @return the result of the name change
      * @throws IOException if the client cannot connect to the server
@@ -807,7 +847,9 @@ public class Client {
 
 
     /**
-     * Requests that the server change a users password
+     * <p>
+     *     Requests that the server change a users password
+     * </p>
      * @param enteredPassword the users current password
      * @param newPassword the users new password
      * @return the result of the password change on the server
@@ -828,7 +870,9 @@ public class Client {
 
 
     /**
-     * Attempts to log a venue into the server
+     * <p>
+     *     Attempts to log a venue into the server
+     * </p>
      * @param venueName the name of the venue logging in
      * @param venuePass the password of the venue logging in
      * @return the result of the login request
@@ -845,7 +889,9 @@ public class Client {
 
 
     /**
-     * Requests that the server delete a file pertaining to the currently logged in venue
+     * <p>
+     *     Requests that the server delete a file pertaining to the currently logged in venue
+     * </p>
      * @param filePath the filepath to the file that the venue would like to delete
      * @return the result of deleting the file on the server
      * @throws IOException if the client cannot connect to the server
@@ -877,7 +923,6 @@ public class Client {
 
 
     /**
-     *
      * @return The connection status to the server
      */
     public boolean isConnected() {
@@ -885,13 +930,11 @@ public class Client {
     }
 
     /**
-     *
      * @return The current version of the client
      */
     public String getCurrVersion() {return CLIENTVERSION;}
 
     /**
-     *
      * @return the boolean of whether the server/client pair are the same version
      */
     public boolean isSameVersion() {
@@ -900,7 +943,9 @@ public class Client {
 
 
     /**
-     * Checks to see if a file is already downloaded
+     * <p>
+     *     Checks to see if a file is already downloaded
+     * </p>
      * @param fileName The name of the file being checked
      * @return True - The file is downloaded. False - The file has not been downloaded
      */
@@ -916,7 +961,9 @@ public class Client {
     }
 
     /**
-     * Requests the current users favourite venues
+     * <p>
+     *     Requests the current users favourite venues
+     * </p>
      * @return the list of the users favourite venues
      * @throws IOException If the client cannot connect to the server
      */
@@ -936,7 +983,9 @@ public class Client {
 
 
     /**
-     * Requests that the server add a new venue to the current users favourite list
+     * <p>
+     *     Requests that the server add a new venue to the current users favourite list
+     * </p>
      * @param venueName the name of the venue to be added to the list
      * @throws IOException if the client cannot connect to the server
      */
@@ -952,7 +1001,9 @@ public class Client {
     }
 
     /**
-     * Requests that the server remove a venue from the current users favourite list
+     * <p>
+     *     Requests that the server remove a venue from the current users favourite list
+     * </p>
      * @param venueName the name of the venue to be removed from the list
      * @throws IOException if the client cannot connect to the server
      */
@@ -967,7 +1018,9 @@ public class Client {
 
 
     /**
-     * Sends a message to the server (Overload of another function)
+     * <p>
+     *     Sends a message to the server (Overload of another function)
+     * </p>
      * @param toSend The bytes to sned to the server
      * @param doEncrypt Whether to encrypt the data
      */
@@ -1006,7 +1059,9 @@ public class Client {
 
 
     /**
-     * A wrapper to send messages to the server
+     * <p>
+     *     A wrapper to send messages to the server
+     * </p>
      * @param toSend the string to send to the server
      * @param doEncrypt whether you want to encrypt the message or not
      */

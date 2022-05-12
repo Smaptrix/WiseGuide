@@ -12,20 +12,26 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 /**
- * Controls the about page of the GUI
+ * <p>
+ *     Controls the about page of the GUI
+ * </p>
  */
 public class AboutController {
 
 
     /**
-     * The label that displays the current version number
+     * <p>
+     *     The label that displays the current version number
+     * </p>
      */
     @FXML
     Label verNumLabel;
 
 
     /**
-     * Sets the current version number
+     * <p>
+     *     Sets the current version number
+     * </p>
      * @param verString the current version number
      */
     public void setVerNum(String verString){

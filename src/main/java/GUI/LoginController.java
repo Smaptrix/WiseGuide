@@ -33,14 +33,23 @@ import java.io.IOException;
  */
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * <p>
+ *     This controls the login page of the GUI
+ * </p>
+ */
 public class LoginController {
 
     /**
-     * The client being used by the GUI
+     * <p>
+     *     The client being used by the GUI
+     * </p>
      */
     public Client client;
     /**
-     * The user being used by the controller - not filled until logged in
+     * <p>
+     *     The user being used by the controller - not filled until logged in
+     * </p>
      */
     protected User currUser;
 
@@ -50,50 +59,68 @@ public class LoginController {
     }
 
     /**
-     * The text field where the user can enter their password
+     * <p>
+     *     The text field where the user can enter their password
+     * </p>
      */
     @FXML
     PasswordField userPassField;
     /**
-     * The text field where the user can enter their username
+     * <p>
+     *     The text field where the user can enter their username
+     * </p>
      */
     @FXML
     TextField userTextField;
     /**
-     * The button a user can press if they wish to create an account
+     * <p>
+     *     The button a user can press if they wish to create an account
+     * </p>
      */
     @FXML
     Button createAccButton;
     /**
-     * The button a user presses if they wish to log in
+     * <p>
+     *     The button a user presses if they wish to log in
+     * </p>
      */
     @FXML
     Button loginButton;
 
     /**
-     * The close button on the menu
+     * <p>
+     *     The close button on the menu
+     * </p>
      */
     @FXML
     MenuItem menuClose;
     /**
-     * The label which displays error information
+     * <p>
+     *     The label which displays error information
+     * </p>
      */
     @FXML
     Label errorLabel;
     /**
-     * The image containing the maptrix logo
+     * <p>
+     *     The image containing the maptrix logo
+     * </p>
      */
     @FXML
     ImageView maptrixLogo;
     /**
-     * The button on the menubar which lets you see your details
+     * <p>
+     *     The button on the menubar which lets you see your details
+     * </p>
      */
     @FXML
     MenuItem accountDetailsButton;
 
 
     /**
-     * This function runs at the start of the page opening
+     * <p>
+     *     This function runs at the start of the page opening
+     * </p>
      */
     @FXML
     //Always called by the FXML Loader
@@ -102,7 +129,9 @@ public class LoginController {
     }
 
     /**
-     * Creates the client object to connect to the server
+     * <p>
+     *     Creates the client object to connect to the server
+     * </p>
      * @throws IOException If the client can't connect to the server
      */
     public void initialConnection() throws IOException {
@@ -113,7 +142,9 @@ public class LoginController {
     }
 
     /**
-     * CLoses the application when the exit button is pressed
+     * <p>
+     *     CLoses the application when the exit button is pressed
+     * </p>
      * @throws IOException If the client cannot connect to the server
      */
     @FXML
@@ -125,10 +156,12 @@ public class LoginController {
         System.exit(0);
     }
 
-    //TODO - MAKE IT SO YOU CANT HAVE SPACES IN ANY OF THE FIELDS
+
 
     /**
-     * When the user presses the button- attempts to log the client into the server
+     * <p>
+     *     When the user presses the button- attempts to log the client into the server
+     * </p>
      * @throws IOException If the client cannot connect to the server
      */
     @FXML
@@ -180,7 +213,9 @@ public class LoginController {
     }
 
     /**
-     * Opens the create account page when the button is pressed
+     * <p>
+     *     Opens the create account page when the button is pressed
+     * </p>
      */
     @FXML
     private void createAccButtonAction() {
@@ -214,7 +249,9 @@ public class LoginController {
 
     //Client field getter and setter, used by testing to create a new testing account manually.
     /**
-     * Sets the client to be used with the controller
+     * <p>
+     *     Sets the client to be used with the controller
+     * </p>
      * @param client The client to give to the controller
      */
     public void setClient(Client client) {
@@ -224,7 +261,9 @@ public class LoginController {
     public Client getClient() { return this.client; }
 
     /**
-     * Opens the venue login page when the "secret" button is pressed
+     * <p>
+     *     Opens the venue login page when the "secret" button is pressed
+     * </p>
      * @throws IOException If the client cannot connect to the server
      */
     @FXML

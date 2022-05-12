@@ -31,77 +31,109 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * The controller for the main page of the application
+ * <p>
+ *     The controller for the main page of the application
+ * </p>
  */
 public class MainController {
 
     /**
-     * The client  being used by the GUI to conect to the sever
+     * <p>
+     *     The client  being used by the GUI to conect to the sever
+     * </p>
      */
     private Client client;
 
     /**
-     * The current user that is logged into the application
+     * <p>
+     *     The current user that is logged into the application
+     * </p>
      */
     private User currUser;
 
     /**
-     * The xml file containing all of the venue data
+     * <p>
+     *     The xml file containing all of the venue data
+     * </p>
      */
     private VenueXMLParser xml;
 
     /**
-     * The currently selected venue in the list in the sidebar
+     * <p>
+     *     The currently selected venue in the list in the sidebar
+     * </p>
      */
     private String selectedItem;
 
     /**
-     * The map we desire to display
+     * <p>
+     *     The map we desire to display
+     * </p>
      */
     protected String desiredMap = "baseMap";
 
     /**
-     * The mouses position on the screen
+     * <p>
+     *     The mouses position on the screen
+     * </p>
      */
     public int mouseX;
     public int mouseY;
 
     /**
-     * The main map image
+     * <p>
+     *     The main map image
+     * </p>
      */
     Image baseMapImage;
     /**
-     * The central  of york central image map
+     * <p>
+     *     The central  of york central image map
+     * </p>
      */
     Image centralCentralYorkImage;
     /**
-     * The central york image map
+     *<p>
+     *      The central york image map
+     *</p>
      */
     Image centralYorkImage;
     /**
-    The heslington east image map
+    *   <p>
+     *  The heslington east image map
+     *</p>
      */
     Image hesEastImage;
     /**
-     * The south east york image map
+     * <p>
+     *     The south east york image map
+     * </p>
      */
     Image SEYorkImage;
     /**
-     * The south of central york image map
+     * <p>
+     *     The south of central york image map
+     * </p>
      */
     Image southCentralYorkImage;
     /**
-     * The west of central york image map
+     * <p>
+     *     The west of central york image map
+     * </p>
      */
     Image westCentralYorkImage;
 
     /**
-     * The current object selected in the list in the sidebar
+     * <p>
+     *     The current object selected in the list in the sidebar
+     * </p>
      */
     Object currentItemSelected = new Object();
 
     /**
-     * Sets the client to be used by the main application
+     * <p>
+     *     Sets the client to be used by the main application
+     * </p>
      * @param client The client to be used
      */
     public void setClient(Client client) {
@@ -109,7 +141,9 @@ public class MainController {
     }
 
     /**
-     * Sets the user that is logged into the application
+     * <p>
+     *     Sets the user that is logged into the application
+     * </p>
      * @param currUser The user that is logged in
      */
     public void setUser(User currUser) {
@@ -117,55 +151,73 @@ public class MainController {
     }
 
     /**
-     * The button on the menubar which closes the application
+     * <p>
+     *     The button on the menubar which closes the application
+     * </p>
      */
     @FXML
     MenuItem closeButton;
 
     /**
-     * The button on the menubar that lets the user access their details page
+     * <p>
+     *     The button on the menubar that lets the user access their details page
+     * </p>
      */
     @FXML
     MenuItem accDetailsButton;
 
     /**
-     * The button on the menubar that lets the user logout of the application
+     * <p>
+     *     The button on the menubar that lets the user logout of the application
+     * </p>
      */
     @FXML
     MenuItem signOutButton;
 
     /**
-     * The uhhhh - Will what is this?
+     * <p>
+     *     The uhhhh - Will what is this?
+     * </p>
      */
     @FXML
     VBox mainWindow;
 
     /**
-     * The button on the menubar that allows the user to access the about page
+     * <p>
+     *     The button on the menubar that allows the user to access the about page
+     * </p>
      */
     @FXML
     MenuItem aboutButton;
 
     /**
-     * The list on the sidebar which displays the list of venues
+     * <p>
+     *     The list on the sidebar which displays the list of venues
+     * </p>
      */
     @FXML
     ListView venueList;
 
     /**
-     * The image which displays the current map view
+     * <p>
+     *     The image which displays the current map view
+     * </p>
      */
     @FXML
     ImageView mapView;
 
     /**
-     * The controller which controls the map
+     * <p>
+     *     The controller which controls the map
+     * </p>
      */
     MapController mapController;
 
 
     /**
-     * Runs at the start of the
+     * <p>
+     *     Runs at the start of the GUI being opened
+     * </p>
      */
     @FXML
     public void initialize() {
@@ -184,7 +236,9 @@ public class MainController {
     }
 
     /**
-     * Opens the Venue Details Page when a venue is selected.
+     * <p>
+     *     Opens the Venue Details Page when a venue is selected.
+     * </p>
      */
     protected void openSelectedVenue() {
         //Use ListView's getSelected Item
@@ -237,7 +291,9 @@ public class MainController {
     };
 
     /**
-     * Called when a venue is selected on a map?
+     * <p>
+     *     Called when a venue is selected on a map?
+     * </p>
      */
     public void selectVenueOnMap() {
         Point2D mousePosition = new Point2D(mouseX, mouseY);
@@ -251,7 +307,9 @@ public class MainController {
     }
 
     /**
-     * used to select the venue on the main map based on the mouseposition
+     * <p>
+     *     used to select the venue on the main map based on the mouseposition
+     * </p>
      * @param mousePosition The current position of the mouse
      */
     private void baseMapSelecting(Point2D mousePosition) {
@@ -287,7 +345,9 @@ public class MainController {
     }
 
     /**
-     * Map selection for the University of Yorks map
+     * <p>
+     *     Map selection for the University of Yorks map
+     * </p>
      * @param mousePosition The position of the map
      */
     private void UoYMapSelecting(Point2D mousePosition) {
@@ -314,7 +374,9 @@ public class MainController {
     }
 
     /**
-     * Finds the files for the relevant image objects for the map
+     * <p>
+     *     Finds the files for the relevant image objects for the map
+     * </p>
      */
     private void createImageObjects() {
         try {
@@ -334,7 +396,9 @@ public class MainController {
     }
 
     /**
-     * Closes the application when the close button is clicked
+     * <p>
+     *     Closes the application when the close button is clicked
+     * </p>
      * @throws IOException if the client cannot connect to the server
      */
     @FXML
@@ -350,7 +414,9 @@ public class MainController {
 
 
     /**
-     * Opens the account details page if the account details page is clocked
+     * <p>
+     *     Opens the account details page if the account details page is clocked
+     * </p>
      * @throws IOException If the GUI cannot find the fxml page
      */
     @FXML
@@ -371,7 +437,9 @@ public class MainController {
 
 
     /**
-     *Signs the user out of the application when the sign out button is pressed
+     *<p>
+     *     Signs the user out of the application when the sign out button is pressed
+     *</p>
      * @throws IOException If the client cannot connect to the server / or the fxml page cannot be found
      */
     @FXML
@@ -404,7 +472,9 @@ public class MainController {
     }
 
     /**
-     * Opens the about page when the about button is pressed
+     * <p>
+     *     Opens the about page when the about button is pressed
+     * </p>
      * @throws IOException If the GUI cannot find the fxml page
      */
     @FXML
@@ -427,7 +497,9 @@ public class MainController {
 
 
     /**
-     * Loads the list of venues into the listview on the main application
+     * <p>
+     *     Loads the list of venues into the listview on the main application
+     * </p>
      */
     protected void loadListOfVenues() {
 

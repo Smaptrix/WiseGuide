@@ -18,43 +18,59 @@ import serverclientstuff.User;
 import java.io.IOException;
 
 /**
- * Controls the page which the user uses to change their username
+ * <p>
+ *     Controls the page which the user uses to change their username
+ * </p>
  */
 public class ChangeUsernameController {
     /**
-     * The current client
+     * <p>
+     *     The current client
+     * </p>
      */
     Client client;
     /**
-     * The current user
+     * <p>
+     *    The current user
+     * </p>
      */
     User currUser;
 
     /**
-     * The label which displays the current users username
+     * <p>
+     *     The label which displays the current users username
+     * </p>
      */
     @FXML
     Label usernameLabel;
 
     /**
-     * The text field which the user can type there desired name into
+     * <p>
+     *     The text field which the user can type there desired name into
+     * </p>
      */
     @FXML
     TextField desiredNameField;
 
     /**
-     * The label that displays any error information
+     * <p>
+     *     The label that displays any error information
+     * </p>
      */
     @FXML
     Label errLabel;
     /**
-     * The button that ocnfirms the users request
+     * <p>
+     *     The button that confirms the users request
+     * </p>
      */
     @FXML
     Button confirmButton;
 
     /**
-     * This function runs first on the page startup
+     * <p>
+     *     This function runs first on the page startup
+     * </p>
      */
     @FXML
     public void initialize(){
@@ -62,7 +78,9 @@ public class ChangeUsernameController {
     }
 
     /**
-     * Sets the current client for the controller
+     * <p>
+     *     Sets the current client for the controller
+     * </p>
      * @param client the client the controller is going to work with
      */
     public void setClient(Client client) {
@@ -70,7 +88,9 @@ public class ChangeUsernameController {
     }
 
     /**
-     * Sets the current user for the controller
+     * <p>
+     *     Sets the current user for the controller
+     * </p>
      * @param currUser the current user of the controller
      */
     public void setUser(User currUser){
@@ -79,7 +99,9 @@ public class ChangeUsernameController {
     }
 
     /**
-     * Tells the client to request a name change when the button is pressed
+     * <p>
+     *     Tells the client to request a name change when the button is pressed
+     * </p>
      */
     @FXML
     protected void onConfirmButtonPress(){

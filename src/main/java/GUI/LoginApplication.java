@@ -16,7 +16,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 /**
- * The entry point into the applicaiton which opens the login page
+ * <p>
+ *     The entry point into the application which opens the login page
+ * </p>
  */
         public class LoginApplication extends Application {
             @Override

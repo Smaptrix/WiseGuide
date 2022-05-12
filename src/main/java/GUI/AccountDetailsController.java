@@ -13,47 +13,66 @@ import serverclientstuff.User;
 import java.io.IOException;
 
 /**
- * Controls the page that displays the current users information *
+ * <p>
+ *     Controls the page that displays the current users information
+ * </p>
  */
 public class AccountDetailsController {
 
     //TODO - Add password change functionality
 
     /**
-     * The current client being used by the GUI
+     * <p>
+     *     The current client being used by the GUI
+     * </p>
      */
     Client client;
 
     /**
-     * The current user
+     * <p>
+     *     The current user
+     * </p>
      */
     User currUser;
 
     private Stage mapStage;
 
     /**
-     * The label that displays the current users username
+     * <p>
+     *     The label that displays the current users username
+     * </p>
      */
     @FXML
     Label usernameLabel;
 
     /**
-     * The button that the user can press to request a name change
+     * <p>
+     *     The button that the user can press to request a name change
+     * </p>
      */
     @FXML
     Button changeNameButton;
 
     /**
-     * The button that the user can press to request a password change
+     * <p>
+     *     The button that the user can press to request a password change
+     * </p>
      */
     @FXML
     Button changePassButton;
 
+    /**
+     * <p>
+     *     The button that the user can press to delete their account
+     * </p>
+     */
     @FXML
     Button deleteAccountButton;
 
     /**
-     * Runs on page open
+     * <p>
+     *     This function runs at the start of the GUI element opening up
+     * </p>
      */
     @FXML
     public void initialize(){
@@ -61,7 +80,9 @@ public class AccountDetailsController {
     }
 
     /**
-     * Sets the client of this controller
+     * <p>
+     *     Sets the client of this controller
+     * </p>
      * @param client
      */
     public void setClient(Client client) {
@@ -70,7 +91,9 @@ public class AccountDetailsController {
     }
 
     /**
-     * Sets the current user of this controller
+     * <p>
+     *     Sets the current user of this controller
+     * </p>
      * @param currUser the current user
      */
     public void setUser(User currUser) {
@@ -80,8 +103,10 @@ public class AccountDetailsController {
     }
 
     /**
-     * Occurs when the change name button is pressed
-     * Opens the name change page
+     * <p>
+     *     Occurs when the change name button is pressed
+     *     Opens the name change page
+     * </p>
      * @throws IOException if the GUI cannot access the fxml file
      */
     @FXML
@@ -113,7 +138,9 @@ public class AccountDetailsController {
     }
 
     /**
-     * Opens the page which the user cna use to change their password
+     * <p>
+     *     Opens the page which the user cna use to change their password
+     * </p>
      * @throws IOException
      */
     @FXML

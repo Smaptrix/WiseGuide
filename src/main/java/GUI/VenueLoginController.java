@@ -22,52 +22,70 @@ import serverclientstuff.User;
 import java.io.IOException;
 
 /**
- * This Controller controls the venue login page
+ * <p>
+ *     This Controller controls the venue login page
+ * </p>
  */
 public class VenueLoginController {
 
     /**
-     * The client that the GUI uses to communicate with the server
+     * <p>
+     *     The client that the GUI uses to communicate with the server
+     * </p>
      */
     Client client;
 
     /**
-     * The current user that is logged in (Wont be active before logging in)
+     * <p>
+     *     The current user that is logged in (Wont be active before logging in)
+     * </p>
      */
     User currUser;
 
     /**
-     * This text field is where the venue types in their venue name
+     *<p>
+     *      This text field is where the venue types in their venue name
+     *</p>
      */
     @FXML
     TextField venueNameField;
 
     /**
-     * This password field is where the venue types in their password
+     * <p>
+     *     This password field is where the venue types in their password
+     * </p>
      */
     @FXML
     PasswordField venuePassField;
 
     /**
-     * This is the button that the venue user can press to login
+     * <p>
+     *     This is the button that the venue user can press to login
+     * </p>
      */
     @FXML
     Button loginButton;
     /**
-     * This is the button that the user can press to go back to the main page of the application
+     * <p>
+     *     This is the button that the user can press to go back to the main page of the application
+     * </p>
      */
     @FXML
     Button backButton;
 
     /**
-     * This label displays any sort of error message that might pop up
+     * <p>
+     *     This label displays any sort of error message that might pop up
+     * </p>
      */
     @FXML
     Label errLabel;
 
 
     /**
-     * This sets the client to be used by the GUI
+     * <p>
+     *     This sets the client to be used by the GUI
+     * </p>
      * @param client the client that we want the GUI to use
      */
     public void setClient(Client client){
@@ -76,8 +94,10 @@ public class VenueLoginController {
 
 
     /**
-     * The action that occurs when the login button is pressed
-     * This attempts to log the venue user into the server
+     * <p>
+     *     The action that occurs when the login button is pressed
+     *     This attempts to log the venue user into the server
+     * </p>
      * @throws IOException if the client cannot connect to the server
      */
     @FXML
@@ -132,8 +152,10 @@ public class VenueLoginController {
 
 
     /**
-     * The action that occurs when the back button is pressed
-     * This sends the user back to the main application page
+     * <p>
+     *     The action that occurs when the back button is pressed
+     *     This sends the user back to the main application page
+     * </p>
      * @throws IOException If the server cannot connect to the client
      */
     @FXML

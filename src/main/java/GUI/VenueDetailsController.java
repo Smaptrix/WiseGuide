@@ -30,38 +30,52 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Controls the venue details page
+ * <p>
+ *     Controls the venue details page
+ * </p>
  */
 public class VenueDetailsController {
 
     /**
-     * The client that the GUI is using to connect to the server
+     * <p>
+     *     The client that the GUI is using to connect to the server
+     * </p>
      */
     Client client;
 
     /**
-     * The venue that the venue details page is displaying the details of
+     * <p>
+     *     The venue that the venue details page is displaying the details of
+     * </p>
      */
     String currVenue;
 
     /**
-     * The current venue page xml which is being displayed
+     * <p>
+     *     The current venue page xml which is being displayed
+     * </p>
      */
     VenuePage currVenuePage;
 
     /**
-     * The user that is currently logged into the application
+     * <p>
+     *     The user that is currently logged into the application
+     * </p>
      */
     User currUser;
 
     /**
-     * Sets the client to be used by the controller to communicate with the server
+     * <p>
+     *     Sets the client to be used by the controller to communicate with the server
+     * </p>
      * @param client
      */
     public void setClient(Client client){this.client = client;}
 
     /**
-     * Sets the current venue for the controller
+     * <p>
+     *     Sets the current venue for the controller
+     * </p>
      * @param currVenue The current venue that the program is dispalying the details of
      * @param currVenuePage The xml data for the current venue page
      * @param currUser The current user logged into the application
@@ -78,50 +92,68 @@ public class VenueDetailsController {
     }
 
     /**
-     * This label is the label that displays the name of the venue
+     * <p>
+     *     This label is the label that displays the name of the venue
+     * </p>
      */
     @FXML
     public Label venueName;
     /**
-     * This text area is the area that displays the text information regarding the venue
+     * <p>
+     *     This text area is the area that displays the text information regarding the venue
+     * </p>
      */
     @FXML
     public TextArea venueText;
     /**
-     * This ImageView is the place that displays the images of the venue
+     * <p>
+     *     This ImageView is the place that displays the images of the venue
+     * </p>
      */
     @FXML
     public ImageView venueImage;
     /**
-     * This button allows the user to favourite/unfavourite a venue
+     * <p>
+     *     This button allows the user to favourite/unfavourite a venue
+     * </p>
      */
     @FXML
     public Button faveVenueButton;
 
 
     /**
-     * This button is on the menubar and allows the user to close the application
+     * <p>
+     *     This button is on the menubar and allows the user to close the application
+     * </p>
      */
     @FXML
     public MenuItem closeButton;
     /**
-     * This VBox is the box that holds all of the GUI inside of it
+     * <p>
+     *     This VBox is the box that holds all of the GUI inside of it
+     * </p>
      */
     @FXML
     VBox mainWindow;
     /**
-     * This button on the menubar allows the user to open the about page
+     * <p>
+     *     This button on the menubar allows the user to open the about page
+     * </p>
      */
     @FXML
     MenuItem aboutButton;
     /**
-     * This button on the menubar allows the user to go back to the main application
+     * <p>
+     *     This button on the menubar allows the user to go back to the main application
+     * </p>
      */
     @FXML
     MenuItem backButton;
 
     /**
-     * This function is always called by the GUI when it opens up
+     * <p>
+     *     This function is always called by the GUI when it opens up
+     * </p>
      */
     @FXML
     public void initialize() {
@@ -132,7 +164,9 @@ public class VenueDetailsController {
     }
 
     /**
-     * Loads the venue data from the xml file to display on the GUI
+     * <p>
+     *     Loads the venue data from the xml file to display on the GUI
+     * </p>
      * @throws IOException when the client cannot connect to the server
      */
     public void loadVenueData() throws IOException {
@@ -175,8 +209,10 @@ public class VenueDetailsController {
     }
 
     /**
-     * The action that occurs when the close button is pressed.
-     * Closes the application
+     * <p>
+     *     The action that occurs when the close button is pressed.
+     *     Closes the application
+     * </p>
      * @throws IOException If the client is unable to connect to the server
      */
     @FXML
@@ -192,8 +228,10 @@ public class VenueDetailsController {
     }
 
     /**
-     * The action that occurs when the about button is pressed
-     * Opens the about page
+     * <p>
+     *     The action that occurs when the about button is pressed
+     *     Opens the about page
+     * </p>
      * @throws IOException if the client cannot connect to the server
      */
     @FXML
@@ -214,8 +252,10 @@ public class VenueDetailsController {
     }
 
     /**
-     * The action that occurs when the back button is pressed
-     * Goes back to the main application
+     * <p>
+     *     The action that occurs when the back button is pressed
+     *     Goes back to the main application
+     * </p>
      */
     @FXML
     public void onBackButtonPress() {
@@ -224,7 +264,9 @@ public class VenueDetailsController {
     }
 
     /**
-     *This function checks to see if the venue is a user favourite
+     *<p>
+     *     This function checks to see if the venue is a user favourite
+     *</p>
      */
     public void checkIfFavourite() {
 
@@ -237,8 +279,10 @@ public class VenueDetailsController {
     }
 
     /**
-     * This is the action that occurs when the user presses the favourite button
-     * It favourites/unfavourites the venue for the user
+     * <p>
+     *     This is the action that occurs when the user presses the favourite button
+     *     It favourites/unfavourites the venue for the user
+     * </p>
      * @throws IOException if the client cannot connect to the server
      */
     @FXML

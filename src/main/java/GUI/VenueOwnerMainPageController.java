@@ -28,57 +28,79 @@ import java.io.IOException;
 
 
 /**
- * This class controllers the venue owner main page
+ * <p>
+ *     This class controllers the venue owner main page
+ * </p>
  */
 public class VenueOwnerMainPageController {
     /**
-     * This is the client that the GUI is using to communicate with the server
+     * <p>
+     *     This is the client that the GUI is using to communicate with the server
+     * </p>
      */
     private Client client;
     /**
-     * This is the current venue user that is logged in
+     * <p>
+     *     This is the current venue user that is logged in
+     * </p>
      */
     private User currUser;
     /**
-     * This is the start of the filepath for the current device
+     * <p>
+     *     This is the start of the filepath for the current device
+     * </p>
      */
     private String filePathStart;
     /**
-     * This is the parser that reads the xml
+     * <p>
+     *     This is the parser that reads the xml
+     * </p>
      */
     private VenueXMLParser xml;
 
     /**
-     * This is the label that displays the title of the current page
+     *<p>
+     *      This is the label that displays the title of the current page
+     *</p>
      */
     @FXML
     Label titleLabel;
     /**
-     * This is the list that displays the currents files that are stored on the server of the venue
+     * <p>
+     *     This is the list that displays the currents files that are stored on the server of the venue
+     * </p>
      */
     @FXML
     ListView fileList;
 
     /**
-     * This button when pressed opens the currently selected file
+     * <p>
+     *     This button when pressed opens the currently selected file
+     * </p>
      */
     @FXML
     Button openFileButton;
     /**
-     * This button when pressed logs the venue user out
+     * <p>
+     *     This button when pressed logs the venue user out
+     * </p>
      */
     @FXML
     Button logOutButton;
 
     /**
-     * LEGACY -When pressed this button allows the user to add a file to the server - LEGACY
+     * <p>
+     *     LEGACY -When pressed this button allows the user to add a file to the server - LEGACY
+     * </p>
      */
     @FXML
     Button addFileButton;
 
 
     /**
-     * This function runs whenever this controller is opened
+     * <p>
+     *     This function runs whenever this controller is opened
+     * </p>
      */
     @FXML
     public void initialize(){
@@ -87,7 +109,9 @@ public class VenueOwnerMainPageController {
     }
 
     /**
-     * This sets the client to be used by the GUI
+     * <p>
+     *     This sets the client to be used by the GUI
+     * </p>
      * @param client the client we want the GUI to use
      */
     public void setClient(Client client) {
@@ -95,7 +119,9 @@ public class VenueOwnerMainPageController {
     }
 
     /**
-     * This sets the current user to the desired venue user
+     * <p>
+     *     This sets the current user to the desired venue user
+     * </p>
      * @param currUser The venue user that is logged in
      */
     public void setCurrUser(User currUser) {
@@ -107,8 +133,10 @@ public class VenueOwnerMainPageController {
 
 
     /**
-     * This populates the list on the main page with the files that are stored on the server
-     * This allows the currently logged in venue user to see the files
+     *<p>
+     *      This populates the list on the main page with the files that are stored on the server
+     *      This allows the currently logged in venue user to see the files
+     *</p>
      */
     public void populateFileList(){
 
@@ -153,8 +181,10 @@ public class VenueOwnerMainPageController {
 
 
     /**
-     * This action occurs when the open file button is pressed
-     * This opens the currently selected file in the list on the device
+     * <p>
+     *     This action occurs when the open file button is pressed
+     *     This opens the currently selected file in the list on the device
+     * </p>
      */
     @FXML
     private void onOpenFileButtonPress(){
@@ -176,7 +206,10 @@ public class VenueOwnerMainPageController {
     }
 
     /**
-     * Deletes the files on the server and also removes the reference from the xml file
+     * <p>
+     *     This action occurs when the delete file button is pressed
+     *     Deletes the selected files on the server and also removes the reference from the xml file
+     * </p>
      */
     @FXML
     private void onDeleteFileButtonPress(){
@@ -210,8 +243,10 @@ public class VenueOwnerMainPageController {
     }
 
     /**
-     * UNUSED CODE
-     * Lets the venue user upload files to the server
+     * <p>
+     *     UNUSED CODE
+     *     Lets the venue user upload files to the server
+     * </p>
      */
     @FXML
     //Adds a new file to the servers directory, and into the XML file
@@ -246,8 +281,10 @@ public class VenueOwnerMainPageController {
     }
 
     /**
-     * The action that occurs when the logout button is pressed
-     * Logs the user out of the application
+     * <p>
+     *     The action that occurs when the logout button is pressed
+     *      Logs the user out of the application
+     * </p>
      * @throws IOException
      */
     @FXML

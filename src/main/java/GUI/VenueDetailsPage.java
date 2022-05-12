@@ -19,7 +19,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 /**
- * This is the page that displays the venue details (including all of the media)
+ * <p>
+ *     This is the page that displays the venue details (including all of the media)
+ * </p>
  */
 public class VenueDetailsPage extends Application {
     @Override
@@ -33,8 +35,10 @@ public class VenueDetailsPage extends Application {
     }
 
     /**
-     * The action that occurs when the exit button is pressed
-     * Exits the application
+     *<p>
+     *     The action that occurs when the exit button is pressed
+     *      Exits the application
+     *</p>
      */
     @FXML
     private void exitButtonAction(){

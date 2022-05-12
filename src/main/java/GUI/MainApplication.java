@@ -22,23 +22,31 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * The main page that the application runs on
+ * <p>
+ *     The main page that the application runs on
+ * </p>
  */
 public class MainApplication extends Application {
 
 
     /**
-     * The client that the application is going to use
+     * <p>
+     *     The client that the application is going to use
+     * </p>
      */
     private Client client;
     /**
-     * The current user being used by the GUI
+     * <p>
+     *     The current user being used by the GUI
+     * </p>
      */
     private User currUser;
 
 
     /**
-     * Opens the FXML file and opens the GUI that is controlled by the FXML
+     * <p>
+     *     Opens the FXML file and opens the GUI that is controlled by the FXML
+     * </p>
      * @param stage the display that GUI is gonna be on
      * @throws IOException
      */
@@ -76,7 +84,9 @@ public class MainApplication extends Application {
     }
 
     /**
-     * Transfers the required info for the application
+     * <p>
+     *     Transfers the required info for the application
+     * </p>
      * @param stage The stage to display the GUI on
      * @param client The client to be used for the server connection
      * @param currUser The current user

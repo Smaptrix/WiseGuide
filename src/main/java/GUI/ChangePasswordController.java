@@ -19,33 +19,45 @@ import serverclientstuff.User;
 import java.io.IOException;
 
 /**
- * Controls the page which the user can use to change their password
+ * <p>
+ *     Controls the page which the user can use to change their password
+ * </p>
  */
 public class ChangePasswordController {
 
     /**
-     * The current client
+     * <p>
+     *     The current client
+     * </p>
      */
     Client client;
 
     /**
-     * The current user
+     * <p>
+     *     The current user
+     * </p>
      */
     User currUser;
 
     /**
-     * The button to signify the user has completed changing their password
+     * <p>
+     *     The button to signify the user has completed changing their password
+     * </p>
      */
     @FXML
     Button changePassButton;
     /**
-     * The label that displays the error information
+     * <p>
+     *     The label that displays the error information
+     * </p>
      */
     @FXML
     Label errLabel;
 
     /**
-     * Sets the client
+     * <p>
+     *     Sets the client
+     * </p>
      * @param client the client we want to set for the controller
      */
     public void setClient(Client client){
@@ -53,7 +65,9 @@ public class ChangePasswordController {
     }
 
     /**
-     * Sets the current user
+     *<p>
+     *      Sets the current user
+     *</p>
      * @param currUser the current user we want to set for the controller
      */
     public void setUser(User currUser){
@@ -61,24 +75,32 @@ public class ChangePasswordController {
     }
 
     /**
-     * The password field which the user should type there current password into
+     * <p>
+     *     The password field which the user should type there current password into
+     * </p>
      */
     @FXML
     PasswordField currPasswordField;
     /**
-     * The password field which the user should type there new password into
+     * <p>
+     *     The password field which the user should type there new password into
+     * </p>
      */
     @FXML
     PasswordField newPasswordField;
     /**
-     * The password field which the user should retype there new password into
+     * <p>
+     *     The password field which the user should retype there new password into
+     * </p>
      */
     @FXML
     PasswordField newPasswordConfirmField;
 
 
     /**
-     * Tells the client to contact the server nad request a password change
+     * <p>
+     *     Tells the client to contact the server nad request a password change
+     * </p>
      */
     @FXML
     public void onChangePassButtonPress(){

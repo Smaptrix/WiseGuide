@@ -28,17 +28,23 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * Controls the account creator within the application
+ * <p>
+ *     Controls the account creator within the application
+ * </p>
  */
 public class AccountCreationController {
 
     /**
-     * The current client
+     * <p>
+     *     The current client
+     * </p>
      */
     Client client;
 
     /**
-     * Sets the client to be used by the controller
+     * <p>
+     *     Sets the client to be used by the controller
+     * </p>
      * @param client the client you want the controller to use
      */
     public void setClient(Client client) {
@@ -46,61 +52,81 @@ public class AccountCreationController {
     }
 
     /**
-     * Gets the current client being used by the controller
+     * <p>
+     *     Gets the current client being used by the controller
+     * </p>
      * @return the current client being used
      */
     public Client getClient() { return this.client; }
 
     /**
-     * The field that the user can type their desired username into
+     * <p>
+     *     The field that the user can type their desired username into
+     * </p>
      */
     @FXML
     TextField userField;
 
     /**
-     * The field where the user can type their desired password into
+     * <p>
+     *     The field where the user can type their desired password into
+     * </p>
      */
     @FXML
     PasswordField passField;
 
     /**
-     * The confirmation field for the users desired password
+     * <p>
+     *     The confirmation field for the users desired password
+     * </p>
      */
     @FXML
     PasswordField passConfirmField;
 
     /**
-     * The label that displays any errors that occur
+     * <p>
+     *     The label that displays any errors that occur
+     * </p>
      */
     @FXML
     Label errLabel;
 
     /**
-     * The button the users press when they want to create the account with the desired attributes
+     * <p>
+     *     The button the users press when they want to create the account with the desired attributes
+     * </p>
      */
     @FXML
     Button createAccountButton;
 
     /**
-     * The button the users use to close the account creation confirmation popup
+     * <p>
+     *     The button the users use to close the account creation confirmation popup
+     * </p>
      */
     @FXML
     Button closePopUpButton;
 
     /**
-     * The checkbox the users tick to confirm they are over the required age limit
+     * <p>
+     *     The checkbox the users tick to confirm they are over the required age limit
+     * </p>
      */
     @FXML
     public CheckBox ageCheckBox;
 
     /**
-     * The link to the company's privacy policy
+     * <p>
+     *     The link to the company's privacy policy
+     * </p>
      */
     @FXML
     Hyperlink privacyPolicyLink;
 
     /**
-     * The link to the companies terms and conditions link
+     * <p>
+     *     The link to the companies terms and conditions link
+     * </p>
      */
     @FXML
     Hyperlink termsLink;
@@ -114,8 +140,11 @@ public class AccountCreationController {
     public void setTestingMode(boolean testingMode) {
         this.testingMode = testingMode;
     }
+
     /**
-     * When the user presses the create account button, this action occurs and requests the server to make the desired account
+     * <p>
+     *     When the user presses the create account button, this action occurs and requests the server to make the desired account
+     * </p>
      * @throws IOException if the client cannot connect to the server
      */
     @FXML
@@ -185,7 +214,9 @@ public class AccountCreationController {
 
 
     /**
-     * Opens a popup to display that the account has been created
+     * <p>
+     *     Opens a popup to display that the account has been created
+     * </p>
      * @throws IOException if the GUI cannot open the FXML file
      */
     public void accountCreatedPageOpen() throws IOException {
@@ -199,7 +230,9 @@ public class AccountCreationController {
     }
 
     /**
-     * Closes the popup when pressed
+     * <p>
+     *     Closes the popup when pressed
+     * </p>
      */
     @FXML
     private void closePopupButton(){
@@ -209,7 +242,9 @@ public class AccountCreationController {
 
 
     /**
-     * When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the privacy policy
+     * <p>
+     *     When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the privacy policy
+     * </p>
      * @throws IOException if the default browser cannot be opened
      * @throws URISyntaxException if the provided uri is invalid
      */
@@ -221,7 +256,9 @@ public class AccountCreationController {
     }
 
     /**
-     * When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the terms and conditions
+     * <p>
+     *     When the privacy policy link is pressed, this action occurs and opens the default web browser and displays the terms and conditions
+     * </p>
      * @throws IOException if the default browser cannot be opened
      * @throws URISyntaxException if the provided uri is invalid
      */
