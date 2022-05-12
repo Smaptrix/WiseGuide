@@ -24,7 +24,7 @@ public class ServerUserHandler {
     private String[] userInfo;
     public boolean passVerified;
 
-
+    private int delIteratorMax = 5;
 
 
     //Creates the user serverside
@@ -99,20 +99,25 @@ public class ServerUserHandler {
         }
         //Close buffers and run garbage collection (doesn't work if you don't do the gc! Java bug)
         System.out.println("Closing the reader...");
+        bw.flush();
         bw.close();
         br.close();
-        System.gc();
         bw = null;
         br = null;
+        System.gc();
 
         //Identify if there's an issue (FOR DEBUG PURPOSES ONLY)
 
         //TODO: Deletion sometimes fails for literally no reason.
 
         boolean delSuccess = database.delete();
-        if(!delSuccess) {
-            System.out.println("The database deletion was not successful.");
+        int delIterator = 0;
+        while(!delSuccess && (delIterator < delIteratorMax)){
+            delIterator++;
+            System.out.println("The database deletion was not successful. Trying again...");
+            delSuccess = database.delete();
         }
+
         boolean renameSuccess = tempFile.renameTo(database);
         if(!renameSuccess) {
             System.out.println("The database rename was not successful.");
