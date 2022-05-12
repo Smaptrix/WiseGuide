@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   09/03/2022
+    Last Updated:   12/05/2022
+ */
 package GUI;
 
 import client.Client;
@@ -14,35 +21,65 @@ import serverclientstuff.User;
 
 import java.io.IOException;
 
+/**
+ * This Controller controls the venue login page
+ */
 public class VenueLoginController {
 
+    /**
+     * The client that the GUI uses to communicate with the server
+     */
     Client client;
 
+    /**
+     * The current user that is logged in (Wont be active before logging in)
+     */
     User currUser;
 
+    /**
+     * This text field is where the venue types in their venue name
+     */
     @FXML
     TextField venueNameField;
 
+    /**
+     * This password field is where the venue types in their password
+     */
     @FXML
     PasswordField venuePassField;
 
+    /**
+     * This is the button that the venue user can press to login
+     */
     @FXML
     Button loginButton;
-
+    /**
+     * This is the button that the user can press to go back to the main page of the application
+     */
     @FXML
     Button backButton;
 
+    /**
+     * This label displays any sort of error message that might pop up
+     */
     @FXML
     Label errLabel;
 
 
+    /**
+     * This sets the client to be used by the GUI
+     * @param client the client that we want the GUI to use
+     */
     public void setClient(Client client){
         this.client = client;
     }
 
 
-
-
+    /**
+     * The action that occurs when the login button is pressed
+     * This attempts to log the venue user into the server
+     * @throws IOException if the client cannot connect to the server
+     */
     @FXML
     private void onLoginButtonPress() throws IOException {
 
@@ -94,7 +131,11 @@ public class VenueLoginController {
     }
 
 
-
+    /**
+     * The action that occurs when the back button is pressed
+     * This sends the user back to the main application page
+     * @throws IOException If the server cannot connect to the client
+     */
     @FXML
     private void onBackButtonPress() throws IOException {
 
