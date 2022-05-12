@@ -3,13 +3,13 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   27/01/2022
-    Last Updated:   24/02/2022
+    Last Updated:   11/05/2022
  */
 package client;
 
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
-import serverclientstuff.Utils;
+
 
 import javax.crypto.*;
 import java.net.*;
@@ -17,10 +17,10 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
+
+
 import java.security.*;
-import java.security.interfaces.RSAPublicKey;
+
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
@@ -30,7 +30,7 @@ import java.util.*;
 
 
 /**
- * Client class handles the client side server operation methods.
+ * Client class handles the client side application operation methods.
  */
 public class Client {
 
@@ -70,30 +70,41 @@ public class Client {
 
 
     /**
-     * Dictionary stores where all the files are located.
+     * fileLocations stores where all the files are located.
      */
     public Map<String, File> fileLocations = new HashMap<>();
 
-
+    /**
+     * serverPublicKey stores the public key of the server
+     */
     private PublicKey serverPublicKey;
 
 
-    //The clients symmetric key
-
+    /**
+     * symKey is they symmetric key used for communciation between the server & client
+     */
     private SecretKey symKey;
+    /**
+     * symmetricKeyFile is the file that contains the symmetric key
+     */
     private File symmetricKeyFile;
 
+    /**
+     * symmetricCIpher is the cipher that is used to encrypt/decrypt communications
+     */
     private Cipher symmetricCipher;
 
 
-    //Stores the users favourite venues
+    /**
+     * faveVenues is a list of the current users favorite venues
+     */
     private String[] faveVenues;
 
 
 
     /**
      * <p>
-     * Starts the connection to the server by creating necessary objects and assigning the correct ip and port.
+     * Starts the connection to the server by creating necessary objects and assigning the determined ip and ports.
      * </p>
      *
      * @param ip The ip address of the server.
@@ -102,9 +113,11 @@ public class Client {
      */
     public void startConnection(String ip, int port) throws IOException {
 
+        //Startup means not connected yet
         connected = false;
 
         try {
+            //Creates the new sockets and input/output streams
             clientSocket = new Socket(ip, port);
             outStream = clientSocket.getOutputStream();
             inputStream = clientSocket.getInputStream();
@@ -133,8 +146,9 @@ public class Client {
             sameVersion = versionCheck();
 
 
-
+            //Once everything is booted and checked the client registers as connected
             connected = true;
+            //Set the socket timeout to 1000ms so that if the sever crashed the app doesnt crash straight away
             clientSocket.setSoTimeout(1000);
 
         } catch (ConnectException e) {
@@ -147,20 +161,25 @@ public class Client {
 
     }
 
-    //Generates the symmetric key for the use in the session
+    /**
+     * Generates a random symmetric key for use in the session
+     * @throws NoSuchAlgorithmException if the specified algorithm does not exist
+     */
     private void generateSymmetricKey() throws NoSuchAlgorithmException {
         KeyGenerator generator = KeyGenerator.getInstance("AES");
+        //Generates a key of size 256 bytes
         generator.init(256);
         symKey = generator.generateKey();
     }
 
 
-
-
-
-    //Recieves the privates public key for the encryption
+    /**
+     * Gets the servser public key for use of encrypting the generated symmetric key
+     * @throws IOException if the connection is not available
+     */
     private void getServerEncryption() throws IOException {
 
+        //Sends the request to get the public key
         sendMessage("SENDPUBLIC", false);
 
 
@@ -192,24 +211,20 @@ public class Client {
 
         System.out.println(dataType);
 
-
+        //Reads the specified number of bytes from the inputstream
         byte[] encPublicKey = readBytes(bytesToRead);
 
 
         System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
-        //Once we have the array of bytes, we then reconstruct that into the actual file.
-        //Don't need to save the file actually...
-        //File serverPublicKeyFile = BytesToFile(encPublicKey, "severPubKey", dataType);
-
-
+        //Generate thhe key spec from the recieved data
         X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encPublicKey);
 
+        //Generate the key using a keyfactory using the given keyspec
         try {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             serverPublicKey = keyFactory.generatePublic(pubKeySpec);
-            System.out.println(serverPublicKey);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
 
@@ -217,7 +232,15 @@ public class Client {
 
     }
 
-    //Encrypts clients public key and send it to server
+    /**
+     * Encodes the gneerated symmetric key and sends it to the server for the current session
+     * @throws NoSuchPaddingException If the given padding type does not exist
+     * @throws NoSuchAlgorithmException If the given alogirthm does not exist
+     * @throws InvalidKeyException If the given key is incorrect/invalid
+     * @throws IllegalBlockSizeException If the input size to the algorithm is incorrect
+     * @throws BadPaddingException If the amount of padding on the block is incorrect
+     * @throws IOException If the client is unable to connect to the server
+     */
     private void sendSymmetricKey() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
         //First encrypt the clients public key with the servers public key
         Cipher rsaCipher = Cipher.getInstance("RSA");
@@ -235,8 +258,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Encoded symmetric key file!");
 
 
         //Opens a one time output data stream to send the file
@@ -276,8 +297,6 @@ public class Client {
             //System.out.println(buffer[bytesSent]);
 
             if(bytesSent == symKeyFileSize){
-                System.out.println("We have written: " + bytesSent + " bytes");
-
                 end = true;
             }
         }
@@ -286,26 +305,25 @@ public class Client {
 
         System.out.println("Key written");
 
-        //Set the socket back to the text write
+        //Set the socket back to the correct write verision
         outStream = clientSocket.getOutputStream();
 
 
     }
 
 
-    //Recieves the symmetric key to use for the rest of the session
+    /**
+     * This function is used to validate that the server has the same symmetric key
+     * @return True - The server key has been validated. False - The server key hasn't been validated
+     * @throws IOException If the client cannot connect to the server
+     */
     private boolean keyValidation() throws IOException {
 
-        System.out.println(symKey);
 
-        //Plan - Encrypt Command and send it
-        //     - Encrypt test message and send it
-        //     - Have server decrypt the command, then decrypt the message then echo it back
-        //     -Check on client to make sure that the messages are the same
-
+        //This command tells the server to repeat back whatever the next message is
         String unencryptedCommand = "ECHO";
 
-
+        //The test message that the server has to repeat back
         String unencryptedMessage = "thisisatestmessage";
 
         //Creates the cipher to use for the rest of the  and determines the algorithm to use
@@ -328,16 +346,17 @@ public class Client {
 
 
 
-        //Sends the encrypted command
+        //Sends the command and encrypts it
         sendMessage(combinedString, true);
 
-        System.out.println("Sent encrypted command");
 
 
+        //If the recieved message is the same as the sent message - the key is validated
         if(receiveAcknowledgement(true).equals(unencryptedMessage)){
             return true;
         }
         else{
+            //If the client is unable  to verify the servers key
             System.out.print("Unable to verify encryptyed connection");
             return false;
         }
@@ -391,7 +410,7 @@ public class Client {
      * </p>
      * @param msg The message to send to the server.
      * @return The message returned by the server.
-     * @throws IOException
+     * @throws IOException if client cannot connect to the server
      */
     public String echoMessage(String msg) throws IOException {
 
@@ -453,7 +472,7 @@ public class Client {
 
 
         //Magic number 3 - because we know that the file extension is only going to be max three letters
-        //TODO - Issue is the file is a jpeg...
+
         byte[] DataTypeBytes = new byte[3];
 
         for (int i = 0; i < 3; i++) {
@@ -461,8 +480,6 @@ public class Client {
         }
 
         String dataType = new String(DataTypeBytes, StandardCharsets.UTF_8);
-
-        System.out.println(dataType);
 
 
         byte[] data = readBytes(bytesToRead);
@@ -526,7 +543,7 @@ public class Client {
      * @param fileName the name of the requested file to construct
      * @param fileType the type of the requested file
      * @return the filepath of the downlaoded file
-     * @throws IOException if
+     * @throws IOException if the client is unable to open the file
      */
     private File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
 
@@ -537,6 +554,7 @@ public class Client {
         //Creates a temp file out of the data received, so that when the program closes the data isn't saved
         FileOutputStream os = new FileOutputStream(currFile);
 
+        //Writes the recieved data to the FileOutPutStreams
         os.write(data);
 
         fileLocations.put(fileName, currFile);
@@ -559,7 +577,7 @@ public class Client {
      * </p>
      * @param currUser The user attempting to login
      * @return the acknowledgement to the request from the server
-     * @throws IOException if
+     * @throws IOException if the client is unable to connect to the server
      */
     public String requestLogin(User currUser) throws IOException {
         sendMessage("LOGIN", true);
@@ -581,24 +599,30 @@ public class Client {
      * Recieves a one line acknowledgement from the server
      * </p>
      * @return the acknowledgement in string form
-     * @throws IOException if
+     * @throws IOException if the server is unable to connect to the server
      */
     public String receiveAcknowledgement(boolean decrypt) throws IOException {
 
+        //Read in the file size of the expected file
+        //Dont have to worry about large files here as this is only messages
         int fileSize = inputStream.read();
 
-
+        //Read the filesize in bytes
         byte[] data = readBytes(fileSize);
 
+        //Initalise the string
         String ack = null;
+        //If we want to decrypt the message
         if (decrypt) {
 
+            //Turn the cipher to decrypt mode
             try {
                 symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
             } catch (InvalidKeyException e) {
                 e.printStackTrace();
             }
 
+            //Decrypt the data using the cipher
             byte[] decryptedData = new byte[0];
             try {
                 decryptedData = symmetricCipher.doFinal(data);
@@ -606,17 +630,20 @@ public class Client {
                 e.printStackTrace();
             }
 
-
+            //Turn the decrypted data into the string
             ack = new String(decryptedData, StandardCharsets.UTF_8);
 
             System.out.println(ack);
 
+            //Turn the cipher back into encrypt mode
             try {
                 symmetricCipher.init(Cipher.ENCRYPT_MODE, symKey);
             } catch (InvalidKeyException e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+        //If we don't want to decrypt the message
+        else {
 
             ack = new String(data, StandardCharsets.UTF_8);
 
@@ -639,7 +666,7 @@ public class Client {
      * </p>
      * @param currUser the current user that you want the server to verify
      * @return the verification status from the server
-     * @throws IOException if
+     * @throws IOException if the client cannot connect to the server
      */
     public String verifyUser(User currUser) throws IOException {
         sendMessage("VERIFYUSER", true);
@@ -659,12 +686,14 @@ public class Client {
      * </p>
      * @param currUser the user that the client wants the server to create
      * @return the status of the user creation
-     * @throws IOException if
+     * @throws IOException if the client cannot connect to the server
      */
     public String createUser(User currUser) throws IOException {
 
+        //Send the command
         sendMessage("CREATEUSER", true);
 
+        //Send the user data
         sendMessage(currUser.getUsername(), true);
 
         sendMessage(currUser.getPassword(), true);
@@ -672,7 +701,8 @@ public class Client {
 
         String ack = receiveAcknowledgement(true);
 
-        //Should timeout if nothing respond
+        //Waits for a request from the server
+        //Generates a salt for the user for extra security
         if(ack.equals("SENDSALT")) {
             currUser.setSalt(UserSecurity.generateSalt());
             System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
@@ -695,10 +725,11 @@ public class Client {
      * Requests that the server logs the current user out
      * </p>
      * @return the logout state of the server
-     * @throws IOException if
+     * @throws IOException if the client cannot connect to the server
      */
     public String requestLogout() throws IOException {
 
+        //Send the command
         sendMessage("LOGOUT", true);
         outStream.flush();
 
@@ -710,22 +741,18 @@ public class Client {
      * Requests the server to check the versions of the client/server pair against eachother
      * </p>
      * @return the versionCheck response from the server
-     * @throws IOException if
+     * @throws IOException if the client cannot connect to the server
      */
     private boolean versionCheck() throws IOException {
 
+        //Send the command
         sendMessage("VERSIONCHECK", true);
 
         sendMessage(CLIENTVERSION, true);
 
         String ack = receiveAcknowledgement(true);
 
-        if(ack.equals("SAMEVER")){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return ack.equals("SAMEVER");
 
 
 
@@ -733,7 +760,6 @@ public class Client {
 
     /**
      * Requests the files from the server containing the list of the venues
-     * @return
      */
     public void requestVenueXMLFile() throws IOException {
 
@@ -749,26 +775,23 @@ public class Client {
      */
     public File getFile(String fileName){
 
-
-        //System.out.println("File requested: " + fileName);
-
         return fileLocations.get(fileName);
 
     }
 
-
-    //TODO - Could be made more rigourous, but assumes server and client have same user
-
-    //Requests that the server requests a users name
+    /**
+     * Requests that the server change a users username
+     * @param desiredUsername the new name that the user would like
+     * @return the result of the name change
+     * @throws IOException if the client cannot connect to the server
+     */
     public String requestUserNameChange(String desiredUsername) throws IOException {
 
-
+        //Sends the command
         sendMessage("CHANGENAME", true);
 
-
+        //Sends the requested username
         sendMessage(desiredUsername, true);
-
-
 
 
         return receiveAcknowledgement(true);
@@ -776,7 +799,13 @@ public class Client {
     }
 
 
-    //Requests that the server changes the users password
+    /**
+     * Requests that the server change a users password
+     * @param enteredPassword the users current password
+     * @param newPassword the users new password
+     * @return the result of the password change on the server
+     * @throws IOException if the client cannot connect to the server
+     */
     public String requestPasswordChange(String enteredPassword, String newPassword) throws IOException {
 
         sendMessage("CHANGEPASS", true);
@@ -791,8 +820,13 @@ public class Client {
     }
 
 
-
-    //Requests that the server log a venue in
+    /**
+     * Attempts to log a venue into the server
+     * @param venueName the name of the venue logging in
+     * @param venuePass the password of the venue logging in
+     * @return the result of the login request
+     * @throws IOException if the client cannot connect to the server
+     */
     public String requestVenueLogin(String venueName, String venuePass) throws IOException {
         sendMessage("VENUELOGIN",true);
 
@@ -803,7 +837,12 @@ public class Client {
     }
 
 
-    //Requests that the server delete a file from a venues directory
+    /**
+     * Requests that the server delete a file pertaining to the currently logged in venue
+     * @param filePath the filepath to the file that the venue would like to delete
+     * @return the result of deleting the file on the server
+     * @throws IOException if the client cannot connect to the server
+     */
     public String requestDeleteFile(String filePath) throws IOException {
         sendMessage("DELETEVENUEFILE",true);
 
@@ -815,7 +854,7 @@ public class Client {
     }
 
 
-
+/*
     //Requests that the client can send a file to the server
     //Maybe change so that it sends an email and then we discuss it
     //Rather than having any user be able to upload any file they want
@@ -826,7 +865,7 @@ public class Client {
         return receiveAcknowledgement(true);
 
     }
-
+*/
 
 
 
@@ -853,7 +892,11 @@ public class Client {
     }
 
 
-
+    /**
+     * Checks to see if a file is already downloaded
+     * @param fileName The name of the file being checked
+     * @return True - The file is downloaded. False - The file has not been downloaded
+     */
     public boolean isFileDownloaded(String fileName){
 
         if(fileLocations.containsKey(fileName)){
@@ -866,15 +909,18 @@ public class Client {
 
     }
 
-
+    /**
+     * Requests the current users favourite venues
+     * @return the list of the users favourite venues
+     * @throws IOException If the client cannot connect to the server
+     */
     public String[] requestFaveVenueList() throws IOException {
         sendMessage("FAVELIST", true);
 
         String venueListString =  receiveAcknowledgement(true);
 
         if(!(venueListString.equals("EMPTY"))) {
-            String[] venueList = venueListString.split("\\.");
-            return venueList;
+            return venueListString.split("\\.");
         }
 
         else{
@@ -883,7 +929,11 @@ public class Client {
     }
 
 
-    //Requests that the server favourites a venue for the user
+    /**
+     * Requests that the server add a new venue to the current users favourite list
+     * @param venueName the name of the venue to be added to the list
+     * @throws IOException if the client cannot connect to the server
+     */
     public void addFavouriteVenue(String venueName) throws IOException {
         sendMessage("FAVEVENUE", true);
 
@@ -895,7 +945,11 @@ public class Client {
 
     }
 
-
+    /**
+     * Requests that the server remove a venue from the current users favourite list
+     * @param venueName the name of the venue to be removed from the list
+     * @throws IOException if the client cannot connect to the server
+     */
     public void removeFavouriteVenue(String venueName) throws IOException {
         sendMessage("UNFAVEVENUE", true);
 
@@ -906,9 +960,11 @@ public class Client {
     }
 
 
-    //Overloaded functions to let client send strings or bytes
-
-    //Provides a wrapper for functions to send strings to the server and also bytes
+    /**
+     * Sends a message to the server (Overload of another function)
+     * @param toSend The bytes to sned to the server
+     * @param doEncrypt Whether to encrypt the data
+     */
     private void sendMessage(byte[] toSend, boolean doEncrypt){
 
         if(doEncrypt) {
@@ -943,7 +999,11 @@ public class Client {
     }
 
 
-    //Provides a wrapper for functions to send strings to the server and also bytes
+    /**
+     * A wrapper to send messages to the server
+     * @param toSend the string to send to the server
+     * @param doEncrypt whether you want to encrypt the message or not
+     */
     private void sendMessage(String toSend, boolean doEncrypt)  {
 
         byte[] toSendBytes = toSend.getBytes();
