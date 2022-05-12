@@ -1,9 +1,9 @@
 /*
     Company Name:   Maptrix
     Project Name:   WiseGuide
-    Authors:        Will Pitchfork
+    Authors:        Will Pitchfork, Joe Ingham
     Date Created:   04/02/2022
-    Last Updated:   04/02/2022
+    Last Updated:   11/05/2022
  */
 
 package GUI;
@@ -14,25 +14,34 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 
+/**
+ * The main page that the application runs on
+ */
 public class MainApplication extends Application {
 
 
-
-
-    //TODO - Get client and user info into the Main app
-
+    /**
+     * The client that the application is going to use
+     */
     private Client client;
+    /**
+     * The current user being used by the GUI
+     */
     private User currUser;
 
 
-
+    /**
+     * Opens the FXML file and opens the GUI that is controlled by the FXML
+     * @param stage the display that GUI is gonna be on
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -43,11 +52,20 @@ public class MainApplication extends Application {
 
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
 
+        //Set the client and current user for the controller
         MainController controller = fxmlLoader.getController();
         controller.setClient(client);
         controller.setUser(currUser);
 
         controller.loadListOfVenues();
+
+        //Sets the users favourite venues -- as long there are some
+        String[] userFaveVenueList = client.requestFaveVenueList();
+
+        if(!(userFaveVenueList == null)){
+            currUser.setFaveVenues(userFaveVenueList);
+            System.out.println("Set user faves: " + Arrays.toString(currUser.getFaveVenues()));
+        }
 
         stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
         stage.setScene(scene);
@@ -57,6 +75,13 @@ public class MainApplication extends Application {
 
     }
 
+    /**
+     * Transfers the required info for the application
+     * @param stage The stage to display the GUI on
+     * @param client The client to be used for the server connection
+     * @param currUser The current user
+     * @throws IOException If the client cant connect to the server
+     */
     public void transferInfoAndOpen(Stage stage, Client client, User currUser) throws IOException {
 
         this.client = client;

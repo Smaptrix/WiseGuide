@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Will Pitchfork, Joe Ingham
     Date Created:   04/02/2022
-    Last Updated:   24/04/2022
+    Last Updated:   11/05/2022
  */
 
 package GUI;
@@ -24,74 +24,149 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import serverclientstuff.User;
 
-import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The controller for the main page of the application
+ */
 public class MainController {
 
+    /**
+     * The client  being used by the GUI to conect to the sever
+     */
     private Client client;
 
+    /**
+     * The current user that is logged into the application
+     */
     private User currUser;
 
+    /**
+     * The xml file containing all of the venue data
+     */
     private VenueXMLParser xml;
 
+    /**
+     * The currently selected venue in the list in the sidebar
+     */
     private String selectedItem;
 
+    /**
+     * The map we desire to display
+     */
     protected String desiredMap = "baseMap";
 
+    /**
+     * The mouses position on the screen
+     */
     public int mouseX;
     public int mouseY;
 
+    /**
+     * The main map image
+     */
     Image baseMapImage;
+    /**
+     * The central  of york central image map
+     */
     Image centralCentralYorkImage;
+    /**
+     * The central york image map
+     */
     Image centralYorkImage;
+    /**
+    The heslington east image map
+     */
     Image hesEastImage;
+    /**
+     * The south east york image map
+     */
     Image SEYorkImage;
+    /**
+     * The south of central york image map
+     */
     Image southCentralYorkImage;
+    /**
+     * The west of central york image map
+     */
     Image westCentralYorkImage;
 
+    /**
+     * The current object selected in the list in the sidebar
+     */
     Object currentItemSelected = new Object();
 
+    /**
+     * Sets the client to be used by the main application
+     * @param client The client to be used
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /**
+     * Sets the user that is logged into the application
+     * @param currUser The user that is logged in
+     */
     public void setUser(User currUser) {
         this.currUser = currUser;
     }
 
-
+    /**
+     * The button on the menubar which closes the application
+     */
     @FXML
     MenuItem closeButton;
 
+    /**
+     * The button on the menubar that lets the user access their details page
+     */
     @FXML
     MenuItem accDetailsButton;
 
+    /**
+     * The button on the menubar that lets the user logout of the application
+     */
     @FXML
     MenuItem signOutButton;
 
+    /**
+     * The uhhhh - Will what is this?
+     */
     @FXML
     VBox mainWindow;
 
+    /**
+     * The button on the menubar that allows the user to access the about page
+     */
     @FXML
     MenuItem aboutButton;
 
+    /**
+     * The list on the sidebar which displays the list of venues
+     */
     @FXML
     ListView venueList;
 
+    /**
+     * The image which displays the current map view
+     */
     @FXML
     ImageView mapView;
 
+    /**
+     * The controller which controls the map
+     */
     MapController mapController;
 
 
+    /**
+     * Runs at the start of the
+     */
     @FXML
     public void initialize() {
 
@@ -131,19 +206,22 @@ public class MainController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected));
+        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
         try {
             controller.loadVenueData();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to get venue data");
         }
+        //Checks to see if the venue has been favourite by the user
+        controller.checkIfFavourite();
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();
         stage.setResizable(false);
     }
 
+    //Gets the position of the mouse on a click
     EventHandler<MouseEvent> mouseEvent = new EventHandler<>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -158,6 +236,9 @@ public class MainController {
         }
     };
 
+    /**
+     * Called when a venue is selected on a map?
+     */
     public void selectVenueOnMap() {
         Point2D mousePosition = new Point2D(mouseX, mouseY);
         createImageObjects();
@@ -169,6 +250,10 @@ public class MainController {
         }
     }
 
+    /**
+     * used to select the venue on the main map based on the mouseposition
+     * @param mousePosition The current position of the mouse
+     */
     private void baseMapSelecting(Point2D mousePosition) {
         if ((mousePosition.getX() > mapController.getBase_NRM_min().getX()) && (mousePosition.getX() < mapController.getBase_NRM_max().getX()) && (mousePosition.getY() > mapController.getBase_NRM_min().getY()) && (mousePosition.getY() < mapController.getBase_NRM_max().getY())) {
             selectedItem = "National Railway Museum York";
@@ -201,6 +286,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Map selection for the University of Yorks map
+     * @param mousePosition The position of the map
+     */
     private void UoYMapSelecting(Point2D mousePosition) {
         if ((mousePosition.getX() > mapController.getUoY3_JBM_min().getX()) && (mousePosition.getX() < mapController.getUoY3_JBM_max().getX()) && (mousePosition.getY() > mapController.getUoY3_JBM_min().getY()) && (mousePosition.getY() < mapController.getUoY3_JBM_max().getY())) {
             selectedItem = "University of York JB Morrell Library";
@@ -224,6 +313,9 @@ public class MainController {
 
     }
 
+    /**
+     * Finds the files for the relevant image objects for the map
+     */
     private void createImageObjects() {
         try {
             //baseMapImage = new Image(new FileInputStream("@../resources/Maps/baseMap.png"));
@@ -241,8 +333,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Closes the application when the close button is clicked
+     * @throws IOException if the client cannot connect to the server
+     */
     @FXML
-    //Closes the window
     protected void onCloseButtonClick() throws IOException {
 
         //Doesn't try to close a connection that isn't there
@@ -254,10 +349,13 @@ public class MainController {
     }
 
 
-
+    /**
+     * Opens the account details page if the account details page is clocked
+     * @throws IOException If the GUI cannot find the fxml page
+     */
     @FXML
     //Opens the account details page
-    protected void onAccDetailsButtonClick() throws IOException {
+    public void onAccDetailsButtonClick() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-details-page.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 420, 240);
@@ -272,6 +370,10 @@ public class MainController {
     }
 
 
+    /**
+     *Signs the user out of the application when the sign out button is pressed
+     * @throws IOException If the client cannot connect to the server / or the fxml page cannot be found
+     */
     @FXML
     //Logs the user out and reopens the login page
     protected void onSignOutButtonClick() throws IOException {
@@ -301,19 +403,19 @@ public class MainController {
 
     }
 
+    /**
+     * Opens the about page when the about button is pressed
+     * @throws IOException If the GUI cannot find the fxml page
+     */
     @FXML
-    protected void onAboutButtonPress() throws IOException {
-
-
+    public void onAboutButtonPress() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("about-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 300);
         Stage stage = new Stage();
 
         AboutController controller = fxmlLoader.getController();
 
-
         controller.setVerNum(client.getCurrVersion());
-
 
         System.out.println("Opening about page");
 

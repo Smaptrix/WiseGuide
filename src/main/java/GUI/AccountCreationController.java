@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   18/02/2022
-    Last Updated:   24/02/2022
+    Last Updated:   11/05/2022
  */
 package GUI;
 
@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import server.ServerUserHandler;
 import serverclientstuff.User;
@@ -25,7 +26,6 @@ import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Controls the account creator within the application
@@ -37,10 +37,6 @@ public class AccountCreationController {
      */
     Client client;
 
-    /*
-      Lets previous controllers set the client so that the client is shared between pages
-      @param client
-     */
     /**
      * Sets the client to be used by the controller
      * @param client the client you want the controller to use
@@ -48,6 +44,11 @@ public class AccountCreationController {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    /**
+     * Gets the current client being used by the controller
+     * @return the current client being used
+     */
     public Client getClient() { return this.client; }
 
     /**
@@ -105,20 +106,18 @@ public class AccountCreationController {
     Hyperlink termsLink;
 
 
-    /**
-     * When the user presses the create account button, this action occurs and requests the server to make the desired account
-     * @throws IOException
-     */
 
 
-    //TODO - Post Integration let the client handle all the user stuff not the GUI
 
     private boolean testingMode = false;
 
     public void setTestingMode(boolean testingMode) {
         this.testingMode = testingMode;
     }
-
+    /**
+     * When the user presses the create account button, this action occurs and requests the server to make the desired account
+     * @throws IOException if the client cannot connect to the server
+     */
     @FXML
     //Attempts to create account
     private void createAccountButtonAction() throws IOException {
@@ -130,7 +129,7 @@ public class AccountCreationController {
             nameForbidden = false;
         }
 
-        //Big check to make sure username and password stuff is correct
+        //Lots of if/elseifs to make sure that the user data stuff is correct
 
         //If the password and the confirmed password don't match
         if(!(passField.getText()).equals(passConfirmField.getText())){
@@ -154,12 +153,22 @@ public class AccountCreationController {
             errLabel.setText("The selected username is unavailable.");
         }
 
+        else if(userField.getLength() > 15){
+            errLabel.setText("username can't be more than 15 characters!");
+        }
+
+        else if(passField.getLength() > 15){
+            errLabel.setText("password can't be more than 15 characters!");
+        }
+
+        //If everything checks out
         else{
             errLabel.setText("");
 
 
             User currUser = new User(userField.getText(), passField.getText());
 
+            //Requests that the server creates the user
             if(client.createUser(currUser).equals("USERCREATED")){
 
                 accountCreatedPageOpen();
@@ -168,15 +177,17 @@ public class AccountCreationController {
                 Stage currStage = (Stage) createAccountButton.getScene().getWindow();
                 currStage.close();
 
+            } else {
+                errLabel.setText("This username is taken.");
             }
-            errLabel.setText("This username is taken.");
-            //TODO - Account creation failed page
         }
     }
 
 
-
-    //Opens the account created notification - Designed with testing in mind :) - JI
+    /**
+     * Opens a popup to display that the account has been created
+     * @throws IOException if the GUI cannot open the FXML file
+     */
     public void accountCreatedPageOpen() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-created-window.fxml"));
@@ -187,11 +198,10 @@ public class AccountCreationController {
         stage.show();
     }
 
-
-    @FXML
-    /*
-      When the close popup button is pressed, this action occurs and closes the popup
+    /**
+     * Closes the popup when pressed
      */
+    @FXML
     private void closePopupButton(){
         Stage stage = (Stage) closePopUpButton.getScene().getWindow();
         stage.close();

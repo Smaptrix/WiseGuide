@@ -3,13 +3,14 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   18/02/2022
-    Last Updated:   24/02/2022
+    Last Updated:   11/05/2022
  */
 
 package GUI;
 
 
 import client.Client;
+import javafx.event.ActionEvent;
 import GUI.LoginApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,12 +26,22 @@ import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
+
+
+/**
+ * Controls the login page for the application
+ */
 import java.security.NoSuchAlgorithmException;
 
 public class LoginController {
 
-    //Stores the client object that lets the GUI communicate with the server
-    public Client client; // Declare empty client
+    /**
+     * The client being used by the GUI
+     */
+    public Client client;
+    /**
+     * The user being used by the controller - not filled until logged in
+     */
     protected User currUser;
 
     private boolean testingMode = false;
@@ -38,29 +49,62 @@ public class LoginController {
         this.testingMode = testingMode;
     }
 
-    //Imports all of the objects in the login 'scene'
+    /**
+     * The text field where the user can enter their password
+     */
     @FXML
     PasswordField userPassField;
+    /**
+     * The text field where the user can enter their username
+     */
     @FXML
     TextField userTextField;
+    /**
+     * The button a user can press if they wish to create an account
+     */
     @FXML
     Button createAccButton;
+    /**
+     * The button a user presses if they wish to log in
+     */
     @FXML
     Button loginButton;
+
+    /**
+     * The close button on the menu
+     */
     @FXML
     MenuItem menuClose;
+    /**
+     * The label which displays error information
+     */
     @FXML
     Label errorLabel;
+    /**
+     * The image containing the maptrix logo
+     */
     @FXML
     ImageView maptrixLogo;
+    /**
+     * The button on the menubar which lets you see your details
+     */
+    @FXML
+    MenuItem accountDetailsButton;
 
 
+    /**
+     * This function runs at the start of the page opening
+     */
     @FXML
     //Always called by the FXML Loader
     public void initialize() {
 
     }
 
+    /**
+     * Creates the client object to connect to the server
+     * @throws IOException If the client can't connect to the server
+     */
     public void initialConnection() throws IOException {
 
         client = new Client(); // Creates new instance of client object
@@ -68,8 +112,11 @@ public class LoginController {
 
     }
 
+    /**
+     * CLoses the application when the exit button is pressed
+     * @throws IOException If the client cannot connect to the server
+     */
     @FXML
-    //Closes the application
     private void exitButtonAction() throws IOException {
         //Doesn't try to close a connection that isn't there
         if (client.isConnected()) {
@@ -80,6 +127,10 @@ public class LoginController {
 
     //TODO - MAKE IT SO YOU CANT HAVE SPACES IN ANY OF THE FIELDS
 
+    /**
+     * When the user presses the button- attempts to log the client into the server
+     * @throws IOException If the client cannot connect to the server
+     */
     @FXML
     //Tries to login using the data provided
     //For now creates a user but that should all be handled on the client not the GUI :)
@@ -128,8 +179,10 @@ public class LoginController {
 
     }
 
+    /**
+     * Opens the create account page when the button is pressed
+     */
     @FXML
-    //Opens the Account Creation Page
     private void createAccButtonAction() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-create-page.fxml"));
@@ -160,15 +213,22 @@ public class LoginController {
     }
 
     //Client field getter and setter, used by testing to create a new testing account manually.
+    /**
+     * Sets the client to be used with the controller
+     * @param client The client to give to the controller
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
     public Client getClient() { return this.client; }
 
+    /**
+     * Opens the venue login page when the "secret" button is pressed
+     * @throws IOException If the client cannot connect to the server
+     */
     @FXML
     private void venueLoginPageOpen() throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-login-page.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
@@ -183,6 +243,5 @@ public class LoginController {
         currStage.close();
 
     }
-
 
 }
