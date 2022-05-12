@@ -128,6 +128,7 @@ public class MainController {
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
         controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
+        // TODO: MOVE THIS TO BELOW STAGE.SHOW OR CREATE A NEW SCENE FOR A LOADING SCREEN
         try {
             controller.loadVenueData();
         } catch (IOException e) {
