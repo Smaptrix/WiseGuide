@@ -804,6 +804,7 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand5.txt" ID="altText4"></base:text>
         </base:shape>
+        <base:playable indlude_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWandVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
     </base:page>
     <base:page title="York's_Chocolate_Story" ID="150" price="3" lat="53.9599946" lon="-1.0825968" category="sightseeing">
         <base:shape x_end="0" y_end="0" type="textbox">

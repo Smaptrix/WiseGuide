@@ -57,14 +57,15 @@ public class VideoHandler extends BorderPane {
      * <p>
      * Video handler constructor.
      * </p>
-     *
      * @param filePath Is the file path of the desired media.
      * @param heightIn Desired initial media height.
      * @param widthIn  Desired initial media width.
+     * @return
      */
-    public VideoHandler(File filePath, int heightIn, int widthIn) {
+    public VideoHandler(String filePath, int heightIn, int widthIn) {
 
-        toString(filePath);
+        //toString(filePath);
+        source = filePath;
 
         try {
             this.media = new Media(source);

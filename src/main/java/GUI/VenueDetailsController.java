@@ -13,9 +13,11 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
+import javafx.scene.media.*;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
+import mediahandlers.VideoHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +45,8 @@ public class VenueDetailsController {
     public Label venueName;
     @FXML
     public TextArea venueText;
+    @FXML
+    public MediaView venueVideo;
     @FXML
     public ImageView venueImage;
     @FXML
@@ -73,7 +77,6 @@ public class VenueDetailsController {
         int photoIndex = 0;
         int maxPhotoIndex = 5;
         String imageFile = null;
-        //ImageView[] imageViews = {venueImage0, venueImage1, venueImage2, venueImage3, venueImage4, venueImage5};
         //Downloads every media element required by the venue xml
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
@@ -89,9 +92,18 @@ public class VenueDetailsController {
 
                 TextManager textManager = new TextManager(textFile, 470, 100);
                 venueText.setText(textManager.loadTextFromFile());
+                /*
+                String videoFile = (currVenuePage.getMediaSourceByID("video0"));
+                System.out.println("Video file: " + videoFile);
 
+                client.requestFile(videoFile);
+
+                VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
+                //venueVideo.setMediaPlayer(videoHandler);
+                */
                 //Sets the text index to 1, as there's only one text file for each venue
                 textIndex = 1;
+
             }
 
             imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
@@ -110,7 +122,7 @@ public class VenueDetailsController {
                 ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
                 // TODO: Look into accessing this value instead of magic number
                 imageHandler.load(220, 400);
-                //venueImage0.setImage(imageHandler.getCurrImage());
+
                 switch (photoIndex) {
                     case 0:
                         venueImage0.setImage(imageHandler.getCurrImage());
@@ -133,7 +145,15 @@ public class VenueDetailsController {
                 }
 
                 photoIndex++;
+
+
             }
+
+
+
+
+
+
         }
     }
 }

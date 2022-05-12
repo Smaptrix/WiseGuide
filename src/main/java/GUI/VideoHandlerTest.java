@@ -16,7 +16,7 @@ public class VideoHandlerTest extends Application {
         int width = 1280;
         int height = 720;
 
-        File testFile = new File("C:\\Users\\Lee\\Videos\\clapping.mp4");
+        String testFile = "C:\\Users\\Lee\\Videos\\clapping.mp4";
 
         VideoHandler test = new VideoHandler(testFile, height, width);
 
