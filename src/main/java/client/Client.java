@@ -724,10 +724,10 @@ public class Client {
      * @throws IOException if
      */
     public String deleteUser(User currUser) throws IOException {
-        outText.println("DELETEUSER");
-        outText.println(currUser.getUsername());
-        outText.println(currUser.getPassword());
-        return receiveAcknowledgement();
+        sendMessage("DELETEUSER",true);
+        sendMessage(currUser.getUsername(),true);
+        sendMessage(currUser.getPassword(),true);
+        return receiveAcknowledgement(true);
     }
 
     /**

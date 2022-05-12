@@ -187,12 +187,14 @@ public class VenueOwnerMainPageController {
         stage.setResizable(false);
         File selectedFile = fileChooser.showOpenDialog(stage);
 
-        try {
+        System.out.println("INFO: The method that's supposed to be called here is commented out.");
+        /*try {
+
             client.requestUploadFile(selectedFile);
         } catch (IOException e) {
             //TODO - Add error message?
             e.printStackTrace();
-        }
+        }*/
 
     }
 

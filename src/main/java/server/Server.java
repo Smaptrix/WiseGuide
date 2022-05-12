@@ -745,10 +745,10 @@ public class Server {
             boolean deleteSuccess = currUserHandler.deleteUser();
 
             if (deleteSuccess){
-                sendResponse("DELETESUCCESS",true);
+                sendResponse("DELETESUCCESS", true, true);
                 System.out.println("User was deleted.");
             } else {
-                sendResponse("DELETEFAILURE",true);
+                sendResponse("DELETEFAILURE",true, true);
                 System.out.println("User could not be deleted.");
             }
         }
