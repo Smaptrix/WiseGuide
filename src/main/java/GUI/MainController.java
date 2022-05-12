@@ -194,7 +194,7 @@ public class MainController {
         } else {
                 currentItemSelected = selectedItem;
         }
-
+        // TODO: add an extra scene for loading page
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
         Stage stage = new Stage();
@@ -207,7 +207,6 @@ public class MainController {
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
         controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
-
         //Checks to see if the venue has been favourite by the user
         controller.checkIfFavourite();
         stage.setScene(scene);
