@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   09/03/2022
+    Last Updated:   12/05/2022
+ */
 package GUI;
 
 import VenueXMLThings.VenuePage;
@@ -20,46 +27,77 @@ import java.io.File;
 import java.io.IOException;
 
 
-
-//TODO - Do we want to display the files that are needed by the XML? OR that we have in our directory?
-
+/**
+ * This class controllers the venue owner main page
+ */
 public class VenueOwnerMainPageController {
-
+    /**
+     * This is the client that the GUI is using to communicate with the server
+     */
     private Client client;
+    /**
+     * This is the current venue user that is logged in
+     */
     private User currUser;
+    /**
+     * This is the start of the filepath for the current device
+     */
     private String filePathStart;
+    /**
+     * This is the parser that reads the xml
+     */
     private VenueXMLParser xml;
 
+    /**
+     * This is the label that displays the title of the current page
+     */
     @FXML
     Label titleLabel;
-
+    /**
+     * This is the list that displays the currents files that are stored on the server of the venue
+     */
     @FXML
     ListView fileList;
 
+    /**
+     * This button when pressed opens the currently selected file
+     */
     @FXML
     Button openFileButton;
-
+    /**
+     * This button when pressed logs the venue user out
+     */
     @FXML
     Button logOutButton;
 
+    /**
+     * LEGACY -When pressed this button allows the user to add a file to the server - LEGACY
+     */
     @FXML
     Button addFileButton;
 
 
+    /**
+     * This function runs whenever this controller is opened
+     */
     @FXML
     public void initialize(){
-
         //REMINDER - MADE THIS BUTTON INVISIBLE BECAUSE IT IS AN UNFINISHED FEATURE
         addFileButton.setVisible(false);
-
-
     }
 
-
+    /**
+     * This sets the client to be used by the GUI
+     * @param client the client we want the GUI to use
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /**
+     * This sets the current user to the desired venue user
+     * @param currUser The venue user that is logged in
+     */
     public void setCurrUser(User currUser) {
         this.currUser = currUser;
         titleLabel.setText("VENUE ADMIN PAGE: " + currUser.getUsername());
@@ -68,7 +106,10 @@ public class VenueOwnerMainPageController {
     }
 
 
-    //Populates the list on the venue owner page of the current files in the XML
+    /**
+     * This populates the list on the main page with the files that are stored on the server
+     * This allows the currently logged in venue user to see the files
+     */
     public void populateFileList(){
 
         //Download the xml file - we dont care if the user has access to it
@@ -111,8 +152,11 @@ public class VenueOwnerMainPageController {
 
 
 
+    /**
+     * This action occurs when the open file button is pressed
+     * This opens the currently selected file in the list on the device
+     */
     @FXML
-    //Downloads and opens the requested file by the venue owner
     private void onOpenFileButtonPress(){
 
         System.out.println("Open File Button Pressed");
@@ -131,10 +175,10 @@ public class VenueOwnerMainPageController {
 
     }
 
-
+    /**
+     * Deletes the files on the server and also removes the reference from the xml file
+     */
     @FXML
-    //Deletes a file from the servers directory, and in the XML file --- WIP
-    //WARNING - Will actually delete the file on the server and not change the xml for now
     private void onDeleteFileButtonPress(){
 
         System.out.println("Delete File Button Pressed");
@@ -144,7 +188,7 @@ public class VenueOwnerMainPageController {
 
             //Request Server delete a file
             try {
-                //Could cause memory leak ish thingy here, not deleting a file but removing its reference from the XML
+
                 client.requestDeleteFile(filePathStart + fileList.getSelectionModel().getSelectedItem());
                 fileList.getItems().remove(fileList.getSelectionModel().getSelectedItem());
             } catch (IOException e) {
@@ -165,7 +209,10 @@ public class VenueOwnerMainPageController {
 
     }
 
-
+    /**
+     * UNUSED CODE
+     * Lets the venue user upload files to the server
+     */
     @FXML
     //Adds a new file to the servers directory, and into the XML file
     //Uploading files to a server could be very dangerous
@@ -198,7 +245,11 @@ public class VenueOwnerMainPageController {
 
     }
 
-
+    /**
+     * The action that occurs when the logout button is pressed
+     * Logs the user out of the application
+     * @throws IOException
+     */
     @FXML
     private void onLogOutButtonPress() throws IOException {
         System.out.println("Log out button pressed");
@@ -224,8 +275,6 @@ public class VenueOwnerMainPageController {
 
     }
 
-
-    //TODO - ADD NEW FILES (REMEMBER WE HAVE TO CHANGE THE FILE ON THE SERVER AS WELL)
 
 
 }
