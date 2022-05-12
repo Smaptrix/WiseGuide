@@ -77,29 +77,53 @@ public class VenueDetailsController {
         System.out.println(currVenuePage.children.get(0).attributes.get("include_source"));
     }
 
-
+    /**
+     * This label is the label that displays the name of the venue
+     */
     @FXML
     public Label venueName;
+    /**
+     * This text area is the area that displays the text information regarding the venue
+     */
     @FXML
     public TextArea venueText;
+    /**
+     * This ImageView is the place that displays the images of the venue
+     */
     @FXML
     public ImageView venueImage;
+    /**
+     * This button allows the user to favourite/unfavourite a venue
+     */
     @FXML
     public Button faveVenueButton;
 
 
-
+    /**
+     * This button is on the menubar and allows the user to close the application
+     */
     @FXML
     public MenuItem closeButton;
+    /**
+     * This VBox is the box that holds all of the GUI inside of it
+     */
     @FXML
     VBox mainWindow;
+    /**
+     * This button on the menubar allows the user to open the about page
+     */
     @FXML
     MenuItem aboutButton;
+    /**
+     * This button on the menubar allows the user to go back to the main application
+     */
     @FXML
     MenuItem backButton;
 
+    /**
+     * This function is always called by the GUI when it opens up
+     */
     @FXML
-    //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
 
@@ -107,7 +131,10 @@ public class VenueDetailsController {
 
     }
 
-    //Will use the client to download relevant data and place it into the page.
+    /**
+     * Loads the venue data from the xml file to display on the GUI
+     * @throws IOException when the client cannot connect to the server
+     */
     public void loadVenueData() throws IOException {
 
         venueName.setText(currVenue);
@@ -147,6 +174,11 @@ public class VenueDetailsController {
 
     }
 
+    /**
+     * The action that occurs when the close button is pressed.
+     * Closes the application
+     * @throws IOException If the client is unable to connect to the server
+     */
     @FXML
     //Closes the window
     protected void onCloseButtonClick() throws IOException {
@@ -159,6 +191,11 @@ public class VenueDetailsController {
         //Platform.exit();
     }
 
+    /**
+     * The action that occurs when the about button is pressed
+     * Opens the about page
+     * @throws IOException if the client cannot connect to the server
+     */
     @FXML
     public void onAboutButtonPress() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("about-page.fxml"));
@@ -176,12 +213,19 @@ public class VenueDetailsController {
         stage.setResizable(false);
     }
 
+    /**
+     * The action that occurs when the back button is pressed
+     * Goes back to the main application
+     */
     @FXML
-    public void onBackButtonPress() throws IOException {
+    public void onBackButtonPress() {
         Stage currStage = (Stage) mainWindow.getScene().getWindow();
         currStage.close();
     }
 
+    /**
+     *This function checks to see if the venue is a user favourite
+     */
     public void checkIfFavourite() {
 
         if(currUser.getFaveVenues() != null){
@@ -192,7 +236,11 @@ public class VenueDetailsController {
 
     }
 
-
+    /**
+     * This is the action that occurs when the user presses the favourite button
+     * It favourites/unfavourites the venue for the user
+     * @throws IOException if the client cannot connect to the server
+     */
     @FXML
     public void favouriteButtonAction() throws IOException {
         if(faveVenueButton.getText().equals("Favourite")){

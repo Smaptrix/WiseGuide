@@ -207,18 +207,19 @@ public class MainController {
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
         controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
-        try {
-            controller.loadVenueData();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Failed to get venue data");
-        }
+
         //Checks to see if the venue has been favourite by the user
         controller.checkIfFavourite();
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();
         stage.setResizable(false);
+        try {
+            controller.loadVenueData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to get venue data");
+        }
     }
 
     //Gets the position of the mouse on a click
