@@ -235,7 +235,6 @@ public class Server {
 
         //Server formed
         serverSocket = new ServerSocket(port);
-
         System.out.println("Port Created\n");
 
 
@@ -251,7 +250,6 @@ public class Server {
 
 
         clientSocket = serverSocket.accept();
-
         System.out.println("After accept\n");
 
         //Reverts back to original socket type
@@ -259,6 +257,8 @@ public class Server {
 
         //Writes pure file bytes to output socket
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
+
+        osDetect();
 
         //Initialises the current user server user handler
         currUser = new User("", "");
@@ -273,8 +273,6 @@ public class Server {
         faveVenuesHandler.faveVenueList("joe");
 
     }
-
-
 
     //Possibly not needed now that windows accepts unix slashes...
     private void osDetect(){
@@ -397,6 +395,9 @@ public class Server {
                 receiveLogin(2);
                 break;
 
+            case "DELETEUSER":
+                receiveLogin(3);
+                break;
 
             case "CHANGENAME":
                 currUserHandler.setUserType("USER");
@@ -512,15 +513,10 @@ public class Server {
 
             byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) fileSize).array();
 
-
-
             int fileSizeInBytesLen = fileSizeInBytes.length;
-
 
             //Tells the client how many bytes are determining the size of the file
             outputStream.write(fileSizeInBytesLen);
-
-            //System.out.println("Sent file size length");
 
             //Writes the fileSize in bytes to the client
             for (byte fileSizeInByte : fileSizeInBytes) {
@@ -645,11 +641,6 @@ public class Server {
 
 
 
-
-
-
-
-
     //Mode decides whether it verifies user data or logs in
     public void receiveLogin(Integer mode) throws IOException {
 
@@ -746,9 +737,22 @@ public class Server {
 
             }
 
-
-
         }
+
+        //User Deletion Mode
+        else if(mode == 3){
+
+            boolean deleteSuccess = currUserHandler.deleteUser();
+
+            if (deleteSuccess){
+                sendResponse("DELETESUCCESS", true, true);
+                System.out.println("User was deleted.");
+            } else {
+                sendResponse("DELETEFAILURE",true, true);
+                System.out.println("User could not be deleted.");
+            }
+        }
+
         else{
             System.out.println("Unrecognised login mode!");
         }

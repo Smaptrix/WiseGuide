@@ -654,11 +654,6 @@ public class Client {
         return ack;
     }
 
-
-
-
-
-
     /**
      * <p>
      * Asks the user to verify if the users information is correct
@@ -690,6 +685,8 @@ public class Client {
      */
     public String createUser(User currUser) throws IOException {
 
+        boolean success = false;
+
         //Send the command
         sendMessage("CREATEUSER", true);
 
@@ -719,6 +716,19 @@ public class Client {
 
     }
 
+    /**
+     * <p>
+     * Deletes the selected user account
+     * </p>
+     * @return whether the deletion was successful or not.
+     * @throws IOException if
+     */
+    public String deleteUser(User currUser) throws IOException {
+        sendMessage("DELETEUSER",true);
+        sendMessage(currUser.getUsername(),true);
+        sendMessage(currUser.getPassword(),true);
+        return receiveAcknowledgement(true);
+    }
 
     /**
      * <p>
@@ -753,9 +763,6 @@ public class Client {
         String ack = receiveAcknowledgement(true);
 
         return ack.equals("SAMEVER");
-
-
-
     }
 
     /**
@@ -906,7 +913,6 @@ public class Client {
         else{
             return false;
         }
-
     }
 
     /**

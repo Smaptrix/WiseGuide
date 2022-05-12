@@ -11,15 +11,19 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -87,10 +91,10 @@ public class AccountCreationController {
      * The checkbox the users tick to confirm they are over the required age limit
      */
     @FXML
-    CheckBox ageCheckBox;
+    public CheckBox ageCheckBox;
 
     /**
-     * The link to the companies' privacy policy
+     * The link to the company's privacy policy
      */
     @FXML
     Hyperlink privacyPolicyLink;
@@ -105,14 +109,25 @@ public class AccountCreationController {
 
 
 
-    //TODO -  User should not be able to create accounts with same names as testing accounts (see LoginGUIIntegration TODOs) (AC)
+    private boolean testingMode = false;
+
+    public void setTestingMode(boolean testingMode) {
+        this.testingMode = testingMode;
+    }
     /**
      * When the user presses the create account button, this action occurs and requests the server to make the desired account
      * @throws IOException if the client cannot connect to the server
      */
     @FXML
+    //Attempts to create account
     private void createAccountButtonAction() throws IOException {
 
+        boolean nameForbidden = forbiddenNameCheck(userField.getText().trim());
+
+        //If testingMode is true, accounts with forbidden names should be allowed
+        if(testingMode){
+            nameForbidden = false;
+        }
 
         //Lots of if/elseifs to make sure that the user data stuff is correct
 
@@ -134,6 +149,10 @@ public class AccountCreationController {
             errLabel.setText("You are not over the age of 13!");
         }
 
+        else if(nameForbidden){
+            errLabel.setText("The selected username is unavailable.");
+        }
+
         else if(userField.getLength() > 15){
             errLabel.setText("username can't be more than 15 characters!");
         }
@@ -152,19 +171,17 @@ public class AccountCreationController {
             //Requests that the server creates the user
             if(client.createUser(currUser).equals("USERCREATED")){
 
-                    accountCreatedPageOpen();
+                accountCreatedPageOpen();
 
-                    //Close the current page
-                    Stage currStage = (Stage) createAccountButton.getScene().getWindow();
-                    currStage.close();
+                //Close the current page
+                Stage currStage = (Stage) createAccountButton.getScene().getWindow();
+                currStage.close();
 
-                }
-            else {
-                errLabel.setText("User already exists");
-            }
-
+            } else {
+                errLabel.setText("This username is taken.");
             }
         }
+    }
 
 
     /**
@@ -215,8 +232,18 @@ public class AccountCreationController {
 
     }
 
-
-
-
+    private boolean forbiddenNameCheck(String name) throws IOException {
+        boolean forbidden = false;
+        File forbiddenNamesList = new File("reservedUsernames.txt");
+        BufferedReader br = new BufferedReader(new FileReader(forbiddenNamesList));
+        String line;
+        while(((line = br.readLine()) != null) && forbidden == false){
+            if(name.equals(line)){
+                forbidden = true;
+            }
+        }
+        br.close();
+        return forbidden;
+    }
 
 }

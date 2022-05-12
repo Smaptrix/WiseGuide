@@ -192,7 +192,7 @@ public class MainController {
             currentItemSelected = venueList.getSelectionModel()
                     .getSelectedItem();
         } else {
-                currentItemSelected = selectedItem;
+            currentItemSelected = selectedItem;
         }
         // TODO: add an extra scene for loading page
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
@@ -342,10 +342,10 @@ public class MainController {
 
         //Doesn't try to close a connection that isn't there
         if(client.isConnected()) {
-           client.closeConnection(); // Closes client connection safely.
+            client.closeConnection(); // Closes client connection safely.
         }
-            System.exit(0);
-          //Platform.exit();
+        System.exit(0);
+        //Platform.exit();
     }
 
 
@@ -362,6 +362,7 @@ public class MainController {
         AccountDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
         controller.setUser(currUser);
+        controller.setMapStage((Stage)mainWindow.getScene().getWindow());
         stage.setScene(scene);
         stage.setTitle("Account Creation");
         stage.show();
@@ -431,14 +432,14 @@ public class MainController {
     protected void loadListOfVenues() {
 
 
-            //Tries to download the venue lists from the server
-            try {
-                client.requestVenueXMLFile();
-                System.out.println("OUT");
-            } catch (IOException e) {
-                System.out.print("Failed to download venue lists");
-            }
-        
+        //Tries to download the venue lists from the server
+        try {
+            client.requestVenueXMLFile();
+            System.out.println("OUT");
+        } catch (IOException e) {
+            System.out.print("Failed to download venue lists");
+        }
+
 
 
 
@@ -446,6 +447,7 @@ public class MainController {
         xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
 
         List<String> venueNameList = xml.getPageNames();
+
 
         //Iterates through every venue name and adds it to the menu item
         for (String s : venueNameList) {

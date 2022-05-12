@@ -24,22 +24,17 @@ public class ServerUserHandler {
     private String[] userInfo;
     public boolean passVerified;
 
-
+    private int delIteratorMax = 5;
 
 
     //Creates the user serverside
     public ServerUserHandler(User currUser, boolean autoVerify) throws IOException {
         this.currUser = currUser;
 
-
-
-
         if(autoVerify){
             verifyUser();
         }
     }
-
-
 
 
     public void verifyUser() throws IOException {
@@ -75,6 +70,56 @@ public class ServerUserHandler {
         return false;
     }
 
+    public boolean deleteUser() throws IOException {
+
+        File database = new File("userDatabase.txt");
+        File tempFile = new File("tempDatabase.txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(database));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
+        String userToRemove = currUser.getUsername();
+        String line;
+
+        //Copies all lines from database into new file EXCEPT for user we wish to delete.
+        while((line = br.readLine()) != null){
+            String[] values = line.split(",");
+            if(!(values[0].equals(userToRemove))){
+                bw.write(line + System.getProperty("line.separator"));
+            }
+        }
+
+        //Close buffers and run garbage collection (doesn't work if you don't do the gc! Java bug)
+        bw.flush();
+        bw.close();
+        br.close();
+        bw = null;
+        br = null;
+        System.gc();
+
+        //Delete the old database.
+        //Sometimes, the .delete() would fail for absolutely no specified reason. The files are 100% NOT open at this
+        //point, so there's no reason for it to fail other than Java messing things up.
+        //If one these random failures occurs, we'll just try again. Max # of tries = delIteratorMax variable.
+        //NOTE: Adding this "try again" seems to have stopped the random errors occurring in the first place. I don't know why.
+        boolean delSuccess = database.delete();
+        int delIterator = 0;
+        while(!delSuccess && (delIterator < delIteratorMax)){
+            delIterator++;
+            System.out.println("The database deletion was not successful. Trying again...");
+            delSuccess = database.delete();
+        }
+
+        boolean renameSuccess = tempFile.renameTo(database);
+        if(!renameSuccess) {
+            System.out.println("The database rename was not successful."); //Debug
+        }
+        boolean success = !(findUser());
+        if(!success) {
+            System.out.println("The user is still in the database."); //Debug
+        }
+
+        return (success);
+    }
 
     //Note - no refactor to use this because this is a serverside package only
     //Determines if a provided username is already taken
@@ -128,15 +173,15 @@ public class ServerUserHandler {
         }
 
 
-            currUser.setUsername(desiredName);
+        currUser.setUsername(desiredName);
 
-            FileOutputStream out = new FileOutputStream(dataFile);
-            out.write(input.getBytes());
-            out.close();
+        FileOutputStream out = new FileOutputStream(dataFile);
+        out.write(input.getBytes());
+        out.close();
 
-            System.out.println("File closed");
+        System.out.println("File closed");
 
-        }
+    }
 
 
 
@@ -172,7 +217,7 @@ public class ServerUserHandler {
         out.write(input.getBytes());
         out.close();
 
-   }
+    }
 
 
 
@@ -183,7 +228,6 @@ public class ServerUserHandler {
 
     //Checks to see if the users password is correct
     public boolean verifyPass() {
-
         return (currUser.getPassword()).equals(userInfo[1]);
     }
 
@@ -213,10 +257,10 @@ public class ServerUserHandler {
 
 
     public void clear(){
-         currUser = null;
-         userExistState = false;
-         userInfo = null;
-         passVerified = false;
+        currUser = null;
+        userExistState = false;
+        userInfo = null;
+        passVerified = false;
     }
 
     public void setCurrUser(User currUser) {

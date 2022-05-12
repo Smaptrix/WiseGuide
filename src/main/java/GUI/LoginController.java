@@ -11,13 +11,18 @@ package GUI;
 
 import client.Client;
 import javafx.event.ActionEvent;
+import GUI.LoginApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -26,18 +31,23 @@ import java.io.IOException;
 /**
  * Controls the login page for the application
  */
-public class LoginController {
+import java.security.NoSuchAlgorithmException;
 
+public class LoginController {
 
     /**
      * The client being used by the GUI
      */
-    protected Client client;
+    public Client client;
     /**
      * The user being used by the controller - not filled until logged in
      */
     protected User currUser;
 
+    private boolean testingMode = false;
+    public void setTestingMode(boolean testingMode) {
+        this.testingMode = testingMode;
+    }
 
     /**
      * The text field where the user can enter their password
@@ -115,7 +125,6 @@ public class LoginController {
         System.exit(0);
     }
 
-
     //TODO - MAKE IT SO YOU CANT HAVE SPACES IN ANY OF THE FIELDS
 
     /**
@@ -123,6 +132,11 @@ public class LoginController {
      * @throws IOException If the client cannot connect to the server
      */
     @FXML
+    //Tries to login using the data provided
+    //For now creates a user but that should all be handled on the client not the GUI :)
+    //Bypasses all the networking stuff while I wait for integration - JI
+    //Shouldn't have to throw the exception because we only want to make the user and transfer that to the server
+
     private void loginButtonAction() throws IOException {
 
         if (userTextField.getText().trim().isEmpty()) {
@@ -139,10 +153,7 @@ public class LoginController {
         } else {
 
             errorLabel.setText("");
-
-
             currUser = new User(userTextField.getText(), userPassField.getText());
-
 
             String loginCode = client.requestLogin(currUser);
 
@@ -155,16 +166,13 @@ public class LoginController {
             else{
                 errorLabel.setText("");
 
-
                 Stage currStage = (Stage) loginButton.getScene().getWindow();
                 currStage.close();
-
 
                 //Opens the main application once you have logged in
                 MainApplication app = new MainApplication();
                 Stage mainStage = new Stage();
                 app.transferInfoAndOpen(mainStage, client, currUser);
-
 
             }
         }
@@ -182,6 +190,7 @@ public class LoginController {
             Scene scene = new Scene(fxmlLoader.load(), 300, 350);
             AccountCreationController controller = fxmlLoader.getController();
             controller.setClient(client);
+            controller.setTestingMode(testingMode);
             stage.setScene(scene);
             stage.setTitle("Account Creation");
             stage.show();
@@ -193,6 +202,17 @@ public class LoginController {
 
     }
 
+    //FOR TESTING PURPOSES: CREATE AN ACCOUNT TO DELETE
+    public void createTestAccount() throws IOException {
+        User testingUser = new User("accountTestUser","accountTest");
+        if(client.createUser(testingUser).equals("USERCREATED")) {
+            System.out.println("ACCOUNT TEST USER was created.");
+        } else {
+            System.out.println("ACCOUNT TEST USER could not be created.");
+        }
+    }
+
+    //Client field getter and setter, used by testing to create a new testing account manually.
     /**
      * Sets the client to be used with the controller
      * @param client The client to give to the controller
@@ -201,6 +221,7 @@ public class LoginController {
         this.client = client;
     }
 
+    public Client getClient() { return this.client; }
 
     /**
      * Opens the venue login page when the "secret" button is pressed
@@ -220,6 +241,7 @@ public class LoginController {
 
         Stage currStage = (Stage) errorLabel.getScene().getWindow();
         currStage.close();
-    }
 
     }
+
+}
