@@ -18,6 +18,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
+import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -67,9 +68,9 @@ public class AccountDeletionTests extends ApplicationTest {
         //No assertion needed.
     }
 
-    //Integration Test | Confirm User Can Be Deleted
+    //Integration Test | Confirm User Can Be Deleted with the GUI
     @Test
-    public void userDeletionTest() throws IOException {
+    public void userDeletionGUITest() throws IOException {
         sleep (1000);
         controller.setTestingMode(true);
         controller.createDeletionTestAccount();

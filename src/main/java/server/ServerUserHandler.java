@@ -72,33 +72,23 @@ public class ServerUserHandler {
 
     public boolean deleteUser() throws IOException {
 
-        System.out.println("Opening the files...");
-
         File database = new File("userDatabase.txt");
         File tempFile = new File("tempDatabase.txt");
-
-        if(tempFile.exists()){
-            System.out.println("INFO: The temp database exists.");
-        } else {
-            System.out.println("INFO: The temp database does NOT exist");
-        }
 
         BufferedReader br = new BufferedReader(new FileReader(database));
         BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
         String userToRemove = currUser.getUsername();
         String line;
+
         //Copies all lines from database into new file EXCEPT for user we wish to delete.
-
-        System.out.println("Removing the user from the database.");
-
         while((line = br.readLine()) != null){
             String[] values = line.split(",");
             if(!(values[0].equals(userToRemove))){
                 bw.write(line + System.getProperty("line.separator"));
             }
         }
+
         //Close buffers and run garbage collection (doesn't work if you don't do the gc! Java bug)
-        System.out.println("Closing the reader...");
         bw.flush();
         bw.close();
         br.close();
@@ -106,10 +96,11 @@ public class ServerUserHandler {
         br = null;
         System.gc();
 
-        //Identify if there's an issue (FOR DEBUG PURPOSES ONLY)
-
-        //TODO: Deletion sometimes fails for literally no reason.
-
+        //Delete the old database.
+        //Sometimes, the .delete() would fail for absolutely no specified reason. The files are 100% NOT open at this
+        //point, so there's no reason for it to fail other than Java messing things up.
+        //If one these random failures occurs, we'll just try again. Max # of tries = delIteratorMax variable.
+        //NOTE: Adding this "try again" seems to have stopped the random errors occurring in the first place. I don't know why.
         boolean delSuccess = database.delete();
         int delIterator = 0;
         while(!delSuccess && (delIterator < delIteratorMax)){
@@ -120,16 +111,12 @@ public class ServerUserHandler {
 
         boolean renameSuccess = tempFile.renameTo(database);
         if(!renameSuccess) {
-            System.out.println("The database rename was not successful.");
+            System.out.println("The database rename was not successful."); //Debug
         }
         boolean success = !(findUser());
         if(!success) {
-            System.out.println("The user is still in the database.");
+            System.out.println("The user is still in the database."); //Debug
         }
-
-
-
-
 
         return (success);
     }

@@ -169,9 +169,6 @@ public class LoginController {
     @FXML
     private void venueLoginPageOpen() throws IOException {
 
-        createTestAccount();
-
-        /*
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("venue-login-page.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
@@ -182,11 +179,8 @@ public class LoginController {
         stage.show();
         stage.setResizable(false);
 
-
         Stage currStage = (Stage) errorLabel.getScene().getWindow();
         currStage.close();
-*/
-
 
     }
 

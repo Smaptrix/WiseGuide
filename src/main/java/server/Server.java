@@ -406,8 +406,9 @@ public class Server {
 
         //User Deletion Mode
         else if(mode == 3){
-            System.out.println("The server is attempting to delete the user.");
+
             boolean deleteSuccess = currUserHandler.deleteUser();
+
             if (deleteSuccess){
                 sendResponse("DELETESUCCESS",true);
                 System.out.println("User was deleted.");

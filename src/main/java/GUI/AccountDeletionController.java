@@ -53,8 +53,6 @@ public class AccountDeletionController {
      */
     private void deleteAccountButtonAction() throws IOException {
 
-        System.out.println("I am checking the input data.");
-
         //Verifies that the user input data is OK.
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
@@ -67,8 +65,6 @@ public class AccountDeletionController {
         }
         else {
 
-            System.out.println("I am checking the user is valid.");
-
             //Uses the code for the login system to determine whether the user details are valid.
             User detailsToCheck = new User(currUser.getUsername(),passField.getText().trim());
             String verificationCode = client.requestLogin(detailsToCheck);
@@ -76,8 +72,6 @@ public class AccountDeletionController {
             //If the "login" with the currently logged in username and the entered password worked, then that means
             //the password is correct and the user is valid and can therefore be deleted.
             if (verificationCode.equals("GOODLOGIN")) {
-
-                System.out.println("The user is valid! Closing windows...");
 
                 //Close all windows and attempt to delete the user.
                 Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
@@ -89,16 +83,15 @@ public class AccountDeletionController {
                 if (mapStage != null) {
                     mapStage.close();
                 }
-                System.out.println("Deleting the user...");
+
                 System.gc(); //Runs gc, allows deleteUser to update the database.
                 String success = client.deleteUser(currUser);
 
                 if (success.equals("DELETESUCCESS")){
-                    System.out.println("The user was deleted.");
                     accountDeletedPageOpen(false);
                 } else {
-                    //This should never appear. If it does, something has gone wrong in the code. Could add error codes if needed.
-                    System.out.println("Something really bad happened.");
+                    //This should never appear. If it does, something has gone wrong in the code (probably file.delete error).
+                    //Could add error codes if needed.
                     accountDeletedPageOpen(true);
                 }
 
@@ -112,14 +105,6 @@ public class AccountDeletionController {
 
     //Opens the "Account Deleted!" window.
     public void accountDeletedPageOpen(boolean error) throws IOException {
-
-        System.out.println("Opening the Account Deleted Page...");
-
-        if(client == null){
-            System.out.println("ADPO: The client is null! What happened?");
-        } else {
-            System.out.println("ADPO: Client is not null.");
-        }
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-deleted-window.fxml"));
         Stage stage = new Stage();

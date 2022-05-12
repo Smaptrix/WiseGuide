@@ -65,9 +65,8 @@ public class AccountDeletionPopupController {
     }
 
     public void reopenLoginPage() throws IOException {
-        System.out.println("Attempting to log out the client.");
+
         client.requestLogout();
-        System.out.println("Opening the login page...");
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("login-page.fxml"));
         Stage stage = new Stage();
