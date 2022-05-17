@@ -207,15 +207,17 @@ public class VenueDetailsController {
 
             //NOTE - REMEMBER YOU CHANGED THE SLASH DIRECTION
 
-
+            //Text onto the GUI
             while (textIndex == 0) {
-                //Text
+                //Gets the text file
                 String textFile = (currVenuePage.getMediaSourceByID("text0"));
                 System.out.println("File: " + textFile);
 
                 client.requestFile(textFile);
 
+                //Places the text from the text file into the text manager
                 TextManager textManager = new TextManager(textFile, 470, 100);
+                //Loads the text onto the GUI
                 venueText.setText(textManager.loadTextFromFile());
                 /*
                 String videoFile = (currVenuePage.getMediaSourceByID("video0"));
@@ -226,50 +228,66 @@ public class VenueDetailsController {
                 VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
                 //venueVideo.setMediaPlayer(videoHandler);
                 */
+
                 //Sets the text index to 1, as there's only one text file for each venue
                 textIndex = 1;
 
             }
 
+            //Loads the first image file
             imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
-            System.out.println(imageFile);
-            while (photoIndex <= maxPhotoIndex && imageFile != null) {
-                //Images
+            //Runs through and places an image in a slot up until all the slots are filled
+            while (photoIndex <= maxPhotoIndex) {
+                //Finding the image file
                 imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
 
-                client.requestFile(imageFile);
+                //Making sure that the image file actually exists
+               if(imageFile != null) {
+                   //Requests the filepath for the image for
+                    client.requestFile(imageFile);
 
-                File imageFilepath = new File(imageFile);
-                System.out.println("This is the file path:" + imageFilepath);
+                    //Sets up the filepath for the image
+                    File imageFilepath = new File(imageFile);
+                    System.out.println("This is the file path:" + imageFilepath);
 
-                ImageView imageView = new ImageView();
+                    //Initialises the image view
+                    ImageView imageView = new ImageView();
 
-                ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
-                // TODO: Look into accessing this value instead of magic number
-                imageHandler.load(220, 400);
+                    //Creates the image handler with the desired image filepath
+                    ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+                    // TODO: Look into accessing this value instead of magic number
+                    //Loads the image into the GUI
+                    imageHandler.load(220, 400);
 
-                switch (photoIndex) {
-                    case 0:
-                        venueImage0.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 1:
-                        venueImage1.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 2:
-                        venueImage2.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 3:
-                        venueImage3.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 4:
-                        venueImage4.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 5:
-                        venueImage5.setImage(imageHandler.getCurrImage());
-                        break;
-                }
-
+                    //Decides which slot to place the image into
+                    switch (photoIndex) {
+                        case 0:
+                            venueImage0.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 1:
+                            venueImage1.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 2:
+                            venueImage2.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 3:
+                            venueImage3.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 4:
+                            venueImage4.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 5:
+                            venueImage5.setImage(imageHandler.getCurrImage());
+                            break;
+                    }
+                //Increases the index
                 photoIndex++;
+            }
+
+               //If the image is null break the while loop and stop attempting to load the images
+               else{
+                   break;
+               }
 
 
             }
