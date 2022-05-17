@@ -17,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.*;
 import javafx.scene.media.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -25,12 +24,10 @@ import javafx.stage.Stage;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
 import serverclientstuff.User;
-import mediahandlers.VideoHandler;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * <p>
@@ -79,7 +76,7 @@ public class VenueDetailsController {
      * <p>
      *     Sets the current venue for the controller
      * </p>
-     * @param currVenue The current venue that the program is dispalying the details of
+     * @param currVenue The current venue that the program is displaying the details of
      * @param currVenuePage The xml data for the current venue page
      * @param currUser The current user logged into the application
      */
@@ -119,7 +116,7 @@ public class VenueDetailsController {
     public ImageView venueImage;
     /**
      * <p>
-     *     This button allows the user to favourite/unfavourite a venue
+     *     This button allows the user to favourite/un-favourite a venue
      * </p>
      */
     @FXML
@@ -267,9 +264,8 @@ public class VenueDetailsController {
 
 
             }
-
-
-
+        }
+    }
 
     /**
      * <p>
@@ -278,8 +274,9 @@ public class VenueDetailsController {
      * </p>
      * @throws IOException If the client is unable to connect to the server
      */
-    @FXML
+
     //Closes the window
+    @FXML
     protected void onCloseButtonClick() throws IOException {
 
         //Doesn't try to close a connection that isn't there
@@ -344,7 +341,7 @@ public class VenueDetailsController {
     /**
      * <p>
      *     This is the action that occurs when the user presses the favourite button
-     *     It favourites/unfavourites the venue for the user
+     *     It favourites/un-favourites the venue for the user
      * </p>
      * @throws IOException if the client cannot connect to the server
      */
@@ -382,10 +379,5 @@ public class VenueDetailsController {
         }
 
 
-    }
-
-
-
-        }
     }
 }
