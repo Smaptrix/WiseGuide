@@ -24,6 +24,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VenueDetailsController">
 
@@ -58,11 +59,11 @@
             </Button>
         </HBox>
         <HBox prefHeight="300.0" prefWidth="900.0">
-            <ImageView fx:id="venueImage" fitHeight="220.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+            <MediaView fx:id="venueVideo" fitHeight="220.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                 <HBox.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </HBox.margin>
-            </ImageView>
+            </MediaView>
             <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0">
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -97,11 +98,17 @@
                     <VBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </VBox.margin>
+               <children>
+                  <Label layoutX="57.0" layoutY="15.0" prefHeight="51.0" prefWidth="75.0" text="Price" />
+               </children>
                 </Pane>
                 <Pane prefHeight="125.0" prefWidth="200.0">
                     <VBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </VBox.margin>
+               <children>
+                  <Label layoutX="53.0" layoutY="30.0" text="Raiting" />
+               </children>
                 </Pane>
             </VBox>
         </HBox>
