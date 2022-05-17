@@ -177,6 +177,9 @@ public class VenueDetailsController {
     public ImageView venueImage5;
     @FXML
     public SubScene priceSubScene;
+    @FXML
+    public Group priceGroup;
+
 
     @FXML
     //Always called by the FXML Loader
@@ -296,9 +299,13 @@ public class VenueDetailsController {
         ShapeManager shapeManager = new ShapeManager();
 
         Color maptrixBlue = Color.web("0x245164");
-        Circle priceCircles = shapeManager.drawCircle(166, 7, 5, maptrixBlue, maptrixBlue, 1);
-        Group prices = new Group(priceCircles);
-        priceSubScene = new SubScene(prices, 250, 70);
+        Circle priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
+        Circle priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixBlue, 1);
+        Circle priceCircle2 = shapeManager.drawCircle(180, -2, 20, maptrixBlue, maptrixBlue, 1);
+        priceGroup.getChildren().add(priceCircle0);
+        priceGroup.getChildren().add(priceCircle1);
+        priceGroup.getChildren().add(priceCircle2);
+
     }
 
     /**
