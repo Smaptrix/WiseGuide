@@ -224,43 +224,49 @@ public class VenueDetailsController {
 
             imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
             System.out.println(imageFile);
-            while (photoIndex <= maxPhotoIndex && imageFile != null) {
+            while (photoIndex <= maxPhotoIndex) {
                 //Images
                 imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
 
-                client.requestFile(imageFile);
+               if(imageFile != null) {
+                    client.requestFile(imageFile);
 
-                File imageFilepath = new File(imageFile);
-                System.out.println("This is the file path:" + imageFilepath);
+                    File imageFilepath = new File(imageFile);
+                    System.out.println("This is the file path:" + imageFilepath);
 
-                ImageView imageView = new ImageView();
+                    ImageView imageView = new ImageView();
 
-                ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
-                // TODO: Look into accessing this value instead of magic number
-                imageHandler.load(220, 400);
+                    ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+                    // TODO: Look into accessing this value instead of magic number
+                    imageHandler.load(220, 400);
 
-                switch (photoIndex) {
-                    case 0:
-                        venueImage0.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 1:
-                        venueImage1.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 2:
-                        venueImage2.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 3:
-                        venueImage3.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 4:
-                        venueImage4.setImage(imageHandler.getCurrImage());
-                        break;
-                    case 5:
-                        venueImage5.setImage(imageHandler.getCurrImage());
-                        break;
-                }
+                    switch (photoIndex) {
+                        case 0:
+                            venueImage0.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 1:
+                            venueImage1.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 2:
+                            venueImage2.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 3:
+                            venueImage3.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 4:
+                            venueImage4.setImage(imageHandler.getCurrImage());
+                            break;
+                        case 5:
+                            venueImage5.setImage(imageHandler.getCurrImage());
+                            break;
+                    }
 
                 photoIndex++;
+            }
+
+               else{
+                   break;
+               }
 
 
             }
