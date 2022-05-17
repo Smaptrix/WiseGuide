@@ -452,13 +452,8 @@ public class Client {
 
         sendMessage("ECHO " + msg, true);
 
-        int fileSize = inputStream.read();
 
-
-        byte[] data = readBytes(fileSize);
-
-
-        return new String(data, StandardCharsets.UTF_8);
+        return receiveAcknowledgement(true);
 
     }
 

@@ -260,7 +260,11 @@ public class FaveVenuesHandler {
     }
 
 
+    public File getFaveVenueFile() {
+        return faveVenueFile;
+    }
 
-
-
+    public HashMap<String, String[]> getFaveVenueMap() {
+        return faveVenueMap;
+    }
 }
