@@ -11,6 +11,8 @@ package GUI;
 import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,10 +22,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.media.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
 import serverclientstuff.User;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -170,6 +176,9 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage5;
     @FXML
+    public SubScene priceSubScene;
+
+    @FXML
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
@@ -265,6 +274,13 @@ public class VenueDetailsController {
 
             }
         }
+        //Shapes
+        ShapeManager shapeManager = new ShapeManager();
+
+        Color maptrixBlue = Color.web("0x245164");
+        Circle priceCircles = shapeManager.drawCircle(166, 7, 5, maptrixBlue, maptrixBlue, 1);
+        Group prices = new Group(priceCircles);
+        priceSubScene = new SubScene(prices, 250, 70);
     }
 
     /**
@@ -380,4 +396,10 @@ public class VenueDetailsController {
 
 
     }
+
+
+
+
+
+
 }
