@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   18/02/2022
-    Last Updated:   24/02/2022
+    Last Updated:   11/05/2022
  */
 package GUI;
 
@@ -11,8 +11,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 
+/**
+ * <p>
+ *     The entry point into the application which opens the login page
+ * </p>
+ */
         public class LoginApplication extends Application {
             @Override
             public void start(Stage stage) throws IOException {
@@ -20,6 +27,7 @@ import java.io.IOException;
                 Scene scene = new Scene(fxmlLoader.load(), 640, 400);
                 stage.setTitle("Login");
                 stage.setScene(scene);
+                stage.setResizable(false);
 
                 LoginController controller = fxmlLoader.getController();
 

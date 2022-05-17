@@ -1,5 +1,7 @@
-package GUI;
+package tests;
 
+import GUI.LoginApplication;
+import GUI.LoginController;
 import client.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,26 +20,34 @@ import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class LoginApplicationTest extends ApplicationTest {
+public class LoginApplicationTests extends ApplicationTest {
 
     /* ===== Tests for Main Login Screen ===== */
 
     private Stage stage;
+    private LoginController controller;
+    public Client client;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent mainNode = FXMLLoader.load(Objects.requireNonNull(LoginApplication.class.getResource("login-page.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(LoginApplication.class.getResource("login-page.fxml")));
+        Parent mainNode = loader.load();
         stage.setScene(new Scene(mainNode));
         stage.show();
         stage.toFront();
         this.stage = stage;
+        this.controller = loader.getController();
     }
 
     @Before
     public void setUpClass() throws Exception {
+        client = new Client(); // Creates new instance of client object
+        client.startConnection("127.0.0.1", 5555);
+        controller.setClient(client);
     }
 
     @After
@@ -63,13 +73,14 @@ public class LoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#createAccButton", LabeledMatchers.hasText("Create Account"));
     }
 
-    //Unit Test | Confirm "Exit" button text is correct.
+    /*Unit Test | Confirm "Exit" button text is correct.
     @Test
     //TODO: Exit button no longer exists - remove if not re-adding button.
     public void exitTextTest() {
         sleep(1000);
         FxAssert.verifyThat("#exitButton", LabeledMatchers.hasText("Exit"));
     }
+    */
 
     //Unit Test | Confirm "Login" button can be pressed.
     @Test
@@ -79,7 +90,7 @@ public class LoginApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //Unit Test | Confirm "Exit" button can be pressed.
+    /*Unit Test | Confirm "Exit" button can be pressed.
     @Test
     //TODO: Exit button no longer exists - remove if not re-adding button.
     public void clickOnExit() {
@@ -87,6 +98,7 @@ public class LoginApplicationTest extends ApplicationTest {
         clickOn("#exitButton");
         Assert.assertFalse(stage.isShowing());
     }
+     */
 
     //Unit Test | Confirm "Create Account" Button can be pressed.
     @Test
@@ -123,6 +135,13 @@ public class LoginApplicationTest extends ApplicationTest {
     public void errorLabelInvisibleTest(){
         sleep(1000);
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(""));
+    }
+
+    //Unit Test | Confirm that test account can be created
+    @Test
+    public void loginTestAccountTest() throws IOException {
+        sleep(1000);
+        controller.createTestAccount();
     }
 
     //Unit Test | Confirm that clicking the maptrix logo opens the venue login page

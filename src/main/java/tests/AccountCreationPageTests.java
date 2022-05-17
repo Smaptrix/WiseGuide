@@ -1,5 +1,7 @@
-package GUI;
+package tests;
 
+import GUI.AccountCreationController;
+import GUI.LoginApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +22,7 @@ import java.awt.*;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class AccountCreationPageTest extends ApplicationTest {
+public class AccountCreationPageTests extends ApplicationTest {
 
     /* ===== Tests for Account Creation Page ===== */
 
@@ -37,7 +39,7 @@ public class AccountCreationPageTest extends ApplicationTest {
     }
 
     @Before
-    public void setUpClass() throws Exception {
+    public void setUpClass() {
     }
 
     @After
@@ -57,7 +59,11 @@ public class AccountCreationPageTest extends ApplicationTest {
     //TODO: Password Confirmation label requires ID to test
 
     //Unit Test | Confirm Error Field is not displayed
-    //TODO
+    @Test
+    public void errorFieldInvisibleTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#errField",LabeledMatchers.hasText(""));
+    }
 
     //Unit Test | Confirm Age Checkbox label is displayed
     @Test

@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   18/02/2022
+    Last Updated:   11/05/2022
+ */
 package GUI;
 
 import client.Client;
@@ -11,41 +18,90 @@ import serverclientstuff.User;
 
 import java.io.IOException;
 
+/**
+ * <p>
+ *     Controls the page which the user can use to change their password
+ * </p>
+ */
 public class ChangePasswordController {
 
-
+    /**
+     * <p>
+     *     The current client
+     * </p>
+     */
     Client client;
 
+    /**
+     * <p>
+     *     The current user
+     * </p>
+     */
     User currUser;
 
-
+    /**
+     * <p>
+     *     The button to signify the user has completed changing their password
+     * </p>
+     */
     @FXML
     Button changePassButton;
-
+    /**
+     * <p>
+     *     The label that displays the error information
+     * </p>
+     */
     @FXML
     Label errLabel;
 
-
+    /**
+     * <p>
+     *     Sets the client
+     * </p>
+     * @param client the client we want to set for the controller
+     */
     public void setClient(Client client){
         this.client = client;
     }
 
+    /**
+     *<p>
+     *      Sets the current user
+     *</p>
+     * @param currUser the current user we want to set for the controller
+     */
     public void setUser(User currUser){
         this.currUser = currUser;
     }
 
+    /**
+     * <p>
+     *     The password field which the user should type there current password into
+     * </p>
+     */
     @FXML
     PasswordField currPasswordField;
-
+    /**
+     * <p>
+     *     The password field which the user should type there new password into
+     * </p>
+     */
     @FXML
     PasswordField newPasswordField;
-
+    /**
+     * <p>
+     *     The password field which the user should retype there new password into
+     * </p>
+     */
     @FXML
     PasswordField newPasswordConfirmField;
 
 
-    //TODO - Changing password lets you login with any old password???
-
+    /**
+     * <p>
+     *     Tells the client to contact the server nad request a password change
+     * </p>
+     */
     @FXML
     public void onChangePassButtonPress(){
 
