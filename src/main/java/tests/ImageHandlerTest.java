@@ -9,6 +9,7 @@ package tests;
 
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -16,13 +17,16 @@ import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import mediahandlers.ImageHandler;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.matcher.base.WindowMatchers;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -30,6 +34,8 @@ import java.util.concurrent.TimeoutException;
  */
 public class ImageHandlerTest extends ApplicationTest {
 
+    ImageHandler test;
+    Group root;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -42,11 +48,11 @@ public class ImageHandlerTest extends ApplicationTest {
 
         File testFile = new File("src/main/resources/Maps/baseMap.png");
 
-        ImageHandler test = new ImageHandler(testFile, testView);
+        test = new ImageHandler(testFile, testView);
 
         test.load(height, width);
 
-        Group root = new Group(testView);
+        root = new Group(testView);
 
         Scene testScene = new Scene(root, width, height);
 
@@ -61,6 +67,19 @@ public class ImageHandlerTest extends ApplicationTest {
     @Before
     public void setUpClass() {
 
+    }
+
+
+    @Test
+    //Unit test- make sure the image is loaded and visible
+    public void imageVisibleTest(){
+
+
+        String filepath = "file:/C:/Users/jsphi/eclipse-workspace/WiseGuide/src/main/resources/Maps/baseMap.png";
+
+        FxAssert.verifyThat(root, Node::isVisible);
+
+        Assert.assertTrue(Objects.equals(test.getCurrImage().getUrl(), filepath));
     }
 
 
