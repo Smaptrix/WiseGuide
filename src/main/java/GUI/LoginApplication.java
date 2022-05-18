@@ -25,7 +25,7 @@ import java.io.IOException;
             public void start(Stage stage) throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("login-page.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 640, 400);
-                stage.setTitle("Login");
+                stage.setTitle("Welcome to WiseGuide");
                 stage.setScene(scene);
                 stage.setResizable(false);
 
