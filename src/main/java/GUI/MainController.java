@@ -431,7 +431,7 @@ public class MainController {
         controller.setUser(currUser);
         controller.setMapStage((Stage)mainWindow.getScene().getWindow());
         stage.setScene(scene);
-        stage.setTitle("Account Creation");
+        stage.setTitle("Account Details");
         stage.show();
         stage.setResizable(false);
     }
