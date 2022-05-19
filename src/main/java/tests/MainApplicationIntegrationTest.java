@@ -13,8 +13,10 @@ import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.matcher.base.WindowMatchers;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -54,9 +56,39 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    //TODO - Create an account with a taken username
+    //     - Enter the matching passwords wrong
+    //     - Forget to click the checkbox
+    //     - Create the account
+    //     - Login with incorrect password
+    //     - Login correctly
+    //     - Open the about page
+    //     - Close the about page
+    //     - Open a venue page (using the list)
+    //     - Close the venue page
+    //     -Open the account information page
+    //     - Delete there account (then test that the user can no longer log in)
+
+    //Probably more to do including the map tests - it has to end with the account being deleted
+
+
+
     @Test
-    //Opens the test and does some random things that an actual user might actual do
+    //Opens the test and does some random things that an actual user might actually do
     public void mainApplicationTest(){
+
+        //First thing a user may do is create an account
+
+        sleep(1000);
+        clickOn("#createAccountButton");
+
+        //Verify that the account creation page is open
+        FxAssert.verifyThat(window("Account Creation"), WindowMatchers.isShowing());
+
+
+
+
+
 
     }
 
