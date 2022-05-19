@@ -17,7 +17,9 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -56,10 +58,7 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
-    //TODO - Create an account with a taken username
-    //     - Enter the matching passwords wrong
-    //     - Forget to click the checkbox
-    //     - Create the account
+    //TODO
     //     - Login with incorrect password
     //     - Login correctly
     //     - Open the about page
@@ -75,18 +74,62 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
 
     @Test
     //Opens the test and does some random things that an actual user might actually do
+    //RUN THE SERVER FIRST
     public void mainApplicationTest(){
 
         //First thing a user may do is create an account
 
         sleep(1000);
-        clickOn("#createAccountButton");
+        clickOn("#createAccButton");
 
         //Verify that the account creation page is open
         FxAssert.verifyThat(window("Account Creation"), WindowMatchers.isShowing());
 
+        sleep(1000);
+        //Create an account with an already taken name
+        clickOn("#usernameField");
+        write("test");
+        clickOn("#passField");
+        write("12345");
+        //Enter the wrong password into the password confirmation box
+        clickOn("#passConfirmField");
+        write("123");
 
+        clickOn("#createAccountButton");
 
+        //Verify that the correct error label appears
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("The passwords do not match!"));
+
+        sleep(1000);
+
+        clickOn("#passConfirmField");
+        write("45");
+
+        clickOn("#createAccountButton");
+        //Verify that the correct error label appears
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You are not over the age of 13!"));
+
+        //Click the checkbox and create an account
+        clickOn("#ageCheckBox");
+        clickOn("#createAccountButton");
+
+        //Verify that the correct error label is displayed (name already in use)
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("This username is taken."));
+
+        //Change the username to a non-taken one
+        clickOn("#usernameField");
+        write("test");
+        //Create the account
+        clickOn("#createAccountButton");
+
+        //Verify that the account created page has been opened
+        sleep(1000);
+        FxAssert.verifyThat(window("Account Created"), WindowMatchers.isShowing());
+
+        //Close the popup page
+        clickOn("#closePopupButton");
+
+        //Verify that the login page is open
 
 
 

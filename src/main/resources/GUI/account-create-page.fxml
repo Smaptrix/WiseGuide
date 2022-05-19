@@ -36,7 +36,7 @@
       <PasswordField id="passConfirmField" fx:id="passConfirmField" layoutX="113.0" layoutY="131.0" />
       <Label alignment="CENTER_RIGHT" layoutX="-9.0" layoutY="135.0" prefHeight="22.0" prefWidth="119.0" text="Confirm Password" />
       <Button id="createAccountButton" fx:id="createAccountButton" alignment="CENTER" layoutX="80.0" layoutY="300.0" mnemonicParsing="false" onAction="#createAccountButtonAction" prefHeight="33.0" prefWidth="119.0" text="Create Account" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="91.0" />
-      <Label id="errField" fx:id="errLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-13.0" layoutY="267.0" prefHeight="17.0" prefWidth="300.0" textFill="#f80000" />
+      <Label id="errLabel" fx:id="errLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-13.0" layoutY="267.0" prefHeight="17.0" prefWidth="300.0" textFill="#f80000" />
       <CheckBox id="ageCheckBox" fx:id="ageCheckBox" layoutX="31.0" layoutY="167.0" mnemonicParsing="false" text="I confirm I am over the age of 13" />
       <Label layoutX="18.0" layoutY="186.0" prefHeight="59.0" prefWidth="243.0" text="By clicking &quot;Create Account&quot; you agree that you have read and agree with Maptrix's" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
       <Hyperlink id="privacyPolicyLink" fx:id="privacyPolicyLink" layoutX="21.0" layoutY="238.0" onAction="#privacyPolicyLinkAction" text="Privacy Policy" />
