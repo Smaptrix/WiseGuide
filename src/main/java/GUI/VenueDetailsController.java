@@ -360,6 +360,10 @@ public class VenueDetailsController {
 
     }
 
+    public String getCurrVenue() {
+        return currVenue;
+    }
+
     /**
      * <p>
      *     This is the action that occurs when the user presses the favourite button
