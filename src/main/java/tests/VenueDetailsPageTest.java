@@ -17,6 +17,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -74,14 +75,41 @@ public class VenueDetailsPageTest extends ApplicationTest {
         doubleClickOn("#venueList");
         sleep(1000);
 
-
-
+        //The title of the default venue in the venue list
+        String venueTitle = "Dusk";
 
         //Verify that the correct window is open
         //Needs to be programmatic but cannot get the current controller of the current page?
-        FxAssert.verifyThat(window("Dusk"), WindowMatchers.isShowing());
+        FxAssert.verifyThat(window(venueTitle), WindowMatchers.isShowing());
 
+        //Verify that the title label at the top of the page has the correct label
+        FxAssert.verifyThat("#venueName", LabeledMatchers.hasText(venueTitle));
 
+        /* CURRENTLY DOESN't WORK BECAUSE THERE IS ANOTHER TEXT AREA INSIDE THE TEXT AREA
+        String venueText = "UID: 008\n" +
+                "Dusk\n" +
+                "\n" +
+                "Address: 8 New St, York YO1 8RA\n" +
+                "Phone: 01904634851\n" +
+                "Email: duskyork@gmail.com\n" +
+                "\n" +
+                "Description:\n" +
+                "By day: Freshly baked bread. Artisan coffee. Stacked homemade burgers. Wraps, Sandwiches, platters (including plenty of vegetarian and vegan options). Gluten free substitutes. Free wifi. Dog friendly. Outside seating area. A soundtrack to help while away the hours. Brownies. A cheeky craft beer (or 2?)[\n" +
+                "By Night: Cocktails. A party. Music from almost every genre. Specially selected wines. Lots of mates. The odd singalong. Live music. A few famous faces (only sometimes). Glastonbury without the wellies.\n" +
+                "\n" +
+                "Opening Times: \n" +
+                "Monday: 10:00 - 02:00 \n" +
+                "Tuesday: 10:00 - 02:00 \n" +
+                "Wednesday: 10:00 - 02:00 \n" +
+                "Thursday: 10:00 - 02:00 \n" +
+                "Friday: 10:00 - 02:00 \n" +
+                "Saturday: 10:00 - 02:00 \n" +
+                "Sunday: 10:00 - 02:00 ";
+
+        //Verify that the text on the venue page is correct
+        FxAssert.verifyThat("#venueText", LabeledMatchers.hasText(venueText));
+
+        */
 
 
 
