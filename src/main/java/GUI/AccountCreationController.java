@@ -274,7 +274,7 @@ public class AccountCreationController {
         File forbiddenNamesList = new File("reservedUsernames.txt");
         BufferedReader br = new BufferedReader(new FileReader(forbiddenNamesList));
         String line;
-        while(((line = br.readLine()) != null) && forbidden == false){
+        while(((line = br.readLine()) != null) && !forbidden){
             if(name.equals(line)){
                 forbidden = true;
             }

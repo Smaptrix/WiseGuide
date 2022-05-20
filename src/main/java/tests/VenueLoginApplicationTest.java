@@ -1,5 +1,7 @@
-package GUI;
+package tests;
 
+import GUI.LoginApplication;
+import GUI.VenueLoginController;
 import client.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

@@ -908,9 +908,11 @@ public class Server {
         //User Deletion Mode
         else if(mode == 3){
 
+            //Delete the user from the user database and from the favourite venues database
             boolean deleteSuccess = currUserHandler.deleteUser();
 
             if (deleteSuccess){
+                faveVenuesHandler.removeUser(currUser.getUsername());
                 sendResponse("DELETESUCCESS", true, true);
                 System.out.println("User was deleted.");
             } else {

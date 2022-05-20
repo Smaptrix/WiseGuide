@@ -1,9 +1,12 @@
-package GUI;
+package tests;
 
+import GUI.LoginApplication;
+import GUI.VenueOwnerMainPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
@@ -97,6 +100,7 @@ public class VenueOwnerMainPageApplicationTest extends ApplicationTest {
     }
 
 
+    /*
     @Test
     //Unit Test | Verify that the Add File Button is visible and displays the correct text
     public void addFileButtonVisibilityAndTextTest(){
@@ -104,6 +108,7 @@ public class VenueOwnerMainPageApplicationTest extends ApplicationTest {
         FxAssert.verifyThat("#addFileButton", LabeledMatchers.hasText("Add New File"));
         FxAssert.verifyThat("#addFileButton", Node::isVisible);
     }
+    */
 
 
     @Test
@@ -114,7 +119,8 @@ public class VenueOwnerMainPageApplicationTest extends ApplicationTest {
        FxAssert.verifyThat(window("Venue Login"), WindowMatchers.isShowing());
     }
 
-    //TODO - ADD/DELETE FILE FUNCTIONALITY WAITING ON THE FUNCTIONALITY TO BE CODED
+
+
 
 
 

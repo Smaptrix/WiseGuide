@@ -34,6 +34,8 @@ import serverclientstuff.User;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * <p>
@@ -185,8 +187,6 @@ public class VenueDetailsController {
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
-
-
 
     }
 
@@ -409,12 +409,18 @@ public class VenueDetailsController {
      */
     public void checkIfFavourite() {
 
+        System.out.println("curr: " + currVenue);
+
         if(currUser.getFaveVenues() != null){
             if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
                 faveVenueButton.setText("UnFavourite");
             }
         }
 
+    }
+
+    public String getCurrVenue() {
+        return currVenue;
     }
 
     /**
@@ -430,31 +436,46 @@ public class VenueDetailsController {
             client.addFavouriteVenue(currVenue);
             faveVenueButton.setText("UnFavourite");
 
-            /* - May be required in the future
-            //Turns the string array into a list
-            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+            String[] currFaves = currUser.getFaveVenues();
+            //Makes sure the currFaves isn't null
+            if(currFaves != null){
 
-            //Adds the current venue to the current users list of favourite venues clientside
-            faveVenues.add(currVenue);
+                //Turns the string array into a linked list
+                List<String> faveVenues = new LinkedList(Arrays.asList(currUser.getFaveVenues()));
 
-            currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+                //Adds the current venue to the current users list of favourite venues clientside
+                faveVenues.add(currVenue);
 
-            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
-            */
+                currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+
+                System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+            }
+            //If the user doesn't have a venue list
+            else{
+                //Create a venue list with the current venue inside of it and give it to the current user
+                String[] userFaves = {currVenue};
+
+                currUser.setFaveVenues(userFaves);
+
+            }
+
+
         }
 
         else if(faveVenueButton.getText().equals("UnFavourite")){
             client.removeFavouriteVenue(currVenue);
             faveVenueButton.setText("Favourite");
 
-            /* - May be required in the future
-            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+            //Turns the string array into a linked list
+            List<String> faveVenues = new LinkedList(Arrays.asList(currUser.getFaveVenues()));
+
+            //Removes the current venue from the current users favourite venue list clientside
             faveVenues.remove(currVenue);
             currUser.setFaveVenues(faveVenues.toArray(new String[0]));
 
             System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
 
-             */
+
         }
 
 

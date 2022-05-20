@@ -262,11 +262,11 @@ public class MainController {
         controller.setClient(client);
         controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
         //Checks to see if the venue has been favourite by the user
-        controller.checkIfFavourite();
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();
         stage.setResizable(false);
+        controller.checkIfFavourite();
         try {
             controller.loadVenueData();
         } catch (IOException e) {
@@ -286,6 +286,7 @@ public class MainController {
             selectVenueOnMap();
             if (!Objects.equals(selectedItem, "ignore")) {
                 openSelectedVenue();
+
             }
         }
     };
@@ -430,7 +431,7 @@ public class MainController {
         controller.setUser(currUser);
         controller.setMapStage((Stage)mainWindow.getScene().getWindow());
         stage.setScene(scene);
-        stage.setTitle("Account Creation");
+        stage.setTitle("Account Details");
         stage.show();
         stage.setResizable(false);
     }
@@ -489,7 +490,7 @@ public class MainController {
 
         System.out.println("Opening about page");
 
-        stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
+        stage.setTitle("About Page");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);

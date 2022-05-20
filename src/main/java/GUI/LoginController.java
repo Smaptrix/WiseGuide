@@ -283,4 +283,7 @@ public class LoginController {
 
     }
 
+    public User getCurrUser() {
+        return currUser;
+    }
 }
