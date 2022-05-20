@@ -56,12 +56,12 @@
             </Button>
         </HBox>
         <HBox prefHeight="300.0" prefWidth="900.0">
-         <Group fx:id="videoGroup" />
-            <MediaView fx:id="venueVideo" fitHeight="220.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-                <HBox.margin>
-                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                </HBox.margin>
-            </MediaView>
+
+            <Pane prefHeight="220.0" prefWidth="400.0" pickOnBounds="true">
+
+                    <Group fx:id="videoGroup" layoutX = "160"  layoutY="90.0" />
+
+            </Pane>
             <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0">
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

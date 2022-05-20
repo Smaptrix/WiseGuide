@@ -11,6 +11,7 @@ package GUI;
 import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -176,6 +177,9 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage5;
     @FXML
+    public Group videoGroup;
+
+    @FXML
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
@@ -289,6 +293,20 @@ public class VenueDetailsController {
 
             }
         }
+
+        // video
+        for(int i = 0; i<currVenuePage.children.size(); i++) {
+            System.out.println(currVenuePage.children.get(i).attributes);
+        }
+
+        String videoFile = (currVenuePage.getMediaSourceByID("video0"));
+        System.out.println("Video file: " + videoFile);
+
+        client.requestFile(videoFile);
+
+        VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
+        videoGroup.getChildren().add(videoHandler.getMediaView());
+
     }
 
     /**
