@@ -301,13 +301,19 @@ public class VenueDetailsController {
 
         //String price =  ((currVenuePage.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem("price"))).toString();
         System.out.println("Price: " + currVenuePage.attributes.get("price"));
-        int price = Integer.parseInt(currVenuePage.attributes.get("price"));
+        int price;
+        if (currVenuePage.attributes.get("price") != null){
+            price = Integer.parseInt(currVenuePage.attributes.get("price"));
+        } else {
+            price = 0;
+        }
+
         Color maptrixBlue = Color.web("0x245164");
 
-        Circle priceCircle0;
-        Circle priceCircle1;
-        Circle priceCircle2;
-/*
+        Circle priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
+        Circle priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
+        Circle priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+
         switch (price){
             case 0:
                 priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
@@ -323,15 +329,13 @@ public class VenueDetailsController {
                 priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
                 priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixBlue, 1);
                 priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+                break;
             case 3:
                 priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
                 priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixBlue, 1);
                 priceCircle2 = shapeManager.drawCircle(180, -2, 20, maptrixBlue, maptrixBlue, 1);
-        }*/
-
-        Circle priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
-        Circle priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixBlue, 1);
-        Circle priceCircle2 = shapeManager.drawCircle(180, -2, 20, maptrixBlue, maptrixBlue, 1);
+                break;
+        }
         priceGroup.getChildren().add(priceCircle0);
         priceGroup.getChildren().add(priceCircle1);
         priceGroup.getChildren().add(priceCircle2);
