@@ -123,6 +123,7 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         sleep(1000);
         FxAssert.verifyThat(window("Account Created"), WindowMatchers.isShowing());
 
+        sleep(1000);
         //Close the popup page
         clickOn("#closePopupButton");
 
@@ -212,9 +213,30 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         clickOn("#passConfirmField");
         write("12345");
         clickOn("#delCheckBox");
+        sleep(1000);
+        clickOn("#deleteAccountButton");
 
+        sleep(1000);
         //Verify that the account deleted page opens
         FxAssert.verifyThat(window("Account Deleted"), WindowMatchers.isShowing());
+
+        sleep(1000);
+        //Close the popup
+        clickOn("#closePopUpButton");
+        sleep(1000);
+
+        //Verify that the user can no longer login with the deleted account
+        sleep(1000);
+        clickOn("#usernameTextField");
+        write("testtest");
+        clickOn("#userPassField");
+        write("12345");
+        sleep(1000);
+        clickOn("#loginButton");
+        sleep(1000);
+
+        //Verify that the correct error message is displayed
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Unrecognised user details"));
 
 
 

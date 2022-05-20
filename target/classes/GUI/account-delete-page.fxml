@@ -8,7 +8,6 @@
         Last Updated:   24/02/2022
 -->
 
-
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -19,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AccountDeletionController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AccountDeletionController">
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
@@ -29,10 +28,10 @@
             <Font size="30.0" />
          </font></Label>
       <Label id="infoLabel" fx:id="infoLabel" layoutX="16.0" layoutY="40.0" prefHeight="70.0" prefWidth="243.0" text="Enter your password to confirm that you would like to delete your WiseGuide account." textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
-      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="125.0" prefHeight="22.0" prefWidth="103.0" text="Password" />
-      <PasswordField id="passField" fx:id="passField" layoutX="131.0" layoutY="121.0" />
-      <PasswordField id="passConfirmField" fx:id="passConfirmField" layoutX="131.0" layoutY="160.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="165.0" prefHeight="22.0" prefWidth="103.0" text="Confirm Password" />
+      <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="125.0" prefHeight="22.0" prefWidth="65.0" text="Password" />
+      <PasswordField id="passField" fx:id="passField" layoutX="111.0" layoutY="121.0" />
+      <PasswordField id="passConfirmField" fx:id="passConfirmField" layoutX="111.0" layoutY="160.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="-11.0" layoutY="164.0" prefHeight="22.0" prefWidth="119.0" text="Confirm Password" />
       <CheckBox id="delCheckBox" fx:id="delCheckBox" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" text="I understand that deletion is permanent." />
       <Button id="deleteAccountButton" fx:id="deleteAccountButton" alignment="CENTER" layoutX="80.0" layoutY="300.0" mnemonicParsing="false" onAction="#deleteAccountButtonAction" prefHeight="33.0" prefWidth="119.0" text="Delete Account" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="91.0" />
       <Label id="errField" fx:id="errLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-13.0" layoutY="267.0" prefHeight="17.0" prefWidth="300.0" textFill="#f80000" />

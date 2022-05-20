@@ -375,16 +375,29 @@ public class VenueDetailsController {
             client.addFavouriteVenue(currVenue);
             faveVenueButton.setText("UnFavourite");
 
+            String[] currFaves = currUser.getFaveVenues();
+            //Makes sure the currFaves isn't null
+            if(currFaves != null){
 
-            //Turns the string array into a linked list
-            List<String> faveVenues = new LinkedList(Arrays.asList(currUser.getFaveVenues()));
+                //Turns the string array into a linked list
+                List<String> faveVenues = new LinkedList(Arrays.asList(currUser.getFaveVenues()));
 
-            //Adds the current venue to the current users list of favourite venues clientside
-            faveVenues.add(currVenue);
+                //Adds the current venue to the current users list of favourite venues clientside
+                faveVenues.add(currVenue);
 
-            currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+                currUser.setFaveVenues(faveVenues.toArray(new String[0]));
 
-            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+                System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+            }
+            //If the user doesn't have a venue list
+            else{
+                //Create a venue list with the current venue inside of it and give it to the current user
+                String[] userFaves = {currVenue};
+
+                currUser.setFaveVenues(userFaves);
+
+            }
+
 
         }
 
