@@ -200,6 +200,79 @@ public class MainController {
 
     /**
      * <p>
+     *     The list on the sidebar which displays the list of bars
+     * </p>
+     */
+    @FXML
+    ListView barsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of cafes
+     * </p>
+     */
+    @FXML
+    ListView cafesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of clubs
+     * </p>
+     */
+    @FXML
+    ListView clubsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of fast food places
+     * </p>
+     */
+    @FXML
+    ListView fastFoodList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of pubs
+     * </p>
+     */
+    @FXML
+    ListView pubsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of restaurants
+     * </p>
+     */
+    @FXML
+    ListView restaurantsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of green spaces
+     * </p>
+     */
+    @FXML
+    ListView greenSpacesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of study spaces
+     * </p>
+     */
+    @FXML
+    ListView studySpacesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of sightseeing places
+     * </p>
+     */
+    @FXML
+    ListView sightseeingList;
+
+
+    /**
+     * <p>
      *     The image which displays the current map view
      * </p>
      */
@@ -226,6 +299,7 @@ public class MainController {
 
         mapView.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent);
 
+        /*
         //Defines what happens when you double-click a venue in the venue list
         venueList.setOnMouseClicked(click -> {
 
@@ -233,6 +307,8 @@ public class MainController {
                 openSelectedVenue();
             }
         });
+        */
+
     }
 
     /**
@@ -528,7 +604,15 @@ public class MainController {
             //Strips the header and final quotation mark from each title
             String stripped_title = s.substring(7, s.length() -1);
 
-            venueList.getItems().add(stripped_title);
+            System.out.println(stripped_title);
+
+            switch(xml.getPage("title", stripped_title).attributes.get("category")) {
+                case "":
+
+            }
+
+
+            venueList.getItems().add(stripped_title.replaceAll("_", " "));
 
 
         }
