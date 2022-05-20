@@ -61,12 +61,10 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
     }
 
     //TODO
-    //     - Close the about page
     //     - Open a venue page (using the list)
     //     - Close the venue page
     //     -Open the account information page
     //     - Delete there account (then test that the user can no longer log in)
-
     //Probably more to do including the map tests - it has to end with the account being deleted
 
 
@@ -153,6 +151,7 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         FxAssert.verifyThat(window("WiseGuide by Maptrix - " + client.getCurrVersion()), WindowMatchers.isShowing());
 
 
+
         //Open the about page
         clickOn("#menuBarHelpButton").clickOn("#aboutButton");
 
@@ -168,9 +167,54 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         //Close the about page - MAybe not necessary
         //interact(()->((Stage)((lookup(".error").query())).getScene().getWindow()).close());
 
+
+
         //Verify that the main page is still open
         FxAssert.verifyThat(window("WiseGuide by Maptrix - " + client.getCurrVersion()), WindowMatchers.isShowing());
 
+        doubleClickOn("#venueList");
+
+        sleep(1000);
+
+        String defaultVenue = "Dusk";
+
+        //Verify that the dusk page is opened
+        FxAssert.verifyThat(window(defaultVenue), WindowMatchers.isShowing());
+
+
+        clickOn("#faveVenueButton");
+        //Verify that the button has changed its text
+        sleep(1000);
+        FxAssert.verifyThat("#faveVenueButton", LabeledMatchers.hasText("UnFavourite"));
+
+        //Go back to the main page
+        sleep(1000);
+        clickOn("#goBack");
+
+        //Verify that the main page is open
+        FxAssert.verifyThat(window("WiseGuide by Maptrix - " + client.getCurrVersion()), WindowMatchers.isShowing());
+
+        //Open the account details page
+        clickOn("#menuBarAccount").clickOn("#accDetailsButton");
+        //Verify that the correct page is open
+        FxAssert.verifyThat(window("Account Details"), WindowMatchers.isShowing());
+        sleep(1000);
+
+        //Open the delete account page
+        clickOn("#deleteAccountButton");
+
+        //Verify that the correct page is open
+        FxAssert.verifyThat(window("Account Deletion"), WindowMatchers.isShowing());
+
+        //Enter passwords and delete account
+        clickOn("#passField");
+        write("12345");
+        clickOn("#passConfirmField");
+        write("12345");
+        clickOn("#delCheckBox");
+
+        //Verify that the account deleted page opens
+        FxAssert.verifyThat(window("Account Deleted"), WindowMatchers.isShowing());
 
 
 

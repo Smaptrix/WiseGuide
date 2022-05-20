@@ -350,8 +350,6 @@ public class VenueDetailsController {
 
         System.out.println("curr: " + currVenue);
 
-        System.out.println("User list: " + Arrays.asList(currUser.getFaveVenues()).contains(currVenue));
-
         if(currUser.getFaveVenues() != null){
             if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
                 faveVenueButton.setText("UnFavourite");
