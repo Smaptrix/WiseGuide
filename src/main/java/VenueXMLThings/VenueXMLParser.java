@@ -77,7 +77,7 @@ public class VenueXMLParser {
 
         for (int i = 0; i < numberOfPages; i++) {
             returnString.add(((this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem("title"))).toString());
-        }
+            }
 
         return returnString;
     }
