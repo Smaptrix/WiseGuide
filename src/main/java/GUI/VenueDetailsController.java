@@ -200,6 +200,14 @@ public class VenueDetailsController {
 
         venueName.setText(currVenue);
 
+        //Add alt text button image
+
+
+
+
+
+
+
 
         int textIndex = 0;
         int photoIndex = 0;
