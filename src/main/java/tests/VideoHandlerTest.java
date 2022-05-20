@@ -16,9 +16,11 @@ public class VideoHandlerTest extends Application {
         int width = 1280;
         int height = 720;
 
-        String testFile = "C:\\Users\\Lee\\Videos\\clapping.mp4";
+        File testFile = new File("clapping.mp4");
 
-        VideoHandler test = new VideoHandler(testFile, height, width);
+        String source = testFile.toURI().toString();
+
+        VideoHandler test = new VideoHandler(source, height, width);
 
         Scene testScene = new Scene(test, width, height, Color.BLACK);
 

@@ -41,7 +41,7 @@ public class MediaBar extends HBox {
     /**
      * PlayButton is the play/pause button.
      */
-    Button PlayButton = new Button("||");
+    Button PlayButton = new Button(">");
 
     /**
      * volume is the label for the volume slider.
@@ -55,7 +55,7 @@ public class MediaBar extends HBox {
 
     /**
      * <p>
-     *     Default media control bar constructor.
+     * Default media control bar constructor.
      * </p>
      *
      * @param play Is the media player object that the bar is built on.
@@ -108,7 +108,7 @@ public class MediaBar extends HBox {
                         PlayButton.setText(">");
                     }
                 }
-                if (status == MediaPlayer.Status.HALTED || status == MediaPlayer.Status.STOPPED || status == MediaPlayer.Status.PAUSED) {
+                if (status == MediaPlayer.Status.HALTED || status == MediaPlayer.Status.STOPPED || status == MediaPlayer.Status.PAUSED || status == Status.READY) {
                     player.play(); // Start the video
                     PlayButton.setText("||");
                 }
@@ -149,7 +149,7 @@ public class MediaBar extends HBox {
 
     /**
      * <p>
-     *     Updates the time slider values.
+     * Updates the time slider values.
      * </p>
      */
     protected void updatesValues() {
