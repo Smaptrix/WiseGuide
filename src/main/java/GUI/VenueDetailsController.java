@@ -23,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
+import mediahandlers.VideoHandler;
 import serverclientstuff.User;
 
 import java.io.File;
@@ -107,11 +108,16 @@ public class VenueDetailsController {
     public TextArea venueText;
     /**
      * <p>
-     *     This ImageView is the place that displays the images of the venue
+     *     This MediaView is the place that displays the video of the venue
      * </p>
      */
     @FXML
     public MediaView venueVideo;
+    /**
+     * <p>
+     *     This ImageView is the place that displays the images of the venue
+     * </p>
+     */
     @FXML
     public ImageView venueImage;
     /**
@@ -218,7 +224,7 @@ public class VenueDetailsController {
 
                 VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
                 //venueVideo.setMediaPlayer(videoHandler);
-                */
+               */
 
                 //Sets the text index to 1, as there's only one text file for each venue
                 textIndex = 1;
