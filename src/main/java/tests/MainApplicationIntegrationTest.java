@@ -7,6 +7,7 @@ import client.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Labeled;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.service.finder.WindowFinder;
 
 import java.awt.*;
 import java.io.IOException;
@@ -59,9 +61,6 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
     }
 
     //TODO
-    //     - Login with incorrect password
-    //     - Login correctly
-    //     - Open the about page
     //     - Close the about page
     //     - Open a venue page (using the list)
     //     - Close the venue page
@@ -78,7 +77,6 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
     public void mainApplicationTest(){
 
         //First thing a user may do is create an account
-
         sleep(1000);
         clickOn("#createAccButton");
 
@@ -106,6 +104,7 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         write("45");
 
         clickOn("#createAccountButton");
+        sleep(1000);
         //Verify that the correct error label appears
         FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You are not over the age of 13!"));
 
@@ -129,7 +128,49 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
         //Close the popup page
         clickOn("#closePopupButton");
 
-        //Verify that the login page is open
+        //Attempt to login with the incorrect password
+
+        sleep(1000);
+        clickOn("#usernameTextField");
+        write("testtest");
+        clickOn("#userPassField");
+        write("1234");
+        sleep(1000);
+
+        clickOn("#loginButton");
+
+        sleep(1000);
+
+        //Verify that the correct error message is displayed
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Unrecognised user details"));
+
+        //Enter correct login details
+        clickOn("#userPassField");
+        write("5");
+        clickOn("#loginButton");
+
+        //Verify that the main page is opened
+        FxAssert.verifyThat(window("WiseGuide by Maptrix - " + client.getCurrVersion()), WindowMatchers.isShowing());
+
+
+        //Open the about page
+        clickOn("#menuBarHelpButton").clickOn("#aboutButton");
+
+
+        //Verify that the about page is open
+        FxAssert.verifyThat(window("About Page"), WindowMatchers.isShowing());
+
+        //Verify that the version number label is correct
+        FxAssert.verifyThat("#verNumLabel", LabeledMatchers.hasText(client.getCurrVersion()));
+
+        sleep(1000);
+
+        //Close the about page - MAybe not necessary
+        //interact(()->((Stage)((lookup(".error").query())).getScene().getWindow()).close());
+
+        //Verify that the main page is still open
+        FxAssert.verifyThat(window("WiseGuide by Maptrix - " + client.getCurrVersion()), WindowMatchers.isShowing());
+
 
 
 

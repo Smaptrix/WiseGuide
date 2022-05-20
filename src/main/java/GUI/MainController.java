@@ -490,7 +490,7 @@ public class MainController {
 
         System.out.println("Opening about page");
 
-        stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
+        stage.setTitle("About Page");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
