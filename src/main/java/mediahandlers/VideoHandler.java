@@ -29,7 +29,7 @@ public class VideoHandler extends BorderPane {
     Media media;
 
     /**
-     * mediaPlayer is the media player.
+     * mediaPlayer class provides the controls for playing media.
      */
     MediaPlayer mediaPlayer;
 
@@ -60,7 +60,6 @@ public class VideoHandler extends BorderPane {
      * @param filePath Is the file path of the desired media.
      * @param heightIn Desired initial media height.
      * @param widthIn  Desired initial media width.
-     * @return
      */
     public VideoHandler(String filePath, int heightIn, int widthIn) {
 
@@ -99,7 +98,6 @@ public class VideoHandler extends BorderPane {
                         bar = new MediaBar(mediaPlayer);
                         setBottom(bar);
                         setStyle("-fx-background-color:#474746");
-                        mediaPlayer.play();
                     } else {
                         // Handle synchronous error creating MediaPlayer.
                     }
