@@ -295,12 +295,12 @@ public class VenueDetailsController {
 
             }
         }
-        //Shapes
+        //Loads the shapes onto the page
         ShapeManager shapeManager = new ShapeManager();
-        //String colourFill =;
 
         //String price =  ((currVenuePage.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem("price"))).toString();
         System.out.println("Price: " + currVenuePage.attributes.get("price"));
+        //The price value of the current venue
         int price;
         if (currVenuePage.attributes.get("price") != null){
             price = Integer.parseInt(currVenuePage.attributes.get("price"));
@@ -308,12 +308,15 @@ public class VenueDetailsController {
             price = 0;
         }
 
+        //Set up the colour required for the circles
         Color maptrixBlue = Color.web("0x245164");
 
+        //Initialise the circles
         Circle priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
         Circle priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
         Circle priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
 
+        //Fill in the required number of circles based on the price value of the venue
         switch (price){
             case 0:
                 priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
@@ -336,6 +339,7 @@ public class VenueDetailsController {
                 priceCircle2 = shapeManager.drawCircle(180, -2, 20, maptrixBlue, maptrixBlue, 1);
                 break;
         }
+        //Add all of the circles into the group on the GUI
         priceGroup.getChildren().add(priceCircle0);
         priceGroup.getChildren().add(priceCircle1);
         priceGroup.getChildren().add(priceCircle2);
