@@ -56,7 +56,7 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <ListView id="barsList" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="barsList" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
@@ -65,7 +65,7 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <ListView id="cafesList" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="cafesList" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
@@ -74,7 +74,7 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <ListView id="clubsList" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="clubsList" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
@@ -83,7 +83,7 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <ListView id="fastFoodList" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="fastFoodList" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
@@ -92,7 +92,7 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <ListView id="pubsList" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="pubsList" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
@@ -101,24 +101,36 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <ListView id="restaurantsList" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="restaurantsList" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
                                     <TitledPane animated="false" text="Green Spaces">
                                        <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                               <children>
+                                                   <ListView fx:id="greenSpacesList" prefHeight="200.0" prefWidth="200.0" />
+                                               </children>
+                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
                                     <TitledPane animated="false" text="Study Spaces">
                                        <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                               <children>
+                                                   <ListView fx:id="studySpacesList" prefHeight="200.0" prefWidth="200.0" />
+                                               </children>
+                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
                                     <TitledPane animated="false" text="Sightseeing">
                                        <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                               <children>
+                                                   <ListView fx:id="sightseeingList" prefHeight="200.0" prefWidth="200.0" />
+                                               </children>
+                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
                                  </panes>

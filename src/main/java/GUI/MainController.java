@@ -607,12 +607,40 @@ public class MainController {
             System.out.println(stripped_title);
 
             switch(xml.getPage("title", stripped_title).attributes.get("category")) {
-                case "":
-
+                case "nightclub":
+                    clubsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "bar":
+                    barsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "cafe":
+                    cafesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "restaurant":
+                    restaurantsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "fast_food":
+                    fastFoodList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "pub":
+                    pubsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "green_space":
+                    greenSpacesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "study_space":
+                    studySpacesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "sightseeing":
+                    sightseeingList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                default:
+                    System.out.println("Error: No category " + xml.getPage("title", stripped_title).attributes.get("category") + " for page " + stripped_title);
+                    break;
             }
 
 
-            venueList.getItems().add(stripped_title.replaceAll("_", " "));
+            //venueList.getItems().add(stripped_title.replaceAll("_", " "));
 
 
         }
