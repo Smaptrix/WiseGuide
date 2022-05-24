@@ -14,7 +14,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import mediahandlers.AudioHandler;
 import mediahandlers.ImageHandler;
 import mediahandlers.TextManager;
 import serverclientstuff.User;
@@ -273,12 +276,13 @@ public class RouteDetailsController {
 
         //TODO crashes if opened more than once due to the file already being downloaded
 
-        String tempFile = String.valueOf(client.requestFile(textFile).toPath());
-
-        //Places the text from the text file into the text manager
-        TextManager textManager = new TextManager(tempFile, 470, 100);
-        //Loads the text onto the GUI
-        routeText.setText(textManager.loadTextFromFile());
+        if(textFile != null) {
+            String tempFile = String.valueOf(client.requestFile(textFile).toPath());
+            //Places the text from the text file into the text manager
+            TextManager textManager = new TextManager(tempFile, 470, 100);
+            //Loads the text onto the GUI
+            routeText.setText(textManager.loadTextFromFile());
+        }
 
 
         //VENUE LIST
@@ -286,15 +290,18 @@ public class RouteDetailsController {
 
         System.out.println("Venues text file: " + venueTextFile);
 
-        String tempVenuesFile = String.valueOf(client.requestFile(venueTextFile).toPath());
+        if(venueTextFile != null) {
+            String tempVenuesFile = String.valueOf(client.requestFile(venueTextFile).toPath());
 
-        TextManager venuesTextManager = new TextManager(tempVenuesFile, 470, 100);
+            TextManager venuesTextManager = new TextManager(tempVenuesFile, 470, 100);
 
-        String[] VenuesForList = venuesTextManager.loadTextFromFile().split(",");
+            String[] VenuesForList = venuesTextManager.loadTextFromFile().split(",");
 
-        for (int j = 0; j < VenuesForList.length - 1; j++) {
-            venuesList.getItems().add(VenuesForList[j].replaceAll("_", " "));
+            for (int j = 0; j < VenuesForList.length - 1; j++) {
+                venuesList.getItems().add(VenuesForList[j].replaceAll("_", " "));
+            }
         }
+
 
         //IMAGE
         imageFile = (currRoutePage.getMediaSourceByID("map"));
@@ -302,17 +309,17 @@ public class RouteDetailsController {
         //Making sure that the image file actually exists
         if (imageFile != null) {
             //Requests the filepath for the image for
-            client.requestFile(imageFile);
+
+            File tempImage = client.requestFile(imageFile);
 
             //Sets up the filepath for the image
-            File imageFilepath = new File(imageFile);
-            System.out.println("This is the file path:" + imageFilepath);
+            System.out.println("This is the file path:" + tempImage);
 
             //Initialises the image view
             ImageView imageView = new ImageView();
 
             //Creates the image handler with the desired image filepath
-            ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+            ImageHandler imageHandler = new ImageHandler(tempImage, imageView);
             // TODO: Look into accessing this value instead of magic number
             //Loads the image into the GUI
             imageHandler.load(220, 400);
@@ -323,30 +330,29 @@ public class RouteDetailsController {
 
         //AUDIO
 
-        String audioFile = currRoutePage.getMediaSourceByID("audio");
+        String audioFile = currRoutePage.getMediaSourceByID("audio0");
 
         if (audioFile != null) {
 
-            /*
-            //Requests the filepath for the image for
-            client.requestFile(imageFile);
+
+            //Requests the filepath for the audio
+            File tempAudio = client.requestFile(audioFile);
 
             //Sets up the filepath for the image
-            File imageFilepath = new File(imageFile);
-            System.out.println("This is the file path:" + imageFilepath);
+            System.out.println("This is the file path:" + tempAudio);
 
             //Initialises the image view
-            ImageView imageView = new ImageView();
+            MediaView audioView = new MediaView();
 
             //Creates the image handler with the desired image filepath
-            ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
-            // TODO: Look into accessing this value instead of magic number
+            AudioHandler audioHandler = new AudioHandler(tempAudio);
+
+            audioHandler.load();
+
             //Loads the image into the GUI
-            imageHandler.load(220, 400);
 
-            routeImage.setImage(imageHandler.getCurrImage());
+            routeAudio = new SubScene(audioView, 400, 40, Color.BLACK);
 
-             */
         }
 
     }

@@ -17,9 +17,19 @@ public class AudioHandlerTest extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        File testFile = new File("Applause.mp3");
+
+        AudioHandler test = new AudioHandler(testFile);
+
+        test.load();
+
+        scene = new Scene(test, 400, 40, Color.BLACK);
+
         stage.setScene(scene);
         stage.toFront();
         stage.setTitle("Audio Handler Test");
+
         stage.show();
     }
 

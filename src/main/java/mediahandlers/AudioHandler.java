@@ -1,7 +1,10 @@
 package mediahandlers;
 
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -9,7 +12,7 @@ import java.io.File;
 /**
  * AudioHandler class extends the MediaManager class and creates an Audio object.
  */
-public class AudioHandler extends MediaManager{
+public class AudioHandler extends BorderPane {
 
     /**
      * autoplay allows the audio to be played upon loading the object (default is set to false).
@@ -26,31 +29,51 @@ public class AudioHandler extends MediaManager{
      */
     private MediaPlayer audioPlayer;
 
+    public MediaView audioView;
+
+    public Media media;
+
+    public Pane mpane;
+
+    private File filePath;
+
+    private  MediaBar bar;
 
     /**
      * <p>
      * Constructor for the AudioHandler class.
      * </p>
      *
-     * @param filePath The string of the path where the audio file is located.
+     * @param filePathIn The string of the path where the audio file is located.
      */
-    public AudioHandler(String filePath) {
-        super();
-        setFilePath(filePath);
+    public AudioHandler(File filePathIn) {
+        this.filePath = filePathIn;
+
+        int heightIn = 40;
+        int widthIn = 400;
+
+        Media audioFile = new Media(new File(String.valueOf(this.filePath)).toURI().toString());
+        this.audioPlayer = new MediaPlayer(audioFile);
+
+        this.audioView = new MediaView(audioPlayer);
+        this.audioView.setFitHeight(heightIn);
+        this.audioView.setFitWidth(widthIn);
+
+        mpane = new Pane();
+        mpane.getChildren().add(audioView);
+        setCenter(mpane);
+        bar = new MediaBar(audioPlayer);
+        setBottom(bar);
     }
 
     /**
      * <p>
-     * loads in the audio file and sets the parameters of the audioPlayer (autoplay and startTime).
+     * loads the audio and sets the start time and the autoplay parameters of the audioPlayer.
      * </p>
      */
-    @Override
     public void load() {
-        Media audioFile = new Media(new File(this.filePath).toURI().toString());
-        this.audioPlayer = new MediaPlayer(audioFile);
         this.audioPlayer.setAutoPlay(this.autoplay);
         this.audioPlayer.setStartTime(Duration.millis(this.startTime));
-
     }
 
     /**
@@ -106,4 +129,5 @@ public class AudioHandler extends MediaManager{
     public void pause() {
         this.audioPlayer.pause();
     }
+
 }
