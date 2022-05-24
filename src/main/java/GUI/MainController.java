@@ -304,6 +304,8 @@ public class MainController {
             baseMapSelecting(mousePosition);
         } else if (Objects.equals(desiredMap, "hesEastMap")) {
             UoYMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "SEYorkMap")) {
+            seMapSelecting(mousePosition);
         }
     }
 
@@ -366,6 +368,30 @@ public class MainController {
             selectedItem = "The Ron Cooke Hub";
         } else if ((mousePosition.getX() > mapController.getUoY3_Piazza_min().getX()) && (mousePosition.getX() < mapController.getUoY3_Piazza_max().getX()) && (mousePosition.getY() > mapController.getUoY3_Piazza_min().getY()) && (mousePosition.getY() < mapController.getUoY3_Piazza_max().getY())) {
             selectedItem = "Piazza Building";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+    }
+
+    /**
+     * <p>
+     *     Map selection for the SE York map
+     * </p>
+     * @param mousePosition The position of the map
+     */
+    private void seMapSelecting(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getSe_efes_min().getX()) && (mousePosition.getX() < mapController.getSe_efes_max().getX()) && (mousePosition.getY() > mapController.getSe_efes_min().getY()) && (mousePosition.getY() < mapController.getSe_efes_max().getY())) {
+            selectedItem = "Efes_Pizza";
+        } else if ((mousePosition.getX() > mapController.getSe_rook_min().getX()) && (mousePosition.getX() < mapController.getSe_rook_max().getX()) && (mousePosition.getY() > mapController.getSe_rook_min().getY()) && (mousePosition.getY() < mapController.getSe_rook_max().getY())) {
+            selectedItem = "The Rook & Gaskill";
+        } else if ((mousePosition.getX() > mapController.getSe_waggon_min().getX()) && (mousePosition.getX() < mapController.getSe_waggon_max().getX()) && (mousePosition.getY() > mapController.getSe_waggon_min().getY()) && (mousePosition.getY() < mapController.getSe_waggon_max().getY())) {
+            selectedItem = "The Waggon & Horses";
+        } else if ((mousePosition.getX() > mapController.getSe_spark_min().getX()) && (mousePosition.getX() < mapController.getSe_spark_max().getX()) && (mousePosition.getY() > mapController.getSe_spark_min().getY()) && (mousePosition.getY() < mapController.getSe_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getSe_paradiso_min().getX()) && (mousePosition.getX() < mapController.getSe_paradiso_max().getX()) && (mousePosition.getY() > mapController.getSe_paradiso_min().getY()) && (mousePosition.getY() < mapController.getSe_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
         } else {
             selectedItem = "ignore";
             desiredMap = "baseMap";
