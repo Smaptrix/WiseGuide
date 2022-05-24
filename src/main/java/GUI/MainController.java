@@ -26,7 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import java.awt.*;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -532,6 +535,23 @@ public class MainController {
 
 
         }
+    }
+
+    /**
+     * This opens the user manual which is stored in the Maptrix File Directory on Google Drive
+     */
+    @FXML
+    public void onUserManualMenuButtonPress(){
+
+        try {
+            Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1w9P1IKH5lbeHghuY0YJpdP8F_PjkEj6R/edit?usp=sharing&ouid=111971918555544856801&rtpof=true&sd=true").toURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 /*
