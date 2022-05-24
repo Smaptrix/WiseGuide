@@ -3,11 +3,10 @@
     Project Name:   WiseGuide
     Authors:        Will Pitchfork
     Date Created:   24/04/2022
-    Last Updated:   24/04/2022
+    Last Updated:   24/05/2022
  */
 
 package GUI;
-// helooooo
 import javafx.geometry.Point2D;
 
 public class MapController {
@@ -59,6 +58,62 @@ public class MapController {
     private final Point2D UoY3_Piazza_min = new Point2D(763, 332);
     private final Point2D UoY3_Piazza_max = new Point2D(791, 360);
 
+    private final Point2D se_efes_min = new Point2D(521, 323);
+    private final Point2D se_efes_max = new Point2D(549, 361);
+
+    private final Point2D se_rook_min = new Point2D(559, 171);
+    private final Point2D se_rook_max = new Point2D(589, 205);
+
+    private final Point2D se_waggon_min = new Point2D(596, 170);
+    private final Point2D se_waggon_max = new Point2D(626, 202);
+
+    private final Point2D se_spark_min = new Point2D(287, 53);
+    private final Point2D se_spark_max = new Point2D(317, 87);
+
+    private final Point2D se_paradiso_min = new Point2D(325, 37);
+    private final Point2D se_paradiso_max = new Point2D(355, 74);
+
+    private final Point2D cen_west_min = new Point2D(405, 285);
+    private final Point2D cen_west_max = new Point2D(445, 333);
+
+    private final Point2D cen_cen_min = new Point2D(469, 251);
+    private final Point2D cen_cen_max = new Point2D(510, 296);
+
+    private final Point2D cen_south_min = new Point2D(553, 308);
+    private final Point2D cen_south_max = new Point2D(592, 359);
+
+    private final Point2D cen_musGard_min = new Point2D(364, 164);
+    private final Point2D cen_musGard_max = new Point2D(392, 201);
+
+    private final Point2D cen_deans_min = new Point2D(520, 72);
+    private final Point2D cen_deans_max = new Point2D(546, 106);
+
+    private final Point2D cen_minster_min = new Point2D(534, 133);
+    private final Point2D cen_minster_max = new Point2D(562, 170);
+
+    private final Point2D cen_cityWalls_min = new Point2D(644, 141);
+    private final Point2D cen_cityWalls_max = new Point2D(675, 179);
+
+    private final Point2D cen_brew_min = new Point2D(447, 201);
+    private final Point2D cen_brew_max = new Point2D(476, 236);
+
+    private final Point2D cen_lucky_min = new Point2D(532, 229);
+    private final Point2D cen_lucky_max = new Point2D(560, 265);
+
+    private final Point2D cen_cats_min = new Point2D(577, 161);
+    private final Point2D cen_cats_max = new Point2D(606, 196);
+
+    private final Point2D cen_evil_min = new Point2D(503, 187);
+    private final Point2D cen_evil_max = new Point2D(534, 222);
+
+    private final Point2D cen_choc_min = new Point2D(565, 217);
+    private final Point2D cen_choc_max = new Point2D(596, 253);
+
+    private final Point2D cen_spark_min = new Point2D(644, 357);
+    private final Point2D cen_spark_max = new Point2D(672, 394);
+
+    private final Point2D cen_paradiso_min = new Point2D(679, 341);
+    private final Point2D cen_paradiso_max = new Point2D(711, 378);
 
     // Getters for all points
     public Point2D getBase_NRM_min() {
@@ -171,6 +226,139 @@ public class MapController {
     }
     public Point2D getUoY3_Piazza_max() {
         return UoY3_Piazza_max;
+    }
+
+    public Point2D getSe_efes_min() {
+        return se_efes_min;
+    }
+    public Point2D getSe_efes_max() {
+        return se_efes_max;
+    }
+
+    public Point2D getSe_rook_min() {
+        return se_rook_min;
+    }
+    public Point2D getSe_rook_max() {
+        return se_rook_max;
+    }
+
+    public Point2D getSe_waggon_min() {
+        return se_waggon_min;
+    }
+    public Point2D getSe_waggon_max() {
+        return se_waggon_max;
+    }
+
+    public Point2D getSe_spark_min() {
+        return se_spark_min;
+    }
+    public Point2D getSe_spark_max() {
+        return se_spark_max;
+    }
+
+    public Point2D getSe_paradiso_min() {
+        return se_paradiso_min;
+    }
+    public Point2D getSe_paradiso_max() {
+        return se_paradiso_max;
+    }
+
+    public Point2D getCen_west_min() {
+        return cen_west_min;
+    }
+    public Point2D getCen_west_max() {
+        return cen_west_max;
+    }
+
+    public Point2D getCen_cen_min() {
+        return cen_cen_min;
+    }
+    public Point2D getCen_cen_max() {
+        return cen_cen_max;
+    }
+
+    public Point2D getCen_south_min() {
+        return cen_south_min;
+    }
+    public Point2D getCen_south_max() {
+        return cen_south_max;
+    }
+
+    public Point2D getCen_musGard_min() {
+        return cen_musGard_min;
+    }
+    public Point2D getCen_musGard_max() {
+        return cen_musGard_max;
+    }
+
+    public Point2D getCen_deans_min() {
+        return cen_deans_min;
+    }
+    public Point2D getCen_deans_max() {
+        return cen_deans_max;
+    }
+
+    public Point2D getCen_minster_min() {
+        return cen_minster_min;
+    }
+    public Point2D getCen_minster_max() {
+        return cen_minster_max;
+    }
+
+    public Point2D getCen_cityWalls_min() {
+        return cen_cityWalls_min;
+    }
+    public Point2D getCen_cityWalls_max() {
+        return cen_cityWalls_max;
+    }
+
+    public Point2D getCen_brew_min() {
+        return cen_brew_min;
+    }
+    public Point2D getCen_brew_max() {
+        return cen_brew_max;
+    }
+
+    public Point2D getCen_lucky_min() {
+        return cen_lucky_min;
+    }
+    public Point2D getCen_lucky_max() {
+        return cen_lucky_max;
+    }
+
+    public Point2D getCen_cats_min() {
+        return cen_cats_min;
+    }
+    public Point2D getCen_cats_max() {
+        return cen_cats_max;
+    }
+
+    public Point2D getCen_evil_min() {
+        return cen_evil_min;
+    }
+    public Point2D getCen_evil_max() {
+        return cen_evil_max;
+    }
+
+    public Point2D getCen_choc_min() {
+        return cen_choc_min;
+    }
+    public Point2D getCen_choc_max() {
+        return cen_choc_max;
+    }
+
+    public Point2D getCen_spark_min() {
+        return cen_spark_min;
+    }
+    public Point2D getCen_spark_max() {
+        return cen_spark_max;
+    }
+
+    public Point2D getCen_paradiso_min() {
+        return cen_paradiso_min;
+    }
+    public Point2D getCen_paradiso_max() {
+        return cen_paradiso_max;
     }
 }
 
