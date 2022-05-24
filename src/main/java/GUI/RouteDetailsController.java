@@ -205,16 +205,25 @@ public class RouteDetailsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        VenueDetailsController controller = fxmlLoader.getController();
-        controller.setClient(client);
-        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) currentItemSelected).replaceAll(" ", "_"));
 
-        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);//Checks to see if the venue has been favourite by the user
-        stage.setScene(scene);
-        stage.setTitle((String) currentItemSelected);
-        stage.show();
-        stage.setResizable(false);
-        controller.checkIfFavourite();
+        VenueDetailsController controller = fxmlLoader.getController();
+
+        try {
+            controller.setClient(client);
+            System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) currentItemSelected).replaceAll(" ", "_"));
+
+            System.out.println(xml.getPageNames());
+
+            controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);//Checks to see if the venue has been favourite by the user
+            stage.setScene(scene);
+            stage.setTitle((String) currentItemSelected);
+            stage.show();
+            stage.setResizable(false);
+            controller.checkIfFavourite();
+        } catch(Exception E) {
+            System.out.println("No Venue found in XML");
+        }
+
         try {
             controller.loadVenueData();
         } catch (IOException e) {
@@ -253,9 +262,7 @@ public class RouteDetailsController {
 
         xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
-        int textIndex = 0;
-        int photoIndex = 0;
-        int maxPhotoIndex = 5;
+        //TEXT
         String imageFile = null;
         //Downloads every media element required by the venue xml
 
@@ -285,12 +292,12 @@ public class RouteDetailsController {
 
         String[] VenuesForList = venuesTextManager.loadTextFromFile().split(",");
 
-        for (int j = 0; j < VenuesForList.length; j++) {
+        for (int j = 0; j < VenuesForList.length - 1; j++) {
             venuesList.getItems().add(VenuesForList[j].replaceAll("_", " "));
         }
 
         //IMAGE
-        imageFile = (currRoutePage.getMediaSourceByID("map" + photoIndex));
+        imageFile = (currRoutePage.getMediaSourceByID("map"));
 
         //Making sure that the image file actually exists
         if (imageFile != null) {
@@ -313,6 +320,35 @@ public class RouteDetailsController {
             routeImage.setImage(imageHandler.getCurrImage());
 
         }
+
+        //AUDIO
+
+        String audioFile = currRoutePage.getMediaSourceByID("audio");
+
+        if (audioFile != null) {
+
+            /*
+            //Requests the filepath for the image for
+            client.requestFile(imageFile);
+
+            //Sets up the filepath for the image
+            File imageFilepath = new File(imageFile);
+            System.out.println("This is the file path:" + imageFilepath);
+
+            //Initialises the image view
+            ImageView imageView = new ImageView();
+
+            //Creates the image handler with the desired image filepath
+            ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+            // TODO: Look into accessing this value instead of magic number
+            //Loads the image into the GUI
+            imageHandler.load(220, 400);
+
+            routeImage.setImage(imageHandler.getCurrImage());
+
+             */
+        }
+
     }
 
     public void setCurrRoute(String route, VenuePage routePage, User user) {
