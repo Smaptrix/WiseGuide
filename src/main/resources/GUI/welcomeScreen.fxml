@@ -144,7 +144,7 @@
                         <TitledPane animated="false" layoutX="9.0" layoutY="-25.0" prefHeight="195.0" prefWidth="219.0" text="Routes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                 <ScrollPane prefHeight="168.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <ListView prefHeight="339.0" prefWidth="217.0" />
+                                    <ListView fx:id="routesList" prefHeight="339.0" prefWidth="217.0" />
                                 </ScrollPane>
                             </AnchorPane>
                         </TitledPane>

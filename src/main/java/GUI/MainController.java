@@ -68,6 +68,13 @@ public class MainController {
 
     /**
      * <p>
+     *     The currently selected route in the list in the sidebar
+     * </p>
+     */
+    private String selectedRoute;
+
+    /**
+     * <p>
      *     The map we desire to display
      * </p>
      */
@@ -130,6 +137,13 @@ public class MainController {
      * </p>
      */
     Object currentItemSelected = new Object();
+
+    /**
+     * <p>
+     *     The current route selected in the list in the sidebar
+     * </p>
+     */
+    Object currentRouteSelected = new Object();
 
     /**
      * <p>
@@ -279,6 +293,13 @@ public class MainController {
     @FXML
     ListView sightseeingList;
 
+    /**
+     * <p>
+     *     The list of  the routes available
+     * </p>
+     */
+    @FXML
+    ListView routesList;
 
     /**
      * <p>
@@ -352,6 +373,11 @@ public class MainController {
         sightseeingList.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
                 openSelectedVenue("sightSeeing");
+            }
+        });
+        routesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedRoute();
             }
         });
 
@@ -432,6 +458,44 @@ public class MainController {
             e.printStackTrace();
             System.out.println("Failed to get venue data");
         }
+    }
+
+    /**
+     * <p>
+     *     Opens the route selected in the list
+     * </p>
+     */
+    private void openSelectedRoute() {
+        if(selectedRoute == null) {
+            currentRouteSelected = routesList.getSelectionModel().getSelectedItem();
+        } else {
+            currentRouteSelected = selectedRoute;
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("RouteDetailsPage.fxml"));
+        Stage stage = new Stage();
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 900, 600);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        RouteDetailsController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) ((String) currentRouteSelected)).replaceAll(" ", "_"));
+        //TODO Sort out xml read-ins in controller
+        controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", (String) ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
+        stage.setScene(scene);
+        stage.setTitle((String) currentRouteSelected);
+        stage.show();
+        stage.setResizable(false);
+
+        try {
+            controller.loadRouteData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to get route data");
+        }
+
     }
 
     //Gets the position of the mouse on a click
@@ -661,7 +725,7 @@ public class MainController {
      *     Loads the list of venues into the listview on the main application
      * </p>
      */
-    protected void loadListOfVenues() {
+    protected void loadListOfVenuesAndRoutes() {
 
 
         //Tries to download the venue lists from the server
@@ -676,7 +740,7 @@ public class MainController {
 
 
         //Provides the controller with the list of venue types it should expect
-        xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
+        xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
         List<String> venueNameList = xml.getPageNames();
 
@@ -717,6 +781,9 @@ public class MainController {
                 case "sightseeing":
                     sightseeingList.getItems().add(stripped_title.replaceAll("_", " "));
                     break;
+                case "route":
+                    routesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
                 default:
                     System.out.println("Error: No category " + xml.getPage("title", stripped_title).attributes.get("category") + " for page " + stripped_title);
                     break;
@@ -728,6 +795,7 @@ public class MainController {
 
         }
     }
+
 
 /*
     private final Point2D base_NRM_min = new Point2D(344, 202);

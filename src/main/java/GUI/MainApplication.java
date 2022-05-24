@@ -65,7 +65,7 @@ public class MainApplication extends Application {
         controller.setClient(client);
         controller.setUser(currUser);
 
-        controller.loadListOfVenues();
+        controller.loadListOfVenuesAndRoutes();
 
         //Sets the users favourite venues -- as long there are some
         String[] userFaveVenueList = client.requestFaveVenueList();

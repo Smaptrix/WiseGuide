@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+        Company Name:   Maptrix
+        Project Name:   WiseGuide
+        Authors:        Will Pitchfork
+        Date Created:   20/02/2022
+        Last Updated:   27/02/2022
+-->
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ListView?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RouteDetailsController">
+
+    <VBox fx:id="mainWindow" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar>
+            <Menu mnemonicParsing="false" text="File">
+                <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+                <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#onAboutButtonPress" text="About" />
+            </Menu>
+        </MenuBar>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <Button fx:id="goBack" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackButtonPress" prefHeight="45.0" prefWidth="75.0" text="Back">
+                <HBox.margin>
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                </HBox.margin>
+            </Button>
+            <Label id="venueName" fx:id="routeName" alignment="TOP_CENTER" prefWidth="900.0" styleClass="heading1" text="ROUTE NAME" textAlignment="CENTER">
+                <padding>
+                    <Insets bottom="15.0" top="15.0" />
+                </padding>
+            <HBox.margin>
+               <Insets right="110.0" />
+            </HBox.margin>
+            </Label>
+        </HBox>
+        <HBox prefHeight="300.0" prefWidth="900.0">
+            <ScrollPane prefHeight="200.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                 <ListView fx:id="venuesList" prefHeight="339.0" prefWidth="450.0" />
+            </ScrollPane>
+            <TextArea id="venueText" fx:id="routeText" prefHeight="200.0" prefWidth="450.0">
+                <padding>
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                </padding>
+            </TextArea>
+        </HBox>
+        <HBox prefHeight="300.0" prefWidth="900.0">
+         <ImageView fx:id="routeImage" fitHeight="220.0" fitWidth="420.0" pickOnBounds="true" preserveRatio="true">
+            <HBox.margin>
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </HBox.margin>
+         </ImageView>
+         <SubScene fx:id="routeAudio" height="220.0" width="420.0">
+           <root>
+             <Region />
+           </root>
+            <HBox.margin>
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </HBox.margin>
+         </SubScene>
+        </HBox>
+    </VBox>
+
+    <stylesheets>
+        <URL value="@../../Downloads/WiseGuideCSS.css" />
+    </stylesheets>
+</AnchorPane>
