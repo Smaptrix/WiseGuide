@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Accordion;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -200,6 +201,14 @@ public class MainController {
 
     /**
      * <p>
+     *     The accordion which holds the collapsable venue types.
+     * </p>
+     */
+    @FXML
+    Accordion venueAccordion;
+
+    /**
+     * <p>
      *     The list on the sidebar which displays the list of bars
      * </p>
      */
@@ -296,18 +305,56 @@ public class MainController {
     public void initialize() {
 
         mapController = new MapController();
-
         mapView.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent);
 
-        /*
-        //Defines what happens when you double-click a venue in the venue list
-        venueList.setOnMouseClicked(click -> {
 
+        //Defines what happens when you double-click a venue in the venue list
+        barsList.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
-                openSelectedVenue();
+                openSelectedVenue("bars");
             }
         });
-        */
+        clubsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("clubs");
+            }
+        });
+        cafesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("cafes");
+            }
+        });
+        restaurantsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("restaurants");
+            }
+        });
+        fastFoodList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("fastFood");
+            }
+        });
+        pubsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("pubs");
+            }
+        });
+        greenSpacesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("greenSpaces");
+            }
+        });
+        studySpacesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("studySpaces");
+            }
+        });
+        sightseeingList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("sightSeeing");
+            }
+        });
+
 
     }
 
@@ -316,11 +363,46 @@ public class MainController {
      *     Opens the Venue Details Page when a venue is selected.
      * </p>
      */
-    protected void openSelectedVenue() {
+    protected void openSelectedVenue(String venueType) {
         //Use ListView's getSelected Item
         if (selectedItem == null) {
-            currentItemSelected = venueList.getSelectionModel()
-                    .getSelectedItem();
+            //System.out.println("Expanded Pane ID: " + venueAccordion.getExpandedPane().getId());
+
+            switch(venueType) {
+                case "clubs":
+                    currentItemSelected = clubsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "bars":
+                    currentItemSelected = barsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "cafes":
+                    currentItemSelected = cafesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "restaurants":
+                    currentItemSelected = restaurantsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "fastFood":
+                    currentItemSelected = fastFoodList.getSelectionModel().getSelectedItem();
+                    break;
+                case "pubs":
+                    currentItemSelected = pubsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "greenSpaces":
+                    currentItemSelected = greenSpacesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "studySpaces":
+                    currentItemSelected = studySpacesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "sightSeeing":
+                    currentItemSelected = sightseeingList.getSelectionModel().getSelectedItem();
+                    break;
+                case "any":
+                    currentItemSelected = venueList.getSelectionModel().getSelectedItem();
+                    break;
+                default:
+                    System.out.println("Error no venue type of " + venueType);
+            }
+
         } else {
             currentItemSelected = selectedItem;
         }
@@ -336,7 +418,8 @@ public class MainController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
+        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) ((String) currentItemSelected)).replaceAll(" ", "_"));
+        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
         //Checks to see if the venue has been favourite by the user
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
@@ -361,7 +444,7 @@ public class MainController {
             System.out.println(mouseX + " ... " + mouseY);
             selectVenueOnMap();
             if (!Objects.equals(selectedItem, "ignore")) {
-                openSelectedVenue();
+                openSelectedVenue("any");
 
             }
         }
