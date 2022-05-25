@@ -60,7 +60,6 @@ public class VenueSelectPageController {
 
 
 
-
     /**
      * The client that is connected to the server
      */
@@ -115,6 +114,7 @@ public class VenueSelectPageController {
         this.xml = xml;
     }
 
+
     /**
      * Looks at the options selected by the user, then selects a relevant venue
      * @return true - if a venue was able to be selected with the given criteria
@@ -127,7 +127,7 @@ public class VenueSelectPageController {
         //Removes users non-favourite venues from the possible list
         if(faveCheckBox.isSelected()){
 
-            //Get the current users faveourite lists
+            //Get the current users favourite lists
             List<String> userFaveList = List.of(currUser.getFaveVenues());
 
             if(userFaveList.isEmpty()){
