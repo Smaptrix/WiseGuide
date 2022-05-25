@@ -10,22 +10,22 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@WiseGuideCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VenueSelectPageController">
    <children>
-      <AnchorPane prefHeight="401.0" prefWidth="600.0">
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
          <children>
             <Label layoutX="257.0" layoutY="22.0" prefHeight="26.0" prefWidth="155.0" text="Venue Selector!">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="233.0" layoutY="82.0" text="Options" />
-            <Label layoutX="85.0" layoutY="82.0" text="Venue Type" />
-            <CheckBox fx:id="faveCheckBox" layoutX="210.0" layoutY="132.0" mnemonicParsing="false" text="Favourited " />
-            <CheckBox fx:id="foodCheckBox" layoutX="91.0" layoutY="132.0" mnemonicParsing="false" text="Food" />
-            <CheckBox fx:id="sightseeingCheckBox" layoutX="76.0" layoutY="201.0" mnemonicParsing="false" text="Sightseeing" />
-            <CheckBox fx:id="drinksCheckBox" layoutX="87.0" layoutY="168.0" mnemonicParsing="false" text="Drinks" />
-            <CheckBox fx:id="studaySpacesCheckBox" layoutX="81.0" layoutY="232.0" mnemonicParsing="false" text="Study Spaces" />
-            <Button fx:id="venuePickButton" layoutX="122.0" layoutY="300.0" mnemonicParsing="false" text="Pick a Venue!" />
-            <Button layoutX="405.0" layoutY="172.0" mnemonicParsing="false" text="Random Venue!" />
+            <Label layoutX="220.0" layoutY="62.0" text="Options" />
+            <Label layoutX="72.0" layoutY="62.0" text="Venue Type" />
+            <CheckBox fx:id="faveCheckBox" layoutX="197.0" layoutY="112.0" mnemonicParsing="false" text="Favourited " />
+            <CheckBox fx:id="foodCheckBox" layoutX="78.0" layoutY="112.0" mnemonicParsing="false" text="Food" />
+            <CheckBox fx:id="sightseeingCheckBox" layoutX="63.0" layoutY="181.0" mnemonicParsing="false" text="Sightseeing" />
+            <CheckBox fx:id="drinksCheckBox" layoutX="74.0" layoutY="148.0" mnemonicParsing="false" text="Drinks" />
+            <CheckBox fx:id="studaySpacesCheckBox" layoutX="68.0" layoutY="212.0" mnemonicParsing="false" text="Study Spaces" />
+            <Button fx:id="venuePickButton" layoutX="109.0" layoutY="268.0" mnemonicParsing="false" text="Pick a Venue!" />
+            <Button layoutX="392.0" layoutY="152.0" mnemonicParsing="false" onAction="#onRandomVenueButtonPress" text="Random Venue!" />
          </children>
       </AnchorPane>
    </children>

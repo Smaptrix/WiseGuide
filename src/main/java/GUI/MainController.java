@@ -561,11 +561,20 @@ public class MainController {
     @FXML
     public void onVenueSelectorMenuButtonPress() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("venue-selector-page.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 300);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage stage = new Stage();
 
         VenueSelectPageController controller = fxmlLoader.getController();
 
+
+        controller.setClient(client);
+        controller.setCurrUser(currUser);
+        controller.setXml(xml);
+
+        //Get the current list of venues from the main application
+        List<String> listOfVenues = venueList.getItems();
+
+        controller.setListOfVenues(listOfVenues);
 
         System.out.println("Opening venue select page");
 
