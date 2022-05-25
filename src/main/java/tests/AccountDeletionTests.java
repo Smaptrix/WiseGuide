@@ -71,12 +71,6 @@ public class AccountDeletionTests extends ApplicationTest {
         controller.setTestingMode(false);
     }
 
-    //For Debug Purposes Only: Open the GUI and do nothing (allows programmer to interact with GUI)
-    @Test
-    public void doesItWorkTest(){
-        sleep(10000000);
-    }
-
     //Unit Test | Confirm an internal testing user can be created.
     @Test
     public void testDeletionUserCreation() throws IOException {
@@ -116,9 +110,17 @@ public class AccountDeletionTests extends ApplicationTest {
 
     //Unit Test | Confirm "Delete Account" button displays correct text
     @Test
-    public void DeleteAccountTextTest(){
+    public void deleteAccountTextTest(){
         sleep(1000);
         FxAssert.verifyThat("#deleteAccountButton",LabeledMatchers.hasText("Delete Account"));
+    }
+
+    //Unit Test | Confirm "Create Account" Button can be pressed.
+    @Test
+    public void deleteAccountButtonTest(){
+        sleep(1000);
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a password!"));
     }
 
     //Unit Test | Confirm that checkbox text is correct.
@@ -136,6 +138,13 @@ public class AccountDeletionTests extends ApplicationTest {
         Assert.assertTrue(controller.delCheckBox.isSelected());
     }
 
+    //Unit Test | Confirm the password label has the correct text.
+    @Test
+    public void passwordTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#passLabel",LabeledMatchers.hasText("Password"));
+    }
+
     //Unit Test | Confirm text can be entered in password field.
     @Test
     public void enterPasswordTest(){
@@ -145,6 +154,13 @@ public class AccountDeletionTests extends ApplicationTest {
         FxAssert.verifyThat("#passField", TextInputControlMatchers.hasText("password"));
     }
 
+    //Unit Test | Confirm the password confirmation label has the correct text.
+    @Test
+    public void passwordConfirmTextTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#passConfirmLabel",LabeledMatchers.hasText("Confirm Password"));
+    }
+
     //Unit Test | Confirm text can be entered in confirm password field.
     @Test
     public void enterConfirmPasswordTest(){
@@ -152,14 +168,6 @@ public class AccountDeletionTests extends ApplicationTest {
         clickOn("#passConfirmField");
         write("password");
         FxAssert.verifyThat("#passConfirmField", TextInputControlMatchers.hasText("password"));
-    }
-
-    //Unit Test | Confirm "Create Account" Button can be pressed.
-    @Test
-    public void deleteAccountButtonTest(){
-        sleep(1000);
-        clickOn("#deleteAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a password!"));
     }
 
     //Integration Test | Confirm account can't be deleted if checkbox is not clicked.

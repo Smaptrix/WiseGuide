@@ -113,6 +113,22 @@ public class AccountDeletionController {
 
     /**
      * <p>
+     *     The password label.
+     * </p>
+     */
+    @FXML
+    Label passLabel;
+
+    /**
+     * <p>
+     *     The password confirmation label.
+     * </p>
+     */
+    @FXML
+    Label passConfirmLabel;
+
+    /**
+     * <p>
      *     The "I understand account deletion is permanent" checkbox.
      * </p>
      */

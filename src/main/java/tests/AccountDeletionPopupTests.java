@@ -57,11 +57,6 @@ public class AccountDeletionPopupTests extends ApplicationTest {
         this.stage = stage;
     }
 
-    @Test
-    public void idleTest(){
-        sleep(100000);
-    }
-
     //Unit Test | Confirm Button Text
     @Test
     public void popupButtonTextTest(){
