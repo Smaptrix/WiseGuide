@@ -18,10 +18,32 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * <p>
+ *     Tests for the Account Deleted Popup.
+ * </p>
+ */
 public class AccountDeletionPopupTests extends ApplicationTest {
 
+    /**
+     * <p>
+     *     The popup controller.
+     * </p>
+     */
     private AccountDeletionPopupController controller;
+
+    /**
+     * <p>
+     *     The current client.
+     * </p>
+     */
     public Client client;
+
+    /**
+     * <p>
+     *     The current stage.
+     * </p>
+     */
     private Stage stage;
 
     @Override

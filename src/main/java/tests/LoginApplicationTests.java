@@ -24,12 +24,32 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the Login Screen.
+ * </p>
+ */
 public class LoginApplicationTests extends ApplicationTest {
 
-    /* ===== Tests for Main Login Screen ===== */
-
+    /**
+     * <p>
+     *     The current stage.
+     * </p>
+     */
     private Stage stage;
+
+    /**
+     * <p>
+     *     The login controller.
+     * </p>
+     */
     private LoginController controller;
+
+    /**
+     * <p>
+     *     The current client.
+     * </p>
+     */
     public Client client;
 
     @Override

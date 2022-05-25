@@ -149,10 +149,11 @@ public class AccountCreationController {
     @FXML
     Hyperlink termsLink;
 
-
-
-
-
+    /**
+     * <p>
+     *     A boolean set to true if the account creator is being accessed by automatic tests and may require some features to be bypassed.
+     * </p>
+     */
     private boolean testingMode = false;
 
     public void setTestingMode(boolean testingMode) {

@@ -19,11 +19,19 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the Account Created Popup.
+ * </p>
+ */
 public class AccountCreationPopupTests extends ApplicationTest {
 
-    /* ===== Tests for Account Created Page ===== */
-
-    private Stage stage; //Reference to JavaFX stage so that window showing status can be checked.
+    /**
+     * <p>
+     *     Reference to JavaFX stage so that window showing status can be checked.
+     * </p>
+     */
+    private Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {

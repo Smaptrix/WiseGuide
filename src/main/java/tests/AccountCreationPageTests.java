@@ -22,11 +22,19 @@ import java.awt.*;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the Account Creation Page.
+ * </p>
+ */
 public class AccountCreationPageTests extends ApplicationTest {
 
-    /* ===== Tests for Account Creation Page ===== */
-
-    private AccountCreationController controller; //Reference to controller so that CheckBox can be interacted with directly.
+    /**
+     * <p>
+     *     Reference to controller so that CheckBox can be interacted with directly.
+     * </p>
+     */
+    private AccountCreationController controller;
 
     @Override
     public void start(Stage stage) throws Exception {

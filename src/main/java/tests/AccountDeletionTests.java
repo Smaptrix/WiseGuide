@@ -25,9 +25,25 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the Account Deletion System.
+ * </p>
+ */
 public class AccountDeletionTests extends ApplicationTest {
 
+    /**
+     * <p>
+     *     The account deletion controller.
+     * </p>
+     */
     private AccountDeletionController controller;
+
+    /**
+     * <p>
+     *     The current client.
+     * </p>
+     */
     public Client client;
 
     @Override
