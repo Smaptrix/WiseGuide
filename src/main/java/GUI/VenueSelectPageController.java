@@ -240,8 +240,13 @@ public class VenueSelectPageController {
             return false;
         }
 
+        //Create a random object
+        Random rand = new Random();
 
+        //Pick a random item from the venue list
+        String randomVenue = listOfPossibleVenues.get(rand.nextInt(listOfPossibleVenues.size()));
 
+        venueDetailsOpener(randomVenue);
         return true;
 
 
