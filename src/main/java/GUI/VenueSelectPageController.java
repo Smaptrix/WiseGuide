@@ -138,7 +138,6 @@ public class VenueSelectPageController {
             //Only retain the values that are also stored in the user favourite list
             listOfPossibleVenues.retainAll(userFaveList);
 
-            System.out.println("Current possible list: " + listOfPossibleVenues);
         }
 
         //This will contain every possible venue from the given criteria
@@ -148,12 +147,10 @@ public class VenueSelectPageController {
         //Retains the drinking venues in the possible list
         if(drinksCheckBox.isSelected()){
 
-            //Create the list of drniking venues
-
+            //Create the list of drinking venues
             for(String s : listOfPossibleVenues){
 
-
-
+                //Finds the venues with tags relating to drinkings
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "nightclub")){
                     tempVenueList.add(s);
                 }
@@ -171,9 +168,8 @@ public class VenueSelectPageController {
         //Retains the food venues in the possible list
         if(foodCheckBox.isSelected()){
 
+            //Finds venues related to food
             for(String s : listOfPossibleVenues){
-
-
 
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "cafe")){
                     tempVenueList.add(s);
@@ -192,6 +188,7 @@ public class VenueSelectPageController {
         //Retains the sightseeing venues in the possible list
         if(sightseeingCheckBox.isSelected()){
 
+            //Finds venues related to sightseeing
             for(String s : listOfPossibleVenues){
 
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "green_space")){
@@ -200,14 +197,13 @@ public class VenueSelectPageController {
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "sightseeing")){
                     tempVenueList.add(s);
                 }
-
             }
-
         }
 
         //Retains the study space venues in the possible list
         if(studySpacesCheckBox.isSelected()) {
 
+            //Finds venues related to study spaces
             for (String s : listOfPossibleVenues) {
 
                 if (Objects.equals(xml.getPage("title", s).attributes.get("category"), "study_space")) {
@@ -216,24 +212,18 @@ public class VenueSelectPageController {
             }
         }
 
-        //Combines the two lists so that only suitable venues remain
 
-        System.out.println("possible: " + listOfPossibleVenues);
-        System.out.println("temp: " + tempVenueList);
 
-        //Makes sure the temp venue list isn't empty or null
-        if( tempVenueList == null){
+
+        //Makes sure the temp venue list isn't null
+        //If it isn't null it implies that tlist has been added to
+        if(tempVenueList == null){
             errLabel.setText("You have not selected any venue types!");
             return false;
         }
 
-
-        //TODO - CHECK TO SEE IF FINAL LIST IS EMPTY BECAUSE OF FAVOURITES
-
-
+        //Combines the two lists so that only suitable venues remain
         listOfPossibleVenues.retainAll(tempVenueList);
-        System.out.println("Combined: " + listOfPossibleVenues);
-
 
         if(listOfPossibleVenues.isEmpty()){
             errLabel.setText("You have no favourites of the selected types!");
@@ -243,15 +233,12 @@ public class VenueSelectPageController {
         //Create a random object
         Random rand = new Random();
 
-        //Pick a random item from the venue list
+        //Pick a random item from the given possible venue list
         String randomVenue = listOfPossibleVenues.get(rand.nextInt(listOfPossibleVenues.size()));
 
+        //Opens the venue details page of the given random venue
         venueDetailsOpener(randomVenue);
         return true;
-
-
-
-
     }
 
 
@@ -310,8 +297,6 @@ public class VenueSelectPageController {
         Stage currStage = (Stage) errLabel.getScene().getWindow();
         currStage.close();
     }
-
-
 
 
 }
