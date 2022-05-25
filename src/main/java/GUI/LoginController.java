@@ -103,7 +103,21 @@ public class LoginController {
     Label errorLabel;
     /**
      * <p>
-     *     The image containing the maptrix logo
+     * The label next to the username field
+     * </p>
+     */
+    @FXML
+    Label usernameLabel;
+    /**
+     * <p>
+     * The label next to the password field
+     * </p>
+     */
+    @FXML
+    Label passwordField;
+    /**
+     * <p>
+     * The image containing the maptrix logo
      * </p>
      */
     @FXML
