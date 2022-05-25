@@ -115,6 +115,33 @@ public class MapController {
     private final Point2D cen_paradiso_min = new Point2D(679, 341);
     private final Point2D cen_paradiso_max = new Point2D(711, 378);
 
+    private final Point2D cenSouth_spark_min = new Point2D(712, 359);
+    private final Point2D cenSouth_spark_max = new Point2D(741, 297);
+
+    private final Point2D cenSouth_paradiso_min = new Point2D(803, 319);
+    private final Point2D cenSouth_paradiso_max = new Point2D(832, 357);
+
+    private final Point2D cenSouth_cresci_min = new Point2D(539, 215);
+    private final Point2D cenSouth_cresci_max = new Point2D(569, 255);
+
+    private final Point2D cenSouth_cosy_min = new Point2D(631, 151);
+    private final Point2D cenSouth_cosy_max = new Point2D(662, 190);
+
+    private final Point2D cenSouth_hole_min = new Point2D(514, 284);
+    private final Point2D cenSouth_hole_max = new Point2D(546, 325);
+
+    private final Point2D cenSouth_deniz_min = new Point2D(525, 94);
+    private final Point2D cenSouth_deniz_max = new Point2D(555, 131);
+
+    private final Point2D cenSouth_drift_min = new Point2D(370, 238);
+    private final Point2D cenSouth_drift_max = new Point2D(399, 276);
+
+    private final Point2D cenSouth_roses_min = new Point2D(359, 293);
+    private final Point2D cenSouth_roses_max = new Point2D(389, 334);
+
+    private final Point2D cenSouth_kuda_min = new Point2D(372, 372);
+    private final Point2D cenSouth_kuda_max = new Point2D(403, 411);
+
     // Getters for all points
     public Point2D getBase_NRM_min() {
         return base_NRM_min;
@@ -359,6 +386,69 @@ public class MapController {
     }
     public Point2D getCen_paradiso_max() {
         return cen_paradiso_max;
+    }
+
+    public Point2D getCenSouth_spark_min() {
+        return cenSouth_spark_min;
+    }
+    public Point2D getCenSouth_spark_max() {
+        return cenSouth_spark_max;
+    }
+
+    public Point2D getCenSouth_paradiso_min() {
+        return cenSouth_paradiso_min;
+    }
+    public Point2D getCenSouth_paradiso_max() {
+        return cenSouth_paradiso_max;
+    }
+
+    public Point2D getCenSouth_cresci_min() {
+        return cenSouth_cresci_min;
+    }
+    public Point2D getCenSouth_cresci_max() {
+        return cenSouth_cresci_max;
+    }
+
+    public Point2D getCenSouth_cosy_min() {
+        return cenSouth_cosy_min;
+    }
+    public Point2D getCenSouth_cosy_max() {
+        return cenSouth_cosy_max;
+    }
+
+    public Point2D getCenSouth_hole_min() {
+        return cenSouth_hole_min;
+    }
+    public Point2D getCenSouth_hole_max() {
+        return cenSouth_hole_max;
+    }
+
+    public Point2D getCenSouth_deniz_min() {
+        return cenSouth_deniz_min;
+    }
+    public Point2D getCenSouth_deniz_max() {
+        return cenSouth_deniz_max;
+    }
+
+    public Point2D getCenSouth_drift_min() {
+        return cenSouth_drift_min;
+    }
+    public Point2D getCenSouth_drift_max() {
+        return cenSouth_drift_max;
+    }
+
+    public Point2D getCenSouth_roses_min() {
+        return cenSouth_roses_min;
+    }
+    public Point2D getCenSouth_roses_max() {
+        return cenSouth_roses_max;
+    }
+
+    public Point2D getCenSouth_kuda_min() {
+        return cenSouth_kuda_min;
+    }
+    public Point2D getCenSouth_kuda_max() {
+        return cenSouth_kuda_max;
     }
 }
 
