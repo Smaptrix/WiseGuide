@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
@@ -181,7 +182,8 @@ public class VenueDetailsController {
     public SubScene priceSubScene;
     @FXML
     public Group priceGroup;
-
+    @FXML
+    public Group ratingGroup;
 
     @FXML
     //Always called by the FXML Loader
@@ -316,27 +318,28 @@ public class VenueDetailsController {
             price = 0;
         }
 
-        Color maptrixBlue = Color.web("0x245164");
+        Color maptrixBlue = Color.web("0xAFD4E5");
+        Color maptrixDarkBlue = Color.web("0x245164");
 
-        Circle priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
-        Circle priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
-        Circle priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+        Circle priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixDarkBlue, 1);
+        Circle priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixDarkBlue, 1);
+        Circle priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixDarkBlue, 1);
 
         switch (price){
             case 0:
-                priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
-                priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
-                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+                priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixDarkBlue, 1);
+                priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixDarkBlue, 1);
+                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixDarkBlue, 1);
                 break;
             case 1:
-                priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
-                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+                priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixDarkBlue, 1);
+                priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixDarkBlue, 1);
+                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixDarkBlue, 1);
                 break;
             case 2:
-                priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+                priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixDarkBlue, 1);
+                priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixDarkBlue, 1);
+                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixDarkBlue, 1);
                 break;
             case 3:
                 priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
@@ -348,6 +351,18 @@ public class VenueDetailsController {
         priceGroup.getChildren().add(priceCircle1);
         priceGroup.getChildren().add(priceCircle2);
 
+
+        Polygon triangle1 = shapeManager.drawTriangle(20,0,0, 40,40,40, maptrixBlue, maptrixDarkBlue,1);
+        Polygon triangle2 = shapeManager.drawTriangle(70,0,50, 40,90,40, maptrixBlue, maptrixDarkBlue,1);
+        Polygon triangle3 = shapeManager.drawTriangle(120,0,100, 40,140,40, maptrixBlue, maptrixDarkBlue,1);
+        Polygon triangle4 = shapeManager.drawTriangle(170,0,150, 40,190,40, maptrixBlue, maptrixDarkBlue,1);
+        Polygon triangle5 = shapeManager.drawTriangle(220,0,200, 40,240,40, maptrixBlue, maptrixDarkBlue,1);
+
+        ratingGroup.getChildren().add(triangle1);
+        ratingGroup.getChildren().add(triangle2);
+        ratingGroup.getChildren().add(triangle3);
+        ratingGroup.getChildren().add(triangle4);
+        ratingGroup.getChildren().add(triangle5);
 
 
 

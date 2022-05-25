@@ -152,6 +152,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </VBox.margin>
                <children>
+                  <Group fx:id="ratingGroup" layoutX="150.0" layoutY="15.0" />
                   <Label layoutX="53.0" layoutY="23.0" text="Raiting" />
                </children>
                 </Pane>
