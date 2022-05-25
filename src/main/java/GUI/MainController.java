@@ -554,6 +554,30 @@ public class MainController {
 
     }
 
+
+    /**
+     * This opens the venue selector page on the GUI - it is linked to the venue select menu item
+     */
+    @FXML
+    public void onVenueSelectorMenuButtonPress() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("venue-selector-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 300);
+        Stage stage = new Stage();
+
+        VenueSelectPageController controller = fxmlLoader.getController();
+
+
+        System.out.println("Opening venue select page");
+
+        stage.setTitle("Venue Select!");
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);
+
+
+    }
+
+
 /*
     private final Point2D base_NRM_min = new Point2D(344, 202);
     private final Point2D base_NRM_max = new Point2D(373, 240);
