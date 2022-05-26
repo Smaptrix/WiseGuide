@@ -308,6 +308,8 @@ public class MainController {
             seMapSelecting(mousePosition);
         } else if (Objects.equals(desiredMap, "CentralYorkMap")) {
             cenMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "southCentralMap")) {
+            cenSouthMapSelection(mousePosition);
         }
     }
 
@@ -436,6 +438,32 @@ public class MainController {
             selectedItem = "Spark York C.I.C";
         } else if ((mousePosition.getX() > mapController.getCen_paradiso_min().getX()) && (mousePosition.getX() < mapController.getCen_paradiso_max().getX()) && (mousePosition.getY() > mapController.getCen_paradiso_min().getY()) && (mousePosition.getY() < mapController.getCen_paradiso_max().getY())) {
             selectedItem = "Il Paradiso Del Cibo";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+    }
+
+    private void cenSouthMapSelection(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCenSouth_cosy_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_cosy_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_cosy_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_cosy_max().getY())) {
+            selectedItem = "Cosy Club";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_spark_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_spark_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_spark_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_paradiso_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_paradiso_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_paradiso_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_cresci_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_cresci_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_cresci_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_cresci_max().getY())) {
+            selectedItem = "Cresci Pizzeria";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_hole_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_hole_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_hole_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_hole_max().getY())) {
+            selectedItem = "The Hole In Wand";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_deniz_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_deniz_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_deniz_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_deniz_max().getY())) {
+            selectedItem = "Deniz Best Kebab";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_drift_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_drift_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_drift_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_drift_max().getY())) {
+            selectedItem = "Drift-In York";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_roses_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_roses_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_roses_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_roses_max().getY())) {
+            selectedItem = "The Stone Roses Bar";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_kuda_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_kuda_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_kuda_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_kuda_max().getY())) {
+            selectedItem = "Cosy Club";
         } else {
             selectedItem = "ignore";
             desiredMap = "baseMap";

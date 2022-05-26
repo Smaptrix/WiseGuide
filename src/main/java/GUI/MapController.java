@@ -116,7 +116,7 @@ public class MapController {
     private final Point2D cen_paradiso_max = new Point2D(711, 378);
 
     private final Point2D cenSouth_spark_min = new Point2D(712, 359);
-    private final Point2D cenSouth_spark_max = new Point2D(741, 297);
+    private final Point2D cenSouth_spark_max = new Point2D(741, 397);
 
     private final Point2D cenSouth_paradiso_min = new Point2D(803, 319);
     private final Point2D cenSouth_paradiso_max = new Point2D(832, 357);
