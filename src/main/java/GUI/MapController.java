@@ -142,6 +142,24 @@ public class MapController {
     private final Point2D cenSouth_kuda_min = new Point2D(372, 372);
     private final Point2D cenSouth_kuda_max = new Point2D(403, 411);
 
+    private final Point2D cenWest_popworld_min = new Point2D(514, 430);
+    private final Point2D cenWest_popworld_max = new Point2D(543, 469);
+
+    private final Point2D cenWest_salvos_min = new Point2D(461, 332);
+    private final Point2D cenWest_salvos_max = new Point2D(492, 374);
+
+    private final Point2D cenWest_flares_min = new Point2D(515, 265);
+    private final Point2D cenWest_flares_max = new Point2D(545, 305);
+
+    private final Point2D cenWest_revs_min = new Point2D(656, 199);
+    private final Point2D cenWest_revs_max = new Point2D(686, 236);
+
+    private final Point2D cenWest_allBarOne_min = new Point2D(744, 183);
+    private final Point2D cenWest_allBarOne_max = new Point2D(768, 220);
+
+    private final Point2D cenWest_dusk_min = new Point2D(768, 142);
+    private final Point2D cenWest_dusk_max = new Point2D(795, 180);
+
     // Getters for all points
     public Point2D getBase_NRM_min() {
         return base_NRM_min;
@@ -449,6 +467,48 @@ public class MapController {
     }
     public Point2D getCenSouth_kuda_max() {
         return cenSouth_kuda_max;
+    }
+
+    public Point2D getCenWest_popworld_min() {
+        return cenWest_popworld_min;
+    }
+    public Point2D getCenWest_popworld_max() {
+        return cenWest_popworld_max;
+    }
+
+    public Point2D getCenWest_salvos_min() {
+        return cenWest_salvos_min;
+    }
+    public Point2D getCenWest_salvos_max() {
+        return cenWest_salvos_max;
+    }
+
+    public Point2D getCenWest_flares_min() {
+        return cenWest_flares_min;
+    }
+    public Point2D getCenWest_flares_max() {
+        return cenWest_flares_max;
+    }
+
+    public Point2D getCenWest_revs_min() {
+        return cenWest_revs_min;
+    }
+    public Point2D getCenWest_revs_max() {
+        return cenWest_revs_max;
+    }
+
+    public Point2D getCenWest_allBarOne_min() {
+        return cenWest_allBarOne_min;
+    }
+    public Point2D getCenWest_allBarOne_max() {
+        return cenWest_allBarOne_max;
+    }
+
+    public Point2D getCenWest_dusk_min() {
+        return cenWest_dusk_min;
+    }
+    public Point2D getCenWest_dusk_max() {
+        return cenWest_dusk_max;
     }
 }
 
