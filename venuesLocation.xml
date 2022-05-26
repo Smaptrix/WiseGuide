@@ -828,29 +828,40 @@
         </base:shape>
     </base:page>
 
-    <base:page title="Night_Out_Route" category="route">
+    <base:page title="Study_Day_Route" category="route">
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Routes/Route_1/Route_1_text.txt" ID="text0"></base:text>
+            <base:text include_source="Routes/StudyDayRoute/StudyDayRoute.txt" ID="text0"></base:text>
         </base:shape>
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Routes/Route_1/Route_1_venues.txt" ID="textVenues"></base:text>
+            <base:text include_source="Routes/StudyDayRoute/StudyDayRouteVenues.txt" ID="textVenues"></base:text>
+        </base:shape>
+        <base:image include_source="Routes/StudyDayRoute/StudyDayRoute0.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="map0" disp_duration_s="-1" show_after_s="0"></base:image>
+    </base:page>
+
+
+    <base:page title="Night_Out_Route" category="route">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Routes/NightOutRoute/NightOutRoute.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Routes/NightOutRoute/NightOutRouteVenues.txt" ID="textVenues"></base:text>
         </base:shape>
         <base:image include_source="Routes/NightOutRoute/NightOutRoute1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="map0" disp_duration_s="-1" show_after_s="0"></base:image>
         <base:image include_source="Routes/NightOutRoute/NightOutRoute2.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="map1" disp_duration_s="-1" show_after_s="0"></base:image>
         <base:image include_source="Routes/NightOutRoute/NightOutRoute3.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="map2" disp_duration_s="-1" show_after_s="0"></base:image>
-        <base:playable include_source="Routes/Route_1/Route_1_audio.mp3" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="audio0" type="audio"/>
     </base:page>
 
-    <base:page title="Route_2" category="route">
-
+    <base:page title="Tourist_Day_Route" category="route">
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Routes/TouristDayRoute/TouristDayRoute.txt" ID="text0"></base:text>
+        </base:shape>
+        <base:shape x_end="0" y_end="0" type="textbox">
+            <base:text include_source="Routes/TouristDayRoute/TouristDayRouteVenues.txt" ID="textVenues"></base:text>
+        </base:shape>
+        <base:image include_source="Routes/TouristDayRoute/TouristDayRoute0.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="map0" disp_duration_s="-1" show_after_s="0"></base:image>
+        <base:image include_source="Routes/TouristDayRoute/TouristDayRoute1.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="map1" disp_duration_s="-1" show_after_s="0"></base:image>
+        <base:playable include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWandVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
     </base:page>
 
-    <base:page title="Route_3" category="route">
-
-    </base:page>
-
-    <base:page title="Route_4" category="route">
-
-    </base:page>
 
 </xml>
