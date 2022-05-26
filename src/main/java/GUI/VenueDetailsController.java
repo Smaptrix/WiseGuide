@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
@@ -36,6 +37,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * <p>
@@ -181,7 +183,8 @@ public class VenueDetailsController {
     public SubScene priceSubScene;
     @FXML
     public Group priceGroup;
-
+    @FXML
+    public Group ratingGroup;
 
     @FXML
     //Always called by the FXML Loader
@@ -199,6 +202,14 @@ public class VenueDetailsController {
     public void loadVenueData() throws IOException {
 
         venueName.setText(currVenue);
+
+        //Add alt text button image
+
+
+
+
+
+
 
 
         int textIndex = 0;
@@ -287,56 +298,121 @@ public class VenueDetailsController {
         //Loads the shapes onto the page
         ShapeManager shapeManager = new ShapeManager();
 
-        //String price =  ((currVenuePage.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem("price"))).toString();
         System.out.println("Price: " + currVenuePage.attributes.get("price"));
         //The price value of the current venue
         int price;
+        //Sets the price value to 0 if there isn't a price field
         if (currVenuePage.attributes.get("price") != null){
             price = Integer.parseInt(currVenuePage.attributes.get("price"));
         } else {
             price = 0;
         }
+        //Set up colours required for the shapes
+        Color maptrixBlue = Color.web("0xAFD4E5");
+        Color maptrixDarkBlue = Color.web("0x245164");
 
-        //Set up the colour required for the circles
-        Color maptrixBlue = Color.web("0x245164");
+        //Initiates the 3 price circles
+        Circle priceCircle0 = new Circle();
+        Circle priceCircle1 = new Circle();
+        Circle priceCircle2 = new Circle();
 
-        //Initialise the circles
-        Circle priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
-        Circle priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
-        Circle priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+        //Initiates the three circle fill colours and sets them to null
+        Color circleFill1 = null;
+        Color circleFill2 = null;
+        Color circleFill3 = null;
 
-        //Fill in the required number of circles based on the price value of the venue
+        //Colours in the relevant circles based on the price value
         switch (price){
-            case 0:
-                priceCircle0 = shapeManager.drawCircle(20, -2, 20, null, maptrixBlue, 1);
-                priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
-                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
-                break;
             case 1:
-                priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle1 = shapeManager.drawCircle(100, -2, 20, null, maptrixBlue, 1);
-                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+                circleFill1 = maptrixBlue;
                 break;
             case 2:
-                priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle2 = shapeManager.drawCircle(180, -2, 20, null, maptrixBlue, 1);
+                circleFill1 = maptrixBlue;
+                circleFill2 = maptrixBlue;
                 break;
             case 3:
-                priceCircle0 = shapeManager.drawCircle(20, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle1 = shapeManager.drawCircle(100, -2, 20, maptrixBlue, maptrixBlue, 1);
-                priceCircle2 = shapeManager.drawCircle(180, -2, 20, maptrixBlue, maptrixBlue, 1);
+                circleFill1 = maptrixBlue;
+                circleFill2 = maptrixBlue;
+                circleFill3 = maptrixBlue;
+                break;
+            default:
                 break;
         }
-        //Add all of the circles into the group on the GUI
+        //Draws the circles with the correct fill based on the price value
+        priceCircle0 = shapeManager.drawCircle(20, -2, 20, circleFill1, maptrixDarkBlue, 1);
+        priceCircle1 = shapeManager.drawCircle(100, -2, 20, circleFill2, maptrixDarkBlue, 1);
+        priceCircle2 = shapeManager.drawCircle(180, -2, 20, circleFill3, maptrixDarkBlue, 1);
+
         priceGroup.getChildren().add(priceCircle0);
         priceGroup.getChildren().add(priceCircle1);
         priceGroup.getChildren().add(priceCircle2);
 
 
+        System.out.println("Rating: " + currVenuePage.attributes.get("rating"));
+        int rating;
 
+        //Sets the rating value to 0 if there isn't a price field
+        if (currVenuePage.attributes.get("rating") != null){
+            rating = Integer.parseInt(currVenuePage.attributes.get("rating"));
+        } else {
+            rating = 0;
+        }
 
+        //Creates 5 instances of triangles
+        Polygon triangle1 = new Polygon();
+        Polygon triangle2 = new Polygon();
+        Polygon triangle3 = new Polygon();
+        Polygon triangle4 = new Polygon();
+        Polygon triangle5 = new Polygon();
 
+        //Initiates the three triangle fill colours and sets them to null
+        Color triangleFill1 = null;
+        Color triangleFill2 = null;
+        Color triangleFill3 = null;
+        Color triangleFill4 = null;
+        Color triangleFill5 = null;
+        //Colours in the relevant triangles based on the rating value
+        switch (rating) {
+            case 1:
+                triangleFill1 = maptrixBlue;
+                break;
+            case 2:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                break;
+            case 3:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                triangleFill3 = maptrixBlue;
+                break;
+            case 4:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                triangleFill3 = maptrixBlue;
+                triangleFill4 = maptrixBlue;
+                break;
+            case 5:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                triangleFill3 = maptrixBlue;
+                triangleFill4 = maptrixBlue;
+                triangleFill5 = maptrixBlue;
+                break;
+            default:
+                break;
+        }
+        //Draws the triangles with the correct fill based on the price value
+        triangle1 = shapeManager.drawTriangle(20,0,0, 40,40,40, triangleFill1, maptrixDarkBlue,1);
+        triangle2 = shapeManager.drawTriangle(70,0,50, 40,90,40, triangleFill2, maptrixDarkBlue,1);
+        triangle3 = shapeManager.drawTriangle(120,0,100, 40,140,40, triangleFill3, maptrixDarkBlue,1);
+        triangle4 = shapeManager.drawTriangle(170,0,150, 40,190,40, triangleFill4, maptrixDarkBlue,1);
+        triangle5 = shapeManager.drawTriangle(220,0,200, 40,240,40, triangleFill5, maptrixDarkBlue,1);
+
+        ratingGroup.getChildren().add(triangle1);
+        ratingGroup.getChildren().add(triangle2);
+        ratingGroup.getChildren().add(triangle3);
+        ratingGroup.getChildren().add(triangle4);
+        ratingGroup.getChildren().add(triangle5);
     }
 
     /**

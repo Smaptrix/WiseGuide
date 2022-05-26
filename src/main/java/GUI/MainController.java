@@ -42,7 +42,7 @@ public class MainController {
 
     /**
      * <p>
-     *     The client  being used by the GUI to conect to the sever
+     *     The client  being used by the GUI to connect to the sever
      * </p>
      */
     private Client client;
@@ -307,12 +307,22 @@ public class MainController {
             baseMapSelecting(mousePosition);
         } else if (Objects.equals(desiredMap, "hesEastMap")) {
             UoYMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "SEYorkMap")) {
+            seMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "CentralYorkMap")) {
+            cenMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "southCentralMap")) {
+            cenSouthMapSelection(mousePosition);
+        } else if (Objects.equals(desiredMap, "westCentralMap")) {
+            cenWestMapSelection(mousePosition);
+        } else if (Objects.equals(desiredMap, "centralCentralMap")) {
+            cenCenMapSelection(mousePosition);
         }
     }
 
     /**
      * <p>
-     *     used to select the venue on the main map based on the mouseposition
+     *     used to select the venue on the main map based on the mouse position
      * </p>
      * @param mousePosition The current position of the mouse
      */
@@ -350,7 +360,7 @@ public class MainController {
 
     /**
      * <p>
-     *     Map selection for the University of Yorks map
+     *     Map selection for the University of York map
      * </p>
      * @param mousePosition The position of the map
      */
@@ -374,7 +384,150 @@ public class MainController {
             desiredMap = "baseMap";
             mapView.setImage(baseMapImage);
         }
+    }
 
+    /**
+     * <p>
+     *     Map selection for the SE York map
+     * </p>
+     * @param mousePosition The position of the map
+     */
+    private void seMapSelecting(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getSe_efes_min().getX()) && (mousePosition.getX() < mapController.getSe_efes_max().getX()) && (mousePosition.getY() > mapController.getSe_efes_min().getY()) && (mousePosition.getY() < mapController.getSe_efes_max().getY())) {
+            selectedItem = "Efes_Pizza";
+        } else if ((mousePosition.getX() > mapController.getSe_rook_min().getX()) && (mousePosition.getX() < mapController.getSe_rook_max().getX()) && (mousePosition.getY() > mapController.getSe_rook_min().getY()) && (mousePosition.getY() < mapController.getSe_rook_max().getY())) {
+            selectedItem = "The Rook & Gaskill";
+        } else if ((mousePosition.getX() > mapController.getSe_waggon_min().getX()) && (mousePosition.getX() < mapController.getSe_waggon_max().getX()) && (mousePosition.getY() > mapController.getSe_waggon_min().getY()) && (mousePosition.getY() < mapController.getSe_waggon_max().getY())) {
+            selectedItem = "The Waggon & Horses";
+        } else if ((mousePosition.getX() > mapController.getSe_spark_min().getX()) && (mousePosition.getX() < mapController.getSe_spark_max().getX()) && (mousePosition.getY() > mapController.getSe_spark_min().getY()) && (mousePosition.getY() < mapController.getSe_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getSe_paradiso_min().getX()) && (mousePosition.getX() < mapController.getSe_paradiso_max().getX()) && (mousePosition.getY() > mapController.getSe_paradiso_min().getY()) && (mousePosition.getY() < mapController.getSe_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+    }
+
+    private void cenMapSelecting(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCen_west_min().getX()) && (mousePosition.getX() < mapController.getCen_west_max().getX()) && (mousePosition.getY() > mapController.getCen_west_min().getY()) && (mousePosition.getY() < mapController.getCen_west_max().getY())) {
+            selectedItem = "ignore";
+            desiredMap = "westCentralMap";
+            mapView.setImage(westCentralYorkImage);
+        } else if ((mousePosition.getX() > mapController.getCen_cen_min().getX()) && (mousePosition.getX() < mapController.getCen_cen_max().getX()) && (mousePosition.getY() > mapController.getCen_cen_min().getY()) && (mousePosition.getY() < mapController.getCen_cen_max().getY())) {
+            selectedItem = "ignore";
+            desiredMap = "centralCentralMap";
+            mapView.setImage(centralCentralYorkImage);
+        } else if ((mousePosition.getX() > mapController.getCen_south_min().getX()) && (mousePosition.getX() < mapController.getCen_south_max().getX()) && (mousePosition.getY() > mapController.getCen_south_min().getY()) && (mousePosition.getY() < mapController.getCen_south_max().getY())) {
+            selectedItem = "ignore";
+            desiredMap = "southCentralMap";
+            mapView.setImage(southCentralYorkImage);
+        } else if ((mousePosition.getX() > mapController.getCen_musGard_min().getX()) && (mousePosition.getX() < mapController.getCen_musGard_max().getX()) && (mousePosition.getY() > mapController.getCen_musGard_min().getY()) && (mousePosition.getY() < mapController.getCen_musGard_max().getY())) {
+            selectedItem = "Museum Gardens";
+        } else if ((mousePosition.getX() > mapController.getCen_deans_min().getX()) && (mousePosition.getX() < mapController.getCen_deans_max().getX()) && (mousePosition.getY() > mapController.getCen_deans_min().getY()) && (mousePosition.getY() < mapController.getCen_deans_max().getY())) {
+            selectedItem = "Dean's Park";
+        } else if ((mousePosition.getX() > mapController.getCen_minster_min().getX()) && (mousePosition.getX() < mapController.getCen_minster_max().getX()) && (mousePosition.getY() > mapController.getCen_minster_min().getY()) && (mousePosition.getY() < mapController.getCen_minster_max().getY())) {
+            selectedItem = "York Minster";
+        } else if ((mousePosition.getX() > mapController.getCen_cityWalls_min().getX()) && (mousePosition.getX() < mapController.getCen_cityWalls_max().getX()) && (mousePosition.getY() > mapController.getCen_cityWalls_min().getY()) && (mousePosition.getY() < mapController.getCen_cityWalls_max().getY())) {
+            selectedItem = "York City Walls";
+        } else if ((mousePosition.getX() > mapController.getCen_brew_min().getX()) && (mousePosition.getX() < mapController.getCen_brew_max().getX()) && (mousePosition.getY() > mapController.getCen_brew_min().getY()) && (mousePosition.getY() < mapController.getCen_brew_max().getY())) {
+            selectedItem = "Brew & Brownie";
+        } else if ((mousePosition.getX() > mapController.getCen_lucky_min().getX()) && (mousePosition.getX() < mapController.getCen_lucky_max().getX()) && (mousePosition.getY() > mapController.getCen_lucky_min().getY()) && (mousePosition.getY() < mapController.getCen_lucky_max().getY())) {
+            selectedItem = "Lucky Days";
+        } else if ((mousePosition.getX() > mapController.getCen_cats_min().getX()) && (mousePosition.getX() < mapController.getCen_cats_max().getX()) && (mousePosition.getY() > mapController.getCen_cats_min().getY()) && (mousePosition.getY() < mapController.getCen_cats_max().getY())) {
+            selectedItem = "The Cat's Whiskers";
+        } else if ((mousePosition.getX() > mapController.getCen_evil_min().getX()) && (mousePosition.getX() < mapController.getCen_evil_max().getX()) && (mousePosition.getY() > mapController.getCen_evil_min().getY()) && (mousePosition.getY() < mapController.getCen_evil_max().getY())) {
+            selectedItem = "Evil Eye";
+        } else if ((mousePosition.getX() > mapController.getCen_choc_min().getX()) && (mousePosition.getX() < mapController.getCen_choc_max().getX()) && (mousePosition.getY() > mapController.getCen_choc_min().getY()) && (mousePosition.getY() < mapController.getCen_choc_max().getY())) {
+            selectedItem = "York's Chocolate Story";
+        } else if ((mousePosition.getX() > mapController.getCen_spark_min().getX()) && (mousePosition.getX() < mapController.getCen_spark_max().getX()) && (mousePosition.getY() > mapController.getCen_spark_min().getY()) && (mousePosition.getY() < mapController.getCen_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getCen_paradiso_min().getX()) && (mousePosition.getX() < mapController.getCen_paradiso_max().getX()) && (mousePosition.getY() > mapController.getCen_paradiso_min().getY()) && (mousePosition.getY() < mapController.getCen_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+    }
+
+    private void cenSouthMapSelection(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCenSouth_cosy_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_cosy_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_cosy_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_cosy_max().getY())) {
+            selectedItem = "Cosy Club";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_spark_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_spark_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_spark_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_paradiso_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_paradiso_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_paradiso_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_cresci_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_cresci_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_cresci_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_cresci_max().getY())) {
+            selectedItem = "Cresci Pizzeria";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_hole_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_hole_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_hole_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_hole_max().getY())) {
+            selectedItem = "The Hole In Wand";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_deniz_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_deniz_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_deniz_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_deniz_max().getY())) {
+            selectedItem = "Deniz Best Kebab";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_drift_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_drift_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_drift_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_drift_max().getY())) {
+            selectedItem = "Drift-In York";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_roses_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_roses_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_roses_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_roses_max().getY())) {
+            selectedItem = "The Stone Roses Bar";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_kuda_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_kuda_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_kuda_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_kuda_max().getY())) {
+            selectedItem = "Cosy Club";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "CentralYorkMap";
+            mapView.setImage(centralYorkImage);
+        }
+    }
+
+    private void cenWestMapSelection(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCenWest_popworld_min().getX()) && (mousePosition.getX() < mapController.getCenWest_popworld_max().getX()) && (mousePosition.getY() > mapController.getCenWest_popworld_min().getY()) && (mousePosition.getY() < mapController.getCenWest_popworld_max().getY())) {
+            selectedItem = "Popworld";
+        } else if ((mousePosition.getX() > mapController.getCenWest_salvos_min().getX()) && (mousePosition.getX() < mapController.getCenWest_salvos_max().getX()) && (mousePosition.getY() > mapController.getCenWest_salvos_min().getY()) && (mousePosition.getY() < mapController.getCenWest_salvos_max().getY())) {
+            selectedItem = "Club Salvation";
+        } else if ((mousePosition.getX() > mapController.getCenWest_flares_min().getX()) && (mousePosition.getX() < mapController.getCenWest_flares_max().getX()) && (mousePosition.getY() > mapController.getCenWest_flares_min().getY()) && (mousePosition.getY() < mapController.getCenWest_flares_max().getY())) {
+            selectedItem = "Flares York";
+        } else if ((mousePosition.getX() > mapController.getCenWest_revs_min().getX()) && (mousePosition.getX() < mapController.getCenWest_revs_max().getX()) && (mousePosition.getY() > mapController.getCenWest_revs_min().getY()) && (mousePosition.getY() < mapController.getCenWest_revs_max().getY())) {
+            selectedItem = "Flares York";
+        } else if ((mousePosition.getX() > mapController.getCenWest_allBarOne_min().getX()) && (mousePosition.getX() < mapController.getCenWest_allBarOne_max().getX()) && (mousePosition.getY() > mapController.getCenWest_allBarOne_min().getY()) && (mousePosition.getY() < mapController.getCenWest_allBarOne_max().getY())) {
+            selectedItem = "All Bar One York";
+        } else if ((mousePosition.getX() > mapController.getCenWest_dusk_min().getX()) && (mousePosition.getX() < mapController.getCenWest_dusk_max().getX()) && (mousePosition.getY() > mapController.getCenWest_dusk_min().getY()) && (mousePosition.getY() < mapController.getCenWest_dusk_max().getY())) {
+            selectedItem = "Dusk";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "CentralYorkMap";
+            mapView.setImage(centralYorkImage);
+        }
+    }
+
+    private void cenCenMapSelection(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCenCen_brew_min().getX()) && (mousePosition.getX() < mapController.getCenCen_brew_max().getX()) && (mousePosition.getY() > mapController.getCenCen_brew_min().getY()) && (mousePosition.getY() < mapController.getCenCen_brew_max().getY())) {
+            selectedItem = "Brew & Brownie";
+        } else if ((mousePosition.getX() > mapController.getCenCen_evil_min().getX()) && (mousePosition.getX() < mapController.getCenCen_evil_max().getX()) && (mousePosition.getY() > mapController.getCenCen_evil_min().getY()) && (mousePosition.getY() < mapController.getCenCen_evil_max().getY())) {
+            selectedItem = "Evil Eye";
+        } else if ((mousePosition.getX() > mapController.getCenCen_cats_min().getX()) && (mousePosition.getX() < mapController.getCenCen_cats_max().getX()) && (mousePosition.getY() > mapController.getCenCen_cats_min().getY()) && (mousePosition.getY() < mapController.getCenCen_cats_max().getY())) {
+            selectedItem = "The Cat's Whiskers";
+        } else if ((mousePosition.getX() > mapController.getCenCen_revs_min().getX()) && (mousePosition.getX() < mapController.getCenCen_revs_max().getX()) && (mousePosition.getY() > mapController.getCenCen_revs_min().getY()) && (mousePosition.getY() < mapController.getCenCen_revs_max().getY())) {
+            selectedItem = "Flares York";
+        } else if ((mousePosition.getX() > mapController.getCenCen_allBarOne_min().getX()) && (mousePosition.getX() < mapController.getCenCen_allBarOne_max().getX()) && (mousePosition.getY() > mapController.getCenCen_allBarOne_min().getY()) && (mousePosition.getY() < mapController.getCenCen_allBarOne_max().getY())) {
+            selectedItem = "All Bar One York";
+        } else if ((mousePosition.getX() > mapController.getCenCen_dusk_min().getX()) && (mousePosition.getX() < mapController.getCenCen_dusk_max().getX()) && (mousePosition.getY() > mapController.getCenCen_dusk_min().getY()) && (mousePosition.getY() < mapController.getCenCen_dusk_max().getY())) {
+            selectedItem = "Dusk";
+        } else if ((mousePosition.getX() > mapController.getCenCen_lucky_min().getX()) && (mousePosition.getX() < mapController.getCenCen_lucky_max().getX()) && (mousePosition.getY() > mapController.getCenCen_lucky_min().getY()) && (mousePosition.getY() < mapController.getCenCen_lucky_max().getY())) {
+            selectedItem = "Lucky Days";
+        } else if ((mousePosition.getX() > mapController.getCenCen_choc_min().getX()) && (mousePosition.getX() < mapController.getCenCen_choc_max().getX()) && (mousePosition.getY() > mapController.getCenCen_choc_min().getY()) && (mousePosition.getY() < mapController.getCenCen_choc_max().getY())) {
+            selectedItem = "York's Chocolate Story";
+        } else if ((mousePosition.getX() > mapController.getCenCen_nana_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana_max().getY())) {
+            selectedItem = "Nana Noodle Bar";
+        } else if ((mousePosition.getX() > mapController.getCenCen_nana2_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana2_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana2_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana2_max().getY())) {
+            selectedItem = "Nana Noodle Bar";
+        } else if ((mousePosition.getX() > mapController.getCenCen_deniz_min().getX()) && (mousePosition.getX() < mapController.getCenCen_deniz_max().getX()) && (mousePosition.getY() > mapController.getCenCen_deniz_min().getY()) && (mousePosition.getY() < mapController.getCenCen_deniz_max().getY())) {
+            selectedItem = "Deniz Best Kebab";
+        } else if ((mousePosition.getX() > mapController.getCenCen_drift_min().getX()) && (mousePosition.getX() < mapController.getCenCen_drift_max().getX()) && (mousePosition.getY() > mapController.getCenCen_drift_min().getY()) && (mousePosition.getY() < mapController.getCenCen_drift_max().getY())) {
+            selectedItem = "Drift-In York";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "CentralYorkMap";
+            mapView.setImage(centralYorkImage);
+        }
     }
 
     /**
@@ -384,7 +537,6 @@ public class MainController {
      */
     private void createImageObjects() {
         try {
-            //baseMapImage = new Image(new FileInputStream("@../resources/Maps/baseMap.png"));
             baseMapImage = new Image(new FileInputStream("src/main/resources/Maps/baseMap.png"));
             centralCentralYorkImage = new Image(new FileInputStream("src/main/resources/Maps/centralCentralYorkMap.png"));
             centralYorkImage = new Image(new FileInputStream("src/main/resources/Maps/centralYorkMap.png"));
