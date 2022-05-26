@@ -227,21 +227,16 @@ public class VenueDetailsController {
                 String textFile = (currVenuePage.getMediaSourceByID("text0"));
                 System.out.println("File: " + textFile);
 
-                client.requestFile(textFile);
+                File tempTextFile = client.requestFile(textFile);
+
+                if(tempTextFile == null){
+                    tempTextFile = client.getFile(textFile);
+                };
 
                 //Places the text from the text file into the text manager
-                TextManager textManager = new TextManager(textFile, 470, 100);
+                TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
                 //Loads the text onto the GUI
                 venueText.setText(textManager.loadTextFromFile());
-                /*
-                String videoFile = (currVenuePage.getMediaSourceByID("video0"));
-                System.out.println("Video file: " + videoFile);
-
-                client.requestFile(videoFile);
-
-                VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
-                //venueVideo.setMediaPlayer(videoHandler);
-                */
 
                 //Sets the text index to 1, as there's only one text file for each venue
                 textIndex = 1;
@@ -258,17 +253,18 @@ public class VenueDetailsController {
                 //Making sure that the image file actually exists
                if(imageFile != null) {
                    //Requests the filepath for the image for
-                    client.requestFile(imageFile);
+                    File  tempImageFile = client.requestFile(imageFile);
 
-                    //Sets up the filepath for the image
-                    File imageFilepath = new File(imageFile);
-                    System.out.println("This is the file path:" + imageFilepath);
+                    //If the file has already been downloaded request it from the client, not the server
+                    if(tempImageFile == null){
+                        tempImageFile = client.getFile(imageFile);
+                    }
 
                     //Initialises the image view
                     ImageView imageView = new ImageView();
 
                     //Creates the image handler with the desired image filepath
-                    ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+                    ImageHandler imageHandler = new ImageHandler(tempImageFile, imageView);
                     // TODO: Look into accessing this value instead of magic number
                     //Loads the image into the GUI
                     imageHandler.load(220, 400);
@@ -306,11 +302,11 @@ public class VenueDetailsController {
 
             }
         }
-        //Shapes
-        //Creates new shape manager instance
+        //Loads the shapes onto the page
         ShapeManager shapeManager = new ShapeManager();
 
         System.out.println("Price: " + currVenuePage.attributes.get("price"));
+        //The price value of the current venue
         int price;
         //Sets the price value to 0 if there isn't a price field
         if (currVenuePage.attributes.get("price") != null){
@@ -318,7 +314,7 @@ public class VenueDetailsController {
         } else {
             price = 0;
         }
-        //Set up colours
+        //Set up colours required for the shapes
         Color maptrixBlue = Color.web("0xAFD4E5");
         Color maptrixDarkBlue = Color.web("0x245164");
 

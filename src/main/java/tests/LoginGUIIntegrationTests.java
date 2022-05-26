@@ -133,8 +133,6 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passConfirmField");
         write("password");
         clickOn("#ageCheckBox");
-        //Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-        //clickOn((screensize.getWidth()/2 - 93),(screensize.getHeight()/2-103));
         clickOn("#createAccountButton");
         FxAssert.verifyThat("#errField", LabeledMatchers.hasText("This username is taken"));
     }

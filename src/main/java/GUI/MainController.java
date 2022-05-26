@@ -26,7 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import java.awt.*;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -533,6 +536,56 @@ public class MainController {
 
         }
     }
+
+    /**
+     * This opens the user manual which is stored in the Maptrix File Directory on Google Drive
+     */
+    @FXML
+    public void onUserManualMenuButtonPress(){
+
+        try {
+            Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1w9P1IKH5lbeHghuY0YJpdP8F_PjkEj6R/edit?usp=sharing&ouid=111971918555544856801&rtpof=true&sd=true").toURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    /**
+     * This opens the venue selector page on the GUI - it is linked to the venue select menu item
+     */
+    @FXML
+    public void onVenueSelectorMenuButtonPress() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("venue-selector-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage stage = new Stage();
+
+        VenueSelectPageController controller = fxmlLoader.getController();
+
+
+        controller.setClient(client);
+        controller.setCurrUser(currUser);
+        controller.setXml(xml);
+
+        //Get the current list of venues from the main application
+        List<String> listOfVenues = venueList.getItems();
+
+        controller.setListOfVenues(listOfVenues);
+
+        System.out.println("Opening venue select page");
+
+        stage.setTitle("Venue Select!");
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);
+
+
+    }
+
 
 /*
     private final Point2D base_NRM_min = new Point2D(344, 202);
