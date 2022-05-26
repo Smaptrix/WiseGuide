@@ -242,17 +242,18 @@ public class VenueDetailsController {
                 //Making sure that the image file actually exists
                if(imageFile != null) {
                    //Requests the filepath for the image for
-                    client.requestFile(imageFile);
+                    File  tempImageFile = client.requestFile(imageFile);
 
-                    //Sets up the filepath for the image
-                    File imageFilepath = new File(imageFile);
-                    System.out.println("This is the file path:" + imageFilepath);
+                    //If the file has already been downloaded request it from the client, not the server
+                    if(tempImageFile == null){
+                        tempImageFile = client.getFile(imageFile);
+                    }
 
                     //Initialises the image view
                     ImageView imageView = new ImageView();
 
                     //Creates the image handler with the desired image filepath
-                    ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+                    ImageHandler imageHandler = new ImageHandler(tempImageFile, imageView);
                     // TODO: Look into accessing this value instead of magic number
                     //Loads the image into the GUI
                     imageHandler.load(220, 400);
