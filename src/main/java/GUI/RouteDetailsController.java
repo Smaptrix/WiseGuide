@@ -285,7 +285,9 @@ public class RouteDetailsController {
         //TODO crashes if opened more than once due to the file already being downloaded
 
         if(textFile != null) {
-            String tempFile = String.valueOf(client.requestFile(textFile).toPath());
+
+            String tempFile = String.valueOf(client.requestFile(textFile));
+
             //Places the text from the text file into the text manager
             TextManager textManager = new TextManager(tempFile, 470, 100);
             //Loads the text onto the GUI
@@ -299,7 +301,8 @@ public class RouteDetailsController {
         System.out.println("Venues text file: " + venueTextFile);
 
         if(venueTextFile != null) {
-            String tempVenuesFile = String.valueOf(client.requestFile(venueTextFile).toPath());
+
+            String tempVenuesFile = String.valueOf(client.requestFile(venueTextFile));
 
             TextManager venuesTextManager = new TextManager(tempVenuesFile, 470, 100);
 
@@ -344,8 +347,8 @@ public class RouteDetailsController {
 
         if (audioFile != null) {
 
-
             File tempAudio = client.requestFile(audioFile);
+
 
             System.out.println("This is the file path:" + tempAudio);
 

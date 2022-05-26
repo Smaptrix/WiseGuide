@@ -85,6 +85,7 @@
     </VBox>
 
     <stylesheets>
-        <URL value="@../../Downloads/WiseGuideCSS.css" />
+        <URL value="@WiseGuideCSS.css" />
     </stylesheets>
 </AnchorPane>
+
