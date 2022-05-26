@@ -63,16 +63,12 @@
             </TextArea>
         </HBox>
         <HBox prefHeight="300.0" prefWidth="900.0">
-         <ImageView fx:id="routeImage" fitHeight="220.0" fitWidth="420.0" pickOnBounds="true" preserveRatio="true">
-            <HBox.margin>
-               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-            </HBox.margin>
-         </ImageView>
-                <Pane prefHeight="200.0" prefWidth="470.0">
-                    <VBox.margin>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                    </VBox.margin>
-                </Pane>
+             <ImageView fx:id="routeImage" fitHeight="220.0" fitWidth="420.0" pickOnBounds="true" preserveRatio="true">
+                <HBox.margin>
+                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                </HBox.margin>
+             </ImageView>
+             <Pane fx:id="routeAudioPane" prefHeight="200.0" prefWidth="470.0"></Pane>
         </HBox>
     </VBox>
 

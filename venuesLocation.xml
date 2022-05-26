@@ -40,13 +40,13 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Clubs/FLares_York/Flares5.txt" ID="altText4"></base:text>
         </base:shape>
-        <base:playable indlude_source="Venues/Clubs/Flares_York/FlaresVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
+        <base:playable include_source="Venues/Clubs/Flares_York/FlaresVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
         <!--
 
         here are the baselines for the other things, playable for some weird reason handles both audio and video:
 
         <base:image include_source="pic.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="im0" disp_duration_s="-1" show_after_s="0" />
-        <base:playable indlude_source="vid.mp4 or sound.mp3" display_player="true" seek_offset="10" autoplay="false" loop="false" type="video or audio"</base:playable>
+        <base:playable include_source="vid.mp4 or sound.mp3" display_player="true" seek_offset="10" autoplay="false" loop="false" type="video or audio"</base:playable>
         -->
     </base:page>
     <base:page title="Club_Salvation" ID="003" price="1" lat="53.958187" lon="-1.0895813" category="nightclub">
@@ -804,7 +804,7 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWand5.txt" ID="altText4"></base:text>
         </base:shape>
-        <base:playable indlude_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWandVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
+        <base:playable include_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWandVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
     </base:page>
     <base:page title="York's_Chocolate_Story" ID="150" price="3" lat="53.9599946" lon="-1.0825968" category="sightseeing">
         <base:shape x_end="0" y_end="0" type="textbox">
@@ -836,7 +836,7 @@
             <base:text include_source="Routes/Route_1/Route_1_venues.txt" ID="textVenues"></base:text>
         </base:shape>
         <base:image include_source="Routes/Route_1/Route_1_image.png" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="map" disp_duration_s="-1" show_after_s="0"></base:image>
-        <base:playable indlude_source="Routes/Route_1/Route_1_audio.mp3" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="audio0" type="audio"/>
+        <base:playable include_source="Routes/Route_1/Route_1_audio.mp3" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="audio0" type="audio"/>
     </base:page>
 
     <base:page title="Route_2" category="route">

@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -87,7 +88,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    SubScene routeAudio;
+    Pane routeAudioPane;
 
     /**
      * <p>
@@ -332,26 +333,24 @@ public class RouteDetailsController {
 
         String audioFile = currRoutePage.getMediaSourceByID("audio0");
 
+        System.out.println(audioFile);
+
         if (audioFile != null) {
 
 
-            //Requests the filepath for the audio
             File tempAudio = client.requestFile(audioFile);
 
-            //Sets up the filepath for the image
             System.out.println("This is the file path:" + tempAudio);
 
-            //Initialises the image view
-            MediaView audioView = new MediaView();
-
-            //Creates the image handler with the desired image filepath
             AudioHandler audioHandler = new AudioHandler(tempAudio);
 
             audioHandler.load();
 
-            //Loads the image into the GUI
+            Scene scene = new Scene(audioHandler, 400, 40, Color.BLACK);
 
-            routeAudio = new SubScene(audioView, 400, 40, Color.BLACK);
+            Stage stage = new Stage();
+
+            routeAudioPane = new Pane();
 
         }
 
