@@ -29,12 +29,12 @@
          <font>
             <Font size="30.0" />
          </font></Label>
-      <Label alignment="CENTER_RIGHT" layoutX="21.0" layoutY="53.0" prefHeight="22.0" prefWidth="73.0" text="Username" textAlignment="RIGHT" />
+      <Label id="usernameLabel" fx:id="userLabel" alignment="CENTER_RIGHT" layoutX="21.0" layoutY="53.0" prefHeight="22.0" prefWidth="73.0" text="Username" textAlignment="RIGHT" />
       <TextField id="usernameField" fx:id="userField" layoutX="113.0" layoutY="49.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="95.0" prefHeight="22.0" prefWidth="73.0" text="Password" />
+      <Label id="passwordLabel" fx:id="passLabel" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="95.0" prefHeight="22.0" prefWidth="73.0" text="Password" />
       <PasswordField id="passField" fx:id="passField" layoutX="113.0" layoutY="91.0" />
       <PasswordField id="passConfirmField" fx:id="passConfirmField" layoutX="113.0" layoutY="131.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="-9.0" layoutY="135.0" prefHeight="22.0" prefWidth="119.0" text="Confirm Password" />
+      <Label id="passConfirmLabel" fx:id="passConfirmLabel" alignment="CENTER_RIGHT" layoutX="-9.0" layoutY="135.0" prefHeight="22.0" prefWidth="119.0" text="Confirm Password" />
       <Button id="createAccountButton" fx:id="createAccountButton" alignment="CENTER" layoutX="80.0" layoutY="300.0" mnemonicParsing="false" onAction="#createAccountButtonAction" prefHeight="33.0" prefWidth="119.0" text="Create Account" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="91.0" />
       <Label id="errLabel" fx:id="errLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-13.0" layoutY="267.0" prefHeight="17.0" prefWidth="300.0" textFill="#f80000" />
       <CheckBox id="ageCheckBox" fx:id="ageCheckBox" layoutX="31.0" layoutY="167.0" mnemonicParsing="false" text="I confirm I am over the age of 13" />

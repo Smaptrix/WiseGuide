@@ -6,9 +6,10 @@
      xmlns:ext="PWS_Exts"
 >
     <!--Price range from 0 (free) to 3 (expensive)-->
+    <!--Raiting range from 0 to 5 -->
     <!--Nightclubs-->
 
-    <base:page title="Flares_York" ID="001" price="2" lat="53.9587775" lon="-1.0867884" category="nightclub">
+    <base:page title="Flares_York" ID="001" price="2" lat="53.9587775" lon="-1.0867884" category="nightclub" rating="4">
         <!--
         there's also some weird shape and text attributes that we can use if need see this example xml from david's schema (https://github.com/super-cow-powers/sweng_21_PWS/blob/master/example_doc.xml)
 
@@ -49,7 +50,7 @@
         <base:playable indlude_source="vid.mp4 or sound.mp3" display_player="true" seek_offset="10" autoplay="false" loop="false" type="video or audio"</base:playable>
         -->
     </base:page>
-    <base:page title="Club_Salvation" ID="003" price="1" lat="53.958187" lon="-1.0895813" category="nightclub">
+    <base:page title="Club_Salvation" ID="003" price="1" lat="53.958187" lon="-1.0895813" category="nightclub" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation.txt" ID="text0"></base:text>
         </base:shape>
@@ -66,7 +67,7 @@
             <base:text include_source="Venues/Clubs/Club_Salvation/Club_Salvation3.txt" ID="altText2"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Kuda" ID="004" price="2" lat="53.9568311" lon="-1.0840847" category="nightclub">
+    <base:page title="Kuda" ID="004" price="2" lat="53.9568311" lon="-1.0840847" category="nightclub" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Clubs/Kuda/Kuda.txt" ID="text0"></base:text>
         </base:shape>
@@ -83,7 +84,7 @@
             <base:text include_source="Venues/Clubs/Kuda/Kuda3.txt" ID="altText2"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Popworld_York" ID="005" price="2" lat="53.957479" lon="-1.0890425" category="nightclub">
+    <base:page title="Popworld_York" ID="005" price="2" lat="53.957479" lon="-1.0890425" category="nightclub" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Clubs/Popworld/Popworld.txt" ID="text0"></base:text>
         </base:shape>
@@ -94,7 +95,7 @@
     </base:page>
 
     <!--Bars-->
-    <base:page title="The_Stone_Roses_Bar" ID="006" lat="53.9573196" lon="-1.0843035" category="bar">
+    <base:page title="The_Stone_Roses_Bar" ID="006" price="2" lat="53.9573196" lon="-1.0843035" category="bar" rating="5">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/The_Stone_Roses_Bar.txt" ID="text0"></base:text>
         </base:shape>
@@ -123,7 +124,7 @@
             <base:text include_source="Venues/Bars/The_Stone_Roses_Bar/StoneRoses6.txt" ID="altText5"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Dusk" ID="008" lat="53.959545" lon="-1.0837168" category="bar">
+    <base:page title="Dusk" ID="008" price="2" lat="53.959545" lon="-1.0837168" category="bar" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/Dusk/Dusk.txt" ID="text0"></base:text>
         </base:shape>
@@ -152,7 +153,7 @@
             <base:text include_source="Venues/Bars/Dusk/Dusk6.txt" ID="altText5"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Evil_Eye" ID="009" lat="53.9611081" lon="-1.0852717" category="bar">
+    <base:page title="Evil_Eye" ID="009" price="3" lat="53.9611081" lon="-1.0852717" category="bar" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/Evil_Eye/Evil_Eye.txt" ID="text0"></base:text>
         </base:shape>
@@ -182,7 +183,7 @@
         </base:shape>
 
     </base:page>
-    <base:page title="All_Bar_One_York" ID="012" lat="53.9593409" lon="-1.0859765" category="bar">
+    <base:page title="All_Bar_One_York" ID="012" price="2" lat="53.9593409" lon="-1.0859765" category="bar" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Bars/All_Bar_One_York/All_Bar_One_York.txt" ID="text0"></base:text>
         </base:shape>
@@ -193,7 +194,7 @@
     </base:page>
 
     <!--Cafes-->
-    <base:page title="The_Cat's_Whiskers" ID="019" lat="53.9593409" lon="-1.0859765" category="cafe">
+    <base:page title="The_Cat's_Whiskers" ID="019" price="3" lat="53.9593409" lon="-1.0859765" category="cafe" rating="5">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/The_Cat_s_Whiskers/The_Cat_s_Whiskers.txt" ID="text0"></base:text>
         </base:shape>
@@ -218,7 +219,7 @@
             <base:text include_source="Venues/Bars/The_Cat_s_Whiskers/CatsWhiskers5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Drift-In_York" ID="020" lat="53.9577585" lon="-1.0842764" category="cafe">
+    <base:page title="Drift-In_York" ID="020" price="1" lat="53.9577585" lon="-1.0842764" category="cafe" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/Drift-In_York/Drift-In_York.txt" ID="text0"></base:text>
         </base:shape>
@@ -243,7 +244,7 @@
             <base:text include_source="Venues/Bars/Drift-In_York/Drift-In5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Brew_&amp;_Brownie" ID="021" lat="53.9610243" lon="-1.0878127" category="cafe">
+    <base:page title="Brew_&amp;_Brownie" ID="021" price="2" lat="53.9610243" lon="-1.0878127" category="cafe" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/Brew_and_Brownie/Brew_and_Brownie.txt" ID="text0"></base:text>
         </base:shape>
@@ -268,7 +269,7 @@
             <base:text include_source="Venues/Bars/Brew_and_Brownie/BrewandBrownie5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Lucky_Days" ID="022" lat="53.9608023" lon="-1.0834307" category="cafe">
+    <base:page title="Lucky_Days" ID="022" price="1" lat="53.9608023" lon="-1.0834307" category="cafe" rating="2">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Cafes/Lucky_Days/Lucky_Days.txt" ID="text0"></base:text>
         </base:shape>
@@ -295,7 +296,7 @@
     </base:page>
 
     <!--Restaurants-->
-    <base:page title="Il_Paradiso_Del_Cibo" ID="042" lat="53.9571145" lon="-1.078579" category="restaurant">
+    <base:page title="Il_Paradiso_Del_Cibo" ID="042" price="3" lat="53.9571145" lon="-1.078579" category="restaurant" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo.txt" ID="text0"></base:text>
         </base:shape>
@@ -316,7 +317,7 @@
             <base:text include_source="Venues/Restaurants/Il_Paradiso_Del_Cibo/Il_Paradiso_Del_Cibo4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Spark_York_C.I.C" ID="044" lat="53.956867" lon="-1.0796585" category="restaurant">
+    <base:page title="Spark_York_C.I.C" ID="044" price="1" lat="53.956867" lon="-1.0796585" category="restaurant" rating="5">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC.txt" ID="text0"></base:text>
         </base:shape>
@@ -337,7 +338,7 @@
             <base:text include_source="Venues/Restaurants/Spark_York_CIC/Spark_York_CIC4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Cosy_Club" ID="045" lat="53.9584837" lon="-1.0806656" category="restaurant">
+    <base:page title="Cosy_Club" ID="045" price="3" lat="53.9584837" lon="-1.0806656" category="restaurant" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club.txt" ID="text0"></base:text>
         </base:shape>
@@ -358,7 +359,7 @@
             <base:text include_source="Venues/Restaurants/Cosy_Club/Cosy_Club4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Cresci_Pizzeria" ID="046" lat="53.9579621" lon="-1.081914" category="restaurant">
+    <base:page title="Cresci_Pizzeria" ID="046" price="1" lat="53.9579621" lon="-1.081914" category="restaurant" rating="2">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Restaurants/Cresci_Pizzeria/Cresci_Pizzeria.txt" ID="text0"></base:text>
         </base:shape>
@@ -381,7 +382,7 @@
     </base:page>
 
     <!--Fast Food Places-->
-    <base:page title="Deniz_Best_Kebab" ID="076" lat="53.9586409" lon="-1.0825015" category="fast_food">
+    <base:page title="Deniz_Best_Kebab" ID="076" price="1" lat="53.9586409" lon="-1.0825015" category="fast_food" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab.txt" ID="text0"></base:text>
         </base:shape>
@@ -394,7 +395,7 @@
             <base:text include_source="Venues/Fast_Food/Deniz_Best_Kebab/Deniz_Best_Kebab2.txt" ID="altText1"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="NaNa_Noodle_Bar" ID="077" lat="53.9591728" lon="-1.0827803" category="fast_food">
+    <base:page title="NaNa_Noodle_Bar" ID="077" price="1" lat="53.9591728" lon="-1.0827803" category="fast_food" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar.txt" ID="text0"></base:text>
         </base:shape>
@@ -419,7 +420,7 @@
             <base:text include_source="Venues/Fast_Food/NaNa_Noodle_Bar/NaNa_Noodle_Bar5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Cecil's_Pizza_-_Grill" ID="079" lat="53.9500767" lon="-1.0322042" category="fast_food">
+    <base:page title="Cecil's_Pizza_-_Grill" ID="079" price="2" lat="53.9500767" lon="-1.0322042" category="fast_food" rating="1">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecil_s_Pizza_-_Grill.txt" ID="text0"></base:text>
         </base:shape>
@@ -444,7 +445,7 @@
             <base:text include_source="Venues/Fast_Food/Cecil_s_Pizza_-_Grill/Cecils_Pizza_Grill5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Efes_Pizza" ID="083" lat="53.9524207" lon="-1.0733016" category="fast_food">
+    <base:page title="Efes_Pizza" ID="083" price="1" lat="53.9524207" lon="-1.0733016" category="fast_food" rating="2">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Fast_Food/Efes_Pizza/Efes_Pizza.txt" ID="text0"></base:text>
         </base:shape>
@@ -467,7 +468,7 @@
     </base:page>
 
     <!--Pubs-->
-    <base:page title="Charles_XII" ID="090" lat="53.9452911" lon="-1.0471227" category="pub">
+    <base:page title="Charles_XII" ID="090" price="2" lat="53.9452911" lon="-1.0471227" category="pub" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII.txt" ID="text0"></base:text>
         </base:shape>
@@ -488,7 +489,7 @@
             <base:text include_source="Venues/Pubs/Charles_XII/Charles_XII4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="The_Waggon_&amp;_Horses" ID="092" lat="53.9549563" lon="-1.0713238" category="pub">
+    <base:page title="The_Waggon_&amp;_Horses" ID="092" price="1" lat="53.9549563" lon="-1.0713238" category="pub" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses.txt" ID="text0"></base:text>
         </base:shape>
@@ -509,7 +510,7 @@
             <base:text include_source="Venues/Pubs/The_Waggon_and_Horses/The_Waggon_and_Horses4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="The_Black_Bull" ID="093" lat="53.953665" lon="-1.045859" category="pub">
+    <base:page title="The_Black_Bull" ID="093" price="2" lat="53.953665" lon="-1.045859" category="pub" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull.txt" ID="text0"></base:text>
         </base:shape>
@@ -522,7 +523,7 @@
             <base:text include_source="Venues/Pubs/The_Black_Bull/The_Black_Bull2.txt" ID="altText1"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="The_Rook_&amp;_Gaskill" ID="095" lat="53.9549124" lon="-1.0723326" category="pub">
+    <base:page title="The_Rook_&amp;_Gaskill" ID="095" price="1" lat="53.9549124" lon="-1.0723326" category="pub" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Pubs/The_Rook_and_Gaskill/The_Rook_and_Gaskill.txt" ID="text0"></base:text>
         </base:shape>
@@ -537,7 +538,7 @@
     </base:page>
 
     <!--Green Spaces-->
-    <base:page title="Museum_Gardens" ID="109" lat="53.9615475" lon="-1.0903137" category="green_space">
+    <base:page title="Museum_Gardens" ID="109" price="0" lat="53.9615475" lon="-1.0903137" category="green_space" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Green_Spaces/Museum_Gardens/Museum_Gardens.txt" ID="text0"></base:text>
         </base:shape>
@@ -562,7 +563,7 @@
             <base:text include_source="Venues/Green_Spaces/Museum_Gardens/York_Museum_Gardens5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Rowntree_Park" ID="110" lat="53.9487966" lon="-1.083312" category="green_space">
+    <base:page title="Rowntree_Park" ID="110" price="0" lat="53.9487966" lon="-1.083312" category="green_space" rating="5">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Green_Spaces/Rowntree_Park/Rowntree_Park.txt" ID="text0"></base:text>
         </base:shape>
@@ -591,7 +592,7 @@
             <base:text include_source="Venues/Green_Spaces/Rowntree_Park/Rowntree_Park1.txt" ID="altText5"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Dean's_Park" ID="111" lat="53.9630229" lon="-1.0846681" category="green_space">
+    <base:page title="Dean's_Park" ID="111" price="0" lat="53.9630229" lon="-1.0846681" category="green_space" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park.txt" ID="text0"></base:text>
         </base:shape>
@@ -608,7 +609,7 @@
             <base:text include_source="Venues/Green_Spaces/Dean_s_Park/Dean_s_Park3.txt" ID="altText2"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Millennium_Fields" ID="112" lat="53.9438" lon="-1.0839827" category="green_space">
+    <base:page title="Millennium_Fields" ID="112" price="0" lat="53.9438" lon="-1.0839827" category="green_space" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Green_Spaces/Millennium_Fields/Millennium_Fields.txt" ID="text0"></base:text>
         </base:shape>
@@ -631,7 +632,7 @@
     </base:page>
 
     <!--Study Spaces-->
-    <base:page title="University_of_York_JB_Morrell_Library" ID="124" lat="53.9490728" lon="-1.0527472" category="study_space">
+    <base:page title="University_of_York_JB_Morrell_Library" ID="124" price="0" lat="53.9490728" lon="-1.0527472" category="study_space" rating="5">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Study_Spaces/University_of_York_JB_Morrell_Library/University_of_York_JB_Morrell_Library.txt" ID="text0"></base:text>
         </base:shape>
@@ -652,7 +653,7 @@
             <base:text include_source="Venues/Study_Spaces/University_of_York_JB_Morrell_Library/University_of_York_JB_Morrell_Library4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Piazza_Building" ID="127" lat="53.9478336" lon="-1.0304155" category="study_space">
+    <base:page title="Piazza_Building" ID="127" price="0" lat="53.9478336" lon="-1.0304155" category="study_space" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Study_Spaces/Piazza_Building/Piazza_Building.txt" ID="text0"></base:text>
         </base:shape>
@@ -673,7 +674,7 @@
             <base:text include_source="Venues/Study_Spaces/Piazza_Building/Piazza_Building4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="The_Ron_Cooke_Hub" ID="128" lat="53.9472683" lon="-1.0320877" category="study_space">
+    <base:page title="The_Ron_Cooke_Hub" ID="128" price="0" lat="53.9472683" lon="-1.0320877" category="study_space" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Study_Spaces/The_Ron_Cooke_Hub/The_Ron_Cooke_Hub.txt" ID="text0"></base:text>
         </base:shape>
@@ -694,7 +695,7 @@
             <base:text include_source="Venues/Study_Spaces/The_Ron_Cooke_Hub/The_Ron_Cooke_Hub4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="Roger_Kirk_Centre" ID="132" lat="53.9457663" lon="-1.0577333" category="study_space">
+    <base:page title="Roger_Kirk_Centre" ID="132" price="0" lat="53.9457663" lon="-1.0577333" category="study_space" rating="2">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Study_Spaces/Roger_Kirk_Centre/Roger_Kirk_Centre.txt" ID="text0"></base:text>
         </base:shape>
@@ -713,7 +714,7 @@
     </base:page>
 
     <!--Sightseeing-->
-    <base:page title="York_City_Walls" ID="137" lat="53.9621584" lon="-1.0795979" category="sightseeing">
+    <base:page title="York_City_Walls" ID="137" price="0" lat="53.9621584" lon="-1.0795979" category="sightseeing" rating="3">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls.txt" ID="text0"></base:text>
         </base:shape>
@@ -734,7 +735,7 @@
             <base:text include_source="Venues/Sightseeing/York_City_Walls/York_City_Walls4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="York_Minster" ID="138" lat="53.9623323" lon="-1.0841092" category="sightseeing">
+    <base:page title="York_Minster" ID="138" price="1" lat="53.9623323" lon="-1.0841092" category="sightseeing" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster.txt" ID="text0"></base:text>
         </base:shape>
@@ -759,7 +760,7 @@
             <base:text include_source="Venues/Sightseeing/York_Minster/York_Minster5.txt" ID="altText4"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="National_Railway_Museum_York" ID="140" price="0" lat="53.9605498" lon="-1.0985547" category="sightseeing">
+    <base:page title="National_Railway_Museum_York" ID="140" price="0" lat="53.9605498" lon="-1.0985547" category="sightseeing" rating="5">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York.txt" ID="text0"></base:text>
         </base:shape>
@@ -780,7 +781,7 @@
             <base:text include_source="Venues/Sightseeing/National_Railway_Museum_York/National_Railway_Museum_York4.txt" ID="altText3"></base:text>
         </base:shape>
     </base:page>
-    <base:page title="The_Hole_In_Wand" ID="147" price="2" lat="53.9575578" lon="-1.0822688" category="sightseeing">
+    <base:page title="The_Hole_In_Wand" ID="147" price="2" lat="53.9575578" lon="-1.0822688" category="sightseeing" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/The_Hole_In_Wand/The_Hole_In_Wand.txt" ID="text0"></base:text>
         </base:shape>
@@ -806,7 +807,7 @@
         </base:shape>
         <base:playable indlude_source="Venues/Sightseeing/The_Hole_In_Wand/HoleInWandVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
     </base:page>
-    <base:page title="York's_Chocolate_Story" ID="150" price="3" lat="53.9599946" lon="-1.0825968" category="sightseeing">
+    <base:page title="York's_Chocolate_Story" ID="150" price="3" lat="53.9599946" lon="-1.0825968" category="sightseeing" rating="5">
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Sightseeing/York_s_Chocolate_Story/York_s_Chocolate_Story.txt" ID="text0"></base:text>
         </base:shape>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@WiseGuideCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VenueSelectPageController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="257.0" layoutY="22.0" prefHeight="26.0" prefWidth="155.0" text="Venue Selector!">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="220.0" layoutY="62.0" text="Options" />
+            <Label layoutX="72.0" layoutY="62.0" text="Venue Type" />
+            <CheckBox fx:id="faveCheckBox" layoutX="197.0" layoutY="112.0" mnemonicParsing="false" text="Favourited " />
+            <CheckBox fx:id="foodCheckBox" layoutX="78.0" layoutY="112.0" mnemonicParsing="false" text="Food" />
+            <CheckBox fx:id="sightseeingCheckBox" layoutX="63.0" layoutY="181.0" mnemonicParsing="false" text="Sightseeing" />
+            <CheckBox fx:id="drinksCheckBox" layoutX="74.0" layoutY="148.0" mnemonicParsing="false" text="Drinks" />
+            <CheckBox fx:id="studySpacesCheckBox" layoutX="68.0" layoutY="212.0" mnemonicParsing="false" text="Study Spaces" />
+            <Button fx:id="venuePickButton" layoutX="109.0" layoutY="268.0" mnemonicParsing="false" onAction="#onVenuePickButtonPress" text="Pick a Venue!" />
+            <Button layoutX="392.0" layoutY="152.0" mnemonicParsing="false" onAction="#onRandomVenueButtonPress" text="Random Venue!" />
+            <Label fx:id="errLabel" layoutX="276.0" layoutY="318.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
