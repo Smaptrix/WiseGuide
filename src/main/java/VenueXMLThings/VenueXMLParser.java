@@ -114,7 +114,7 @@ public class VenueXMLParser {
      * @param price of new venue
      * @throws TransformerException
      */
-    public void addPage(String title, String ID, String lat, String lon, String category, String price) throws TransformerException {
+    public void addPage(String title, String ID, String lat, String lon, String category, String price, String rating) throws TransformerException {
 
         Element newPage = document.createElement("base:page");
 
@@ -126,6 +126,7 @@ public class VenueXMLParser {
         newPage.setAttribute("lon", lon);
         newPage.setAttribute("category", category);
         newPage.setAttribute("price", price);
+        newPage.setAttribute("raiting", rating);
 
         root.appendChild(newPage);
         numberOfPages++;
