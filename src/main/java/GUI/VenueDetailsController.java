@@ -216,21 +216,16 @@ public class VenueDetailsController {
                 String textFile = (currVenuePage.getMediaSourceByID("text0"));
                 System.out.println("File: " + textFile);
 
-                client.requestFile(textFile);
+                File tempTextFile = client.requestFile(textFile);
+
+                if(tempTextFile == null){
+                    tempTextFile = client.getFile(textFile);
+                };
 
                 //Places the text from the text file into the text manager
-                TextManager textManager = new TextManager(textFile, 470, 100);
+                TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
                 //Loads the text onto the GUI
                 venueText.setText(textManager.loadTextFromFile());
-                /*
-                String videoFile = (currVenuePage.getMediaSourceByID("video0"));
-                System.out.println("Video file: " + videoFile);
-
-                client.requestFile(videoFile);
-
-                VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
-                //venueVideo.setMediaPlayer(videoHandler);
-                */
 
                 //Sets the text index to 1, as there's only one text file for each venue
                 textIndex = 1;
