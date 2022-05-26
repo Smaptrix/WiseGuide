@@ -102,10 +102,8 @@ public class MediaBar extends HBox {
                         player.seek(player.getStartTime());
                         player.play();
                     } else {
-
-                        player.pause();
-
                         PlayButton.setText(">");
+                        player.pause();
                     }
                 }
                 if (status == MediaPlayer.Status.HALTED || status == MediaPlayer.Status.STOPPED || status == MediaPlayer.Status.PAUSED || status == MediaPlayer.Status.READY) {

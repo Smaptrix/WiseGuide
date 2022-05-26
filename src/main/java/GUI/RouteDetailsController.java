@@ -167,6 +167,13 @@ public class RouteDetailsController {
 
     /**
      * <p>
+     *     The handler for the audio display.
+     * </p>
+     */
+    private AudioHandler audioHandler;
+
+    /**
+     * <p>
      *     Sets the client to be used by the main application
      * </p>
      * @param client The client to be used
@@ -192,6 +199,10 @@ public class RouteDetailsController {
      */
     @FXML
     private void onCloseButtonClick(){
+        if(audioHandler != null) {
+            audioHandler.pause();
+            audioHandler = null;
+        }
         System.exit(0);
     }
 
@@ -203,6 +214,11 @@ public class RouteDetailsController {
      */
     @FXML
     public void onBackButtonPress() {
+        if(audioHandler != null) {
+            audioHandler.pause();
+            audioHandler = null;
+        }
+
         Stage currStage = (Stage) mainWindow.getScene().getWindow();
         currStage.close();
     }
@@ -244,6 +260,8 @@ public class RouteDetailsController {
                 System.out.println("Error: Cannot display current image: " + (currentImageIndex+1));
             }
         });
+
+
     }
 
     /**
@@ -258,6 +276,13 @@ public class RouteDetailsController {
         File tempImage = client.getFile(imageFile);
         ImageHandler imageHandler = new ImageHandler(tempImage, routeImage);
         imageHandler.load(250, 420);
+        for(int i = 0; i <= maxImageIndex; i++) {
+            if(i == currentImageIndex) {
+                imageGrid.getChildren().get(i).setOpacity(1);
+            } else {
+                imageGrid.getChildren().get(i).setOpacity(0.5);
+            }
+        }
     }
 
     /**
@@ -284,9 +309,6 @@ public class RouteDetailsController {
 
         try {
             controller.setClient(client);
-            System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) currentItemSelected).replaceAll(" ", "_"));
-
-            System.out.println(xml.getPageNames());
 
             controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);//Checks to see if the venue has been favourite by the user
             stage.setScene(scene);
@@ -330,7 +352,12 @@ public class RouteDetailsController {
         stage.setResizable(false);
     }
 
-
+    /**
+     * <p>
+     *     Downloads all of the relevant files for the route and places theme into the GUI
+     * </p>
+     * @throws IOException
+     */
     public void loadRouteData() throws IOException {
         routeName.setText(currRoute);
 
@@ -338,12 +365,9 @@ public class RouteDetailsController {
 
         //Downloads every media element required by the venue xml
 
-        //Text onto the GUI
-        //Gets the text file
-        String textFile = (currRoutePage.getMediaSourceByID("text0"));
-        System.out.println("File: " + textFile);
+        //TEXT
 
-        //TODO crashes if opened more than once due to the file already being downloaded
+        String textFile = (currRoutePage.getMediaSourceByID("text0"));
 
         if(textFile != null) {
 
@@ -356,10 +380,9 @@ public class RouteDetailsController {
         }
 
 
-        //VENUE LIST
-        String venueTextFile = (currRoutePage.getMediaSourceByID("textVenues"));
+        //VENUE LIST TEXT
 
-        System.out.println("Venues text file: " + venueTextFile);
+        String venueTextFile = (currRoutePage.getMediaSourceByID("textVenues"));
 
         if(venueTextFile != null) {
 
@@ -374,6 +397,7 @@ public class RouteDetailsController {
             }
         }
 
+        //IMAGES
 
         int imageIndex = 0;
 
@@ -382,8 +406,6 @@ public class RouteDetailsController {
             String imageFile = (currRoutePage.getMediaSourceByID("map" + imageIndex));
 
             File tempImage = client.requestFile(imageFile);
-
-            System.out.println("This is the file path:" + tempImage);
 
             if(imageIndex == 0) {
                 ImageHandler imageHandler = new ImageHandler(tempImage, routeImage);
@@ -410,8 +432,6 @@ public class RouteDetailsController {
 
         String audioFile = currRoutePage.getMediaSourceByID("audio0");
 
-        System.out.println(audioFile);
-
         if (audioFile != null) {
 
             File tempAudio = client.requestFile(audioFile);
@@ -420,19 +440,31 @@ public class RouteDetailsController {
 
             Stage stage =  new Stage();
 
-            AudioHandler audioHandler = new AudioHandler(tempAudio);
+            audioHandler = new AudioHandler(tempAudio);
 
             audioHandler.load();
 
             audioAnchorPane.getChildren().add(audioHandler);
 
-            System.out.println("Anchor pane children: " + audioAnchorPane.getChildren());
 
+        }
 
+        imageGrid.getChildren().get(0).setOpacity(1);
+
+        for(int i = 1; i<=maxImageIndex; i++) {
+            imageGrid.getChildren().get(i).setOpacity(0.3);
         }
 
     }
 
+    /**
+     * <p>
+     *     Sets the current route page data.
+     * </p>
+     * @param route route name.
+     * @param routePage route page (VenuePage).
+     * @param user user details.
+     */
     public void setCurrRoute(String route, VenuePage routePage, User user) {
         this.currRoute = route;
         this.currRoutePage = routePage;
