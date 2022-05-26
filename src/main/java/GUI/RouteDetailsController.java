@@ -83,11 +83,35 @@ public class RouteDetailsController {
 
     /**
      * <p>
-     *     The audio description of the route
+     *     The grid which holds the rest of the images.
      * </p>
      */
     @FXML
-    Scene routeAudio;
+    GridPane imageGrid;
+
+    /**
+     * <p>
+     *     The left image on the smaller maps
+     * </p>
+     */
+    @FXML
+    ImageView routeImage0;
+
+    /**
+     * <p>
+     *     The middle image on the smaller maps
+     * </p>
+     */
+    @FXML
+    ImageView routeImage1;
+
+    /**
+     * <p>
+     *     The right image on the smaller maps
+     * </p>
+     */
+    @FXML
+    ImageView routeImage2;
 
     /**
      * <p>
@@ -185,16 +209,55 @@ public class RouteDetailsController {
 
     /**
      * <p>
+     *     The index of the current image presented.
+     * </p>
+     */
+    private int currentImageIndex;
+
+    /**
+     * <p>
+     *     The number of map images shown on the screen.
+     * </p>
+     */
+    private int maxImageIndex;
+
+    /**
+     * <p>
      *     Runs at the start of the GUI being opened
      * </p>
      */
     @FXML
     public void initialize() {
+
+        currentImageIndex = 0;
         venuesList.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
                 openSelectedVenue();
             }
         });
+
+
+        routeImage.setOnMouseClicked(click -> {
+            try {
+                changeImageViewed();
+            } catch (IOException e) {
+                System.out.println("Error: Cannot display current image: " + (currentImageIndex+1));
+            }
+        });
+    }
+
+    /**
+     * <p>
+     *     Changes the image viewed at the top.
+     * </p>
+     */
+    private void changeImageViewed() throws IOException {
+        currentImageIndex++;
+        if(currentImageIndex > maxImageIndex) {currentImageIndex = 0;}
+        String imageFile = (currRoutePage.getMediaSourceByID("map" + currentImageIndex));
+        File tempImage = client.getFile(imageFile);
+        ImageHandler imageHandler = new ImageHandler(tempImage, routeImage);
+        imageHandler.load(250, 420);
     }
 
     /**
@@ -273,8 +336,6 @@ public class RouteDetailsController {
 
         xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
-        //TEXT
-        String imageFile = null;
         //Downloads every media element required by the venue xml
 
         //Text onto the GUI
@@ -314,30 +375,36 @@ public class RouteDetailsController {
         }
 
 
-        //IMAGE
-        imageFile = (currRoutePage.getMediaSourceByID("map"));
+        int imageIndex = 0;
 
-        //Making sure that the image file actually exists
-        if (imageFile != null) {
-            //Requests the filepath for the image for
+        while(currRoutePage.getMediaSourceByID("map" + imageIndex) != null) {
+
+            String imageFile = (currRoutePage.getMediaSourceByID("map" + imageIndex));
 
             File tempImage = client.requestFile(imageFile);
 
-            //Sets up the filepath for the image
             System.out.println("This is the file path:" + tempImage);
 
-            //Initialises the image view
-            ImageView imageView = new ImageView();
+            if(imageIndex == 0) {
+                ImageHandler imageHandler = new ImageHandler(tempImage, routeImage);
 
-            //Creates the image handler with the desired image filepath
-            ImageHandler imageHandler = new ImageHandler(tempImage, imageView);
-            // TODO: Look into accessing this value instead of magic number
-            //Loads the image into the GUI
-            imageHandler.load(220, 400);
+                imageHandler.load(250, 420);
+            }
 
-            routeImage.setImage(imageHandler.getCurrImage());
+            ImageView imageViewSmall = new ImageView();
+
+            ImageHandler smallImageHandler = new ImageHandler(tempImage, imageViewSmall);
+
+            imageGrid.add(imageViewSmall, imageIndex, 0);
+
+            smallImageHandler.load(100, 125);
+
+            imageIndex++;
 
         }
+
+        maxImageIndex = imageIndex-1;
+
 
         //AUDIO
 
@@ -349,7 +416,6 @@ public class RouteDetailsController {
 
             File tempAudio = client.requestFile(audioFile);
 
-
             System.out.println("This is the file path:" + tempAudio);
 
             Stage stage =  new Stage();
@@ -357,20 +423,6 @@ public class RouteDetailsController {
             AudioHandler audioHandler = new AudioHandler(tempAudio);
 
             audioHandler.load();
-             /*
-
-
-            Scene scene = new Scene(audioHandler, 400, 40, Color.BLACK);
-
-            stage.setScene(scene);
-            stage.toFront();
-            stage.setTitle("Audio Handler Test");
-
-
-            stage.show();
-            */
-
-            routeAudio = new Scene(audioHandler,  400, 40, Color.BLACK);
 
             audioAnchorPane.getChildren().add(audioHandler);
 
