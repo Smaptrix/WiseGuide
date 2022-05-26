@@ -474,7 +474,7 @@ public class Client {
         //Checks to see if a file has already been downloaded
         //This is so that the same file is not downloaded twice
         if(isFileDownloaded(fileName)){
-            return null;
+            return getFile(fileName);
         }
 
 

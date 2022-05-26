@@ -218,10 +218,6 @@ public class VenueDetailsController {
 
                 File tempTextFile = client.requestFile(textFile);
 
-                if(tempTextFile == null){
-                    tempTextFile = client.getFile(textFile);
-                };
-
                 //Places the text from the text file into the text manager
                 TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
                 //Loads the text onto the GUI
@@ -244,10 +240,7 @@ public class VenueDetailsController {
                    //Requests the filepath for the image for
                     File  tempImageFile = client.requestFile(imageFile);
 
-                    //If the file has already been downloaded request it from the client, not the server
-                    if(tempImageFile == null){
-                        tempImageFile = client.getFile(imageFile);
-                    }
+
 
                     //Initialises the image view
                     ImageView imageView = new ImageView();
