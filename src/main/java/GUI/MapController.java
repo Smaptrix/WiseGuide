@@ -160,6 +160,42 @@ public class MapController {
     private final Point2D cenWest_dusk_min = new Point2D(768, 142);
     private final Point2D cenWest_dusk_max = new Point2D(795, 180);
 
+    private final Point2D cenCen_brew_min = new Point2D(290, 110);
+    private final Point2D cenCen_brew_max = new Point2D(319, 149);
+
+    private final Point2D cenCen_evil_min = new Point2D(503, 107);
+    private final Point2D cenCen_evil_max = new Point2D(529, 143);
+
+    private final Point2D cenCen_cats_min = new Point2D(730, 48);
+    private final Point2D cenCen_cats_max = new Point2D(758, 86);
+
+    private final Point2D cenCen_revs_min = new Point2D(331, 353);
+    private final Point2D cenCen_revs_max = new Point2D(358, 391);
+
+    private final Point2D cenCen_allBarOne_min = new Point2D(432, 340);
+    private final Point2D cenCen_allBarOne_max = new Point2D(459, 369);
+
+    private final Point2D cenCen_dusk_min = new Point2D(454, 296);
+    private final Point2D cenCen_dusk_max = new Point2D(480, 331);
+
+    private final Point2D cenCen_lucky_min = new Point2D(601, 289);
+    private final Point2D cenCen_lucky_max = new Point2D(630, 326);
+
+    private final Point2D cenCen_choc_min = new Point2D(701, 251);
+    private final Point2D cenCen_choc_max = new Point2D(731, 287);
+
+    private final Point2D cenCen_nana_min = new Point2D(710, 322);
+    private final Point2D cenCen_nana_max = new Point2D(739, 359);
+
+    private final Point2D cenCen_nana2_min = new Point2D(522, 322);
+    private final Point2D cenCen_nana2_max = new Point2D(548, 359);
+
+    private final Point2D cenCen_deniz_min = new Point2D(739, 403);
+    private final Point2D cenCen_deniz_max = new Point2D(769, 441);
+
+    private final Point2D cenCen_drift_min = new Point2D(589, 543);
+    private final Point2D cenCen_drift_max = new Point2D(622, 581);
+
     // Getters for all points
     public Point2D getBase_NRM_min() {
         return base_NRM_min;
@@ -509,6 +545,90 @@ public class MapController {
     }
     public Point2D getCenWest_dusk_max() {
         return cenWest_dusk_max;
+    }
+
+    public Point2D getCenCen_brew_min() {
+        return cenCen_brew_min;
+    }
+    public Point2D getCenCen_brew_max() {
+        return cenCen_brew_max;
+    }
+
+    public Point2D getCenCen_evil_min() {
+        return cenCen_evil_min;
+    }
+    public Point2D getCenCen_evil_max() {
+        return cenCen_evil_max;
+    }
+
+    public Point2D getCenCen_cats_min() {
+        return cenCen_cats_min;
+    }
+    public Point2D getCenCen_cats_max() {
+        return cenCen_cats_max;
+    }
+
+    public Point2D getCenCen_revs_min() {
+        return cenCen_revs_min;
+    }
+    public Point2D getCenCen_revs_max() {
+        return cenCen_revs_max;
+    }
+
+    public Point2D getCenCen_allBarOne_min() {
+        return cenCen_allBarOne_min;
+    }
+    public Point2D getCenCen_allBarOne_max() {
+        return cenCen_allBarOne_max;
+    }
+
+    public Point2D getCenCen_dusk_min() {
+        return cenCen_dusk_min;
+    }
+    public Point2D getCenCen_dusk_max() {
+        return cenCen_dusk_max;
+    }
+
+    public Point2D getCenCen_lucky_min() {
+        return cenCen_lucky_min;
+    }
+    public Point2D getCenCen_lucky_max() {
+        return cenCen_lucky_max;
+    }
+
+    public Point2D getCenCen_choc_min() {
+        return cenCen_choc_min;
+    }
+    public Point2D getCenCen_choc_max() {
+        return cenCen_choc_max;
+    }
+
+    public Point2D getCenCen_nana_min() {
+        return cenCen_nana_min;
+    }
+    public Point2D getCenCen_nana_max() {
+        return cenCen_nana_max;
+    }
+
+    public Point2D getCenCen_nana2_min() {
+        return cenCen_nana2_min;
+    }
+    public Point2D getCenCen_nana2_max() {
+        return cenCen_nana2_max;
+    }
+
+    public Point2D getCenCen_deniz_min() {
+        return cenCen_deniz_min;
+    }
+    public Point2D getCenCen_deniz_max() {
+        return cenCen_deniz_max;
+    }
+
+    public Point2D getCenCen_drift_min() {
+        return cenCen_drift_min;
+    }
+    public Point2D getCenCen_drift_max() {
+        return cenCen_drift_max;
     }
 }
 
