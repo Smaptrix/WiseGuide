@@ -3,7 +3,6 @@ package GUI;
 import VenueXMLThings.VenuePage;
 import VenueXMLThings.VenueXMLParser;
 import client.Client;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -25,7 +25,6 @@ import serverclientstuff.User;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 
 public class RouteDetailsController {
 
@@ -88,7 +87,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    Pane routeAudioPane;
+    Scene routeAudio;
 
     /**
      * <p>
@@ -119,6 +118,14 @@ public class RouteDetailsController {
      */
     @FXML
     MenuItem backButton;
+
+    /**
+     * <p>
+     *     Anchor pane which holds the audio description.
+     * </p>
+     */
+    @FXML
+    AnchorPane audioAnchorPane;
 
     /**
      * <p>
@@ -342,15 +349,30 @@ public class RouteDetailsController {
 
             System.out.println("This is the file path:" + tempAudio);
 
+            Stage stage =  new Stage();
+
             AudioHandler audioHandler = new AudioHandler(tempAudio);
 
             audioHandler.load();
+             /*
+
 
             Scene scene = new Scene(audioHandler, 400, 40, Color.BLACK);
 
-            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.toFront();
+            stage.setTitle("Audio Handler Test");
 
-            routeAudioPane = new Pane();
+
+            stage.show();
+            */
+
+            routeAudio = new Scene(audioHandler,  400, 40, Color.BLACK);
+
+            audioAnchorPane.getChildren().add(audioHandler);
+
+            System.out.println("Anchor pane children: " + audioAnchorPane.getChildren());
+
 
         }
 

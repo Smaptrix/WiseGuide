@@ -26,6 +26,9 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.control.TitledPane?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RouteDetailsController">
 
     <VBox fx:id="mainWindow" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -52,23 +55,32 @@
             </HBox.margin>
             </Label>
         </HBox>
-        <HBox prefHeight="300.0" prefWidth="900.0">
-            <ScrollPane prefHeight="200.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                 <ListView fx:id="venuesList" prefHeight="339.0" prefWidth="450.0" />
-            </ScrollPane>
-            <TextArea id="venueText" fx:id="routeText" prefHeight="200.0" prefWidth="450.0">
-                <padding>
-                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                </padding>
-            </TextArea>
-        </HBox>
-        <HBox prefHeight="300.0" prefWidth="900.0">
-             <ImageView fx:id="routeImage" fitHeight="220.0" fitWidth="420.0" pickOnBounds="true" preserveRatio="true">
-                <HBox.margin>
-                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                </HBox.margin>
-             </ImageView>
-             <Pane fx:id="routeAudioPane" prefHeight="200.0" prefWidth="470.0"></Pane>
+        <HBox prefHeight="600.0" prefWidth="900.0">
+            <VBox prefHeight="600.0" prefWidth="450.0">
+                <ImageView fx:id="routeImage" fitHeight="220.0" fitWidth="420.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </HBox.margin>
+                </ImageView>
+                <TitledPane animated="false" prefHeight="300.0" prefWidth="450.0" text="Venues In Route" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <ScrollPane prefHeight="300.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ListView fx:id="venuesList" prefHeight="300.0" prefWidth="450.0" />
+                    </ScrollPane>
+                    <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </HBox.margin>
+                </TitledPane>
+            </VBox>
+            <VBox prefHeight="600.0" prefWidth="450.0">
+                <TitledPane animated="false" prefHeight="200.0" prefWidth="450.0" text="Text Description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <TextArea id="venueText" fx:id="routeText" prefHeight="200.0" prefWidth="450.0">
+                        <padding>
+                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                        </padding>
+                    </TextArea>
+                </TitledPane>
+                <AnchorPane fx:id="audioAnchorPane" prefHeight="300.0" prefWidth="450.0"></AnchorPane>
+            </VBox>
         </HBox>
     </VBox>
 
