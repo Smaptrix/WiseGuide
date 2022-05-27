@@ -435,7 +435,7 @@ public class MainController {
         } else {
             currentItemSelected = selectedItem;
         }
-        // TODO: add an extra scene for loading page
+        // TODO: add an extra scene for loading page - @WILL
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
         Stage stage = new Stage();
@@ -512,8 +512,8 @@ public class MainController {
             selectVenueOnMap();
             if (!Objects.equals(selectedItem, "ignore")) {
                 openSelectedVenue("any");
-
             }
+            selectedItem = null;
         }
     };
 
