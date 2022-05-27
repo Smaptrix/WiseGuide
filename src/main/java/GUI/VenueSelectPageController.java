@@ -11,10 +11,8 @@ import javafx.stage.Stage;
 import serverclientstuff.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.time.Instant;
+import java.util.*;
 
 /**
  * Controls the GUI page that the user can use to have a venue selected for them
@@ -150,6 +148,10 @@ public class VenueSelectPageController {
             //Create the list of drinking venues
             for(String s : listOfPossibleVenues){
 
+
+
+
+
                 //Finds the venues with tags relating to drinkings
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "nightclub")){
                     tempVenueList.add(s);
@@ -171,6 +173,8 @@ public class VenueSelectPageController {
             //Finds venues related to food
             for(String s : listOfPossibleVenues){
 
+
+
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "cafe")){
                     tempVenueList.add(s);
                 }
@@ -191,6 +195,7 @@ public class VenueSelectPageController {
             //Finds venues related to sightseeing
             for(String s : listOfPossibleVenues){
 
+
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "green_space")){
                     tempVenueList.add(s);
                 }
@@ -205,6 +210,7 @@ public class VenueSelectPageController {
 
             //Finds venues related to study spaces
             for (String s : listOfPossibleVenues) {
+
 
                 if (Objects.equals(xml.getPage("title", s).attributes.get("category"), "study_space")) {
                     tempVenueList.add(s);
@@ -222,8 +228,15 @@ public class VenueSelectPageController {
             return false;
         }
 
+        System.out.println("Venues: " + listOfPossibleVenues);
+
+        System.out.println("Temp Venues: " + tempVenueList);
+
+
         //Combines the two lists so that only suitable venues remain
         listOfPossibleVenues.retainAll(tempVenueList);
+
+        System.out.println("Possible Venues: " + listOfPossibleVenues);
 
         if(listOfPossibleVenues.isEmpty()){
             errLabel.setText("You have no favourites of the selected types!");
@@ -286,7 +299,7 @@ public class VenueSelectPageController {
     @FXML
     public void onRandomVenueButtonPress(){
         //Create a random object
-        Random rand = new Random();
+        Random rand = new Random(Instant.now().toEpochMilli());
 
         //Pick a random item from the venue list
         String randomVenue = listOfVenues.get(rand.nextInt(listOfVenues.size()));
