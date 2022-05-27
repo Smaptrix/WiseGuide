@@ -802,7 +802,7 @@ public class Client {
      * <p>
      *     Gives the directory path for the required file
      * </p>
-     * @param fileName name of the file you desire to fine
+     * @param fileName name of the file you desire to find
      * @return the directory path of specified file
      */
     public File getFile(String fileName){
@@ -1089,15 +1089,16 @@ public class Client {
 
     /**
      * <p>
-     *     A testing function used to make the server run the fileExistsTest.
+     *     A testing function used to make the server run tests and return the results.
      * </p>
      */
-    public String requestServerFileCheck() throws IOException {
+    public String requestServerTest(String testToRun) throws IOException {
         sendMessage("TEST",true);
-        sendMessage("fileExistsTest",true);
+        sendMessage(testToRun,true);
         String response = receiveAcknowledgement(true);
         return response;
     }
+
 
 
 }

@@ -583,7 +583,7 @@ public class Server {
         String testToRun = recieveMessageAsString(inStream.read());
         System.out.println("Running server test on " + testToRun);
         switch(testToRun){
-            case "fileExistsTest":
+            case "fileDetectTest":
                 File testFile = new File(System.getProperty("user.dir")+"\\test.txt");
                     if(testFile.exists()){
                         sendResponse("File found",true,true);
@@ -591,6 +591,8 @@ public class Server {
                         sendResponse("File not found",true,true);
                     }
                     break;
+            case "osDetectTest":
+                sendResponse(slashType,true,true);
         }
     }
 
