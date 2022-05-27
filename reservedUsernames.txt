@@ -3,3 +3,4 @@ accountTestUser
 IntTestUser
 accountDeletionTestUser
 test000000
+testUser
