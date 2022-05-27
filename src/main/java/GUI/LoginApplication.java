@@ -17,7 +17,7 @@ import java.io.IOException;
 
 /**
  * <p>
- *     The entry point into the application which opens the login page
+ *     The entry point into the application which opens the login pages
  * </p>
  */
         public class LoginApplication extends Application {
