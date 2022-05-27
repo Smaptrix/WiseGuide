@@ -100,7 +100,7 @@ public class Client {
 
     /**
      * <p>
-     *     symKey is they symmetric key used for communciation between the server & client
+     *     symKey is they symmetric key used for communication between the server and the client
      * </p>
      */
     private SecretKey symKey;

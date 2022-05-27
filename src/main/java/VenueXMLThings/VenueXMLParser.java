@@ -43,7 +43,6 @@ public class VenueXMLParser {
      *     Constructor, takes xml file and returns VenueXMLParser class
      * </p>
      * @param inputFile the name of the xml file
-     * @return VenueXMLParser
      */
     public VenueXMLParser(File inputFile) {
 
@@ -112,7 +111,7 @@ public class VenueXMLParser {
      * @param lon of new venue
      * @param category of new venue
      * @param price of new venue
-     * @throws TransformerException
+     * @throws TransformerException when the document builder is unable to build the document correctly
      */
     public void addPage(String title, String ID, String lat, String lon, String category, String price, String rating) throws TransformerException {
 

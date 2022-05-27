@@ -79,7 +79,7 @@ public class VenuePage {
      * <p>
      *     Returns a list of children node media types (mainly for debugging/testing)
      * </p>
-     * @return List/<String/> of the media children's mediaType
+     * @return A List of Strings containing the media children's mediaType
      */
     public List<String> getChildrenType() {
 
@@ -98,7 +98,7 @@ public class VenuePage {
      *     Gather the child nodes of media type (mainly for debugging/testing)
      * </p>
      * @param mediaType is the type of media "text"/"playable" ect.
-     * @return List/<Integer/> of the index of the media with a given mediaType, returns null if none found
+     * @return the index of the media with a given mediaType, returns null if none found
      */
     public List<Integer> getMediaByType(String mediaType) {
 
