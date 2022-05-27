@@ -62,7 +62,7 @@
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </HBox.margin>
             </MediaView>
-            <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0">
+            <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0" style="-fx-wrap-text: true;">
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>

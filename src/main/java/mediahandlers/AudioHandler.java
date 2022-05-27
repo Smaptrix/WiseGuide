@@ -29,7 +29,7 @@ public class AudioHandler extends BorderPane {
      */
     private MediaPlayer audioPlayer;
 
-    public MediaView audioView;
+    private MediaView audioView;
 
     public Media media;
 

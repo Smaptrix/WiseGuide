@@ -6,7 +6,6 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -15,8 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import mediahandlers.AudioHandler;
 import mediahandlers.ImageHandler;
@@ -55,7 +52,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    VBox mainWindow;
+    private VBox mainWindow;
 
     /**
      * <p>
@@ -63,7 +60,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    Label routeName;
+    private Label routeName;
 
     /**
      * <p>
@@ -71,7 +68,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    TextArea routeText;
+    private TextArea routeText;
 
     /**
      * <p>
@@ -79,7 +76,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    ImageView routeImage;
+    private ImageView routeImage;
 
     /**
      * <p>
@@ -87,7 +84,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    GridPane imageGrid;
+    private GridPane imageGrid;
 
     /**
      * <p>
@@ -95,7 +92,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    ImageView routeImage0;
+    private ImageView routeImage0;
 
     /**
      * <p>
@@ -103,7 +100,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    ImageView routeImage1;
+    private ImageView routeImage1;
 
     /**
      * <p>
@@ -111,21 +108,21 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    ImageView routeImage2;
+    private ImageView routeImage2;
 
     /**
      * <p>
      *     Current Route name
      * </p>
      */
-    String currRoute;
+    private String currRoute;
 
     /**
      * <p>
      *     The page of the current route selected
      * </p>
      */
-    VenuePage currRoutePage;
+    private VenuePage currRoutePage;
 
     /**
      * <p>
@@ -133,7 +130,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    ListView venuesList;
+    private ListView venuesList;
 
     /**
      * <p>
@@ -141,7 +138,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    MenuItem backButton;
+    private MenuItem backButton;
 
     /**
      * <p>
@@ -149,21 +146,21 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    AnchorPane audioAnchorPane;
+    private AnchorPane audioAnchorPane;
 
     /**
      * <p>
      *     The current object selected in the list in the sidebar
      * </p>
      */
-    Object currentItemSelected = new Object();
+    private Object currentItemSelected = new Object();
 
     /**
      * <p>
      *     The currently selected venue in the list in the sidebar
      * </p>
      */
-    String selectedItem;
+    private String selectedItem;
 
     /**
      * <p>
@@ -171,6 +168,21 @@ public class RouteDetailsController {
      * </p>
      */
     private AudioHandler audioHandler;
+
+    /**
+     * <p>
+     *     The index of the current image presented.
+     * </p>
+     */
+    private int currentImageIndex;
+
+    /**
+     * <p>
+     *     The number of map images shown on the screen.
+     * </p>
+     */
+    private int maxImageIndex;
+
 
     /**
      * <p>
@@ -213,7 +225,7 @@ public class RouteDetailsController {
      * </p>
      */
     @FXML
-    public void onBackButtonPress() {
+    private void onBackButtonPress() {
         if(audioHandler != null) {
             audioHandler.pause();
             audioHandler = null;
@@ -222,20 +234,6 @@ public class RouteDetailsController {
         Stage currStage = (Stage) mainWindow.getScene().getWindow();
         currStage.close();
     }
-
-    /**
-     * <p>
-     *     The index of the current image presented.
-     * </p>
-     */
-    private int currentImageIndex;
-
-    /**
-     * <p>
-     *     The number of map images shown on the screen.
-     * </p>
-     */
-    private int maxImageIndex;
 
     /**
      * <p>
@@ -335,7 +333,7 @@ public class RouteDetailsController {
      * @throws IOException If the GUI cannot find the fxml page
      */
     @FXML
-    public void onAboutButtonPress() throws IOException {
+    private void onAboutButtonPress() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("about-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 300);
         Stage stage = new Stage();
