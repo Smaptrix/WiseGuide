@@ -55,7 +55,7 @@ public class MediaBar extends HBox {
 
     /**
      * <p>
-     * Default media control bar constructor.
+     *     Default media control bar constructor.
      * </p>
      *
      * @param play Is the media player object that the bar is built on.
@@ -102,13 +102,11 @@ public class MediaBar extends HBox {
                         player.seek(player.getStartTime());
                         player.play();
                     } else {
-
-                        player.pause();
-
                         PlayButton.setText(">");
+                        player.pause();
                     }
                 }
-                if (status == MediaPlayer.Status.HALTED || status == MediaPlayer.Status.STOPPED || status == MediaPlayer.Status.PAUSED || status == Status.READY) {
+                if (status == MediaPlayer.Status.HALTED || status == MediaPlayer.Status.STOPPED || status == MediaPlayer.Status.PAUSED || status == MediaPlayer.Status.READY) {
                     player.play(); // Start the video
                     PlayButton.setText("||");
                 }
@@ -149,7 +147,7 @@ public class MediaBar extends HBox {
 
     /**
      * <p>
-     * Updates the time slider values.
+     *     Updates the time slider values.
      * </p>
      */
     protected void updatesValues() {

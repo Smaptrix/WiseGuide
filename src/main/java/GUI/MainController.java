@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Accordion;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -67,6 +68,13 @@ public class MainController {
      * </p>
      */
     private String selectedItem;
+
+    /**
+     * <p>
+     *     The currently selected route in the list in the sidebar
+     * </p>
+     */
+    private String selectedRoute;
 
     /**
      * <p>
@@ -132,6 +140,13 @@ public class MainController {
      * </p>
      */
     Object currentItemSelected = new Object();
+
+    /**
+     * <p>
+     *     The current route selected in the list in the sidebar
+     * </p>
+     */
+    Object currentRouteSelected = new Object();
 
     /**
      * <p>
@@ -203,6 +218,94 @@ public class MainController {
 
     /**
      * <p>
+     *     The accordion which holds the collapsable venue types.
+     * </p>
+     */
+    @FXML
+    Accordion venueAccordion;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of bars
+     * </p>
+     */
+    @FXML
+    ListView barsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of cafes
+     * </p>
+     */
+    @FXML
+    ListView cafesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of clubs
+     * </p>
+     */
+    @FXML
+    ListView clubsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of fast food places
+     * </p>
+     */
+    @FXML
+    ListView fastFoodList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of pubs
+     * </p>
+     */
+    @FXML
+    ListView pubsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of restaurants
+     * </p>
+     */
+    @FXML
+    ListView restaurantsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of green spaces
+     * </p>
+     */
+    @FXML
+    ListView greenSpacesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of study spaces
+     * </p>
+     */
+    @FXML
+    ListView studySpacesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of sightseeing places
+     * </p>
+     */
+    @FXML
+    ListView sightseeingList;
+
+    /**
+     * <p>
+     *     The list of  the routes available
+     * </p>
+     */
+    @FXML
+    ListView routesList;
+
+    /**
+     * <p>
      *     The image which displays the current map view
      * </p>
      */
@@ -226,16 +329,62 @@ public class MainController {
     public void initialize() {
 
         mapController = new MapController();
-
         mapView.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent);
 
-        //Defines what happens when you double-click a venue in the venue list
-        venueList.setOnMouseClicked(click -> {
 
+        //Defines what happens when you double-click a venue in the venue list
+        barsList.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
-                openSelectedVenue();
+                openSelectedVenue("bars");
             }
         });
+        clubsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("clubs");
+            }
+        });
+        cafesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("cafes");
+            }
+        });
+        restaurantsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("restaurants");
+            }
+        });
+        fastFoodList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("fastFood");
+            }
+        });
+        pubsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("pubs");
+            }
+        });
+        greenSpacesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("greenSpaces");
+            }
+        });
+        studySpacesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("studySpaces");
+            }
+        });
+        sightseeingList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("sightSeeing");
+            }
+        });
+        routesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedRoute();
+            }
+        });
+
+
     }
 
     /**
@@ -243,11 +392,46 @@ public class MainController {
      *     Opens the Venue Details Page when a venue is selected.
      * </p>
      */
-    protected void openSelectedVenue() {
+    protected void openSelectedVenue(String venueType) {
         //Use ListView's getSelected Item
         if (selectedItem == null) {
-            currentItemSelected = venueList.getSelectionModel()
-                    .getSelectedItem();
+            //System.out.println("Expanded Pane ID: " + venueAccordion.getExpandedPane().getId());
+
+            switch(venueType) {
+                case "clubs":
+                    currentItemSelected = clubsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "bars":
+                    currentItemSelected = barsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "cafes":
+                    currentItemSelected = cafesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "restaurants":
+                    currentItemSelected = restaurantsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "fastFood":
+                    currentItemSelected = fastFoodList.getSelectionModel().getSelectedItem();
+                    break;
+                case "pubs":
+                    currentItemSelected = pubsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "greenSpaces":
+                    currentItemSelected = greenSpacesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "studySpaces":
+                    currentItemSelected = studySpacesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "sightSeeing":
+                    currentItemSelected = sightseeingList.getSelectionModel().getSelectedItem();
+                    break;
+                case "any":
+                    currentItemSelected = venueList.getSelectionModel().getSelectedItem();
+                    break;
+                default:
+                    System.out.println("Error no venue type of " + venueType);
+            }
+
         } else {
             currentItemSelected = selectedItem;
         }
@@ -263,7 +447,8 @@ public class MainController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
+        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) ((String) currentItemSelected)).replaceAll(" ", "_"));
+        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
         //Checks to see if the venue has been favourite by the user
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
@@ -278,6 +463,44 @@ public class MainController {
         }
     }
 
+    /**
+     * <p>
+     *     Opens the route selected in the list
+     * </p>
+     */
+    private void openSelectedRoute() {
+        if(selectedRoute == null) {
+            currentRouteSelected = routesList.getSelectionModel().getSelectedItem();
+        } else {
+            currentRouteSelected = selectedRoute;
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("RouteDetailsPage.fxml"));
+        Stage stage = new Stage();
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 900, 600);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        RouteDetailsController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) ((String) currentRouteSelected)).replaceAll(" ", "_"));
+        //TODO Sort out xml read-ins in controller
+        controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", (String) ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
+        stage.setScene(scene);
+        stage.setTitle((String) currentRouteSelected);
+        stage.show();
+        stage.setResizable(false);
+
+        try {
+            controller.loadRouteData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to get route data");
+        }
+
+    }
+
     //Gets the position of the mouse on a click
     EventHandler<MouseEvent> mouseEvent = new EventHandler<>() {
         @Override
@@ -288,7 +511,7 @@ public class MainController {
             System.out.println(mouseX + " ... " + mouseY);
             selectVenueOnMap();
             if (!Objects.equals(selectedItem, "ignore")) {
-                openSelectedVenue();
+                openSelectedVenue("any");
 
             }
         }
@@ -480,13 +703,13 @@ public class MainController {
 
     private void cenWestMapSelection(Point2D mousePosition) {
         if ((mousePosition.getX() > mapController.getCenWest_popworld_min().getX()) && (mousePosition.getX() < mapController.getCenWest_popworld_max().getX()) && (mousePosition.getY() > mapController.getCenWest_popworld_min().getY()) && (mousePosition.getY() < mapController.getCenWest_popworld_max().getY())) {
-            selectedItem = "Popworld";
+            selectedItem = "Popworld York";
         } else if ((mousePosition.getX() > mapController.getCenWest_salvos_min().getX()) && (mousePosition.getX() < mapController.getCenWest_salvos_max().getX()) && (mousePosition.getY() > mapController.getCenWest_salvos_min().getY()) && (mousePosition.getY() < mapController.getCenWest_salvos_max().getY())) {
             selectedItem = "Club Salvation";
         } else if ((mousePosition.getX() > mapController.getCenWest_flares_min().getX()) && (mousePosition.getX() < mapController.getCenWest_flares_max().getX()) && (mousePosition.getY() > mapController.getCenWest_flares_min().getY()) && (mousePosition.getY() < mapController.getCenWest_flares_max().getY())) {
             selectedItem = "Flares York";
         } else if ((mousePosition.getX() > mapController.getCenWest_revs_min().getX()) && (mousePosition.getX() < mapController.getCenWest_revs_max().getX()) && (mousePosition.getY() > mapController.getCenWest_revs_min().getY()) && (mousePosition.getY() < mapController.getCenWest_revs_max().getY())) {
-            selectedItem = "Flares York";
+            selectedItem = "Revolution York";
         } else if ((mousePosition.getX() > mapController.getCenWest_allBarOne_min().getX()) && (mousePosition.getX() < mapController.getCenWest_allBarOne_max().getX()) && (mousePosition.getY() > mapController.getCenWest_allBarOne_min().getY()) && (mousePosition.getY() < mapController.getCenWest_allBarOne_max().getY())) {
             selectedItem = "All Bar One York";
         } else if ((mousePosition.getX() > mapController.getCenWest_dusk_min().getX()) && (mousePosition.getX() < mapController.getCenWest_dusk_max().getX()) && (mousePosition.getY() > mapController.getCenWest_dusk_min().getY()) && (mousePosition.getY() < mapController.getCenWest_dusk_max().getY())) {
@@ -516,9 +739,9 @@ public class MainController {
         } else if ((mousePosition.getX() > mapController.getCenCen_choc_min().getX()) && (mousePosition.getX() < mapController.getCenCen_choc_max().getX()) && (mousePosition.getY() > mapController.getCenCen_choc_min().getY()) && (mousePosition.getY() < mapController.getCenCen_choc_max().getY())) {
             selectedItem = "York's Chocolate Story";
         } else if ((mousePosition.getX() > mapController.getCenCen_nana_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana_max().getY())) {
-            selectedItem = "Nana Noodle Bar";
+            selectedItem = "NaNa Noodle Bar";
         } else if ((mousePosition.getX() > mapController.getCenCen_nana2_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana2_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana2_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana2_max().getY())) {
-            selectedItem = "Nana Noodle Bar";
+            selectedItem = "NaNa Noodle Bar";
         } else if ((mousePosition.getX() > mapController.getCenCen_deniz_min().getX()) && (mousePosition.getX() < mapController.getCenCen_deniz_max().getX()) && (mousePosition.getY() > mapController.getCenCen_deniz_min().getY()) && (mousePosition.getY() < mapController.getCenCen_deniz_max().getY())) {
             selectedItem = "Deniz Best Kebab";
         } else if ((mousePosition.getX() > mapController.getCenCen_drift_min().getX()) && (mousePosition.getX() < mapController.getCenCen_drift_max().getX()) && (mousePosition.getY() > mapController.getCenCen_drift_min().getY()) && (mousePosition.getY() < mapController.getCenCen_drift_max().getY())) {
@@ -657,7 +880,7 @@ public class MainController {
      *     Loads the list of venues into the listview on the main application
      * </p>
      */
-    protected void loadListOfVenues() {
+    protected void loadListOfVenuesAndRoutes() {
 
 
         //Tries to download the venue lists from the server
@@ -672,7 +895,7 @@ public class MainController {
 
 
         //Provides the controller with the list of venue types it should expect
-        xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
+        xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
         List<String> venueNameList = xml.getPageNames();
 
@@ -683,11 +906,51 @@ public class MainController {
             //Strips the header and final quotation mark from each title
             String stripped_title = s.substring(7, s.length() -1);
 
-            venueList.getItems().add(stripped_title);
+            System.out.println(stripped_title);
+
+            switch(xml.getPage("title", stripped_title).attributes.get("category")) {
+                case "nightclub":
+                    clubsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "bar":
+                    barsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "cafe":
+                    cafesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "restaurant":
+                    restaurantsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "fast_food":
+                    fastFoodList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "pub":
+                    pubsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "green_space":
+                    greenSpacesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "study_space":
+                    studySpacesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "sightseeing":
+                    sightseeingList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "route":
+                    routesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                default:
+                    System.out.println("Error: No category " + xml.getPage("title", stripped_title).attributes.get("category") + " for page " + stripped_title);
+                    break;
+            }
+
+
+            //venueList.getItems().add(stripped_title.replaceAll("_", " "));
 
 
         }
     }
+
 
     /**
      * This opens the user manual which is stored in the Maptrix File Directory on Google Drive

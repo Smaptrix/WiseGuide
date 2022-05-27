@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+        Company Name:   Maptrix
+        Project Name:   WiseGuide
+        Authors:        Will Pitchfork
+        Date Created:   20/02/2022
+        Last Updated:   27/02/2022
+-->
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RouteDetailsController">
+
+    <VBox fx:id="mainWindow" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar>
+            <Menu mnemonicParsing="false" text="File">
+                <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+                <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#onAboutButtonPress" text="About" />
+            </Menu>
+        </MenuBar>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <Button fx:id="goBack" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackButtonPress" prefHeight="45.0" prefWidth="75.0" text="Back">
+                <HBox.margin>
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                </HBox.margin>
+            </Button>
+            <Label id="venueName" fx:id="routeName" alignment="TOP_CENTER" prefWidth="900.0" styleClass="heading1" text="ROUTE NAME" textAlignment="CENTER">
+                <padding>
+                    <Insets bottom="15.0" top="15.0" />
+                </padding>
+            <HBox.margin>
+               <Insets right="110.0" />
+            </HBox.margin>
+            </Label>
+        </HBox>
+        <HBox prefHeight="600.0" prefWidth="900.0">
+            <VBox prefHeight="600.0" prefWidth="440.0">
+                <ImageView fx:id="routeImage" fitHeight="270.0" fitWidth="440.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets bottom="15.0" left="15" right="15.0" top="15.0" />
+                    </HBox.margin>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+                </ImageView>
+                <GridPane fx:id="imageGrid" prefHeight="150" prefWidth="450.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="56.00000000000001" minHeight="10.0" prefHeight="21.333374023437493" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </HBox.margin>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+                </GridPane>
+                <AnchorPane fx:id="audioAnchorPane" prefHeight="150.0" prefWidth="450.0">
+                    <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </HBox.margin>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+                </AnchorPane>
+            </VBox>
+            <VBox prefHeight="600.0" prefWidth="450.0">
+                <TitledPane animated="false" prefHeight="300.0" prefWidth="450.0" text="Text Description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <TextArea id="venueText" fx:id="routeText" prefHeight="200.0" prefWidth="450.0" style="-fx-wrap-text: true;" />
+                    <VBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </VBox.margin>
+                </TitledPane>
+                <TitledPane animated="false" prefHeight="300.0" prefWidth="450.0" text="Venues In Route" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <ScrollPane prefHeight="300.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ListView fx:id="venuesList" prefHeight="172.0" prefWidth="373.0" />
+                    </ScrollPane>
+                    <VBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </VBox.margin>
+                </TitledPane>
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <stylesheets>
+        <URL value="@WiseGuideCSS.css" />
+    </stylesheets>
+</AnchorPane>
