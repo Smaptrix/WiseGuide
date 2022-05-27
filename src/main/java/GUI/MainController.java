@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.Accordion;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,7 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -171,11 +173,43 @@ public class MainController {
 
     /**
      * <p>
+     *     The top menu bar
+     * </p>
+     */
+    @FXML
+    MenuBar menuBar;
+
+    /**
+     * <p>
+     *     The File menu
+     * </p>
+     */
+    @FXML
+    Menu menuBarFile;
+
+    /**
+     * <p>
+     *     The Accounts menu
+     * </p>
+     */
+    @FXML
+    Menu menuBarAccount;
+
+    /**
+     * <p>
+     *     The Help menu
+     * </p>
+     */
+    @FXML
+    Menu menuBarHelp;
+
+    /**
+     * <p>
      *     The button on the menubar which closes the application
      * </p>
      */
     @FXML
-    MenuItem closeButton;
+    public MenuItem closeButton;
 
     /**
      * <p>
@@ -183,7 +217,7 @@ public class MainController {
      * </p>
      */
     @FXML
-    MenuItem accDetailsButton;
+    public MenuItem accDetailsButton;
 
     /**
      * <p>
@@ -191,7 +225,7 @@ public class MainController {
      * </p>
      */
     @FXML
-    MenuItem signOutButton;
+    public MenuItem signOutButton;
 
     /**
      * <p>
@@ -207,7 +241,15 @@ public class MainController {
      * </p>
      */
     @FXML
-    MenuItem aboutButton;
+    public MenuItem aboutButton;
+
+    /**
+     * <p>
+     *     The button on the menubar that allows the user to access the manual
+     * </p>
+     */
+    @FXML
+    public MenuItem manualButton;
 
     /**
      * <p>
@@ -881,7 +923,7 @@ public class MainController {
      *     Loads the list of venues into the listview on the main application
      * </p>
      */
-    protected void loadListOfVenuesAndRoutes() {
+    public void loadListOfVenuesAndRoutes() {
 
 
         //Tries to download the venue lists from the server
