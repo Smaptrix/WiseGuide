@@ -24,12 +24,32 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the Login Screen.
+ * </p>
+ */
 public class LoginApplicationTests extends ApplicationTest {
 
-    /* ===== Tests for Main Login Screen ===== */
-
+    /**
+     * <p>
+     *     The current stage.
+     * </p>
+     */
     private Stage stage;
+
+    /**
+     * <p>
+     *     The login controller.
+     * </p>
+     */
     private LoginController controller;
+
+    /**
+     * <p>
+     *     The current client.
+     * </p>
+     */
     public Client client;
 
     @Override
@@ -57,23 +77,23 @@ public class LoginApplicationTests extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
-    //TODO: Username and Password Labels require IDs to test.
 
     //Unit Test | Confirm "Login" button text is correct.
     @Test
-    public void loginTextTest() {
+    public void loginButtonTextTest() {
         sleep(1000);
         FxAssert.verifyThat("#loginButton", LabeledMatchers.hasText("Login"));
     }
 
-    //Unit Test | Confirm "Create Account" button text is correct.
+    //Unit Test | Confirm "Login" button can be pressed.
     @Test
-    public void createAccountTextTest() {
+    public void loginButtonTest() {
         sleep(1000);
-        FxAssert.verifyThat("#createAccButton", LabeledMatchers.hasText("Create Account"));
+        clickOn("#loginButton");
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    /*Unit Test | Confirm "Exit" button text is correct.
+        /*Unit Test | Confirm "Exit" button text is correct.
     @Test
     //TODO: Exit button no longer exists - remove if not re-adding button.
     public void exitTextTest() {
@@ -82,35 +102,43 @@ public class LoginApplicationTests extends ApplicationTest {
     }
     */
 
-    //Unit Test | Confirm "Login" button can be pressed.
-    @Test
-    public void clickOnLoginTest() {
-        sleep(1000);
-        clickOn("#loginButton");
-        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You have not entered a username!"));
-    }
-
     /*Unit Test | Confirm "Exit" button can be pressed.
     @Test
     //TODO: Exit button no longer exists - remove if not re-adding button.
-    public void clickOnExit() {
+    public void exitTest() {
         sleep(1000);
         clickOn("#exitButton");
         Assert.assertFalse(stage.isShowing());
     }
      */
 
+    //Unit Test | Confirm "Create Account" button text is correct.
+    @Test
+    public void createAccountLoginButtonTextTest() {
+        sleep(1000);
+        FxAssert.verifyThat("#createAccButton", LabeledMatchers.hasText("Create Account"));
+    }
+
+
     //Unit Test | Confirm "Create Account" Button can be pressed.
     @Test
-    public void clickOnCreateAccountTest(){
+    public void createAccountLoginButtonTest(){
         sleep(1000);
         clickOn("#createAccButton");
         FxAssert.verifyThat(window("Account Creation"), WindowMatchers.isShowing());
     }
 
+    //Unit Test | Confirm the username label text is correct.
+    @Test
+    public void loginUsernameLabelTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#usernameLabel",LabeledMatchers.hasText("Username"));
+    }
+
+
     //Unit Test | Confirm text can be entered in username field.
     @Test
-    public void enterMainScreenUsernameTest(){
+    public void enterLoginUsernameTest(){
         sleep(1000);
         clickOn("#usernameTextField");
         sleep(1000);
@@ -119,9 +147,16 @@ public class LoginApplicationTests extends ApplicationTest {
         FxAssert.verifyThat("#usernameTextField", TextInputControlMatchers.hasText("Test"));
     }
 
+    //Unit Test | Confirm the password label text is correct.
+    @Test
+    public void loginPasswordLabelTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#passwordLabel",LabeledMatchers.hasText("Password"));
+    }
+
     //Unit Test | Confirm text can be entered in password field.
     @Test
-    public void enterMainScreenPasswordTest(){
+    public void enterLoginPasswordTest(){
         sleep(1000);
         clickOn("#userPassField");
         sleep(1000);
@@ -132,7 +167,7 @@ public class LoginApplicationTests extends ApplicationTest {
 
     //Unit Test | Confirm that error label is not visible by default.
     @Test
-    public void errorLabelInvisibleTest(){
+    public void loginErrorLabelInvisibleTest(){
         sleep(1000);
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(""));
     }

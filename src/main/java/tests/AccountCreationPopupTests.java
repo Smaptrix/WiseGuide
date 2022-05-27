@@ -19,11 +19,19 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class AccountCreatedPageTests extends ApplicationTest {
+/**
+ * <p>
+ *     Tests for the Account Created Popup.
+ * </p>
+ */
+public class AccountCreationPopupTests extends ApplicationTest {
 
-    /* ===== Tests for Account Created Page ===== */
-
-    private Stage stage; //Reference to JavaFX stage so that window showing status can be checked.
+    /**
+     * <p>
+     *     Reference to JavaFX stage so that window showing status can be checked.
+     * </p>
+     */
+    private Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -46,6 +54,16 @@ public class AccountCreatedPageTests extends ApplicationTest {
         FxToolkit.hideStage();
     }
 
+    //Unit Test | Confirm the popup text is correct.
+    //May require another controller if approached in same way as deletion popup - not a priority to test this right now.
+
+    //Unit Test | Confirm "Okay" button text displays "Okay"
+    @Test
+    public void okayTextTest() {
+        sleep(1000);
+        FxAssert.verifyThat("#closePopupButton", LabeledMatchers.hasText("Okay!"));
+    }
+
     //Unit Test | Confirm "Okay" Button can be pressed.
     @Test
     public void okayButtonTest(){
@@ -53,13 +71,6 @@ public class AccountCreatedPageTests extends ApplicationTest {
         clickOn("#closePopupButton");
         //FxAssert.verifyThat(window("Account Created"), WindowMatchers.isNotShowing()); --This method does not work as it can't find a window w/o a title.
         Assert.assertFalse(stage.isShowing());
-    }
-
-    //Unit Test | Confirm "Okay" button text displays "Okay"
-    @Test
-    public void okayTextTest() {
-        sleep(1000);
-        FxAssert.verifyThat("#closePopupButton", LabeledMatchers.hasText("Okay!"));
     }
 
 }
