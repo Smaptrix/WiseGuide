@@ -73,7 +73,7 @@ public class Server {
      *     The current directory of the program
      * </p>
      */
-    private String CurrDir;
+    private String currDir;
     /**
      * <p>
      *           The slash direction - used regarding file transfer
@@ -180,7 +180,7 @@ public class Server {
         //System.out.println("Private: " + privateKey);
 
         //Gets the current server key directory
-        String keyDirectory = CurrDir + "\\serverkeys";
+        String keyDirectory = currDir + "\\serverkeys";
 
         //Writes the public key to a file
         serverPublicKey = new File(keyDirectory + "\\serverpubkey.pub");
@@ -385,7 +385,7 @@ public class Server {
      */
     private void osDetect(){
         //Stores the current directory that the application was launched from
-        CurrDir = System.getProperty("user.dir");
+        currDir = System.getProperty("user.dir");
         String operatingSys = System.getProperty("os.name");
 
         //Determines the slash type (back or forward) for file systems on unix/non-unix systems.
@@ -491,7 +491,7 @@ public class Server {
             case "GET":
 
                 //Should send file stored at the location of the current directory with the filename provided
-                sendFile(Path.of((CurrDir + slashType + requestSplit[1])), true);
+                sendFile(Path.of((currDir + slashType + requestSplit[1])), true);
 
                 break;
             case "ECHO":
@@ -560,8 +560,6 @@ public class Server {
                 favouriteNewVenue();
                 break;
 
-
-
             case "UNFAVEVENUE":
                 currUserHandler.setUserType("USER");
                     unfavouriteVenue();
@@ -571,13 +569,28 @@ public class Server {
                 currUserHandler.setUserType("USER");
                     sendFaveVenueList();
                     break;
-
-
-
+            case "TEST":
+                runServerTest();
+                    break;
             default:
                 System.out.println(requestIn + " : Invalid command");
                 sendResponse("Error 404: Request Code '" + requestIn + "' Not Found", false, true);
                 break;
+        }
+    }
+
+    private void runServerTest() throws IOException {
+        String testToRun = recieveMessageAsString(inStream.read());
+        System.out.println("Running server test on " + testToRun);
+        switch(testToRun){
+            case "fileExistsTest":
+                File testFile = new File(System.getProperty("user.dir")+"\\test.txt");
+                    if(testFile.exists()){
+                        sendResponse("File found",true,true);
+                    } else {
+                        sendResponse("File not found",true,true);
+                    }
+                    break;
         }
     }
 

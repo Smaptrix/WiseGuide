@@ -149,8 +149,6 @@ public class Client {
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
 
-
-
             //Get the servers public key
             getServerEncryption();
 
@@ -160,17 +158,14 @@ public class Client {
             //Sends the encrypted symmetric key to the server
             sendSymmetricKey();
 
-
             //Makes sure that the server and client are able to encrypt/decrypt messages
             if(!keyValidation()){
                 System.out.println("Key validation failed... Shutting down");
                 System.exit(-1);
-
             }
 
             //Verify that the server and client are running on the same version
             sameVersion = versionCheck();
-
 
             //Once everything is booted and checked the client registers as connected
             connected = true;
@@ -1090,6 +1085,18 @@ public class Client {
             }
         }
 
+    }
+
+    /**
+     * <p>
+     *     A testing function used to make the server run the fileExistsTest.
+     * </p>
+     */
+    public String requestServerFileCheck() throws IOException {
+        sendMessage("TEST",true);
+        sendMessage("fileExistsTest",true);
+        String response = receiveAcknowledgement(true);
+        return response;
     }
 
 
