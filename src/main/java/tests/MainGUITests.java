@@ -1,12 +1,10 @@
 package tests;
 
-import GUI.LoginApplication;
 import GUI.MainApplication;
 import GUI.MainController;
 import client.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -22,14 +20,11 @@ import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import serverclientstuff.User;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.concurrent.TimeoutException;
 
 public class MainGUITests extends ApplicationTest {
 
-    private Client client;
     private MainController controller;
     User testUser = new User("testUser","testUserPass");
 
@@ -40,12 +35,13 @@ public class MainGUITests extends ApplicationTest {
         controller = fxmlLoader.getController();
         stage.setScene(scene);
         stage.show();
+        stage.setTitle("WiseGuide by Maptrix");
         stage.setResizable(false);
     }
 
     @Before
     public void setUpClass() throws IOException {
-        client = new Client(); // Creates new instance of client object
+        Client client = new Client(); // Creates new instance of client object
         client.startConnection("127.0.0.1", 5555);
         controller.setClient(client);
         controller.setUser(testUser);
@@ -69,8 +65,12 @@ public class MainGUITests extends ApplicationTest {
     }
 
     @Test
-    public void idleTest(){
-        sleep(50000);
+    //Unit Test | Verify that the interface opens.
+    public void openInterfaceTest(){
+        FxAssert.verifyThat(window("WiseGuide by Maptrix"), WindowMatchers.isShowing());
+
+        //Uncomment to pause for 50k ms after opening - allows for easy manual testing if needed.
+        //sleep(50000);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class MainGUITests extends ApplicationTest {
         sleep(1000);
         clickOn("#menuBarFile");
         clickOn("#closeButton");
-        FxAssert.verifyThat(window("WiseGuide by Maptrix - " + client.getCurrVersion()), WindowMatchers.isNotShowing());
+        FxAssert.verifyThat(window("WiseGuide by Maptrix"), WindowMatchers.isNotShowing());
     }
     */
 
@@ -108,6 +108,7 @@ public class MainGUITests extends ApplicationTest {
         sleep(1000);
         clickOn("#menuBarAccount");
         FxAssert.verifyThat("#accDetailsButton", Node::isVisible);
+        FxAssert.verifyThat("#signOutButton", Node::isVisible);
     }
 
     @Test
@@ -139,6 +140,15 @@ public class MainGUITests extends ApplicationTest {
     }
 
     @Test
+    //Unit Test | Verify that clicking "Help" opens the accounts menu.
+    public void menuBarHelpTest(){
+        sleep(1000);
+        clickOn("#menuBarHelp");
+        FxAssert.verifyThat("#aboutButton", Node::isVisible);
+        FxAssert.verifyThat("#manualButton", Node::isVisible);
+    }
+
+    @Test
     //Unit Test | Verify that the help menu texts are correct.
     public void menuBarHelpTextTest(){
         sleep(1000);
@@ -152,7 +162,7 @@ public class MainGUITests extends ApplicationTest {
     @Test
     public void aboutPageOpenTest(){
         sleep(1000);
-        clickOn("#menuBarHelpButton").clickOn("#aboutButton");
+        clickOn("#menuBarHelp").clickOn("#aboutButton");
         FxAssert.verifyThat(window("About Page"), WindowMatchers.isShowing());
     }
 

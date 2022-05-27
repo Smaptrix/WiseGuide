@@ -154,7 +154,7 @@ public class MainApplicationIntegrationTest extends ApplicationTest {
 
 
         //Open the about page
-        clickOn("#menuBarHelpButton").clickOn("#aboutButton");
+        clickOn("#menuBarHelp").clickOn("#aboutButton");
 
 
         //Verify that the about page is open
