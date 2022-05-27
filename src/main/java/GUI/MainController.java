@@ -729,7 +729,7 @@ public class MainController {
         } else if ((mousePosition.getX() > mapController.getCenCen_cats_min().getX()) && (mousePosition.getX() < mapController.getCenCen_cats_max().getX()) && (mousePosition.getY() > mapController.getCenCen_cats_min().getY()) && (mousePosition.getY() < mapController.getCenCen_cats_max().getY())) {
             selectedItem = "The Cat's Whiskers";
         } else if ((mousePosition.getX() > mapController.getCenCen_revs_min().getX()) && (mousePosition.getX() < mapController.getCenCen_revs_max().getX()) && (mousePosition.getY() > mapController.getCenCen_revs_min().getY()) && (mousePosition.getY() < mapController.getCenCen_revs_max().getY())) {
-            selectedItem = "Flares York";
+            selectedItem = "Revolution York";
         } else if ((mousePosition.getX() > mapController.getCenCen_allBarOne_min().getX()) && (mousePosition.getX() < mapController.getCenCen_allBarOne_max().getX()) && (mousePosition.getY() > mapController.getCenCen_allBarOne_min().getY()) && (mousePosition.getY() < mapController.getCenCen_allBarOne_max().getY())) {
             selectedItem = "All Bar One York";
         } else if ((mousePosition.getX() > mapController.getCenCen_dusk_min().getX()) && (mousePosition.getX() < mapController.getCenCen_dusk_max().getX()) && (mousePosition.getY() > mapController.getCenCen_dusk_min().getY()) && (mousePosition.getY() < mapController.getCenCen_dusk_max().getY())) {
