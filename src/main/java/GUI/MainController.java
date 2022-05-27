@@ -703,13 +703,13 @@ public class MainController {
 
     private void cenWestMapSelection(Point2D mousePosition) {
         if ((mousePosition.getX() > mapController.getCenWest_popworld_min().getX()) && (mousePosition.getX() < mapController.getCenWest_popworld_max().getX()) && (mousePosition.getY() > mapController.getCenWest_popworld_min().getY()) && (mousePosition.getY() < mapController.getCenWest_popworld_max().getY())) {
-            selectedItem = "Popworld";
+            selectedItem = "Popworld York";
         } else if ((mousePosition.getX() > mapController.getCenWest_salvos_min().getX()) && (mousePosition.getX() < mapController.getCenWest_salvos_max().getX()) && (mousePosition.getY() > mapController.getCenWest_salvos_min().getY()) && (mousePosition.getY() < mapController.getCenWest_salvos_max().getY())) {
             selectedItem = "Club Salvation";
         } else if ((mousePosition.getX() > mapController.getCenWest_flares_min().getX()) && (mousePosition.getX() < mapController.getCenWest_flares_max().getX()) && (mousePosition.getY() > mapController.getCenWest_flares_min().getY()) && (mousePosition.getY() < mapController.getCenWest_flares_max().getY())) {
             selectedItem = "Flares York";
         } else if ((mousePosition.getX() > mapController.getCenWest_revs_min().getX()) && (mousePosition.getX() < mapController.getCenWest_revs_max().getX()) && (mousePosition.getY() > mapController.getCenWest_revs_min().getY()) && (mousePosition.getY() < mapController.getCenWest_revs_max().getY())) {
-            selectedItem = "Flares York";
+            selectedItem = "Revolution York";
         } else if ((mousePosition.getX() > mapController.getCenWest_allBarOne_min().getX()) && (mousePosition.getX() < mapController.getCenWest_allBarOne_max().getX()) && (mousePosition.getY() > mapController.getCenWest_allBarOne_min().getY()) && (mousePosition.getY() < mapController.getCenWest_allBarOne_max().getY())) {
             selectedItem = "All Bar One York";
         } else if ((mousePosition.getX() > mapController.getCenWest_dusk_min().getX()) && (mousePosition.getX() < mapController.getCenWest_dusk_max().getX()) && (mousePosition.getY() > mapController.getCenWest_dusk_min().getY()) && (mousePosition.getY() < mapController.getCenWest_dusk_max().getY())) {
@@ -739,9 +739,9 @@ public class MainController {
         } else if ((mousePosition.getX() > mapController.getCenCen_choc_min().getX()) && (mousePosition.getX() < mapController.getCenCen_choc_max().getX()) && (mousePosition.getY() > mapController.getCenCen_choc_min().getY()) && (mousePosition.getY() < mapController.getCenCen_choc_max().getY())) {
             selectedItem = "York's Chocolate Story";
         } else if ((mousePosition.getX() > mapController.getCenCen_nana_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana_max().getY())) {
-            selectedItem = "Nana Noodle Bar";
+            selectedItem = "NaNa Noodle Bar";
         } else if ((mousePosition.getX() > mapController.getCenCen_nana2_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana2_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana2_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana2_max().getY())) {
-            selectedItem = "Nana Noodle Bar";
+            selectedItem = "NaNa Noodle Bar";
         } else if ((mousePosition.getX() > mapController.getCenCen_deniz_min().getX()) && (mousePosition.getX() < mapController.getCenCen_deniz_max().getX()) && (mousePosition.getY() > mapController.getCenCen_deniz_min().getY()) && (mousePosition.getY() < mapController.getCenCen_deniz_max().getY())) {
             selectedItem = "Deniz Best Kebab";
         } else if ((mousePosition.getX() > mapController.getCenCen_drift_min().getX()) && (mousePosition.getX() < mapController.getCenCen_drift_max().getX()) && (mousePosition.getY() > mapController.getCenCen_drift_min().getY()) && (mousePosition.getY() < mapController.getCenCen_drift_max().getY())) {
