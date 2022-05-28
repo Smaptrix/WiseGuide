@@ -545,4 +545,20 @@ public class VenueDetailsController {
             System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
         }
     }
+
+    public void altText0() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("altTextPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 400, 300);
+        Stage stage = new Stage();
+
+        altTextController controller = fxmlLoader.getController();
+
+
+        System.out.println("Opening altText page");
+
+        stage.setTitle("Alt Text Page");
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);
+    }
 }

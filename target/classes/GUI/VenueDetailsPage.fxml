@@ -89,7 +89,7 @@
                <ImageView fx:id="venueImage3" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
                <ImageView fx:id="venueImage4" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <ImageView fx:id="venueImage5" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#openAltText1">
+               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#altText0">
                    <Image url="@InfoLogo.png" />
                   <GridPane.margin>
                      <Insets left="100.0" top="70.0" />
