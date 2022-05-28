@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  *     Tests for the Server/Client Connection
  * </p>
  */
-public class ServerClientTest {
+public class ServerClientTests {
 
     //TODO - change tests and current saved user info
 

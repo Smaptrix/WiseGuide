@@ -949,7 +949,7 @@ public class Server {
     private void logout() {
 
         //deletes the current information regarding the user
-        //Guarantees that the server wont accidently stick on
+        //Guarantees that the server wont accidentally stick on
         //Have to be careful because this makes things null
         currUser.clear();
         currUserHandler.clear();

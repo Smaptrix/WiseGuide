@@ -10,6 +10,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import server.ServerUserHandler;
 import serverclientstuff.User;
 
+import javax.imageio.IIOException;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -191,5 +192,86 @@ public class AccountsSystemTests extends ApplicationTest {
 
     }
  */
+
+    /*
+    Does not work despite password being correct? Suspect it's something to do with the hashing stuff.
+
+    @Test
+    //Integration Test | Confirm users can be verified via server/client
+    public void verifyViaClientTest() throws IOException {
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+
+        String username = "test";
+        String password = "12345";
+        User user = new User(username,password);
+        String response = client.verifyUser(user);
+        System.out.println(response);
+    }
+    */
+
+    @Test
+    //Integration Test | Confirm users can login via server/client
+    public void loginViaClientTest() throws IOException {
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        String username = "test";
+        String password = "12345";
+        User user = new User(username,password);
+        String response = client.requestLogin(user);
+        assertEquals("GOODLOGIN",response);
+    }
+
+    @Test
+    //Integration Test | Confirm users with incorrect details can't login via server/client
+    public void noLoginViaClientTest() throws IOException {
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        String username = "test";
+        String password = "123456";
+        User user = new User(username,password);
+        String response = client.requestLogin(user);
+        assertEquals("BADLOGIN",response);
+    }
+
+    @Test
+    //Integration Test | Confirm users can be created via server/client
+    public void createViaClientTest() throws IOException{
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        String username = "makeme!";
+        String password = "password";
+        User user = new User(username,password);
+        String response = client.createUser(user);
+        assertEquals("USERCREATED",response);
+
+        //Delete makeme over server/client when done
+        client.deleteUser(user);
+    }
+
+    @Test
+    //Integration Test | Confirm an existing user can't be created via server/client
+    public void doNotCreateViaClientTest() throws IOException{
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        String username = "test";
+        String password = "12345";
+        User user = new User(username,password);
+        String response = client.createUser(user);
+        assertEquals("USERALREADYEXISTS",response);
+    }
+
+    @Test
+    //Integration Test | Confirm the user can log out
+    public void logOutTest() throws IOException{
+        Client client = new Client();
+        client.startConnection("127.0.0.1", 5555);
+        String username = "test";
+        String password = "12345";
+        User user = new User(username,password);
+        assertEquals("GOODLOGIN",client.requestLogin(user));
+        String response = client.requestLogout();
+        assertEquals("LOGGEDOUT",response);
+    }
 
 }
