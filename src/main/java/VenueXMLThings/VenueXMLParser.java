@@ -85,7 +85,7 @@ public class VenueXMLParser {
      * <p>
      *     Searches for a requested page based on title/ID
      * </p>
-     * @param indexType can be "title" or "id"
+     * @param indexType can be "title" or "ID"
      * @param index the title/id value
      * @return Returns a new page based on the title or ID, where there is no page with title or ID, returns null
      */

@@ -180,21 +180,6 @@ public class AccountsSystemTests extends ApplicationTest {
         assertEquals("USERNOTFOUND", client.verifyUser(test));
 
     }
-
-    @Test
-    //Integration Test | Confirm users can be verified via server/client. (Somewhat defunct)
-    public void verifyViaClientTest() throws IOException {
-        Client client = new Client();
-        client.startConnection("127.0.0.1", 5555);
-
-        String username = "test";
-        String password = "12345";
-        User user = new User(username,password);
-        user.setSalt("fb58b47c3b3f759080cff1a2883f1f97");
-        String response = client.verifyUser(user);
-        System.out.println(response);
-    }
-
      */
 
     @Test
