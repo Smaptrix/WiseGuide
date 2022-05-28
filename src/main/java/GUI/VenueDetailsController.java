@@ -543,16 +543,6 @@ public class VenueDetailsController {
             currUser.setFaveVenues(faveVenues.toArray(new String[0]));
 
             System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
-
-
         }
-
-
     }
-
-
-
-
-
-
 }
