@@ -22,23 +22,23 @@
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares1.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="40" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares1.txt" ID="altText0"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares1.txt" ID="altText0"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares2.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares2.txt" ID="altText1"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares2.txt" ID="altText1"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares3.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares3.txt" ID="altText2"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares3.txt" ID="altText2"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares4.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image3" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares4.txt" ID="altText3"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares4.txt" ID="altText3"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares5.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image4" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares5.txt" ID="altText4"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares5.txt" ID="altText4"/>
         </base:shape>
         <base:playable include_source="Venues/Clubs/Flares_York/FlaresVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
         <!--

@@ -83,58 +83,64 @@
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>
             <children>
-               <ImageView fx:id="venueImage0" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
-               <ImageView fx:id="venueImage1" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-               <ImageView fx:id="venueImage2" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-               <ImageView fx:id="venueImage3" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-               <ImageView fx:id="venueImage4" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               <ImageView fx:id="venueImage5" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#altText0">
+                <ImageView fx:id="venueImage0" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="venueImage1" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                <ImageView fx:id="venueImage2" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                <ImageView fx:id="venueImage3" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                <ImageView fx:id="venueImage4" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ImageView fx:id="venueImage5" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextArea fx:id="image0AltText" prefHeight="200.0" prefWidth="200.0" editable="false"/>
+                <TextArea fx:id="image1AltText" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" editable="false"/>
+                <TextArea fx:id="image2AltText" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" editable="false"/>
+                <TextArea fx:id="image3AltText" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" editable="false"/>
+                <TextArea fx:id="image4AltText" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false"/>
+                <TextArea fx:id="image5AltText" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" editable="false"/>
+                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#altText0" pickOnBounds="true" preserveRatio="true">
                    <Image url="@InfoLogo.png" />
                   <GridPane.margin>
                      <Insets left="100.0" top="70.0" />
                   </GridPane.margin>
-               </ImageView>
-               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="125.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                  <image>
-                     <Image url="@InfoLogo.png" />
-                  </image>
-                  <GridPane.margin>
-                     <Insets left="100.0" top="70.0" />
-                  </GridPane.margin>
-               </ImageView>
-               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="155.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                  <image>
-                     <Image url="@InfoLogo.png" />
-                  </image>
-                  <GridPane.margin>
-                     <Insets left="100.0" top="70.0" />
-                  </GridPane.margin>
-               </ImageView>
-               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="155.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                  <image>
-                     <Image url="@InfoLogo.png" />
-                  </image>
-                  <GridPane.margin>
-                     <Insets left="100.0" top="70.0" />
-                  </GridPane.margin>
-               </ImageView>
-               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                  <image>
-                     <Image url="@InfoLogo.png" />
-                  </image>
-                  <GridPane.margin>
-                     <Insets left="100.0" top="70.0" />
-                  </GridPane.margin>
-               </ImageView>
-               <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="155.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                  <image>
-                     <Image url="@InfoLogo.png" />
-                  </image>
-                  <GridPane.margin>
-                     <Insets left="100.0" top="70.0" />
-                  </GridPane.margin>
-               </ImageView>
+                </ImageView>
+                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="125.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                   <image>
+                      <Image url="@InfoLogo.png" />
+                   </image>
+                   <GridPane.margin>
+                      <Insets left="100.0" top="70.0" />
+                   </GridPane.margin>
+                </ImageView>
+                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="155.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                   <image>
+                      <Image url="@InfoLogo.png" />
+                   </image>
+                   <GridPane.margin>
+                      <Insets left="100.0" top="70.0" />
+                   </GridPane.margin>
+                </ImageView>
+                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="155.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                   <image>
+                      <Image url="@InfoLogo.png" />
+                   </image>
+                   <GridPane.margin>
+                      <Insets left="100.0" top="70.0" />
+                   </GridPane.margin>
+                </ImageView>
+                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                   <image>
+                      <Image url="@InfoLogo.png" />
+                   </image>
+                   <GridPane.margin>
+                      <Insets left="100.0" top="70.0" />
+                   </GridPane.margin>
+                </ImageView>
+                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" layoutX="155.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                   <image>
+                      <Image url="@InfoLogo.png" />
+                   </image>
+                   <GridPane.margin>
+                      <Insets left="100.0" top="70.0" />
+                   </GridPane.margin>
+                </ImageView>
             </children>
             </GridPane>
             <VBox prefHeight="200.0" prefWidth="470.0">

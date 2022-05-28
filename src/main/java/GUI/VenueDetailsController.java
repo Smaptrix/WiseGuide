@@ -12,6 +12,7 @@ import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
@@ -185,12 +188,23 @@ public class VenueDetailsController {
     public Group priceGroup;
     @FXML
     public Group ratingGroup;
+    @FXML
+    public TextArea image0AltText;
+    @FXML
+    public TextArea image1AltText;
+    @FXML
+    public TextArea image2AltText;
+    @FXML
+    public TextArea image3AltText;
+    @FXML
+    public TextArea image4AltText;
+    @FXML
+    public TextArea image5AltText;
 
     @FXML
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
-
     }
 
     /**
@@ -413,6 +427,13 @@ public class VenueDetailsController {
         ratingGroup.getChildren().add(triangle3);
         ratingGroup.getChildren().add(triangle4);
         ratingGroup.getChildren().add(triangle5);
+
+        image0AltText.setVisible(false);
+        image1AltText.setVisible(false);
+        image2AltText.setVisible(false);
+        image3AltText.setVisible(false);
+        image4AltText.setVisible(false);
+        image5AltText.setVisible(false);
     }
 
     /**
@@ -547,18 +568,25 @@ public class VenueDetailsController {
     }
 
     public void altText0() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("altTextPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 300);
-        Stage stage = new Stage();
+        if (image0AltText.isVisible()) {
+            image0AltText.setVisible(false);
+            System.out.println("Hiding altText");
+        } else {
+            image0AltText.setVisible(true);
+            System.out.println("Displaying altText");
+        }
 
-        altTextController controller = fxmlLoader.getController();
+        //Gets the text file
+        String textFile = (currVenuePage.getMediaSourceByID("altText0"));
+        System.out.println("File: " + textFile);
+
+        File tempTextFile = client.requestFile(textFile);
+
+        //Places the text from the text file into the text manager
+        TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+        //Loads the text onto the GUI
+        image0AltText.setText(textManager.loadTextFromFile());
 
 
-        System.out.println("Opening altText page");
-
-        stage.setTitle("Alt Text Page");
-        stage.setScene(scene);
-        stage.show();
-        stage.setResizable(false);
     }
 }
