@@ -126,7 +126,8 @@ public class VenueXMLParser {
         newPage.setAttribute("category", category);
         newPage.setAttribute("price", price);
         newPage.setAttribute("raiting", rating);
-
+        //TODO: Typo in "rating" - added pages won't be able to show their rating. Don't know where this is used so
+        // leaving it for now to avoid breaking anything, but thought it was worth pointing out.
         root.appendChild(newPage);
         numberOfPages++;
 
