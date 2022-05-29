@@ -195,8 +195,7 @@ public class VenueLoginApplicationTest extends ApplicationTest {
     //SO YOU NEED TO COMMENT ONE OUT THEN RUN THE TESTS
     //THEY DO BOTH WORK THOUGH
 
-   /*
-    //Unit/Intergration Test | Making sure that incorrect user data is confirmed by an error label
+    //Integration Test | Making sure that incorrect user data is confirmed by an error label
     //Requires connection with the server
     @Test
     public void incorrectLoginEntryTest() throws IOException {
@@ -217,10 +216,9 @@ public class VenueLoginApplicationTest extends ApplicationTest {
         clickOn("#loginButton");
         FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("Unrecognised Venue Details"));
     }
-*/
 
 
-    //Unit/Intergration Test | Making sure that correct user data logs you on to the Venue Owner Main Page
+    //Integration Test | Making sure that correct user data logs you on to the Venue Owner Main Page
     @Test
     public void correctLoginEntryTest() throws IOException {
 
