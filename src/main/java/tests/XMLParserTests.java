@@ -25,8 +25,25 @@ public class XMLParserTests extends ApplicationTest {
 
     @After
     public void afterEachTest() throws TransformerException {
+        System.out.println("[CLEANUP] Checking for newly created test page...");
         if(xml.getPage("title","testPage") != null){
             xml.removePage("title","testPage");
+        }
+    }
+
+    @Test
+    //unit Test | Confirm the XML file is read in correctly.
+    public void readInTest(){
+        File venueLocations = new File("venuesLocation_forTesting.xml");
+        xml = new VenueXMLParser(venueLocations);
+        Assert.assertEquals(41,xml.numberOfPages);
+    }
+
+    @Test
+    public void searchEveryPage() {
+        for(String name : xml.getPageNames()) {
+            name = name.replaceAll("title=\"", "").replaceAll("\"", "");
+            Assert.assertNotEquals(xml.getPage("title", name), null);
         }
     }
 
@@ -34,7 +51,6 @@ public class XMLParserTests extends ApplicationTest {
     //Unit Test | Confirm the page names are stored correctly.
     //This is very inefficient, but works for now.
     public void pageNamesTest(){
-        client = new Client();
         File venueLocations = new File("venuesLocation_forTesting.xml");
         xml = new VenueXMLParser(venueLocations);
         List<String> venueList = xml.getPageNames();
@@ -47,7 +63,6 @@ public class XMLParserTests extends ApplicationTest {
     @Test
     //Unit Test | Confirm venue pages can be retrieved by title.
     public void getVenueByTitleTest(){
-        client = new Client();
         File venueLocations = new File("venuesLocation_forTesting.xml");
         xml = new VenueXMLParser(venueLocations);
         VenuePage testVenue = xml.getPage("title","Flares_York");
@@ -57,7 +72,6 @@ public class XMLParserTests extends ApplicationTest {
     @Test
     //Unit Test | Confirm venue pages can be retrieved by ID.
     public void getVenueByIDTest(){
-        client = new Client();
         File venueLocations = new File("venuesLocation_forTesting.xml");
         xml = new VenueXMLParser(venueLocations);
         VenuePage testVenue = xml.getPage("ID","001");
@@ -67,42 +81,52 @@ public class XMLParserTests extends ApplicationTest {
     @Test
     //Unit Test | Confirm new pages can be added to the XML File.
     public void addNewPageTest() throws TransformerException {
-        client = new Client();
         File venueLocations = new File("venuesLocation_forTesting.xml");
         xml = new VenueXMLParser(venueLocations);
-        xml.addPage("testPage","999","0.000","0.000","nightclub","2","4");
+        xml.addPage("testPage","testID","testLat","testLong","testCategory","testPrice","testRating");
         Assert.assertNotNull(xml.getPage("title","testPage"));
     }
 
     @Test
     //Unit Test | Confirm pages can be removed from the XML File.
     public void removePageTest() throws TransformerException {
-        client = new Client();
         File venueLocations = new File("venuesLocation_forTesting.xml");
         xml = new VenueXMLParser(venueLocations);
-
+        System.out.println("Checking for test page...");
         if(xml.getPage("title","testPage") == null){
-            xml.addPage("testPage","999","0.000","0.000","nightclub","2","4");
+            xml.addPage("testPage","testID","testLat","testLong","testCategory","testPrice","testRating");
         }
 
         Assert.assertNotNull(xml.getPage("title","testPage"));
-        xml.removePage("title","testPage");
+        System.out.println("Checking test page was deleted...");
+        int result = xml.removePage("title","testPage");
+        Assert.assertEquals(1,result);
         Assert.assertNull(xml.getPage("title","testPage"));
     }
 
     @Test
     //Unit Test | Confirm page attributes can be modified.
-    public void changeAttributeTest() throws TransformerException {
-        client = new Client();
+    public void changeNewAttributeTest() throws TransformerException {
         File venueLocations = new File("venuesLocation_forTesting.xml");
         xml = new VenueXMLParser(venueLocations);
         if(xml.getPage("title","testPage") == null){
-            xml.addPage("testPage","999","0.000","0.000","nightclub","2","4");
+            xml.addPage("testPage","testID","testLat","testLong","testCategory","testPrice","testRating");
         }
-        xml.changeAttribute("title","testPage","price","1");
+        int result = xml.changeAttribute("title","testPage","price","1");
+        Assert.assertEquals(1,result);
         VenuePage testVenue = xml.getPage("title","testPage");
         String price = testVenue.attributes.get("price");
         Assert.assertEquals(price,"1");
+    }
+
+    @Test
+    //Unit Test | Confirm page attributes can be modified for existing pages.
+    public void changeOldAttributeTest() throws TransformerException {
+        File venueLocations = new File("venuesLocation_forTesting.xml");
+        xml = new VenueXMLParser(venueLocations);
+        String oldLatitude = xml.getPage("title", "Flares_York").attributes.get("lat");
+        Assert.assertEquals(xml.changeAttribute("title", "Flares_York", "lat", "newLat"), 1);
+        Assert.assertEquals(xml.changeAttribute("title", "Flares_York", "lat", oldLatitude), 1);
     }
 
     //TODO
