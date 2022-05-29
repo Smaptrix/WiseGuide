@@ -122,8 +122,23 @@ public class VenueSelectPageController {
         //Create a copy of the list of venues so that it isn't edited when the button is pressed
         List<String> listOfPossibleVenues = new ArrayList<>(listOfVenues);;
 
+
+        if(!drinksCheckBox.isSelected() & !foodCheckBox.isSelected() & !sightseeingCheckBox.isSelected() & !studySpacesCheckBox.isSelected()){
+            errLabel.setText("You have not selected any venue types!");
+            return false;
+        }
+
+
+
+
         //Removes users non-favourite venues from the possible list
         if(faveCheckBox.isSelected()){
+
+
+            if(currUser.getFaveVenues() == null){
+                errLabel.setText("You have no favourites!");
+                return false;
+            }
 
             //Get the current users favourite lists
             List<String> userFaveList = List.of(currUser.getFaveVenues());
@@ -147,9 +162,6 @@ public class VenueSelectPageController {
 
             //Create the list of drinking venues
             for(String s : listOfPossibleVenues){
-
-
-
 
 
                 //Finds the venues with tags relating to drinkings
@@ -228,15 +240,12 @@ public class VenueSelectPageController {
             return false;
         }
 
-        System.out.println("Venues: " + listOfPossibleVenues);
 
-        System.out.println("Temp Venues: " + tempVenueList);
 
 
         //Combines the two lists so that only suitable venues remain
         listOfPossibleVenues.retainAll(tempVenueList);
 
-        System.out.println("Possible Venues: " + listOfPossibleVenues);
 
         if(listOfPossibleVenues.isEmpty()){
             errLabel.setText("You have no favourites of the selected types!");
