@@ -17,8 +17,8 @@
             <Font size="21.0"/>
          </font>
       </Label>
-      <Label layoutX="152.0" layoutY="128.0" prefHeight="17.0" prefWidth="103.0" text="Current Username"/>
-      <Label layoutX="155.0" layoutY="233.0" text="Desired Username"/>
+      <Label id="usernameText" fx:id="usernameText" layoutX="152.0" layoutY="128.0" prefHeight="17.0" prefWidth="103.0" text="Current Username"/>
+      <Label id="desiredText" fx:id="desiredText" layoutX="155.0" layoutY="233.0" text="Desired Username"/>
       <TextField id="desiredNameField" fx:id="desiredNameField" layoutX="312.0" layoutY="229.0"/>
       <Label id="usernameLabel" fx:id="usernameLabel" layoutX="341.0" layoutY="128.0" text="currentUsername"/>
       <Button id="confirmButton" fx:id="confirmButton" layoutX="271.0" layoutY="326.0" mnemonicParsing="false"

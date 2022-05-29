@@ -47,6 +47,22 @@ public class AccountDetailsController {
 
     /**
      * <p>
+     *     The label that displays the text "username"
+     * </p>
+     */
+    @FXML
+    Label usernameText;
+
+    /**
+     * <p>
+     *     The label that displays the text "password"
+     * </p>
+     */
+    @FXML
+    Label passwordText;
+
+    /**
+     * <p>
      *     The button that the user can press to request a name change
      * </p>
      */
