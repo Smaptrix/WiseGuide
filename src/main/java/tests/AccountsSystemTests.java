@@ -42,18 +42,6 @@ public class AccountsSystemTests extends ApplicationTest {
     }
 
     @Test
-    //Unit Test | Confirm hashing works correctly.
-    public void userPasswordHashingTest() {
-        User test = new User("test", "12345");
-        test.setSalt("fb58b47c3b3f759080cff1a2883f1f97");
-        test.encryptUserInfo();
-        //Password is '12345' pre-hash
-        assertEquals(test.getPassword(), "180614082906af58f873bb44e200db520e3c860ad47ac24b13574ef3a7bb1876");
-
-    }
-
-
-    @Test
     //Unit Test | Confirm an existing user can be found in the database.
     public void userExistsTest() throws IOException {
         User test = new User("test", "12345");
