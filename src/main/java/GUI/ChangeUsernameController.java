@@ -88,6 +88,14 @@ public class ChangeUsernameController {
 
     /**
      * <p>
+     *     The title
+     * </p>
+     */
+    @FXML
+    Label title;
+
+    /**
+     * <p>
      *     Whether testing mode is enabled.
      * </p>
      */
@@ -175,18 +183,6 @@ public class ChangeUsernameController {
         }
 
 
-    }
-
-    /**
-     * <p>
-     *     Creates a temporary user for testing purposes.
-     * </p>
-     * @return whether the account creation was successful.
-     */
-    public void createTestUser() throws IOException {
-        User user = new User("usernameChangeAccount","usernameChangePass");
-        client.createUser(user);
-        this.setUser(user);
     }
 
     /**

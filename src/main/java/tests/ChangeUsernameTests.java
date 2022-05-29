@@ -36,11 +36,13 @@ public class ChangeUsernameTests extends ApplicationTest {
         stage.toFront();
         this.controller = loader.getController();
         client = new Client(); // Creates new instance of client object
-        client.startConnection("127.0.0.1", 5555);
-        controller.setClient(client);
+        user = new User("usernameChangeAccount", "usernameChangePass");
 
-        //Create the testing user
-        controller.createTestUser();
+        client.startConnection("127.0.0.1", 5555);
+        client.createUser(user);
+
+        controller.setClient(client);
+        controller.setUser(user);
     }
 
     @Before
@@ -49,36 +51,44 @@ public class ChangeUsernameTests extends ApplicationTest {
 
     @After
     public void afterEach() throws IOException {
-        client.deleteUser(new User("usernameChangeAccount","usernameChangePass"));
-        client.deleteUser(new User("usernameChangedAccount","usernameChangedPass"));
+        client.deleteUser(new User("usernameChangeAccount", "usernameChangePass"));
+        client.deleteUser(new User("usernameChangedAccount", "usernameChangedPass"));
+    }
+
+    @Test
+    //Unit Test | Confirm that the title displays correctly.
+    public void titleTest() {
+        FxAssert.verifyThat("#title", Node::isVisible);
+        FxAssert.verifyThat("#title", LabeledMatchers.hasText("Change Username"));
     }
 
     @Test
     //Unit Test | Confirm that the "Current Username" label displays correctly.
-    public void usernameLabelTest(){
+    public void usernameLabelTest() {
         FxAssert.verifyThat("#usernameText", Node::isVisible);
         FxAssert.verifyThat("#usernameText", LabeledMatchers.hasText("Current Username"));
     }
 
     @Test
     //Unit Test | Confirm that username displays correctly.
-    public void usernameTest(){
+    public void usernameTest() {
         sleep(1000);
-        FxAssert.verifyThat("#usernameLabel",LabeledMatchers.hasText("usernameChangeAccount"));
+        FxAssert.verifyThat("#usernameLabel", LabeledMatchers.hasText("usernameChangeAccount"));
     }
 
     @Test
     //Unit Test | Confirm that the "Desired Username" label displays correctly.
-    public void desiredUsernameLabelTest(){
+    public void desiredUsernameLabelTest() {
         FxAssert.verifyThat("#desiredText", Node::isVisible);
         FxAssert.verifyThat("#desiredText", LabeledMatchers.hasText("Desired Username"));
     }
 
     @Test
-    //Unit Test | Confirm that the "Desired Username" box can be typed in.
-    public void desiredUsernameFieldTest(){
+    //Unit Test | Confirm that the "Desired Username" field can be typed in.
+    public void desiredUsernameFieldTest() {
         sleep(1000);
-        FxAssert.verifyThat("#desiredNameField",Node::isVisible);
+        FxAssert.verifyThat("#desiredNameField", TextInputControlMatchers.hasText(""));
+        FxAssert.verifyThat("#desiredNameField", Node::isVisible);
         clickOn("#desiredNameField");
         write("test");
         FxAssert.verifyThat("#desiredNameField", TextInputControlMatchers.hasText("test"));
@@ -86,77 +96,81 @@ public class ChangeUsernameTests extends ApplicationTest {
 
     @Test
     //Unit Test | Verify that "Confirm" button displays correctly.
-    public void confirmButtonTextTest(){
-        FxAssert.verifyThat("#confirmButton",Node::isVisible);
-        FxAssert.verifyThat("#confirmButton",LabeledMatchers.hasText("Confirm"));
+    public void confirmButtonTextTest() {
+        FxAssert.verifyThat("#confirmButton", Node::isVisible);
+        FxAssert.verifyThat("#confirmButton", LabeledMatchers.hasText("Confirm"));
     }
 
     @Test
     //Unit Test | Confirm that the error field is invisible by default.
-    public void errorFieldTest(){
-        FxAssert.verifyThat("#errLabel",Node::isVisible);
-        FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText(""));
+    public void errorLabelTest() {
+        FxAssert.verifyThat("#errLabel", Node::isVisible);
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText(""));
     }
 
     @Test
     //Unit Test | Confirm that the button can be clicked.
     //Unit Test | Confirm blank names are rejected.
-    public void confirmButtonTest(){
+    public void confirmButtonTest() {
         sleep(1000);
         clickOn("#confirmButton");
-        FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText("You cannot have a blank name!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You cannot have a blank name!"));
     }
 
     @Test
     //Integration Test | Confirm the username cannot be changed to what it already is.
-    public void sameUsernameTest(){
+    public void sameUsernameTest() {
         controller.setTestingMode(true);
         sleep(1000);
         clickOn("#desiredNameField");
         write("usernameChangeAccount");
         clickOn("#confirmButton");
-        FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText("This is your current name!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("This is your current name!"));
     }
 
     @Test
     //Integration Test | Confirm the username cannot be changed to a taken username.
-    public void takenUsernameTest(){
+    public void takenUsernameTest() {
         sleep(1000);
         clickOn("#desiredNameField");
         write("test");
         clickOn("#confirmButton");
-        FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText("That name is already taken!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("That name is already taken!"));
+    }
+
+    @Test
+    //Integration Test | Confirm the username cannot be changed to a reserved username.
+    public void reservedUsernameTest() {
+        sleep(1000);
+        clickOn("#desiredNameField");
+        //This name is reserved as long as testing mode is off.
+        write("usernameChangedAccount");
+        clickOn("#confirmButton");
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("That username is not allowed."));
     }
 
     @Test
     //Integration Test | Confirm the username can be changed to a non-taken username via the GUI.
-    public void changeUsernameViaGUITest(){
+    public void changeUsernameViaGUITest() {
         controller.setTestingMode(true);
         sleep(1000);
         clickOn("#desiredNameField");
         write("usernameChangedAccount");
         clickOn("#confirmButton");
-        Assert.assertEquals("usernameChangedAccount",controller.getUser().getUsername());
+        Assert.assertEquals("usernameChangedAccount", controller.getUser().getUsername());
     }
 
     @Test
     //Unit Test | Confirm usernames can be changed
     public void changeUsernameTest() throws IOException {
 
-        User oldDetails = new User("usernameChangeAccount","usernameChangePass");
-        User newDetails = new User("usernameChangedAccount","usernameChangePass");
+        User oldDetails = new User("usernameChangeAccount", "usernameChangePass");
+        User newDetails = new User("usernameChangedAccount", "usernameChangePass");
 
-        Assert.assertEquals("GOODLOGIN",client.requestLogin(oldDetails));
+        Assert.assertEquals("GOODLOGIN", client.requestLogin(oldDetails));
         String result = client.requestUserNameChange("usernameChangedAccount");
-        Assert.assertEquals("NAMECHANGED",result);
-        Assert.assertEquals("BADLOGIN",client.requestLogin(oldDetails));
-        Assert.assertEquals("GOODLOGIN",client.requestLogin(newDetails));
+        Assert.assertEquals("NAMECHANGED", result);
+        Assert.assertEquals("BADLOGIN", client.requestLogin(oldDetails));
+        Assert.assertEquals("GOODLOGIN", client.requestLogin(newDetails));
     }
-
-    @Test
-    public void test(){
-        sleep(1000000);
-    }
-
-
 }

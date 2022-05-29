@@ -12,7 +12,7 @@
       prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="GUI.ChangeUsernameController">
    <AnchorPane prefHeight="454.0" prefWidth="600.0">
-      <Label layoutX="214.0" layoutY="26.0" prefHeight="71.0" prefWidth="172.0" text="Change Username">
+      <Label id="title" fx:id="title" layoutX="214.0" layoutY="26.0" prefHeight="71.0" prefWidth="172.0" text="Change Username">
          <font>
             <Font size="21.0"/>
          </font>
