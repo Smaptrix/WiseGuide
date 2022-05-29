@@ -1,14 +1,18 @@
 package tests;
 
 import javafx.application.Application;
+import org.testfx.framework.junit.ApplicationTest;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import mediahandlers.VideoHandler;
+import org.junit.Test;
 
 import java.io.File;
 
-public class VideoHandlerTest extends Application {
+public class VideoHandlerTest extends ApplicationTest {
+
+    VideoHandler videoHandler;
 
     @Override
     public void start(Stage stage){
@@ -20,9 +24,9 @@ public class VideoHandlerTest extends Application {
 
         String source = testFile.toURI().toString();
 
-        VideoHandler test = new VideoHandler(source, height, width);
+        videoHandler = new VideoHandler(source, height, width);
 
-        Scene testScene = new Scene(test, width, height, Color.BLACK);
+        Scene testScene = new Scene(videoHandler, width, height, Color.BLACK);
 
         stage.setTitle("Video Handler Test");
 
@@ -32,8 +36,15 @@ public class VideoHandlerTest extends Application {
 
     }
 
+    @Test
+    public void manualTest(){
+        sleep(100000);
+    }
+
+    /*
     public static void main(String[] args) {
         launch();
     }
+     */
 
 }

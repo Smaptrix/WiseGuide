@@ -32,7 +32,7 @@ public class XMLParserTests extends ApplicationTest {
     }
 
     @Test
-    //unit Test | Confirm the XML file is read in correctly.
+    //Unit Test | Confirm the XML file is read in correctly.
     public void readInTest(){
         File venueLocations = new File("venuesLocation_forTesting.xml");
         xml = new VenueXMLParser(venueLocations);
@@ -40,7 +40,10 @@ public class XMLParserTests extends ApplicationTest {
     }
 
     @Test
-    public void searchEveryPage() {
+    //Unit Test | Confirm page names are read in correctly.
+    public void searchEveryPageTest() {
+        File venueLocations = new File("venuesLocation_forTesting.xml");
+        xml = new VenueXMLParser(venueLocations);
         for(String name : xml.getPageNames()) {
             name = name.replaceAll("title=\"", "").replaceAll("\"", "");
             Assert.assertNotEquals(xml.getPage("title", name), null);
