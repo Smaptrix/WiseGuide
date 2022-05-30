@@ -178,4 +178,12 @@ public class ChangeUsernameTests extends ApplicationTest {
         Assert.assertEquals("BADLOGIN", client.requestLogin(oldDetails));
         Assert.assertEquals("GOODLOGIN", client.requestLogin(newDetails));
     }
+
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
 }

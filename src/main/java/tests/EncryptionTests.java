@@ -1,10 +1,13 @@
 package tests;
 
+import client.Client;
 import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -62,6 +65,15 @@ public class EncryptionTests extends ApplicationTest {
         Assert.assertEquals("49be2df48ddb17a0968d0dbb0f30b08efbfe9c537ca679c747b579450b56b36e",result);
     }
 
-    //TODO: Tests for server/client message encryption and key generation?
+    //TODO: Tests for key generation?
+
+    @Test
+    //Manual Test | Outputs a conversation between the client and server, with received encrypted messages also shown.
+    //This must be manually checked to ensure the outputs are as expected.
+    public void encryptionManualTest() throws IOException {
+        Client client = new Client();
+        client.startConnection("127.0.0.1",5555);
+        client.serverEncryptionTest();
+    }
 
 }

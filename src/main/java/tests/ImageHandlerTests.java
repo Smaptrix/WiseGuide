@@ -35,7 +35,7 @@ import java.util.concurrent.TimeoutException;
  *     Tests for the Image Handler.
  * </p>
  */
-public class ImageHandlerTest extends ApplicationTest {
+public class ImageHandlerTests extends ApplicationTest {
 
     ImageHandler test;
     Group root;
@@ -105,6 +105,16 @@ public class ImageHandlerTest extends ApplicationTest {
     public void imageSizeCheck(){
         Assert.assertEquals(340.0,test.getDesiredView().getFitHeight(),0);
         Assert.assertEquals(200.0,test.getDesiredView().getFitWidth(),0);
+    }
+
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm that the displayed image is correct.
+    // - Confirm that the quality of the image is as expected.
+    // - Confirm that the image size is as expected.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
     }
 
 }

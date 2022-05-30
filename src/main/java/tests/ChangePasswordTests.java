@@ -225,7 +225,7 @@ public class ChangePasswordTests extends ApplicationTest {
 
     @Test
     //Integration Test | Verify that the password can be changed via the GUI if the details are correct.
-    public void changePasswordViaGUITest() throws IOException {
+    public void changePasswordViaGUITest() {
         User newDetails = new User("usernameChangeAccount","usernameChangedPass");
         sleep(1000);
         clickOn("#currPasswordField");
@@ -255,7 +255,7 @@ public class ChangePasswordTests extends ApplicationTest {
 
     @Test
     //Unit Test | Verify that the password cannot be changed via the GUI if the details are incorrect.
-    public void changePasswordViaGUIRejectTest() throws IOException {
+    public void changePasswordViaGUIRejectTest() {
         User newDetails = new User("usernameChangeAccount","usernameChangedPass");
         sleep(1000);
         clickOn("#currPasswordField");
@@ -266,6 +266,14 @@ public class ChangePasswordTests extends ApplicationTest {
         write(newDetails.getPassword());
         clickOn("#changePassButton");
         FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText("Your current password is incorrect!"));
+    }
+
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
     }
 
 }

@@ -168,5 +168,12 @@ public class LoginApplicationTests extends ApplicationTest {
         FxAssert.verifyThat(window("Venue Login"), WindowMatchers.isShowing());
     }
 
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
 
 }

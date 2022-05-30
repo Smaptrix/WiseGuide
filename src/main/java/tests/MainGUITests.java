@@ -171,7 +171,14 @@ public class MainGUITests extends ApplicationTest {
         FxAssert.verifyThat(window("About Page"), WindowMatchers.isShowing());
     }
 
-    //Unit Test | Verify that the Manual Works
-    //This test must be done manually as there is no way for the program to test that the correct browser page opened.
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm close button works
+    // - Confirm manual opens
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
 
 }

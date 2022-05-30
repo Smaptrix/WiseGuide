@@ -113,9 +113,12 @@ public class AccountDetailsTests extends ApplicationTest {
         FxAssert.verifyThat(window("Account Deletion"), WindowMatchers.isShowing());
     }
 
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
     @Test
-    public void test(){
-        sleep(10000);
+    public void manualTests(){
+        sleep(1000000);
     }
 
 }

@@ -38,7 +38,7 @@ public class ServerClientTests {
     @Test
     public void serverOnlineTest(){
 
-        boolean connected = false;
+        boolean connected;
 
         try {
             Socket s = new Socket("127.0.0.1",5555);
@@ -50,10 +50,11 @@ public class ServerClientTests {
     }
 
     //Unit Test | Confirm server is online. Requires the server to NOT be online.
+    //Run this test again after a connection has been opened and closed to confirm connections are closed correctly.
     @Test
     public void serverOfflineTest(){
 
-        boolean connected = false;
+        boolean connected;
 
         try {
             Socket s = new Socket("127.0.0.1",5555);
@@ -83,7 +84,7 @@ public class ServerClientTests {
     //Unit Test | Confirm the connection is closed correctly.
     @Test
     public void connectionClosedTest() throws IOException {
-        boolean connected = false;
+        boolean connected;
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
         client.closeConnection();

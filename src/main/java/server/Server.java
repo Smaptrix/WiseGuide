@@ -134,6 +134,23 @@ public class Server {
      */
     private boolean encryptionReady;
 
+    /**
+     * <p>
+     *     A boolean that determines whether testing mode is on.
+     * </p>
+     */
+    private boolean testingMode;
+
+    /**
+     * <p>
+     *     Change the testing mode.
+     * </p>
+     * @param testingMode Value to change testing mode to.
+     */
+    protected void setTestingMode(boolean testingMode){
+        this.testingMode = testingMode;
+    }
+
 
     /**
      * <p>
@@ -335,6 +352,7 @@ public class Server {
     public void startup(int port) throws IOException{
 
         osDetect();
+        setTestingMode(false);
         System.out.println("Creating new Server Socket at " + port);
 
         //Server formed
@@ -437,6 +455,10 @@ public class Server {
 
                     byte[] inputLine =  recieveMessage(bytesToRead);
 
+
+                    if(testingMode) {
+                        System.out.println("[TESTING] The server received the message: "+inputLine.toString());
+                    }
 
                     System.out.println("Encryption done: " + encryptionReady);
                     if (encryptionReady) {
@@ -581,7 +603,7 @@ public class Server {
 
     private void runServerTest() throws IOException {
         String testToRun = recieveMessageAsString(inStream.read());
-        System.out.println("Running server test on " + testToRun);
+        System.out.println("[TESTING] Running server test on " + testToRun);
         switch(testToRun){
             case "fileDetectTest":
                 File testFile = new File(System.getProperty("user.dir")+"\\test.txt");
@@ -593,6 +615,20 @@ public class Server {
                     break;
             case "osDetectTest":
                 sendResponse(slashType,true,true);
+                break;
+            case "enableServerTestingMode":
+                setTestingMode(true);
+                sendResponse("[TESTING] Server testing mode was enabled.",true,true);
+                break;
+            case "checkServerEncryptionTest":
+                System.out.println("[TESTING] The server has decrypted the message successfully.");
+                System.out.println("[TESTING] The server will response with the message \"Encryption Test Successful\".");
+                sendResponse("Encryption Test Successful",true,true);
+                break;
+            case "disableServerTestingMode":
+                setTestingMode(false);
+                sendResponse("[TESTING] Server testing mode was disabled.",true,true);
+                break;
         }
     }
 
@@ -969,7 +1005,7 @@ public class Server {
     //Checks that the client and server versions are the same
     private void versionCheck() throws IOException {
 
-        String clientVersion = recieveMessageAsString(inStream.read());;
+        String clientVersion = recieveMessageAsString(inStream.read());
 
         System.out.println("Client ver: " + clientVersion);
         System.out.println("Server ver: " + SERVERVERSION);
@@ -989,7 +1025,7 @@ public class Server {
     private void changeUsername() throws IOException {
 
 
-        String desiredUsername = recieveMessageAsString(inStream.read());;
+        String desiredUsername = recieveMessageAsString(inStream.read());
 
         //If the username is taken
         if (ServerUserHandler.findUserName(desiredUsername)){
@@ -1004,9 +1040,9 @@ public class Server {
 
     private void changePassword() throws IOException {
 
-        String currPass = recieveMessageAsString(inStream.read());;
+        String currPass = recieveMessageAsString(inStream.read());
 
-        String newPass = recieveMessageAsString(inStream.read());;
+        String newPass = recieveMessageAsString(inStream.read());
 
 
         //If the password entered doesnt match the current password
