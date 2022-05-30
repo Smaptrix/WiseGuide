@@ -22,6 +22,11 @@ import serverclientstuff.User;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * <p>
+ *     Tests for the password changing system.
+ * </p>
+ */
 public class ChangePasswordTests extends ApplicationTest {
 
     ChangePasswordController controller;

@@ -29,6 +29,11 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the Accounts/Login GUI pages.
+ * </p>
+ */
 public class AccountsAndLoginGUITests extends ApplicationTest {
 
     private LoginController loginController; //Reference to controller so testing user can be created manually.

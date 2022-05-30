@@ -22,6 +22,11 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the venue owner main page.
+ * </p>
+ */
 public class VenueOwnerMainPageApplicationTest extends ApplicationTest {
 
 

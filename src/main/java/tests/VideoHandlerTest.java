@@ -10,6 +10,11 @@ import org.junit.Test;
 
 import java.io.File;
 
+/**
+ * <p>
+ *     Tests for the video handler.
+ * </p>
+ */
 public class VideoHandlerTest extends ApplicationTest {
 
     VideoHandler videoHandler;

@@ -18,6 +18,11 @@ import serverclientstuff.User;
 
 import java.util.Objects;
 
+/**
+ * <p>
+ *     Tests for the Account Details page.
+ * </p>
+ */
 public class AccountDetailsTests extends ApplicationTest {
 
     AccountDetailsController controller;

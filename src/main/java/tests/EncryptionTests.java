@@ -8,6 +8,11 @@ import serverclientstuff.UserSecurity;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * <p>
+ *     Tests for the encryption features.
+ * </p>
+ */
 public class EncryptionTests extends ApplicationTest {
 
     @Test

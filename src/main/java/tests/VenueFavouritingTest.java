@@ -8,6 +8,11 @@ import server.FaveVenuesHandler;
 import java.io.File;
 import java.util.Arrays;
 
+/**
+ * <p>
+ *     Tests for the venue favouring system.
+ * </p>
+ */
 public class VenueFavouritingTest{
 
 

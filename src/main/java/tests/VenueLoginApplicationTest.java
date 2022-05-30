@@ -27,6 +27,11 @@ import java.io.IOException;
 
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the venue login system.
+ * </p>
+ */
 public class VenueLoginApplicationTest extends ApplicationTest {
 
     /* === Tests for Venue Login Page === */

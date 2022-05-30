@@ -31,7 +31,9 @@ import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
 /**
- * A test for the ImageHandler developed by Joe
+ * <p>
+ *     Tests for the Image Handler.
+ * </p>
  */
 public class ImageHandlerTest extends ApplicationTest {
 

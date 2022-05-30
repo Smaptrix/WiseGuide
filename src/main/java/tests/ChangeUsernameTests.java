@@ -21,6 +21,11 @@ import serverclientstuff.User;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * <p>
+ *     Tests for the username changing system.
+ * </p>
+ */
 public class ChangeUsernameTests extends ApplicationTest {
 
     ChangeUsernameController controller;

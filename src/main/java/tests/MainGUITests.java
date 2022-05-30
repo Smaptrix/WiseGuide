@@ -23,6 +23,11 @@ import serverclientstuff.User;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the main screen.
+ * </p>
+ */
 public class MainGUITests extends ApplicationTest {
 
     private MainController controller;

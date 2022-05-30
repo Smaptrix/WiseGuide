@@ -10,6 +10,11 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import java.io.File;
 
+/**
+ * <p>
+ *     Tests for the Audio Handler.
+ * </p>
+ */
 public class AudioHandlerTests extends ApplicationTest {
 
     AudioHandler audioHandler;
