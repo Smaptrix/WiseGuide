@@ -29,14 +29,10 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-public class LoginGUIIntegrationTests extends ApplicationTest {
-
-    /* ===== INTEGRATION TESTS for Login and GUI ===== */
+public class AccountsAndLoginGUITests extends ApplicationTest {
 
     private LoginController loginController; //Reference to controller so testing user can be created manually.
     private Client client;
-
-    //TODO: Account Creation | Any limits on what characters allowed in username/password? These will need testing.
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -134,7 +130,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         write("password");
         clickOn("#ageCheckBox");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("This username is taken"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("This username is taken"));
     }
 
 
@@ -150,7 +146,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passConfirmField");
         write("password");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You are not over the age of 13!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You are not over the age of 13!"));
     }
 
     //Integration Test | Confirm a user cannot be created if all fields are left blank.
@@ -164,7 +160,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         sleep(1000);
         clickOn("#createAccButton");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
     //Integration Test | Confirm a user cannot be created if a username is entered without a password or password confirmation.
@@ -180,7 +176,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#usernameField");
         write("testUser");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a password!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You have not entered a password!"));
     }
 
     //Integration Test | Confirm a user cannot be created if a password is entered without a username or password confirmation.
@@ -196,7 +192,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passField");
         write("password");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
     //Integration Test | Confirm a user cannot be created if the password confirmation is entered without a username or password.
@@ -212,7 +208,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passConfirmField");
         write("password");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
     //Integration Test | Confirm a user cannot be created if a username and password are entered but the password is not confirmed.
@@ -230,7 +226,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passField");
         write("password");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
     //Integration Test | Confirm a user cannot be created if a username and password confirmation are entered without a password.
@@ -248,7 +244,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passConfirmField");
         write("password");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
     //Integration Test | Confirm a user cannot be created if a password and confirmation are entered without a username.
@@ -266,7 +262,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passConfirmField");
         write("password");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("You have not entered a username!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
     //Integration Test | Confirm a user cannot be created if a username is entered but the passwords do not match.
@@ -281,12 +277,12 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         clickOn("#passConfirmField");
         write("mismatch");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField", LabeledMatchers.hasText("The passwords do not match!"));
+        FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("The passwords do not match!"));
     }
 
     //Integration Test | Confirm that a user cannot create an account with a forbidden name.
     @Test
-    public void forbiddenNamesTest(){
+    public void createReservedUserAttemptTest(){
         //TextInputControls.clearTextIn
         sleep(1000);
         loginController.setTestingMode(false);
@@ -299,7 +295,41 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         write("password");
         clickOn("#ageCheckBox");
         clickOn("#createAccountButton");
-        FxAssert.verifyThat("#errField",LabeledMatchers.hasText("The selected username is unavailable."));
+        FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText("The selected username is unavailable."));
+    }
+
+    @Test
+    //Integration Test | Confirm the username can't be > 15 characters.
+    public void userOver15charsTest(){
+        sleep(1000);
+        loginController.setTestingMode(false);
+        clickOn("#createAccButton");
+        clickOn("#usernameField");
+        write("0123456789ABCDEF");
+        clickOn("#passField");
+        write("password");
+        clickOn("#passConfirmField");
+        write("password");
+        clickOn("#ageCheckBox");
+        clickOn("#createAccountButton");
+        FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText("Username can't be more than 15 characters!"));
+    }
+
+    @Test
+    //Integration Test | Confirm the password can't be > 15 characters.
+    public void passOver15charsTest(){
+        sleep(1000);
+        loginController.setTestingMode(false);
+        clickOn("#createAccButton");
+        clickOn("#usernameField");
+        write("username");
+        clickOn("#passField");
+        write("0123456789ABCDEF");
+        clickOn("#passConfirmField");
+        write("0123456789ABCDEF");
+        clickOn("#ageCheckBox");
+        clickOn("#createAccountButton");
+        FxAssert.verifyThat("#errLabel",LabeledMatchers.hasText("Password can't be more than 15 characters!"));
     }
 
 }

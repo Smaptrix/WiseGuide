@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -37,6 +38,8 @@ public class ImageHandlerTest extends ApplicationTest {
     ImageHandler test;
     Group root;
 
+    File testFile = new File("src/main/resources/Maps/baseMap.png");
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -46,7 +49,7 @@ public class ImageHandlerTest extends ApplicationTest {
 
         ImageView testView = new ImageView();
 
-        File testFile = new File("src/main/resources/Maps/baseMap.png");
+
 
         test = new ImageHandler(testFile, testView);
 
@@ -74,25 +77,32 @@ public class ImageHandlerTest extends ApplicationTest {
     //Unit test- make sure the image is loaded and visible
     public void imageVisibleTest(){
 
-
-        String filepath = "file:/C:/Users/jsphi/eclipse-workspace/WiseGuide/src/main/resources/Maps/baseMap.png";
-
         FxAssert.verifyThat(root, Node::isVisible);
 
-        Assert.assertTrue(Objects.equals(test.getCurrImage().getUrl(), filepath));
+        String filepath = "src/main/resources/Maps/baseMap.png";
+        String currDir = System.getProperty("user.dir");
+        currDir = currDir.replace('\\','/');
+
+        String expectedPath = "file:/"+currDir+"/src/main/resources/Maps/baseMap.png";
+        String actualPath = test.getCurrImage().getUrl();
+
+        Assert.assertEquals(expectedPath,actualPath);
     }
 
+    @Test
+    //Unit Test | Image check
+    //This might technically do the exact same thing as the above test...
+    public void imageCheck(){
+        Image testImage = test.getCurrImage();
+        Image image = new Image(testFile.toURI().toString());
+        Assert.assertEquals(testImage.getUrl(),image.getUrl());
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    @Test
+    //Unit Test | Size check
+    public void imageSizeCheck(){
+        Assert.assertEquals(340.0,test.getDesiredView().getFitHeight(),0);
+        Assert.assertEquals(200.0,test.getDesiredView().getFitWidth(),0);
+    }
 
 }

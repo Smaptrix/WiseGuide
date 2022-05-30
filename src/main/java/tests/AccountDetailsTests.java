@@ -94,6 +94,21 @@ public class AccountDetailsTests extends ApplicationTest {
     }
 
     @Test
+    //Unit Test | Verify that the "Delete Account" button displays correctly.
+    public void deleteButtonTextTest(){
+        FxAssert.verifyThat("#deleteAccountButton",Node::isVisible);
+        FxAssert.verifyThat("#deleteAccountButton",LabeledMatchers.hasText("Delete Account"));
+    }
+
+    @Test
+    //Unit Test | Verify that the "Delete Account" button opens the account deletion window.
+    public void deleteButtonTest(){
+        sleep(1000);
+        clickOn("#deleteAccountButton");
+        FxAssert.verifyThat(window("Account Deletion"), WindowMatchers.isShowing());
+    }
+
+    @Test
     public void test(){
         sleep(10000);
     }

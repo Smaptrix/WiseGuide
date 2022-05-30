@@ -19,8 +19,6 @@ import java.io.IOException;
  */
 public class AccountDetailsController {
 
-    //TODO - Add password change functionality
-
     /**
      * <p>
      *     The current client being used by the GUI
@@ -99,7 +97,7 @@ public class AccountDetailsController {
      * <p>
      *     Sets the client of this controller
      * </p>
-     * @param client
+     * @param client The client
      */
     public void setClient(Client client) {
         this.client = client;
@@ -155,7 +153,7 @@ public class AccountDetailsController {
 
     /**
      * <p>
-     *     Opens the page which the user cna use to change their password
+     *     Opens the page which the user can use to change their password
      * </p>
      * @throws IOException
      */

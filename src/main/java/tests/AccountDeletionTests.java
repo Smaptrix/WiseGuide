@@ -73,9 +73,18 @@ public class AccountDeletionTests extends ApplicationTest {
 
     //Unit Test | Confirm an internal testing user can be created.
     @Test
-    public void testDeletionUserCreation() throws IOException {
+    public void createUserToDeleteTest() throws IOException {
+        int result = controller.createDeletionTestAccount();
+        Assert.assertNotEquals(-1,result);
+    }
+
+    //Unit Test | Confirm a user can be deleted.
+    @Test
+    public void userDeletionTest() throws IOException {
         controller.createDeletionTestAccount();
-        //No assertion needed.
+        User testingUser = new User("accountDeletionTestUser","accountDeletionTest");
+        String result = client.deleteUser(testingUser);
+        Assert.assertEquals("DELETESUCCESS",result);
     }
 
     //Integration Test | Confirm User Can Be Deleted with the GUI
