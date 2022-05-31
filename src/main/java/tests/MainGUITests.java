@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,6 +19,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.matcher.control.ListViewMatchers;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -169,6 +171,127 @@ public class MainGUITests extends ApplicationTest {
         sleep(1000);
         clickOn("#menuBarHelp").clickOn("#aboutButton");
         FxAssert.verifyThat(window("About Page"), WindowMatchers.isShowing());
+    }
+
+    //Unit Test | Check bar lists
+    @Test
+    public void barsListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#barsPane",Node::isVisible);
+        FxAssert.verifyThat("#barsPane",LabeledMatchers.hasText("Bars"));
+        FxAssert.verifyThat("#barsList",Node::isVisible);
+        FxAssert.verifyThat("#barsList", ListViewMatchers.hasListCell("All Bar One York"));
+    }
+
+    //TODO: Check the other lists
+
+    //Integration Test | Open a Bar (#barsList defaults to All Bar One York)
+    @Test
+    public void openBarTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#barsPane");
+        sleep(1000);
+        doubleClickOn("#barsList");
+        sleep(1000);
+        FxAssert.verifyThat(window("All Bar One York"), WindowMatchers.isShowing());
+    }
+
+    //Integration Test | Open a Cafe (#cafesList defaults to Lucky Days)
+    @Test
+    public void openCafeTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#cafesPane");
+        sleep(1000);
+        doubleClickOn("#cafesList");
+        sleep(1000);
+        FxAssert.verifyThat(window("Lucky Days"), WindowMatchers.isShowing());
+    }
+
+    //Integration Test | Open a Club (#clubsList defaults to Popworld)
+    @Test
+    public void openClubTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#clubsPane");
+        sleep(1000);
+        doubleClickOn("#clubsList");
+        sleep(1000);
+        FxAssert.verifyThat(window("Popworld York"), WindowMatchers.isShowing());
+    }
+
+    //Integration Test | Open a Fast Food Venue (#pubsList defaults to The Rook & Gaskill)
+    @Test
+    public void openPubTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#pubsPane");
+        sleep(1000);
+        doubleClickOn("#pubsList");
+        sleep(1000);
+        FxAssert.verifyThat(window("The Rook & Gaskill"), WindowMatchers.isShowing());
+    }
+
+    //Integration Test | Open a Restaurant (#restaurantsPane defaults to Cresci Pizzeria)
+    @Test
+    public void openRestaurantTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#restaurantsPane");
+        sleep(1000);
+        doubleClickOn("#restaurantsList");
+        sleep(1000);
+        FxAssert.verifyThat(window("Cresci Pizzeria"), WindowMatchers.isShowing());
+    }
+
+    //Integration Test | Open a Green Space (#greenSpacesList defaults to Millennium Fields)
+    @Test
+    public void openGreenSpaceTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#greenPane");
+        sleep(1000);
+        controller.venueScrollPane.setVvalue(10);
+        doubleClickOn("#greenSpacesList");
+        sleep(1000);
+        FxAssert.verifyThat(window("Millennium Fields"), WindowMatchers.isShowing());
+    }
+
+    //Integration Test | Open a Study Space (#studySpacesList defaults to RKC)
+    @Test
+    public void openStudySpaceTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#studyPane");
+        sleep(1000);
+        controller.venueScrollPane.setVvalue(10);
+        doubleClickOn("#studySpacesList");
+        sleep(1000);
+        FxAssert.verifyThat(window("Roger Kirk Centre"), WindowMatchers.isShowing());
+    }
+
+    //Integration Test | Open a Sightseeing Space (#sightseeingList defaults to The Hole in Wand)
+    @Test
+    public void openSightseeingTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#sightseeingPane");
+        sleep(1000);
+        controller.venueScrollPane.setVvalue(10);
+        doubleClickOn("#sightseeingList");
+        sleep(1000);
+        FxAssert.verifyThat(window("The Hole in Wand"), WindowMatchers.isShowing());
     }
 
     //Manual Tests | Provides an opportunity for manual tests to be performed

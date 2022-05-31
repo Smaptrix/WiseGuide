@@ -28,8 +28,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
+import javafx.scene.control.ScrollPane;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -354,6 +355,15 @@ public class MainController {
      */
     @FXML
     ImageView mapView;
+
+    /**
+     * <p>
+     *     The venues scroll pane
+     * </p>
+     */
+    @FXML
+    public ScrollPane venueScrollPane;
+
 
     /**
      * <p>
