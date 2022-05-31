@@ -171,7 +171,7 @@
         </base:shape>
         <base:image include_source="Venues/Bars/Evil_Eye/EvilEye1.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye1.txt" ID="altText0"/>
+            <base:text include_source="Venues/Bars/Evil_Eye/EvilEye1.txt" ID="otherText0"/>
         </base:shape>
         <base:image include_source="Venues/Bars/Evil_Eye/EvilEye2.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">

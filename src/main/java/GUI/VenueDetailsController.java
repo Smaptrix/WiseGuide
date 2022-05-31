@@ -577,10 +577,12 @@ public class VenueDetailsController {
         }
 
         //Gets the text file
-        String textFile = (currVenuePage.getMediaSourceByID("altText0"));
-        System.out.println("File: " + textFile);
+        System.out.println(currVenuePage.children);
+        System.out.println(currVenuePage.getChildrenType());
+        String altTextFile = (currVenuePage.getMediaSourceByID("otherText0"));
+        System.out.println("File: " + altTextFile);
 
-        File tempTextFile = client.requestFile(textFile);
+        File tempTextFile = client.requestFile(altTextFile);
 
         //Places the text from the text file into the text manager
         TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
