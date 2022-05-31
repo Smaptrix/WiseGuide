@@ -68,6 +68,12 @@ public class AccountCreationController {
     TextField userField;
 
     /**
+     * The username label
+     */
+    @FXML
+    Label userLabel;
+
+    /**
      * <p>
      *     The field where the user can type their desired password into
      * </p>
@@ -76,12 +82,24 @@ public class AccountCreationController {
     PasswordField passField;
 
     /**
+     * The password label
+     */
+    @FXML
+    Label passLabel;
+
+    /**
      * <p>
      *     The confirmation field for the users desired password
      * </p>
      */
     @FXML
     PasswordField passConfirmField;
+
+    /**
+     * The password confirmation label
+     */
+    @FXML
+    Label passConfirmLabel;
 
     /**
      * <p>
@@ -131,10 +149,11 @@ public class AccountCreationController {
     @FXML
     Hyperlink termsLink;
 
-
-
-
-
+    /**
+     * <p>
+     *     A boolean set to true if the account creator is being accessed by automatic tests and may require some features to be bypassed.
+     * </p>
+     */
     private boolean testingMode = false;
 
     public void setTestingMode(boolean testingMode) {
@@ -274,7 +293,7 @@ public class AccountCreationController {
         File forbiddenNamesList = new File("reservedUsernames.txt");
         BufferedReader br = new BufferedReader(new FileReader(forbiddenNamesList));
         String line;
-        while(((line = br.readLine()) != null) && forbidden == false){
+        while(((line = br.readLine()) != null) && !forbidden){
             if(name.equals(line)){
                 forbidden = true;
             }

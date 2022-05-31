@@ -103,7 +103,21 @@ public class LoginController {
     Label errorLabel;
     /**
      * <p>
-     *     The image containing the maptrix logo
+     * The label next to the username field
+     * </p>
+     */
+    @FXML
+    Label usernameLabel;
+    /**
+     * <p>
+     * The label next to the password field
+     * </p>
+     */
+    @FXML
+    Label passwordField;
+    /**
+     * <p>
+     * The image containing the maptrix logo
      * </p>
      */
     @FXML
@@ -137,8 +151,13 @@ public class LoginController {
     public void initialConnection() throws IOException {
 
         client = new Client(); // Creates new instance of client object
-        client.startConnection("127.0.0.1", 5555);
 
+        String defaultIP = "127.0.0.1";
+        int defaultPort = 5555;
+
+
+        client.startConnection(defaultIP, defaultPort);
+        System.out.println("Connection Started!");
     }
 
     /**
@@ -283,4 +302,7 @@ public class LoginController {
 
     }
 
+    public User getCurrUser() {
+        return currUser;
+    }
 }

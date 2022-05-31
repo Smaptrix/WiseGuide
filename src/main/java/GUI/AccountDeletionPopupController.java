@@ -10,28 +10,96 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * <p>
+ *     Controls the account deletion popup.
+ * </p>
+ */
 public class AccountDeletionPopupController {
 
+    /**
+     * <p>
+     *     The current client.
+     * </p>
+     */
     private Client client;
+
+    /**
+     * <p>
+     *     Sets the current client.
+     * </p>
+     * @param client The current client.
+     */
     public void setClient(Client client){ this.client = client; };
+
+    /**
+     * <p>
+     *     A boolean set to true if the deletion system is being accessed by automatic tests and may require some features to be bypassed.
+     * </p>
+     */
     private boolean testingMode = false;
+
+    /**
+     * <p>
+     *     Activates or deactivates the controller's testing mode.
+     * </p>
+     * @param mode Whether testing mode should be true or false.
+     */
     public void setTestingMode(boolean mode){ this.testingMode = mode; };
+
+    /**
+     * <p>
+     *     A boolean set to true if the button has been pressed (for testing purposes).
+     * </p>
+     */
     public boolean buttonPressed = false; //For testing purposes
+
+    /**
+     * <p>
+     *     A boolean set to true if the current client is null.
+     * </p>
+     */
     private boolean nullClientDetected = false;
 
 
-    @FXML
-    Label infoLabel1;
-
+    /**
+     * <p>
+     *     The first line of the information text.
+     * </p>
+     */
     @FXML
     Label infoLabel0;
 
+    /**
+     * <p>
+     *     The second line of the information text.
+     * </p>
+     */
+    @FXML
+    Label infoLabel1;
+
+    /**
+     * <p>
+     *     The third line of the information text.
+     * </p>
+     */
     @FXML
     Label infoLabel2;
 
+    /**
+     * <p>
+     *     The "okay" button.
+     * </p>
+     */
     @FXML
     Button closePopUpButton;
 
+    /**
+     * <p>
+     *     Closes the popup and reopens the login screen.
+     * </p>
+     * @throws IOException if the client and server lose connection.
+     */
     public void closePopUpButton() throws IOException {
 
         buttonPressed = true;
@@ -56,6 +124,12 @@ public class AccountDeletionPopupController {
         }
     }
 
+    /**
+     * <p>
+     *     Changes the text to an error message if appropriate.
+     * </p>
+     * @param error Whether an error has occurred (true) or not.
+     */
     public void setErrorMessage(boolean error){
         if(error){
             infoLabel0.setText("An error occurred.");
@@ -64,6 +138,12 @@ public class AccountDeletionPopupController {
         }
     }
 
+    /**
+     * <p>
+     *     Reopens the login window.
+     * </p>
+     * @throws IOException if the client and server lose connection.
+     */
     public void reopenLoginPage() throws IOException {
 
         client.requestLogout();

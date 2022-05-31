@@ -100,7 +100,7 @@ public class Client {
 
     /**
      * <p>
-     *     symKey is they symmetric key used for communciation between the server & client
+     *     symKey is they symmetric key used for communication between the server and the client
      * </p>
      */
     private SecretKey symKey;
@@ -452,13 +452,8 @@ public class Client {
 
         sendMessage("ECHO " + msg, true);
 
-        int fileSize = inputStream.read();
 
-
-        byte[] data = readBytes(fileSize);
-
-
-        return new String(data, StandardCharsets.UTF_8);
+        return receiveAcknowledgement(true);
 
     }
 
@@ -479,7 +474,7 @@ public class Client {
         //Checks to see if a file has already been downloaded
         //This is so that the same file is not downloaded twice
         if(isFileDownloaded(fileName)){
-            return null;
+            return getFile(fileName);
         }
 
 
@@ -550,8 +545,6 @@ public class Client {
 
                 data[bytesRead] = (byte) inputStream.read();
 
-                //System.out.println(data[bytesRead]);
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -560,7 +553,6 @@ public class Client {
             //Increment Byte count
             bytesRead += 1;
             if (bytesRead == bytesToRead) {
-                // System.out.println("We have read: " + bytesRead);
                 end = true;
             }
 

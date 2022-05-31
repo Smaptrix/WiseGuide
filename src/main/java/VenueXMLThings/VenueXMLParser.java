@@ -43,7 +43,6 @@ public class VenueXMLParser {
      *     Constructor, takes xml file and returns VenueXMLParser class
      * </p>
      * @param inputFile the name of the xml file
-     * @return VenueXMLParser
      */
     public VenueXMLParser(File inputFile) {
 
@@ -77,7 +76,7 @@ public class VenueXMLParser {
 
         for (int i = 0; i < numberOfPages; i++) {
             returnString.add(((this.root.getElementsByTagName("base:page").item(i).getAttributes().getNamedItem("title"))).toString());
-        }
+            }
 
         return returnString;
     }
@@ -112,9 +111,9 @@ public class VenueXMLParser {
      * @param lon of new venue
      * @param category of new venue
      * @param price of new venue
-     * @throws TransformerException
+     * @throws TransformerException when the document builder is unable to build the document correctly
      */
-    public void addPage(String title, String ID, String lat, String lon, String category, String price) throws TransformerException {
+    public void addPage(String title, String ID, String lat, String lon, String category, String price, String rating) throws TransformerException {
 
         Element newPage = document.createElement("base:page");
 
@@ -126,6 +125,7 @@ public class VenueXMLParser {
         newPage.setAttribute("lon", lon);
         newPage.setAttribute("category", category);
         newPage.setAttribute("price", price);
+        newPage.setAttribute("raiting", rating);
 
         root.appendChild(newPage);
         numberOfPages++;

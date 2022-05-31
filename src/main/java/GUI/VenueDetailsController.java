@@ -12,6 +12,7 @@ import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,15 +22,23 @@ import javafx.scene.control.TextArea;
 import javafx.scene.media.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
+import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
 import mediahandlers.VideoHandler;
 import serverclientstuff.User;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * <p>
@@ -180,11 +189,16 @@ public class VenueDetailsController {
     public AnchorPane videoAnchorPane;
 
     @FXML
+    public SubScene priceSubScene;
+    @FXML
+    public Group priceGroup;
+    @FXML
+    public Group ratingGroup;
+
+    @FXML
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
-
-
 
     }
 
@@ -197,6 +211,14 @@ public class VenueDetailsController {
     public void loadVenueData() throws IOException {
 
         venueName.setText(currVenue);
+
+        //Add alt text button image
+
+
+
+
+
+
 
 
         int textIndex = 0;
@@ -214,21 +236,12 @@ public class VenueDetailsController {
                 String textFile = (currVenuePage.getMediaSourceByID("text0"));
                 System.out.println("File: " + textFile);
 
-                client.requestFile(textFile);
+                File tempTextFile = client.requestFile(textFile);
 
                 //Places the text from the text file into the text manager
-                TextManager textManager = new TextManager(textFile, 470, 100);
+                TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
                 //Loads the text onto the GUI
                 venueText.setText(textManager.loadTextFromFile());
-                /*
-                String videoFile = (currVenuePage.getMediaSourceByID("video0"));
-                System.out.println("Video file: " + videoFile);
-
-                client.requestFile(videoFile);
-
-                VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
-                //venueVideo.setMediaPlayer(videoHandler);
-               */
 
                 //Sets the text index to 1, as there's only one text file for each venue
                 textIndex = 1;
@@ -245,17 +258,15 @@ public class VenueDetailsController {
                 //Making sure that the image file actually exists
                if(imageFile != null) {
                    //Requests the filepath for the image for
-                    client.requestFile(imageFile);
+                    File  tempImageFile = client.requestFile(imageFile);
 
-                    //Sets up the filepath for the image
-                    File imageFilepath = new File(imageFile);
-                    System.out.println("This is the file path:" + imageFilepath);
+
 
                     //Initialises the image view
                     ImageView imageView = new ImageView();
 
                     //Creates the image handler with the desired image filepath
-                    ImageHandler imageHandler = new ImageHandler(imageFilepath, imageView);
+                    ImageHandler imageHandler = new ImageHandler(tempImageFile, imageView);
                     // TODO: Look into accessing this value instead of magic number
                     //Loads the image into the GUI
                     imageHandler.load(220, 400);
@@ -291,6 +302,126 @@ public class VenueDetailsController {
                }
 
 
+            }
+        }
+        //Loads the shapes onto the page
+        ShapeManager shapeManager = new ShapeManager();
+
+        System.out.println("Price: " + currVenuePage.attributes.get("price"));
+        //The price value of the current venue
+        int price;
+        //Sets the price value to 0 if there isn't a price field
+        if (currVenuePage.attributes.get("price") != null){
+            price = Integer.parseInt(currVenuePage.attributes.get("price"));
+        } else {
+            price = 0;
+        }
+        //Set up colours required for the shapes
+        Color maptrixBlue = Color.web("0xAFD4E5");
+        Color maptrixDarkBlue = Color.web("0x245164");
+
+        //Initiates the 3 price circles
+        Circle priceCircle0 = new Circle();
+        Circle priceCircle1 = new Circle();
+        Circle priceCircle2 = new Circle();
+
+        //Initiates the three circle fill colours and sets them to null
+        Color circleFill1 = null;
+        Color circleFill2 = null;
+        Color circleFill3 = null;
+
+        //Colours in the relevant circles based on the price value
+        switch (price){
+            case 1:
+                circleFill1 = maptrixBlue;
+                break;
+            case 2:
+                circleFill1 = maptrixBlue;
+                circleFill2 = maptrixBlue;
+                break;
+            case 3:
+                circleFill1 = maptrixBlue;
+                circleFill2 = maptrixBlue;
+                circleFill3 = maptrixBlue;
+                break;
+            default:
+                break;
+        }
+        //Draws the circles with the correct fill based on the price value
+        priceCircle0 = shapeManager.drawCircle(20, -2, 20, circleFill1, maptrixDarkBlue, 1);
+        priceCircle1 = shapeManager.drawCircle(100, -2, 20, circleFill2, maptrixDarkBlue, 1);
+        priceCircle2 = shapeManager.drawCircle(180, -2, 20, circleFill3, maptrixDarkBlue, 1);
+
+        priceGroup.getChildren().add(priceCircle0);
+        priceGroup.getChildren().add(priceCircle1);
+        priceGroup.getChildren().add(priceCircle2);
+
+
+        System.out.println("Rating: " + currVenuePage.attributes.get("rating"));
+        int rating;
+
+        //Sets the rating value to 0 if there isn't a price field
+        if (currVenuePage.attributes.get("rating") != null){
+            rating = Integer.parseInt(currVenuePage.attributes.get("rating"));
+        } else {
+            rating = 0;
+        }
+
+        //Creates 5 instances of triangles
+        Polygon triangle1 = new Polygon();
+        Polygon triangle2 = new Polygon();
+        Polygon triangle3 = new Polygon();
+        Polygon triangle4 = new Polygon();
+        Polygon triangle5 = new Polygon();
+
+        //Initiates the three triangle fill colours and sets them to null
+        Color triangleFill1 = null;
+        Color triangleFill2 = null;
+        Color triangleFill3 = null;
+        Color triangleFill4 = null;
+        Color triangleFill5 = null;
+        //Colours in the relevant triangles based on the rating value
+        switch (rating) {
+            case 1:
+                triangleFill1 = maptrixBlue;
+                break;
+            case 2:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                break;
+            case 3:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                triangleFill3 = maptrixBlue;
+                break;
+            case 4:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                triangleFill3 = maptrixBlue;
+                triangleFill4 = maptrixBlue;
+                break;
+            case 5:
+                triangleFill1 = maptrixBlue;
+                triangleFill2 = maptrixBlue;
+                triangleFill3 = maptrixBlue;
+                triangleFill4 = maptrixBlue;
+                triangleFill5 = maptrixBlue;
+                break;
+            default:
+                break;
+        }
+        //Draws the triangles with the correct fill based on the price value
+        triangle1 = shapeManager.drawTriangle(20,0,0, 40,40,40, triangleFill1, maptrixDarkBlue,1);
+        triangle2 = shapeManager.drawTriangle(70,0,50, 40,90,40, triangleFill2, maptrixDarkBlue,1);
+        triangle3 = shapeManager.drawTriangle(120,0,100, 40,140,40, triangleFill3, maptrixDarkBlue,1);
+        triangle4 = shapeManager.drawTriangle(170,0,150, 40,190,40, triangleFill4, maptrixDarkBlue,1);
+        triangle5 = shapeManager.drawTriangle(220,0,200, 40,240,40, triangleFill5, maptrixDarkBlue,1);
+
+        ratingGroup.getChildren().add(triangle1);
+        ratingGroup.getChildren().add(triangle2);
+        ratingGroup.getChildren().add(triangle3);
+        ratingGroup.getChildren().add(triangle4);
+        ratingGroup.getChildren().add(triangle5);
             }
         }
 
@@ -378,12 +509,18 @@ public class VenueDetailsController {
      */
     public void checkIfFavourite() {
 
+        System.out.println("curr: " + currVenue);
+
         if(currUser.getFaveVenues() != null){
             if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
                 faveVenueButton.setText("UnFavourite");
             }
         }
 
+    }
+
+    public String getCurrVenue() {
+        return currVenue;
     }
 
     /**
@@ -399,33 +536,54 @@ public class VenueDetailsController {
             client.addFavouriteVenue(currVenue);
             faveVenueButton.setText("UnFavourite");
 
-            /* - May be required in the future
-            //Turns the string array into a list
-            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+            String[] currFaves = currUser.getFaveVenues();
+            //Makes sure the currFaves isn't null
+            if(currFaves != null){
 
-            //Adds the current venue to the current users list of favourite venues clientside
-            faveVenues.add(currVenue);
+                //Turns the string array into a linked list
+                List<String> faveVenues = new LinkedList(Arrays.asList(currUser.getFaveVenues()));
 
-            currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+                //Adds the current venue to the current users list of favourite venues clientside
+                faveVenues.add(currVenue);
 
-            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
-            */
+                currUser.setFaveVenues(faveVenues.toArray(new String[0]));
+
+                System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+            }
+            //If the user doesn't have a venue list
+            else{
+                //Create a venue list with the current venue inside of it and give it to the current user
+                String[] userFaves = {currVenue};
+
+                currUser.setFaveVenues(userFaves);
+
+            }
+
+
         }
 
         else if(faveVenueButton.getText().equals("UnFavourite")){
             client.removeFavouriteVenue(currVenue);
             faveVenueButton.setText("Favourite");
 
-            /* - May be required in the future
-            List<String> faveVenues = Arrays.asList(currUser.getFaveVenues());
+            //Turns the string array into a linked list
+            List<String> faveVenues = new LinkedList(Arrays.asList(currUser.getFaveVenues()));
+
+            //Removes the current venue from the current users favourite venue list clientside
             faveVenues.remove(currVenue);
             currUser.setFaveVenues(faveVenues.toArray(new String[0]));
 
             System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
 
-             */
+
         }
 
 
     }
+
+
+
+
+
+
 }

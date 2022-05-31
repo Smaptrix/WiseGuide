@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Accordion;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -26,7 +27,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import serverclientstuff.User;
 
+import java.awt.*;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,7 +44,7 @@ public class MainController {
 
     /**
      * <p>
-     *     The client  being used by the GUI to conect to the sever
+     *     The client  being used by the GUI to connect to the sever
      * </p>
      */
     private Client client;
@@ -64,6 +69,13 @@ public class MainController {
      * </p>
      */
     private String selectedItem;
+
+    /**
+     * <p>
+     *     The currently selected route in the list in the sidebar
+     * </p>
+     */
+    private String selectedRoute;
 
     /**
      * <p>
@@ -129,6 +141,13 @@ public class MainController {
      * </p>
      */
     Object currentItemSelected = new Object();
+
+    /**
+     * <p>
+     *     The current route selected in the list in the sidebar
+     * </p>
+     */
+    Object currentRouteSelected = new Object();
 
     /**
      * <p>
@@ -200,6 +219,94 @@ public class MainController {
 
     /**
      * <p>
+     *     The accordion which holds the collapsable venue types.
+     * </p>
+     */
+    @FXML
+    Accordion venueAccordion;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of bars
+     * </p>
+     */
+    @FXML
+    ListView barsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of cafes
+     * </p>
+     */
+    @FXML
+    ListView cafesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of clubs
+     * </p>
+     */
+    @FXML
+    ListView clubsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of fast food places
+     * </p>
+     */
+    @FXML
+    ListView fastFoodList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of pubs
+     * </p>
+     */
+    @FXML
+    ListView pubsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of restaurants
+     * </p>
+     */
+    @FXML
+    ListView restaurantsList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of green spaces
+     * </p>
+     */
+    @FXML
+    ListView greenSpacesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of study spaces
+     * </p>
+     */
+    @FXML
+    ListView studySpacesList;
+
+    /**
+     * <p>
+     *     The list on the sidebar which displays the list of sightseeing places
+     * </p>
+     */
+    @FXML
+    ListView sightseeingList;
+
+    /**
+     * <p>
+     *     The list of  the routes available
+     * </p>
+     */
+    @FXML
+    ListView routesList;
+
+    /**
+     * <p>
      *     The image which displays the current map view
      * </p>
      */
@@ -223,16 +330,62 @@ public class MainController {
     public void initialize() {
 
         mapController = new MapController();
-
         mapView.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent);
 
-        //Defines what happens when you double-click a venue in the venue list
-        venueList.setOnMouseClicked(click -> {
 
+        //Defines what happens when you double-click a venue in the venue list
+        barsList.setOnMouseClicked(click -> {
             if (click.getClickCount() == 2) {
-                openSelectedVenue();
+                openSelectedVenue("bars");
             }
         });
+        clubsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("clubs");
+            }
+        });
+        cafesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("cafes");
+            }
+        });
+        restaurantsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("restaurants");
+            }
+        });
+        fastFoodList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("fastFood");
+            }
+        });
+        pubsList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("pubs");
+            }
+        });
+        greenSpacesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("greenSpaces");
+            }
+        });
+        studySpacesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("studySpaces");
+            }
+        });
+        sightseeingList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedVenue("sightSeeing");
+            }
+        });
+        routesList.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                openSelectedRoute();
+            }
+        });
+
+
     }
 
     /**
@@ -240,15 +393,50 @@ public class MainController {
      *     Opens the Venue Details Page when a venue is selected.
      * </p>
      */
-    protected void openSelectedVenue() {
+    protected void openSelectedVenue(String venueType) {
         //Use ListView's getSelected Item
         if (selectedItem == null) {
-            currentItemSelected = venueList.getSelectionModel()
-                    .getSelectedItem();
+            //System.out.println("Expanded Pane ID: " + venueAccordion.getExpandedPane().getId());
+
+            switch(venueType) {
+                case "clubs":
+                    currentItemSelected = clubsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "bars":
+                    currentItemSelected = barsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "cafes":
+                    currentItemSelected = cafesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "restaurants":
+                    currentItemSelected = restaurantsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "fastFood":
+                    currentItemSelected = fastFoodList.getSelectionModel().getSelectedItem();
+                    break;
+                case "pubs":
+                    currentItemSelected = pubsList.getSelectionModel().getSelectedItem();
+                    break;
+                case "greenSpaces":
+                    currentItemSelected = greenSpacesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "studySpaces":
+                    currentItemSelected = studySpacesList.getSelectionModel().getSelectedItem();
+                    break;
+                case "sightSeeing":
+                    currentItemSelected = sightseeingList.getSelectionModel().getSelectedItem();
+                    break;
+                case "any":
+                    currentItemSelected = venueList.getSelectionModel().getSelectedItem();
+                    break;
+                default:
+                    System.out.println("Error no venue type of " + venueType);
+            }
+
         } else {
             currentItemSelected = selectedItem;
         }
-        // TODO: add an extra scene for loading page
+        // TODO: add an extra scene for loading page - @WILL
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
         Stage stage = new Stage();
@@ -260,19 +448,58 @@ public class MainController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) currentItemSelected), currUser);
+        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) ((String) currentItemSelected)).replaceAll(" ", "_"));
+        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
         //Checks to see if the venue has been favourite by the user
-        controller.checkIfFavourite();
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();
         stage.setResizable(false);
+        controller.checkIfFavourite();
         try {
             controller.loadVenueData();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to get venue data");
         }
+    }
+
+    /**
+     * <p>
+     *     Opens the route selected in the list
+     * </p>
+     */
+    private void openSelectedRoute() {
+        if(selectedRoute == null) {
+            currentRouteSelected = routesList.getSelectionModel().getSelectedItem();
+        } else {
+            currentRouteSelected = selectedRoute;
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("RouteDetailsPage.fxml"));
+        Stage stage = new Stage();
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 900, 600);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        RouteDetailsController controller = fxmlLoader.getController();
+        controller.setClient(client);
+        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) ((String) currentRouteSelected)).replaceAll(" ", "_"));
+        //TODO Sort out xml read-ins in controller
+        controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", (String) ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
+        stage.setScene(scene);
+        stage.setTitle((String) currentRouteSelected);
+        stage.show();
+        stage.setResizable(false);
+
+        try {
+            controller.loadRouteData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to get route data");
+        }
+
     }
 
     //Gets the position of the mouse on a click
@@ -285,8 +512,9 @@ public class MainController {
             System.out.println(mouseX + " ... " + mouseY);
             selectVenueOnMap();
             if (!Objects.equals(selectedItem, "ignore")) {
-                openSelectedVenue();
+                openSelectedVenue("any");
             }
+            selectedItem = null;
         }
     };
 
@@ -303,12 +531,22 @@ public class MainController {
             baseMapSelecting(mousePosition);
         } else if (Objects.equals(desiredMap, "hesEastMap")) {
             UoYMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "SEYorkMap")) {
+            seMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "CentralYorkMap")) {
+            cenMapSelecting(mousePosition);
+        } else if (Objects.equals(desiredMap, "southCentralMap")) {
+            cenSouthMapSelection(mousePosition);
+        } else if (Objects.equals(desiredMap, "westCentralMap")) {
+            cenWestMapSelection(mousePosition);
+        } else if (Objects.equals(desiredMap, "centralCentralMap")) {
+            cenCenMapSelection(mousePosition);
         }
     }
 
     /**
      * <p>
-     *     used to select the venue on the main map based on the mouseposition
+     *     used to select the venue on the main map based on the mouse position
      * </p>
      * @param mousePosition The current position of the mouse
      */
@@ -346,7 +584,7 @@ public class MainController {
 
     /**
      * <p>
-     *     Map selection for the University of Yorks map
+     *     Map selection for the University of York map
      * </p>
      * @param mousePosition The position of the map
      */
@@ -370,7 +608,150 @@ public class MainController {
             desiredMap = "baseMap";
             mapView.setImage(baseMapImage);
         }
+    }
 
+    /**
+     * <p>
+     *     Map selection for the SE York map
+     * </p>
+     * @param mousePosition The position of the map
+     */
+    private void seMapSelecting(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getSe_efes_min().getX()) && (mousePosition.getX() < mapController.getSe_efes_max().getX()) && (mousePosition.getY() > mapController.getSe_efes_min().getY()) && (mousePosition.getY() < mapController.getSe_efes_max().getY())) {
+            selectedItem = "Efes_Pizza";
+        } else if ((mousePosition.getX() > mapController.getSe_rook_min().getX()) && (mousePosition.getX() < mapController.getSe_rook_max().getX()) && (mousePosition.getY() > mapController.getSe_rook_min().getY()) && (mousePosition.getY() < mapController.getSe_rook_max().getY())) {
+            selectedItem = "The Rook & Gaskill";
+        } else if ((mousePosition.getX() > mapController.getSe_waggon_min().getX()) && (mousePosition.getX() < mapController.getSe_waggon_max().getX()) && (mousePosition.getY() > mapController.getSe_waggon_min().getY()) && (mousePosition.getY() < mapController.getSe_waggon_max().getY())) {
+            selectedItem = "The Waggon & Horses";
+        } else if ((mousePosition.getX() > mapController.getSe_spark_min().getX()) && (mousePosition.getX() < mapController.getSe_spark_max().getX()) && (mousePosition.getY() > mapController.getSe_spark_min().getY()) && (mousePosition.getY() < mapController.getSe_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getSe_paradiso_min().getX()) && (mousePosition.getX() < mapController.getSe_paradiso_max().getX()) && (mousePosition.getY() > mapController.getSe_paradiso_min().getY()) && (mousePosition.getY() < mapController.getSe_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+    }
+
+    private void cenMapSelecting(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCen_west_min().getX()) && (mousePosition.getX() < mapController.getCen_west_max().getX()) && (mousePosition.getY() > mapController.getCen_west_min().getY()) && (mousePosition.getY() < mapController.getCen_west_max().getY())) {
+            selectedItem = "ignore";
+            desiredMap = "westCentralMap";
+            mapView.setImage(westCentralYorkImage);
+        } else if ((mousePosition.getX() > mapController.getCen_cen_min().getX()) && (mousePosition.getX() < mapController.getCen_cen_max().getX()) && (mousePosition.getY() > mapController.getCen_cen_min().getY()) && (mousePosition.getY() < mapController.getCen_cen_max().getY())) {
+            selectedItem = "ignore";
+            desiredMap = "centralCentralMap";
+            mapView.setImage(centralCentralYorkImage);
+        } else if ((mousePosition.getX() > mapController.getCen_south_min().getX()) && (mousePosition.getX() < mapController.getCen_south_max().getX()) && (mousePosition.getY() > mapController.getCen_south_min().getY()) && (mousePosition.getY() < mapController.getCen_south_max().getY())) {
+            selectedItem = "ignore";
+            desiredMap = "southCentralMap";
+            mapView.setImage(southCentralYorkImage);
+        } else if ((mousePosition.getX() > mapController.getCen_musGard_min().getX()) && (mousePosition.getX() < mapController.getCen_musGard_max().getX()) && (mousePosition.getY() > mapController.getCen_musGard_min().getY()) && (mousePosition.getY() < mapController.getCen_musGard_max().getY())) {
+            selectedItem = "Museum Gardens";
+        } else if ((mousePosition.getX() > mapController.getCen_deans_min().getX()) && (mousePosition.getX() < mapController.getCen_deans_max().getX()) && (mousePosition.getY() > mapController.getCen_deans_min().getY()) && (mousePosition.getY() < mapController.getCen_deans_max().getY())) {
+            selectedItem = "Dean's Park";
+        } else if ((mousePosition.getX() > mapController.getCen_minster_min().getX()) && (mousePosition.getX() < mapController.getCen_minster_max().getX()) && (mousePosition.getY() > mapController.getCen_minster_min().getY()) && (mousePosition.getY() < mapController.getCen_minster_max().getY())) {
+            selectedItem = "York Minster";
+        } else if ((mousePosition.getX() > mapController.getCen_cityWalls_min().getX()) && (mousePosition.getX() < mapController.getCen_cityWalls_max().getX()) && (mousePosition.getY() > mapController.getCen_cityWalls_min().getY()) && (mousePosition.getY() < mapController.getCen_cityWalls_max().getY())) {
+            selectedItem = "York City Walls";
+        } else if ((mousePosition.getX() > mapController.getCen_brew_min().getX()) && (mousePosition.getX() < mapController.getCen_brew_max().getX()) && (mousePosition.getY() > mapController.getCen_brew_min().getY()) && (mousePosition.getY() < mapController.getCen_brew_max().getY())) {
+            selectedItem = "Brew & Brownie";
+        } else if ((mousePosition.getX() > mapController.getCen_lucky_min().getX()) && (mousePosition.getX() < mapController.getCen_lucky_max().getX()) && (mousePosition.getY() > mapController.getCen_lucky_min().getY()) && (mousePosition.getY() < mapController.getCen_lucky_max().getY())) {
+            selectedItem = "Lucky Days";
+        } else if ((mousePosition.getX() > mapController.getCen_cats_min().getX()) && (mousePosition.getX() < mapController.getCen_cats_max().getX()) && (mousePosition.getY() > mapController.getCen_cats_min().getY()) && (mousePosition.getY() < mapController.getCen_cats_max().getY())) {
+            selectedItem = "The Cat's Whiskers";
+        } else if ((mousePosition.getX() > mapController.getCen_evil_min().getX()) && (mousePosition.getX() < mapController.getCen_evil_max().getX()) && (mousePosition.getY() > mapController.getCen_evil_min().getY()) && (mousePosition.getY() < mapController.getCen_evil_max().getY())) {
+            selectedItem = "Evil Eye";
+        } else if ((mousePosition.getX() > mapController.getCen_choc_min().getX()) && (mousePosition.getX() < mapController.getCen_choc_max().getX()) && (mousePosition.getY() > mapController.getCen_choc_min().getY()) && (mousePosition.getY() < mapController.getCen_choc_max().getY())) {
+            selectedItem = "York's Chocolate Story";
+        } else if ((mousePosition.getX() > mapController.getCen_spark_min().getX()) && (mousePosition.getX() < mapController.getCen_spark_max().getX()) && (mousePosition.getY() > mapController.getCen_spark_min().getY()) && (mousePosition.getY() < mapController.getCen_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getCen_paradiso_min().getX()) && (mousePosition.getX() < mapController.getCen_paradiso_max().getX()) && (mousePosition.getY() > mapController.getCen_paradiso_min().getY()) && (mousePosition.getY() < mapController.getCen_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "baseMap";
+            mapView.setImage(baseMapImage);
+        }
+    }
+
+    private void cenSouthMapSelection(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCenSouth_cosy_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_cosy_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_cosy_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_cosy_max().getY())) {
+            selectedItem = "Cosy Club";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_spark_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_spark_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_spark_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_spark_max().getY())) {
+            selectedItem = "Spark York C.I.C";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_paradiso_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_paradiso_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_paradiso_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_paradiso_max().getY())) {
+            selectedItem = "Il Paradiso Del Cibo";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_cresci_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_cresci_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_cresci_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_cresci_max().getY())) {
+            selectedItem = "Cresci Pizzeria";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_hole_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_hole_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_hole_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_hole_max().getY())) {
+            selectedItem = "The Hole In Wand";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_deniz_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_deniz_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_deniz_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_deniz_max().getY())) {
+            selectedItem = "Deniz Best Kebab";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_drift_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_drift_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_drift_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_drift_max().getY())) {
+            selectedItem = "Drift-In York";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_roses_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_roses_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_roses_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_roses_max().getY())) {
+            selectedItem = "The Stone Roses Bar";
+        } else if ((mousePosition.getX() > mapController.getCenSouth_kuda_min().getX()) && (mousePosition.getX() < mapController.getCenSouth_kuda_max().getX()) && (mousePosition.getY() > mapController.getCenSouth_kuda_min().getY()) && (mousePosition.getY() < mapController.getCenSouth_kuda_max().getY())) {
+            selectedItem = "Cosy Club";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "CentralYorkMap";
+            mapView.setImage(centralYorkImage);
+        }
+    }
+
+    private void cenWestMapSelection(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCenWest_popworld_min().getX()) && (mousePosition.getX() < mapController.getCenWest_popworld_max().getX()) && (mousePosition.getY() > mapController.getCenWest_popworld_min().getY()) && (mousePosition.getY() < mapController.getCenWest_popworld_max().getY())) {
+            selectedItem = "Popworld York";
+        } else if ((mousePosition.getX() > mapController.getCenWest_salvos_min().getX()) && (mousePosition.getX() < mapController.getCenWest_salvos_max().getX()) && (mousePosition.getY() > mapController.getCenWest_salvos_min().getY()) && (mousePosition.getY() < mapController.getCenWest_salvos_max().getY())) {
+            selectedItem = "Club Salvation";
+        } else if ((mousePosition.getX() > mapController.getCenWest_flares_min().getX()) && (mousePosition.getX() < mapController.getCenWest_flares_max().getX()) && (mousePosition.getY() > mapController.getCenWest_flares_min().getY()) && (mousePosition.getY() < mapController.getCenWest_flares_max().getY())) {
+            selectedItem = "Flares York";
+        } else if ((mousePosition.getX() > mapController.getCenWest_revs_min().getX()) && (mousePosition.getX() < mapController.getCenWest_revs_max().getX()) && (mousePosition.getY() > mapController.getCenWest_revs_min().getY()) && (mousePosition.getY() < mapController.getCenWest_revs_max().getY())) {
+            selectedItem = "Revolution York";
+        } else if ((mousePosition.getX() > mapController.getCenWest_allBarOne_min().getX()) && (mousePosition.getX() < mapController.getCenWest_allBarOne_max().getX()) && (mousePosition.getY() > mapController.getCenWest_allBarOne_min().getY()) && (mousePosition.getY() < mapController.getCenWest_allBarOne_max().getY())) {
+            selectedItem = "All Bar One York";
+        } else if ((mousePosition.getX() > mapController.getCenWest_dusk_min().getX()) && (mousePosition.getX() < mapController.getCenWest_dusk_max().getX()) && (mousePosition.getY() > mapController.getCenWest_dusk_min().getY()) && (mousePosition.getY() < mapController.getCenWest_dusk_max().getY())) {
+            selectedItem = "Dusk";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "CentralYorkMap";
+            mapView.setImage(centralYorkImage);
+        }
+    }
+
+    private void cenCenMapSelection(Point2D mousePosition) {
+        if ((mousePosition.getX() > mapController.getCenCen_brew_min().getX()) && (mousePosition.getX() < mapController.getCenCen_brew_max().getX()) && (mousePosition.getY() > mapController.getCenCen_brew_min().getY()) && (mousePosition.getY() < mapController.getCenCen_brew_max().getY())) {
+            selectedItem = "Brew & Brownie";
+        } else if ((mousePosition.getX() > mapController.getCenCen_evil_min().getX()) && (mousePosition.getX() < mapController.getCenCen_evil_max().getX()) && (mousePosition.getY() > mapController.getCenCen_evil_min().getY()) && (mousePosition.getY() < mapController.getCenCen_evil_max().getY())) {
+            selectedItem = "Evil Eye";
+        } else if ((mousePosition.getX() > mapController.getCenCen_cats_min().getX()) && (mousePosition.getX() < mapController.getCenCen_cats_max().getX()) && (mousePosition.getY() > mapController.getCenCen_cats_min().getY()) && (mousePosition.getY() < mapController.getCenCen_cats_max().getY())) {
+            selectedItem = "The Cat's Whiskers";
+        } else if ((mousePosition.getX() > mapController.getCenCen_revs_min().getX()) && (mousePosition.getX() < mapController.getCenCen_revs_max().getX()) && (mousePosition.getY() > mapController.getCenCen_revs_min().getY()) && (mousePosition.getY() < mapController.getCenCen_revs_max().getY())) {
+            selectedItem = "Revolution York";
+        } else if ((mousePosition.getX() > mapController.getCenCen_allBarOne_min().getX()) && (mousePosition.getX() < mapController.getCenCen_allBarOne_max().getX()) && (mousePosition.getY() > mapController.getCenCen_allBarOne_min().getY()) && (mousePosition.getY() < mapController.getCenCen_allBarOne_max().getY())) {
+            selectedItem = "All Bar One York";
+        } else if ((mousePosition.getX() > mapController.getCenCen_dusk_min().getX()) && (mousePosition.getX() < mapController.getCenCen_dusk_max().getX()) && (mousePosition.getY() > mapController.getCenCen_dusk_min().getY()) && (mousePosition.getY() < mapController.getCenCen_dusk_max().getY())) {
+            selectedItem = "Dusk";
+        } else if ((mousePosition.getX() > mapController.getCenCen_lucky_min().getX()) && (mousePosition.getX() < mapController.getCenCen_lucky_max().getX()) && (mousePosition.getY() > mapController.getCenCen_lucky_min().getY()) && (mousePosition.getY() < mapController.getCenCen_lucky_max().getY())) {
+            selectedItem = "Lucky Days";
+        } else if ((mousePosition.getX() > mapController.getCenCen_choc_min().getX()) && (mousePosition.getX() < mapController.getCenCen_choc_max().getX()) && (mousePosition.getY() > mapController.getCenCen_choc_min().getY()) && (mousePosition.getY() < mapController.getCenCen_choc_max().getY())) {
+            selectedItem = "York's Chocolate Story";
+        } else if ((mousePosition.getX() > mapController.getCenCen_nana_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana_max().getY())) {
+            selectedItem = "NaNa Noodle Bar";
+        } else if ((mousePosition.getX() > mapController.getCenCen_nana2_min().getX()) && (mousePosition.getX() < mapController.getCenCen_nana2_max().getX()) && (mousePosition.getY() > mapController.getCenCen_nana2_min().getY()) && (mousePosition.getY() < mapController.getCenCen_nana2_max().getY())) {
+            selectedItem = "NaNa Noodle Bar";
+        } else if ((mousePosition.getX() > mapController.getCenCen_deniz_min().getX()) && (mousePosition.getX() < mapController.getCenCen_deniz_max().getX()) && (mousePosition.getY() > mapController.getCenCen_deniz_min().getY()) && (mousePosition.getY() < mapController.getCenCen_deniz_max().getY())) {
+            selectedItem = "Deniz Best Kebab";
+        } else if ((mousePosition.getX() > mapController.getCenCen_drift_min().getX()) && (mousePosition.getX() < mapController.getCenCen_drift_max().getX()) && (mousePosition.getY() > mapController.getCenCen_drift_min().getY()) && (mousePosition.getY() < mapController.getCenCen_drift_max().getY())) {
+            selectedItem = "Drift-In York";
+        } else {
+            selectedItem = "ignore";
+            desiredMap = "CentralYorkMap";
+            mapView.setImage(centralYorkImage);
+        }
     }
 
     /**
@@ -380,7 +761,6 @@ public class MainController {
      */
     private void createImageObjects() {
         try {
-            //baseMapImage = new Image(new FileInputStream("@../resources/Maps/baseMap.png"));
             baseMapImage = new Image(new FileInputStream("src/main/resources/Maps/baseMap.png"));
             centralCentralYorkImage = new Image(new FileInputStream("src/main/resources/Maps/centralCentralYorkMap.png"));
             centralYorkImage = new Image(new FileInputStream("src/main/resources/Maps/centralYorkMap.png"));
@@ -430,7 +810,7 @@ public class MainController {
         controller.setUser(currUser);
         controller.setMapStage((Stage)mainWindow.getScene().getWindow());
         stage.setScene(scene);
-        stage.setTitle("Account Creation");
+        stage.setTitle("Account Details");
         stage.show();
         stage.setResizable(false);
     }
@@ -489,7 +869,7 @@ public class MainController {
 
         System.out.println("Opening about page");
 
-        stage.setTitle("WiseGuide by Maptrix - " + client.getCurrVersion());
+        stage.setTitle("About Page");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
@@ -501,7 +881,7 @@ public class MainController {
      *     Loads the list of venues into the listview on the main application
      * </p>
      */
-    protected void loadListOfVenues() {
+    protected void loadListOfVenuesAndRoutes() {
 
 
         //Tries to download the venue lists from the server
@@ -516,7 +896,7 @@ public class MainController {
 
 
         //Provides the controller with the list of venue types it should expect
-        xml = new  VenueXMLParser(client.getFile("venuesLocation.xml"));
+        xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
         List<String> venueNameList = xml.getPageNames();
 
@@ -527,174 +907,107 @@ public class MainController {
             //Strips the header and final quotation mark from each title
             String stripped_title = s.substring(7, s.length() -1);
 
-            venueList.getItems().add(stripped_title);
+            System.out.println(stripped_title);
+
+            switch(xml.getPage("title", stripped_title).attributes.get("category")) {
+                case "nightclub":
+                    clubsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "bar":
+                    barsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "cafe":
+                    cafesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "restaurant":
+                    restaurantsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "fast_food":
+                    fastFoodList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "pub":
+                    pubsList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "green_space":
+                    greenSpacesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "study_space":
+                    studySpacesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "sightseeing":
+                    sightseeingList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                case "route":
+                    routesList.getItems().add(stripped_title.replaceAll("_", " "));
+                    break;
+                default:
+                    System.out.println("Error: No category " + xml.getPage("title", stripped_title).attributes.get("category") + " for page " + stripped_title);
+                    break;
+            }
+
+
+            //venueList.getItems().add(stripped_title.replaceAll("_", " "));
 
 
         }
     }
 
-/*
-    private final Point2D base_NRM_min = new Point2D(344, 202);
-    private final Point2D base_NRM_max = new Point2D(373, 240);
 
-    private final Point2D base_25_min = new Point2D(437, 200);
-    private final Point2D base_25_max = new Point2D(475, 249);
+    /**
+     * This opens the user manual which is stored in the Maptrix File Directory on Google Drive
+     */
+    @FXML
+    public void onUserManualMenuButtonPress(){
 
-    private final Point2D base_SW3_min = new Point2D(509, 251);
-    private final Point2D base_SW3_max = new Point2D(545, 295);
-
-    private final Point2D base_UoY_min = new Point2D(738, 336);
-    private final Point2D base_UoY_max = new Point2D(776, 388);
-
-    private final Point2D base_Charles_min = new Point2D(665, 347);
-    private final Point2D base_Charles_max = new Point2D(695, 388);
-
-    private final Point2D base_RKC_min = new Point2D(599, 347);
-    private final Point2D base_RKC_max = new Point2D(626, 383);
-
-    private final Point2D base_JBM_min = new Point2D(630, 309);
-    private final Point2D base_JBM_max = new Point2D(656, 345);
-
-    private final Point2D base_rowntree_min = new Point2D(439, 319);
-    private final Point2D base_rowntree_max = new Point2D(465, 354);
-
-    private final Point2D base_millennium_min = new Point2D(445, 384);
-    private final Point2D base_millennium_max = new Point2D(474, 420);
-
-    private final Point2D UoY3_JBM_min = new Point2D(308, 283);
-    private final Point2D UoY3_JBM_max = new Point2D(336, 321);
-
-    private final Point2D UoY3_RKC_min = new Point2D(243, 391);
-    private final Point2D UoY3_RKC_max = new Point2D(270, 428);
-
-    private final Point2D UoY3_Charles_min = new Point2D(444, 418);
-    private final Point2D UoY3_Charles_max = new Point2D(471, 456);
-
-    private final Point2D UoY3_BlackBull_min = new Point2D(467, 138);
-    private final Point2D UoY3_BlackBull_max = new Point2D(495, 175);
-
-    private final Point2D UoY3_Cecils_min = new Point2D(728, 242);
-    private final Point2D UoY3_Cecils_max = new Point2D(756, 276);
-
-    private final Point2D UoY3_RCH_min = new Point2D(710, 362);
-    private final Point2D UoY3_RCH_max = new Point2D(739, 399);
-
-    private final Point2D UoY3_Piazza_min = new Point2D(763, 332);
-    private final Point2D UoY3_Piazza_max = new Point2D(791, 360);
+        try {
+            Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1w9P1IKH5lbeHghuY0YJpdP8F_PjkEj6R/edit?usp=sharing&ouid=111971918555544856801&rtpof=true&sd=true").toURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
 
-    // Getters for all points
-    public Point2D getBase_NRM_min() {
-        return base_NRM_min;
-    }
-    public Point2D getBase_NRM_max() {
-        return base_NRM_max;
     }
 
-    public Point2D getBase_25_min() {
-        return base_25_min;
-    }
-    public Point2D getBase_25_max() {
-        return base_25_max;
+
+    /**
+     * This opens the venue selector page on the GUI - it is linked to the venue select menu item
+     */
+    @FXML
+    public void onVenueSelectorMenuButtonPress() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("venue-selector-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage stage = new Stage();
+
+        VenueSelectPageController controller = fxmlLoader.getController();
+
+
+        controller.setClient(client);
+        controller.setCurrUser(currUser);
+        controller.setXml(xml);
+
+        //Get the current list of venues from the main application
+        List<String> listOfVenues = xml.getPageNames();
+
+        List<String> strippedListOfVenues =  new ArrayList();
+
+        for(String s: listOfVenues){
+           s =  s.substring(7, s.length() -1);
+           strippedListOfVenues.add(s);
+        }
+
+        controller.setListOfVenues(strippedListOfVenues);
+
+        System.out.println("Opening venue select page");
+
+        stage.setTitle("Venue Select!");
+        stage.setScene(scene);
+        stage.show();
+        stage.setResizable(false);
+
+
     }
 
-    public Point2D getBase_SW3_min() {
-        return base_SW3_min;
-    }
-    public Point2D getBase_SW3_max() {
-        return base_SW3_max;
-    }
 
-    public Point2D getBase_UoY_min() {
-        return base_UoY_min;
-    }
-    public Point2D getBase_UoY_max() {
-        return base_UoY_max;
-    }
-
-    public Point2D getBase_Charles_min() {
-        return base_Charles_min;
-    }
-    public Point2D getBase_Charles_max() {
-        return base_Charles_max;
-    }
-
-    public Point2D getBase_RKC_min() {
-        return base_RKC_min;
-    }
-    public Point2D getBase_RKC_max() {
-        return base_RKC_max;
-    }
-
-    public Point2D getBase_JBM_min() {
-        return base_JBM_min;
-    }
-    public Point2D getBase_JBM_max() {
-        return base_JBM_max;
-    }
-
-    public Point2D getBase_rowntree_min() {
-        return base_rowntree_min;
-    }
-    public Point2D getBase_rowntree_max() {
-        return base_rowntree_max;
-    }
-
-    public Point2D getBase_millennium_min() {
-        return base_millennium_min;
-    }
-    public Point2D getBase_millennium_max() {
-        return base_millennium_max;
-    }
-
-    public Point2D getUoY3_JBM_min() {
-        return UoY3_JBM_min;
-    }
-    public Point2D getUoY3_JBM_max() {
-        return UoY3_JBM_max;
-    }
-
-    public Point2D getUoY3_RKC_min() {
-        return UoY3_RKC_min;
-    }
-    public Point2D getUoY3_RKC_max() {
-        return UoY3_RKC_max;
-    }
-
-    public Point2D getUoY3_Charles_min() {
-        return UoY3_Charles_min;
-    }
-    public Point2D getUoY3_Charles_max() {
-        return UoY3_Charles_max;
-    }
-
-    public Point2D getUoY3_BlackBull_min() {
-        return UoY3_BlackBull_min;
-    }
-    public Point2D getUoY3_BlackBull_max() {
-        return UoY3_BlackBull_max;
-    }
-
-    public Point2D getUoY3_Cecils_min() {
-        return UoY3_Cecils_min;
-    }
-    public Point2D getUoY3_Cecils_max() {
-        return UoY3_Cecils_max;
-    }
-
-    public Point2D getUoY3_RCH_min() {
-        return UoY3_RCH_min;
-    }
-    public Point2D getUoY3_RCH_max() {
-        return UoY3_RCH_max;
-    }
-
-    public Point2D getUoY3_Piazza_min() {
-        return UoY3_Piazza_min;
-    }
-    public Point2D getUoY3_Piazza_max() {
-        return UoY3_Piazza_max;
-    }
-
- */
 }
