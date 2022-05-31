@@ -26,7 +26,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VenueDetailsController">
 
@@ -57,12 +56,8 @@
             </Button>
         </HBox>
         <HBox prefHeight="300.0" prefWidth="900.0">
-            <MediaView fx:id="venueVideo" fitHeight="220.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-                <HBox.margin>
-                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                </HBox.margin>
-            </MediaView>
-            <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0" style="-fx-wrap-text: true;">
+            <AnchorPane fx:id="videoAnchorPane" layoutX="-2.0" prefHeight="236.0" prefWidth="400.0" />
+            <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0">
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>

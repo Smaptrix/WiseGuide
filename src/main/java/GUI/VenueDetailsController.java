@@ -213,14 +213,6 @@ public class VenueDetailsController {
         venueName.setText(currVenue);
 
         //Add alt text button image
-
-
-
-
-
-
-
-
         int textIndex = 0;
         int photoIndex = 0;
         int maxPhotoIndex = 5;
@@ -422,8 +414,6 @@ public class VenueDetailsController {
         ratingGroup.getChildren().add(triangle3);
         ratingGroup.getChildren().add(triangle4);
         ratingGroup.getChildren().add(triangle5);
-            }
-        }
 
         // video
         for(int i = 0; i < currVenuePage.children.size(); i++) {
@@ -431,19 +421,14 @@ public class VenueDetailsController {
         }
 
         String videoFile = (currVenuePage.getMediaSourceByID("video0"));
-        System.out.println("Video file: " + videoFile);
 
         File videoTempFile = client.requestFile(videoFile);
 
-        System.out.println(videoTempFile);
-
-        VideoHandler videoHandler = new VideoHandler(videoTempFile, 470, 100);
-        System.out.println("VideoHandler created." + videoHandler);
-        System.out.println(videoHandler.getMediaView());
+        VideoHandler videoHandler = new VideoHandler(videoTempFile, (int) videoAnchorPane.getHeight(), (int) videoAnchorPane.getWidth());
 
         videoAnchorPane.getChildren().add(videoHandler);
-        System.out.println("Videohandler added to Anchorpane");
-        videoHandler.play();
+        //Video End
+
     }
 
     /**
@@ -552,7 +537,7 @@ public class VenueDetailsController {
             }
             //If the user doesn't have a venue list
             else{
-                //Create a venue list with the current venue inside of it and give it to the current user
+                //Create a venue list with the current venue inside it and give it to the current user
                 String[] userFaves = {currVenue};
 
                 currUser.setFaveVenues(userFaves);
