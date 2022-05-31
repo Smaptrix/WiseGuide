@@ -35,7 +35,7 @@
             </Menu>
          <Menu id="venueSelectMenu" fx:id="venueSelectMenu" mnemonicParsing="false" text="Venue Selector">
            <items>
-             <MenuItem fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
+             <MenuItem id="venueSelectorMenuItem" fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
            </items>
          </Menu>
             <Menu fx:id="menuBarAccount" mnemonicParsing="false" text="Account">
