@@ -577,9 +577,7 @@ public class VenueDetailsController {
         }
 
         //Gets the text file
-        System.out.println(currVenuePage.children);
-        System.out.println(currVenuePage.getChildrenType());
-        String altTextFile = (currVenuePage.getMediaSourceByID("otherText0"));
+        String altTextFile = (currVenuePage.getMediaSourceByID("altText0"));
         System.out.println("File: " + altTextFile);
 
         File tempTextFile = client.requestFile(altTextFile);

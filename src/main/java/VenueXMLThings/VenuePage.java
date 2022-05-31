@@ -2,10 +2,7 @@ package VenueXMLThings;
 
 import org.w3c.dom.Node;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 /**
  * Stores all relevant media data in a tree for one specific venue.
@@ -132,13 +129,15 @@ public class VenuePage {
      */
     public String getMediaSourceByID(String IDSearch) {
 
+        System.out.println("");
+
         System.out.println(this.attributes);
             for(int i = 0; i < this.children.size(); i++) {
                 MediaElement element = null;
                 try {
-                    if (IDSearch.contains("text") && this.children.get(i).attributes.get("type").equals("textbox")) {
+                    if ((IDSearch.contains("text") || IDSearch.contains("altText")) && this.children.get(i).attributes.get("type").equals("textbox")) {
                         for(int j = 0; j <= this.children.get(i).children.size() - 1; ++j) {
-                            if (children.get(i).children.get(j).ID.contains("text")) {
+                            if (children.get(i).children.get(j).ID.contains("text") || children.get(i).children.get(j).ID.contains("altText")) {
                                 element = this.children.get(i).children.get(j);
                                 j = this.children.get(i).children.size();
                             }
