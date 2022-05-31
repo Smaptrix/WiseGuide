@@ -54,13 +54,7 @@
             </Button>
         </HBox>
         <HBox prefHeight="300.0" prefWidth="900.0">
-
-            <Pane pickOnBounds="true" prefHeight="220.0" prefWidth="400.0">
-            <children>
-               <AnchorPane fx:id="videoAnchorPane" layoutX="-2.0" prefHeight="236.0" prefWidth="400.0" />
-            </children>
-
-            </Pane>
+            <AnchorPane fx:id="videoAnchorPane" layoutX="-2.0" prefHeight="236.0" prefWidth="400.0" />
             <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0">
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

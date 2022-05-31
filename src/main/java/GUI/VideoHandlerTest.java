@@ -10,8 +10,10 @@ import mediahandlers.VideoHandler;
 
 import java.io.File;
 
+/*
 public class VideoHandlerTest extends Application {
 
+    /*
     @Override
     public void start(Stage stage){
 
@@ -24,11 +26,8 @@ public class VideoHandlerTest extends Application {
 
         VideoHandler test = new VideoHandler(source, height, width);
 
-        AnchorPane group = new AnchorPane();
 
-        group.getChildren().add(test);
-
-        Scene testScene = new Scene(group, width, height, Color.BLACK);
+        Scene testScene = new Scene(test, width, height, Color.BLACK);
 
         stage.setTitle("Video Handler Test");
 
@@ -43,3 +42,6 @@ public class VideoHandlerTest extends Application {
     }
 
 }
+*/
+
+

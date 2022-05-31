@@ -295,20 +295,24 @@ public class VenueDetailsController {
         }
 
         // video
-        for(int i = 0; i<currVenuePage.children.size(); i++) {
+        for(int i = 0; i < currVenuePage.children.size(); i++) {
             System.out.println(currVenuePage.children.get(i).attributes);
         }
 
         String videoFile = (currVenuePage.getMediaSourceByID("video0"));
         System.out.println("Video file: " + videoFile);
 
-        client.requestFile(videoFile);
+        File videoTempFile = client.requestFile(videoFile);
 
-        VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
-        System.out.println("VideoHandler created.");
+        System.out.println(videoTempFile);
+
+        VideoHandler videoHandler = new VideoHandler(videoTempFile, 470, 100);
+        System.out.println("VideoHandler created." + videoHandler);
+        System.out.println(videoHandler.getMediaView());
 
         videoAnchorPane.getChildren().add(videoHandler);
-
+        System.out.println("Videohandler added to Anchorpane");
+        videoHandler.play();
     }
 
     /**

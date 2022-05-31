@@ -61,13 +61,13 @@ public class VideoHandler extends BorderPane {
      * @param heightIn Desired initial media height.
      * @param widthIn  Desired initial media width.
      */
-    public VideoHandler(String filePath, int heightIn, int widthIn) {
+    public VideoHandler(File filePath, int heightIn, int widthIn) {
 
-        //toString(filePath);
-        source = filePath;
-
+        toString(filePath);
+        System.out.println("Media file source: " + source);
         try {
             this.media = new Media(source);
+            System.out.println("Media: " + media);
             if (media.getError() == null) {
                 media.setOnError(new Runnable() {
                     public void run() {
@@ -76,6 +76,9 @@ public class VideoHandler extends BorderPane {
                 });
                 try {
                     this.mediaPlayer = new MediaPlayer(media);
+
+                    System.out.println("MEdiaPlayeR:" + mediaPlayer);
+
                     if (mediaPlayer.getError() == null) {
                         mediaPlayer.setOnError(new Runnable() {
                             public void run() {
@@ -109,6 +112,8 @@ public class VideoHandler extends BorderPane {
             }
         } catch (Exception mediaException) {
             // Handle exception in Media constructor.
+            System.out.println(mediaException);
+            System.out.println("Exception Thrown");
         }
     }
 
