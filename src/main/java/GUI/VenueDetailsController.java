@@ -177,7 +177,7 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage5;
     @FXML
-    public Group videoGroup;
+    public AnchorPane videoAnchorPane;
 
     @FXML
     //Always called by the FXML Loader
@@ -305,7 +305,9 @@ public class VenueDetailsController {
         client.requestFile(videoFile);
 
         VideoHandler videoHandler = new VideoHandler(videoFile, 470, 100);
-        videoGroup.getChildren().add(videoHandler.getMediaView());
+        System.out.println("VideoHandler created.");
+
+        videoAnchorPane.getChildren().add(videoHandler);
 
     }
 

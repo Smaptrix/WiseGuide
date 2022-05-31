@@ -136,6 +136,17 @@ public class VideoHandler extends BorderPane {
 
     /**
      * <p>
+     * Method returns the Media Pane
+     * </p>
+     *
+     * @return mpane of type Pane
+     */
+    public Pane getMediaPane() {
+        return mpane;
+    }
+
+    /**
+     * <p>
      * Method plays the video.
      * </p>
      */

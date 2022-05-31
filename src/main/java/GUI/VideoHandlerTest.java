@@ -1,7 +1,9 @@
 package GUI;
 
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import mediahandlers.VideoHandler;
@@ -22,7 +24,11 @@ public class VideoHandlerTest extends Application {
 
         VideoHandler test = new VideoHandler(source, height, width);
 
-        Scene testScene = new Scene(test, width, height, Color.BLACK);
+        AnchorPane group = new AnchorPane();
+
+        group.getChildren().add(test);
+
+        Scene testScene = new Scene(group, width, height, Color.BLACK);
 
         stage.setTitle("Video Handler Test");
 
