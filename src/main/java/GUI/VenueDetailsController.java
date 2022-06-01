@@ -132,6 +132,21 @@ public class VenueDetailsController {
     @FXML
     public Button faveVenueButton;
 
+    /**
+     * <p>
+     *     This button allows the user to return to the main window.
+     * </p>
+     */
+    @FXML
+    public Button goBack;
+
+    /**
+     * <p>
+     *     The close button
+     * </p>
+     */
+    @FXML
+    public MenuItem menuClose;
 
     /**
      * <p>
@@ -153,7 +168,7 @@ public class VenueDetailsController {
      * </p>
      */
     @FXML
-    MenuItem aboutButton;
+    public MenuItem aboutButton;
     /**
      * <p>
      *     This button on the menubar allows the user to go back to the main application

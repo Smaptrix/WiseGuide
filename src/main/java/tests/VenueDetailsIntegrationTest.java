@@ -27,7 +27,7 @@ import java.util.concurrent.TimeoutException;
  *     Tests for the Venue Details page.
  * </p>
  */
-public class VenueDetailsPageTest extends ApplicationTest {
+public class VenueDetailsIntegrationTest extends ApplicationTest {
 
 
     public Client client;

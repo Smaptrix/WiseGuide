@@ -297,7 +297,7 @@ public class MainGUITests extends ApplicationTest {
 
     //Unit Test | Check sightseeing lists
     @Test
-    public void sightseeingList(){
+    public void sightseeingListTest(){
         sleep(1000);
         controller.loadListOfVenuesAndRoutes();
         sleep(1000);

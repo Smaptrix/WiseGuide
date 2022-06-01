@@ -32,10 +32,10 @@
 
     <VBox fx:id="mainWindow" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <MenuBar>
-            <Menu mnemonicParsing="false" text="File">
+            <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
                 <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
             </Menu>
-            <Menu mnemonicParsing="false" text="Help">
+            <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
                 <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#onAboutButtonPress" text="About" />
             </Menu>
         </MenuBar>
