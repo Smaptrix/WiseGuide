@@ -54,11 +54,11 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                         <TitledPane animated="false" prefHeight="366.0" prefWidth="219.0" text="Venues" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                <ScrollPane prefHeight="339.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <ScrollPane fx:id="venueScrollPane" prefHeight="339.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <Accordion fx:id="venueAccordion">
                                  <panes>
-                                    <TitledPane animated="false" expanded="false" text="Bars">
+                                    <TitledPane fx:id="barsPane" animated="false" expanded="false" text="Bars">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -67,7 +67,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" expanded="false" text="Cafés">
+                                    <TitledPane fx:id="cafesPane" animated="false" expanded="false" text="Cafés">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -76,7 +76,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Clubs">
+                                    <TitledPane fx:id="clubsPane" animated="false" text="Clubs">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -85,7 +85,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" expanded="false" text="Fast Food">
+                                    <TitledPane fx:id="foodPane" animated="false" expanded="false" text="Fast Food">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -94,7 +94,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" layoutX="10.0" layoutY="86.0" text="Pubs">
+                                    <TitledPane fx:id="pubsPane" animated="false" layoutX="10.0" layoutY="86.0" text="Pubs">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -103,7 +103,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Restaurants">
+                                    <TitledPane fx:id="restaurantsPane" animated="false" text="Restaurants">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -112,7 +112,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Green Spaces">
+                                    <TitledPane fx:id="greenPane" animated="false" text="Green Spaces">
                                        <content>
                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                <children>
@@ -121,7 +121,7 @@
                                            </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Study Spaces">
+                                    <TitledPane fx:id="studyPane" animated="false" text="Study Spaces">
                                        <content>
                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                <children>
@@ -130,7 +130,7 @@
                                            </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Sightseeing">
+                                    <TitledPane fx:id="sightseeingPane" animated="false" text="Sightseeing">
                                        <content>
                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                <children>

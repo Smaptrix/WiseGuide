@@ -182,10 +182,134 @@ public class MainGUITests extends ApplicationTest {
         FxAssert.verifyThat("#barsPane",Node::isVisible);
         FxAssert.verifyThat("#barsPane",LabeledMatchers.hasText("Bars"));
         FxAssert.verifyThat("#barsList",Node::isVisible);
+        FxAssert.verifyThat("#barsList", ListViewMatchers.hasListCell("The Stone Roses Bar"));
+        FxAssert.verifyThat("#barsList", ListViewMatchers.hasListCell("Dusk"));
+        FxAssert.verifyThat("#barsList", ListViewMatchers.hasListCell("Evil Eye"));
         FxAssert.verifyThat("#barsList", ListViewMatchers.hasListCell("All Bar One York"));
     }
 
-    //TODO: Check the other lists
+    //Unit Test | Check clubs lists
+    @Test
+    public void clubsListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#clubsPane",Node::isVisible);
+        FxAssert.verifyThat("#clubsPane",LabeledMatchers.hasText("Clubs"));
+        FxAssert.verifyThat("#clubsList",Node::isVisible);
+        FxAssert.verifyThat("#clubsList", ListViewMatchers.hasListCell("Flares York"));
+        FxAssert.verifyThat("#clubsList", ListViewMatchers.hasListCell("Club Salvation"));
+        FxAssert.verifyThat("#clubsList", ListViewMatchers.hasListCell("Kuda"));
+        FxAssert.verifyThat("#clubsList", ListViewMatchers.hasListCell("Popworld York"));
+        FxAssert.verifyThat("#clubsList", ListViewMatchers.hasListCell("Revolution York"));
+        FxAssert.verifyThat("#clubsList", ListViewMatchers.hasListCell("Flares York"));
+    }
+
+    //Unit Test | Check cafe lists
+    @Test
+    public void cafesListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#cafesPane",Node::isVisible);
+        FxAssert.verifyThat("#cafesPane",LabeledMatchers.hasText("Cafés"));
+        FxAssert.verifyThat("#cafesList",Node::isVisible);
+        FxAssert.verifyThat("#cafesList", ListViewMatchers.hasListCell("The Cat's Whiskers"));
+        FxAssert.verifyThat("#cafesList", ListViewMatchers.hasListCell("Drift-In York"));
+        FxAssert.verifyThat("#cafesList", ListViewMatchers.hasListCell("Brew & Brownie"));
+        FxAssert.verifyThat("#cafesList", ListViewMatchers.hasListCell("Lucky Days"));
+    }
+
+    //Unit Test | Check restaurant lists
+    @Test
+    public void restaurantsListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#restaurantsPane",Node::isVisible);
+        FxAssert.verifyThat("#restaurantsPane",LabeledMatchers.hasText("Restaurants"));
+        FxAssert.verifyThat("#restaurantsList",Node::isVisible);
+        FxAssert.verifyThat("#restaurantsList", ListViewMatchers.hasListCell("Il Paradiso Del Cibo"));
+        FxAssert.verifyThat("#restaurantsList", ListViewMatchers.hasListCell("Spark York C.I.C"));
+        FxAssert.verifyThat("#restaurantsList", ListViewMatchers.hasListCell("Cosy Club"));
+        FxAssert.verifyThat("#restaurantsList", ListViewMatchers.hasListCell("Cresci Pizzeria"));
+    }
+
+    //Unit Test | Check fast food lists
+    @Test
+    public void fastFoodListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#foodPane",Node::isVisible);
+        FxAssert.verifyThat("#foodPane",LabeledMatchers.hasText("Fast Food"));
+        FxAssert.verifyThat("#foodPane",Node::isVisible);
+        FxAssert.verifyThat("#fastFoodList", ListViewMatchers.hasListCell("Deniz Best Kebab"));
+        FxAssert.verifyThat("#fastFoodList", ListViewMatchers.hasListCell("NaNa Noodle Bar"));
+        FxAssert.verifyThat("#fastFoodList", ListViewMatchers.hasListCell("Cecil's Pizza - Grill"));
+        FxAssert.verifyThat("#fastFoodList", ListViewMatchers.hasListCell("Efes Pizza"));
+    }
+
+    //Unit Test | Check pubs lists
+    @Test
+    public void pubListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#pubsPane",Node::isVisible);
+        FxAssert.verifyThat("#pubsPane",LabeledMatchers.hasText("Pubs"));
+        FxAssert.verifyThat("#pubsPane",Node::isVisible);
+        FxAssert.verifyThat("#pubsList", ListViewMatchers.hasListCell("Charles XII"));
+        FxAssert.verifyThat("#pubsList", ListViewMatchers.hasListCell("The Waggon & Horses"));
+        FxAssert.verifyThat("#pubsList", ListViewMatchers.hasListCell("The Black Bull"));
+        FxAssert.verifyThat("#pubsList", ListViewMatchers.hasListCell("The Rook & Gaskill"));
+    }
+
+    //Unit Test | Check green spaces lists
+    @Test
+    public void greenListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#greenPane",Node::isVisible);
+        FxAssert.verifyThat("#greenPane",LabeledMatchers.hasText("Green Spaces"));
+        FxAssert.verifyThat("#greenPane",Node::isVisible);
+        FxAssert.verifyThat("#greenSpacesList", ListViewMatchers.hasListCell("Museum Gardens"));
+        FxAssert.verifyThat("#greenSpacesList", ListViewMatchers.hasListCell("Rowntree Park"));
+        FxAssert.verifyThat("#greenSpacesList", ListViewMatchers.hasListCell("Dean's Park"));
+        FxAssert.verifyThat("#greenSpacesList", ListViewMatchers.hasListCell("Millennium Fields"));
+    }
+
+    //Unit Test | Check study spaces lists
+    @Test
+    public void studyListTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#studyPane",Node::isVisible);
+        FxAssert.verifyThat("#studyPane",LabeledMatchers.hasText("Study Spaces"));
+        FxAssert.verifyThat("#studyPane",Node::isVisible);
+        FxAssert.verifyThat("#studySpacesList", ListViewMatchers.hasListCell("University of York JB Morrell Library"));
+        FxAssert.verifyThat("#studySpacesList", ListViewMatchers.hasListCell("Piazza Building"));
+        FxAssert.verifyThat("#studySpacesList", ListViewMatchers.hasListCell("The Ron Cooke Hub"));
+        FxAssert.verifyThat("#studySpacesList", ListViewMatchers.hasListCell("Roger Kirk Centre"));
+    }
+
+    //Unit Test | Check sightseeing lists
+    @Test
+    public void sightseeingList(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#sightseeingPane",Node::isVisible);
+        FxAssert.verifyThat("#sightseeingPane",LabeledMatchers.hasText("Sightseeing"));
+        FxAssert.verifyThat("#sightseeingPane",Node::isVisible);
+        FxAssert.verifyThat("#sightseeingList", ListViewMatchers.hasListCell("York City Walls"));
+        FxAssert.verifyThat("#sightseeingList", ListViewMatchers.hasListCell("York Minster"));
+        FxAssert.verifyThat("#sightseeingList", ListViewMatchers.hasListCell("National Railway Museum York"));
+        FxAssert.verifyThat("#sightseeingList", ListViewMatchers.hasListCell("The Hole In Wand"));
+        FxAssert.verifyThat("#sightseeingList", ListViewMatchers.hasListCell("York's Chocolate Story"));
+    }
 
     //Integration Test | Open a Bar (#barsList defaults to All Bar One York)
     @Test
@@ -252,6 +376,19 @@ public class MainGUITests extends ApplicationTest {
         FxAssert.verifyThat(window("Cresci Pizzeria"), WindowMatchers.isShowing());
     }
 
+    //Integration Test | Open a Fast Food Place (#foodPane defaults to Efes Pizza)
+    @Test
+    public void openFastFoodTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        clickOn("#foodPane");
+        sleep(1000);
+        doubleClickOn("#fastFoodList");
+        sleep(1000);
+        FxAssert.verifyThat(window("Efes Pizza"), WindowMatchers.isShowing());
+    }
+
     //Integration Test | Open a Green Space (#greenSpacesList defaults to Millennium Fields)
     @Test
     public void openGreenSpaceTest(){
@@ -280,7 +417,7 @@ public class MainGUITests extends ApplicationTest {
         FxAssert.verifyThat(window("Roger Kirk Centre"), WindowMatchers.isShowing());
     }
 
-    //Integration Test | Open a Sightseeing Space (#sightseeingList defaults to The Hole in Wand)
+    //Integration Test | Open a Sightseeing Space (#sightseeingList defaults to The Hole In Wand)
     @Test
     public void openSightseeingTest(){
         sleep(1000);
@@ -291,7 +428,7 @@ public class MainGUITests extends ApplicationTest {
         controller.venueScrollPane.setVvalue(10);
         doubleClickOn("#sightseeingList");
         sleep(1000);
-        FxAssert.verifyThat(window("The Hole in Wand"), WindowMatchers.isShowing());
+        FxAssert.verifyThat(window("The Hole In Wand"), WindowMatchers.isShowing());
     }
 
     //Manual Tests | Provides an opportunity for manual tests to be performed
