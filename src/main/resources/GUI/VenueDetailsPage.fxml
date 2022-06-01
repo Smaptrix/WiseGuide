@@ -132,7 +132,7 @@
                     </GridPane.margin>
                     <Image url="@InfoLogo.png"/>
                 </ImageView>
-                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#altText4"layoutX="25.0" layoutY="154.0"
+                <ImageView id="altTextIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#altText4" layoutX="25.0" layoutY="154.0"
                            pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="100.0" top="70.0"/>
