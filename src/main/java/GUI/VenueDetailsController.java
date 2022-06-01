@@ -12,7 +12,6 @@ import VenueXMLThings.VenuePage;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
@@ -26,21 +25,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
 import serverclientstuff.User;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * <p>
@@ -229,7 +223,7 @@ public class VenueDetailsController {
         int textIndex = 0;
         int photoIndex = 0;
         int maxPhotoIndex = 5;
-        String imageFile = null;
+        String imageFile;
         //Downloads every media element required by the venue xml
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
@@ -326,9 +320,9 @@ public class VenueDetailsController {
         Color maptrixDarkBlue = Color.web("0x245164");
 
         //Initiates the 3 price circles
-        Circle priceCircle0 = new Circle();
-        Circle priceCircle1 = new Circle();
-        Circle priceCircle2 = new Circle();
+        Circle priceCircle0;
+        Circle priceCircle1;
+        Circle priceCircle2;
 
         //Initiates the three circle fill colours and sets them to null
         Color circleFill1 = null;
@@ -373,11 +367,11 @@ public class VenueDetailsController {
         }
 
         //Creates 5 instances of triangles
-        Polygon triangle1 = new Polygon();
-        Polygon triangle2 = new Polygon();
-        Polygon triangle3 = new Polygon();
-        Polygon triangle4 = new Polygon();
-        Polygon triangle5 = new Polygon();
+        Polygon triangle1;
+        Polygon triangle2;
+        Polygon triangle3;
+        Polygon triangle4;
+        Polygon triangle5;
 
         //Initiates the three triangle fill colours and sets them to null
         Color triangleFill1 = null;
@@ -509,10 +503,6 @@ public class VenueDetailsController {
 
     }
 
-    public String getCurrVenue() {
-        return currVenue;
-    }
-
     /**
      * <p>
      *     This is the action that occurs when the user presses the favourite button
@@ -542,7 +532,7 @@ public class VenueDetailsController {
             }
             //If the user doesn't have a venue list
             else{
-                //Create a venue list with the current venue inside of it and give it to the current user
+                //Create a venue list with the current venue inside it and give it to the current user
                 String[] userFaves = {currVenue};
 
                 currUser.setFaveVenues(userFaves);
@@ -567,7 +557,7 @@ public class VenueDetailsController {
         }
     }
 
-    public void altText0() throws IOException {
+    public void altText0() {
         try {
             if (image0AltText.isVisible()) {
                 image0AltText.setVisible(false);
@@ -592,7 +582,7 @@ public class VenueDetailsController {
         }
     }
 
-    public void altText1() throws IOException {
+    public void altText1() {
         try {
             if (image1AltText.isVisible()) {
                 image1AltText.setVisible(false);
@@ -617,7 +607,7 @@ public class VenueDetailsController {
         }
     }
 
-    public void altText2() throws IOException {
+    public void altText2() {
         try {
             if (image2AltText.isVisible()) {
                 image2AltText.setVisible(false);
@@ -642,7 +632,7 @@ public class VenueDetailsController {
         }
     }
 
-    public void altText3() throws IOException {
+    public void altText3() {
         try {
             if (image3AltText.isVisible()) {
                 image3AltText.setVisible(false);
@@ -667,7 +657,7 @@ public class VenueDetailsController {
         }
     }
 
-    public void altText4() throws IOException {
+    public void altText4() {
         try {
             if (image4AltText.isVisible()) {
                 image4AltText.setVisible(false);
@@ -692,7 +682,7 @@ public class VenueDetailsController {
         }
     }
 
-    public void altText5() throws IOException {
+    public void altText5() {
         try {
             if (image5AltText.isVisible()) {
                 image5AltText.setVisible(false);
