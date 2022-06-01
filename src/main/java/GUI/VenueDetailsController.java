@@ -432,17 +432,21 @@ public class VenueDetailsController {
         image5AltText.setVisible(false);
 
         // video
-        for(int i = 0; i < currVenuePage.children.size(); i++) {
-            System.out.println(currVenuePage.children.get(i).attributes);
+        try {
+            for (int i = 0; i < currVenuePage.children.size(); i++) {
+                System.out.println(currVenuePage.children.get(i).attributes);
+            }
+
+            String videoFile = (currVenuePage.getMediaSourceByID("video0"));
+
+            File videoTempFile = client.requestFile(videoFile);
+
+            VideoHandler videoHandler = new VideoHandler(videoTempFile, (int) videoAnchorPane.getHeight(), (int) videoAnchorPane.getWidth());
+
+            videoAnchorPane.getChildren().add(videoHandler);
+        } catch (Exception e){
+            System.out.println("No video to load");
         }
-
-        String videoFile = (currVenuePage.getMediaSourceByID("video0"));
-
-        File videoTempFile = client.requestFile(videoFile);
-
-        VideoHandler videoHandler = new VideoHandler(videoTempFile, (int) videoAnchorPane.getHeight(), (int) videoAnchorPane.getWidth());
-
-        videoAnchorPane.getChildren().add(videoHandler);
         //Video End
 
     }
