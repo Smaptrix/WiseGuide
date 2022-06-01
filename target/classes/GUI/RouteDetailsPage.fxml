@@ -93,7 +93,7 @@
             </VBox>
             <VBox prefHeight="600.0" prefWidth="450.0">
                 <TitledPane animated="false" prefHeight="300.0" prefWidth="450.0" text="Text Description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <TextArea id="venueText" fx:id="routeText" prefHeight="200.0" prefWidth="450.0" style="-fx-wrap-text: true;" />
+                    <TextArea id="venueText" fx:id="routeText" prefHeight="200.0" prefWidth="450.0" wrapText="true" editable="false" />
                     <VBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </VBox.margin>

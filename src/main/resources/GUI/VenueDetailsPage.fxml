@@ -57,7 +57,7 @@
         </HBox>
         <HBox prefHeight="300.0" prefWidth="900.0">
             <AnchorPane fx:id="videoAnchorPane" layoutX="-2.0" prefHeight="236.0" prefWidth="400.0" />
-            <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0">
+            <TextArea id="venueText" fx:id="venueText" prefHeight="200.0" prefWidth="470.0" editable="false" wrapText="true">
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>
@@ -88,7 +88,7 @@
                            GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <ImageView fx:id="venueImage5" fitHeight="100.0" fitWidth="130.0" pickOnBounds="true"
                            GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                <TextArea fx:id="image0AltText" prefHeight="300.0" prefWidth="900.0" editable="false" wrapText="true"/>
+                <TextArea fx:id="image0AltText" prefHeight="300.0" prefWidth="900.0" editable="false" wrapText="true" />
                 <TextArea fx:id="image1AltText" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
                           editable="false" wrapText="true"/>
                 <TextArea fx:id="image2AltText" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2"
