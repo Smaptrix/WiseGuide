@@ -570,10 +570,10 @@ public class VenueDetailsController {
     public void altText0() throws IOException {
         if (image0AltText.isVisible()) {
             image0AltText.setVisible(false);
-            System.out.println("Hiding altText");
+            System.out.println("Hiding altText0");
         } else {
             image0AltText.setVisible(true);
-            System.out.println("Displaying altText");
+            System.out.println("Displaying altText0");
         }
 
         //Gets the text file
@@ -586,7 +586,110 @@ public class VenueDetailsController {
         TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
         //Loads the text onto the GUI
         image0AltText.setText(textManager.loadTextFromFile());
+    }
 
+    public void altText1() throws IOException {
+        if (image1AltText.isVisible()) {
+            image1AltText.setVisible(false);
+            System.out.println("Hiding altText1");
+        } else {
+            image1AltText.setVisible(true);
+            System.out.println("Displaying altText1");
+        }
 
+        //Gets the text file
+        String altTextFile = (currVenuePage.getMediaSourceByID("altText1"));
+        System.out.println("File: " + altTextFile);
+
+        File tempTextFile = client.requestFile(altTextFile);
+
+        //Places the text from the text file into the text manager
+        TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+        //Loads the text onto the GUI
+        image1AltText.setText(textManager.loadTextFromFile());
+    }
+
+    public void altText2() throws IOException {
+        if (image2AltText.isVisible()) {
+            image2AltText.setVisible(false);
+            System.out.println("Hiding altText2");
+        } else {
+            image2AltText.setVisible(true);
+            System.out.println("Displaying altText2");
+        }
+
+        //Gets the text file
+        String altTextFile = (currVenuePage.getMediaSourceByID("altText2"));
+        System.out.println("File: " + altTextFile);
+
+        File tempTextFile = client.requestFile(altTextFile);
+
+        //Places the text from the text file into the text manager
+        TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+        //Loads the text onto the GUI
+        image2AltText.setText(textManager.loadTextFromFile());
+    }
+
+    public void altText3() throws IOException {
+        if (image3AltText.isVisible()) {
+            image3AltText.setVisible(false);
+            System.out.println("Hiding altText3");
+        } else {
+            image3AltText.setVisible(true);
+            System.out.println("Displaying altText3");
+        }
+
+        //Gets the text file
+        String altTextFile = (currVenuePage.getMediaSourceByID("altText3"));
+        System.out.println("File: " + altTextFile);
+
+        File tempTextFile = client.requestFile(altTextFile);
+
+        //Places the text from the text file into the text manager
+        TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+        //Loads the text onto the GUI
+        image3AltText.setText(textManager.loadTextFromFile());
+    }
+
+    public void altText4() throws IOException {
+        if (image4AltText.isVisible()) {
+            image4AltText.setVisible(false);
+            System.out.println("Hiding altText4");
+        } else {
+            image4AltText.setVisible(true);
+            System.out.println("Displaying altText4");
+        }
+
+        //Gets the text file
+        String altTextFile = (currVenuePage.getMediaSourceByID("altText4"));
+        System.out.println("File: " + altTextFile);
+
+        File tempTextFile = client.requestFile(altTextFile);
+
+        //Places the text from the text file into the text manager
+        TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+        //Loads the text onto the GUI
+        image4AltText.setText(textManager.loadTextFromFile());
+    }
+
+    public void altText5() throws IOException {
+        if (image5AltText.isVisible()) {
+            image5AltText.setVisible(false);
+            System.out.println("Hiding altText5");
+        } else {
+            image5AltText.setVisible(true);
+            System.out.println("Displaying altText5");
+        }
+
+        //Gets the text file
+        String altTextFile = (currVenuePage.getMediaSourceByID("altText5"));
+        System.out.println("File: " + altTextFile);
+
+        File tempTextFile = client.requestFile(altTextFile);
+
+        //Places the text from the text file into the text manager
+        TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+        //Loads the text onto the GUI
+        image5AltText.setText(textManager.loadTextFromFile());
     }
 }
