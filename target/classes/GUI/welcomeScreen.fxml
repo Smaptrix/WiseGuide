@@ -33,9 +33,9 @@
             <Menu mnemonicParsing="false" text="File">
                 <MenuItem id="closeButton" fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
             </Menu>
-         <Menu mnemonicParsing="false" text="Venue Selector">
+         <Menu id="venueSelectMenu" fx:id="venueSelectMenu" mnemonicParsing="false" text="Venue Selector">
            <items>
-             <MenuItem fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
+             <MenuItem id="venueSelectorMenuItem" fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
            </items>
          </Menu>
             <Menu fx:id="menuBarAccount" mnemonicParsing="false" text="Account">

@@ -151,8 +151,13 @@ public class LoginController {
     public void initialConnection() throws IOException {
 
         client = new Client(); // Creates new instance of client object
-        client.startConnection("127.0.0.1", 5555);
 
+        String defaultIP = "127.0.0.1";
+        int defaultPort = 5555;
+
+
+        client.startConnection(defaultIP, defaultPort);
+        System.out.println("Connection Started!");
     }
 
     /**

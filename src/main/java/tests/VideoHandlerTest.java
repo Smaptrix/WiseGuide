@@ -8,19 +8,22 @@ import mediahandlers.VideoHandler;
 
 import java.io.File;
 
+
 public class VideoHandlerTest extends Application {
 
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
 
         int width = 1280;
         int height = 720;
 
         File testFile = new File("clapping.mp4");
 
-        String source = testFile.toURI().toString();
-
-        VideoHandler test = new VideoHandler(source, height, width);
+        VideoHandler test = new VideoHandler(testFile, height, width);
 
         Scene testScene = new Scene(test, width, height, Color.BLACK);
 
@@ -32,8 +35,6 @@ public class VideoHandlerTest extends Application {
 
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
-
 }
+
+

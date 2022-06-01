@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
+import mediahandlers.VideoHandler;
 import serverclientstuff.User;
 import java.io.File;
 import java.io.IOException;
@@ -114,11 +115,16 @@ public class VenueDetailsController {
     public TextArea venueText;
     /**
      * <p>
-     *     This ImageView is the place that displays the images of the venue
+     *     This MediaView is the place that displays the video of the venue
      * </p>
      */
     @FXML
     public MediaView venueVideo;
+    /**
+     * <p>
+     *     This ImageView is the place that displays the images of the venue
+     * </p>
+     */
     @FXML
     public ImageView venueImage;
     /**
@@ -177,6 +183,9 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage5;
     @FXML
+    public AnchorPane videoAnchorPane;
+
+    @FXML
     public SubScene priceSubScene;
     @FXML
     public Group priceGroup;
@@ -199,6 +208,7 @@ public class VenueDetailsController {
     //Always called by the FXML Loader
     public void initialize() {
         venueText.setEditable(false);
+
     }
 
     /**
@@ -212,14 +222,6 @@ public class VenueDetailsController {
         venueName.setText(currVenue);
 
         //Add alt text button image
-
-
-
-
-
-
-
-
         int textIndex = 0;
         int photoIndex = 0;
         int maxPhotoIndex = 5;
@@ -428,6 +430,21 @@ public class VenueDetailsController {
         image3AltText.setVisible(false);
         image4AltText.setVisible(false);
         image5AltText.setVisible(false);
+
+        // video
+        for(int i = 0; i < currVenuePage.children.size(); i++) {
+            System.out.println(currVenuePage.children.get(i).attributes);
+        }
+
+        String videoFile = (currVenuePage.getMediaSourceByID("video0"));
+
+        File videoTempFile = client.requestFile(videoFile);
+
+        VideoHandler videoHandler = new VideoHandler(videoTempFile, (int) videoAnchorPane.getHeight(), (int) videoAnchorPane.getWidth());
+
+        videoAnchorPane.getChildren().add(videoHandler);
+        //Video End
+
     }
 
     /**
