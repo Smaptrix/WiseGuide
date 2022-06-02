@@ -10,8 +10,6 @@ package GUI;
 
 
 import client.Client;
-import javafx.event.ActionEvent;
-import GUI.LoginApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,17 +19,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import server.ServerUserHandler;
 import serverclientstuff.User;
-
 import java.io.IOException;
-
-
-/**
- * Controls the login page for the application
- */
-import java.security.NoSuchAlgorithmException;
 
 /**
  * <p>
@@ -184,7 +173,7 @@ public class LoginController {
      * @throws IOException If the client cannot connect to the server
      */
     @FXML
-    //Tries to login using the data provided
+    //Tries to log in using the data provided
     //For now creates a user but that should all be handled on the client not the GUI :)
     //Bypasses all the networking stuff while I wait for integration - JI
     //Shouldn't have to throw the exception because we only want to make the user and transfer that to the server

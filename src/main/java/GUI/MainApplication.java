@@ -14,9 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import serverclientstuff.User;
-
-
-import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -46,7 +43,7 @@ public class MainApplication extends Application {
      * <p>
      *     Opens the FXML file and opens the GUI that is controlled by the FXML
      * </p>
-     * @param stage the display that GUI is gonna be on
+     * @param stage the display that GUI is going to be on
      * @throws IOException
      */
     @Override
@@ -89,7 +86,7 @@ public class MainApplication extends Application {
      * @param stage The stage to display the GUI on
      * @param client The client to be used for the server connection
      * @param currUser The current user
-     * @throws IOException If the client cant connect to the server
+     * @throws IOException If the client can't connect to the server
      */
     public void transferInfoAndOpen(Stage stage, Client client, User currUser) throws IOException {
 

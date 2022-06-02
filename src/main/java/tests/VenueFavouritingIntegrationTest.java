@@ -56,8 +56,8 @@ public class VenueFavouritingIntegrationTest extends ApplicationTest {
 
 
     @Test
-    //Integration test - verifies that the user can favourite and unfavourite venues using the GUI (which implicitliy uses the server)
-    //RUN servermain before this
+    //Integration test - verifies that the user can favourite and un-favourite venues using the GUI (which implicitly uses the server)
+    //RUN serverMain before this
     public void venueFavouriteGUIandServerIntegrationTest(){
 
         //Log the user into the program
@@ -102,7 +102,7 @@ public class VenueFavouritingIntegrationTest extends ApplicationTest {
 
         sleep(1000);
 
-        //Check to see if the venue has been unfavourited
+        //Check to see if the venue has been un-favourited
         FxAssert.verifyThat("#faveVenueButton", LabeledMatchers.hasText("Favourite"));
 
 

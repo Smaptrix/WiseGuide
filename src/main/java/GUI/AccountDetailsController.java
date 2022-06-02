@@ -116,7 +116,7 @@ public class AccountDetailsController {
         //Opens the fxml
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("change-username-page.fxml"));
 
-        //Opens the GUI page in regards to the fxml
+        //Opens the GUI page with regard to the fxml
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 600, 375);
         ChangeUsernameController controller = fxmlLoader.getController();
@@ -177,7 +177,7 @@ public class AccountDetailsController {
         controller.setCurrUser(currUser);
         controller.setParentStage((Stage)deleteAccountButton.getScene().getWindow());
         controller.setMapStage(mapStage);
-        //controller.setTestingMode(testingMode); //Uncomment if a testingMode if a testingMode is added to main screen
+        //controller.setTestingMode(testingMode); //Uncomment if a testingMode is added to main screen
         stage.setScene(scene);
         stage.setTitle("Account Deletion");
         stage.show();

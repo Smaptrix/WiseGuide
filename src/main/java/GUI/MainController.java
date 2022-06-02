@@ -195,7 +195,7 @@ public class MainController {
 
     /**
      * <p>
-     *     The uhhhh - Will what is this?
+     *     The main window for the GUI. Used to allow closing of certain windows.
      * </p>
      */
     @FXML
@@ -447,8 +447,8 @@ public class MainController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) ((String) currentItemSelected)).replaceAll(" ", "_"));
-        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
+        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) currentItemSelected).replaceAll(" ", "_"));
+        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
         //Checks to see if the venue has been favourite by the user
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
@@ -484,9 +484,9 @@ public class MainController {
         }
         RouteDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) ((String) currentRouteSelected)).replaceAll(" ", "_"));
+        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) currentRouteSelected).replaceAll(" ", "_"));
         //TODO Sort out xml read-ins in controller
-        controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", (String) ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
+        controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
         stage.setScene(scene);
         stage.setTitle((String) currentRouteSelected);
         stage.show();
@@ -962,9 +962,7 @@ public class MainController {
 
         try {
             Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1w9P1IKH5lbeHghuY0YJpdP8F_PjkEj6R/edit?usp=sharing&ouid=111971918555544856801&rtpof=true&sd=true").toURI());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
 

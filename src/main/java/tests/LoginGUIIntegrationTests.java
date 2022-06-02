@@ -3,16 +3,13 @@ package tests;
 import GUI.LoginApplication;
 import GUI.LoginController;
 import client.Client;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
@@ -20,11 +17,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
-import org.testfx.matcher.control.TextInputControlMatchers;
-import server.ServerUserHandler;
 import serverclientstuff.User;
-
-import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
@@ -65,7 +58,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         loginController.setTestingMode(false);
     }
 
-    //Integration Test | Confirm user can login with real username and password by clicking "Login" after entering them.
+    //Integration Test | Confirm user can log in with real username and password by clicking "Login" after entering them.
     @Test
     public void realLoginTest(){
         sleep(1000);
@@ -78,7 +71,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         FxAssert.verifyThat(window("WiseGuide by Maptrix - Ver 0.45"), WindowMatchers.isShowing());
     }
 
-    //Integration Test | Confirm user cannot login if they have entered a real username but incorrect password.
+    //Integration Test | Confirm user cannot log in if they have entered a real username but incorrect password.
     @Test
     public void realUserWrongPassTest(){
         sleep(1000);
@@ -90,7 +83,7 @@ public class LoginGUIIntegrationTests extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Unrecognised user details"));
     }
 
-    //Integration Test | Confirm user cannot login if they have entered an incorrect username and password.
+    //Integration Test | Confirm user cannot log in if they have entered an incorrect username and password.
     @Test
     public void fakeUserWrongPassTest(){
         sleep(1000);

@@ -64,7 +64,7 @@ public class Server {
     private DataOutputStream outputStream;
     /**
      * <p>
-     *     The input stream that the server recieves data from the client on
+     *     The input stream that the server receives data from the client on
      * </p>
      */
     private InputStream inStream;
@@ -172,7 +172,7 @@ public class Server {
         //Generate initial key pair
         KeyPair initKeyPair = generateKeyPair();
 
-        //Seperates the keys out
+        //Separates the keys out
         PublicKey publicKey = initKeyPair.getPublic();
         privateKey =  initKeyPair.getPrivate();
 
@@ -224,10 +224,10 @@ public class Server {
 
         DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 
-        //Recieve the length of the size data
+        //Receive the length of the size data
         int numOfFileSizeBytes = in.read();
 
-        //Recieve the size data
+        //Receive the size data
 
         byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
 
@@ -237,10 +237,10 @@ public class Server {
 
         int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
 
-        //Recieve the actual data
+        //Receive the actual data
 
 
-        //Similar code to the clients read bytes but we only need it the once for the server - JI
+        //Similar code to the clients read bytes, but we only need it the once for the server - JI
 
         //Initialises a new byte array of size predetermined by our network protocol
         byte[] keyData = new byte[bytesToRead];
@@ -289,7 +289,7 @@ public class Server {
      * <p>
      *     Decrypts the symmetric key from the client then "remembers" it
      * </p>
-     * @param encryptedKeyData the data recieved from the client regarding the symmetric key
+     * @param encryptedKeyData the data received from the client regarding the symmetric key
      * @throws NoSuchPaddingException If the padding specified does not exist
      * @throws NoSuchAlgorithmException If the algorithm specified does not exist
      * @throws IllegalBlockSizeException If the block size of the input is incorrect
@@ -356,7 +356,7 @@ public class Server {
         clientSocket = serverSocket.accept();
         System.out.println("After accept\n");
 
-        //Reverts back to original socket type
+        // Reverts to original socket type
         inStream = clientSocket.getInputStream();
 
         //Writes pure file bytes to output socket
@@ -435,7 +435,7 @@ public class Server {
 
                     System.out.println("Listening...");
 
-                    byte[] inputLine =  recieveMessage(bytesToRead);
+                    byte[] inputLine =  receiveMessage(bytesToRead);
 
 
                     System.out.println("Encryption done: " + encryptionReady);
@@ -456,7 +456,7 @@ public class Server {
                         System.out.println("Request Received: " + decryptedInputLine);
 
                         requestParser(decryptedInputLine);
-                        //Preencryption request parser
+                        //Pre-encryption request parser
                     } else {
                         requestParser(new String(inputLine));
                     }
@@ -467,7 +467,7 @@ public class Server {
         }
 
         catch (SocketException e){
-            System.out.println("Lost connnection to client");
+            System.out.println("Lost connection to client");
             e.printStackTrace();
         }
     }
@@ -609,7 +609,7 @@ public class Server {
      */
     private void favouriteNewVenue() throws IOException {
 
-        String venueToFavourite = recieveMessageAsString(inStream.read());
+        String venueToFavourite = receiveMessageAsString(inStream.read());
 
         faveVenuesHandler.addFaveVenue(currUser.getUsername(), venueToFavourite);
 
@@ -618,12 +618,12 @@ public class Server {
 
     /**
      * <p>
-     *     Unfavourites a venue when requested by the client
+     *     Un-favourites a venue when requested by the client
      * </p>
      * @throws IOException If the server loses connection with the client
      */
     private void unfavouriteVenue() throws IOException {
-        String venueToUnFavourite = recieveMessageAsString(inStream.read());
+        String venueToUnFavourite = receiveMessageAsString(inStream.read());
 
         faveVenuesHandler.removeFaveVenue(currUser.getUsername(), venueToUnFavourite);
 
@@ -636,7 +636,7 @@ public class Server {
      *     Sends a file across the socket (after it has been broken down into its bytes)
      * </p>
      * @param filepath The filepath to the file wanting to be sent
-     * @param encrypt True - encrypt the file, False - dont encrypt the file
+     * @param encrypt True - encrypt the file, False - don't encrypt the file
      * @throws IOException If the server loses connection with the client
      */
     private void sendFile(Path filepath, Boolean encrypt) throws IOException {
@@ -719,7 +719,7 @@ public class Server {
 
     /**
      * <p>
-     *     Sends a response to the client (Is recieved by the clients "recieveAcknowledgement" function
+     *     Sends a response to the client (Is received by the clients "receiveAcknowledgement" function
      * </p>
      * @param response The response to be sent to the client
      * @param sendSize True - send the size of the response. False - Don't send the size of the response
@@ -774,7 +774,7 @@ public class Server {
 
     /**
      * <p>
-     *     Sends a response to the client (Is recieved by the clients "recieveAcknowledgement" function
+     *     Sends a response to the client (Is received by the clients "receiveAcknowledgement" function
      * </p>
      * @param response The response to be sent to the client in byte
      * @param sendSize True - send the size of the response. False - Don't send the size of the response
@@ -803,7 +803,7 @@ public class Server {
 
     /**
      * <p>
-     *     Recieves the login information from the client
+     *     Receives the login information from the client
      * </p>
      * @param mode decides whether it verifies user data or logs in
      * @throws IOException if the server loses connection with the client
@@ -812,9 +812,9 @@ public class Server {
 
 
         //Reads the input stream for the size of the message
-        String loginName = recieveMessageAsString(inStream.read());
+        String loginName = receiveMessageAsString(inStream.read());
 
-        String loginPass = recieveMessageAsString(inStream.read());
+        String loginPass = receiveMessageAsString(inStream.read());
 
 
 
@@ -867,13 +867,13 @@ public class Server {
 
             //Verifies the user data
             if(!(currUserHandler.userExistState && currUserHandler.passVerified)){
-                //If the users data is incorrect - let the client know
+                //If the users' data is incorrect - let the client know
 
                 System.out.println("Not logged in!");
                 sendResponse("BADLOGIN", true, true);
             }
             else{
-                //If the users data is verified - sets the server user to the user provided
+                //If the users' data is verified - sets the server user to the user provided
                 currUser = new User(loginName, loginPass);
                 System.out.println("Logged in!");
                 sendResponse("GOODLOGIN", true, true);
@@ -891,7 +891,7 @@ public class Server {
             if(!(currUserHandler.userExistState)){
 
                 sendResponse("SENDSALT", true, true);
-                currUser.setSalt(recieveMessageAsString(inStream.read()));
+                currUser.setSalt(receiveMessageAsString(inStream.read()));
                 currUser.encryptUserInfo();
                 currUserHandler.createUser();
                 sendResponse("USERCREATED", true, true);
@@ -934,7 +934,7 @@ public class Server {
     private void logout() {
 
         //deletes the current information regarding the user
-        //Guarantees that the server wont accidently stick on
+        //Guarantees that the server won't accidentally stick on
         //Have to be careful because this makes things null
         currUser.clear();
         currUserHandler.clear();
@@ -954,7 +954,7 @@ public class Server {
     //Checks that the client and server versions are the same
     private void versionCheck() throws IOException {
 
-        String clientVersion = recieveMessageAsString(inStream.read());;
+        String clientVersion = receiveMessageAsString(inStream.read());
 
         System.out.println("Client ver: " + clientVersion);
         System.out.println("Server ver: " + SERVERVERSION);
@@ -974,7 +974,7 @@ public class Server {
     private void changeUsername() throws IOException {
 
 
-        String desiredUsername = recieveMessageAsString(inStream.read());;
+        String desiredUsername = receiveMessageAsString(inStream.read());
 
         //If the username is taken
         if (ServerUserHandler.findUserName(desiredUsername)){
@@ -989,12 +989,12 @@ public class Server {
 
     private void changePassword() throws IOException {
 
-        String currPass = recieveMessageAsString(inStream.read());;
+        String currPass = receiveMessageAsString(inStream.read());
 
-        String newPass = recieveMessageAsString(inStream.read());;
+        String newPass = receiveMessageAsString(inStream.read());
 
 
-        //If the password entered doesnt match the current password
+        //If the password entered doesn't match the current password
         if(!(UserSecurity.hashThis(currPass, currUserHandler.getcurrUserSalt()).equals(UserSecurity.hashThis(currUser.getPassword(), currUserHandler.getcurrUserSalt())))){
 
             sendResponse("INCORRECTPASS", true, true);
@@ -1021,7 +1021,7 @@ public class Server {
     private void deleteVenueFile() throws IOException {
 
         //Gets the filepath from the client
-        File fileToDelete = new File(recieveMessageAsString(inStream.read()));
+        File fileToDelete = new File(receiveMessageAsString(inStream.read()));
 
 
 
@@ -1051,10 +1051,10 @@ public class Server {
 
     }
 
-    //Overloaded functions to let you decide if you want to recieve the pure bytes or the string
+    //Overloaded functions to let you decide if you want to receive the pure bytes or the string
 
     //Reads n number of bytes from the socket
-    private byte[] recieveMessage(int n) {
+    private byte[] receiveMessage(int n) {
 
         byte[] readBytes = new byte[0];
         try {
@@ -1068,7 +1068,7 @@ public class Server {
     }
 
     //Reads n number of bytes from the socket - turns them into a string
-    private String recieveMessageAsString(int n) {
+    private String receiveMessageAsString(int n) {
 
         byte[] readBytes = new byte[0];
         try {

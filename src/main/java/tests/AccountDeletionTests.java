@@ -18,7 +18,6 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
-import server.ServerUserHandler;
 import serverclientstuff.User;
 
 import java.io.IOException;
@@ -211,7 +210,7 @@ public class AccountDeletionTests extends ApplicationTest {
     }
 
     //Integration Test | Confirm that reserved accounts cannot be deleted.
-    //Currently not needed as username field was removed and only a logged-in account can be deleted.
+    // Currently, not needed as username field was removed and only a logged-in account can be deleted.
     /*@Test
     public void reservedNoDeleteTest() throws IOException {
         sleep(1000);

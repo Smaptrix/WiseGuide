@@ -120,7 +120,7 @@ public class VenueSelectPageController {
     @FXML
     public boolean onVenuePickButtonPress(){
         //Create a copy of the list of venues so that it isn't edited when the button is pressed
-        List<String> listOfPossibleVenues = new ArrayList<>(listOfVenues);;
+        List<String> listOfPossibleVenues = new ArrayList<>(listOfVenues);
 
 
         if(!drinksCheckBox.isSelected() & !foodCheckBox.isSelected() & !sightseeingCheckBox.isSelected() & !studySpacesCheckBox.isSelected()){
@@ -234,7 +234,7 @@ public class VenueSelectPageController {
 
 
         //Makes sure the temp venue list isn't null
-        //If it isn't null it implies that tlist has been added to
+        //If it isn't null it implies that the list has been added to
         if(tempVenueList == null){
             errLabel.setText("You have not selected any venue types!");
             return false;

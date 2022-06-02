@@ -174,7 +174,7 @@ public class Client {
 
             //Once everything is booted and checked the client registers as connected
             connected = true;
-            //Set the socket timeout to 1000ms so that if the sever crashed the app doesnt crash straight away
+            //Set the socket timeout to 1000ms so that if the sever crashed the app doesn't crash straight away
             clientSocket.setSoTimeout(1000);
 
         } catch (ConnectException e) {
@@ -213,7 +213,7 @@ public class Client {
         sendMessage("SENDPUBLIC", false);
 
 
-        //SAME CODE AS FILE REQUEST EXCEPT WE DONT CHOOSE THE FILE
+        //SAME CODE AS FILE REQUEST EXCEPT WE DON'T CHOOSE THE FILE
 
         //Tells us how many bytes are telling us how big the file is
         int numOfFileSizeBytes = inputStream.read();
@@ -247,7 +247,7 @@ public class Client {
 
         System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
-        //Generate thhe key spec from the recieved data
+        //Generate the key spec from the received data
         X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encPublicKey);
 
         //Generate the key using a keyfactory using the given keyspec
@@ -267,7 +267,7 @@ public class Client {
      *     Encodes the generated symmetric key and sends it to the server for the current session
      * </p>
      * @throws NoSuchPaddingException If the given padding type does not exist
-     * @throws NoSuchAlgorithmException If the given alogirthm does not exist
+     * @throws NoSuchAlgorithmException If the given algorithm does not exist
      * @throws InvalidKeyException If the given key is incorrect/invalid
      * @throws IllegalBlockSizeException If the input size to the algorithm is incorrect
      * @throws BadPaddingException If the amount of padding on the block is incorrect
@@ -337,7 +337,7 @@ public class Client {
 
         System.out.println("Key written");
 
-        //Set the socket back to the correct write verision
+        //Set the socket back to the correct write version
         outStream = clientSocket.getOutputStream();
 
 
@@ -385,13 +385,13 @@ public class Client {
 
 
 
-        //If the recieved message is the same as the sent message - the key is validated
+        //If the received message is the same as the message sent - the key is validated
         if(receiveAcknowledgement(true).equals(unencryptedMessage)){
             return true;
         }
         else{
             //If the client is unable  to verify the servers key
-            System.out.print("Unable to verify encryptyed connection");
+            System.out.print("Unable to verify encrypted connection");
             return false;
         }
 
@@ -568,7 +568,7 @@ public class Client {
      * @param data the raw byte array
      * @param fileName the name of the requested file to construct
      * @param fileType the type of the requested file
-     * @return the filepath of the downlaoded file
+     * @return the filepath of the downloaded file
      * @throws IOException if the client is unable to open the file
      */
     private File BytesToFile(byte[] data, String fileName, String fileType) throws IOException {
@@ -580,7 +580,7 @@ public class Client {
         //Creates a temp file out of the data received, so that when the program closes the data isn't saved
         FileOutputStream os = new FileOutputStream(currFile);
 
-        //Writes the recieved data to the FileOutPutStreams
+        //Writes the received data to the FileOutPutStreams
         os.write(data);
 
         fileLocations.put(fileName, currFile);
@@ -601,7 +601,7 @@ public class Client {
      * <p>
      * Makes an attempt to login to the server with the provided user data
      * </p>
-     * @param currUser The user attempting to login
+     * @param currUser The user attempting to log in
      * @return the acknowledgement to the request from the server
      * @throws IOException if the client is unable to connect to the server
      */
@@ -622,7 +622,7 @@ public class Client {
 
     /**
      * <p>
-     * Recieves a one line acknowledgement from the server
+     * Receives a one line acknowledgement from the server
      * </p>
      * @return the acknowledgement in string form
      * @throws IOException if the server is unable to connect to the server
@@ -630,13 +630,13 @@ public class Client {
     public String receiveAcknowledgement(boolean decrypt) throws IOException {
 
         //Read in the file size of the expected file
-        //Dont have to worry about large files here as this is only messages
+        //Don't have to worry about large files here as this is only messages
         int fileSize = inputStream.read();
 
         //Read the filesize in bytes
         byte[] data = readBytes(fileSize);
 
-        //Initalise the string
+        //Initialise the string
         String ack = null;
         //If we want to decrypt the message
         if (decrypt) {
@@ -1013,7 +1013,7 @@ public class Client {
      * <p>
      *     Sends a message to the server (Overload of another function)
      * </p>
-     * @param toSend The bytes to sned to the server
+     * @param toSend The bytes to send to the server
      * @param doEncrypt Whether to encrypt the data
      */
     private void sendMessage(byte[] toSend, boolean doEncrypt){

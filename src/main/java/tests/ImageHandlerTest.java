@@ -7,27 +7,21 @@
  */
 package tests;
 
-import javafx.application.Application;
+
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import mediahandlers.ImageHandler;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
-import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.WindowMatchers;
 
 import java.io.File;
 import java.util.Objects;
-import java.util.concurrent.TimeoutException;
 
 /**
  * A test for the ImageHandler developed by Joe

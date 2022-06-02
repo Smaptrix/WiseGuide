@@ -103,7 +103,7 @@ public class VenueLoginController {
     @FXML
     private void onLoginButtonPress() throws IOException {
 
-        //Make sure teh fields arent empty
+        //Make sure teh fields aren't empty
         if(venueNameField.getText().isEmpty() || venuePassField.getText().isEmpty()){
             errLabel.setText("Please enter something in both fields!");
         }

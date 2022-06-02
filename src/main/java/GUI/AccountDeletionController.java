@@ -160,7 +160,7 @@ public class AccountDeletionController {
             User detailsToCheck = new User(currUser.getUsername(),passField.getText().trim());
             String verificationCode = client.requestLogin(detailsToCheck);
 
-            //If the "login" with the currently logged in username and the entered password worked, then that means
+            //If the "login" with the currently logged-in username and the entered password worked, then that means
             //the password is correct and the user is valid and can therefore be deleted.
             if (verificationCode.equals("GOODLOGIN")) {
 
@@ -232,7 +232,7 @@ public class AccountDeletionController {
     }
 
     //Reads the list of reserved usernames to check if the user input name is allowed.
-    //Redundant now that the system automatically gets the logged in user's username but keeping in code for
+    //Redundant now that the system automatically gets the logged-in user's username but keeping in code for
     //now as could be useful for testing purposes.
     private boolean forbiddenNamesCheck(String name) throws IOException {
         boolean forbidden = false;
@@ -265,7 +265,7 @@ public class AccountDeletionController {
      * <p>
      *     Sets the current user.
      * </p>
-     * @param user The currently logged in user.
+     * @param user The currently logged-in user.
      */
     public void setCurrUser(User user) {
         this.currUser = user;

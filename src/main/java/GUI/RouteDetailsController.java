@@ -27,7 +27,7 @@ public class RouteDetailsController {
 
     /**
      * <p>
-     *     The client  being used by the GUI to conect to the sever
+     *     The client  being used by the GUI to connect to the sever
      * </p>
      */
     private Client client;
@@ -308,7 +308,7 @@ public class RouteDetailsController {
         try {
             controller.setClient(client);
 
-            controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);//Checks to see if the venue has been favourite by the user
+            controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", ((String) currentItemSelected).replaceAll(" ", "_")), currUser);//Checks to see if the venue has been favourite by the user
             stage.setScene(scene);
             stage.setTitle((String) currentItemSelected);
             stage.show();

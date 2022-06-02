@@ -1,6 +1,5 @@
 package tests;
 
-import GUI.AccountDeletionController;
 import GUI.AccountDeletionPopupController;
 import GUI.LoginApplication;
 import client.Client;

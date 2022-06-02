@@ -14,8 +14,8 @@ public class TextManager{
     protected int mediaID;
     protected int positionX;
     protected int positionY;
-    protected int width = 200;
-    protected int height = 100;
+    protected int width;
+    protected int height;
     protected String filePath;
     private Font font = new Font("Times New Roman", 12);    //Default font
     private String content = "";

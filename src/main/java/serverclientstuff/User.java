@@ -13,15 +13,11 @@ package serverclientstuff;
 
 //Object regarding User functions and User creation
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 public class User {
 
     private String username;
     private String password;
-    //The users salt that is added to there password
+    //The users salt that is added to their password
     private String salt;
 
     private String[] faveVenues;

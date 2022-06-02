@@ -2,14 +2,8 @@ package serverclientstuff;
 
 
 import javax.crypto.*;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.PBEParameterSpec;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.util.Random;
 
 
 //TODO - Password based key derivation ?
@@ -19,7 +13,7 @@ import java.util.Random;
 
 
 
-//A class that provides the encryption/decryption tools required by the client to make sure that the users data
+//A class that provides the encryption/decryption tools required by the client to make sure that the users' data
 //is secure before it is sent to the server
 public class UserSecurity {
 

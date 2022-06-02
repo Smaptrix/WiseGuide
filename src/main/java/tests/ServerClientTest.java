@@ -90,7 +90,7 @@ public class ServerClientTest {
     }
 
     @Test
-    //Test to make sure a user doesnt exist
+    //Test to make sure a user doesn't exist
     public void userDoesntExistTest() throws IOException {
         User test = new User("ImNotReal", "089-2341980-324");
         test.encryptUserInfo();
@@ -108,7 +108,7 @@ public class ServerClientTest {
         test.encryptUserInfo();
 
         ServerUserHandler toBeCreatedUser = new ServerUserHandler(test, true);
-        //First check they dont exist
+        //First check they don't exist
         assertFalse(toBeCreatedUser.userExistState);
         //Make user
         toBeCreatedUser.createUser();
@@ -126,7 +126,7 @@ public class ServerClientTest {
         User test = new User("test", "54321");
         test.encryptUserInfo();
 
-        //Create user with incorrect passowrd
+        //Create user with incorrect password
         ServerUserHandler passCheckUser = new ServerUserHandler(test, true);
 
         //Check password has been detected as incorrect

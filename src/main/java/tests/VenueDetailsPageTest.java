@@ -22,7 +22,7 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-//These are the tests which test that the venue detials page works correctly
+//These are the tests which test that the venue details page works correctly
 public class VenueDetailsPageTest extends ApplicationTest {
 
 
@@ -85,7 +85,7 @@ public class VenueDetailsPageTest extends ApplicationTest {
         //Verify that the title label at the top of the page has the correct label
         FxAssert.verifyThat("#venueName", LabeledMatchers.hasText(venueTitle));
 
-        /* CURRENTLY DOESN't WORK BECAUSE THERE IS ANOTHER TEXT AREA INSIDE THE TEXT AREA
+        /* CURRENTLY, DOESN't WORK BECAUSE THERE IS ANOTHER TEXT AREA INSIDE THE TEXT AREA
         String venueText = "UID: 008\n" +
                 "Dusk\n" +
                 "\n" +
