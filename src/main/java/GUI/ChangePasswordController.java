@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   18/02/2022
-    Last Updated:   11/05/2022
+    Last Updated:   02/06/2022
  */
 package GUI;
 
@@ -155,9 +155,12 @@ public class ChangePasswordController {
         //Check the users passwords match
         if(!desiredPass.equals(desiredPassConfirm)){
             errLabel.setText("Your new passwords don't match!");
-        } else if(currPass.isBlank() || desiredPass.isBlank() || desiredPassConfirm.isBlank() ) {
+        }
+        //If their are blank fields
+        else if(currPass.isBlank() || desiredPass.isBlank() || desiredPassConfirm.isBlank() ) {
             errLabel.setText("You must fill in all the fields!");
         }
+        //If the password matches your old password
         else if(desiredPass.equals(currPass)){
             errLabel.setText("You cannot change your password to your current password!");
         }
@@ -165,9 +168,6 @@ public class ChangePasswordController {
         else{
 
             try {
-
-
-
                 String changePassResult = client.requestPasswordChange(currPass, desiredPass);
 
 
@@ -177,9 +177,6 @@ public class ChangePasswordController {
                 }
                 else if(changePassResult.equals("PASSCHANGED")){
                     currUser.setPassword(desiredPass);
-
-
-
                    Stage currScene = (Stage) changePassButton.getScene().getWindow();
                    currScene.close();
                 }
