@@ -64,7 +64,9 @@ public class AccountCreationController {
     TextField userField;
 
     /**
-     * The username label
+     * <p>
+     *   The username label
+     * </p>
      */
     @FXML
     Label userLabel;
