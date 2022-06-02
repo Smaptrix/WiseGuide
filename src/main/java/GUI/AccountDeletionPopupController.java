@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Aidan Carson
+    Date Created:   05/04/2022
+    Last Updated:   05/05/2022
+ */
 package GUI;
 
 import client.Client;
