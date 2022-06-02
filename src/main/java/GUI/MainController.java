@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Will Pitchfork, Joe Ingham
     Date Created:   04/02/2022
-    Last Updated:   11/05/2022
+    Last Updated:   02/06/2022
  */
 
 package GUI;
@@ -448,7 +448,7 @@ public class MainController {
     protected void openSelectedVenue(String venueType) {
         //Use ListView's getSelected Item
         if (selectedItem == null) {
-            //System.out.println("Expanded Pane ID: " + venueAccordion.getExpandedPane().getId());
+
 
             switch(venueType) {
                 case "clubs":
@@ -501,11 +501,12 @@ public class MainController {
         controller.setClient(client);
         System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) currentItemSelected).replaceAll(" ", "_"));
         controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
-        //Checks to see if the venue has been favourite by the user
+
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
         stage.show();
         stage.setResizable(false);
+        //Checks to see if the venue has been favourited by the user
         controller.checkIfFavourite();
         try {
             controller.loadVenueData();
@@ -521,11 +522,13 @@ public class MainController {
      * </p>
      */
     private void openSelectedRoute() {
+        //Checks to make sure the selected route exists
         if(selectedRoute == null) {
             currentRouteSelected = routesList.getSelectionModel().getSelectedItem();
         } else {
             currentRouteSelected = selectedRoute;
         }
+
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("RouteDetailsPage.fxml"));
         Stage stage = new Stage();
         Scene scene = null;
@@ -534,10 +537,10 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         RouteDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) currentRouteSelected).replaceAll(" ", "_"));
-        //TODO Sort out xml read-ins in controller
+
         controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
         stage.setScene(scene);
         stage.setTitle((String) currentRouteSelected);
@@ -824,7 +827,7 @@ public class MainController {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("uh oh...");
+            System.out.println("Map Images cannot be found");
         }
     }
 
@@ -842,7 +845,7 @@ public class MainController {
             client.closeConnection(); // Closes client connection safely.
         }
         System.exit(0);
-        //Platform.exit();
+
     }
 
 
@@ -947,7 +950,6 @@ public class MainController {
 
 
 
-
         //Provides the controller with the list of venue types it should expect
         xml = new VenueXMLParser(client.getFile("venuesLocation.xml"));
 
@@ -997,10 +999,6 @@ public class MainController {
                     System.out.println("Error: No category " + xml.getPage("title", stripped_title).attributes.get("category") + " for page " + stripped_title);
                     break;
             }
-
-
-            //venueList.getItems().add(stripped_title.replaceAll("_", " "));
-
 
         }
     }
