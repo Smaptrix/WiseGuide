@@ -25,7 +25,7 @@ public class FileTransferTests extends ApplicationTest {
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
         String testResult = client.requestServerTest("fileDetectTest");
-        Assert.assertEquals("File found",testResult);
+        Assert.assertEquals("File not found",testResult);
     }
 
     @Test
