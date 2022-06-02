@@ -602,7 +602,7 @@ public class Server {
     }
 
     private void runServerTest() throws IOException {
-        String testToRun = recieveMessageAsString(inStream.read());
+        String testToRun = receiveMessageAsString(inStream.read());
         System.out.println("[TESTING] Running server test on " + testToRun);
         switch(testToRun){
             case "fileDetectTest":
