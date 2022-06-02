@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham, Aidan Carson
+    Date Created:   14/03/2022
+    Last Updated:   02/06/2022
+ */
 package GUI;
 
 import client.Client;
@@ -180,7 +187,7 @@ public class AccountDetailsController {
 
     }
 
-    //TODO: Button on the fxml may not be centred
+
     @FXML
     public void onDeleteAccountButtonPress(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("account-delete-page.fxml"));
@@ -191,7 +198,6 @@ public class AccountDetailsController {
         controller.setCurrUser(currUser);
         controller.setParentStage((Stage)deleteAccountButton.getScene().getWindow());
         controller.setMapStage(mapStage);
-        //controller.setTestingMode(testingMode); //Uncomment if a testingMode is added to main screen
         stage.setScene(scene);
         stage.setTitle("Account Deletion");
         stage.show();
