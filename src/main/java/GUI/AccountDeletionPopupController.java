@@ -30,7 +30,7 @@ public class AccountDeletionPopupController {
      * </p>
      * @param client The current client.
      */
-    public void setClient(Client client){ this.client = client; };
+    public void setClient(Client client){ this.client = client; }
 
     /**
      * <p>
@@ -45,7 +45,7 @@ public class AccountDeletionPopupController {
      * </p>
      * @param mode Whether testing mode should be true or false.
      */
-    public void setTestingMode(boolean mode){ this.testingMode = mode; };
+    public void setTestingMode(boolean mode){ this.testingMode = mode; }
 
     /**
      * <p>

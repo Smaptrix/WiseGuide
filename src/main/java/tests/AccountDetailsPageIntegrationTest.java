@@ -21,6 +21,11 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Integration test for Account Details Page
+ * </p>
+ **/
 public class AccountDetailsPageIntegrationTest extends ApplicationTest {
 
     private Stage stage;
@@ -187,12 +192,12 @@ public class AccountDetailsPageIntegrationTest extends ApplicationTest {
         clickOn("#loginButton");
         sleep(1000);
 
-        //Verify that the user can login with the new password
+        //Verify that the user can log in with the new password
         FxAssert.verifyThat(window("WiseGuide by Maptrix - " + client.getCurrVersion()), WindowMatchers.isShowing());
 
         sleep(1000);
 
-        //Change the username nad passowrd back to the original in the same login session
+        //Change the username nad password back to the original in the same login session
 
         //Open the user details page
         clickOn("#menuBarAccount").clickOn("#accDetailsButton");
@@ -277,7 +282,7 @@ public class AccountDetailsPageIntegrationTest extends ApplicationTest {
         FxAssert.verifyThat("#usernameLabel", LabeledMatchers.hasText(oldUsername));
 
 
-        //Test to make sure that a user cannot change to a name that is already taken (in this case there own name)
+        //Test to make sure that a user cannot change to a name that is already taken (in this case their own name)
 
         clickOn("#changeNameButton");
         sleep(1000);

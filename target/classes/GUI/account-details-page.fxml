@@ -15,8 +15,8 @@
             <Font size="20.0"/>
          </font>
       </Label>
-      <Label layoutX="84.0" layoutY="100.0" text="Username:"/>
-      <Label layoutX="86.0" layoutY="157.0" text="Password:"/>
+      <Label id="usernameText" fx:id="usernameText" layoutX="84.0" layoutY="100.0" text="Username:"/>
+      <Label id="passwordText" fx:id="passwordText" layoutX="86.0" layoutY="157.0" text="Password:"/>
       <Label id="usernameLabel" fx:id="usernameLabel" layoutX="198.0" layoutY="100.0" text="UsernameBlank"/>
       <Button id="changeNameButton" fx:id="changeNameButton" layoutX="322.0" layoutY="96.0" mnemonicParsing="false"
               onAction="#onchangeNameButtonPress" text="Change"/>

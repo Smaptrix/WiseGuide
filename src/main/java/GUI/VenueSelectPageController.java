@@ -1,6 +1,6 @@
 package GUI;
 
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -30,32 +30,37 @@ public class VenueSelectPageController {
      * The checkbox to indicate a user only wants to see their favourite venues
      */
     @FXML
-    CheckBox faveCheckBox;
+    public CheckBox faveCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see food venues
      */
     @FXML
-    CheckBox foodCheckBox;
+    public CheckBox foodCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see drinking venues
      */
     @FXML
-    CheckBox drinksCheckBox;
+    public CheckBox drinksCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see sightseeing venues
      */
     @FXML
-    CheckBox sightseeingCheckBox;
+    public CheckBox sightseeingCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see study space venues
      */
     @FXML
-    CheckBox studySpacesCheckBox;
+    public CheckBox studySpacesCheckBox;
 
+    /**
+     * The random venue to be opened's name (for testing purposes).
+     */
+    @FXML
+    public String randomVenue;
 
 
     /**
@@ -120,10 +125,25 @@ public class VenueSelectPageController {
     @FXML
     public boolean onVenuePickButtonPress(){
         //Create a copy of the list of venues so that it isn't edited when the button is pressed
-        List<String> listOfPossibleVenues = new ArrayList<>(listOfVenues);;
+        List<String> listOfPossibleVenues = new ArrayList<>(listOfVenues);
+
+
+        if(!drinksCheckBox.isSelected() & !foodCheckBox.isSelected() & !sightseeingCheckBox.isSelected() & !studySpacesCheckBox.isSelected()){
+            errLabel.setText("You have not selected any venue types!");
+            return false;
+        }
+
+
+
 
         //Removes users non-favourite venues from the possible list
         if(faveCheckBox.isSelected()){
+
+
+            if(currUser.getFaveVenues() == null){
+                errLabel.setText("You have no favourites!");
+                return false;
+            }
 
             //Get the current users favourite lists
             List<String> userFaveList = List.of(currUser.getFaveVenues());
@@ -147,9 +167,6 @@ public class VenueSelectPageController {
 
             //Create the list of drinking venues
             for(String s : listOfPossibleVenues){
-
-
-
 
 
                 //Finds the venues with tags relating to drinkings
@@ -222,21 +239,18 @@ public class VenueSelectPageController {
 
 
         //Makes sure the temp venue list isn't null
-        //If it isn't null it implies that tlist has been added to
+        //If it isn't null it implies that the list has been added to
         if(tempVenueList == null){
             errLabel.setText("You have not selected any venue types!");
             return false;
         }
 
-        System.out.println("Venues: " + listOfPossibleVenues);
 
-        System.out.println("Temp Venues: " + tempVenueList);
 
 
         //Combines the two lists so that only suitable venues remain
         listOfPossibleVenues.retainAll(tempVenueList);
 
-        System.out.println("Possible Venues: " + listOfPossibleVenues);
 
         if(listOfPossibleVenues.isEmpty()){
             errLabel.setText("You have no favourites of the selected types!");
@@ -274,10 +288,10 @@ public class VenueSelectPageController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        controller.setCurrVenue( venueName, xml.getPage("title", venueName), currUser);
+        controller.setCurrVenue(venueName.replaceAll("_"," "), xml.getPage("title", venueName), currUser);
         //Checks to see if the venue has been favourite by the user
         stage.setScene(scene);
-        stage.setTitle(venueName);
+        stage.setTitle(venueName.replaceAll("_"," "));
         stage.show();
         stage.setResizable(false);
         controller.checkIfFavourite();
@@ -301,8 +315,15 @@ public class VenueSelectPageController {
         //Create a random object
         Random rand = new Random(Instant.now().toEpochMilli());
 
+        //Removes the possibility of opening a routes page.
+        boolean venueOkay = false;
+        while (!venueOkay){
+            randomVenue = listOfVenues.get(rand.nextInt(listOfVenues.size()));
+            venueOkay = !randomVenue.equals("Study_Day_Route") && !randomVenue.equals("Night_Out_Route") && !randomVenue.equals("Tourist_Day_Route");
+        }
+
         //Pick a random item from the venue list
-        String randomVenue = listOfVenues.get(rand.nextInt(listOfVenues.size()));
+
 
         venueDetailsOpener(randomVenue);
 

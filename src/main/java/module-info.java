@@ -18,7 +18,7 @@ module maptrix.wiseguide {
 
     opens GUI to javafx.fxml;
     exports GUI;
-    exports serverclientstuff;
+    exports ServerClientUtility;
     exports tests;
     opens tests to javafx.fxml;
 }

@@ -1,6 +1,5 @@
 package tests;
 
-import GUI.AccountDeletionController;
 import GUI.AccountDeletionPopupController;
 import GUI.LoginApplication;
 import client.Client;
@@ -139,4 +138,11 @@ public class AccountDeletionPopupTests extends ApplicationTest {
         FxAssert.verifyThat(window("Welcome to WiseGuide"), WindowMatchers.isShowing());
     }
 
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
 }

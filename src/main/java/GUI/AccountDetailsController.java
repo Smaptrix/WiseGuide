@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.IOException;
 
@@ -18,8 +18,6 @@ import java.io.IOException;
  * </p>
  */
 public class AccountDetailsController {
-
-    //TODO - Add password change functionality
 
     /**
      * <p>
@@ -44,6 +42,22 @@ public class AccountDetailsController {
      */
     @FXML
     Label usernameLabel;
+
+    /**
+     * <p>
+     *     The label that displays the text "username"
+     * </p>
+     */
+    @FXML
+    Label usernameText;
+
+    /**
+     * <p>
+     *     The label that displays the text "password"
+     * </p>
+     */
+    @FXML
+    Label passwordText;
 
     /**
      * <p>
@@ -83,7 +97,7 @@ public class AccountDetailsController {
      * <p>
      *     Sets the client of this controller
      * </p>
-     * @param client
+     * @param client The client
      */
     public void setClient(Client client) {
         this.client = client;
@@ -116,7 +130,7 @@ public class AccountDetailsController {
         //Opens the fxml
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("change-username-page.fxml"));
 
-        //Opens the GUI page in regards to the fxml
+        //Opens the GUI page with regard to the fxml
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 600, 375);
         ChangeUsernameController controller = fxmlLoader.getController();
@@ -139,7 +153,7 @@ public class AccountDetailsController {
 
     /**
      * <p>
-     *     Opens the page which the user cna use to change their password
+     *     Opens the page which the user can use to change their password
      * </p>
      * @throws IOException
      */
@@ -177,7 +191,7 @@ public class AccountDetailsController {
         controller.setCurrUser(currUser);
         controller.setParentStage((Stage)deleteAccountButton.getScene().getWindow());
         controller.setMapStage(mapStage);
-        //controller.setTestingMode(testingMode); //Uncomment if a testingMode if a testingMode is added to main screen
+        //controller.setTestingMode(testingMode); //Uncomment if a testingMode is added to main screen
         stage.setScene(scene);
         stage.setTitle("Account Deletion");
         stage.show();

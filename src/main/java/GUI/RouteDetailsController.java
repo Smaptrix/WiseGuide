@@ -1,15 +1,12 @@
 package GUI;
 
-import VenueXMLThings.VenuePage;
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenuePage;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -18,7 +15,7 @@ import javafx.stage.Stage;
 import mediahandlers.AudioHandler;
 import mediahandlers.ImageHandler;
 import mediahandlers.TextManager;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +24,7 @@ public class RouteDetailsController {
 
     /**
      * <p>
-     *     The client  being used by the GUI to conect to the sever
+     *     The client  being used by the GUI to connect to the sever
      * </p>
      */
     private Client client;
@@ -134,11 +131,27 @@ public class RouteDetailsController {
 
     /**
      * <p>
-     *     This button on the menubar allows the user to go back to the main application
+     *     This button allows the user to go back to the main application
      * </p>
      */
     @FXML
-    private MenuItem backButton;
+    public Button goBack;
+
+    /**
+     * <p>
+     *     Menu item that closes the application.
+     * </p>
+     */
+    @FXML
+    public MenuItem menuClose;
+
+    /**
+     * <p>
+     *     Menu item for the about page
+     * </p>
+     */
+    @FXML
+    public MenuItem aboutButton;
 
     /**
      * <p>
@@ -308,7 +321,7 @@ public class RouteDetailsController {
         try {
             controller.setClient(client);
 
-            controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);//Checks to see if the venue has been favourite by the user
+            controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", ((String) currentItemSelected).replaceAll(" ", "_")), currUser);//Checks to see if the venue has been favourite by the user
             stage.setScene(scene);
             stage.setTitle((String) currentItemSelected);
             stage.show();

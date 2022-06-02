@@ -37,6 +37,9 @@ public class MapController {
     private final Point2D base_millennium_min = new Point2D(445, 384);
     private final Point2D base_millennium_max = new Point2D(474, 420);
 
+    private final Point2D base_blackBull_min = new Point2D(676,268);
+    private final Point2D base_blackBull_max = new Point2D(704,308);
+
     private final Point2D UoY3_JBM_min = new Point2D(308, 283);
     private final Point2D UoY3_JBM_max = new Point2D(336, 321);
 
@@ -258,6 +261,14 @@ public class MapController {
     }
     public Point2D getBase_millennium_max() {
         return base_millennium_max;
+    }
+
+    public Point2D getBase_blackBull_min() {
+        return base_blackBull_min;
+    }
+
+    public Point2D getBase_blackBull_max() {
+        return base_blackBull_max;
     }
 
     public Point2D getUoY3_JBM_min() {

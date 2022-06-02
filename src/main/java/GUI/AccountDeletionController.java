@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.*;
 
@@ -160,14 +160,14 @@ public class AccountDeletionController {
             User detailsToCheck = new User(currUser.getUsername(),passField.getText().trim());
             String verificationCode = client.requestLogin(detailsToCheck);
 
-            //If the "login" with the currently logged in username and the entered password worked, then that means
+            //If the "login" with the currently logged-in username and the entered password worked, then that means
             //the password is correct and the user is valid and can therefore be deleted.
             if (verificationCode.equals("GOODLOGIN")) {
 
                 //Close all windows and attempt to delete the user.
                 Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
                 currStage.close();
-                //Null comparisons are made because the parentStage and mapStage will not exist during testing.
+                //Null comparisons are made because the parentStage and mapStage may not exist during testing.
                 if(parentStage != null){
                     parentStage.close();
                 }
@@ -221,18 +221,26 @@ public class AccountDeletionController {
      *     Creates an account (For Automatic Tests that require an account to test deletion on).
      * </p>
      * @throws IOException if the client cannot connect to the server.
+     * @return 1 if user created, 0 if already exists, -1 if something went wrong.
      */
-    public void createDeletionTestAccount() throws IOException {
+    public int createDeletionTestAccount() throws IOException {
         User testingUser = new User("accountDeletionTestUser","accountDeletionTest");
-        if(client.createUser(testingUser).equals("USERCREATED")) {
+        String success = client.createUser(testingUser);
+
+        if(success.equals("USERCREATED")) {
             System.out.println("ACCOUNT DELETION TEST USER was created.");
+            return 1;
+        } else if (success.equals("USERALREADYEXISTS")) {
+            System.out.println("ACCOUNT DELETION TEST USER already exists.");
+            return 0;
         } else {
             System.out.println("ACCOUNT DELETION TEST USER could not be created.");
+            return -1;
         }
     }
 
     //Reads the list of reserved usernames to check if the user input name is allowed.
-    //Redundant now that the system automatically gets the logged in user's username but keeping in code for
+    //Redundant now that the system automatically gets the logged-in user's username but keeping in code for
     //now as could be useful for testing purposes.
     private boolean forbiddenNamesCheck(String name) throws IOException {
         boolean forbidden = false;
@@ -265,7 +273,7 @@ public class AccountDeletionController {
      * <p>
      *     Sets the current user.
      * </p>
-     * @param user The currently logged in user.
+     * @param user The currently logged-in user.
      */
     public void setCurrUser(User user) {
         this.currUser = user;

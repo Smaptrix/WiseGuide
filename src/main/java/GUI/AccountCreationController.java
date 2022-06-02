@@ -15,15 +15,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.*;
 import javafx.stage.Stage;
-import server.ServerUserHandler;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -177,7 +173,7 @@ public class AccountCreationController {
             nameForbidden = false;
         }
 
-        //Lots of if/elseifs to make sure that the user data stuff is correct
+        //Lots of if/else-ifs to make sure that the user data stuff is correct
 
         //If the password and the confirmed password don't match
         if(!(passField.getText()).equals(passConfirmField.getText())){
@@ -202,11 +198,11 @@ public class AccountCreationController {
         }
 
         else if(userField.getLength() > 15){
-            errLabel.setText("username can't be more than 15 characters!");
+            errLabel.setText("Username can't be more than 15 characters!");
         }
 
         else if(passField.getLength() > 15){
-            errLabel.setText("password can't be more than 15 characters!");
+            errLabel.setText("Password can't be more than 15 characters!");
         }
 
         //If everything checks out

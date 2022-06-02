@@ -64,32 +64,25 @@ public class MediaBar extends HBox {
 
         player = play;
 
-        /**
-         * Sets bar position.
-         */
+        //Sets bar position.
+
         setAlignment(Pos.CENTER);
         setPadding(new Insets(5, 10, 5, 10));
 
-        /**
-         * Setting up volume slider.
-         */
+        //Setting up volume slider.
         vol.setPrefWidth(70);
         vol.setMinWidth(30);
         vol.setValue(100);
         HBox.setHgrow(time, Priority.ALWAYS);
         PlayButton.setPrefWidth(30);
 
-        /**
-         * Adding components to bar.
-         */
+        //Adding components to bar
         getChildren().add(PlayButton);
         getChildren().add(time);
         getChildren().add(volume);
         getChildren().add(vol);
 
-        /**
-         * Function to play the media depending on the state.
-         */
+        //Function to play the media depending on the state
         PlayButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 MediaPlayer.Status status = player.getStatus(); // To get the status of Player
@@ -113,18 +106,14 @@ public class MediaBar extends HBox {
             }
         });
 
-        /**
-         * Time slider update functionality.
-         */
+        //Time slider update functionality.
         player.currentTimeProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov) {
                 updatesValues();
             }
         });
 
-        /**
-         * Time slider jump to different part of the video functionality.
-         */
+        //Time slider jump to different part of the video functionality.
         time.valueProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov) {
                 if (time.isPressed()) {
@@ -133,9 +122,7 @@ public class MediaBar extends HBox {
             }
         });
 
-        /**
-         * Volume slider functionality.
-         */
+        //Volume slider functionality.
         vol.valueProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov) {
                 if (vol.isPressed()) {

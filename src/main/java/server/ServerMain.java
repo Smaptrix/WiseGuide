@@ -10,8 +10,6 @@ package server;
 
 
 import java.io.IOException;
-import java.net.SocketException;
-import java.security.NoSuchAlgorithmException;
 
 public class ServerMain {
 

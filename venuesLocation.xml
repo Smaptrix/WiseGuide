@@ -4,41 +4,41 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="PWS_Base https://raw.githubusercontent.com/super-cow-powers/sweng_21_PWS/master/PWS.xsd"
 >
-    <!--Price range from 0 (free) to 3 (expensive)-->
-    <!--Raiting range from 0 to 5 -->
+    <!--Price ranges from 0 (free) to 3 (expensive)-->
+    <!--Rating range from 0 to 5 -->
     <!--Nightclubs-->
 
     <base:page title="Flares_York" ID="001" price="2" lat="53.9587775" lon="-1.0867884" category="nightclub" rating="4">
         <!--
-        there's also some weird shape and text attributes that we can use if need see this example xml from david's schema (https://github.com/super-cow-powers/sweng_21_PWS/blob/master/example_doc.xml)
+        there's also some weird shape and text attributes that we can use if you need see this example xml from david's schema (https://github.com/super-cow-powers/sweng_21_PWS/blob/master/example_doc.xml)
 
-        also i didnt realise that the "source" attribute was actually "include_source" so i just made a quick switch
-        and there was some other silly mistakes i made formatting wise... so ive just cleaned them up now, sorry!
+        also, I didn't realise that the "source" attribute was actually "include_source" so I just made a quick switch
+        and there was some other silly mistakes I made formatting wise... so ive just cleaned them up now, sorry!
 
-        hopefully this should be everything we need from the schema for now? i guess we also need the alt text option, but will have to change the extra schema and im unsure of how to do that atm aha
+        hopefully this should be everything we need from the schema for now? I guess we also need the alt text option, but will have to change the extra schema and im unsure of how to do that atm aha
         -->
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Clubs/Flares_York/Flares_York.txt" ID="text0"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares1.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image0" disp_duration_s="40" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares1.txt" ID="altText0"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares1.txt" ID="altText0"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares2.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image1" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares2.txt" ID="altText1"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares2.txt" ID="altText1"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares3.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image2" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares3.txt" ID="altText2"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares3.txt" ID="altText2"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares4.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image3" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares4.txt" ID="altText3"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares4.txt" ID="altText3"/>
         </base:shape>
         <base:image include_source="Venues/Clubs/Flares_York/Flares5.jpg" x_orig="40" y_orig="40" z_ind="0" x_size_px="50" y_size_px="50" rot_angle="0" ID="image4" disp_duration_s="-1" show_after_s="0" />
         <base:shape x_end="0" y_end="0" type="textbox">
-            <base:text include_source="Venues/Clubs/FLares_York/Flares5.txt" ID="altText4"/>
+            <base:text include_source="Venues/Clubs/Flares_York/Flares5.txt" ID="altText4"/>
         </base:shape>
         <base:playable include_source="Venues/Clubs/Flares_York/FlaresVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
         <!--

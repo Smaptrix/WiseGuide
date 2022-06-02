@@ -13,8 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -46,6 +49,22 @@ public class ChangeUsernameController {
 
     /**
      * <p>
+     *     The label which displays the text "Current Username"
+     * </p>
+     */
+    @FXML
+    Label usernameText;
+
+    /**
+     * <p>
+     *     The label which displays the text "Desired Username"
+     * </p>
+     */
+    @FXML
+    Label desiredText;
+
+    /**
+     * <p>
      *     The text field which the user can type there desired name into
      * </p>
      */
@@ -66,6 +85,21 @@ public class ChangeUsernameController {
      */
     @FXML
     Button confirmButton;
+
+    /**
+     * <p>
+     *     The title
+     * </p>
+     */
+    @FXML
+    Label title;
+
+    /**
+     * <p>
+     *     Whether testing mode is enabled.
+     * </p>
+     */
+    boolean testingMode;
 
     /**
      * <p>
@@ -100,20 +134,34 @@ public class ChangeUsernameController {
 
     /**
      * <p>
+     *     Gets the current user for the controller
+     * </p>
+     * @return The current user
+     */
+    public User getUser(){
+        return currUser;
+    }
+
+    public void setTestingMode(boolean testingMode) { this.testingMode = testingMode; }
+
+    /**
+     * <p>
      *     Tells the client to request a name change when the button is pressed
      * </p>
      */
     @FXML
-    protected void onConfirmButtonPress(){
+    protected void onConfirmButtonPress() throws IOException {
 
 
         String desiredName = desiredNameField.getText();
 
-
-        if(desiredName.equals(currUser.getUsername())){
+        if(forbiddenNameCheck(desiredName) && !testingMode) {
+            errLabel.setText("That username is not allowed.");
+        } else if(desiredName.equals(currUser.getUsername())){
             errLabel.setText("This is your current name!");
-        }
-        else{
+        } else if(desiredName.equals("")){
+            errLabel.setText("You cannot have a blank name!");
+        } else{
             try {
                 if (client.requestUserNameChange(desiredName).equals("NAMECHANGED")){
 
@@ -135,6 +183,26 @@ public class ChangeUsernameController {
         }
 
 
+    }
+
+    /**
+     * <p>
+     *     Checks to see if the desired username is allowed.
+     * </p>
+     * @return whether the username is allowed.
+     */
+    private boolean forbiddenNameCheck(String name) throws IOException {
+        boolean forbidden = false;
+        File forbiddenNamesList = new File("reservedUsernames.txt");
+        BufferedReader br = new BufferedReader(new FileReader(forbiddenNamesList));
+        String line;
+        while(((line = br.readLine()) != null) && !forbidden){
+            if(name.equals(line)){
+                forbidden = true;
+            }
+        }
+        br.close();
+        return forbidden;
     }
 
 

@@ -1,6 +1,6 @@
 package server;
 
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.*;
 
@@ -164,7 +164,7 @@ public class ServerUserHandler {
 
             }
 
-            //If the lines dont match, the line is ignored
+            //If the lines don't match, the line is ignored
             else {
 
                 input += line + '\n';
@@ -208,7 +208,7 @@ public class ServerUserHandler {
 
             }
 
-            //If the lines dont match, the line is ignored
+            //If the lines don't match, the line is ignored
             else {
                 input += line + '\n';
             }
@@ -226,7 +226,7 @@ public class ServerUserHandler {
 
 
 
-    //Checks to see if the users password is correct
+    //Checks to see if the users' password is correct
     public boolean verifyPass() {
         return (currUser.getPassword()).equals(userInfo[1]);
     }

@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 
 import java.util.Objects;
@@ -38,6 +39,7 @@ public class AccountCreationPopupTests extends ApplicationTest {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(LoginApplication.class.getResource("account-created-window.fxml")));
         Parent mainNode = loader.load();
         stage.setScene(new Scene(mainNode));
+        stage.setTitle("Account Created");
         stage.show();
         stage.toFront();
         this.stage = stage;
@@ -69,7 +71,7 @@ public class AccountCreationPopupTests extends ApplicationTest {
     public void okayButtonTest(){
         sleep(1000);
         clickOn("#closePopupButton");
-        //FxAssert.verifyThat(window("Account Created"), WindowMatchers.isNotShowing()); --This method does not work as it can't find a window w/o a title.
+        //FxAssert.verifyThat(window("Account Created"), WindowMatchers.isNotShowing()); //This method does not work as it can't find a closed window.
         Assert.assertFalse(stage.isShowing());
     }
 

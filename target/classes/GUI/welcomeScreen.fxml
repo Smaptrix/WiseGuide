@@ -23,28 +23,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="mainWindow" fx:id="mainWindow" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
+<VBox id="mainWindow" fx:id="mainWindow" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-        <MenuBar fx:id="menuBar" layoutX="7.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Menu mnemonicParsing="false" text="File">
+        <MenuBar id="menuBar" fx:id="menuBar" layoutX="7.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Menu id="menuBarFile" fx:id="menuBarFile" mnemonicParsing="false" text="File">
                 <MenuItem id="closeButton" fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
             </Menu>
-         <Menu mnemonicParsing="false" text="Venue Selector">
+         <Menu id="venueSelectMenu" fx:id="venueSelectMenu" mnemonicParsing="false" text="Venue Selector">
            <items>
-             <MenuItem fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
+             <MenuItem id="venueSelectorMenuItem" fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
            </items>
          </Menu>
             <Menu fx:id="menuBarAccount" mnemonicParsing="false" text="Account">
                 <MenuItem id="accDetailsButton" fx:id="accDetailsButton" mnemonicParsing="false" onAction="#onAccDetailsButtonClick" text="Account Details" />
                 <MenuItem id="signOutButton" fx:id="signOutButton" mnemonicParsing="false" onAction="#onSignOutButtonClick" text="Sign Out" />
             </Menu>
-            <Menu id="menuBarHelpButton" fx:id="menuBarHelpButton" mnemonicParsing="false" text="Help">
+            <Menu id="menuBarHelp" fx:id="menuBarHelp" mnemonicParsing="false" text="Help">
                 <MenuItem id="aboutButton" fx:id="aboutButton" mnemonicParsing="false" onAction="#onAboutButtonPress" text="About" />
-            <MenuItem id="ManualButton" fx:id="ManualButton" mnemonicParsing="false" onAction="#onUserManualMenuButtonPress" text="Manual" />
+            <MenuItem id="manualButton" fx:id="manualButton" mnemonicParsing="false" onAction="#onUserManualMenuButtonPress" text="Manual" />
             </Menu>
         </MenuBar>
 
@@ -52,13 +52,13 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                 <SplitPane dividerPositions="0.65" orientation="VERTICAL" prefHeight="570.0" prefWidth="264.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                        <TitledPane animated="false" prefHeight="366.0" prefWidth="219.0" text="Venues" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TitledPane fx:id="venueTitlePane" animated="false" prefHeight="366.0" prefWidth="219.0" text="Venues" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                <ScrollPane prefHeight="339.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <ScrollPane fx:id="venueScrollPane" prefHeight="339.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <Accordion fx:id="venueAccordion">
                                  <panes>
-                                    <TitledPane animated="false" expanded="false" text="Bars">
+                                    <TitledPane fx:id="barsPane" animated="false" expanded="false" text="Bars">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -67,7 +67,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" expanded="false" text="Cafés">
+                                    <TitledPane fx:id="cafesPane" animated="false" expanded="false" text="Cafés">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -76,7 +76,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Clubs">
+                                    <TitledPane fx:id="clubsPane" animated="false" text="Clubs">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -85,7 +85,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" expanded="false" text="Fast Food">
+                                    <TitledPane fx:id="foodPane" animated="false" expanded="false" text="Fast Food">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -94,7 +94,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" layoutX="10.0" layoutY="86.0" text="Pubs">
+                                    <TitledPane fx:id="pubsPane" animated="false" layoutX="10.0" layoutY="86.0" text="Pubs">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -103,7 +103,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Restaurants">
+                                    <TitledPane fx:id="restaurantsPane" animated="false" text="Restaurants">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
@@ -112,7 +112,7 @@
                                           </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Green Spaces">
+                                    <TitledPane fx:id="greenPane" animated="false" text="Green Spaces">
                                        <content>
                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                <children>
@@ -121,7 +121,7 @@
                                            </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Study Spaces">
+                                    <TitledPane fx:id="studyPane" animated="false" text="Study Spaces">
                                        <content>
                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                <children>
@@ -130,7 +130,7 @@
                                            </AnchorPane>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Sightseeing">
+                                    <TitledPane fx:id="sightseeingPane" animated="false" text="Sightseeing">
                                        <content>
                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                <children>
@@ -147,7 +147,7 @@
                         </TitledPane>
                     </AnchorPane>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                        <TitledPane animated="false" layoutX="9.0" layoutY="-25.0" prefHeight="195.0" prefWidth="219.0" text="Routes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TitledPane fx:id="routesTitlePane" animated="false" layoutX="9.0" layoutY="-25.0" prefHeight="195.0" prefWidth="219.0" text="Routes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                 <ScrollPane prefHeight="168.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <ListView fx:id="routesList" prefHeight="339.0" prefWidth="217.0" />

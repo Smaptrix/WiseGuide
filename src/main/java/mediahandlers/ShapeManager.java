@@ -2,17 +2,8 @@ package mediahandlers;
 
 //CREATED BY ENTROPY DESIGNS FOR MAPTRIX
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.SubScene;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import javafx.util.Duration;
 
 public class ShapeManager{
 

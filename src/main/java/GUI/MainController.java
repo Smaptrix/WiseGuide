@@ -8,7 +8,7 @@
 
 package GUI;
 
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenueXMLParser;
 import client.Client;
 
 import javafx.event.EventHandler;
@@ -19,13 +19,16 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.Accordion;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
+import javafx.scene.control.ScrollPane;
 
 import java.awt.*;
 import java.io.*;
@@ -171,11 +174,43 @@ public class MainController {
 
     /**
      * <p>
+     *     The top menu bar
+     * </p>
+     */
+    @FXML
+    MenuBar menuBar;
+
+    /**
+     * <p>
+     *     The File menu
+     * </p>
+     */
+    @FXML
+    Menu menuBarFile;
+
+    /**
+     * <p>
+     *     The Accounts menu
+     * </p>
+     */
+    @FXML
+    Menu menuBarAccount;
+
+    /**
+     * <p>
+     *     The Help menu
+     * </p>
+     */
+    @FXML
+    Menu menuBarHelp;
+
+    /**
+     * <p>
      *     The button on the menubar which closes the application
      * </p>
      */
     @FXML
-    MenuItem closeButton;
+    public MenuItem closeButton;
 
     /**
      * <p>
@@ -183,7 +218,7 @@ public class MainController {
      * </p>
      */
     @FXML
-    MenuItem accDetailsButton;
+    public MenuItem accDetailsButton;
 
     /**
      * <p>
@@ -191,11 +226,11 @@ public class MainController {
      * </p>
      */
     @FXML
-    MenuItem signOutButton;
+    public MenuItem signOutButton;
 
     /**
      * <p>
-     *     The uhhhh - Will what is this?
+     *     The main window for the GUI. Used to allow closing of certain windows.
      * </p>
      */
     @FXML
@@ -207,7 +242,15 @@ public class MainController {
      * </p>
      */
     @FXML
-    MenuItem aboutButton;
+    public MenuItem aboutButton;
+
+    /**
+     * <p>
+     *     The button on the menubar that allows the user to access the manual
+     * </p>
+     */
+    @FXML
+    public MenuItem manualButton;
 
     /**
      * <p>
@@ -312,6 +355,15 @@ public class MainController {
      */
     @FXML
     ImageView mapView;
+
+    /**
+     * <p>
+     *     The venues scroll pane
+     * </p>
+     */
+    @FXML
+    public ScrollPane venueScrollPane;
+
 
     /**
      * <p>
@@ -436,7 +488,6 @@ public class MainController {
         } else {
             currentItemSelected = selectedItem;
         }
-        // TODO: add an extra scene for loading page - @WILL
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
         Stage stage = new Stage();
@@ -448,8 +499,8 @@ public class MainController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) ((String) currentItemSelected)).replaceAll(" ", "_"));
-        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", (String) ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
+        System.out.println("THIS IS THE VENUE NAME SEARCHING: " + ((String) currentItemSelected).replaceAll(" ", "_"));
+        controller.setCurrVenue((String) currentItemSelected, xml.getPage("title", ((String) currentItemSelected).replaceAll(" ", "_")), currUser);
         //Checks to see if the venue has been favourite by the user
         stage.setScene(scene);
         stage.setTitle((String) currentItemSelected);
@@ -485,9 +536,9 @@ public class MainController {
         }
         RouteDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) ((String) currentRouteSelected)).replaceAll(" ", "_"));
+        System.out.println("THIS IS THE ROUTE NAME SEARCHING: " + ((String) currentRouteSelected).replaceAll(" ", "_"));
         //TODO Sort out xml read-ins in controller
-        controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", (String) ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
+        controller.setCurrRoute((String) currentRouteSelected, xml.getPage("title", ((String) currentRouteSelected).replaceAll(" ", "_")), currUser);
         stage.setScene(scene);
         stage.setTitle((String) currentRouteSelected);
         stage.show();
@@ -575,6 +626,8 @@ public class MainController {
             selectedItem = "Rowntree Park";
         } else if ((mousePosition.getX() > mapController.getBase_millennium_min().getX()) && (mousePosition.getX() < mapController.getBase_millennium_max().getX()) && (mousePosition.getY() > mapController.getBase_millennium_min().getY()) && (mousePosition.getY() < mapController.getBase_millennium_max().getY())) {
             selectedItem = "Millennium Fields";
+        } else if ((mousePosition.getX() > mapController.getBase_blackBull_min().getX()) && (mousePosition.getY() < mapController.getBase_blackBull_max().getX()) && (mousePosition.getY() > mapController.getBase_blackBull_min().getY()) && (mousePosition.getY() < mapController.getBase_blackBull_max().getY())){
+            selectedItem = "The Black Bull";
         } else {
             selectedItem = "ignore";
             desiredMap = "baseMap";
@@ -881,7 +934,7 @@ public class MainController {
      *     Loads the list of venues into the listview on the main application
      * </p>
      */
-    protected void loadListOfVenuesAndRoutes() {
+    public void loadListOfVenuesAndRoutes() {
 
 
         //Tries to download the venue lists from the server
@@ -961,9 +1014,7 @@ public class MainController {
 
         try {
             Desktop.getDesktop().browse(new URL("https://docs.google.com/document/d/1w9P1IKH5lbeHghuY0YJpdP8F_PjkEj6R/edit?usp=sharing&ouid=111971918555544856801&rtpof=true&sd=true").toURI());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
 
@@ -990,7 +1041,7 @@ public class MainController {
         //Get the current list of venues from the main application
         List<String> listOfVenues = xml.getPageNames();
 
-        List<String> strippedListOfVenues =  new ArrayList();
+        List<String> strippedListOfVenues = new ArrayList();
 
         for(String s: listOfVenues){
            s =  s.substring(7, s.length() -1);

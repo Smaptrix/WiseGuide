@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * <p>
- *     Controls the hashmap textfile which contains every users favourite venues
+ *     Controls the hashmap text file which contains every users favourite venues
  * </p>
  */
 
@@ -34,7 +34,7 @@ public class FaveVenuesHandler {
      */
     public FaveVenuesHandler(File faveVenueFile){
         this.faveVenueFile = faveVenueFile;
-        //Loads the hashmap from the textfile
+        //Loads the hashmap from the text file
         try {
             loadHashMap();
         } catch (IOException e) {
@@ -59,7 +59,7 @@ public class FaveVenuesHandler {
         //Creates a new array with an extra space
         String[] result = Arrays.copyOf(faveVenueMap.get(username), faveVenueMap.get(username).length + 1);
 
-        //Places the venuename into the extra space
+        //Places the venue name into the extra space
         result[result.length -1] = venueName;
 
         //Replace the current venue list with the new one
@@ -77,12 +77,12 @@ public class FaveVenuesHandler {
      * @param venueName the name of the venue
      */
     public void removeFaveVenue(String username, String venueName){
-        //If a user doesn't exist dont do anything
+        //If a user doesn't exist don't do anything
         if(!faveVenueMap.containsKey(username)){
             return;
         }
         else{
-            //Turns the string array into a list so we can remove the venue
+            //Turns the string array into a list, so we can remove the venue
             List<String> list = new ArrayList<String>(Arrays.asList(faveVenueMap.get(username)));
             //Remove the venue
             list.remove(venueName);
@@ -210,7 +210,7 @@ public class FaveVenuesHandler {
      *     Returns the favourite venue list for a given user
      * </p>
      * @param username the users username
-     * @return The list of venues as a string with a fullstop between each venue name
+     * @return The list of venues as a string with a full stop between each venue name
      */
     public String faveVenueList(String username){
 
@@ -221,7 +221,7 @@ public class FaveVenuesHandler {
 
             String faveVenueListString = "";
 
-            //Turn the string array into one long string so its easier to send
+            //Turn the string array into one long string, so it's easier to send
             for (int i = 0; faveVenueList.length > i; i++) {
                 faveVenueListString = faveVenueListString.concat(faveVenueList[i] + ".");
             }
@@ -242,7 +242,7 @@ public class FaveVenuesHandler {
      * <p>
      *     Changes the name of a user in the favourite venue list to represent there new name
      * </p>
-     * @param oldUsername the old uesrname of the user
+     * @param oldUsername the old username of the user
      * @param newUsername the new username of the user
      */
     public void nameChange(String oldUsername, String newUsername){

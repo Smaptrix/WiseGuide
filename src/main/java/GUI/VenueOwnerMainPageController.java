@@ -7,8 +7,8 @@
  */
 package GUI;
 
-import VenueXMLThings.VenuePage;
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenuePage;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +16,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import serverclientstuff.User;
-import serverclientstuff.Utils;
+import ServerClientUtility.User;
+import ServerClientUtility.Utils;
 
 import javax.xml.transform.TransformerException;
 import java.io.File;
@@ -127,7 +126,7 @@ public class VenueOwnerMainPageController {
     public void setCurrUser(User currUser) {
         this.currUser = currUser;
         titleLabel.setText("VENUE ADMIN PAGE: " + currUser.getUsername());
-        //Replaces spaces with _ so that file paths remain correct
+        //Replaces space with _ so that file paths remain correct
         filePathStart = "Venues/Clubs/" + (currUser.getUsername()).replace(" ", "_") + "/";
     }
 
@@ -140,7 +139,7 @@ public class VenueOwnerMainPageController {
      */
     public void populateFileList(){
 
-        //Download the xml file - we dont care if the user has access to it
+        //Download the xml file - we don't care if the user has access to it
         //This is because all the venues will be on the main application publicly
         //No sensitive data is stored in the venue xml file
         try {
@@ -191,7 +190,7 @@ public class VenueOwnerMainPageController {
 
         System.out.println("Open File Button Pressed");
 
-        //Make sure that something is selected to it doesnt request a file that doesnt exist
+        //Make sure that something is selected to it doesn't request a file that doesn't exist
        if(fileList.getSelectionModel().getSelectedItem() != null){
            //Requests the selected file from the server
            try {
@@ -249,7 +248,7 @@ public class VenueOwnerMainPageController {
      * </p>
      */
     @FXML
-    //Adds a new file to the servers directory, and into the XML file
+    //Adds a new file to the server's directory, and into the XML file
     //Uploading files to a server could be very dangerous
     //WIP!!! - BUTTON IS INVISIBLE
     private void onAddFileButtonPress(){
