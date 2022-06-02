@@ -31,20 +31,20 @@
 
     <VBox fx:id="mainWindow" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <MenuBar>
-            <Menu mnemonicParsing="false" text="File">
-                <MenuItem mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
+            <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
+                <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
             </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-                <MenuItem mnemonicParsing="false" onAction="#onAboutButtonPress" text="About" />
+            <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
+                <MenuItem id="aboutButton" fx:id="aboutButton" mnemonicParsing="false" onAction="#onAboutButtonPress" text="About" />
             </Menu>
         </MenuBar>
         <HBox prefHeight="100.0" prefWidth="200.0">
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackButtonPress" prefHeight="45.0" prefWidth="75.0" text="Back">
+            <Button fx:id="goBack" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackButtonPress" prefHeight="45.0" prefWidth="75.0" text="Back">
                 <HBox.margin>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </HBox.margin>
             </Button>
-            <Label id="venueName" fx:id="routeName" alignment="TOP_CENTER" prefWidth="900.0" styleClass="heading1" text="ROUTE NAME" textAlignment="CENTER">
+            <Label id="routeName" fx:id="routeName" alignment="TOP_CENTER" prefWidth="900.0" styleClass="heading1" text="ROUTE NAME" textAlignment="CENTER">
                 <padding>
                     <Insets bottom="15.0" top="15.0" />
                 </padding>
@@ -92,13 +92,13 @@
                 </AnchorPane>
             </VBox>
             <VBox prefHeight="600.0" prefWidth="450.0">
-                <TitledPane animated="false" prefHeight="300.0" prefWidth="450.0" text="Text Description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <TitledPane fx:id="routeTextPane" animated="false" prefHeight="300.0" prefWidth="450.0" text="Text Description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <TextArea id="venueText" fx:id="routeText" prefHeight="200.0" prefWidth="450.0" wrapText="true" editable="false" />
                     <VBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                     </VBox.margin>
                 </TitledPane>
-                <TitledPane animated="false" prefHeight="300.0" prefWidth="450.0" text="Venues In Route" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <TitledPane fx:id="venueTextPane" animated="false" prefHeight="300.0" prefWidth="450.0" text="Venues In Route" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <ScrollPane prefHeight="300.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <ListView fx:id="venuesList" prefHeight="172.0" prefWidth="373.0" />
                     </ScrollPane>

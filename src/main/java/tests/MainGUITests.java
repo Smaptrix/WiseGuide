@@ -173,6 +173,14 @@ public class MainGUITests extends ApplicationTest {
         FxAssert.verifyThat(window("About Page"), WindowMatchers.isShowing());
     }
 
+    //Unit Test | Check Venue Accordion
+    @Test
+    public void venueListTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#venueTitlePane",Node::isVisible);
+        FxAssert.verifyThat("#venueTitlePane",LabeledMatchers.hasText("Venues"));
+    }
+
     //Unit Test | Check bar lists
     @Test
     public void barsListTest(){
@@ -429,6 +437,35 @@ public class MainGUITests extends ApplicationTest {
         doubleClickOn("#sightseeingList");
         sleep(1000);
         FxAssert.verifyThat(window("The Hole In Wand"), WindowMatchers.isShowing());
+    }
+
+    //Unit Test | Check routes accordion
+    @Test
+    public void routesListTest(){
+        sleep(1000);
+        FxAssert.verifyThat("#routesTitlePane",Node::isVisible);
+        FxAssert.verifyThat("#routesTitlePane",LabeledMatchers.hasText("Routes"));
+    }
+
+    //Unit Test | Check routes list
+    @Test
+    public void routesTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        FxAssert.verifyThat("#routesList", ListViewMatchers.hasListCell("Study Day Route"));
+        FxAssert.verifyThat("#routesList", ListViewMatchers.hasListCell("Night Out Route"));
+        FxAssert.verifyThat("#routesList", ListViewMatchers.hasListCell("Tourist Day Route"));
+    }
+
+    //Integration Test | Confirm a route can open (#routesList defaults to Tourist Day Route)
+    @Test
+    public void openRouteTest(){
+        sleep(1000);
+        controller.loadListOfVenuesAndRoutes();
+        sleep(1000);
+        doubleClickOn("#routesList");
+        FxAssert.verifyThat(window("Tourist Day Route"),WindowMatchers.isShowing());
     }
 
     //Manual Tests | Provides an opportunity for manual tests to be performed
