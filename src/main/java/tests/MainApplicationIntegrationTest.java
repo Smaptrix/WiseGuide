@@ -28,6 +28,12 @@ import java.util.concurrent.TimeoutException;
 //This is a test to ensure that the main application works correctly
 //Needs the map sections adding
 //For now it is a test that the software works if the user wants to click through the buttons one by one
+
+/**
+ * <p>
+ *     Integration test for the main application.
+ * </p>
+ */
 public class MainApplicationIntegrationTest extends ApplicationTest {
 
     public Client client;

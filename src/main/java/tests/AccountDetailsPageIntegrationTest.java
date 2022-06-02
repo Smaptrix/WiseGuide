@@ -21,6 +21,11 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Integration test for Account Details Page
+ * </p>
+ **/
 public class AccountDetailsPageIntegrationTest extends ApplicationTest {
 
     private Stage stage;

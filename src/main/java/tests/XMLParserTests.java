@@ -132,25 +132,4 @@ public class XMLParserTests extends ApplicationTest {
         Assert.assertEquals(xml.changeAttribute("title", "Flares_York", "lat", oldLatitude), 1);
     }
 
-    //TODO
-    @Test
-    //Unit Test | Confirm child text can be added.
-    public void addChildTextTest(){
-    }
-
-    @Test
-    //Unit Test | Confirm child media can be added.
-    public void addChildMediaTest(){
-    }
-
-    @Test
-    //Unit Test | Confirm child media can be removed.
-    public void removeChildMediaTest(){
-    }
-
-    @Test
-    //Unit Test | Confirm XML files can be created.
-    public void createXMLTest(){
-    }
-
 }

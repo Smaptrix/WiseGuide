@@ -22,6 +22,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * <p>
+ *     Tests for the Venue Details page.
+ * </p>
+ */
 public class VenueDetailsTests extends ApplicationTest {
 
     VenueDetailsController controller;

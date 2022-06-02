@@ -13,6 +13,11 @@ import serverclientstuff.User;
 
 import java.io.IOException;
 
+/**
+ * <p>
+ *     Tests for the Map.
+ * </p>
+ */
 public class MapTests extends ApplicationTest {
 
     private MainController controller;

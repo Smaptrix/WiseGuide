@@ -21,6 +21,11 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Integration test for the venue favouriting system.
+ * </p>
+ */
 public class VenueFavouritingIntegrationTest extends ApplicationTest {
 
     public Client client;
@@ -104,10 +109,6 @@ public class VenueFavouritingIntegrationTest extends ApplicationTest {
 
         //Check to see if the venue has been unfavourited
         FxAssert.verifyThat("#faveVenueButton", LabeledMatchers.hasText("Favourite"));
-
-
-
-
 
     }
 

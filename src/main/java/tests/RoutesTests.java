@@ -19,6 +19,11 @@ import serverclientstuff.User;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * <p>
+ *     Tests for the route details page.
+ * </p>
+ */
 public class RoutesTests extends ApplicationTest {
 
     RouteDetailsController controller;
@@ -35,9 +40,10 @@ public class RoutesTests extends ApplicationTest {
         stage.setResizable(false);
     }
 
-    //Manual Testing
+    //Manual Testing | Opens a blank routes page for GUI verification. Actual route pages should be tested via the
+    //normal application as the route details cannot be loaded on the main thread.
     @Test
-    public void manualTest() throws IOException {
+    public void manualTest() {
         sleep(1000000);
     }
 

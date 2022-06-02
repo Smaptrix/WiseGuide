@@ -10,10 +10,10 @@ import java.util.Arrays;
 
 /**
  * <p>
- *     Tests for the venue favouring system.
+ *     Tests for the venue favouriting system.
  * </p>
  */
-public class VenueFavouritingTest{
+public class VenueFavouritingTests {
 
 
     @Test
