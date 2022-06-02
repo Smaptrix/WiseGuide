@@ -442,12 +442,13 @@ public class Client {
 
         sendMessage("ECHO " + "test", true);
 
-        int stringSize = inputStream.read();
+        //int stringSize = inputStream.read();
 
-        byte[] data = readBytes(stringSize);
+        //byte[] data = readBytes(stringSize);
 
 
-        return new String(data, StandardCharsets.UTF_8);
+        //return new String(data, StandardCharsets.UTF_8);
+        return receiveAcknowledgement(true);
     }
 
 
