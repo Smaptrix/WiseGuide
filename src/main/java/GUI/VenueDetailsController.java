@@ -339,9 +339,9 @@ public class VenueDetailsController {
                 break;
         }
         //Draws the circles with the correct fill based on the price value
-        priceCircle0 = shapeManager.drawCircle(20, -2, 20, circleFill1, maptrixDarkBlue, 1);
-        priceCircle1 = shapeManager.drawCircle(100, -2, 20, circleFill2, maptrixDarkBlue, 1);
-        priceCircle2 = shapeManager.drawCircle(180, -2, 20, circleFill3, maptrixDarkBlue, 1);
+        priceCircle0 = shapeManager.drawCircle(20, -2, 20, circleFill1, maptrixDarkBlue, 3);
+        priceCircle1 = shapeManager.drawCircle(100, -2, 20, circleFill2, maptrixDarkBlue, 3);
+        priceCircle2 = shapeManager.drawCircle(180, -2, 20, circleFill3, maptrixDarkBlue, 3);
 
         priceGroup.getChildren().add(priceCircle0);
         priceGroup.getChildren().add(priceCircle1);
@@ -402,11 +402,11 @@ public class VenueDetailsController {
                 break;
         }
         //Draws the triangles with the correct fill based on the price value
-        triangle1 = shapeManager.drawTriangle(20,0,0, 40,40,40, triangleFill1, maptrixDarkBlue,1);
-        triangle2 = shapeManager.drawTriangle(70,0,50, 40,90,40, triangleFill2, maptrixDarkBlue,1);
-        triangle3 = shapeManager.drawTriangle(120,0,100, 40,140,40, triangleFill3, maptrixDarkBlue,1);
-        triangle4 = shapeManager.drawTriangle(170,0,150, 40,190,40, triangleFill4, maptrixDarkBlue,1);
-        triangle5 = shapeManager.drawTriangle(220,0,200, 40,240,40, triangleFill5, maptrixDarkBlue,1);
+        triangle1 = shapeManager.drawTriangle(20,0,0, 40,40,40, triangleFill1, maptrixDarkBlue,3);
+        triangle2 = shapeManager.drawTriangle(70,0,50, 40,90,40, triangleFill2, maptrixDarkBlue,3);
+        triangle3 = shapeManager.drawTriangle(120,0,100, 40,140,40, triangleFill3, maptrixDarkBlue,3);
+        triangle4 = shapeManager.drawTriangle(170,0,150, 40,190,40, triangleFill4, maptrixDarkBlue,3);
+        triangle5 = shapeManager.drawTriangle(220,0,200, 40,240,40, triangleFill5, maptrixDarkBlue,3);
 
         ratingGroup.getChildren().add(triangle1);
         ratingGroup.getChildren().add(triangle2);
