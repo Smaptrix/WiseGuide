@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Aidan Carson
+    Date Created:   05/04/2022
+    Last Updated:   05/05/2022
+ */
 package GUI;
 
 import client.Client;
@@ -148,9 +155,11 @@ public class AccountDeletionController {
         if(!(passField.getText()).equals(passConfirmField.getText())){
             errLabel.setText("The passwords do not match!");
         }
+        //Verifies that the passwords are correct
         else if(passField.getText().trim().isEmpty()){
             errLabel.setText("You have not entered a password!");
         }
+        //Verifies that the checkbox has been checked
         else if(!delCheckBox.isSelected()){
             errLabel.setText("You must click the checkbox to continue.");
         }
