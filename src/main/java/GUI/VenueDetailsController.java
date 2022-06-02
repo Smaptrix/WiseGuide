@@ -433,9 +433,6 @@ public class VenueDetailsController {
 
         // video
         try {
-            for (int i = 0; i < currVenuePage.children.size(); i++) {
-                System.out.println(currVenuePage.children.get(i).attributes);
-            }
 
             String videoFile = (currVenuePage.getMediaSourceByID("video0"));
 
