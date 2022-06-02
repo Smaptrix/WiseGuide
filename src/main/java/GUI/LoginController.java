@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   18/02/2022
-    Last Updated:   11/05/2022
+    Last Updated:   02/06/2022
  */
 
 package GUI;
@@ -173,23 +173,25 @@ public class LoginController {
      * @throws IOException If the client cannot connect to the server
      */
     @FXML
-    //Tries to log in using the data provided
-    //For now creates a user but that should all be handled on the client not the GUI :)
-    //Bypasses all the networking stuff while I wait for integration - JI
-    //Shouldn't have to throw the exception because we only want to make the user and transfer that to the server
-
     private void loginButtonAction() throws IOException {
 
+        //If the username text field is empty
         if (userTextField.getText().trim().isEmpty()) {
 
             errorLabel.setText("You have not entered a username!");
 
-        } else if (userPassField.getText().trim().isEmpty()) {
+        }
+        //If the password field is empty
+        else if (userPassField.getText().trim().isEmpty()) {
 
             errorLabel.setText("You have not entered a password!");
-        } else if (!client.isConnected()) {
+        }
+        //If the client isn't connected to the server
+        else if (!client.isConnected()) {
             errorLabel.setText("Cannot connect to server!");
-        } else if (!client.isSameVersion()) {
+        }
+        //If the server and the client have seperate versions
+        else if (!client.isSameVersion()) {
             errorLabel.setText("Server and Client are different Versions!");
         } else {
 
@@ -198,12 +200,10 @@ public class LoginController {
 
             String loginCode = client.requestLogin(currUser);
 
-
+            //If the message recieved is anything other than GOODLOGIN don't login
             if (!(loginCode.equals("GOODLOGIN"))) {
                 errorLabel.setText("Unrecognised user details");
             }
-
-            //If not BADLOGIN assume GOODLOGIN - shouldn't this be the other way around?? (JI)
             else{
                 errorLabel.setText("");
 
@@ -214,7 +214,6 @@ public class LoginController {
                 MainApplication app = new MainApplication();
                 Stage mainStage = new Stage();
                 app.transferInfoAndOpen(mainStage, client, currUser);
-
             }
         }
 
@@ -255,7 +254,6 @@ public class LoginController {
         }
     }
 
-    //Client field getter and setter, used by testing to create a new testing account manually.
     /**
      * <p>
      *     Sets the client to be used with the controller
@@ -266,6 +264,10 @@ public class LoginController {
         this.client = client;
     }
 
+    /**
+     * Gets the current client being used by the login application
+     * @return the current client
+     */
     public Client getClient() { return this.client; }
 
     /**
@@ -291,6 +293,11 @@ public class LoginController {
 
     }
 
+    /**
+     * Gets the current user from the login controlle
+     * Isn't necessary because noone can be logged in yet
+     * @return the current user
+     */
     public User getCurrUser() {
         return currUser;
     }
