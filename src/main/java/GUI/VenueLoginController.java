@@ -135,9 +135,10 @@ public class VenueLoginController {
                 controller.populateFileList();
                 stage.setScene(scene);
                 stage.setTitle(currUser.getUsername() + " Owner Page");
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.show();
                 stage.setResizable(false);
-                stage.initStyle(StageStyle.UNDECORATED);
+
 
 
                 Stage currStage = (Stage) backButton.getScene().getWindow();

@@ -6,10 +6,7 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -134,11 +131,27 @@ public class RouteDetailsController {
 
     /**
      * <p>
-     *     This button on the menubar allows the user to go back to the main application
+     *     This button allows the user to go back to the main application
      * </p>
      */
     @FXML
-    private MenuItem backButton;
+    public Button goBack;
+
+    /**
+     * <p>
+     *     Menu item that closes the application.
+     * </p>
+     */
+    @FXML
+    public MenuItem menuClose;
+
+    /**
+     * <p>
+     *     Menu item for the about page
+     * </p>
+     */
+    @FXML
+    public MenuItem aboutButton;
 
     /**
      * <p>

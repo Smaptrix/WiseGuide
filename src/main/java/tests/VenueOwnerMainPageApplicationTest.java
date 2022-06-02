@@ -22,6 +22,11 @@ import org.testfx.matcher.control.LabeledMatchers;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * <p>
+ *     Tests for the venue owner main page.
+ * </p>
+ */
 public class VenueOwnerMainPageApplicationTest extends ApplicationTest {
 
 
@@ -119,7 +124,16 @@ public class VenueOwnerMainPageApplicationTest extends ApplicationTest {
        FxAssert.verifyThat(window("Venue Login"), WindowMatchers.isShowing());
     }
 
-
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm that, visually, the GUI layout is as expected.
+    // - Confirm that files can be added to the venue media list and XML file.
+    // - Confirm that files can be removed from the venue media list and XML file.
+    // - Confirm that files from the venue media list can be opened.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
 
 
 

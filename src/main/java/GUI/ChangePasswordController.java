@@ -55,6 +55,38 @@ public class ChangePasswordController {
 
     /**
      * <p>
+     *     The title
+     * </p>
+     */
+    @FXML
+    Label title;
+
+    /**
+     * <p>
+     *     The current password label
+     * </p>
+     */
+    @FXML
+    Label currPassLabel;
+
+    /**
+     * <p>
+     *     The new password label
+     * </p>
+     */
+    @FXML
+    Label newPassLabel;
+
+    /**
+     * <p>
+     *     The new password confirmation label
+     * </p>
+     */
+    @FXML
+    Label confirmLabel;
+
+    /**
+     * <p>
      *     Sets the client
      * </p>
      * @param client the client we want to set for the controller
@@ -71,6 +103,16 @@ public class ChangePasswordController {
      */
     public void setUser(User currUser){
         this.currUser = currUser;
+    }
+
+    /**
+     *<p>
+     *      Gets the current user
+     *</p>
+     * @return the current user.
+     */
+    public User getUser(){
+        return currUser;
     }
 
     /**
@@ -112,10 +154,10 @@ public class ChangePasswordController {
 
         //Check the users passwords match
         if(!desiredPass.equals(desiredPassConfirm)){
-            errLabel.setText("Your new passwords dont match!");
+            errLabel.setText("Your new passwords don't match!");
+        } else if(currPass.isBlank() || desiredPass.isBlank() || desiredPassConfirm.isBlank() ) {
+            errLabel.setText("You must fill in all the fields!");
         }
-
-
         else if(desiredPass.equals(currPass)){
             errLabel.setText("You cannot change your password to your current password!");
         }

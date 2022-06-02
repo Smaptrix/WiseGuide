@@ -92,25 +92,6 @@ public class LoginApplicationTests extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-        /*Unit Test | Confirm "Exit" button text is correct.
-    @Test
-    //TODO: Exit button no longer exists - remove if not re-adding button.
-    public void exitTextTest() {
-        sleep(1000);
-        FxAssert.verifyThat("#exitButton", LabeledMatchers.hasText("Exit"));
-    }
-    */
-
-    /*Unit Test | Confirm "Exit" button can be pressed.
-    @Test
-    //TODO: Exit button no longer exists - remove if not re-adding button.
-    public void exitTest() {
-        sleep(1000);
-        clickOn("#exitButton");
-        Assert.assertFalse(stage.isShowing());
-    }
-     */
-
     //Unit Test | Confirm "Create Account" button text is correct.
     @Test
     public void createAccountLoginButtonTextTest() {
@@ -186,5 +167,12 @@ public class LoginApplicationTests extends ApplicationTest {
         FxAssert.verifyThat(window("Venue Login"), WindowMatchers.isShowing());
     }
 
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
 
 }

@@ -84,7 +84,7 @@ public class VenueXMLParser {
      * <p>
      *     Searches for a requested page based on title/ID
      * </p>
-     * @param indexType can be "title" or "id"
+     * @param indexType can be "title" or "ID"
      * @param index the title/id value
      * @return Returns a new page based on the title or ID, where there is no page with title or ID, returns null
      */
@@ -125,7 +125,8 @@ public class VenueXMLParser {
         newPage.setAttribute("category", category);
         newPage.setAttribute("price", price);
         newPage.setAttribute("raiting", rating);
-
+        //TODO: Typo in "rating" - added pages won't be able to show their rating. Don't know where this is used so
+        // leaving it for now to avoid breaking anything, but thought it was worth pointing out.
         root.appendChild(newPage);
         numberOfPages++;
 

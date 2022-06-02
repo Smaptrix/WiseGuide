@@ -7,6 +7,7 @@
  */
 package client;
 
+import org.junit.Assert;
 import serverclientstuff.User;
 import serverclientstuff.UserSecurity;
 
@@ -126,7 +127,22 @@ public class Client {
      */
     private String[] faveVenues;
 
+    /**
+     * <p>
+     *     Whether testing mode is enabled.
+     * </p>
+     */
+    private boolean testingMode;
 
+    /**
+     * <p>
+     *     Changes testing mode to the input boolean.
+     * </p>
+     * @param testingMode Whether testing mode should set to true or false.
+     */
+    protected void setTestingMode(boolean testingMode){
+        this.testingMode = testingMode;
+    }
 
     /**
      * <p>
@@ -139,6 +155,8 @@ public class Client {
      */
     public void startConnection(String ip, int port) throws IOException {
 
+        setTestingMode(false);
+
         //Startup means not connected yet
         connected = false;
 
@@ -149,8 +167,6 @@ public class Client {
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
 
-
-
             //Get the servers public key
             getServerEncryption();
 
@@ -160,17 +176,14 @@ public class Client {
             //Sends the encrypted symmetric key to the server
             sendSymmetricKey();
 
-
             //Makes sure that the server and client are able to encrypt/decrypt messages
             if(!keyValidation()){
                 System.out.println("Key validation failed... Shutting down");
                 System.exit(-1);
-
             }
 
             //Verify that the server and client are running on the same version
             sameVersion = versionCheck();
-
 
             //Once everything is booted and checked the client registers as connected
             connected = true;
@@ -429,12 +442,13 @@ public class Client {
 
         sendMessage("ECHO " + "test", true);
 
-        int stringSize = inputStream.read();
+        //int stringSize = inputStream.read();
 
-        byte[] data = readBytes(stringSize);
+        //byte[] data = readBytes(stringSize);
 
 
-        return new String(data, StandardCharsets.UTF_8);
+        //return new String(data, StandardCharsets.UTF_8);
+        return receiveAcknowledgement(true);
     }
 
 
@@ -636,6 +650,10 @@ public class Client {
         //Read the filesize in bytes
         byte[] data = readBytes(fileSize);
 
+        if(testingMode){
+            System.out.println("[TESTING] The client received the message: "+data.toString());
+        }
+
         //Initialise the string
         String ack = null;
         //If we want to decrypt the message
@@ -807,7 +825,7 @@ public class Client {
      * <p>
      *     Gives the directory path for the required file
      * </p>
-     * @param fileName name of the file you desire to fine
+     * @param fileName name of the file you desire to find
      * @return the directory path of specified file
      */
     public File getFile(String fileName){
@@ -1092,6 +1110,52 @@ public class Client {
 
     }
 
+    /**
+     * <p>
+     *     A testing function used to make the server run tests and return the results.
+     * </p>
+     */
+    public String requestServerTest(String testToRun) throws IOException {
+        sendMessage("TEST",true);
+        sendMessage(testToRun,true);
+        String response = receiveAcknowledgement(true);
+        return response;
+    }
+
+
+    /**
+     * <p>
+     *     Used during testing to output messages during encryption to verify that encryption is taking place correctly.
+     * </p>
+     * @throws IOException if a server/client-related error occurs.
+     */
+    public void serverEncryptionTest() throws IOException {
+
+
+        //Enable Server Testing Mode
+        sendMessage("TEST",true);
+        sendMessage("enableServerTestingMode",true);
+        Assert.assertEquals("[TESTING] Server testing mode was enabled.",receiveAcknowledgement(true));
+
+        //Enable Client Testing Mode
+        setTestingMode(true);
+
+        //Send a message to the server
+        System.out.println("[TESTING] The message that will be sent is: \"TEST\" followed by \"checkServerEncryptionTest\".");
+        sendMessage("TEST",true);
+        sendMessage("checkServerEncryptionTest",true);
+
+        //Receive a message from the server
+        String response = receiveAcknowledgement(true);
+        System.out.println("[TESTING] The decrypted message was: "+response);
+        System.out.println("[TESTING] Manual observation must be done to verify that encryption and decryption was performed successfully.");
+
+        //Disable testing mode;
+        setTestingMode(false);
+        sendMessage("TEST",true);
+        sendMessage("disableServerTestingMode",true);
+        Assert.assertEquals("[TESTING] Server testing mode was disabled.",receiveAcknowledgement(true));
+    }
 
 }
 

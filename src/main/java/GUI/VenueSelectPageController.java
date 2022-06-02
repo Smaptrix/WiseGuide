@@ -30,32 +30,37 @@ public class VenueSelectPageController {
      * The checkbox to indicate a user only wants to see their favourite venues
      */
     @FXML
-    CheckBox faveCheckBox;
+    public CheckBox faveCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see food venues
      */
     @FXML
-    CheckBox foodCheckBox;
+    public CheckBox foodCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see drinking venues
      */
     @FXML
-    CheckBox drinksCheckBox;
+    public CheckBox drinksCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see sightseeing venues
      */
     @FXML
-    CheckBox sightseeingCheckBox;
+    public CheckBox sightseeingCheckBox;
 
     /**
      * The checkbox to indicate a user wants to see study space venues
      */
     @FXML
-    CheckBox studySpacesCheckBox;
+    public CheckBox studySpacesCheckBox;
 
+    /**
+     * The random venue to be opened's name (for testing purposes).
+     */
+    @FXML
+    public String randomVenue;
 
 
     /**
@@ -283,10 +288,10 @@ public class VenueSelectPageController {
         }
         VenueDetailsController controller = fxmlLoader.getController();
         controller.setClient(client);
-        controller.setCurrVenue( venueName, xml.getPage("title", venueName), currUser);
+        controller.setCurrVenue(venueName.replaceAll("_"," "), xml.getPage("title", venueName), currUser);
         //Checks to see if the venue has been favourite by the user
         stage.setScene(scene);
-        stage.setTitle(venueName);
+        stage.setTitle(venueName.replaceAll("_"," "));
         stage.show();
         stage.setResizable(false);
         controller.checkIfFavourite();
@@ -310,8 +315,15 @@ public class VenueSelectPageController {
         //Create a random object
         Random rand = new Random(Instant.now().toEpochMilli());
 
+        //Removes the possibility of opening a routes page.
+        boolean venueOkay = false;
+        while (!venueOkay){
+            randomVenue = listOfVenues.get(rand.nextInt(listOfVenues.size()));
+            venueOkay = !randomVenue.equals("Study_Day_Route") && !randomVenue.equals("Night_Out_Route") && !randomVenue.equals("Tourist_Day_Route");
+        }
+
         //Pick a random item from the venue list
-        String randomVenue = listOfVenues.get(rand.nextInt(listOfVenues.size()));
+
 
         venueDetailsOpener(randomVenue);
 

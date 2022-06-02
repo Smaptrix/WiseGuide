@@ -198,11 +198,11 @@ public class AccountCreationController {
         }
 
         else if(userField.getLength() > 15){
-            errLabel.setText("username can't be more than 15 characters!");
+            errLabel.setText("Username can't be more than 15 characters!");
         }
 
         else if(passField.getLength() > 15){
-            errLabel.setText("password can't be more than 15 characters!");
+            errLabel.setText("Password can't be more than 15 characters!");
         }
 
         //If everything checks out

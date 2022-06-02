@@ -72,9 +72,18 @@ public class AccountDeletionTests extends ApplicationTest {
 
     //Unit Test | Confirm an internal testing user can be created.
     @Test
-    public void testDeletionUserCreation() throws IOException {
+    public void createUserToDeleteTest() throws IOException {
+        int result = controller.createDeletionTestAccount();
+        Assert.assertNotEquals(-1,result);
+    }
+
+    //Unit Test | Confirm a user can be deleted.
+    @Test
+    public void userDeletionTest() throws IOException {
         controller.createDeletionTestAccount();
-        //No assertion needed.
+        User testingUser = new User("accountDeletionTestUser","accountDeletionTest");
+        String result = client.deleteUser(testingUser);
+        Assert.assertEquals("DELETESUCCESS",result);
     }
 
     //Integration Test | Confirm User Can Be Deleted with the GUI
@@ -207,6 +216,14 @@ public class AccountDeletionTests extends ApplicationTest {
         clickOn("#delCheckBox");
         clickOn("#deleteAccountButton");
         FxAssert.verifyThat("#errField",LabeledMatchers.hasText("User details are incorrect."));
+    }
+
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
     }
 
     //Integration Test | Confirm that reserved accounts cannot be deleted.

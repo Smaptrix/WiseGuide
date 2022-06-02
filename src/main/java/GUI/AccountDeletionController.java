@@ -167,7 +167,7 @@ public class AccountDeletionController {
                 //Close all windows and attempt to delete the user.
                 Stage currStage = (Stage) deleteAccountButton.getScene().getWindow();
                 currStage.close();
-                //Null comparisons are made because the parentStage and mapStage will not exist during testing.
+                //Null comparisons are made because the parentStage and mapStage may not exist during testing.
                 if(parentStage != null){
                     parentStage.close();
                 }
@@ -221,13 +221,21 @@ public class AccountDeletionController {
      *     Creates an account (For Automatic Tests that require an account to test deletion on).
      * </p>
      * @throws IOException if the client cannot connect to the server.
+     * @return 1 if user created, 0 if already exists, -1 if something went wrong.
      */
-    public void createDeletionTestAccount() throws IOException {
+    public int createDeletionTestAccount() throws IOException {
         User testingUser = new User("accountDeletionTestUser","accountDeletionTest");
-        if(client.createUser(testingUser).equals("USERCREATED")) {
+        String success = client.createUser(testingUser);
+
+        if(success.equals("USERCREATED")) {
             System.out.println("ACCOUNT DELETION TEST USER was created.");
+            return 1;
+        } else if (success.equals("USERALREADYEXISTS")) {
+            System.out.println("ACCOUNT DELETION TEST USER already exists.");
+            return 0;
         } else {
             System.out.println("ACCOUNT DELETION TEST USER could not be created.");
+            return -1;
         }
     }
 

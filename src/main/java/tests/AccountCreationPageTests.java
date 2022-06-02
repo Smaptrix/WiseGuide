@@ -155,8 +155,14 @@ public class AccountCreationPageTests extends ApplicationTest {
         FxAssert.verifyThat("#errLabel", LabeledMatchers.hasText("You have not entered a username!"));
     }
 
-    //Unit Test | Confirm Privacy Policy/T&C links work.
-    //StackOverflow says this isn't possible to test.
-    //https://stackoverflow.com/questions/13085791/possible-to-check-if-a-website-is-open-in-browser-from-java?rq=1
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm T&C link works
+    // - Confirm Privacy Policy link works
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
 
 }
