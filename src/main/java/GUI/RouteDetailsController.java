@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Ben Alexander
+    Date Created:   20/05/2022
+    Last Updated:   26/05/2022
+ */
 package GUI;
 
 import XMLTools.VenuePage;
@@ -377,7 +384,6 @@ public class RouteDetailsController {
         //Downloads every media element required by the venue xml
 
         //TEXT
-
         String textFile = (currRoutePage.getMediaSourceByID("text0"));
 
         if(textFile != null) {
@@ -392,7 +398,6 @@ public class RouteDetailsController {
 
 
         //VENUE LIST TEXT
-
         String venueTextFile = (currRoutePage.getMediaSourceByID("textVenues"));
 
         if(venueTextFile != null) {
@@ -409,7 +414,6 @@ public class RouteDetailsController {
         }
 
         //IMAGES
-
         int imageIndex = 0;
 
         while(currRoutePage.getMediaSourceByID("map" + imageIndex) != null) {
