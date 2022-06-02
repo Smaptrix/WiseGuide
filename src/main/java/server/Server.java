@@ -42,7 +42,7 @@ public class Server {
      *     Contains the current version of the server - should only be changed by hand
      * </p>
      */
-    private static final String SERVERVERSION = "Ver 0.60";
+    private static final String SERVERVERSION = "Ver 1.00";
 
     /**
      * <p>

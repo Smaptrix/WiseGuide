@@ -42,7 +42,7 @@ public class Client {
      *     CLIENTVERSION is the current version of the client
      * </p>
      */
-    private static final String CLIENTVERSION = "Ver 0.60";
+    private static final String CLIENTVERSION = "Ver 1.00";
 
     /**
      * <p>
