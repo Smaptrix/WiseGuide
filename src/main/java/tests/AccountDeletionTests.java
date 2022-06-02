@@ -219,6 +219,14 @@ public class AccountDeletionTests extends ApplicationTest {
         FxAssert.verifyThat("#errField",LabeledMatchers.hasText("User details are incorrect."));
     }
 
+    //Manual Tests | Provides an opportunity for manual tests to be performed
+    //Tests to be carried out:
+    // - Confirm GUI layout is correct.
+    @Test
+    public void manualTests(){
+        sleep(1000000);
+    }
+
     //Integration Test | Confirm that reserved accounts cannot be deleted.
     //Currently not needed as username field was removed and only a logged-in account can be deleted.
     /*@Test
