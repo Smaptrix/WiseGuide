@@ -1,9 +1,9 @@
 /*
     Company Name:   Maptrix
     Project Name:   WiseGuide
-    Authors:        Joe Ingham
+    Authors:        Joe Ingham, Aidan Carson
     Date Created:   27/01/2022
-    Last Updated:   11/05/2022
+    Last Updated:   02/06/2022
  */
 package client;
 
@@ -216,7 +216,7 @@ public class Client {
 
     /**
      * <p>
-     *     Gets the servser public key for use of encrypting the generated symmetric key
+     *     Gets the server public key for use of encrypting the generated symmetric key
      * </p>
      * @throws IOException if the connection is not available
      */
@@ -227,11 +227,8 @@ public class Client {
 
 
         //SAME CODE AS FILE REQUEST EXCEPT WE DON'T CHOOSE THE FILE
-
         //Tells us how many bytes are telling us how big the file is
         int numOfFileSizeBytes = inputStream.read();
-
-        System.out.println("We have " + numOfFileSizeBytes + " file size bytes to read");
 
         //Reads the next set amount of bytes to decode the file size
         byte[] bytesToReadBytes = new byte[numOfFileSizeBytes];
@@ -242,7 +239,6 @@ public class Client {
 
         int bytesToRead = ByteBuffer.wrap(bytesToReadBytes).getInt();
 
-
         //Magic number 3 - because we know that the file extension is only going to be three letters
         byte[] DataTypeBytes = new byte[3];
 
@@ -252,13 +248,9 @@ public class Client {
 
         String dataType = new String(DataTypeBytes, StandardCharsets.UTF_8);
 
-        System.out.println(dataType);
 
         //Reads the specified number of bytes from the inputstream
         byte[] encPublicKey = readBytes(bytesToRead);
-
-
-        System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Generate the key spec from the received data
         X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encPublicKey);
@@ -348,8 +340,6 @@ public class Client {
         //Clears the outputStream of any excess data
         out.flush();
 
-        System.out.println("Key written");
-
         //Set the socket back to the correct write version
         outStream = clientSocket.getOutputStream();
 
@@ -390,7 +380,6 @@ public class Client {
 
         //Combine the test command with the test message
         String combinedString = unencryptedCommand + " " + unencryptedMessage;
-
 
 
         //Sends the command and encrypts it
@@ -442,12 +431,6 @@ public class Client {
 
         sendMessage("ECHO " + "test", true);
 
-        //int stringSize = inputStream.read();
-
-        //byte[] data = readBytes(stringSize);
-
-
-        //return new String(data, StandardCharsets.UTF_8);
         return receiveAcknowledgement(true);
     }
 
@@ -515,7 +498,6 @@ public class Client {
 
 
         //Magic number 3 - because we know that the file extension is only going to be max three letters
-
         byte[] DataTypeBytes = new byte[3];
 
         for (int i = 0; i < 3; i++) {
@@ -526,9 +508,6 @@ public class Client {
 
 
         byte[] data = readBytes(bytesToRead);
-
-
-        System.out.println("The file is a : " + dataType + " file and it is : " + bytesToRead + " long.");
 
         //Once we have the array of bytes, we then reconstruct that into the actual file.
         return BytesToFile(data, fileName, dataType);
@@ -604,9 +583,6 @@ public class Client {
 
         os.close();
 
-        //Saves file in temp position
-        System.out.println("File saved at: " + currFile);
-
         return currFile;
     }
 
@@ -677,7 +653,7 @@ public class Client {
             //Turn the decrypted data into the string
             ack = new String(decryptedData, StandardCharsets.UTF_8);
 
-            System.out.println(ack);
+            System.out.println("Acknowledgement Recieved: " + ack);
 
             //Turn the cipher back into encrypt mode
             try {
@@ -691,7 +667,7 @@ public class Client {
 
             ack = new String(data, StandardCharsets.UTF_8);
 
-            System.out.println(ack);
+            System.out.println("Acknowledgement Recieved: " + ack);
         }
 
 
@@ -746,7 +722,6 @@ public class Client {
         //Generates a salt for the user for extra security
         if(ack.equals("SENDSALT")) {
             currUser.setSalt(UserSecurity.generateSalt());
-            System.out.println("User: " + currUser.getUsername() + " Salt: " +  currUser.getSalt());
 
             sendMessage(currUser.getSalt(), true);
             return receiveAcknowledgement(true);
@@ -917,18 +892,6 @@ public class Client {
     }
 
 
-/*
-    //Requests that the client can send a file to the server
-    //Maybe change so that it sends an email and then we discuss it
-    //Rather than having any user be able to upload any file they want
-    public String requestUploadFile(File filetoUpload) throws IOException {
-        sendMessage("UPLOADFILE",true);
-
-
-        return receiveAcknowledgement(true);
-
-    }
-*/
 
 
 
@@ -1006,7 +969,6 @@ public class Client {
 
 
         receiveAcknowledgement(true);
-
 
     }
 
