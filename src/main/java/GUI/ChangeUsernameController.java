@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   18/02/2022
-    Last Updated:   11/05/2022
+    Last Updated:   02/06/2022
  */
 package GUI;
 
@@ -88,7 +88,7 @@ public class ChangeUsernameController {
 
     /**
      * <p>
-     *     The title
+     *     The title of the page
      * </p>
      */
     @FXML
@@ -155,11 +155,16 @@ public class ChangeUsernameController {
 
         String desiredName = desiredNameField.getText();
 
+        //If the username isn't allowed
         if(forbiddenNameCheck(desiredName) && !testingMode) {
             errLabel.setText("That username is not allowed.");
-        } else if(desiredName.equals(currUser.getUsername())){
+        }
+        //If the desired name matches their current username
+        else if(desiredName.equals(currUser.getUsername())){
             errLabel.setText("This is your current name!");
-        } else if(desiredName.equals("")){
+        }
+        //If the desired name is blank
+        else if(desiredName.equals("")){
             errLabel.setText("You cannot have a blank name!");
         } else{
             try {
