@@ -1,9 +1,9 @@
 /*
     Company Name:   Maptrix
     Project Name:   WiseGuide
-    Authors:        Joe Ingham
+    Authors:        Joe Ingham, Aidan Carson
     Date Created:   18/02/2022
-    Last Updated:   11/05/2022
+    Last Updated:   02/06/2022
  */
 package GUI;
 
@@ -115,7 +115,7 @@ public class AccountCreationController {
 
     /**
      * <p>
-     *     The button the users use to close the account creation confirmation popup
+     *     The button the users press to close the account creation confirmation popup
      * </p>
      */
     @FXML
@@ -173,7 +173,6 @@ public class AccountCreationController {
             nameForbidden = false;
         }
 
-        //Lots of if/else-ifs to make sure that the user data stuff is correct
 
         //If the password and the confirmed password don't match
         if(!(passField.getText()).equals(passConfirmField.getText())){
@@ -181,31 +180,37 @@ public class AccountCreationController {
 
         }
 
+        //If the username field doesn't have anything in it
         else if(userField.getText().trim().isEmpty()){
             errLabel.setText("You have not entered a username!");
         }
 
+        //If the password field doesn't have anything in it
         else if(passField.getText().trim().isEmpty()){
             errLabel.setText("You have not entered a password!");
         }
 
+        //If the age checkbox hasn't been selected
         else if(!ageCheckBox.isSelected()){
             errLabel.setText("You are not over the age of 13!");
         }
 
+        //If the chosen name is forbidden
         else if(nameForbidden){
             errLabel.setText("The selected username is unavailable.");
         }
 
+        //If the username is too long
         else if(userField.getLength() > 15){
             errLabel.setText("Username can't be more than 15 characters!");
         }
 
+        //If the password is too long
         else if(passField.getLength() > 15){
             errLabel.setText("Password can't be more than 15 characters!");
         }
 
-        //If everything checks out
+        //If everything is correct
         else{
             errLabel.setText("");
 
@@ -284,6 +289,12 @@ public class AccountCreationController {
 
     }
 
+    /**
+     * Checks the given name to see if it is forbidden
+     * @param name the given username
+     * @return true if the name is forbidden, false if the name is allowed
+     * @throws IOException if the client is unable to access the reserved username files
+     */
     private boolean forbiddenNameCheck(String name) throws IOException {
         boolean forbidden = false;
         File forbiddenNamesList = new File("reservedUsernames.txt");
