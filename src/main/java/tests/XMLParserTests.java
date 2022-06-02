@@ -1,7 +1,7 @@
 package tests;
 
-import VenueXMLThings.VenuePage;
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenuePage;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import org.junit.After;
 import org.junit.Assert;

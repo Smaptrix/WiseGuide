@@ -8,7 +8,7 @@
 
 package GUI;
 
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenueXMLParser;
 import client.Client;
 
 import javafx.event.EventHandler;
@@ -27,7 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 import javafx.scene.control.ScrollPane;
 
 import java.awt.*;

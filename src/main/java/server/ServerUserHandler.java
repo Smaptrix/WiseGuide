@@ -1,6 +1,6 @@
 package server;
 
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.*;
 

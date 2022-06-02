@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.*;
 

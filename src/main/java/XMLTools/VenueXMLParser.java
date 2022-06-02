@@ -1,4 +1,4 @@
-package VenueXMLThings;
+package XMLTools;
 
 import java.io.File;
 import java.util.*;

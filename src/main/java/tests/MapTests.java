@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.IOException;
 

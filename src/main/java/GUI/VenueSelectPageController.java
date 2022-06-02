@@ -1,6 +1,6 @@
 package GUI;
 
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.IOException;
 import java.time.Instant;

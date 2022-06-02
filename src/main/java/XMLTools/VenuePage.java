@@ -1,4 +1,4 @@
-package VenueXMLThings;
+package XMLTools;
 
 import org.w3c.dom.Node;
 

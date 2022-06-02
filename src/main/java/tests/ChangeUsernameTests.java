@@ -16,7 +16,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextInputControlMatchers;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.IOException;
 import java.util.Objects;

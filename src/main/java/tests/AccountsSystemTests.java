@@ -5,7 +5,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import server.ServerUserHandler;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.IOException;
 

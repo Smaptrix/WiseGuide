@@ -6,7 +6,7 @@
     Last Updated:   18/02/2022
  */
 
-package serverclientstuff;
+package ServerClientUtility;
 
 
 //TODO - Only Hash once - Stop Hashing every time new user is made

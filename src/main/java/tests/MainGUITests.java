@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +19,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.ListViewMatchers;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

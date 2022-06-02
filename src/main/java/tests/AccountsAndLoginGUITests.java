@@ -17,7 +17,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;

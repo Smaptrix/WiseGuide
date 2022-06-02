@@ -9,9 +9,9 @@
 package server;
 
 
-import VenueXMLThings.VenueXMLParser;
-import serverclientstuff.User;
-import serverclientstuff.UserSecurity;
+import XMLTools.VenueXMLParser;
+import ServerClientUtility.User;
+import ServerClientUtility.UserSecurity;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;

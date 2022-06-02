@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.BufferedReader;
 import java.io.File;

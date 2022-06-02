@@ -13,7 +13,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 import java.io.IOException;
 import java.util.Arrays;
 

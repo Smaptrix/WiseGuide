@@ -11,13 +11,8 @@ package tests;
 import client.Client;
 import org.junit.Assert;
 import org.junit.Test;
-import server.Server;
-import server.ServerMain;
-import server.ServerUserHandler;
-import serverclientstuff.User;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;

@@ -4,8 +4,8 @@ import client.Client;
 import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import serverclientstuff.User;
-import serverclientstuff.UserSecurity;
+import ServerClientUtility.User;
+import ServerClientUtility.UserSecurity;
 
 import java.io.IOException;
 

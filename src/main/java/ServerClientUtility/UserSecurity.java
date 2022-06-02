@@ -1,4 +1,4 @@
-package serverclientstuff;
+package ServerClientUtility;
 
 
 import javax.crypto.*;

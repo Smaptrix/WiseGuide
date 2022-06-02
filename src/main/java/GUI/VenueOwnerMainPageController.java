@@ -7,8 +7,8 @@
  */
 package GUI;
 
-import VenueXMLThings.VenuePage;
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenuePage;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import serverclientstuff.User;
-import serverclientstuff.Utils;
+import ServerClientUtility.User;
+import ServerClientUtility.Utils;
 
 import javax.xml.transform.TransformerException;
 import java.io.File;

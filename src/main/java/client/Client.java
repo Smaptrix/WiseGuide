@@ -8,8 +8,8 @@
 package client;
 
 import org.junit.Assert;
-import serverclientstuff.User;
-import serverclientstuff.UserSecurity;
+import ServerClientUtility.User;
+import ServerClientUtility.UserSecurity;
 
 
 import javax.crypto.*;

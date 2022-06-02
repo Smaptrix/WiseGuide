@@ -1,7 +1,7 @@
 package GUI;
 
-import VenueXMLThings.VenuePage;
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenuePage;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import mediahandlers.AudioHandler;
 import mediahandlers.ImageHandler;
 import mediahandlers.TextManager;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
 import java.io.File;
 import java.io.IOException;

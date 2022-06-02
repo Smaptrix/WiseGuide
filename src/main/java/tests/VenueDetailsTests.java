@@ -2,7 +2,7 @@ package tests;
 
 import GUI.LoginApplication;
 import GUI.VenueDetailsController;
-import VenueXMLThings.VenueXMLParser;
+import XMLTools.VenueXMLParser;
 import client.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,9 +15,8 @@ import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
-import serverclientstuff.User;
+import ServerClientUtility.User;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
