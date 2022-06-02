@@ -84,7 +84,7 @@ public class MainGUITests extends ApplicationTest {
     //Unit Test | Verify that clicking "File" opens the file menu.
     public void menuBarFileTest(){
         sleep(1000);
-        clickOn("#menuBarFileButton");
+        clickOn("#menuBarFile");
         FxAssert.verifyThat("#closeButton", Node::isVisible);
     }
 
