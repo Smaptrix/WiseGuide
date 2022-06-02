@@ -488,7 +488,6 @@ public class MainController {
         } else {
             currentItemSelected = selectedItem;
         }
-        // TODO: add an extra scene for loading page - @WILL
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
         Stage stage = new Stage();
@@ -627,6 +626,8 @@ public class MainController {
             selectedItem = "Rowntree Park";
         } else if ((mousePosition.getX() > mapController.getBase_millennium_min().getX()) && (mousePosition.getX() < mapController.getBase_millennium_max().getX()) && (mousePosition.getY() > mapController.getBase_millennium_min().getY()) && (mousePosition.getY() < mapController.getBase_millennium_max().getY())) {
             selectedItem = "Millennium Fields";
+        } else if ((mousePosition.getX() > mapController.getBase_blackBull_min().getX()) && (mousePosition.getY() < mapController.getBase_blackBull_max().getX()) && (mousePosition.getY() > mapController.getBase_blackBull_min().getY()) && (mousePosition.getY() < mapController.getBase_blackBull_max().getY())){
+            selectedItem = "The Black Bull";
         } else {
             selectedItem = "ignore";
             desiredMap = "baseMap";

@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="mainWindow" fx:id="mainWindow" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
+<VBox id="mainWindow" fx:id="mainWindow" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -33,9 +33,9 @@
             <Menu id="menuBarFile" fx:id="menuBarFile" mnemonicParsing="false" text="File">
                 <MenuItem id="closeButton" fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close WiseGuide" />
             </Menu>
-         <Menu id="menuBarVenuesButton" fx:id="menuBarVenuesButton" mnemonicParsing="false" text="Venue Selector">
+         <Menu id="venueSelectMenu" fx:id="venueSelectMenu" mnemonicParsing="false" text="Venue Selector">
            <items>
-             <MenuItem fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
+             <MenuItem id="venueSelectorMenuItem" fx:id="venueSelectorMenuItem" mnemonicParsing="false" onAction="#onVenueSelectorMenuButtonPress" text="Open Venue Selector" />
            </items>
          </Menu>
             <Menu fx:id="menuBarAccount" mnemonicParsing="false" text="Account">

@@ -29,15 +29,13 @@ import javafx.stage.Stage;
 import mediahandlers.ShapeManager;
 import mediahandlers.TextManager;
 import mediahandlers.ImageHandler;
+import mediahandlers.VideoHandler;
 import serverclientstuff.User;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * <p>
@@ -117,11 +115,16 @@ public class VenueDetailsController {
     public TextArea venueText;
     /**
      * <p>
-     *     This ImageView is the place that displays the images of the venue
+     *     This MediaView is the place that displays the video of the venue
      * </p>
      */
     @FXML
     public MediaView venueVideo;
+    /**
+     * <p>
+     *     This ImageView is the place that displays the images of the venue
+     * </p>
+     */
     @FXML
     public ImageView venueImage;
     /**
@@ -195,11 +198,26 @@ public class VenueDetailsController {
     @FXML
     public ImageView venueImage5;
     @FXML
+    public AnchorPane videoAnchorPane;
+
+    @FXML
     public SubScene priceSubScene;
     @FXML
     public Group priceGroup;
     @FXML
     public Group ratingGroup;
+    @FXML
+    public TextArea image0AltText;
+    @FXML
+    public TextArea image1AltText;
+    @FXML
+    public TextArea image2AltText;
+    @FXML
+    public TextArea image3AltText;
+    @FXML
+    public TextArea image4AltText;
+    @FXML
+    public TextArea image5AltText;
 
     @FXML
     //Always called by the FXML Loader
@@ -219,18 +237,10 @@ public class VenueDetailsController {
         venueName.setText(currVenue);
 
         //Add alt text button image
-
-
-
-
-
-
-
-
         int textIndex = 0;
         int photoIndex = 0;
         int maxPhotoIndex = 5;
-        String imageFile = null;
+        String imageFile;
         //Downloads every media element required by the venue xml
         for(int i = 0; i < currVenuePage.numberOfElements; i++) {
 
@@ -327,9 +337,9 @@ public class VenueDetailsController {
         Color maptrixDarkBlue = Color.web("0x245164");
 
         //Initiates the 3 price circles
-        Circle priceCircle0 = new Circle();
-        Circle priceCircle1 = new Circle();
-        Circle priceCircle2 = new Circle();
+        Circle priceCircle0;
+        Circle priceCircle1;
+        Circle priceCircle2;
 
         //Initiates the three circle fill colours and sets them to null
         Color circleFill1 = null;
@@ -374,11 +384,11 @@ public class VenueDetailsController {
         }
 
         //Creates 5 instances of triangles
-        Polygon triangle1 = new Polygon();
-        Polygon triangle2 = new Polygon();
-        Polygon triangle3 = new Polygon();
-        Polygon triangle4 = new Polygon();
-        Polygon triangle5 = new Polygon();
+        Polygon triangle1;
+        Polygon triangle2;
+        Polygon triangle3;
+        Polygon triangle4;
+        Polygon triangle5;
 
         //Initiates the three triangle fill colours and sets them to null
         Color triangleFill1 = null;
@@ -428,6 +438,32 @@ public class VenueDetailsController {
         ratingGroup.getChildren().add(triangle3);
         ratingGroup.getChildren().add(triangle4);
         ratingGroup.getChildren().add(triangle5);
+
+        image0AltText.setVisible(false);
+        image1AltText.setVisible(false);
+        image2AltText.setVisible(false);
+        image3AltText.setVisible(false);
+        image4AltText.setVisible(false);
+        image5AltText.setVisible(false);
+
+        // video
+        try {
+            for (int i = 0; i < currVenuePage.children.size(); i++) {
+                System.out.println(currVenuePage.children.get(i).attributes);
+            }
+
+            String videoFile = (currVenuePage.getMediaSourceByID("video0"));
+
+            File videoTempFile = client.requestFile(videoFile);
+
+            VideoHandler videoHandler = new VideoHandler(videoTempFile, (int) videoAnchorPane.getHeight(), (int) videoAnchorPane.getWidth());
+
+            videoAnchorPane.getChildren().add(videoHandler);
+        } catch (Exception e){
+            System.out.println("No video to load");
+        }
+        //Video End
+
     }
 
     /**
@@ -503,10 +539,6 @@ public class VenueDetailsController {
 
     }
 
-    public String getCurrVenue() {
-        return currVenue;
-    }
-
     /**
      * <p>
      *     This is the action that occurs when the user presses the favourite button
@@ -536,7 +568,7 @@ public class VenueDetailsController {
             }
             //If the user doesn't have a venue list
             else{
-                //Create a venue list with the current venue inside of it and give it to the current user
+                //Create a venue list with the current venue inside it and give it to the current user
                 String[] userFaves = {currVenue};
 
                 currUser.setFaveVenues(userFaves);
@@ -558,16 +590,156 @@ public class VenueDetailsController {
             currUser.setFaveVenues(faveVenues.toArray(new String[0]));
 
             System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
-
-
         }
-
-
     }
 
+    public void altText0() {
+        try {
+            if (image0AltText.isVisible()) {
+                image0AltText.setVisible(false);
+                System.out.println("Hiding altText0");
+            } else {
+                image0AltText.setVisible(true);
+                System.out.println("Displaying altText0");
+            }
 
+            //Gets the text file
+            String altTextFile = (currVenuePage.getMediaSourceByID("altText0"));
+            System.out.println("File: " + altTextFile);
 
+            File tempTextFile = client.requestFile(altTextFile);
 
+            //Places the text from the text file into the text manager
+            TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+            //Loads the text onto the GUI
+            image0AltText.setText(textManager.loadTextFromFile());
+        } catch (Exception e) {
+            image0AltText.setText("Oops... for some reason we don't have any alt text for this image");
+        }
+    }
 
+    public void altText1() {
+        try {
+            if (image1AltText.isVisible()) {
+                image1AltText.setVisible(false);
+                System.out.println("Hiding altText1");
+            } else {
+                image1AltText.setVisible(true);
+                System.out.println("Displaying altText1");
+            }
 
+            //Gets the text file
+            String altTextFile = (currVenuePage.getMediaSourceByID("altText1"));
+            System.out.println("File: " + altTextFile);
+
+            File tempTextFile = client.requestFile(altTextFile);
+
+            //Places the text from the text file into the text manager
+            TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+            //Loads the text onto the GUI
+            image1AltText.setText(textManager.loadTextFromFile());
+        } catch (Exception e) {
+            image1AltText.setText("Oops... for some reason we don't have any alt text for this image");
+        }
+    }
+
+    public void altText2() {
+        try {
+            if (image2AltText.isVisible()) {
+                image2AltText.setVisible(false);
+                System.out.println("Hiding altText2");
+            } else {
+                image2AltText.setVisible(true);
+                System.out.println("Displaying altText2");
+            }
+
+            //Gets the text file
+            String altTextFile = (currVenuePage.getMediaSourceByID("altText2"));
+            System.out.println("File: " + altTextFile);
+
+            File tempTextFile = client.requestFile(altTextFile);
+
+            //Places the text from the text file into the text manager
+            TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+            //Loads the text onto the GUI
+            image2AltText.setText(textManager.loadTextFromFile());
+        } catch (Exception e) {
+            image2AltText.setText("Oops... for some reason we don't have any alt text for this image");
+        }
+    }
+
+    public void altText3() {
+        try {
+            if (image3AltText.isVisible()) {
+                image3AltText.setVisible(false);
+                System.out.println("Hiding altText3");
+            } else {
+                image3AltText.setVisible(true);
+                System.out.println("Displaying altText3");
+            }
+
+            //Gets the text file
+            String altTextFile = (currVenuePage.getMediaSourceByID("altText3"));
+            System.out.println("File: " + altTextFile);
+
+            File tempTextFile = client.requestFile(altTextFile);
+
+            //Places the text from the text file into the text manager
+            TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+            //Loads the text onto the GUI
+            image3AltText.setText(textManager.loadTextFromFile());
+        } catch (Exception e) {
+            image3AltText.setText("Oops... for some reason we don't have any alt text for this image");
+        }
+    }
+
+    public void altText4() {
+        try {
+            if (image4AltText.isVisible()) {
+                image4AltText.setVisible(false);
+                System.out.println("Hiding altText4");
+            } else {
+                image4AltText.setVisible(true);
+                System.out.println("Displaying altText4");
+            }
+
+            //Gets the text file
+            String altTextFile = (currVenuePage.getMediaSourceByID("altText4"));
+            System.out.println("File: " + altTextFile);
+
+            File tempTextFile = client.requestFile(altTextFile);
+
+            //Places the text from the text file into the text manager
+            TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+            //Loads the text onto the GUI
+            image4AltText.setText(textManager.loadTextFromFile());
+        } catch (Exception e) {
+            image4AltText.setText("Oops... for some reason we don't have any alt text for this image");
+        }
+    }
+
+    public void altText5() {
+        try {
+            if (image5AltText.isVisible()) {
+                image5AltText.setVisible(false);
+                System.out.println("Hiding altText5");
+            } else {
+                image5AltText.setVisible(true);
+                System.out.println("Displaying altText5");
+            }
+
+            //Gets the text file
+            String altTextFile = (currVenuePage.getMediaSourceByID("altText5"));
+            System.out.println("File: " + altTextFile);
+
+            File tempTextFile = client.requestFile(altTextFile);
+
+            //Places the text from the text file into the text manager
+            TextManager textManager = new TextManager(tempTextFile.getPath(), 470, 100);
+            //Loads the text onto the GUI
+            image5AltText.setText(textManager.loadTextFromFile());
+        } catch (Exception e) {
+            image5AltText.setText("Oops... for some reason we don't have any alt text for this image");
+        }
+    }
 }

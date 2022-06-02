@@ -29,7 +29,7 @@ public class VideoHandler extends BorderPane {
     Media media;
 
     /**
-     * mediaPlayer class provides the controls for playing media.
+     * mediaPlayer provides the controls for playing media.
      */
     MediaPlayer mediaPlayer;
 
@@ -38,100 +38,157 @@ public class VideoHandler extends BorderPane {
      */
     MediaView mediaView;
 
-    /**
-     * source is the file path stored as a string.
-     */
-    String source;
 
     /**
-     * mpane is the pane layout of the player.
+     * mediaPane is the pane layout of the player.
      */
-    Pane mpane;
+    Pane mediaPane;
 
     /**
-     * bar is the media controls at the bottom of the window.
+     * controlBar is the media controls at the bottom of the window.
      */
-    MediaBar bar;
+    MediaBar controlBar;
 
     /**
      * <p>
      * Video handler constructor.
      * </p>
+     *
      * @param filePath Is the file path of the desired media.
      * @param heightIn Desired initial media height.
      * @param widthIn  Desired initial media width.
      */
-    public VideoHandler(String filePath, int heightIn, int widthIn) {
+    public VideoHandler(File filePath, int heightIn, int widthIn) {
 
-        //toString(filePath);
-        source = filePath;
+        mediaConstructor(toString(filePath));
 
+        mediaPlayerConstructor(media);
+
+        mediaViewConstructor(mediaPlayer, heightIn, widthIn);
+
+        mediaBarConstructor();
+    }
+
+    /**
+     * <p>
+     * Returns the given file path as a string.
+     * </p>
+     *
+     * @param filePath Is the file path of the desired media.
+     * @return filePath as a string.
+     */
+    private String toString(File filePath) {
+        return filePath.toURI().toString();
+    }
+
+    /**
+     * <p>
+     * Creates a Media object from the file at the given string.
+     * </p>
+     *
+     * @param source Media file path as a string.
+     */
+    private void mediaConstructor(String source) {
         try {
             this.media = new Media(source);
+
             if (media.getError() == null) {
                 media.setOnError(new Runnable() {
                     public void run() {
                         // Handle asynchronous error in Media object.
+                        System.out.println("Media object is null!");
                     }
                 });
-                try {
-                    this.mediaPlayer = new MediaPlayer(media);
-                    if (mediaPlayer.getError() == null) {
-                        mediaPlayer.setOnError(new Runnable() {
-                            public void run() {
-                                // Handle asynchronous error in MediaPlayer object.
-                            }
-                        });
-                        this.mediaView = new MediaView(mediaPlayer);
-                        this.mediaView.setPreserveRatio(true);
-                        this.mediaView.setSmooth(true);
-                        this.mediaView.setFitHeight(heightIn);
-                        this.mediaView.setFitWidth(widthIn);
-                        this.mediaView.setOnError(new EventHandler<MediaErrorEvent>() {
-                            public void handle(MediaErrorEvent t) {
-                                // Handle asynchronous error in MediaView.
-                            }
-                        });
-                        mpane = new Pane();
-                        mpane.getChildren().add(mediaView);
-                        setCenter(mpane);
-                        bar = new MediaBar(mediaPlayer);
-                        setBottom(bar);
-                        setStyle("-fx-background-color:#474746");
-                    } else {
-                        // Handle synchronous error creating MediaPlayer.
-                    }
-                } catch (Exception mediaPlayerException) {
-                    // Handle exception in MediaPlayer constructor.
-                }
             } else {
                 // Handle synchronous error creating Media.
+                System.out.println("Media object constructor failed!");
             }
         } catch (Exception mediaException) {
             // Handle exception in Media constructor.
+            System.out.println("Media object constructor failed!");
         }
     }
 
     /**
      * <p>
-     * Stores the file path as a string in the source variable.
+     * Creates a MediaPlayer using the given media object.
      * </p>
      *
-     * @param filePath Is the file path of the desired media.
+     * @param media The media object the player is created for.
      */
-    private void toString(File filePath) {
-        source = filePath.toURI().toString();
+    private void mediaPlayerConstructor(Media media) {
+        try {
+            this.mediaPlayer = new MediaPlayer(media);
+
+            if (mediaPlayer.getError() == null) {
+                mediaPlayer.setOnError(new Runnable() {
+                    public void run() {
+                        // Handle asynchronous error in MediaPlayer object.
+                        System.out.println("MediaPlayer object is null!");
+                    }
+                });
+            } else {
+                // Handle synchronous error creating MediaPlayer.
+                System.out.println("MediaPlayer object constructor failed!");
+            }
+        } catch (Exception mediaPlayerException) {
+            // Handle exception in MediaPlayer constructor.
+            System.out.println("MediaPlayer object constructor failed!");
+        }
     }
 
     /**
      * <p>
-     * Method returns the mediaView
+     * Creates a MediaView of the given size for the given MediaPlayer.
      * </p>
      *
-     * @return mediaView of type MediaView
+     * @param mediaPlayer The media player the media view is created for.
+     * @param heightIn    Desired height of the media view.
+     * @param widthIn     Desired width of the media view.
      */
-    public MediaView getMediaView() {
-        return mediaView;
+    private void mediaViewConstructor(MediaPlayer mediaPlayer, int heightIn, int widthIn) {
+        try {
+            this.mediaView = new MediaView(mediaPlayer);
+            this.mediaView.setPreserveRatio(true);
+            this.mediaView.setSmooth(true);
+            this.mediaView.setFitHeight(heightIn);
+            this.mediaView.setFitWidth(widthIn);
+
+            this.mediaView.setOnError(new EventHandler<MediaErrorEvent>() {
+                public void handle(MediaErrorEvent t) {
+                    // Handle asynchronous error in MediaView.
+                    System.out.println("MediaView object is null!");
+                }
+            });
+
+        } catch (Exception mediaViewException) {
+            // Handle exception in MediaPlayer constructor.
+            System.out.println("MediaView object constructor failed!");
+        }
+    }
+
+    /**
+     * <p>
+     * Creates the media control bar for the media view and media player.
+     * </p>
+     */
+    private void mediaBarConstructor() {
+        try {
+            this.mediaPane = new Pane();
+            this.mediaPane.getChildren().add(mediaView);
+            setCenter(mediaPane);
+        } catch (Exception mediaPaneException) {
+            // Handle exception in MediaPane constructor.
+            System.out.println("MediaPane object constructor failed!");
+        }
+        try {
+            this.controlBar = new MediaBar(mediaPlayer);
+            setBottom(controlBar);
+            setStyle("-fx-background-color:#474746");
+        } catch (Exception barPaneException) {
+            // Handle exception in MediaBar constructor.
+            System.out.println("MediaBar object constructor failed!");
+        }
     }
 
     /**

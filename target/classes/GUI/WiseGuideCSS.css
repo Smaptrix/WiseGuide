@@ -30,26 +30,6 @@
     -fx-text-alignment: center;
 }
 
-.heading2 {
-
-}
-
-.heading3 {
-
-}
-
-.heading4 {
-
-}
-
-.heading5 {
-
-}
-
-.heading6 {
-
-}
-
 .text {
     -fx-font-family: Oswald, sans-serif;
     -fx-font-size: 14px;
@@ -92,4 +72,8 @@
 .scroll-bar {
     -fx-background-color: -pale-blue;
     -fx-border-color: -pastel-blue;
+}
+
+.label {
+    -fx-font-size: 64px;
 }
