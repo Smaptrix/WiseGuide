@@ -1043,7 +1043,7 @@ public class MainController {
         //Get the current list of venues from the main application
         List<String> listOfVenues = xml.getPageNames();
 
-        List<String> strippedListOfVenues =  new ArrayList();
+        List<String> strippedListOfVenues = new ArrayList();
 
         for(String s: listOfVenues){
            s =  s.substring(7, s.length() -1);
