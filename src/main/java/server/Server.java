@@ -949,7 +949,7 @@ public class Server {
 
 
     /**
-     * Logs the current user out of the server
+     * <p>Logs the current user out of the server</p>
      */
     private void logout() {
 
@@ -972,7 +972,7 @@ public class Server {
     }
 
     /**
-     * Checks that the server and client have the same version number
+     * <p>Checks that the server and client have the same version number</p>
      * @throws IOException
      */
     private void versionCheck() throws IOException {
@@ -995,7 +995,7 @@ public class Server {
 
 
     /**
-     * Recieves information from the client, which changes the username of the current user in the database
+     * <p>Recieves information from the client, which changes the username of the current user in the database</p>
      * @throws IOException If the server cannot connect to the client
      */
     private void changeUsername() throws IOException {
@@ -1014,7 +1014,7 @@ public class Server {
     }
 
     /**
-     * Recieves information from the client, which changes the password of the current user in the database
+     * <p>Recieves information from the client, which changes the password of the current user in the database</p>
      * @throws IOException If the server cannot connect to the client
      */
     private void changePassword() throws IOException {
@@ -1048,7 +1048,7 @@ public class Server {
     }
 
     /**
-     * Deletes a given venue file from the server directory, and its reference from the xml file
+     * <p>Deletes a given venue file from the server directory, and its reference from the xml file</p>
      * @throws IOException
      */
     private void deleteVenueFile() throws IOException {
@@ -1078,7 +1078,7 @@ public class Server {
     //Overloaded functions to let you decide if you want to receive the pure bytes or the string
 
     /**
-     * Reads n bytes from the input buffer
+     * <p>Reads n bytes from the input buffer</p>
      * @param n the number of bytes to read
      * @return the byte array of the bytes read from the buffer
      */
@@ -1097,7 +1097,7 @@ public class Server {
 
 
     /**
-     * Reads n bytes from the input buffer and returns it as a string
+     * <p>Reads n bytes from the input buffer and returns it as a string</p>
      * @param n the number of bytes to read
      * @return the string that the bytes read represent
      */

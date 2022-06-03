@@ -1,3 +1,11 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   24/02/2022
+    Last Updated:   03/06/2022
+ */
+
 package server;
 
 import ServerClientUtility.User;
@@ -5,29 +13,54 @@ import ServerClientUtility.User;
 import java.io.*;
 
 
-
-
-
-
+/**
+ * <p>
+ *     Handles the communication between the server and the user database
+ * </p>
+ */
 public class ServerUserHandler {
 
 
-    //Will either be USER or VENUE
+    /**
+     * <p>
+     *     The current type of user logged into the server
+     *      They can either be USER (The default user, i.e. the customer) or VENUE (The owner of a venue)
+     * </p>
+     */
     private String userType;
 
 
-    //Will be decided upon setting the user type
+    /**
+     * <p>The relevant file storing the user data (user or venue)</p>
+     */
     private static String dataFile;
 
+    /**
+     * <p>The current user actually logged into the server</p>
+     */
     private User currUser;
+    /**
+     * <p>Whether a user exists or not - used primarily for checking if usernames are taken</p>
+     */
     public boolean userExistState;
+    /**
+     * <p>Where the current user info is stored for quick access</p>
+     *
+     */
     private String[] userInfo;
+
+    /**
+     * <p> If the current password is correct or not</p>
+     */
     public boolean passVerified;
 
-    private int delIteratorMax = 5;
 
-
-    //Creates the user serverside
+    /**
+     * <p>The constructor for a ServerUserHandler Object</p>
+     * @param currUser The current user logged in (or attempting to login) to the server
+     * @param autoVerify Whether or not to check the users details automatically
+     * @throws IOException If the ServerUserHandler cannot access the database
+     */
     public ServerUserHandler(User currUser, boolean autoVerify) throws IOException {
         this.currUser = currUser;
 
@@ -37,6 +70,10 @@ public class ServerUserHandler {
     }
 
 
+    /**
+     * <p>Checks a users details (their username and entered password)</p>
+     * @throws IOException
+     */
     public void verifyUser() throws IOException {
         userExistState = findUser();
 
@@ -51,7 +88,11 @@ public class ServerUserHandler {
     }
 
 
-    //Checks to see if a user exists
+    /**
+     * <p>Checks the relevant database to find if a user exists or not</p>
+     * @return True - If the user exists. False - Otherwise
+     * @throws IOException If the Handler cannot access the relevant database
+     */
     private boolean findUser() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(dataFile));
         String line;
@@ -70,6 +111,11 @@ public class ServerUserHandler {
         return false;
     }
 
+    /**
+     * <p>Deletes the given user from the database</p>
+     * @return True - if the deletion was successfull. False - Otherwise
+     * @throws IOException If the Handler cannot access the database
+     */
     public boolean deleteUser() throws IOException {
 
         File database = new File("userDatabase.txt");
@@ -103,6 +149,7 @@ public class ServerUserHandler {
         //NOTE: Adding this "try again" seems to have stopped the random errors occurring in the first place. I don't know why.
         boolean delSuccess = database.delete();
         int delIterator = 0;
+        int delIteratorMax = 5;
         while(!delSuccess && (delIterator < delIteratorMax)){
             delIterator++;
             System.out.println("The database deletion was not successful. Trying again...");
@@ -121,8 +168,12 @@ public class ServerUserHandler {
         return (success);
     }
 
-    //Note - no refactor to use this because this is a serverside package only
-    //Determines if a provided username is already taken
+    /**
+     * <p>Finds if the given username is already taken</p>
+     * @param username the username to be checked
+     * @return True - If the username is taken, False - Otherwise
+     * @throws IOException If the Handler cannot access the database
+     */
     public static boolean findUserName(String username) throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader(dataFile));
@@ -141,7 +192,11 @@ public class ServerUserHandler {
     }
 
 
-    //Changes the current username
+    /**
+     * <p>Changes the current users, to the given username</p>
+     * @param desiredName the desired username
+     * @throws IOException If the Handler cannot access the database
+     */
     public void changeUserName(String desiredName) throws IOException {
 
         //Finds the line that we need to update
@@ -159,16 +214,11 @@ public class ServerUserHandler {
                 values[0] = desiredName;
 
                 input += desiredName + "," + currUser.getPassword() + "," + currUser.getSalt() + '\n';
-
-
-
             }
 
             //If the lines don't match, the line is ignored
             else {
-
                 input += line + '\n';
-
             }
         }
 
@@ -184,11 +234,11 @@ public class ServerUserHandler {
     }
 
 
-
-
-
-
-    //Changes the current username
+    /**
+     * <p>Changes the current users username</p>
+     * @param desiredPass The new desired password
+     * @throws IOException If the handler cannot access the database
+     */
     public void changeUserPass (String desiredPass) throws IOException {
 
         //Finds the line that we need to update
@@ -220,17 +270,18 @@ public class ServerUserHandler {
     }
 
 
-
-
-
-
-
-
-    //Checks to see if the users' password is correct
+    /**
+     * <p>Verifies the entered password for the user</p>
+     * @return True - If the password is correct, False - Otherwise
+     */
     public boolean verifyPass() {
         return (currUser.getPassword()).equals(userInfo[1]);
     }
 
+    /**
+     * <p>Creates a new user (from the already given user) and adds them to the database</p>
+     * @throws IOException IF the handler cannot access the database
+     */
     public void createUser() throws IOException {
         if (userExistState) {
             System.out.println("This user already exists");
@@ -247,6 +298,9 @@ public class ServerUserHandler {
     }
 
     @Override
+    /**
+     * <p>To String function, prints the username, if the user exists, and if the entered password is correct</p>
+     */
     public String toString() {
         return "ServerUser{" +
                 "currUser=" + currUser +
@@ -256,6 +310,12 @@ public class ServerUserHandler {
     }
 
 
+    /**
+     * <p>
+     *     Clears the current user information from the handler
+     *     Should only done after a logout
+     * </p>
+     */
     public void clear(){
         currUser = null;
         userExistState = false;
@@ -263,27 +323,47 @@ public class ServerUserHandler {
         passVerified = false;
     }
 
+    /**
+     * <p>Sets the current user in the handler</p>
+     * @param currUser
+     */
     public void setCurrUser(User currUser) {
         this.currUser = currUser;
 
 
     }
 
+    /**
+     * <p>Gets the users password salt</p>
+     * @return the salt
+     */
     public String getcurrUserSalt() {
 
         return userInfo[2];
 
     }
 
+    /**
+     * <p>Gets the current user</p>
+     * @return the current user
+     */
     public User getcurrUser() {
 
         return currUser;
     }
 
+    /**
+     * <p>Gets the current users type</p>
+     * @return the user type
+     */
     public String getUserType() {
         return userType;
     }
 
+    /**
+     * <p>Sets the current users type</p>
+     * @param userType VENUE or USER
+     */
     public void setUserType(String userType) {
 
         if (userType.equals("USER")){
