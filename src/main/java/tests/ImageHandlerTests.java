@@ -88,7 +88,7 @@ public class ImageHandlerTests extends ApplicationTest {
     @Test
     //Unit Test | Image check
     //This might technically do the exact same thing as the above test...
-    public void imageCheck(){
+    public void imageCheckTest(){
         Image testImage = test.getCurrImage();
         Image image = new Image(testFile.toURI().toString());
         Assert.assertEquals(testImage.getUrl(),image.getUrl());
@@ -96,7 +96,7 @@ public class ImageHandlerTests extends ApplicationTest {
 
     @Test
     //Unit Test | Size check
-    public void imageSizeCheck(){
+    public void imageSizeCheckTest(){
         Assert.assertEquals(340.0,test.getDesiredView().getFitHeight(),0);
         Assert.assertEquals(200.0,test.getDesiredView().getFitWidth(),0);
     }
