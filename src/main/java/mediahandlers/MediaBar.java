@@ -6,7 +6,7 @@
     Last Updated:   03/06/2022
     Lead Programmers Note: I have noticed that this is pretty much copied line for line from:
         https://github.com/humblelad/Media-Player/blob/master/MediaBar.java
-
+        ^ As a Precaution this class is probably referenced from the above webpage ^
 
  */
 

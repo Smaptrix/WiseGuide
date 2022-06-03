@@ -1,3 +1,11 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   03/05/2022
+    Last Updated:   03/06/2022
+ */
+
 package server;
 
 import java.io.*;
@@ -171,7 +179,7 @@ public class FaveVenuesHandler {
      * <p>
      *     Opens the text file and interprets the hashmap
      * </p>
-     * @throws IOException
+     * @throws IOException if the server is unable to read the data from the file
      */
     private void loadHashMap() throws IOException {
 
