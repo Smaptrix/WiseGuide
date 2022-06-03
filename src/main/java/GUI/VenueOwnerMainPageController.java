@@ -89,11 +89,21 @@ public class VenueOwnerMainPageController {
 
     /**
      * <p>
+     *     This button deletes the selected file when pressed
+     * </p>
+     */
+    @FXML
+    Button deleteFileButton;
+
+    /**
+     * <p>
      *     LEGACY -When pressed this button allows the user to add a file to the server - LEGACY
      * </p>
      */
     @FXML
     Button addFileButton;
+
+
 
 
     /**

@@ -81,6 +81,30 @@ public class VenueLoginController {
     @FXML
     Label errLabel;
 
+    /**
+     * <p>
+     *     The label displayed at the top of the page
+     * </p>
+     */
+    @FXML
+    Label titleLabel;
+
+    /**
+     * <p>
+     *     The venue name label
+     * </p>
+     */
+    @FXML
+    Label venueNameLabel;
+
+    /**
+     * <p>
+     *     The venue password label
+     * </p>
+     */
+    @FXML
+    Label venuePassLabel;
+
 
     /**
      * <p>

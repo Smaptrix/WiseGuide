@@ -20,7 +20,6 @@ public class FileTransferTests extends ApplicationTest {
 
     @Test
     //Test to confirm the server can recognise a file.
-    //TODO: Check if this also works on Mac.
     public void serverFileDetectTest() throws IOException {
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);
@@ -39,7 +38,6 @@ public class FileTransferTests extends ApplicationTest {
 
     @Test
     //Confirm the operating system is correct. (Mac)
-    //TODO: Confirm this works on Mac.
     public void osDetectTestMac() throws IOException {
         Client client = new Client();
         client.startConnection("127.0.0.1", 5555);

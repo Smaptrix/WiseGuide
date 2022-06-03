@@ -65,7 +65,34 @@ public class RouteDetailsController {
      */
     @FXML
     private Label routeName;
-
+    /**
+     * <p>
+     *     The file menu
+     * </p>
+     */
+    @FXML
+    private Menu fileMenu;
+    /**
+     * <p>
+     *     The help menu
+     * </p>
+     */
+    @FXML
+    private Menu helpMenu;
+    /**
+     * <p>
+     *     The title of the box containing route details information
+     * </p>
+     */
+    @FXML
+    private TitledPane routeTextPane;
+    /**
+     * <p>
+     *     The title of the box containing venue details information
+     * </p>
+     */
+    @FXML
+    private TitledPane venueTextPane;
     /**
      * <p>
      *     The text-box container that will contain the description of the route

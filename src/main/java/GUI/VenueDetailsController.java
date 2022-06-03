@@ -13,12 +13,9 @@ import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.media.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -140,6 +137,22 @@ public class VenueDetailsController {
      */
     @FXML
     public Button goBack;
+
+    /**
+     * <p>
+     *     The File menu
+     * </p>
+     */
+    @FXML
+    Menu fileMenu;
+
+    /**
+     * <p>
+     *     The Help menu
+     * </p>
+     */
+    @FXML
+    Menu helpMenu;
 
     /**
      * <p>

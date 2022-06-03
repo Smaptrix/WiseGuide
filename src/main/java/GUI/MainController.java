@@ -17,18 +17,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 
-import javafx.scene.control.Accordion;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ServerClientUtility.User;
-import javafx.scene.control.ScrollPane;
 
 import java.awt.*;
 import java.io.*;
@@ -172,6 +171,7 @@ public class MainController {
         this.currUser = currUser;
     }
 
+
     /**
      * <p>
      *     The top menu bar
@@ -187,6 +187,14 @@ public class MainController {
      */
     @FXML
     Menu menuBarFile;
+
+    /**
+     * <p>
+     *     The venue select menu
+     * </p>
+     */
+    @FXML
+    Menu venueSelectMenu;
 
     /**
      * <p>
@@ -230,6 +238,14 @@ public class MainController {
 
     /**
      * <p>
+     *     The button on the menubar that lets the user open the venue selector
+     * </p>
+     */
+    @FXML
+    public MenuItem venueSelectorMenuItem;
+
+    /**
+     * <p>
      *     The main window for the GUI. Used to allow closing of certain windows.
      * </p>
      */
@@ -267,6 +283,86 @@ public class MainController {
      */
     @FXML
     Accordion venueAccordion;
+
+    /**
+     * <p>
+     *     The title for the venues list.
+     * </p>
+     */
+    @FXML
+    TitledPane venueTitlePane;
+
+    /**
+     * <p>
+     *     The title for the bars list.
+     * </p>
+     */
+    @FXML
+    TitledPane barsPane;
+
+    /**
+     * <p>
+     *     The title for the cafés list.
+     * </p>
+     */
+    @FXML
+    TitledPane cafesPane;
+
+    /**
+     * <p>
+     *     The title for the clubs list.
+     * </p>
+     */
+    @FXML
+    TitledPane clubsPane;
+
+    /**
+     * <p>
+     *     The title for the fast food list.
+     * </p>
+     */
+    @FXML
+    TitledPane foodPane;
+
+    /**
+     * <p>
+     *     The title for the pubs list.
+     * </p>
+     */
+    @FXML
+    TitledPane pubsPane;
+
+    /**
+     * <p>
+     *     The title for the green spaces list.
+     * </p>
+     */
+    @FXML
+    TitledPane greenPane;
+
+    /**
+     * <p>
+     *     The title for the study spaces list.
+     * </p>
+     */
+    @FXML
+    TitledPane studyPane;
+
+    /**
+     * <p>
+     *     The title for the sightseeing spots list.
+     * </p>
+     */
+    @FXML
+    TitledPane sightseeingPane;
+
+    /**
+     * <p>
+     *     The title for the routes list.
+     * </p>
+     */
+    @FXML
+    TitledPane routesTitlePane;
 
     /**
      * <p>
