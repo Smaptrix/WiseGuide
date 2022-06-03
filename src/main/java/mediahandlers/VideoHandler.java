@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Lee Foster
     Date Created:   10/03/2022
-    Last Updated:   22/04/2022
+    Last Updated:   03/06/2022
  */
 
 package mediahandlers;
@@ -77,7 +77,7 @@ public class VideoHandler extends BorderPane {
      * @param filePath Is the file path of the desired media.
      * @return filePath as a string.
      */
-    private String toString(File filePath) {
+    public String toString(File filePath) {
         return filePath.toURI().toString();
     }
 
