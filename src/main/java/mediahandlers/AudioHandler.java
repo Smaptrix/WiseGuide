@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Ben Alexander
+    Date Created:   28/02/2022
+    Last Updated:   17/03/2022
+ */
 package mediahandlers;
 
 import javafx.scene.layout.BorderPane;
@@ -52,13 +59,16 @@ public class AudioHandler extends BorderPane {
         int heightIn = 40;
         int widthIn = 400;
 
+        //Loads the audio file
         Media audioFile = new Media(new File(String.valueOf(this.filePath)).toURI().toString());
         this.audioPlayer = new MediaPlayer(audioFile);
 
+        //Sets the view for the audio player
         this.audioView = new MediaView(audioPlayer);
         this.audioView.setFitHeight(heightIn);
         this.audioView.setFitWidth(widthIn);
 
+        //Places the audio view into the player
         mpane = new Pane();
         mpane.getChildren().add(audioView);
         setCenter(mpane);
