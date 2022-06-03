@@ -3,7 +3,11 @@
     Project Name:   WiseGuide
     Authors:        Lee Foster
     Date Created:   21/04/2022
-    Last Updated:   22/04/2022
+    Last Updated:   03/06/2022
+    Lead Programmers Note: I have noticed that this is pretty much copied line for line from:
+        https://github.com/humblelad/Media-Player/blob/master/MediaBar.java
+
+
  */
 
 package mediahandlers;
@@ -65,7 +69,6 @@ public class MediaBar extends HBox {
         player = play;
 
         //Sets bar position.
-
         setAlignment(Pos.CENTER);
         setPadding(new Insets(5, 10, 5, 10));
 
@@ -139,6 +142,7 @@ public class MediaBar extends HBox {
      */
     protected void updatesValues() {
         Platform.runLater(new Runnable() {
+            //Sets the value of the time slider
             public void run() {
                 time.setValue(player.getCurrentTime().toMillis() /
                         player.getTotalDuration()
