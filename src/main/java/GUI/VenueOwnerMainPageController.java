@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   09/03/2022
-    Last Updated:   12/05/2022
+    Last Updated:   03/06/2022
  */
 package GUI;
 
@@ -66,7 +66,7 @@ public class VenueOwnerMainPageController {
     Label titleLabel;
     /**
      * <p>
-     *     This is the list that displays the currents files that are stored on the server of the venue
+     *     This is the list that displays the current files that are stored on the server of the venue
      * </p>
      */
     @FXML
@@ -220,7 +220,6 @@ public class VenueOwnerMainPageController {
 
             //Request Server delete a file
             try {
-
                 client.requestDeleteFile(filePathStart + fileList.getSelectionModel().getSelectedItem());
                 fileList.getItems().remove(fileList.getSelectionModel().getSelectedItem());
             } catch (IOException e) {
