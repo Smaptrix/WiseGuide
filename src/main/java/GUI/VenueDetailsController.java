@@ -1,9 +1,9 @@
 /*
     Company Name:   Maptrix
     Project Name:   WiseGuide
-    Authors:        Joe Ingham
+    Authors:        Joe Ingham, Alice Milburn, Colleen Ritchey, Will Pitchfork, Lee Foster
     Date Created:   09/03/2022
-    Last Updated:   12/05/2022
+    Last Updated:   03/06/2022
  */
 
 package GUI;
@@ -76,7 +76,7 @@ public class VenueDetailsController {
      * <p>
      *     Sets the client to be used by the controller to communicate with the server
      * </p>
-     * @param client
+     * @param client the client that is connected to the server
      */
     public void setClient(Client client){this.client = client;}
 
@@ -94,9 +94,7 @@ public class VenueDetailsController {
         this.currVenuePage = currVenuePage;
         this.currUser = currUser;
 
-        System.out.println(currVenuePage);
-        System.out.println(currVenuePage.attributes);
-        System.out.println(currVenuePage.children.get(0).attributes.get("include_source"));
+        System.out.println("Current Venue: " + currVenuePage);
     }
 
     /**
@@ -250,7 +248,6 @@ public class VenueDetailsController {
             while (textIndex == 0) {
                 //Gets the text file
                 String textFile = (currVenuePage.getMediaSourceByID("text0"));
-                System.out.println("File: " + textFile);
 
                 File tempTextFile = client.requestFile(textFile);
 
@@ -264,8 +261,7 @@ public class VenueDetailsController {
 
             }
 
-            //Loads the first image file
-            imageFile = (currVenuePage.getMediaSourceByID("image" + photoIndex));
+
             //Runs through and places an image in a slot up until all the slots are filled
             while (photoIndex <= maxPhotoIndex) {
                 //Finding the image file
@@ -275,8 +271,6 @@ public class VenueDetailsController {
                if(imageFile != null) {
                    //Requests the filepath for the image for
                     File  tempImageFile = client.requestFile(imageFile);
-
-
 
                     //Initialises the image view
                     ImageView imageView = new ImageView();
@@ -323,7 +317,6 @@ public class VenueDetailsController {
         //Loads the shapes onto the page
         ShapeManager shapeManager = new ShapeManager();
 
-        System.out.println("Price: " + currVenuePage.attributes.get("price"));
         //The price value of the current venue
         int price;
         //Sets the price value to 0 if there isn't a price field
@@ -372,9 +365,7 @@ public class VenueDetailsController {
         priceGroup.getChildren().add(priceCircle1);
         priceGroup.getChildren().add(priceCircle2);
 
-
-        System.out.println("Rating: " + currVenuePage.attributes.get("rating"));
-        int rating;
+       int rating;
 
         //Sets the rating value to 0 if there isn't a price field
         if (currVenuePage.attributes.get("rating") != null){
@@ -480,7 +471,6 @@ public class VenueDetailsController {
             client.closeConnection(); // Closes client connection safely.
         }
         System.exit(0);
-        //Platform.exit();
     }
 
     /**
@@ -526,9 +516,7 @@ public class VenueDetailsController {
      */
     public void checkIfFavourite() {
 
-        System.out.println("curr: " + currVenue);
-
-        if(currUser.getFaveVenues() != null){
+         if(currUser.getFaveVenues() != null){
             if(Arrays.asList(currUser.getFaveVenues()).contains(currVenue)){
                 faveVenueButton.setText("UnFavourite");
             }
@@ -561,7 +549,6 @@ public class VenueDetailsController {
 
                 currUser.setFaveVenues(faveVenues.toArray(new String[0]));
 
-                System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
             }
             //If the user doesn't have a venue list
             else{
@@ -586,19 +573,13 @@ public class VenueDetailsController {
             faveVenues.remove(currVenue);
             currUser.setFaveVenues(faveVenues.toArray(new String[0]));
 
-            System.out.println(currUser.getUsername()+" faves: " + Arrays.toString(currUser.getFaveVenues()));
+
         }
     }
 
     public void altText0() {
         try {
-            if (image0AltText.isVisible()) {
-                image0AltText.setVisible(false);
-                System.out.println("Hiding altText0");
-            } else {
-                image0AltText.setVisible(true);
-                System.out.println("Displaying altText0");
-            }
+            image0AltText.setVisible(!image0AltText.isVisible());
 
             //Gets the text file
             String altTextFile = (currVenuePage.getMediaSourceByID("altText0"));
@@ -617,13 +598,7 @@ public class VenueDetailsController {
 
     public void altText1() {
         try {
-            if (image1AltText.isVisible()) {
-                image1AltText.setVisible(false);
-                System.out.println("Hiding altText1");
-            } else {
-                image1AltText.setVisible(true);
-                System.out.println("Displaying altText1");
-            }
+            image1AltText.setVisible(!image1AltText.isVisible());
 
             //Gets the text file
             String altTextFile = (currVenuePage.getMediaSourceByID("altText1"));
@@ -642,13 +617,7 @@ public class VenueDetailsController {
 
     public void altText2() {
         try {
-            if (image2AltText.isVisible()) {
-                image2AltText.setVisible(false);
-                System.out.println("Hiding altText2");
-            } else {
-                image2AltText.setVisible(true);
-                System.out.println("Displaying altText2");
-            }
+            image2AltText.setVisible(!image2AltText.isVisible());
 
             //Gets the text file
             String altTextFile = (currVenuePage.getMediaSourceByID("altText2"));
@@ -667,13 +636,7 @@ public class VenueDetailsController {
 
     public void altText3() {
         try {
-            if (image3AltText.isVisible()) {
-                image3AltText.setVisible(false);
-                System.out.println("Hiding altText3");
-            } else {
-                image3AltText.setVisible(true);
-                System.out.println("Displaying altText3");
-            }
+            image3AltText.setVisible(!image3AltText.isVisible());
 
             //Gets the text file
             String altTextFile = (currVenuePage.getMediaSourceByID("altText3"));
@@ -692,13 +655,7 @@ public class VenueDetailsController {
 
     public void altText4() {
         try {
-            if (image4AltText.isVisible()) {
-                image4AltText.setVisible(false);
-                System.out.println("Hiding altText4");
-            } else {
-                image4AltText.setVisible(true);
-                System.out.println("Displaying altText4");
-            }
+            image4AltText.setVisible(!image4AltText.isVisible());
 
             //Gets the text file
             String altTextFile = (currVenuePage.getMediaSourceByID("altText4"));
@@ -717,13 +674,7 @@ public class VenueDetailsController {
 
     public void altText5() {
         try {
-            if (image5AltText.isVisible()) {
-                image5AltText.setVisible(false);
-                System.out.println("Hiding altText5");
-            } else {
-                image5AltText.setVisible(true);
-                System.out.println("Displaying altText5");
-            }
+            image5AltText.setVisible(!image5AltText.isVisible());
 
             //Gets the text file
             String altTextFile = (currVenuePage.getMediaSourceByID("altText5"));
