@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   09/03/2022
-    Last Updated:   12/05/2022
+    Last Updated:   03/06/2022
  */
 package GUI;
 
@@ -23,7 +23,7 @@ import java.io.IOException;
 
 /**
  * <p>
- *     This Controller controls the venue login page
+ *     This Controller controls the venue owner login page
  * </p>
  */
 public class VenueLoginController {
@@ -113,10 +113,10 @@ public class VenueLoginController {
 
 
             //Checks to see if the login data was correct
+            //If the login is anything but a goodlogin, its a bad login
             if(!(client.requestVenueLogin(currUser.getUsername(), currUser.getPassword()).equals("GOODLOGIN"))){
                 errLabel.setText("Unrecognised Venue Details");
             }
-            //If not a bad login, it has to be a good login
             else{
                 //If the login data is correct
                 errLabel.setText("");
