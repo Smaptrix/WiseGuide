@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   20/01/2022
-    Last Updated:   12/05/2022
+    Last Updated:   03/06/2022
  */
 
 package server;
@@ -32,9 +32,6 @@ import java.util.Arrays;
  *</p>
  */
 public class Server {
-
-
-    //TODO - Could maybe compartmentalise some of these security functions to trim down this file
 
 
     /**
@@ -193,8 +190,6 @@ public class Server {
         PublicKey publicKey = initKeyPair.getPublic();
         privateKey =  initKeyPair.getPrivate();
 
-        //System.out.println("Public: " + publicKey);
-        //System.out.println("Private: " + privateKey);
 
         //Gets the current server key directory
         String keyDirectory = currDir + "\\serverkeys";
@@ -271,7 +266,7 @@ public class Server {
 
             try {
                 keyData[bytesRead] = (byte) in.read();
-                //System.out.println(data[bytesRead]);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -279,14 +274,11 @@ public class Server {
             //Increment Byte count
             bytesRead += 1;
             if (bytesRead == bytesToRead) {
-                // System.out.println("We have read: " + bytesRead);
+
                 end = true;
             }
 
         }
-
-
-        System.out.println("Key read");
 
         //Sets the input socket back to the text reader
         inStream = clientSocket.getInputStream();
@@ -328,14 +320,11 @@ public class Server {
         //Rebuild the key using the encoded key bytes
         symKey = new SecretKeySpec(decryptedSymmetricKey, 0, decryptedSymmetricKey.length, "AES");
 
-        System.out.println(symKey);
+
 
 
         //Creates the symmetric Cipher with which to decrypt messages from the client
         symmetricCipher = Cipher.getInstance("AES");
-
-        //symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
-
 
         encryptionReady = true;
 
@@ -372,7 +361,7 @@ public class Server {
 
 
         clientSocket = serverSocket.accept();
-        System.out.println("After accept\n");
+
 
         //Reverts to original socket type
         inStream = clientSocket.getInputStream();
@@ -382,17 +371,12 @@ public class Server {
 
         osDetect();
 
-        //Initialises the current user server user handler
+        //Initialises the current user server user handler and the favourite user handler
         currUser = new User("", "");
         currUserHandler = new ServerUserHandler(currUser, false);
         faveVenuesHandler = new FaveVenuesHandler(new File("faveVenues.txt"));
 
-        //TEST FEATURES
-        //faveVenuesHandler.addUser("tester");
-        //faveVenuesHandler.removeUser("deleteme");
-        //faveVenuesHandler.addFaveVenue("joe", "ADDEDVENUE");
-        //faveVenuesHandler.removeFaveVenue("joe", "DELETEME");
-        faveVenuesHandler.faveVenueList("joe");
+
 
     }
 
@@ -447,7 +431,6 @@ public class Server {
         try{
 
             while (true) {
-                System.out.println("Waiting for byte size");
                 if ((bytesToRead = inStream.read()) != 0) {
 
 
@@ -460,20 +443,12 @@ public class Server {
                         System.out.println("[TESTING] The server received the message: "+inputLine.toString());
                     }
 
-                    System.out.println("Encryption done: " + encryptionReady);
                     if (encryptionReady) {
                         symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
 
-
-
-                        System.out.println("Input size: " + inputLine.length);
-
                         byte[] decryptedInpLineBytes = symmetricCipher.doFinal(inputLine);
 
-                        System.out.println("Decrypted input line in bytes: " + Arrays.toString(decryptedInpLineBytes));
-
                         String decryptedInputLine = new String(decryptedInpLineBytes, StandardCharsets.UTF_8);
-
 
                         System.out.println("Request Received: " + decryptedInputLine);
 
@@ -505,8 +480,6 @@ public class Server {
      */
     public void requestParser(String requestIn) throws IOException, NoSuchAlgorithmException {
 
-        //TODO - CLOSE CONNECTION REQUEST
-
 
         String[] requestSplit = requestIn.split(" ");
         switch(requestSplit[0]) {
@@ -519,7 +492,6 @@ public class Server {
             case "ECHO":
                 //Echos the request back (mainly for testing)
                 sendResponse(requestSplit[1], true, true);
-                System.out.println("Response sent: " + requestSplit[1]);
                 break;
 
             //Creates a new user and adds it to the database
@@ -702,13 +674,12 @@ public class Server {
 
 
         try {
-            System.out.println("File stored at: " + filepath);
 
 
             //Sends a data packet telling the client to expect a file of a certain size
             long fileSize = Files.size(filepath);
 
-            System.out.println("File Size: " + fileSize);
+
 
             byte[] fileSizeInBytes = ByteBuffer.allocate(4).putInt((int) fileSize).array();
 
@@ -721,8 +692,6 @@ public class Server {
             for (byte fileSizeInByte : fileSizeInBytes) {
                 outputStream.write(fileSizeInByte);
             }
-
-            // System.out.println("sent file size");
 
             //Tells the client what type of file to expect
             String fileType = filepath.toString();
@@ -744,8 +713,7 @@ public class Server {
 
                 bytesSent += 1;
 
-                //Testing purposes only
-                //System.out.println(buffer[bytesSent]);
+
 
                 if(bytesSent == fileSize){
                     System.out.println("We have written: " + bytesSent + " bytes");
@@ -756,7 +724,7 @@ public class Server {
             //Clears the outputStream of any excess data
             outputStream.flush();
 
-            System.out.println("All done!");
+
 
             if(encrypt) {
                 symmetricCipher.init(Cipher.DECRYPT_MODE, symKey);
@@ -928,7 +896,7 @@ public class Server {
                 currUser = new User(loginName, loginPass);
                 System.out.println("Logged in!");
                 sendResponse("GOODLOGIN", true, true);
-                System.out.println("Login message sent!");
+
             }
 
 
@@ -950,7 +918,7 @@ public class Server {
 
             else{
                 sendResponse("USERALREADYEXISTS", true, true);
-                System.out.println("User already exists");
+
 
             }
 
@@ -980,8 +948,9 @@ public class Server {
     }
 
 
-
-    //Logs the user out of the server
+    /**
+     * Logs the current user out of the server
+     */
     private void logout() {
 
         //deletes the current information regarding the user
@@ -1002,7 +971,10 @@ public class Server {
 
     }
 
-    //Checks that the client and server versions are the same
+    /**
+     * Checks that the server and client have the same version number
+     * @throws IOException
+     */
     private void versionCheck() throws IOException {
 
         String clientVersion = receiveMessageAsString(inStream.read());
@@ -1022,8 +994,11 @@ public class Server {
     }
 
 
+    /**
+     * Recieves information from the client, which changes the username of the current user in the database
+     * @throws IOException If the server cannot connect to the client
+     */
     private void changeUsername() throws IOException {
-
 
         String desiredUsername = receiveMessageAsString(inStream.read());
 
@@ -1038,6 +1013,10 @@ public class Server {
         }
     }
 
+    /**
+     * Recieves information from the client, which changes the password of the current user in the database
+     * @throws IOException If the server cannot connect to the client
+     */
     private void changePassword() throws IOException {
 
         String currPass = receiveMessageAsString(inStream.read());
@@ -1068,15 +1047,16 @@ public class Server {
 
     }
 
-    //Deletes the requested venue file
+    /**
+     * Deletes a given venue file from the server directory, and its reference from the xml file
+     * @throws IOException
+     */
     private void deleteVenueFile() throws IOException {
 
         //Gets the filepath from the client
         File fileToDelete = new File(receiveMessageAsString(inStream.read()));
 
 
-
-        System.out.println("File to delete: " + fileToDelete);
 
         //Delete the file from the PC
         if(fileToDelete.delete()){
@@ -1093,20 +1073,18 @@ public class Server {
         else{
             sendResponse("File Deletion Error", true, true);
         }
-
-
-
-
-
-
-
     }
 
     //Overloaded functions to let you decide if you want to receive the pure bytes or the string
 
-    //Reads n number of bytes from the socket
+    /**
+     * Reads n bytes from the input buffer
+     * @param n the number of bytes to read
+     * @return the byte array of the bytes read from the buffer
+     */
     private byte[] receiveMessage(int n) {
 
+        //Initialise the empty byte array
         byte[] readBytes = new byte[0];
         try {
             readBytes = inStream.readNBytes(n);
@@ -1115,10 +1093,14 @@ public class Server {
         }
 
         return readBytes;
-
     }
 
-    //Reads n number of bytes from the socket - turns them into a string
+
+    /**
+     * Reads n bytes from the input buffer and returns it as a string
+     * @param n the number of bytes to read
+     * @return the string that the bytes read represent
+     */
     private String receiveMessageAsString(int n) {
 
         byte[] readBytes = new byte[0];
@@ -1142,6 +1124,4 @@ public class Server {
 
         return unencryptedMsg;
     }
-
-
 }
