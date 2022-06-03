@@ -193,7 +193,7 @@ public class FaveVenuesHandler {
         //Goes through every line in the file
         while((line = br.readLine()) != null){
 
-            System.out.println(line);
+
 
             //splits the line into the key and value pair
             String[] userVenuesPair = line.split(",");
@@ -235,7 +235,7 @@ public class FaveVenuesHandler {
             }
 
 
-            System.out.println(faveVenueListString);
+
 
             return faveVenueListString;
         }
