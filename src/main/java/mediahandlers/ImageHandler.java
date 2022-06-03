@@ -2,7 +2,7 @@
     Company Name:   Maptrix
     Project Name:   WiseGuide
     Authors:        Joe Ingham
-    Date Created:   28/03/2022
+    Date Created:   28/02/2022
     Last Updated:   12/05/2022
  */
 package mediahandlers;
@@ -76,10 +76,9 @@ public class ImageHandler extends MediaHandler{
         imageFromFile();
         intoImgView();
 
+        //Sets the measreuments required for the image
         desiredView.setFitHeight(height);
         desiredView.setFitWidth(width);
-
-        System.out.println(currImage);
     }
 
     /**
