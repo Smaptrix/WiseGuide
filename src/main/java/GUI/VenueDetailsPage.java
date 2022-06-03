@@ -3,7 +3,7 @@
     Project Name:   WiseGuide
     Authors:        Joe Ingham
     Date Created:   09/03/2022
-    Last Updated:   12/05/2022
+    Last Updated:   03/06/2022
  */
 
 package GUI;
@@ -43,6 +43,11 @@ public class VenueDetailsPage extends Application {
         System.exit(0);
     }
 
+    /**
+     * This runs the page directly
+     * Will not work correctly without client context
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch();
 
