@@ -1,3 +1,11 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   03/05/2022
+    Last Updated:   03/06/2022
+ */
+
 package GUI;
 
 import XMLTools.VenueXMLParser;
@@ -127,19 +135,16 @@ public class VenueSelectPageController {
         //Create a copy of the list of venues so that it isn't edited when the button is pressed
         List<String> listOfPossibleVenues = new ArrayList<>(listOfVenues);
 
-
+        //Check to make sure a venue type has been selected
         if(!drinksCheckBox.isSelected() & !foodCheckBox.isSelected() & !sightseeingCheckBox.isSelected() & !studySpacesCheckBox.isSelected()){
             errLabel.setText("You have not selected any venue types!");
             return false;
         }
 
-
-
-
-        //Removes users non-favourite venues from the possible list
+        //Removes users non-favourite venues from the possible list if the favourite checkbox is ticked
         if(faveCheckBox.isSelected()){
 
-
+            //If the user has no favourites (if the list doesn't exist)
             if(currUser.getFaveVenues() == null){
                 errLabel.setText("You have no favourites!");
                 return false;
@@ -148,6 +153,7 @@ public class VenueSelectPageController {
             //Get the current users favourite lists
             List<String> userFaveList = List.of(currUser.getFaveVenues());
 
+            //If the user has no favourites (and the list exists, i.e. they have removed there last favourite)
             if(userFaveList.isEmpty()){
                 errLabel.setText("You have no favourites!");
                 return false;
@@ -169,7 +175,7 @@ public class VenueSelectPageController {
             for(String s : listOfPossibleVenues){
 
 
-                //Finds the venues with tags relating to drinkings
+                //Finds the venues with tags relating to drinking (nightclubs, bars and pubs)
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "nightclub")){
                     tempVenueList.add(s);
                 }
@@ -187,9 +193,8 @@ public class VenueSelectPageController {
         //Retains the food venues in the possible list
         if(foodCheckBox.isSelected()){
 
-            //Finds venues related to food
+            //Finds venues related to food (i.e. cafes, restaurants and fast_food)
             for(String s : listOfPossibleVenues){
-
 
 
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "cafe")){
@@ -209,9 +214,8 @@ public class VenueSelectPageController {
         //Retains the sightseeing venues in the possible list
         if(sightseeingCheckBox.isSelected()){
 
-            //Finds venues related to sightseeing
+            //Finds venues related to sightseeing (i.e. green_spaces and sightseeing venues)
             for(String s : listOfPossibleVenues){
-
 
                 if(Objects.equals(xml.getPage("title", s).attributes.get("category"), "green_space")){
                     tempVenueList.add(s);
@@ -222,7 +226,7 @@ public class VenueSelectPageController {
             }
         }
 
-        //Retains the study space venues in the possible list
+        //Retains the study space venues in the possible list (i.e. study spaces)
         if(studySpacesCheckBox.isSelected()) {
 
             //Finds venues related to study spaces
@@ -240,6 +244,7 @@ public class VenueSelectPageController {
 
         //Makes sure the temp venue list isn't null
         //If it isn't null it implies that the list has been added to
+        //The warning here thrown by intellij is false (the tempVenuelist isn't always null)
         if(tempVenueList == null){
             errLabel.setText("You have not selected any venue types!");
             return false;
@@ -251,7 +256,7 @@ public class VenueSelectPageController {
         //Combines the two lists so that only suitable venues remain
         listOfPossibleVenues.retainAll(tempVenueList);
 
-
+        //If the list of possible venues is empty
         if(listOfPossibleVenues.isEmpty()){
             errLabel.setText("You have no favourites of the selected types!");
             return false;
@@ -265,6 +270,7 @@ public class VenueSelectPageController {
 
         //Opens the venue details page of the given random venue
         venueDetailsOpener(randomVenue);
+        //Return a true message to tell the system a venue was selected
         return true;
     }
 
@@ -275,8 +281,8 @@ public class VenueSelectPageController {
      */
     private void venueDetailsOpener(String venueName){
 
-        //Open that random venues details page
-        // TODO: add an extra scene for loading page
+        //Open the given venues details page
+
         //Opens the generic venue page with the current venue selected which is used to populate the venue information
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("VenueDetailsPage.fxml"));
         Stage stage = new Stage();
@@ -286,7 +292,9 @@ public class VenueSelectPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //Get the controller for the current page
         VenueDetailsController controller = fxmlLoader.getController();
+        //Set the client for the controller
         controller.setClient(client);
         controller.setCurrVenue(venueName.replaceAll("_"," "), xml.getPage("title", venueName), currUser);
         //Checks to see if the venue has been favourite by the user
@@ -295,6 +303,7 @@ public class VenueSelectPageController {
         stage.show();
         stage.setResizable(false);
         controller.checkIfFavourite();
+        //Attempt to get the venue data
         try {
             controller.loadVenueData();
         } catch (IOException e) {
@@ -323,8 +332,6 @@ public class VenueSelectPageController {
         }
 
         //Pick a random item from the venue list
-
-
         venueDetailsOpener(randomVenue);
 
         //Close the venue selector page
