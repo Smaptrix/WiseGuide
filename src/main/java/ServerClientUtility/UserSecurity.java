@@ -1,141 +1,42 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Joe Ingham
+    Date Created:   14/03/2022
+    Last Updated:   04/06/2022
+ */
+
+
 package ServerClientUtility;
 
 
-import javax.crypto.*;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 
-
-//TODO - Password based key derivation ?
-
-//TODO - Store keys on the server?? Need to encrypt before sending to the server but cant download key?
-//TODO - Actually encrypt the username - for now maybe not worth the overhead
-
-
-
-//A class that provides the encryption/decryption tools required by the client to make sure that the users' data
-//is secure before it is sent to the server
+/**
+ * <p>Provides the user class with tools to encrypt the password</p>
+ */
 public class UserSecurity {
 
+    /**
+     * <p>The currently logged in user</p>
+     */
     User currUser;
 
-
-    SecretKey key;
-
-
-
-
-
+    /**
+     * <p>The constructor for this class</p>
+     * @param currUser the currently logged in user
+     */
     public UserSecurity(User currUser)  {
 
         this.currUser = currUser;
-
-        //Turns the password into a character array
-        //deriveEncryptionKey();
-
-
     }
-
-    /*
-    public void deriveEncryptionKey() throws InvalidKeySpecException, NoSuchAlgorithmException {
-
-        //Determining the method required for the encryption
-        String method = "PBKDF2WithHmacSHA1";
-
-
-
-        //Create a keyfactory with the method
-        SecretKeyFactory kf = SecretKeyFactory.getInstance(method);
-
-        KeySpec keySpec = new KeySpec(method);
-        key = kf.generateSecret(keySpec);
-
-        System.out.println(key.getEncoded());
-
-
-    }
-
-*/
-
 
     /**
-     * Encrypts the users username
-     * @return the hex value of the encrypted string
+     * <p>Hashes the current users password</p>
+      * @return the hashed password
      */
-   /*
-    public String encryptUsername() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException {
-
-        /*
-        //Turns the string into bytes for the encryption
-        byte[] input = string.getBytes(StandardCharsets.UTF_8);
-
-
-        //Create the cipher
-        Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
-
-        //Bytes to store the key and the IV
-        byte[] keyBytes = new byte[256];
-        byte[] ivBytes= new byte[cipher.getBlockSize()];
-
-
-        //Create a key generator
-        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-        keyGen.init(256);
-
-
-        //Generate the key and initialisation vector
-        SecretKey key = keyGen.generateKey();
-        IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
-
-        //Pass the key and iv to the cipher
-        cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
-
-        byte[] encrypted = new byte[cipher.getOutputSize(input.length)];
-
-        int enc_len = cipher.update(input, 0, input.length, encrypted, 0);
-
-        enc_len += cipher.doFinal(encrypted, enc_len);
-
-
-        */
-
-            /*
-        //Creating a salt
-        Random r = new SecureRandom();
-        byte[] salt = new byte[20];
-        r.nextBytes(salt);
-
-
-        String method = "AES";
-
-
-        Cipher cipher = Cipher.getInstance(method);
-
-        cipher.init(Cipher.ENCRYPT_MODE, key);
-
-
-
-
-
-        byte[] encrypted = cipher.doFinal(currUser.getUsername().getBytes(StandardCharsets.UTF_8));
-
-
-        String encryptedString = Utils.bytesToHex(encrypted);
-
-        System.out.println(encryptedString);
-
-        return encryptedString;
-
-    }
-
-
-*/
-
-    //TODO - Salt to slow down dictionary attacks
-
     public String hashPassword(){
-
-
 
         //Hash the password because we never want to undo it
         MessageDigest digest = null;
@@ -156,8 +57,10 @@ public class UserSecurity {
     }
 
 
-    //Creates a random salt value
-    //Used to create new users
+    /**
+     * <p>Generates the salt for the users password</p>
+     * @return the generated salt
+     */
     public static String generateSalt(){
 
         SecureRandom random = new SecureRandom();
@@ -169,8 +72,12 @@ public class UserSecurity {
     }
 
 
-
-    //Hashes a provided string with a provided salt
+    /**
+     * <p>Hashes a given password and salt combined</p>
+     * @param pass the users password
+     * @param salt the users salt
+     * @return the hash result
+     */
     public static String hashThis(String pass, String salt) {
 
         //Hash the password because we never want to undo it
@@ -183,8 +90,6 @@ public class UserSecurity {
         assert digest != null;
 
         String saltedPass = pass + salt;
-
-
 
         byte[] hashPass = digest.digest(saltedPass.getBytes(StandardCharsets.UTF_8));
 
