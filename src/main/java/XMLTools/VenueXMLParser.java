@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Ben Alexander
+    Date Created:   13/02/2022
+    Last Updated:   04/06/2022
+ */
 package XMLTools;
 
 import java.io.File;
@@ -12,27 +19,27 @@ import org.w3c.dom.*;
 
 
 /**
- * XML parsing for venue data, constructs a tree with the ability to get pages through id or title.
+ * <p>XML parsing for venue data, constructs a tree with the ability to get pages through id or title.</p>
  */
 public class VenueXMLParser {
 
     /**
-     * file is the xml file
+     * <p>file is the xml file</p>
      */
     private File file;
 
     /**
-     * document is created by the document builder
+     * <p>document is created by the document builder</p>
      */
     private Document document;
 
     /**
-     * root contains the top node of the xml tree
+     * <p>root contains the top node of the xml tree</p>
      */
     public Element root = null;
 
     /**
-     * number of pages is the number of venue elements (excludes #comment and #text)
+     * <p>number of pages is the number of venue elements (excludes #comment and #text)</p>
      */
     public int numberOfPages;
 
@@ -307,9 +314,9 @@ public class VenueXMLParser {
             if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().equals("base:shape")) {
                 for (int j = 0; j < root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().getLength(); j++) {
                     if (!root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(j).getNodeName().contains("#text")) {
-                        System.out.println(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(j).getAttributes().getNamedItem("include_source").getNodeValue());
+
                         if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getChildNodes().item(j).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
-                            System.out.println("FOUND IT");
+
                             sourceFound = true;
                             childIndex = i;
                             break;
@@ -317,7 +324,7 @@ public class VenueXMLParser {
                     }
                 }
             } else {
-                System.out.println(root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().contains("#text"));
+
                 if (!root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getNodeName().contains("#text")) {
                     if (root.getElementsByTagName("base:page").item(searchedIndex).getChildNodes().item(i).getAttributes().getNamedItem("include_source").getNodeValue().equals(source)) {
                         sourceFound = true;

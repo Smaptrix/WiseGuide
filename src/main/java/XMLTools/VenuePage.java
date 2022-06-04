@@ -1,3 +1,10 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Ben Alexander
+    Date Created:   13/02/2022
+    Last Updated:   04/06/2022
+ */
 package XMLTools;
 
 import org.w3c.dom.Node;
@@ -5,27 +12,27 @@ import org.w3c.dom.Node;
 import java.util.*;
 
 /**
- * Stores all relevant media data in a tree for one specific venue.
+ * <p>Stores all relevant media data in a tree for one specific venue.</p>
  */
 public class VenuePage {
 
     /**
-     * node is the top node of the VenuePage
+     * <p>node is the top node of the VenuePage</p>
      */
     private Node node;
 
     /**
-     * attributes is a dictionary that contains all the attributes for the page
+     * <p>attributes is a dictionary that contains all the attributes for the page</p>
      */
     public Dictionary<String, String> attributes;
 
     /**
-     * children are a list of the MediaElements attached to the VenuePage
+     * <p>children are a list of the MediaElements attached to the VenuePage</p>
      */
     public List<MediaElement> children;
 
     /**
-     * numberOfElements is the number of MediaElements attached to the given page
+     * <p>numberOfElements is the number of MediaElements attached to the given page</p>
      */
     public int numberOfElements;
 
@@ -129,9 +136,8 @@ public class VenuePage {
      */
     public String getMediaSourceByID(String IDSearch) {
 
-        System.out.println("");
 
-        System.out.println(this.attributes);
+
             for(int i = 0; i < this.children.size(); i++) {
                 MediaElement element = null;
                 try {
@@ -145,7 +151,9 @@ public class VenuePage {
                     } else {
                         element = this.children.get(i);
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    System.out.println("Exception in media search");
+                }
 
                 try {
                     if (element != null) {
@@ -155,7 +163,9 @@ public class VenuePage {
                             }
                         }
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    System.out.println("Exception in media search");
+                }
             }
 
         return null;
