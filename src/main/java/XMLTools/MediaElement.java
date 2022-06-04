@@ -1,6 +1,15 @@
+/*
+    Company Name:   Maptrix
+    Project Name:   WiseGuide
+    Authors:        Ben Alexander
+    Date Created:   13/02/2022
+    Last Updated:   04/06/2022
+ */
 package XMLTools;
 
 import org.w3c.dom.Node;
+
+import java.util.Objects;
 
 /**
  * <p>
@@ -10,17 +19,17 @@ import org.w3c.dom.Node;
 public class MediaElement extends VenuePage {
 
     /**
-     * mediaType is "playable"/"text"/"shape"/"image"
+     * <p>mediaType is "playable"/"text"/"shape"/"image"</p>
      */
     public String mediaType;
 
     /**
-     * ID is the unique identifier for the media within the venuePage
+     * <p>ID is the unique identifier for the media within the venuePage</p>
      */
     public String ID;
 
     /**
-     * include_source is the file where the media data is stored
+     * <p>include_source is the file where the media data is stored</p>
      */
     public String include_source;
 
@@ -36,7 +45,7 @@ public class MediaElement extends VenuePage {
         try{
             this.mediaType = item.getNodeName();
             this.ID = this.attributes.get("ID");
-            if(this.attributes.get("type") == "textbox") {
+            if(Objects.equals(this.attributes.get("type"), "textbox")) {
                 this.include_source = this.children.get(0).include_source;
             } else {
                 this.include_source = this.attributes.get("include_source");

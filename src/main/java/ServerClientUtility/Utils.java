@@ -43,6 +43,7 @@ public class Utils {
      */
     public static String bytesToHex(byte[] byteArray){
         StringBuilder hexString = new StringBuilder( 2 * byteArray.length);
+       //Goes through the bytes and converts it to a hex
         for (byte b : byteArray) {
             String hex = Integer.toHexString(0xff & b);
             if (hex.length() == 1) {
