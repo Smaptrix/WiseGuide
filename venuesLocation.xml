@@ -662,6 +662,9 @@
         <base:shape x_end="0" y_end="0" type="textbox">
             <base:text include_source="Venues/Study_Spaces/University_of_York_JB_Morrell_Library/University_of_York_JB_Morrell_Library4.txt" ID="altText3"/>
         </base:shape>
+        <base:playable include_source="Venues/Study_Spaces/University_of_York_JB_Morrell_Library/LibraryVideo1.mp4" display_player="true" seek_offset="0" autoplay="false" loop="false" ID="video0" type="video"/>
+
+
     </base:page>
     <base:page title="Piazza_Building" ID="127" price="0" lat="53.9478336" lon="-1.0304155" category="study_space" rating="4">
         <base:shape x_end="0" y_end="0" type="textbox">
