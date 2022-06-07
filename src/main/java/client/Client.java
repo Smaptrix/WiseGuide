@@ -147,14 +147,14 @@ public class Client {
 
     /**
      * <p>
-     * Starts the connection to the server by creating necessary objects and assigning the determined ip and ports.
+     * Starts the connection to the server by creating necessary objects and assigning the determined IP and ports.
      * </p>
      *
-     * @param ip The ip address of the server.
+     * @param IP The IP address of the server.
      * @param port The port of the client side.
      * @throws IOException Throws an IOException if it fails to connect to the server.
      */
-    public void startConnection(String ip, int port) throws IOException {
+    public void startConnection(String IP, int port) throws IOException {
 
         setTestingMode(false);
 
@@ -163,7 +163,7 @@ public class Client {
 
         try {
             //Creates the new sockets and input/output streams
-            clientSocket = new Socket(ip, port);
+            clientSocket = new Socket(IP, port);
             outStream = clientSocket.getOutputStream();
             inputStream = clientSocket.getInputStream();
             System.out.println("Connection Opened");
